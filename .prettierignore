@@ -1,10 +1,6 @@
 .git
 .github
 build
-built
-coverage
-dist
-lib
 node_modules
 *.yaml
 *.yml
