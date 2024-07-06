@@ -6,5 +6,5 @@ export const metadata: Metadata = metadataGenerator({
 });
 
 export default function page() {
-  return <div></div>;
+  return <div>Dashboard</div>;
 }
