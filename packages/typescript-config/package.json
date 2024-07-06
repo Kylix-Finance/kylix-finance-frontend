@@ -1,23 +1,12 @@
 {
-	"name": "@repo/typescript-config",
-	"version": "0.0.0",
-	"private": true,
-	"main": "./src/index.ts",
-	"files": [
-		"./src/configs/base.json",
-		"./src/configs/nextjs.json"
-	],
-	"license": "MIT",
-	"scripts": {
-		"check:format": "prettier --write  --list-different ./",
-		"check:lint": "eslint ./",
-		"check:lint:fix": "eslint --fix ./",
-		"check:lint:fix:strict": "eslint --fix --max-warnings 0 ./",
-		"check:style": "pnpm run check:format && pnpm run check:lint:fix && pnpm run check:types",
-		"check:types": "npx tsc --noEmit",
-		"check:types:watch": "pnpm run check:types --watch"
-	},
-	"publishConfig": {
-		"access": "public"
-	}
+  "name": "@repo/typescript-config",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "./src/base.json",
+    "./src/nextjs.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
