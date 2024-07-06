@@ -1,4 +1,23 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+module.exports = {
+	productionBrowserSourceMaps: false,
+	experimental: {
+		turbo: {
+			rules: {
+				"*.svg": {
+					loaders: ["@svgr/webpack"],
+					as: "*.js",
+				},
+			},
+		},
+	},
+	transpilePackages: [],
+	webpack(config) {
+		config.module.rules.push({
+			test: /\.svg$/i,
+			use: ["@svgr/webpack"],
+		});
 
-export default nextConfig;
+		return config;
+	},
+};
