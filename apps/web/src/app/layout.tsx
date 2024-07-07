@@ -1,6 +1,6 @@
 import Providers from "~/providers";
 import "./globals.css";
-import MainLayout from "./_parts/MainLayout";
+import MainLayout from "./_parts/mainLayout";
 
 export default function RootLayout({
   children,
