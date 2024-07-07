@@ -14,7 +14,8 @@ const Sidebar = () => {
       open
       PaperProps={{
         component: "div",
-        className: "w-[inherit] bg-[inherit] !bg-[inherit] !border-none",
+        className:
+          "w-[inherit] bg-[inherit] !bg-[inherit] !border-none hide-scrollbar",
       }}
     >
       <div className="flex flex-col items-center justify-between h-[inherit] pb-6 w-full">
