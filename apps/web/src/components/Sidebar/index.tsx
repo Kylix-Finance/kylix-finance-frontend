@@ -1,5 +1,6 @@
 import { Box, Drawer } from "@mui/material";
 import Footer from "./footer";
+import Header from "./header";
 
 const Sidebar = () => {
   return (
@@ -10,10 +11,15 @@ const Sidebar = () => {
       open
       PaperProps={{
         component: "div",
-        className: "w-[inherit] bg-[inherit] !bg-[inherit]",
+        className: "w-[inherit] bg-[inherit] !bg-[inherit] !border-none",
       }}
     >
-      <Footer />
+      <div className="flex flex-col items-center justify-between h-[inherit] pb-6 w-full">
+        <div className="flex flex-col w-full h-48">
+          <Header />
+        </div>
+        <Footer />
+      </div>
     </Drawer>
   );
 };
