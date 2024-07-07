@@ -1,5 +1,9 @@
-import Card from "~/components/card";
-import { Icons } from "~/assets/svgs";
+import { Metadata } from "next";
+import { metadataGenerator } from "~/config/metadata";
+export const metadata: Metadata = metadataGenerator({
+  title: "Dashboard",
+});
+
 const Page = () => {
   return <div></div>;
 };
