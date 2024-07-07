@@ -1,6 +1,7 @@
 "use client";
 
 import { createTheme } from "@mui/material/styles";
+import ThemeLink from "./themeComponents/ThemeLink";
 
 let theme = createTheme({
   palette: {
@@ -47,7 +48,13 @@ let theme = createTheme({
 });
 
 theme = createTheme(theme, {
-  components: {},
+  components: {
+    MuiLink: {
+      defaultProps: {
+        component: ThemeLink,
+      },
+    },
+  },
 });
 
 export { theme };

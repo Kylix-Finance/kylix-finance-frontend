@@ -1,7 +1,7 @@
-import { SidebarType, SocialMediaType } from "~/types";
-import { Icons } from "../svgs";
+import { Sidebar, SocialMedia } from "~/types";
+import { Icons, sidebarIcons } from "../svgs";
 
-const socialMediaLinks: Array<SocialMediaType> = [
+const socialMediaLinks: Array<SocialMedia> = [
   {
     name: "X",
     link: "https://x.com/",
@@ -23,54 +23,65 @@ const socialMediaLinks: Array<SocialMediaType> = [
     icon: Icons.Discord,
   },
 ];
-const sidebar: Array<SidebarType> = [
+const sidebar: Array<Sidebar> = [
   {
     heading: "Main",
     items: [
       {
         name: "Dashboard",
         href: "/dashboard",
-        icon: Icons.SidebarDashboard,
+        icon: sidebarIcons.SidebarDashboard,
       },
       {
         name: "Portfolio",
-        icon: Icons.SidebarWallet,
-        items: [],
+        icon: sidebarIcons.SidebarWallet,
+        items: [
+          {
+            name: "Account",
+            icon: sidebarIcons.SidebarWallet,
+            href: "/portfolio/account",
+          },
+          {
+            name: "PnL",
+            icon: sidebarIcons.SidebarWallet,
+            href: "/portfolio/pnl",
+          },
+        ],
       },
       {
         name: "Market",
         href: "/market",
-        icon: Icons.SidebarMarket,
+        icon: sidebarIcons.SidebarMarket,
       },
       {
         name: "Swap",
-        icon: Icons.SidebarSwap,
+        icon: sidebarIcons.SidebarSwap,
         items: [],
       },
       {
         name: "Cross Swap",
         href: "/cross-swap",
-        icon: Icons.SidebarCrossSwap,
+        icon: sidebarIcons.SidebarCrossSwap,
       },
       {
         name: "Pools",
         href: "/pools",
-        icon: Icons.SidebarPool,
+        icon: sidebarIcons.SidebarPool,
       },
       {
         name: "Liquidations",
         href: "/liquidations",
-        icon: Icons.SidebarLiquidations,
+        icon: sidebarIcons.SidebarLiquidations,
       },
       {
         name: "Staking",
         href: "/staking",
-        icon: Icons.SidebarStaking,
+        icon: sidebarIcons.SidebarStaking,
       },
       {
         name: "Governance",
         href: "/governance",
-        icon: Icons.SidebarGovernance,
+        icon: sidebarIcons.SidebarGovernance,
       },
     ],
   },
@@ -80,11 +91,11 @@ const sidebar: Array<SidebarType> = [
       {
         name: "Notification",
         href: "/settings/notification",
-        icon: Icons.SidebarNotification,
+        icon: sidebarIcons.SidebarNotification,
       },
       {
         name: "Settings",
-        icon: Icons.SidebarSettings,
+        icon: sidebarIcons.SidebarSettings,
         items: [],
       },
     ],

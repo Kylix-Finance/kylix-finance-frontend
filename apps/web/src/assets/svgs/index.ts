@@ -15,12 +15,7 @@ import SidebarStaking from "./sidebar-staking.svg";
 import SidebarSwap from "./sidebar-swap.svg";
 import SidebarWallet from "./sidebar-wallet.svg";
 
-export const Icons = {
-  WalletIcon,
-  Discord,
-  Instagram,
-  Linkedin,
-  Twitter,
+export const sidebarIcons = {
   SidebarNotification,
   SidebarCrossSwap,
   SidebarDashboard,
@@ -32,4 +27,12 @@ export const Icons = {
   SidebarStaking,
   SidebarSwap,
   SidebarWallet,
+};
+
+export const Icons = {
+  WalletIcon,
+  Discord,
+  Instagram,
+  Linkedin,
+  Twitter,
 };

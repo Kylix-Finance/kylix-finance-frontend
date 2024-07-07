@@ -1,6 +1,6 @@
 import { ComponentType, SVGProps } from "react";
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
-export type SocialMediaType = {
+export type SocialMedia = {
   name: string;
   link: string;
   icon: Icon;
@@ -13,7 +13,7 @@ type SidebarItem = {
   items?: Array<SidebarItem>;
 };
 
-export type SidebarType = {
+export type Sidebar = {
   heading: string;
   items: Array<SidebarItem>;
 };
