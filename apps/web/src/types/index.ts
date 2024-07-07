@@ -6,14 +6,14 @@ export type SocialMedia = {
   icon: Icon;
 };
 
-type SidebarItem = {
+export type SidebarItem = {
   name: string;
   href?: string;
   icon: Icon;
-  items?: Array<SidebarItem>;
+  items?: SidebarItem[];
 };
 
 export type Sidebar = {
   heading: string;
-  items: Array<SidebarItem>;
+  items: SidebarItem[];
 };
