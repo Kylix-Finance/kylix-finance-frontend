@@ -6,5 +6,7 @@ export const metadata: Metadata = metadataGenerator({
 });
 
 export default function page() {
-  return <div>Dashboard</div>;
+  return (
+    <span className="w-full h-[8000px] bg-gradient-to-b from-slate-400 to-green-500" />
+  );
 }

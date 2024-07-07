@@ -1,6 +1,6 @@
 import Providers from "~/providers";
 import "./globals.css";
-import Parts from "./_parts";
+import MainLayout from "./_parts/MainLayout";
 
 export default function RootLayout({
   children,
@@ -11,7 +11,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <Parts>{children}</Parts>
+          <MainLayout>{children}</MainLayout>
         </Providers>
       </body>
     </html>

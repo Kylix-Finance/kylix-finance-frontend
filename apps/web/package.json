@@ -14,13 +14,14 @@
     "check:types:watch": "pnpm run check:types --watch",
     "dev": "pnpm run start:dev",
     "start": "pnpm run start:production",
-    "start:dev": "next dev -p ${p:-3000}",
+    "start:dev": "next dev",
     "start:dev:watch": "pnpm run start:dev &  pnpm run check:types:watch",
-    "start:production": "next start -p ${p:-3000}"
+    "start:production": "next start"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.16.0",
     "@mui/material": "^5.16.0",
     "@mui/material-nextjs": "^5.15.11",
     "next": "15.0.0-rc.0",
