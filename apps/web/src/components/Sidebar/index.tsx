@@ -1,6 +1,7 @@
 import { Box, Drawer, Link } from "@mui/material";
 import { sidebar, socialMediaLinks } from "~/assets/data";
 import Image from "next/image";
+import { SidebarMenu } from "./Item";
 
 const Sidebar = () => {
   return (
@@ -26,27 +27,11 @@ const Sidebar = () => {
             />
           </div>
           <div className="flex flex-col">
-            {sidebar.map((item) => {
+            {sidebar.map((section) => {
               return (
-                <div key={item.heading} className="text-black flex flex-col">
-                  <p>{item.heading}</p>
-                  <div className="flex flex-col">
-                    {item.items.map((link) => {
-                      if (link.items?.length) {
-                        return (
-                          <div className="bg-red-200" key={link.name}>
-                            {link.name}
-                          </div>
-                        );
-                      } else {
-                        return (
-                          <Link key={link.name} href={link.href || ""}>
-                            {link.name}
-                          </Link>
-                        );
-                      }
-                    })}
-                  </div>
+                <div key={section.heading} className="text-black flex flex-col">
+                  <p>{section.heading}</p>
+                  <SidebarMenu items={section.items} />
                 </div>
               );
             })}
