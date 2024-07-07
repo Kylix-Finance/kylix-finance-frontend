@@ -1,6 +1,6 @@
 import { Box, Drawer } from "@mui/material";
-import Footer from "./footer";
-import Header from "./header";
+import Footer from "./Footer";
+import Header from "./Header";
 
 const Sidebar = () => {
   return (

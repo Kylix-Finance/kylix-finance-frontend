@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import Breadcrumbs from "./breadcrumbs";
-import Heading from "./heading";
+import Breadcrumbs from "./Breadcrumbs";
+import Heading from "./Heading";
 
 const Header = () => {
   return (

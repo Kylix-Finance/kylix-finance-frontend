@@ -8,7 +8,7 @@
     }
   },
   "include": [
-    "../../react-app-env.d.ts",
+    "./react-app-env.d.ts",
     "../../theme.d.ts",
     "next-env.d.ts",
     "src",
