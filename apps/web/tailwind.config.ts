@@ -1,4 +1,5 @@
 import { Config } from "tailwindcss";
+import { PluginAPI } from "tailwindcss/types/config";
 const config: Config = {
   content: ["./src/**/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
@@ -32,7 +33,21 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }: PluginAPI) {
+      const hideScrollbar = {
+        ".hide-scrollbar": {
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+          "-ms-overflow-style": "none",
+          "scrollbar-width": "none",
+        },
+      };
+
+      addUtilities(hideScrollbar);
+    },
+  ],
 };
 
 module.exports = config;
