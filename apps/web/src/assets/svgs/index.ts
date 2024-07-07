@@ -3,30 +3,30 @@ import Discord from "./discord.svg";
 import Instagram from "./instagram.svg";
 import Linkedin from "./linkedin.svg";
 import Twitter from "./twitter.svg";
-import SidebarNotification from "./sidebar-notification.svg";
-import SidebarCrossSwap from "./sidebar-cross-swap.svg";
-import SidebarDashboard from "./sidebar-dashboard.svg";
-import SidebarGovernance from "./sidebar-governance.svg";
-import SidebarLiquidations from "./sidebar-liquidations.svg";
-import SidebarMarket from "./sidebar-market.svg";
-import SidebarPool from "./sidebar-pool.svg";
-import SidebarSettings from "./sidebar-settings.svg";
-import SidebarStaking from "./sidebar-staking.svg";
-import SidebarSwap from "./sidebar-swap.svg";
-import SidebarWallet from "./sidebar-wallet.svg";
+import Notification from "./notification.svg";
+import CrossSwap from "./cross-swap.svg";
+import Dashboard from "./dashboard.svg";
+import Governance from "./governance.svg";
+import Liquidations from "./liquidations.svg";
+import Market from "./market.svg";
+import Pool from "./pool.svg";
+import Settings from "./settings.svg";
+import Staking from "./staking.svg";
+import Swap from "./swap.svg";
+import Wallet from "./wallet.svg";
 
 export const sidebarIcons = {
-  SidebarNotification,
-  SidebarCrossSwap,
-  SidebarDashboard,
-  SidebarGovernance,
-  SidebarLiquidations,
-  SidebarMarket,
-  SidebarPool,
-  SidebarSettings,
-  SidebarStaking,
-  SidebarSwap,
-  SidebarWallet,
+  Notification,
+  CrossSwap,
+  Dashboard,
+  Governance,
+  Liquidations,
+  Market,
+  Pool,
+  Settings,
+  Staking,
+  Swap,
+  Wallet,
 };
 
 export const Icons = {

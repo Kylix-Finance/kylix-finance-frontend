@@ -1,9 +1,9 @@
 "use client";
 
-import { Box, Drawer, Link } from "@mui/material";
+import { Box, Drawer, Link, List } from "@mui/material";
 import { sidebar, socialMediaLinks } from "~/assets/data";
 import Image from "next/image";
-import { SidebarMenu } from "./Item";
+import { Item } from "./Item";
 
 const Sidebar = () => {
   return (
@@ -33,13 +33,18 @@ const Sidebar = () => {
               return (
                 <div key={section.heading} className="text-black flex flex-col">
                   <p>{section.heading}</p>
-                  <SidebarMenu items={section.items} />
+                  <List>
+                    {section.items.map((item) => (
+                      <div key={item.name} className="flex flex-col">
+                        <Item data={item} collapsable={!!item.items?.length} />
+                      </div>
+                    ))}
+                  </List>
                 </div>
               );
             })}
           </div>
         </div>
-
         <div className="flex flex-col items-center">
           <div className="flex items-center justify-center">
             {socialMediaLinks.map(({ icon: Icon, link }) => (

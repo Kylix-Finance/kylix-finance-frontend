@@ -36,7 +36,7 @@ let theme = createTheme({
     },
     text: {
       disabled: "#9ea3ac",
-      primary: "#ffffff",
+      primary: "#5C5E64",
       secondary: "#dacfd8",
     },
     warning: {

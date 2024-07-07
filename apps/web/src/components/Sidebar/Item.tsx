@@ -26,8 +26,13 @@ export const Item = ({ data, collapsable }: ItemProps) => {
 
   return (
     <>
-      <ListItemButton onClick={clickHandler} className="hover:bg-gray-100">
-        <ListItemIcon>{data.icon && <data.icon />}</ListItemIcon>
+      <ListItemButton
+        onClick={clickHandler}
+        className="hover:bg-gray-100 flex items-center h-10 w-full"
+      >
+        <ListItemIcon>
+          {data.icon && <data.icon className="w-10 h-full" />}
+        </ListItemIcon>
         <ListItemText primary={data.name} />
         {collapsable ? isOpen ? <ExpandLess /> : <ExpandMore /> : null}
       </ListItemButton>
@@ -49,21 +54,5 @@ export const Item = ({ data, collapsable }: ItemProps) => {
         </Collapse>
       )}
     </>
-  );
-};
-
-interface SidebarMenuProps {
-  items: SidebarItem[];
-}
-
-export const SidebarMenu = ({ items }: SidebarMenuProps) => {
-  return (
-    <List>
-      {items.map((item) => (
-        <div key={item.name} className="flex flex-col">
-          <Item data={item} collapsable={!!item.items?.length} />
-        </div>
-      ))}
-    </List>
   );
 };

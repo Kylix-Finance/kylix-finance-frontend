@@ -30,20 +30,20 @@ const sidebar: Array<Sidebar> = [
       {
         name: "Dashboard",
         href: "/dashboard",
-        icon: sidebarIcons.SidebarDashboard,
+        icon: sidebarIcons.Dashboard,
       },
       {
         name: "Portfolio",
-        icon: sidebarIcons.SidebarWallet,
+        icon: sidebarIcons.Wallet,
         items: [
           {
             name: "Account",
-            icon: sidebarIcons.SidebarWallet,
+            icon: sidebarIcons.Wallet,
             href: "/portfolio/account",
           },
           {
             name: "PnL",
-            icon: sidebarIcons.SidebarWallet,
+            icon: sidebarIcons.Wallet,
             href: "/portfolio/pnl",
           },
         ],
@@ -51,37 +51,37 @@ const sidebar: Array<Sidebar> = [
       {
         name: "Market",
         href: "/market",
-        icon: sidebarIcons.SidebarMarket,
+        icon: sidebarIcons.Market,
       },
       {
         name: "Swap",
-        icon: sidebarIcons.SidebarSwap,
+        icon: sidebarIcons.Swap,
         items: [],
       },
       {
         name: "Cross Swap",
         href: "/cross-swap",
-        icon: sidebarIcons.SidebarCrossSwap,
+        icon: sidebarIcons.CrossSwap,
       },
       {
         name: "Pools",
         href: "/pools",
-        icon: sidebarIcons.SidebarPool,
+        icon: sidebarIcons.Pool,
       },
       {
         name: "Liquidations",
         href: "/liquidations",
-        icon: sidebarIcons.SidebarLiquidations,
+        icon: sidebarIcons.Liquidations,
       },
       {
         name: "Staking",
         href: "/staking",
-        icon: sidebarIcons.SidebarStaking,
+        icon: sidebarIcons.Staking,
       },
       {
         name: "Governance",
         href: "/governance",
-        icon: sidebarIcons.SidebarGovernance,
+        icon: sidebarIcons.Governance,
       },
     ],
   },
@@ -91,11 +91,11 @@ const sidebar: Array<Sidebar> = [
       {
         name: "Notification",
         href: "/settings/notification",
-        icon: sidebarIcons.SidebarNotification,
+        icon: sidebarIcons.Notification,
       },
       {
         name: "Settings",
-        icon: sidebarIcons.SidebarSettings,
+        icon: sidebarIcons.Settings,
         items: [],
       },
     ],
