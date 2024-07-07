@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Drawer, Link } from "@mui/material";
 import { sidebar, socialMediaLinks } from "~/assets/data";
 import Image from "next/image";
