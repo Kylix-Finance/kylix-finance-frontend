@@ -1,6 +1,6 @@
+import Card from "~/components/card";
+import { Icons } from "~/assets/svgs";
 const Page = () => {
-  return (
-    <span className="w-full h-[8000px] bg-gradient-to-b from-slate-400 to-green-500" />
-  );
+  return <div></div>;
 };
 export default Page;
