@@ -7,9 +7,11 @@ interface Header {
   icon?: Icon;
   hasIconBackground?: boolean;
   rightComponent?: FC;
+  iconColor?: string;
 }
 interface IconProps {
   icon: Icon;
+  iconColor?: string;
 }
 
 interface TitleProps {
@@ -19,14 +21,22 @@ interface TitleProps {
 
 interface Props extends PropsWithChildren, Header {}
 
-const IconWithBackground: FC<IconProps> = ({ icon: Icon }) => (
+const IconWithBackground: FC<IconProps> = ({ icon: Icon, iconColor }) => (
   <div className="p-2 bg-[#F4FAF9] rounded-lg">
-    <Icon width="16px" height="16px" className="text-primary-500" />
+    <Icon
+      width="16px"
+      height="16px"
+      className={`${iconColor ?? "text-primary-500"}`}
+    />
   </div>
 );
 
-const IconWithoutBackground: FC<IconProps> = ({ icon: Icon }) => (
-  <Icon width="16px" height="16px" className="text-primary-500" />
+const IconWithoutBackground: FC<IconProps> = ({ icon: Icon, iconColor }) => (
+  <Icon
+    width="16px"
+    height="16px"
+    className={`${iconColor ?? "text-primary-500"}`}
+  />
 );
 
 const Title: FC<TitleProps> = ({ title, hasIconBackground }) => (
