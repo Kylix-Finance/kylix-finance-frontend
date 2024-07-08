@@ -27,6 +27,9 @@ const config: Config = {
           800: "#42313c",
           900: "#21191e",
         },
+        background: {
+          light: "#F4FAF9",
+        },
       },
       boxShadow: {
         box: "0px 5.5px 12px 0px rgba(0, 0, 0, 0.05)",
