@@ -33,6 +33,7 @@ const config: Config = {
       },
       boxShadow: {
         box: "0px 5.5px 12px 0px rgba(0, 0, 0, 0.05)",
+        "secondary-box": "0px 3.5px 5.5px 0px #00000005",
       },
       fontFamily: {
         body: ["var(--font-inter)"],
@@ -51,7 +52,6 @@ const config: Config = {
           "scrollbar-width": "none",
         },
       };
-
       addUtilities(hideScrollbar);
     },
   ],

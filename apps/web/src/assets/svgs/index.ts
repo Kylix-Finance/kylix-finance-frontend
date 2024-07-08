@@ -14,7 +14,7 @@ import Settings from "./settings.svg";
 import Staking from "./staking.svg";
 import Swap from "./swap.svg";
 import Wallet from "./wallet.svg";
-
+import ArrowRight from "./arrow-right.svg";
 export const sidebarIcons = {
   Notification,
   CrossSwap,
@@ -35,4 +35,5 @@ export const Icons = {
   Instagram,
   Linkedin,
   Twitter,
+  ArrowRight,
 };
