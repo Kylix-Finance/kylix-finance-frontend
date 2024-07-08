@@ -25,10 +25,12 @@
     "@mui/material": "^5.16.0",
     "@mui/material-nextjs": "^5.15.11",
     "@svgr/webpack": "^8.1.0",
+    "chart.js": "^4.4.3",
     "next": "15.0.0-rc.0",
     "react": "19.0.0-rc-f994737d14-20240522",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "19.0.0-rc-f994737d14-20240522",
-    "recharts": "^2.12.7"
+    "recharts": "2.13.0-alpha.4"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
