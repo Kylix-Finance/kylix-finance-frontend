@@ -1,13 +1,11 @@
-"use client";
-
 import { Breadcrumbs as BaseBreadcrumbs } from "@mui/material";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-const Breadcrumbs = () => {
-  const pathname = usePathname();
-  const pathnames = pathname.split("/").filter((x) => x);
+interface Props {
+  pathnames: string[];
+}
 
+const Breadcrumbs = ({ pathnames }: Props) => {
   return (
     <BaseBreadcrumbs separator="/" className="!font-normal !text-xs !leading-4">
       <p className="text-[#A0AEC0]">Pages</p>
