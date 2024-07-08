@@ -30,25 +30,34 @@ export const Item = ({ data, collapsable }: ItemProps) => {
     <>
       <Link
         onClick={clickHandler}
-        className="hover:bg-gray-100 flex items-center h-10 w-full"
+        className="hover:bg-primary-300 flex items-center h-10 w-full rounded-lg overflow-hidden pl-3"
         href={data.href || ""}
       >
-        <ListItemIcon>
-          {data.icon && <data.icon className="w-5 h-5 ml-9 mr-3" />}
+        <ListItemIcon className="!min-w-0 mr-3">
+          {data.icon && <data.icon className="w-5 h-5" />}
         </ListItemIcon>
         <ListItemText primary={data.name} />
-        {collapsable ? isOpen ? <ExpandLess /> : <ExpandMore /> : null}
+        {collapsable ? (
+          isOpen ? (
+            <ExpandLess className="w-4 h-4 mr-3" />
+          ) : (
+            <ExpandMore className="w-4 h-4 mr-3" />
+          )
+        ) : null}
       </Link>
       {collapsable && (
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {data.items?.map((subItem) => (
               <Link
-                href={subItem.href || ""}
                 key={subItem.name}
-                className="pl-12"
+                href={subItem.href || ""}
+                className="hover:bg-gray-100 flex items-center h-10 w-full rounded-lg overflow-hidden"
               >
                 <ListItemButton className="hover:bg-gray-100">
+                  <ListItemIcon>
+                    {subItem.icon && <subItem.icon className="w-5 h-5 " />}
+                  </ListItemIcon>
                   <ListItemText primary={subItem.name} />
                 </ListItemButton>
               </Link>

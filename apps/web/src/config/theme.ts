@@ -50,6 +50,12 @@ let theme = createTheme({
 theme = createTheme(theme, {
   components: {
     MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: "none",
+          color: theme.palette.text.primary,
+        },
+      },
       defaultProps: {
         component: ThemeLink,
       },

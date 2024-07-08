@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Drawer, Link, List } from "@mui/material";
+import { Box, Drawer, Link, List, ListItem } from "@mui/material";
 import { sidebar, socialMediaLinks } from "~/assets/data";
 import Image from "next/image";
 import { Item } from "./Item";
@@ -15,10 +15,10 @@ const Sidebar = () => {
       PaperProps={{
         component: "div",
         className:
-          "w-[inherit] bg-[inherit] !bg-[inherit] !border-none hide-scrollbar",
+          "w-[inherit] bg-[inherit] !bg-[inherit] !border-none hide-scrollbar ",
       }}
     >
-      <div className="flex flex-col items-center justify-between h-[inherit] pb-6 w-full">
+      <div className="flex flex-col items-center justify-between h-[inherit] pb-6 w-full bg-green-200/20">
         <div className="flex flex-col w-full">
           <div className="w-full h-full bg-primary-500 flex flex-col justify-center items-center py-10 px-16">
             <Image
@@ -29,16 +29,22 @@ const Sidebar = () => {
               draggable="false"
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
             {sidebar.map((section) => {
               return (
-                <div key={section.heading} className="text-black flex flex-col">
+                <div
+                  key={section.heading}
+                  className="text-black flex flex-col w-full px-6"
+                >
                   <p>{section.heading}</p>
-                  <List>
+                  <List className="w-full flex flex-col gap-2">
                     {section.items.map((item) => (
-                      <div key={item.name} className="flex flex-col">
+                      <ListItem
+                        key={item.name}
+                        className="w-full flex flex-col !px-0 !py-0"
+                      >
                         <Item data={item} collapsable={!!item.items?.length} />
-                      </div>
+                      </ListItem>
                     ))}
                   </List>
                 </div>
