@@ -1,4 +1,10 @@
-import { FC, ComponentType, PropsWithChildren, SVGProps } from "react";
+import {
+  FC,
+  ComponentType,
+  PropsWithChildren,
+  SVGProps,
+  ReactNode,
+} from "react";
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -6,7 +12,7 @@ interface Header {
   title?: string;
   icon?: Icon;
   hasIconBackground?: boolean;
-  rightComponent?: FC;
+  rightComponent?: ReactNode;
   iconColor?: string;
 }
 interface IconProps {
@@ -23,7 +29,7 @@ interface Props extends PropsWithChildren, Header {
   className?: string;
 }
 
-const IconWithBackground: FC<IconProps> = ({ icon: Icon, iconColor }) => (
+const IconWithBackground = ({ icon: Icon, iconColor }: IconProps) => (
   <div className="p-2 bg-[#F4FAF9] rounded-lg">
     <Icon
       width="16px"
@@ -33,7 +39,7 @@ const IconWithBackground: FC<IconProps> = ({ icon: Icon, iconColor }) => (
   </div>
 );
 
-const IconWithoutBackground: FC<IconProps> = ({ icon: Icon, iconColor }) => (
+const IconWithoutBackground = ({ icon: Icon, iconColor }: IconProps) => (
   <Icon
     width="16px"
     height="16px"
@@ -41,7 +47,7 @@ const IconWithoutBackground: FC<IconProps> = ({ icon: Icon, iconColor }) => (
   />
 );
 
-const Title: FC<TitleProps> = ({ title, hasIconBackground }) => (
+const Title = ({ title, hasIconBackground }: TitleProps) => (
   <p
     className={`font-bold text-sm leading-5 ${hasIconBackground ? "font-medium" : "font-bold"}`}
   >
@@ -49,7 +55,7 @@ const Title: FC<TitleProps> = ({ title, hasIconBackground }) => (
   </p>
 );
 
-const Card: FC<Props> = ({
+const Card = ({
   icon: Icon,
   hasIconBackground,
   title,
@@ -57,7 +63,7 @@ const Card: FC<Props> = ({
   rightComponent: RightComponent,
   className,
   iconColor,
-}) => {
+}: Props) => {
   return (
     <div
       className={`shadow-box rounded-lg p-6 bg-white w-full h-full flex flex-col ${className}`}
@@ -70,13 +76,13 @@ const Card: FC<Props> = ({
             (hasIconBackground ? (
               <IconWithBackground icon={Icon} iconColor={iconColor} />
             ) : (
-              <IconWithoutBackground icon={Icon} />
+              <IconWithoutBackground icon={Icon} iconColor={iconColor} />
             ))}
           {title && (
             <Title title={title} hasIconBackground={hasIconBackground} />
           )}
         </div>
-        {RightComponent && <RightComponent />}
+        {RightComponent}
       </div>
       {children}
     </div>
