@@ -1,6 +1,5 @@
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
-import SkeletonTheme from "./SkeletonTheme";
 import { theme } from "~/config";
 import { FC } from "react";
 
@@ -10,11 +9,9 @@ interface Props {
 
 const Providers: FC<Props> = ({ children }) => {
   return (
-    <SkeletonTheme>
-      <AppRouterCacheProvider>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
-      </AppRouterCacheProvider>
-    </SkeletonTheme>
+    <AppRouterCacheProvider>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </AppRouterCacheProvider>
   );
 };
 export default Providers;
