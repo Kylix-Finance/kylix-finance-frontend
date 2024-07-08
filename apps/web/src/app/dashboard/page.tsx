@@ -9,7 +9,8 @@ import Reward from "./_parts/Reward";
 import Supply from "./_parts/Supply";
 import TotalLocked from "./_parts/TotalLocked";
 import VaultChart from "./_parts/VaultChart";
-import { Card } from "@mui/material";
+import { Card } from "~/components";
+import { Icons } from "~/assets/svgs";
 
 export const metadata: Metadata = metadataGenerator({
   title: "Dashboard",
@@ -18,28 +19,41 @@ export const metadata: Metadata = metadataGenerator({
 const Page = () => {
   return (
     <div className={styles.container}>
-      <Card className={styles.total}>
+      <Card
+        className={styles.total}
+        title="Total value locked"
+        icon={Icons.WalletFill}
+        hasIconBackground
+      >
         <TotalLocked />
       </Card>
-      <Card className={styles.reward}>
+      <Card
+        className={styles.reward}
+        title="Reward imbursed to lenders"
+        icon={Icons.WalletFill}
+      >
         <Reward />
       </Card>
-      <Card className={styles.burned}>
+      <Card
+        className={styles.burned}
+        title=" Kylix Burned"
+        icon={Icons.WalletFill}
+      >
         <Burned />
       </Card>
       <Card className={styles.kylix_chart}>
         <KylixChart />
       </Card>
-      <Card className={styles.featured}>
+      <Card className={styles.featured} title="Featured Market">
         <Featured />
       </Card>
       <Card className={styles.vault_chart}>
         <VaultChart />
       </Card>
-      <Card className={styles.supply}>
+      <Card className={styles.supply} title="Assets to Supply">
         <Supply />
       </Card>
-      <Card className={styles.borrow}>
+      <Card className={styles.borrow} title="Assets to Borrow">
         <Borrow />
       </Card>
     </div>

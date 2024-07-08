@@ -19,7 +19,9 @@ interface TitleProps {
   hasIconBackground?: boolean;
 }
 
-interface Props extends PropsWithChildren, Header {}
+interface Props extends PropsWithChildren, Header {
+  className?: string;
+}
 
 const IconWithBackground: FC<IconProps> = ({ icon: Icon, iconColor }) => (
   <div className="p-2 bg-[#F4FAF9] rounded-lg">
@@ -53,16 +55,20 @@ const Card: FC<Props> = ({
   title,
   children,
   rightComponent: RightComponent,
+  className,
+  iconColor,
 }) => {
   return (
-    <div className="shadow-box rounded-lg p-6 bg-white w-full h-full flex flex-col">
+    <div
+      className={`shadow-box rounded-lg p-6 bg-white w-full h-full flex flex-col ${className}`}
+    >
       <div className="flex justify-between items-center w-full mb-2">
         <div
           className={`flex items-center ${hasIconBackground ? "gap-2" : "gap-1"}`}
         >
           {Icon &&
             (hasIconBackground ? (
-              <IconWithBackground icon={Icon} />
+              <IconWithBackground icon={Icon} iconColor={iconColor} />
             ) : (
               <IconWithoutBackground icon={Icon} />
             ))}

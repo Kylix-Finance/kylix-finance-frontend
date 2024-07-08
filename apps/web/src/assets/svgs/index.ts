@@ -1,4 +1,4 @@
-import WalletIcon from "./wallet.svg";
+import WalletFill from "./wallet-fill.svg";
 import Discord from "./discord.svg";
 import Instagram from "./instagram.svg";
 import Linkedin from "./linkedin.svg";
@@ -30,7 +30,7 @@ export const sidebarIcons = {
 };
 
 export const Icons = {
-  WalletIcon,
+  WalletFill,
   Discord,
   Instagram,
   Linkedin,
