@@ -18,7 +18,7 @@ const Featured = () => {
           <p>+ Load more</p>
         </Button>
         <div className="flex items-center gap-1.5">
-          <Switch />
+          {/* <Switch /> */}
           <p className="text-xs font-semibold leading-4 text-primary-800">
             Detailed View
           </p>
