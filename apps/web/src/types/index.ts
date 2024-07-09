@@ -17,3 +17,16 @@ export type Sidebar = {
   heading: string;
   items: SidebarItem[];
 };
+
+export type NotificationType =
+  | "information"
+  | "warning"
+  | "error"
+  | "success"
+  | "message";
+
+export type NotificationParams = {
+  type: "information" | "warning" | "error" | "success" | "message";
+  message: string;
+  title: string;
+};

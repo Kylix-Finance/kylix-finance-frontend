@@ -15,6 +15,12 @@ import Staking from "./staking.svg";
 import Swap from "./swap.svg";
 import Wallet from "./wallet.svg";
 import ArrowRight from "./arrow-right.svg";
+import ErrorAlert from "./error.svg";
+import SuccessAlert from "./success.svg";
+import WarningAlert from "./warning.svg";
+import MessageAlert from "./message.svg";
+import InformationAlert from "./information.svg";
+import XIcon from "./x.svg";
 export const sidebarIcons = {
   Notification,
   CrossSwap,
@@ -29,6 +35,14 @@ export const sidebarIcons = {
   Wallet,
 };
 
+export const Alert = {
+  Error: ErrorAlert,
+  Success: SuccessAlert,
+  Warning: WarningAlert,
+  Message: MessageAlert,
+  Information: InformationAlert,
+};
+
 export const Icons = {
   WalletFill,
   Discord,
@@ -36,4 +50,5 @@ export const Icons = {
   Linkedin,
   Twitter,
   ArrowRight,
+  XIcon,
 };

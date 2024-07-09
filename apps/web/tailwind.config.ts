@@ -27,6 +27,12 @@ const config: Config = {
           800: "#42313c",
           900: "#21191e",
         },
+        notification: {
+          information: "#50A0E1",
+          success: "#45a996",
+          error: "#F07979",
+          warning: "#FAAA56",
+        },
         background: {
           light: "#F4FAF9",
         },
