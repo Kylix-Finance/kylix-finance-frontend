@@ -8,7 +8,7 @@ const MainLayout = ({ children }: Props) => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="w-full h-screen overflow-y-scroll flex flex-col px-6 bg-background-light">
+      <div className="w-full h-screen overflow-y-scroll flex flex-col px-6 ">
         <Header />
         <main className="w-full flex flex-col">{children}</main>
       </div>

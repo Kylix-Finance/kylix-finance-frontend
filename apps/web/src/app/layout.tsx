@@ -13,7 +13,7 @@ export default function RootLayout({
       lang="en"
       className={`${fonts.inter.variable} ${fonts.poppins.variable}`}
     >
-      <body className="font-body">
+      <body className="font-body !bg-[#F4FAF9]">
         <Providers>
           <MainLayout>{children}</MainLayout>
         </Providers>
