@@ -1,14 +1,14 @@
 {
-	"$schema": "https://json.schemastore.org/prettierrc.json",
-	"arrowParens": "always",
-	"bracketSameLine": false,
-	"bracketSpacing": true,
-	"embeddedLanguageFormatting": "auto",
-	"endOfLine": "lf",
-	"htmlWhitespaceSensitivity": "css",
-	"proseWrap": "preserve",
-	"semi": true,
-	"singleQuote": false,
-	"tabWidth": 2,
-	"trailingComma": "es5"
+  "$schema": "https://json.schemastore.org/prettierrc.json",
+  "arrowParens": "always",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "embeddedLanguageFormatting": "auto",
+  "endOfLine": "lf",
+  "htmlWhitespaceSensitivity": "css",
+  "proseWrap": "preserve",
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "trailingComma": "es5"
 }
