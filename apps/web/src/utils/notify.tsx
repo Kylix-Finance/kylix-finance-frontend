@@ -4,7 +4,10 @@ import { NotificationParams } from "~/types";
 
 export const notify = (
   { type, message, title }: NotificationParams,
-  options?: Omit<ToastOptions, "className" | "bodyClassName">
+  options?: Omit<
+    ToastOptions,
+    "className" | "bodyClassName" | "progressStyle" | "progressClassName"
+  >
 ) => {
   const progressColor: Record<NotificationParams["type"], string> = {
     information: "#50A0E1",
