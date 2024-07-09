@@ -16,7 +16,7 @@ export const metadataGenerator = ({ title, description }: Props): Metadata => {
       url: process.env.NEXT_PUBLIC_FRONTEND_URL || "",
       siteName: title,
       images: {
-        url: "/cover.jpg",
+        url: "/cover.png",
         width: 400,
         height: 400,
         type: "image/jpg",
