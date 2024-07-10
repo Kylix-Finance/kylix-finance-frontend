@@ -1,8 +1,10 @@
-import { ReactNode } from "react";
-import { ListItem } from "./type";
 import { List as MUIList } from "@mui/material";
 import Item from "./Item";
-
+export type ListItem = {
+  label: string;
+  value: string;
+  kylixValue?: string;
+};
 interface Props {
   items: Array<ListItem>;
 }

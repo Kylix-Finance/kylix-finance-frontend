@@ -1,12 +1,6 @@
-import {
-  Box,
-  keyframes,
-  ListItemIcon,
-  ListItemText,
-  ListItem as MUIItemList,
-} from "@mui/material";
-import { ListItem } from "./type";
+import { Box, ListItemText, ListItem as MUIItemList } from "@mui/material";
 import KylixChip from "../KylixChip";
+import { ListItem } from "./index";
 
 const Item = ({ label, value, kylixValue }: ListItem) => {
   return (
