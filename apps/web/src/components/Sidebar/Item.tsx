@@ -7,12 +7,14 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { MouseEvent, useMemo, useState } from "react";
+import { MouseEvent, useState } from "react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { SidebarItem } from "~/types";
 import { usePathname } from "next/navigation";
 import { cn } from "~/utils";
 
+const linkBaseStyles =
+  "hover:bg-primary-500/30 flex items-center h-10 w-full rounded-lg overflow-hidden";
 interface ItemProps {
   data: SidebarItem;
   collapsable?: boolean;
@@ -31,45 +33,43 @@ export const Item = ({ data, collapsable }: ItemProps) => {
 
   const isCurrentPath = pathname === data.href;
 
-  const renderIcon = (
-    IconComponent: React.ElementType | undefined,
-    className: string
-  ) => {
-    return IconComponent ? <IconComponent className={className} /> : null;
+  const renderIcon = (IconComponent: React.ElementType | undefined) => {
+    return IconComponent ? (
+      <IconComponent
+        className={cn("w-5 h-5 text-primary-500", {
+          ["text-white"]: isCurrentPath,
+        })}
+      />
+    ) : null;
   };
 
+  const textStyles = isCurrentPath ? "text-white" : "text-primaryText";
   const renderSubItems = (items: SidebarItem[] | undefined) => {
     return items?.map((subItem) => (
       <Link
         key={subItem.name}
         href={subItem.href || ""}
-        className={cn(
-          "hover:bg-gray-100 flex items-center h-10 w-full rounded-lg overflow-hidden"
-        )}
+        className={cn(linkBaseStyles)}
       >
-        <ListItemButton className="hover:bg-gray-100">
-          <ListItemIcon>{renderIcon(subItem.icon, "w-5 h-5")}</ListItemIcon>
-          <ListItemText primary={subItem.name} />
+        <ListItemButton className="w-full">
+          <ListItemIcon>{renderIcon(subItem.icon)}</ListItemIcon>
+          <ListItemText primary={subItem.name} className={cn(textStyles)} />
         </ListItemButton>
       </Link>
     ));
   };
-
   return (
     <>
       <Link
         onClick={clickHandler}
-        className={cn(
-          "hover:bg-primary-300 flex items-center h-10 w-full rounded-lg overflow-hidden pl-3",
-          { ["bg-primary-500"]: isCurrentPath }
-        )}
+        className={cn(linkBaseStyles, { ["bg-primary-500"]: isCurrentPath })}
         href={data.href || ""}
       >
-        <ListItemButton className="hover:bg-gray-100">
+        <ListItemButton className="pl-3">
           <ListItemIcon className="!min-w-0 mr-3">
-            {renderIcon(data.icon, "w-5 h-5")}
+            {renderIcon(data.icon)}
           </ListItemIcon>
-          <ListItemText primary={data.name} />
+          <ListItemText primary={data.name} className={cn(textStyles)} />
           {collapsable &&
             (isOpen ? (
               <ExpandLess className="w-4 h-4 mr-3" />
@@ -79,8 +79,13 @@ export const Item = ({ data, collapsable }: ItemProps) => {
         </ListItemButton>
       </Link>
       {collapsable && (
-        <Collapse in={isOpen} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
+        <Collapse
+          in={isOpen}
+          timeout="auto"
+          unmountOnExit
+          className="w-[90%] self-end"
+        >
+          <List component="div" disablePadding className="w-full">
             {renderSubItems(data.items)}
           </List>
         </Collapse>

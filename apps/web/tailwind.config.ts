@@ -33,6 +33,9 @@ const config: Config = {
           error: "#F07979",
           warning: "#FAAA56",
         },
+
+        primaryText: "#5C5E64",
+
         background: {
           light: "#F4FAF9",
         },
