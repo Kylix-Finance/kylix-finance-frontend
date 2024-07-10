@@ -1,29 +1,30 @@
 import { Card } from "@mui/material";
 import TabsManager, { TabType } from "~/components/TabsManager";
+import { Withdraw, Borrow, Repay, Supply } from "./form";
 
 const tabItems: Array<TabType> = [
   {
     value: "supply",
     label: "Supply",
-    content: <p>Supply</p>,
+    content: <Supply />,
     disable: true,
   },
   {
     value: "withdraw",
     label: "Withdraw",
-    content: <p>Withdraw</p>,
+    content: <Withdraw />,
     disable: true,
   },
   {
     value: "borrow",
     label: "Borrow",
-    content: <p>Borrow</p>,
+    content: <Borrow />,
     disable: true,
   },
   {
     value: "repay",
     label: "Repay",
-    content: <p>Repay</p>,
+    content: <Repay />,
     disable: true,
   },
 ];
