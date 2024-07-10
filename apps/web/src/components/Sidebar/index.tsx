@@ -18,7 +18,6 @@ const Sidebar = () => {
           "w-[inherit] bg-[inherit] !bg-[inherit] !border-none hide-scrollbar ",
       }}
     >
-      {/* FIXME: change background color to white */}
       <div className="flex flex-col items-center justify-between h-[inherit] pb-6 w-full">
         <div className="flex flex-col w-full">
           <div className="w-full h-full bg-primary-500 flex flex-col justify-center items-center py-10 px-16">
@@ -30,7 +29,7 @@ const Sidebar = () => {
               draggable="false"
             />
           </div>
-          <div className="flex flex-col mt-6">
+          <div className="flex flex-col mt-6 gap-8">
             {sidebar.map((section) => {
               return (
                 <div

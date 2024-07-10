@@ -15,7 +15,7 @@ import SubItem from "./SubItem";
 import ItemIcon from "./ItemIcon";
 
 const linkBaseStyles =
-  "duration-300 hover:bg-primary-500/30 flex items-center h-10 w-full rounded-lg overflow-hidden";
+  "duration-300 flex items-center h-10 w-full rounded-lg overflow-hidden";
 
 interface ItemProps {
   data: SidebarItem;
@@ -43,7 +43,10 @@ export const Item = ({
     <>
       <Link
         onClick={clickHandler}
-        className={cn(linkBaseStyles, { "bg-primary-500": isCurrentPath })}
+        className={cn(
+          linkBaseStyles,
+          isCurrentPath ? "bg-primary-500" : "hover:bg-primary-500/30"
+        )}
         href={data.href || ""}
       >
         <ListItemButton className="pl-3">
@@ -53,9 +56,13 @@ export const Item = ({
           <ListItemText
             primary={data.name}
             className={cn(
-              "duration-300",
+              "duration-300 text-sm font-medium",
               isCurrentPath ? "text-white" : "text-primaryText"
             )}
+            primaryTypographyProps={{
+              fontSize: "14px",
+              fontWeight: isCurrentPath ? 700 : 500,
+            }}
           />
           {collapsable &&
             (isOpen ? (
@@ -75,7 +82,7 @@ export const Item = ({
           <List component="div" disablePadding className="w-full">
             {data.items?.map((subItem) => (
               <SubItem
-                linkBaseStyles=""
+                linkBaseStyles={linkBaseStyles}
                 key={subItem.name}
                 subItem={subItem}
                 isCurrentPath={isCurrentPath}

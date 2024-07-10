@@ -17,7 +17,10 @@ const SubItem = ({ subItem, isCurrentPath, linkBaseStyles }: SubItemProps) => (
   <Link
     key={subItem.name}
     href={subItem.href || ""}
-    className={cn(linkBaseStyles)}
+    className={cn(
+      linkBaseStyles,
+      isCurrentPath ? "bg-primary-500" : "hover:bg-primary-500/30"
+    )}
   >
     <ListItemButton className="w-full">
       <ListItemIcon>
@@ -25,6 +28,10 @@ const SubItem = ({ subItem, isCurrentPath, linkBaseStyles }: SubItemProps) => (
       </ListItemIcon>
       <ListItemText
         primary={subItem.name}
+        primaryTypographyProps={{
+          fontSize: "14px",
+          fontWeight: isCurrentPath ? 700 : 500,
+        }}
         className={cn(
           "duration-300",
           isCurrentPath ? "text-white" : "text-primaryText"

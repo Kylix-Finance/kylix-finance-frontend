@@ -2,6 +2,7 @@
 
 import { createTheme } from "@mui/material/styles";
 import ThemeLink from "./themeComponents/ThemeLink";
+import { fonts } from "~/assets/fonts";
 
 let theme = createTheme({
   palette: {
@@ -48,6 +49,9 @@ let theme = createTheme({
 });
 
 theme = createTheme(theme, {
+  typography: {
+    fontFamily: fonts.inter.style.fontFamily,
+  },
   components: {
     MuiLink: {
       styleOverrides: {
