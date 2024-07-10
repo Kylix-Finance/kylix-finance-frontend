@@ -21,6 +21,7 @@ import WarningAlert from "./warning.svg";
 import MessageAlert from "./message.svg";
 import InformationAlert from "./information.svg";
 import XIcon from "./x.svg";
+import LeftArrow from "./left-arrow.svg";
 export const sidebarIcons = {
   Notification,
   CrossSwap,
@@ -51,4 +52,5 @@ export const Icons = {
   Twitter,
   ArrowRight,
   XIcon,
+  LeftArrow,
 };
