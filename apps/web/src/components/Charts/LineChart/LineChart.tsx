@@ -14,7 +14,7 @@ const LineChart = () => {
           labels: ["Feb 10", "Feb 11", "Feb 12", "Feb 13", "Feb 14"], // X-axis labels
           datasets: [
             {
-              label: "Kylis Price",
+              label: "Kylix Price",
               data: [1200, 1500, 1600, 3000, 1900, 1800, 2000],
               fill: "origin",
               borderColor: palette.primary.light,
