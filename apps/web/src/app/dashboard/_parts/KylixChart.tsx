@@ -1,7 +1,9 @@
+import LineChart from "~/components/Charts/LineChart";
+
 const KylixChart = () => {
   return (
     <div>
-      <h1>KylixChart</h1>
+      <LineChart />
     </div>
   );
 };
