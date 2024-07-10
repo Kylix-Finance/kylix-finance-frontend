@@ -25,7 +25,7 @@ const socialMediaLinks: Array<SocialMedia> = [
 ];
 const sidebar: Array<Sidebar> = [
   {
-    heading: "Main",
+    heading: "MAIN",
     items: [
       {
         name: "Dashboard",
@@ -86,7 +86,7 @@ const sidebar: Array<Sidebar> = [
     ],
   },
   {
-    heading: "Settings",
+    heading: "SETTINGS",
     items: [
       {
         name: "Notification",
