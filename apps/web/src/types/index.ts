@@ -1,5 +1,5 @@
 import { ComponentType, SVGProps } from "react";
-type Icon = ComponentType<SVGProps<SVGSVGElement>>;
+export type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 export type SocialMedia = {
   name: string;
   link: string;
