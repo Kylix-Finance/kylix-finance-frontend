@@ -1,3 +1,10 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
 .top,
 .bottom {
   display: grid;
@@ -12,7 +19,7 @@
 }
 
 .top {
-  grid-template-columns: 270px repeat(2, 1fr);
+  grid-template-columns: 280px repeat(2, 1fr);
   grid-template-areas:
     "total reward burned"
     "total kylix_chart kylix_chart";

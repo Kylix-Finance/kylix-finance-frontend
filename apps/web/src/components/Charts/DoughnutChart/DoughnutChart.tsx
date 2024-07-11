@@ -1,33 +1,35 @@
 "use client";
-import "chart.js/auto";
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
+import { palette } from "~/config/palette";
+import "chart.js/auto";
 
 const DoughnutChart = () => {
   return (
-    <div className="w-32 h-32">
+    <div className="w-25 h-25">
       <Doughnut
         width="100%"
         height="100%"
         data={{
           datasets: [
             {
-              label: "# of Votes",
               data: [12, 19],
-              backgroundColor: [
-                "rgba(255, 99, 132, 1)",
-                "rgba(54, 162, 235, 1)",
-              ],
-              borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
-              borderWidth: 2,
+              backgroundColor: [palette.primary.main, palette.secondary.main],
               borderRadius: 1000,
-              spacing: 4,
+              spacing: 2,
             },
           ],
+          labels: ["Total Deposit", "Total Borrow"],
         }}
         options={{
-          cutout: "85%",
+          cutout: "78%",
           maintainAspectRatio: false,
+          responsive: false,
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
         }}
       />
     </div>
