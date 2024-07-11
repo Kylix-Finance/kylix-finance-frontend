@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import Image from "next/image";
 import { Icons } from "~/assets/svgs";
+import LineBreak from "~/components/LineBreak";
 
 interface Props {}
 
@@ -38,7 +39,7 @@ const FeaturedCard = () => {
           </Box>
         </Box>
       </Box>
-      <Box className="w-full border bg-primary-500 my-4" />
+      <LineBreak />
       <Box className="flex justify-between">
         <Box className="flex flex-col">
           <p className="font-normal text-[10px] leading-4 text-primary-800/50">
