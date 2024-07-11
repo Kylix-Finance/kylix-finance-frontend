@@ -21,7 +21,7 @@ const Tab = ({ ...rest }: Props) => {
         maxHeight: "auto",
         padding: "4px 8px",
       }}
-      className="!capitalize !rounded-lg !px-1.5 !py-3 !my-0 !mx-1 !min-w-[auto] !text-sm !font-medium"
+      className="!capitalize !rounded-lg !px-1.5 !py-3 !my-0 !mx-1 !min-w-[auto] !text-sm !font-medium !leading-3"
       disableRipple
       {...rest}
     />
