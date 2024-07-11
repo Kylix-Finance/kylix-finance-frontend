@@ -1,12 +1,9 @@
 "use client";
-import { useTheme } from "@mui/material";
 import { Line } from "react-chartjs-2";
-import { kylixPriceData } from "~/mock/chart";
+import { palette } from "~/config/palette";
 import { formatNumber } from "~/utils";
 
 const LineChart = () => {
-  const { palette } = useTheme();
-
   return (
     <div style={{ height: "300px", width: "100%" }}>
       <Line
