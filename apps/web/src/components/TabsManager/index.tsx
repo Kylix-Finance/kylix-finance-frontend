@@ -47,7 +47,7 @@ function TabsManager({ tabs }: Props) {
         ))}
       </Tabs>
       {tabs.map((tab) => (
-        <TabPanel key={tab.value} value={tab.value}>
+        <TabPanel key={tab.value} value={tab.value} className="!m-0 !p-1">
           {tab.content}
         </TabPanel>
       ))}
