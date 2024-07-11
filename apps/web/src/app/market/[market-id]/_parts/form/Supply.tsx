@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@mui/material";
+import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import List, { ListItem } from "~/components/List";
 
 const items: Array<ListItem> = [
@@ -36,10 +36,54 @@ const items: Array<ListItem> = [
     valueClassName: "!text-primary-500",
   },
 ];
-
+//FIXME: add pattern to input(accept only number) and fix style of input
 const Supply = () => {
   return (
-    <div className="flex flex-col gap-6">
+    <Box display="flex" flexDirection="column" gap="24px">
+      <Box flexDirection="column" gap="6px" alignItems="center" display="flex">
+        <Box
+          flexDirection="row"
+          display="flex"
+          justifyContent="space-between"
+          className="!w-full"
+        >
+          <p className="text-primary-800 font-bold text-sm leading-5">Amount</p>
+          <Button
+            className="!text-primary-500 !capitalize"
+            variant="text"
+            disableElevation
+            size="small"
+          >
+            Max
+          </Button>
+        </Box>
+        <TextField
+          size="small"
+          fullWidth
+          className="!rounded-md !font-number !font-bold !text-base bg-primary-500/10 !text-primary-800 !leading-5 !py-2 !px-1"
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                border: "none",
+              },
+              "&:hover fieldset": {
+                border: "none",
+              },
+              "&.Mui-focused fieldset": {
+                border: "none",
+              },
+            },
+          }}
+          inputMode="numeric"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start" className="">
+                $
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
       <List items={items} />
       <Button
         variant="contained"
@@ -49,7 +93,7 @@ const Supply = () => {
       >
         Supply
       </Button>
-    </div>
+    </Box>
   );
 };
 
