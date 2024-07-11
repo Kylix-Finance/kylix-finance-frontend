@@ -1,10 +1,11 @@
 "use client";
 
+import { Box } from "@mui/material";
 import { Line } from "react-chartjs-2";
 
 const VaultChart = () => {
   return (
-    <div>
+    <Box>
       <h1>VaultChart</h1>
       <Line
         data={{
@@ -62,7 +63,7 @@ const VaultChart = () => {
           },
         }}
       />
-    </div>
+    </Box>
   );
 };
 

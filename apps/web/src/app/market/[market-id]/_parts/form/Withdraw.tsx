@@ -1,5 +1,7 @@
+import { Box } from "@mui/material";
+
 const Withdraw = () => {
-  return <div>Withdraw</div>;
+  return <Box>Withdraw</Box>;
 };
 
 export default Withdraw;

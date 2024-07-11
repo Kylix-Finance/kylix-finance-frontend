@@ -1,4 +1,4 @@
-import { Card } from "@mui/material";
+import { Box, Card } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { Icons } from "~/assets/svgs";
@@ -34,35 +34,35 @@ const items2: Array<ListItem> = [
 
 const PoolDetails = () => {
   return (
-    <div className="flex flex-col gap-4">
+    <Box className="flex flex-col gap-4">
       {/* Heading */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
+      <Box className="flex items-center justify-between">
+        <Box className="flex items-center">
           <Link href="/market">
             <Icons.LeftArrow className="text-black" />
           </Link>
-          <div className="p-1.5 flex gap-2 items-center">
+          <Box className="p-1.5 flex gap-2 items-center">
             <Image
               src="/kylix-chip.svg"
               alt="Coin icon"
               width={24}
               height={24}
             />
-            <div className="flex flex-col">
+            <Box className="flex flex-col">
               <p className="font-bold text-sm leading-5 tracking-[-2%] text-primary-800">
                 USDC
               </p>
               <p className="font-normal text-[10px] leading-3 tracking-[-2%] text-primary-800/50">
                 USD coin
               </p>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
         <div className="flex items-center text-primary-800 font-bold gap-2.5">
           <p className=" text-sm leading-5">Price:</p>
           <p className="font-number">$ 1.01</p>
         </div>
-      </div>
+      </Box>
       {/* Pool status */}
       <Card
         elevation={0}
@@ -71,7 +71,7 @@ const PoolDetails = () => {
         <List items={items} />
         <List items={items2} />
       </Card>
-    </div>
+    </Box>
   );
 };
 

@@ -1,5 +1,7 @@
+import { Box } from "@mui/material";
+
 const Repay = () => {
-  return <div>Repay</div>;
+  return <Box>Repay</Box>;
 };
 
 export default Repay;

@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import React from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -36,21 +37,21 @@ const Notification: React.FC<NotificationProps> = ({
   };
 
   return (
-    <div
+    <Box
       className={`flex flex-col items-start gap-2 p-3 border rounded-lg bg-white ${boxShadow[type]}`}
     >
-      <div className="flex items-center justify-between w-full">
-        <div className="flex gap-1.5 font-bold text-sm leading-5">
+      <Box className="flex items-center justify-between w-full">
+        <Box className="flex gap-1.5 font-bold text-sm leading-5">
           {Icon[type]}
           <p className={`capitalize ${textColor[type]}`}>{title}</p>
-        </div>
+        </Box>
         <Icons.XIcon
           className="text-gray-500 cursor-pointer"
           onClick={() => toast.dismiss()}
         />
-      </div>
+      </Box>
       <p className="text-[#82908D] font-bold text-xs leading-4">{message}</p>
-    </div>
+    </Box>
   );
 };
 export default Notification;

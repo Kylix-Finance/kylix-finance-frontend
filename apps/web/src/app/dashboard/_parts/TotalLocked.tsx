@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import Doughnut from "~/components/Charts/DoughnutChart";
 import FinanceSummary from "~/components/FinanceSummary/FinanceSummary";
 import LineBreak from "~/components/LineBreak";
@@ -6,13 +7,13 @@ import { numToLocalString } from "~/utils";
 
 const TotalLocked = () => {
   return (
-    <div className="flex flex-col h-full">
+    <Box className="flex flex-col h-full">
       <p className="mb-9">
         {numToLocalString(65800200)} <span>USD</span>
       </p>
-      <div className="flex justify-between mb-auto">
+      <Box className="flex justify-between mb-auto">
         <Doughnut />
-        <div>
+        <Box>
           <FinanceSummary
             label="Total Deposit"
             value={1502300}
@@ -23,14 +24,14 @@ const TotalLocked = () => {
             value={1502300}
             color={palette.secondary.main}
           />
-        </div>
-      </div>
+        </Box>
+      </Box>
       <LineBreak />
       <p className="mb-2">Kylix Treasury Amount</p>
       <p>
         {numToLocalString(20800000)} <span>USD</span>
       </p>
-    </div>
+    </Box>
   );
 };
 

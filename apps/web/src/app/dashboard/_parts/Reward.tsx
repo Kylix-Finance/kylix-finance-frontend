@@ -1,8 +1,10 @@
+import { Box } from "@mui/material";
+
 const Reward = () => {
   return (
-    <div>
+    <Box>
       <h1>Reward</h1>
-    </div>
+    </Box>
   );
 };
 

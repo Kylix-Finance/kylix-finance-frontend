@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { Sidebar, Header } from "~/components";
 
 interface Props {
@@ -6,13 +7,15 @@ interface Props {
 
 const MainLayout = ({ children }: Props) => {
   return (
-    <div className="flex">
+    <Box className="flex">
       <Sidebar />
-      <div className="w-full h-screen overflow-y-scroll flex flex-col px-6 ">
+      <Box className="w-full h-screen overflow-y-scroll flex flex-col px-6 ">
         <Header />
-        <main className="w-full flex flex-col">{children}</main>
-      </div>
-    </div>
+        <Box component="main" className="w-full flex flex-col">
+          {children}
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

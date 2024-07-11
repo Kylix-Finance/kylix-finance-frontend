@@ -1,8 +1,10 @@
+import { Box } from "@mui/material";
+
 const Supply = () => {
   return (
-    <div>
+    <Box>
       <h1>Supply</h1>
-    </div>
+    </Box>
   );
 };
 

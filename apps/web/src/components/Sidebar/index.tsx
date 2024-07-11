@@ -18,9 +18,9 @@ const Sidebar = () => {
           "w-[inherit] bg-[inherit] !bg-[inherit] !border-none hide-scrollbar ",
       }}
     >
-      <div className="flex flex-col items-center justify-between h-[inherit] pb-6 w-full">
-        <div className="flex flex-col w-full">
-          <div className="w-full h-full bg-primary-500 flex flex-col justify-center items-center py-10 px-16">
+      <Box className="flex flex-col items-center justify-between h-[inherit] pb-6 w-full">
+        <Box className="flex flex-col w-full">
+          <Box className="w-full h-full bg-primary-500 flex flex-col justify-center items-center py-10 px-16">
             <Image
               src="kylix-logo.svg"
               alt="kylix-logo"
@@ -28,11 +28,11 @@ const Sidebar = () => {
               height={117}
               draggable="false"
             />
-          </div>
-          <div className="flex flex-col mt-6 gap-8">
+          </Box>
+          <Box className="flex flex-col mt-6 gap-8">
             {sidebar.map((section) => {
               return (
-                <div
+                <Box
                   key={section.heading}
                   className="text-black flex flex-col w-full px-6"
                 >
@@ -49,25 +49,25 @@ const Sidebar = () => {
                       </ListItem>
                     ))}
                   </List>
-                </div>
+                </Box>
               );
             })}
-          </div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="flex items-center justify-center">
+          </Box>
+        </Box>
+        <Box className="flex flex-col items-center">
+          <Box className="flex items-center justify-center">
             {socialMediaLinks.map(({ icon: Icon, link }) => (
               <Link key={link} href={link}>
                 <Icon className="text-primary-500 w-10 h-10" />
               </Link>
             ))}
-          </div>
+          </Box>
           <p className="text-primary-300 font-medium text-xs leading-5 tracking-[-2%] select-none">
             <span>&#169;</span>
             <span>KYLIX Version 1.0</span>
           </p>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </Drawer>
   );
 };

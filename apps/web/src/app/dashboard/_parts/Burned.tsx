@@ -1,8 +1,10 @@
+import { Box } from "@mui/material";
+
 const Burned = () => {
   return (
-    <div>
+    <Box>
       <h1>Burned</h1>
-    </div>
+    </Box>
   );
 };
 

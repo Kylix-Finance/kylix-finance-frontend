@@ -10,6 +10,7 @@ import {
   DialogContent,
   DialogTitle,
   Button,
+  Box,
 } from "@mui/material";
 import {
   DialogActionsProps,
@@ -89,7 +90,7 @@ const Modal: React.FC<ModalProps> = ({
           flexDirection="column"
           className="!p-0 !m-0"
         >
-          <div className="flex justify-end">
+          <Box className="flex justify-end">
             <IconButton
               size="small"
               onClick={handleClose}
@@ -97,7 +98,7 @@ const Modal: React.FC<ModalProps> = ({
             >
               <Icons.XIcon />
             </IconButton>
-          </div>
+          </Box>
           <p className="font-bold text-sm leading-5 text-[#383E42]">{title}</p>
         </DialogTitle>
       )}

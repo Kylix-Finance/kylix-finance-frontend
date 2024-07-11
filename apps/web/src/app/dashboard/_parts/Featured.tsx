@@ -1,15 +1,15 @@
-import { Button, Switch } from "@mui/material";
+import { Box, Button, Switch } from "@mui/material";
 import FeaturedCard from "./FeaturedCard";
 
 const Featured = () => {
   return (
-    <div className="flex flex-col gap-2.5 mt-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <Box className="flex flex-col gap-2.5 mt-6">
+      <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <FeaturedCard />
         <FeaturedCard />
         <FeaturedCard />
-      </div>
-      <div className="flex justify-between w-full items-center">
+      </Box>
+      <Box className="flex justify-between w-full items-center">
         <Button
           variant="outlined"
           size="small"
@@ -17,14 +17,14 @@ const Featured = () => {
         >
           <p>+ Load more</p>
         </Button>
-        <div className="flex items-center gap-1.5">
+        <Box className="flex items-center gap-1.5">
           {/* <Switch /> */}
           <p className="text-xs font-semibold leading-4 text-primary-800">
             Detailed View
           </p>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
