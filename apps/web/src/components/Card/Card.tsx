@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import {
   FC,
   ComponentType,
@@ -30,13 +31,13 @@ interface Props extends PropsWithChildren, Header {
 }
 
 const IconWithBackground = ({ icon: Icon, iconColor }: IconProps) => (
-  <div className="p-2 bg-[#F4FAF9] rounded-lg">
+  <Box className="p-2 bg-[#F4FAF9] rounded-lg">
     <Icon
       width="16px"
       height="16px"
       className={`${iconColor ?? "text-primary-500"}`}
     />
-  </div>
+  </Box>
 );
 
 const IconWithoutBackground = ({ icon: Icon, iconColor }: IconProps) => (
@@ -65,11 +66,11 @@ const Card = ({
   iconColor,
 }: Props) => {
   return (
-    <div
+    <Box
       className={`shadow-box rounded-lg p-6 bg-white w-full h-full flex flex-col ${className}`}
     >
-      <div className="flex justify-between items-center w-full mb-2">
-        <div
+      <Box className="flex justify-between items-center w-full mb-2">
+        <Box
           className={`flex items-center ${hasIconBackground ? "gap-2" : "gap-1"}`}
         >
           {Icon &&
@@ -81,11 +82,11 @@ const Card = ({
           {title && (
             <Title title={title} hasIconBackground={hasIconBackground} />
           )}
-        </div>
+        </Box>
         {RightComponent}
-      </div>
+      </Box>
       {children}
-    </div>
+    </Box>
   );
 };
 
