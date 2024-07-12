@@ -25,6 +25,7 @@
     "@mui/lab": "5.0.0-alpha.171",
     "@mui/material": "^5.16.0",
     "@mui/material-nextjs": "^5.15.11",
+    "@mui/utils": "^5.16.1",
     "@svgr/webpack": "^8.1.0",
     "chart.js": "^4.4.3",
     "clsx": "^2.1.1",
