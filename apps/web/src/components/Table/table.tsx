@@ -28,7 +28,7 @@ interface Props<K extends string> {
   tRowProps?: TRowProps;
 }
 
-function Table<K extends string>({
+export function Table<K extends string>({
   data,
   defaultSortKey,
   hasPagination = false,
@@ -108,5 +108,3 @@ function getComparator<Key extends keyof any>(
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
-
-export default Table;
