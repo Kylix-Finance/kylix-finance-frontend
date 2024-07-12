@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import Doughnut from "~/components/Charts/DoughnutChart";
-import FinanceSummary from "~/components/FinanceSummary/FinanceSummary";
-import LineBreak from "~/components/LineBreak";
+import { LineBreak, FinanceSummary } from "~/components";
 import { palette } from "~/config/palette";
 import { numToLocalString } from "~/utils";
 

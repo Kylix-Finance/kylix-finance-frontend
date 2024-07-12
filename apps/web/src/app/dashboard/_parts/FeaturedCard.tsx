@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import Image from "next/image";
 import { Icons } from "~/assets/svgs";
-import LineBreak from "~/components/LineBreak";
+import { LineBreak } from "~/components";
 
 interface Props {}
 

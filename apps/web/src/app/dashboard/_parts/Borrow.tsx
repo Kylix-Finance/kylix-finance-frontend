@@ -1,7 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
-import Modal from "~/components/Modal";
+import { Modal } from "~/components";
 
 const Borrow = () => {
   return (

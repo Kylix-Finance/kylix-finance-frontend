@@ -2,7 +2,7 @@ import { Box, Card } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { Icons } from "~/assets/svgs";
-import List, { ListItem } from "~/components/List";
+import { List, ListItem } from "~/components";
 
 const items: Array<ListItem> = [
   {

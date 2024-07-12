@@ -1,5 +1,5 @@
 import { toast, ToastOptions } from "react-toastify";
-import Notification from "~/components/Notification";
+import Container from "./Container";
 import { NotificationParams } from "~/types";
 
 export const notify = (
@@ -33,7 +33,7 @@ export const notify = (
   };
 
   toast(
-    <Notification type={type} message={message} title={title} />,
+    <Container type={type} message={message} title={title} />,
     toastOptions
   );
 };

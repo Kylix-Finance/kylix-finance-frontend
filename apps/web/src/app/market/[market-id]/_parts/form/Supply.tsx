@@ -1,6 +1,6 @@
 "use client";
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
-import List, { ListItem } from "~/components/List";
+import { List, ListItem } from "~/components";
 
 const items: Array<ListItem> = [
   {

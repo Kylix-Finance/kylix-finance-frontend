@@ -1,7 +1,7 @@
 "use client";
 
 import { PieChart, Pie, Cell } from "recharts";
-import ClientOnly from "~/components/ClientOnly";
+import { ClientOnly } from "~/components";
 
 const data = [
   { name: "Group A", value: 400 },

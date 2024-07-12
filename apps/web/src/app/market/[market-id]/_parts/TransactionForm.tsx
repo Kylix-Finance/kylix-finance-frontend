@@ -1,5 +1,5 @@
 import { Card } from "@mui/material";
-import TabsManager, { TabType } from "~/components/TabsManager";
+import { TabsManager, TabType } from "~/components";
 import { Withdraw, Borrow, Repay, Supply } from "./form";
 
 const tabItems: Array<TabType> = [
