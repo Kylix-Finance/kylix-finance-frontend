@@ -4,6 +4,7 @@ import { Box, Drawer, Link, List, ListItem } from "@mui/material";
 import { sidebar, socialMediaLinks } from "~/assets/data";
 import Image from "next/image";
 import { Item } from "./Item";
+import { Icons } from "~/assets/svgs";
 
 const Sidebar = () => {
   return (
@@ -21,13 +22,7 @@ const Sidebar = () => {
       <Box className="flex flex-col items-center justify-between h-[inherit] pb-6 w-full">
         <Box className="flex flex-col w-full">
           <Box className="w-full h-full bg-primary-500 flex flex-col justify-center items-center py-10 px-16">
-            <Image
-              src="kylix-logo.svg"
-              alt="kylix-logo"
-              width={155}
-              height={117}
-              draggable="false"
-            />
+            <Icons.KylixLogo />
           </Box>
           <Box className="flex flex-col mt-6 gap-8">
             {sidebar.map((section) => {

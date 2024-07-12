@@ -22,6 +22,7 @@ import MessageAlert from "./message.svg";
 import InformationAlert from "./information.svg";
 import XIcon from "./x.svg";
 import LeftArrow from "./left-arrow.svg";
+import KylixLogo from "./kylix-logo.svg";
 export const sidebarIcons = {
   Notification,
   CrossSwap,
@@ -53,4 +54,5 @@ export const Icons = {
   ArrowRight,
   XIcon,
   LeftArrow,
+  KylixLogo,
 };
