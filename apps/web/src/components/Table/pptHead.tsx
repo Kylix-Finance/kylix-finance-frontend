@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
 
-import TCell from "./tCell";
+import TCell from "./pptCell";
 import { Order, TData, THeadProps } from "./types";
 
 interface Props<K extends string> extends THeadProps {

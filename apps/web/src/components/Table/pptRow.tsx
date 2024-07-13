@@ -1,6 +1,6 @@
 import { TableCellProps, TableRow } from "@mui/material";
 
-import TCell from "./tCell";
+import TCell from "./pptCell";
 import { Header, TData, TRowProps } from "./types";
 
 interface Props<K extends string> extends TRowProps {
