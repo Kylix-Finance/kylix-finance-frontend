@@ -1,12 +1,14 @@
+"use client";
+
 import { Paper, Table as TableBase, TableContainer } from "@mui/material";
 import React, { ReactNode } from "react";
 
-import TBody from "./tBody";
-import THead from "./tHead";
-import TablePagination from "./tablePagination";
+import TBody from "./TBody";
+import THead from "./THead";
+import TablePagination from "./TablePagination";
 import {
-  Data,
   Order,
+  TableData,
   TBaseProps,
   TBodyProps,
   TContainerProps,
@@ -17,7 +19,7 @@ import {
 import { GlobalStore } from "~/store";
 
 interface Props<K extends string> {
-  data: Data<K>;
+  data: TableData<K>;
   defaultSortKey: keyof TData<K>;
   hasPagination?: boolean;
   tableName: GlobalStore.TableName;
