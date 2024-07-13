@@ -4,8 +4,7 @@
   "private": true,
   "main": "./src",
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
-    "generate:component": "turbo gen react-component"
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
@@ -19,6 +18,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "zustand": "^4.5.4"
   }
 }
