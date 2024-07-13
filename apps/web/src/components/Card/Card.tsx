@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { Button } from "@repo/wallet-modal";
 import {
   FC,
   ComponentType,
@@ -86,6 +87,7 @@ const Card = ({
         {RightComponent}
       </Box>
       {children}
+      <Button />
     </Box>
   );
 };

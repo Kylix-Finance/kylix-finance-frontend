@@ -36,7 +36,8 @@
     "react-toastify": "^10.0.5",
     "recharts": "2.13.0-alpha.4",
     "tailwind-merge": "^2.4.0",
-    "zustand": "^4.5.4"
+    "zustand": "^4.5.4",
+    "@repo/wallet-modal": "workspace:*"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
