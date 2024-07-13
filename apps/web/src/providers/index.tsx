@@ -5,7 +5,7 @@ import { theme } from "~/config";
 import { FC } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { Button } from "@repo/wallet-modal";
+import ReactQueryProvider from "./ReactQueryProvider";
 
 interface Props {
   children: React.ReactNode;
@@ -14,7 +14,9 @@ interface Props {
 const Providers: FC<Props> = ({ children }) => {
   return (
     <AppRouterCacheProvider>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ReactQueryProvider>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      </ReactQueryProvider>
       <ToastContainer className="flex flex-col gap-2" />
     </AppRouterCacheProvider>
   );
