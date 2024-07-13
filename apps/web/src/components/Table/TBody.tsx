@@ -1,11 +1,11 @@
 import { TableBody } from "@mui/material";
 
-import TRow from "./tRow";
-import { Data, Header, TBodyProps, TRowProps } from "./types";
+import TRow from "./TRow";
+import { TableData, Header, TBodyProps, TRowProps } from "./types";
 
 interface Props<K extends string> {
   headers: Header;
-  data: Data<K>;
+  data: TableData<K>;
   tBody?: TBodyProps;
   tRowProps?: TRowProps;
 }
