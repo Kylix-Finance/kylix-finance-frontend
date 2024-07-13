@@ -1,2 +1,2 @@
-export * from "./pptable";
+export * from "./Table";
 export type * from "./types";

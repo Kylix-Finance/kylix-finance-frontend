@@ -1,9 +1,9 @@
 import { Paper, Table as TableBase, TableContainer } from "@mui/material";
 import React, { ReactNode } from "react";
 
-import TBody from "./tBody";
-import THead from "./tHead";
-import TablePagination from "./tablePagination";
+import TBody from "./TBody";
+import THead from "./THead";
+import TablePagination from "./TablePagination";
 import {
   Data,
   Order,
