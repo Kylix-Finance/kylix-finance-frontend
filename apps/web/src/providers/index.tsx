@@ -5,6 +5,7 @@ import { theme } from "~/config";
 import { FC } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { Button } from "@repo/wallet-modal";
 
 interface Props {
   children: React.ReactNode;

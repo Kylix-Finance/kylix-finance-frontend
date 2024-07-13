@@ -104,6 +104,9 @@ importers:
       '@mui/utils':
         specifier: ^5.16.1
         version: 5.16.1(@types/react@18.2.61)(react@19.0.0-rc-f994737d14-20240522)
+      '@repo/wallet-modal':
+        specifier: workspace:*
+        version: link:../../packages/wallet-modal
       '@svgr/webpack':
         specifier: ^8.1.0
         version: 8.1.0(typescript@5.3.3)
