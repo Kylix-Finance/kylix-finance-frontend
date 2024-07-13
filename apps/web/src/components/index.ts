@@ -23,3 +23,5 @@ export {
   TabsManager,
 };
 export type { ListItem, TabType };
+
+export * from "./Table";
