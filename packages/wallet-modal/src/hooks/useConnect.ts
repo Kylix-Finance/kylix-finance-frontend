@@ -1,57 +1,59 @@
-import { useState } from "react";
-import { InjectedWindowProvider } from "../types";
-interface Wallet {
-  name: string;
-  id: string;
-  extensionName: string;
+//@ts-expect-error ts error
+import {
+  InjectedAccount,
+  InjectedWindowProvider,
+} from "@polkadot/extension-inject/types";
+import { useStatusStore } from "../stores";
+import { STATUS } from "../constants";
+
+declare global {
+  interface Window {
+    injectedWeb3: {
+      [key: string]: InjectedWindowProvider;
+    };
+  }
 }
 
-const wallets: Wallet[] = [
-  { name: "Fearless Wallet", id: "fearless", extensionName: "fearless-wallet" },
-  {
-    name: "SubWallet - Polkadot Wallet",
-    id: "subwallet",
-    extensionName: "subwallet-js",
-  },
-  {
-    name: "Talisman - Ethereum and Polkadot Wallet",
-    id: "talisman",
-    extensionName: "talisman",
-  },
-  { name: "Enkrypt Crypto Wallet", id: "enkrypt", extensionName: "enkrypt" },
-];
-export const useConnect = async (wallet: Wallet) => {
-  const [accounts, setAccounts] = useState<
-    {
-      name: string;
-      address: string;
-    }[]
-  >([]);
-  const [selectedWallet, setSelectedWallet] = useState<string>("");
+export interface Wallet {
+  name: string;
+  id: string;
+  image: string;
+}
 
+const connect = async (
+  wallet: Wallet,
+  origin: string,
+  setStatus: (status: STATUS) => void
+): Promise<InjectedAccount["address"] | undefined> => {
   try {
-    setSelectedWallet(wallet.name);
-    const extensions = (window as any).injectedWeb3;
-
-    const walletExtension: InjectedWindowProvider =
-      extensions[wallet.extensionName];
+    setStatus(STATUS.CONNECTING);
+    const walletExtension =
+      window.injectedWeb3 && window.injectedWeb3[wallet.id];
 
     if (!walletExtension) {
-      console.error(`No ${wallet.name} extension found`);
-      return;
+      throw new Error(`No ${wallet.name} extension found`);
     }
-    console.log(walletExtension.enable);
 
-    const wall = await (await walletExtension.enable("my-dapp")).accounts.get();
-
-    setAccounts((prev) => [
-      ...prev,
-      ...wall.map((i) => ({
-        address: i.address ?? "",
-        name: i.name ?? "",
-      })),
-    ]);
+    const accounts = await walletExtension.enable!(origin).then((ext) =>
+      ext.accounts.get()
+    );
+    setStatus(STATUS.CONNECTED);
+    return accounts[0]?.address;
   } catch (error) {
     console.error(`Failed to connect to ${wallet.name}`, error);
+    setStatus(STATUS.ERROR);
+    return undefined;
   }
+};
+
+export const useConnect = (origin: string) => {
+  const { setStatus, status } = useStatusStore();
+  console.log("STATUS", status);
+  const connectWallet = async (wallet: Wallet) => {
+    return await connect(wallet, origin, setStatus);
+  };
+
+  return {
+    connect: connectWallet,
+  };
 };
