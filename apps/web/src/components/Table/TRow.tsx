@@ -8,6 +8,7 @@ interface Props<K extends string> extends TRowProps {
   headers: Header;
   tCellProps?: TableCellProps;
 }
+
 function TRow<K extends string>({
   headers,
   row,
@@ -15,12 +16,19 @@ function TRow<K extends string>({
   ...rest
 }: Props<K>) {
   return (
-    <TableRow {...rest}>
-      {headers.map((header) => (
-        <TCell {...tCellProps} key={header}>
-          {row[header as keyof TData<K>]}
-        </TCell>
-      ))}
+    // TODO: Refactor classNames
+    <TableRow className="bg-light" {...rest}>
+      {headers.map((header) => {
+        return (
+          <TCell
+            className="rounded-none first:rounded-[8px_0_0_8px] last:rounded-[0_8px_8px_0] !border-none"
+            {...tCellProps}
+            key={header}
+          >
+            {row[header as keyof TData<K>]}
+          </TCell>
+        );
+      })}
     </TableRow>
   );
 }

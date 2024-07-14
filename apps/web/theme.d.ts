@@ -1,9 +1,9 @@
 import React from "react";
-// import {
-//   ButtonPropsVariantOverrides,
-//   TypographyPropsVariantOverrides,
-// } from "@mui/material";
-// import { TypographyVariantsOptions } from "@mui/material/styles";
+import {
+  ButtonPropsVariantOverrides,
+  TypographyPropsVariantOverrides,
+} from "@mui/material";
+import { TypographyVariantsOptions } from "@mui/material/styles";
 import { PaletteColor } from "@mui/material/styles/createPalette";
 
 declare module "@mui/material/styles" {
@@ -24,11 +24,19 @@ declare module "@mui/material/styles" {
 
 declare module "@mui/material/styles" {
   interface TypographyVariants {
-    // VARIANT_NAME: React.CSSProperties;
+    lg: React.CSSProperties;
+    md: React.CSSProperties;
+    s: React.CSSProperties;
+    xl: React.CSSProperties;
+    xs: React.CSSProperties;
   }
 
   interface TypographyVariantsOptions {
-    // VARIANT_NAME?: React.CSSProperties;
+    lg?: React.CSSProperties;
+    md?: React.CSSProperties;
+    s?: React.CSSProperties;
+    xl?: React.CSSProperties;
+    xs?: React.CSSProperties;
   }
 }
 
@@ -37,6 +45,10 @@ declare module "@mui/material/Button" {
 }
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
-    // VARIANT_NAME: true;
+    lg: true;
+    md: true;
+    s: true;
+    xl: true;
+    xs: true;
   }
 }

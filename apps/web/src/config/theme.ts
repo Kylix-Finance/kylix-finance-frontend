@@ -5,12 +5,45 @@ import ThemeLink from "./themeComponents/ThemeLink";
 import { fonts } from "~/assets/fonts";
 import { palette } from "./palette";
 
+// TODO: Move colors to palette
 export const theme = createTheme({
   palette,
   typography: {
     fontFamily: fonts.inter.style.fontFamily,
+    xs: {
+      color: "#1A433B80",
+      fontSize: "10px",
+      fontWeight: 400,
+      lineHeight: "150%",
+    },
+    s: {
+      color: "#1A433B80",
+      fontSize: "12px",
+      fontWeight: 400,
+      lineHeight: "150%",
+    },
+    md: {
+      color: "#1A433B",
+      fontSize: "14px",
+      lineHeight: "18px",
+      letterSpacing: "-0.28px",
+    },
+    lg: {
+      color: "#1A433B",
+      fontSize: "16px",
+      fontWeight: 500,
+      letterSpacing: "-0.32px",
+      lineHeight: "125%",
+    },
   },
   components: {
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: "none",
+        },
+      },
+    },
     MuiLink: {
       styleOverrides: {
         root: {
@@ -22,29 +55,6 @@ export const theme = createTheme({
         component: ThemeLink,
       },
     },
-    MuiSwitch: {
-      styleOverrides: {
-        root: {
-          width: 36,
-          height: 20,
-          padding: 0,
-          display: "flex",
-          alignItems: "center",
-        },
-        thumb: {
-          width: 16,
-          height: 16,
-          borderRadius: "50%",
-          boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
-          transition: "transform 200ms",
-        },
-        track: {
-          borderRadius: 20 / 2,
-          backgroundColor: "rgba(0,0,0,.25)",
-          opacity: 1,
-          boxSizing: "border-box",
-        },
-      },
-    },
+    MuiSwitch: {},
   },
 });

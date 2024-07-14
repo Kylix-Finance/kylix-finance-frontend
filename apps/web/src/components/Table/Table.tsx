@@ -1,6 +1,11 @@
 "use client";
 
-import { Paper, Table as TableBase, TableContainer } from "@mui/material";
+import {
+  Paper,
+  PaperProps,
+  Table as TableBase,
+  TableContainer,
+} from "@mui/material";
 import React, { ReactNode } from "react";
 
 import TBody from "./TBody";
@@ -28,6 +33,7 @@ interface Props<K extends string> {
   tContainerProps?: TContainerProps;
   tHeadProps?: THeadProps;
   tRowProps?: TRowProps;
+  rowSpacing?: string;
 }
 
 export function Table<K extends string>({
@@ -40,6 +46,7 @@ export function Table<K extends string>({
   tContainerProps,
   tHeadProps,
   tRowProps,
+  rowSpacing,
 }: Props<K>) {
   type DataItemKey = keyof TData<K>;
 
@@ -64,7 +71,14 @@ export function Table<K extends string>({
 
   return (
     <TableContainer
-      component={Paper}
+      // component={(props: PaperProps) => (
+      //   <Paper
+      //     style={{
+      //       backgroundColor: "transparent",
+      //     }}
+      //     {...props}
+      //   />
+      // )}
       {...tContainerProps}
       sx={{
         height: "100%",
@@ -82,7 +96,12 @@ export function Table<K extends string>({
           {...tHeadProps}
           tRowProps={tRowProps}
         />
-        <TBody data={sortedData} headers={headers} tBody={tBodyProps} />
+        <TBody
+          rowSpacing={rowSpacing}
+          data={sortedData}
+          headers={headers}
+          tBody={tBodyProps}
+        />
       </TableBase>
       {hasPagination && <TablePagination tableName={tableName} />}
     </TableContainer>

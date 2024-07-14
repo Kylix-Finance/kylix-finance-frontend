@@ -7,7 +7,7 @@ interface Props {}
 
 const FeaturedCard = () => {
   return (
-    <Box className="bg-background-light py-4 px-6 flex-col gap-4 rounded-lg shadow-secondary-box">
+    <Box className="bg-light py-4 px-6 flex-col gap-4 rounded-lg shadow-secondary-box">
       <Box className="flex justify-between w-2/3 ">
         <Box className="flex flex-col gap-1">
           <p className="font-normal text-[10px] leading-4 text-primary-800/50">

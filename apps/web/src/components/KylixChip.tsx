@@ -27,6 +27,7 @@ const KylixChip = ({
         className
       )}
     >
+      {/* TODO: Replace with MUI Components */}
       <span>{value}</span>
       <Image
         draggable="false"

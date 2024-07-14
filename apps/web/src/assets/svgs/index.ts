@@ -22,7 +22,9 @@ import MessageAlert from "./message.svg";
 import InformationAlert from "./information.svg";
 import XIcon from "./x.svg";
 import LeftArrow from "./left-arrow.svg";
+import Sort from "./sort.svg";
 import KylixLogo from "./kylix-logo.svg";
+import Search from "./search.svg";
 export const sidebarIcons = {
   Notification,
   CrossSwap,
@@ -46,13 +48,15 @@ export const Alert = {
 };
 
 export const Icons = {
-  WalletFill,
+  ArrowRight,
   Discord,
   Instagram,
-  Linkedin,
-  Twitter,
-  ArrowRight,
-  XIcon,
-  LeftArrow,
   KylixLogo,
+  LeftArrow,
+  Linkedin,
+  Search,
+  Sort,
+  Twitter,
+  WalletFill,
+  XIcon,
 };

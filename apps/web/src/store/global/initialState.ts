@@ -16,6 +16,6 @@ export const defaultDialogProps: DialogState["props"] = {
 export const initialState: State = {
   dialogStates: [],
   pagination: {
-    users: defaultPaginationState,
+    markets: defaultPaginationState,
   },
 };

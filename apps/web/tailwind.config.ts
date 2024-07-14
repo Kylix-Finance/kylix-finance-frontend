@@ -39,9 +39,7 @@ const config: Config = {
 
         primaryText: "#5C5E64",
 
-        background: {
-          light: "#F4FAF9",
-        },
+        light: "#F4FAF9",
       },
       boxShadow: {
         box: "0px 5.5px 12px 0px rgba(0, 0, 0, 0.05)",

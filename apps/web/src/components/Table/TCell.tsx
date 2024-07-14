@@ -9,13 +9,12 @@ function TCell(props: Props) {
     <TableCell {...props}>
       <Box
         sx={{
-          width: 150,
+          minWidth: 100,
           overflow: "hidden",
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",
         }}
       >
-        {" "}
         {props.children}
       </Box>
     </TableCell>
