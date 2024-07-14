@@ -1,12 +1,6 @@
-import {
-  Link,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { Link, ListItemButton, ListItemText } from "@mui/material";
 import { SidebarItem } from "~/types";
 import { cn } from "~/utils";
-import ItemIcon from "./ItemIcon";
 
 interface SubItemProps {
   subItem: Omit<SidebarItem, "icon">;

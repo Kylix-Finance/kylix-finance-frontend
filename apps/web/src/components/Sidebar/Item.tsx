@@ -88,7 +88,7 @@ export const Item = ({
                   linkBaseStyles={linkBaseStyles}
                   key={subItem.name}
                   subItem={subItem}
-                  isCurrentPath={isCurrentPath}
+                  isCurrentPath={pathname === subItem.href}
                 />
               ))}
             </List>
