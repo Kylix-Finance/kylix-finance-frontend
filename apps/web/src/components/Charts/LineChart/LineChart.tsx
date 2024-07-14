@@ -1,18 +1,22 @@
 "use client";
 import { Line } from "react-chartjs-2";
 import { palette } from "~/config/palette";
+import { kylixPriceData } from "~/mock/chart";
 import { formatNumber } from "~/utils";
+import "chartjs-adapter-date-fns"; // This imports the adapter
 
 const LineChart = () => {
   return (
     <div style={{ height: "300px", width: "100%" }}>
       <Line
         data={{
-          labels: ["Feb 10", "Feb 11", "Feb 12", "Feb 13", "Feb 14"], // X-axis labels
           datasets: [
             {
-              label: "Kylix Price",
-              data: [1200, 1500, 1600, 3000, 1900, 1800, 2000],
+              data: kylixPriceData,
+              parsing: {
+                xAxisKey: "timestamp",
+                yAxisKey: "price",
+              },
               fill: "origin",
               borderColor: palette.primary.light,
               backgroundColor: (context) => {
@@ -43,12 +47,24 @@ const LineChart = () => {
           },
           scales: {
             x: {
+              type: "time",
+              time: {
+                unit: "day",
+                tooltipFormat: "MMM dd",
+                displayFormats: {
+                  month: "MMM dd",
+                },
+              },
               display: true,
               grid: {
                 display: false,
               },
               border: {
                 display: false,
+              },
+              ticks: {
+                color: palette.text.disabled,
+                align: "inner",
               },
             },
             y: {
@@ -62,14 +78,16 @@ const LineChart = () => {
                 dash: [8, 8],
               },
               ticks: {
+                color: palette.text.disabled,
                 count: 4,
                 callback: (value, index) => {
                   if (index === 0) return;
                   return formatNumber(value);
                 },
+                // padding: 10,
               },
               afterDataLimits: (axis) => {
-                const padding = 0.2;
+                const padding = 0.15;
                 axis.min -= axis.min * padding;
                 axis.max += axis.max * padding;
               },
