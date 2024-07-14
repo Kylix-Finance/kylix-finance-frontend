@@ -1,4 +1,4 @@
-//@ts-expect-error ts error
+//@ts-expect-error rwsf
 import {
   InjectedAccount,
   InjectedWindowProvider,

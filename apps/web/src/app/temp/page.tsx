@@ -1,14 +1,24 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ApiPromise, WsProvider } from "@polkadot/api";
-import {
-  web3Accounts,
-  web3Enable,
-  web3FromAddress,
-} from "@polkadot/extension-dapp";
-import { Api } from "@mui/icons-material";
+import { Wallet, useConnect } from "@repo/wallet-modal"; // Adjust the import path as needed
 
 const POLKADOT_WS_PROVIDER = "wss://westend-rpc.polkadot.io";
+
+const wallets: Wallet[] = [
+  { name: "Fearless Wallet", id: "fearless-wallet", image: "" },
+  {
+    name: "SubWallet - Polkadot Wallet",
+    id: "subwallet-js",
+    image: ""
+  },
+  {
+    name: "Talisman - Ethereum and Polkadot Wallet",
+    id: "talisman",
+    image: ""
+  },
+  { name: "Enkrypt Crypto Wallet", id: "enkrypt", image: "" }
+];
 
 const PolkadotConnection: React.FC = () => {
   const [api, setApi] = useState<ApiPromise | null>(null);
@@ -16,8 +26,10 @@ const PolkadotConnection: React.FC = () => {
   const [account, setAccount] = useState<string | null>(null);
   const [balance, setBalance] = useState<string | null>(null);
 
+  const { connect } = useConnect("PolkadotConnection");
+
   useEffect(() => {
-    const connect = async () => {
+    const connectToApi = async () => {
       try {
         const provider = new WsProvider(POLKADOT_WS_PROVIDER);
         const api = await ApiPromise.create({ provider });
@@ -36,38 +48,17 @@ const PolkadotConnection: React.FC = () => {
       }
     };
 
-    connect();
+    connectToApi();
   }, []);
 
-  const connectToSubwallet = async () => {
-    try {
-      // Request permissions to access the user's accounts
-      const extensions = await web3Enable("PolkadotConnection");
-      if (extensions.length === 0) {
-        throw new Error("No extension installed");
-      }
-
-      // Get all accounts available in the extension
-      const allAccounts = await web3Accounts();
-      if (allAccounts.length === 0) {
-        throw new Error("No accounts available");
-      }
-
-      // Select the first account as the default account
-      const defaultAccount = allAccounts[0]?.address || "";
-      setAccount(defaultAccount);
-
-      // Retrieve the balance of the default account
-      const injector = await web3FromAddress(defaultAccount);
-      api?.setSigner(injector.signer);
-      let balance;
-      if (api?.query.system && api?.query.system.account) {
-        const data = await api?.query.system.account(defaultAccount);
-        balance = (data as unknown as any)?.data;
-      }
-      setBalance(balance.free.toString());
-    } catch (error) {
-      console.error("Failed to connect to the Subwallet", error);
+  const handleConnect = async (wallet: Wallet) => {
+    const connectionRequest = await connect(wallet);
+    console.log("connectionRequest", connectionRequest);
+    if (connectionRequest && api) {
+      setAccount(connectionRequest);
+      //@ts-expect-error tt
+      const { data: { free: accountBalance } } = await api.query.system.account(connectionRequest);
+      setBalance(accountBalance.toString());
     }
   };
 
@@ -75,10 +66,13 @@ const PolkadotConnection: React.FC = () => {
     <div>
       <h1>Polkadot Westend Testnet</h1>
       <p>
-        Current Block Number:{" "}
-        {blockNumber !== null ? blockNumber : "Loading..."}
+        Current Block Number: {blockNumber !== null ? blockNumber : "Loading..."}
       </p>
-      <button onClick={connectToSubwallet}>Connect to Subwallet</button>
+      {wallets.map((wallet) => (
+        <button key={wallet.id} onClick={() => handleConnect(wallet)}>
+          Connect to {wallet.name}
+        </button>
+      ))}
       {account && (
         <div>
           <p>Connected Account: {account}</p>
@@ -90,19 +84,3 @@ const PolkadotConnection: React.FC = () => {
 };
 
 export default PolkadotConnection;
-
-const useConnet = () => {
-  return async function connect({ id = "subwallet" }) {
-    try {
-      //update status to isConnecting= true
-      const account = await web3Enable(id);
-      // update store for status and account
-      //update status to isConnecting= false && status = "Connected"
-    } catch (e) {
-      // retry OR toast (e="user rejected request" OR e="ERROR bullshit like RPC error")
-      //update status to isConnecting= false
-    }
-  };
-};
-// first modal: choose Wallet
-// second modal: choose account from allAccounts[not 0]
