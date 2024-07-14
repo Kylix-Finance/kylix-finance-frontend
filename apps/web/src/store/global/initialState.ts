@@ -17,5 +17,6 @@ export const initialState: State = {
   dialogStates: [],
   pagination: {
     markets: defaultPaginationState,
+    supply: defaultPaginationState,
   },
 };

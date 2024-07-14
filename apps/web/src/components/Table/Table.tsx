@@ -27,26 +27,30 @@ interface Props<K extends string> {
   data: TableData<K>;
   defaultSortKey: keyof TData<K>;
   hasPagination?: boolean;
+  rowSpacing?: string;
   tableName: GlobalStore.TableName;
   tBaseProps?: TBaseProps;
   tBodyProps?: TBodyProps;
+  tCellClassnames?: string;
   tContainerProps?: TContainerProps;
   tHeadProps?: THeadProps;
   tRowProps?: TRowProps;
-  rowSpacing?: string;
+  hiddenTHeadsText?: Array<K>;
 }
 
 export function Table<K extends string>({
   data,
   defaultSortKey,
   hasPagination = false,
+  rowSpacing,
   tableName,
   tBaseProps,
   tBodyProps,
+  tCellClassnames,
   tContainerProps,
   tHeadProps,
   tRowProps,
-  rowSpacing,
+  hiddenTHeadsText,
 }: Props<K>) {
   type DataItemKey = keyof TData<K>;
 
@@ -71,14 +75,6 @@ export function Table<K extends string>({
 
   return (
     <TableContainer
-      // component={(props: PaperProps) => (
-      //   <Paper
-      //     style={{
-      //       backgroundColor: "transparent",
-      //     }}
-      //     {...props}
-      //   />
-      // )}
       {...tContainerProps}
       sx={{
         height: "100%",
@@ -89,6 +85,7 @@ export function Table<K extends string>({
     >
       <TableBase {...tBaseProps} stickyHeader>
         <THead
+          hiddenTHeadsText={hiddenTHeadsText}
           headers={headers}
           order={order}
           orderBy={orderBy}
@@ -97,6 +94,7 @@ export function Table<K extends string>({
           tRowProps={tRowProps}
         />
         <TBody
+          tCellClassnames={tCellClassnames}
           rowSpacing={rowSpacing}
           data={sortedData}
           headers={headers}

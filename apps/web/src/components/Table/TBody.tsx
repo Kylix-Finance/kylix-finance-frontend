@@ -4,19 +4,21 @@ import TRow from "./TRow";
 import { TableData, Header, TBodyProps, TRowProps } from "./types";
 
 interface Props<K extends string> {
-  headers: Header;
   data: TableData<K>;
-  tBody?: TBodyProps;
-  tRowProps?: TRowProps;
+  headers: Header;
   rowSpacing?: string;
+  tBody?: TBodyProps;
+  tCellClassnames?: string;
+  tRowProps?: TRowProps;
 }
 
 function TBody<K extends string>({
   data,
   headers,
-  tBody,
-  tRowProps,
   rowSpacing,
+  tBody,
+  tCellClassnames,
+  tRowProps,
 }: Props<K>) {
   return (
     <TableBody {...tBody}>
@@ -24,7 +26,13 @@ function TBody<K extends string>({
         <>
           {rowSpacing && <Box mt={rowSpacing} />}
 
-          <TRow key={index} headers={headers} row={row} {...tRowProps} />
+          <TRow
+            tCellClassnames={tCellClassnames}
+            key={index}
+            headers={headers}
+            row={row}
+            {...tRowProps}
+          />
         </>
       ))}
     </TableBody>

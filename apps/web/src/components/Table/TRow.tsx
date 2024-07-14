@@ -7,12 +7,14 @@ interface Props<K extends string> extends TRowProps {
   row: TData<K>;
   headers: Header;
   tCellProps?: TableCellProps;
+  tCellClassnames?: string;
 }
 
 function TRow<K extends string>({
   headers,
   row,
   tCellProps,
+  tCellClassnames,
   ...rest
 }: Props<K>) {
   return (
@@ -21,7 +23,7 @@ function TRow<K extends string>({
       {headers.map((header) => {
         return (
           <TCell
-            className="rounded-none first:rounded-[8px_0_0_8px] last:rounded-[0_8px_8px_0] !border-none"
+            className={`rounded-none first:rounded-[8px_0_0_8px] last:rounded-[0_8px_8px_0] !border-none ${tCellClassnames}`}
             {...tCellProps}
             key={header}
           >

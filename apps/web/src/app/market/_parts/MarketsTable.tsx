@@ -40,7 +40,13 @@ const Actions = () => {
   );
 };
 
-const Asset = ({ label, name }: { label: string; name: string }) => {
+const Asset = ({
+  helperText: helperText,
+  label,
+}: {
+  helperText: string;
+  label: string;
+}) => {
   return (
     <Box className="flex flex-row items-center justify-start gap-[8px]">
       <Box>
@@ -54,9 +60,9 @@ const Asset = ({ label, name }: { label: string; name: string }) => {
       </Box>
       <Box className="flex flex-col">
         <Typography variant="md" fontWeight={"bold"}>
-          {name}
+          {label}
         </Typography>
-        <Typography variant="xs">{label}</Typography>
+        <Typography variant="xs">{helperText}</Typography>
       </Box>
     </Box>
   );
@@ -86,9 +92,12 @@ const MarketsTable = () => {
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
       <Table<TKey>
+        hiddenTHeadsText={["Actions"]}
         rowSpacing="11px"
         data={tableData.map((item) => ({
-          Asset: <Asset label={item.Asset.label} name={item.Asset.name} />,
+          Asset: (
+            <Asset helperText={item.Asset.label} label={item.Asset.name} />
+          ),
           "Collateral Q": (
             <Typography variant="lg">{item["Collateral Q"].value}</Typography>
           ),

@@ -30,7 +30,7 @@ export interface PaginationDefaultProps {
   total: number;
 }
 
-export type TableName = "markets";
+export type TableName = "markets" | "supply";
 
 export type PaginationState = {
   [key in TableName]: PaginationDefaultProps;

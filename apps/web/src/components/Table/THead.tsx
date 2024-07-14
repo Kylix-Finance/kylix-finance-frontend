@@ -21,6 +21,7 @@ interface Props<K extends string> extends THeadProps {
   numeric?: boolean;
   orderBy: string;
   order: Order;
+  hiddenTHeadsText?: Array<K>;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
     property: keyof TData<K>
@@ -35,6 +36,7 @@ function THead<K extends string>({
   order,
   orderBy,
   tRowProps,
+  hiddenTHeadsText,
   ...rest
 }: Props<K>) {
   const createSortHandler =
@@ -62,7 +64,9 @@ function THead<K extends string>({
               direction={orderBy === header ? order : "asc"}
               onClick={createSortHandler(header)}
             >
-              <Typography variant="s">{header}</Typography>
+              <Typography variant="s">
+                {hiddenTHeadsText?.includes(header) ? "" : header}
+              </Typography>
               {orderBy === header ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === "desc" ? "sorted descending" : "sorted ascending"}
