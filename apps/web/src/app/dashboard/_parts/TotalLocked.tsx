@@ -10,9 +10,9 @@ const TotalLocked = () => {
       <p className="mb-9">
         {numToLocalString(65800200)} <span>USD</span>
       </p>
-      <Box className="flex justify-between mb-auto">
+      <Box className="flex mb-auto">
         <Doughnut />
-        <Box>
+        <Box className="flex flex-col gap-5 ml-4">
           <FinanceSummary
             label="Total Deposit"
             value={1502300}
