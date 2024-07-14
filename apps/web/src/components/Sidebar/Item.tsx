@@ -6,6 +6,7 @@ import {
   ListItemText,
   Collapse,
   List,
+  Box,
 } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { SidebarItem } from "~/types";
@@ -66,9 +67,9 @@ export const Item = ({
           />
           {collapsable &&
             (isOpen ? (
-              <ExpandLess className="w-4 h-4 mr-3" />
+              <ExpandLess className="w-4 h-4" />
             ) : (
-              <ExpandMore className="w-4 h-4 mr-3" />
+              <ExpandMore className="w-4 h-4" />
             ))}
         </ListItemButton>
       </Link>
@@ -77,18 +78,21 @@ export const Item = ({
           in={isOpen}
           timeout="auto"
           unmountOnExit
-          className="w-[90%] self-end"
+          className="w-[80%] self-end"
         >
-          <List component="div" disablePadding className="w-full">
-            {data.items?.map((subItem) => (
-              <SubItem
-                linkBaseStyles={linkBaseStyles}
-                key={subItem.name}
-                subItem={subItem}
-                isCurrentPath={isCurrentPath}
-              />
-            ))}
-          </List>
+          <Box className="flex gap-3.5 h-full">
+            <Box height="100%" width="2px" bgcolor="#EAF6F4" />
+            <List component="div" disablePadding className="w-full">
+              {data.items?.map((subItem) => (
+                <SubItem
+                  linkBaseStyles={linkBaseStyles}
+                  key={subItem.name}
+                  subItem={subItem}
+                  isCurrentPath={isCurrentPath}
+                />
+              ))}
+            </List>
+          </Box>
         </Collapse>
       )}
     </>

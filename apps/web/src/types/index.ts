@@ -10,7 +10,7 @@ export type SidebarItem = {
   name: string;
   href?: string;
   icon: Icon;
-  items?: SidebarItem[];
+  items?: Omit<SidebarItem, "icon">[];
 };
 
 export type Sidebar = {

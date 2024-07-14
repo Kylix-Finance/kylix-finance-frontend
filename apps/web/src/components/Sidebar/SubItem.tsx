@@ -9,7 +9,7 @@ import { cn } from "~/utils";
 import ItemIcon from "./ItemIcon";
 
 interface SubItemProps {
-  subItem: SidebarItem;
+  subItem: Omit<SidebarItem, "icon">;
   isCurrentPath: boolean;
   linkBaseStyles: string;
 }
@@ -23,9 +23,6 @@ const SubItem = ({ subItem, isCurrentPath, linkBaseStyles }: SubItemProps) => (
     )}
   >
     <ListItemButton className="w-full">
-      <ListItemIcon>
-        <ItemIcon Icon={subItem.icon} isCurrentPath={isCurrentPath} />
-      </ListItemIcon>
       <ListItemText
         primary={subItem.name}
         primaryTypographyProps={{

@@ -38,12 +38,10 @@ const sidebar: Array<Sidebar> = [
         items: [
           {
             name: "Account",
-            icon: sidebarIcons.Wallet,
             href: "/portfolio/account",
           },
           {
             name: "PnL",
-            icon: sidebarIcons.Wallet,
             href: "/portfolio/pnl",
           },
         ],
