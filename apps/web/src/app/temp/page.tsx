@@ -6,6 +6,7 @@ import {
   web3Enable,
   web3FromAddress,
 } from "@polkadot/extension-dapp";
+import { Api } from "@mui/icons-material";
 
 const POLKADOT_WS_PROVIDER = "wss://westend-rpc.polkadot.io";
 
@@ -89,3 +90,19 @@ const PolkadotConnection: React.FC = () => {
 };
 
 export default PolkadotConnection;
+
+const useConnet = () => {
+  return async function connect({ id = "subwallet" }) {
+    try {
+      //update status to isConnecting= true
+      const account = await web3Enable(id);
+      // update store for status and account
+      //update status to isConnecting= false && status = "Connected"
+    } catch (e) {
+      // retry OR toast (e="user rejected request" OR e="ERROR bullshit like RPC error")
+      //update status to isConnecting= false
+    }
+  };
+};
+// first modal: choose Wallet
+// second modal: choose account from allAccounts[not 0]
