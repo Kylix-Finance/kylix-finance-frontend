@@ -4,10 +4,11 @@ import { palette } from "~/config/palette";
 import { kylixPriceData } from "~/mock/chart";
 import { formatNumber } from "~/utils";
 import "chartjs-adapter-date-fns"; // This imports the adapter
+import { Box } from "@mui/material";
 
 const LineChart = () => {
   return (
-    <div style={{ height: "300px", width: "100%" }}>
+    <Box height={180} width="100%">
       <Line
         data={{
           datasets: [
@@ -102,7 +103,7 @@ const LineChart = () => {
           maintainAspectRatio: false, // Set to false to set height and width manually
         }}
       />
-    </div>
+    </Box>
   );
 };
 
