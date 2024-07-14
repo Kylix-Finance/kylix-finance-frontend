@@ -37,6 +37,13 @@ export const theme = createTheme({
     },
   },
   components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "capitalize",
+        },
+      },
+    },
     MuiTableCell: {
       styleOverrides: {
         root: {

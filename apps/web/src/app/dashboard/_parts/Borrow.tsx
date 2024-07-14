@@ -2,6 +2,7 @@
 
 import { Box } from "@mui/material";
 import { Modal } from "~/components";
+import { BorrowChart } from "./BorrowChart";
 
 const Borrow = () => {
   return (
@@ -19,7 +20,7 @@ const Borrow = () => {
         }}
         maxWidth="xs"
       /> */}
-      <h1>Borrow</h1>
+      <BorrowChart />
     </Box>
   );
 };
