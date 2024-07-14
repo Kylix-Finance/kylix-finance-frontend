@@ -23,7 +23,6 @@ interface IconProps {
 
 interface TitleProps {
   title: string;
-  hasIconBackground?: boolean;
 }
 
 interface Props extends PropsWithChildren, Header {
@@ -48,17 +47,12 @@ const IconWithoutBackground = ({ icon: Icon, iconColor }: IconProps) => (
   />
 );
 
-const Title = ({ title, hasIconBackground }: TitleProps) => (
-  <p
-    className={`font-bold text-sm leading-5 ${hasIconBackground ? "font-medium" : "font-bold"}`}
-  >
-    {title}
-  </p>
+const Title = ({ title }: TitleProps) => (
+  <p className={`font-bold text-sm leading-5 font-medium`}>{title}</p>
 );
 
 const Card = ({
   icon: Icon,
-  hasIconBackground,
   title,
   children,
   rightComponent: RightComponent,
@@ -70,18 +64,9 @@ const Card = ({
       className={`shadow-box rounded-lg p-6 bg-white w-full h-full flex flex-col ${className}`}
     >
       <Box className="flex justify-between items-center w-full mb-2">
-        <Box
-          className={`flex items-center ${hasIconBackground ? "gap-2" : "gap-1"}`}
-        >
-          {Icon &&
-            (hasIconBackground ? (
-              <IconWithBackground icon={Icon} iconColor={iconColor} />
-            ) : (
-              <IconWithoutBackground icon={Icon} iconColor={iconColor} />
-            ))}
-          {title && (
-            <Title title={title} hasIconBackground={hasIconBackground} />
-          )}
+        <Box className={`flex items-center gap-2`}>
+          {Icon && <IconWithBackground icon={Icon} iconColor={iconColor} />}
+          {title && <Title title={title} />}
         </Box>
         {RightComponent}
       </Box>
