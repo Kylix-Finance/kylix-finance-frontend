@@ -235,6 +235,9 @@ importers:
       react:
         specifier: ^18.2.0
         version: 18.3.1
+      react-responsive-modal:
+        specifier: ^6.4.2
+        version: 6.4.2(react-dom@19.0.0-rc-f994737d14-20240522(react@18.3.1))(react@18.3.1)
       zustand:
         specifier: ^4.5.4
         version: 4.5.4(@types/react@18.2.61)(react@18.3.1)
@@ -992,6 +995,16 @@ packages:
   '@babel/types@7.24.7':
     resolution: {integrity: sha512-XEFXSlxiG5td2EJRe8vOmRbaXVgfcBlszKujvVmWIK/UpywWljQCfzAv3RQCGujWQ1RD4YYWEAqDXfuJiy8f5Q==}
     engines: {node: '>=6.9.0'}
+
+  '@bedrock-layout/use-forwarded-ref@1.6.1':
+    resolution: {integrity: sha512-GD9A9AFLzFNjr7k6fgerSqxfwDWl+wsPS11PErOKe1zkVz0y7RGC9gzlOiX/JrgpyB3NFHWIuGtoOQqifJQQpw==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18
+
+  '@bedrock-layout/use-stateful-ref@1.4.1':
+    resolution: {integrity: sha512-4eKO2KdQEXcR5LI4QcxqlJykJUDQJWDeWYAukIn6sRQYoabcfI5kDl61PUi6FR6o8VFgQ8IEP7HleKqWlSe8SQ==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18
 
   '@cspell/cspell-bundled-dicts@8.10.4':
     resolution: {integrity: sha512-QmgvIp9/NM60Jj6ft5oaiCFidwPwKYS9FfpfABrDLw/Jx6wwcTdy9cVbuPxT8n4LwkHpswkmIzOf4zSlnrd4MQ==}
@@ -2469,6 +2482,9 @@ packages:
   bn.js@5.2.1:
     resolution: {integrity: sha512-eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==}
 
+  body-scroll-lock@3.1.5:
+    resolution: {integrity: sha512-Yi1Xaml0EvNA0OYWxXiYNqY24AfWkbA6w5vxE7GWxtKfzIbZM+Qw+aSmkgsbWzbHiy/RCSkUZBplVxTA+E4jJg==}
+
   boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
 
@@ -2565,6 +2581,9 @@ packages:
   ci-info@4.0.0:
     resolution: {integrity: sha512-TdHqgGf9odd8SXNuxtUBVx8Nv+qZOejE6qyqiy5NtbYYQOeFa6zmHkxlPzmaLxWWHsU6nJmB7AETdVPi+2NBUg==}
     engines: {node: '>=8'}
+
+  classnames@2.5.1:
+    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
 
   clean-regexp@1.0.0:
     resolution: {integrity: sha512-GfisEZEJvzKrmGWkvfhgzcz/BllN1USeqD2V6tg14OAOgaCD2Z/PUEuxnAZ/nPvmaHRG7a8y77p1T/IRQ4D1Hw==}
@@ -4336,6 +4355,12 @@ packages:
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
+  react-responsive-modal@6.4.2:
+    resolution: {integrity: sha512-ARjGEKE5Gu5CSvyA8U9ARVbtK4SMAtdXsjtzwtxRlQIHC99RQTnOUctLpl7+/sp1Kg1OJZ6yqvp6ivd4TBueEw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+      react-dom: ^16.8.0 || ^17 || ^18
+
   react-smooth@4.0.1:
     resolution: {integrity: sha512-OE4hm7XqR0jNOq3Qmk9mFLyd6p2+j6bvbPJ7qlB7+oo0eNcL2l7WQzG6MBnT3EXY6xzkLMUBec3AfewJdA0J8w==}
     peerDependencies:
@@ -6094,6 +6119,15 @@ snapshots:
       '@babel/helper-string-parser': 7.24.7
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
+
+  '@bedrock-layout/use-forwarded-ref@1.6.1(react@18.3.1)':
+    dependencies:
+      '@bedrock-layout/use-stateful-ref': 1.4.1(react@18.3.1)
+      react: 18.3.1
+
+  '@bedrock-layout/use-stateful-ref@1.4.1(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
 
   '@cspell/cspell-bundled-dicts@8.10.4':
     dependencies:
@@ -7887,6 +7921,8 @@ snapshots:
 
   bn.js@5.2.1: {}
 
+  body-scroll-lock@3.1.5: {}
+
   boolbase@1.0.0: {}
 
   brace-expansion@1.1.11:
@@ -8014,6 +8050,8 @@ snapshots:
       fsevents: 2.3.3
 
   ci-info@4.0.0: {}
+
+  classnames@2.5.1: {}
 
   clean-regexp@1.0.0:
     dependencies:
@@ -10147,6 +10185,11 @@ snapshots:
       chart.js: 4.4.3
       react: 19.0.0-rc-f994737d14-20240522
 
+  react-dom@19.0.0-rc-f994737d14-20240522(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      scheduler: 0.25.0-rc-f994737d14-20240522
+
   react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522):
     dependencies:
       react: 19.0.0-rc-f994737d14-20240522
@@ -10155,6 +10198,14 @@ snapshots:
   react-is@16.13.1: {}
 
   react-is@18.3.1: {}
+
+  react-responsive-modal@6.4.2(react-dom@19.0.0-rc-f994737d14-20240522(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@bedrock-layout/use-forwarded-ref': 1.6.1(react@18.3.1)
+      body-scroll-lock: 3.1.5
+      classnames: 2.5.1
+      react: 18.3.1
+      react-dom: 19.0.0-rc-f994737d14-20240522(react@18.3.1)
 
   react-smooth@4.0.1(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522):
     dependencies:

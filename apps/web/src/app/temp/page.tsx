@@ -1,23 +1,21 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ApiPromise, WsProvider } from "@polkadot/api";
-import { Wallet, useConnect } from "@repo/wallet-modal"; // Adjust the import path as needed
+import { Wallet, useConnect, Button, Modal } from "@repo/wallet-modal";
 
 const POLKADOT_WS_PROVIDER = "wss://westend-rpc.polkadot.io";
 
 const wallets: Wallet[] = [
-  { name: "Fearless Wallet", id: "fearless-wallet", image: "" },
+  { name: "Fearless Wallet", id: "fearless-wallet" },
   {
     name: "SubWallet - Polkadot Wallet",
     id: "subwallet-js",
-    image: ""
   },
   {
     name: "Talisman - Ethereum and Polkadot Wallet",
     id: "talisman",
-    image: ""
   },
-  { name: "Enkrypt Crypto Wallet", id: "enkrypt", image: "" }
+  { name: "Enkrypt Crypto Wallet", id: "enkrypt" }
 ];
 
 const PolkadotConnection: React.FC = () => {
@@ -55,31 +53,32 @@ const PolkadotConnection: React.FC = () => {
     const connectionRequest = await connect(wallet);
     console.log("connectionRequest", connectionRequest);
     if (connectionRequest && api) {
-      setAccount(connectionRequest);
       //@ts-expect-error tt
       const { data: { free: accountBalance } } = await api.query.system.account(connectionRequest);
       setBalance(accountBalance.toString());
     }
   };
+  useEffect(() => {
+    handleConnect(wallets![0]!)
 
+  }, [])
   return (
-    <div>
-      <h1>Polkadot Westend Testnet</h1>
-      <p>
-        Current Block Number: {blockNumber !== null ? blockNumber : "Loading..."}
-      </p>
-      {wallets.map((wallet) => (
-        <button key={wallet.id} onClick={() => handleConnect(wallet)}>
-          Connect to {wallet.name}
-        </button>
-      ))}
-      {account && (
-        <div>
-          <p>Connected Account: {account}</p>
-          <p>Balance: {balance !== null ? balance : "Loading..."}</p>
-        </div>
-      )}
-    </div>
+    <>
+      <Modal center />
+      <div>
+        <h1>Polkadot Westend Testnet</h1>
+        <p>
+          Current Block Number: {blockNumber !== null ? blockNumber : "Loading..."}
+        </p>
+        <Button />
+        {account && (
+          <div>
+            <p>Connected Account: {account}</p>
+            <p>Balance: {balance !== null ? balance : "Loading..."}</p>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
