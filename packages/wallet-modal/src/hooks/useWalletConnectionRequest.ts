@@ -30,10 +30,10 @@ const request = async (
   }
 };
 
-export const useWalletConnectionRequest = () => {
+export const useWalletConnectionRequest = (dappName: string) => {
   const { setStatus } = useStatusStore();
   const { setAccounts } = useAccountsStore();
-  const requestHandler = async (wallet: Wallet, dappName: string) => {
+  const requestHandler = async (wallet: Wallet) => {
     return request(wallet, dappName, setStatus, setAccounts);
   };
   return {

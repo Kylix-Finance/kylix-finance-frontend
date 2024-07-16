@@ -1,12 +1,9 @@
-import { Wallet } from "../types";
-import { useWalletConnectionRequest } from "./useWalletConnectionRequest";
+import { useAccountsStore } from "../stores";
 
-export const useConnect = (dappName: string) => {
-  const { request } = useWalletConnectionRequest()
-  const handler = (wallet: Wallet) => {
-    return request(wallet, dappName)
-  }
+export const useConnect = () => {
+  const { accounts, activeAccount } = useAccountsStore();
   return {
-    connect: handler
+    accounts,
+    currentAccount: activeAccount,
   };
 };
