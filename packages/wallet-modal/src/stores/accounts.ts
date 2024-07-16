@@ -4,10 +4,10 @@ import { persist, createJSONStorage } from "zustand/middleware";
 import { STORAGE_KEYS } from "../constants";
 
 interface AccountsStore {
-  activeAccount: InjectedAccount["address"] | undefined;
+  activeAccount: string | undefined;
   accounts: InjectedAccount[] | undefined;
   setAccounts: (account: InjectedAccount[] | undefined) => void;
-  setActiveAccount: (activeAccount: InjectedAccount["address"] | undefined) => void;
+  setActiveAccount: (activeAccount: string | undefined) => void;
 }
 
 export const useAccountsStore = create<AccountsStore>()(
@@ -15,8 +15,10 @@ export const useAccountsStore = create<AccountsStore>()(
     (set, get) => ({
       activeAccount: undefined,
       accounts: [],
-      setAccounts: (accounts: InjectedAccount[] | undefined) => set({ accounts }),
-      setActiveAccount: (activeAccount: InjectedAccount["address"] | undefined) => set({ activeAccount })
+      setAccounts: (accounts: InjectedAccount[] | undefined) =>
+        set({ accounts }),
+      setActiveAccount: (activeAccount: string | undefined) =>
+        set({ activeAccount }),
     }),
     {
       name: STORAGE_KEYS.POLKA_WALLET_MODAL_ACCOUNTS,
