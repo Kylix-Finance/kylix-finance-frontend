@@ -11,7 +11,7 @@ const useSwitchAccount = () => {
     if (accountExists) {
       setActiveAccount(walletAddress);
     } else {
-      console.error("Wallet address not found");
+      throw new Error("Wallet address not found");
     }
   };
 
