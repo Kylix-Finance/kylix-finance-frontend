@@ -12,7 +12,7 @@ interface AccountsStore {
 
 export const useAccountsStore = create<AccountsStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       activeAccount: undefined,
       accounts: [],
       setAccounts: (accounts: InjectedAccount[] | undefined) =>
