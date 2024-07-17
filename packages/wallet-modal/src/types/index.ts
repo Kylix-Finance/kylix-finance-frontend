@@ -1,7 +1,2 @@
-export interface Wallet {
-    name: string;
-    id: string;
-    image: string;
-    is_installed: boolean
-    installation_url: string
-}
+export type * from "./global";
+export type { Wallet } from "./wallet";
