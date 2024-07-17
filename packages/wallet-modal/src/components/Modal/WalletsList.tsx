@@ -3,13 +3,13 @@ import { useAvailableWallets } from "../../hooks/useAvailableWallets";
 import { wallets } from "../../constants";
 import { useModalStore } from "../../stores";
 import Button from "./Button";
-import { useWalletConnectionRequest } from "../../hooks/useWalletConnectionRequest";
+import { useConnect } from "../../hooks";
 
 const WalletsList: React.FC = () => {
   const availableWallets = useAvailableWallets();
   const [selectedWalletId, setSelectedWalletId] = useState<string | null>(null);
   const { setStatus } = useModalStore();
-  const { request } = useWalletConnectionRequest("__0__");
+  const { connectWallet } = useConnect("__0__");
   const { setStage } = useModalStore();
 
   const updatedWallets = useMemo(() => {
@@ -29,7 +29,7 @@ const WalletsList: React.FC = () => {
   const handleConnect = async () => {
     const wallet = updatedWallets.find((item) => item.id === selectedWalletId);
     if (wallet) {
-      await request(wallet);
+      await connectWallet(wallet);
       setStage("accountsList");
     }
   };
