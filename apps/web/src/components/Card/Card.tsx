@@ -39,16 +39,9 @@ const IconWithBackground = ({ icon: Icon, iconColor }: IconProps) => (
   </Box>
 );
 
-const IconWithoutBackground = ({ icon: Icon, iconColor }: IconProps) => (
-  <Icon
-    width="16px"
-    height="16px"
-    className={`${iconColor ?? "text-primary-500"}`}
-  />
-);
 const Title = ({ title }: TitleProps) => (
   // FIXME: 'font-bold' applies the same CSS properties as 'font-medium'
-  <p className={`font-bold text-sm leading-5 font-medium`}>{title}</p>
+  <Typography variant="h6"> {title}</Typography>
 );
 
 const Card = ({

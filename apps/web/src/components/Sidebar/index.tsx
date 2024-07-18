@@ -1,8 +1,7 @@
 "use client";
 
-import { Box, Drawer, Link, List, ListItem } from "@mui/material";
+import { Box, Drawer, Link, List, ListItem, Typography } from "@mui/material";
 import { sidebar, socialMediaLinks } from "~/assets/data";
-import Image from "next/image";
 import { Item } from "./Item";
 import { Icons } from "~/assets/svgs";
 
@@ -31,9 +30,9 @@ const Sidebar = () => {
                   key={section.heading}
                   className="text-black flex flex-col w-full px-6"
                 >
-                  <p className="font-medium text-[10px] ml-3">
+                  <Typography variant="caption" marginLeft="12px">
                     {section.heading}
-                  </p>
+                  </Typography>
                   <List className="w-full flex flex-col gap-2">
                     {section.items.map((item) => (
                       <ListItem

@@ -99,26 +99,34 @@ const MarketsTable = () => {
             <Asset helperText={item.Asset.label} label={item.Asset.name} />
           ),
           "Collateral Q": (
-            <Typography variant="lg">{item["Collateral Q"].value}</Typography>
+            <Typography variant="subtitle1">
+              {item["Collateral Q"].value}
+            </Typography>
           ),
           Utilization: (
-            <Typography variant="lg">{item.Utilization.value}</Typography>
+            <Typography variant="subtitle1">
+              {item.Utilization.value}
+            </Typography>
           ),
           "Borrow APY": (
             <Box className="flex flex-col">
-              <Typography variant="lg">{item["Borrow APY"].value}</Typography>
+              <Typography variant="subtitle1">
+                {item["Borrow APY"].value}
+              </Typography>
               <KylixChip value={`${(Math.random() * 10).toFixed()}%`} />
             </Box>
           ),
           "Supply APY": (
             <Box className="flex flex-col">
-              <Typography variant="lg">{item["Supply APY"].value}</Typography>
+              <Typography variant="subtitle1">
+                {item["Supply APY"].value}
+              </Typography>
               <KylixChip value={`${(Math.random() * 10).toFixed()}%`} />
             </Box>
           ),
           Collateral: <Switch />,
           "Wallet Balance": (
-            <Typography variant="lg">
+            <Typography variant="subtitle1">
               {Number(item["Wallet Balance"].value).toLocaleString()}
             </Typography>
           ),

@@ -6,6 +6,7 @@ import {
   ListItemText,
   ListItem as MUIItemList,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import KylixChip from "../KylixChip";
 import { ListItem } from "./index";
@@ -24,13 +25,8 @@ const Item = ({
   return (
     <MUIItemList className="!flex gap-5 !p-0 !m-0 !justify-between">
       <Box display="flex" alignItems="center" gap="5px">
-        <ListItemText
-          className={cn(
-            "!text-sm !font-medium !leading-5 !text-[#767F7D]",
-            labelClassName
-          )}
-        >
-          {label}
+        <ListItemText className={cn("text-[#767F7D]", labelClassName)}>
+          <Typography variant="body1">{label}</Typography>
         </ListItemText>
         {tooltipTitle && (
           <Tooltip title={tooltipTitle} placement="right">
@@ -39,14 +35,13 @@ const Item = ({
         )}
       </Box>
       <Box display="flex" gap="10px" alignItems="center">
-        <p
-          className={cn(
-            "!font-semibold !text-base !leading-5 !text-primary-800 !font-number",
-            valueClassName
-          )}
+        <Typography
+          className={cn("text-primary-800 font-number", valueClassName)}
+          variant="subtitle2"
+          fontWeight="600"
         >
           {value}
-        </p>
+        </Typography>
         {kylixValue && (
           <KylixChip
             value={kylixValue}

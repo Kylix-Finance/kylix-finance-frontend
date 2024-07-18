@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
 
@@ -8,15 +9,18 @@ const Borrow = () => {
       iconColor="text-secondary-500"
       icon={Icons.WalletFill}
       rightComponent={
-        <p className="text-primary-800 font-bold text-xl leading-7 ">
+        <Typography variant="h5" className="text-primary-800">
           $ 1,820,140
-        </p>
+        </Typography>
       }
     >
-      <p className="flex items-center text-primary-800/50 text-xs">
+      <Typography
+        variant="caption"
+        className="flex items-center text-primary-800/50"
+      >
         <span>Borrowers: </span>
         <span>1,421</span>
-      </p>
+      </Typography>
     </Card>
   );
 };

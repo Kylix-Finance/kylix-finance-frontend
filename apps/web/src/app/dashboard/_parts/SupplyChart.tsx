@@ -45,15 +45,15 @@ export const SupplyChart = () => {
       tableName="supply"
       data={tableData.map((item) => ({
         Asset: <Asset label={item.Asset} helperText="" />,
-        APY: <Typography variant="md">{item.APY}</Typography>,
-        Balance: <Typography variant="md">{item.Balance}</Typography>,
-        Status: <Typography variant="md">{item.Status}</Typography>,
+        APY: <Typography variant="subtitle1">{item.APY}</Typography>,
+        Balance: <Typography variant="subtitle1">{item.Balance}</Typography>,
+        Status: <Typography variant="subtitle1">{item.Status}</Typography>,
         Actions: (
           <Box>
             <Button style={{ padding: "4px 12px" }} variant="outlined">
               <Typography
                 className="!text-primary-500"
-                variant="md"
+                variant="subtitle1"
                 fontWeight={600}
                 fontFamily={"Poppins"}
               >

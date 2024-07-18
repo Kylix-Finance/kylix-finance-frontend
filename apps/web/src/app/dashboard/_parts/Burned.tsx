@@ -1,17 +1,31 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { numToLocalString } from "~/utils";
 
 const Burned = () => {
   return (
     <Box className="flex gap-5">
-      <p className="text-secondary-500">
+      <Typography variant="h5" fontWeight="500" className="text-secondary-500">
         {numToLocalString(302200)}{" "}
-        <span className="ml-2 text-neutral-400">KYL</span>
-      </p>
-      <p>
+        <Typography
+          component="span"
+          variant="body3"
+          className="ml-2 text-neutral-400"
+        >
+          KYL
+        </Typography>
+      </Typography>
+      <Typography variant="h5" fontWeight="500">
         {numToLocalString(514100)}{" "}
-        <span className="ml-2 text-neutral-400">USD</span>
-      </p>
+        <Typography
+          component="span"
+          variant="body3"
+          fontWeight="500"
+          marginLeft="8px"
+          className="text-neutral-400"
+        >
+          USD
+        </Typography>
+      </Typography>
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { numToLocalString } from "~/utils";
 
 type FinanceSummaryProps = {
@@ -12,9 +12,9 @@ const FinanceSummary = ({ label, value, color }: FinanceSummaryProps) => {
     <Box className="flex flex-col gap-1">
       <Box className="flex items-center">
         <Box className="w-3 h-3 rounded-sm mr-1" bgcolor={color}></Box>
-        <p>{label}</p>
+        <Typography variant="body1">{label}</Typography>
       </Box>
-      <p>$ {numToLocalString(value)}</p>
+      <Typography variant="body2">$ {numToLocalString(value)}</Typography>
     </Box>
   );
 };

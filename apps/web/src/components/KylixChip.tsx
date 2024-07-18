@@ -1,4 +1,4 @@
-import { Box, Chip } from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
 import { cn } from "~/utils";
@@ -22,13 +22,27 @@ const KylixChip = ({
 }: Props) => {
   return (
     <Box
+      sx={{
+        display: "flex",
+        gap: "4px",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "fit-content",
+        fontWeight: "500",
+        fontSize: "10px",
+        lineHeight: "20px",
+        letterSpacing: "-2%",
+        borderRadius: "4px",
+        paddingX: "6px",
+        paddingY: "1px",
+      }}
       className={cn(
-        "rounded-[4px] flex px-1.5 py-0.5 bg-primary-400/10 gap-1 items-center justify-center w-fit font-medium text-[10px] leading-5 tracking-[-2%] font-number text-primary-800",
+        "bg-primary-400/10 font-number text-primary-800",
         className
       )}
     >
       {/* TODO: Replace with MUI Components */}
-      <span>{value}</span>
+      <Typography variant="caption">{value}</Typography>
       <Image
         draggable="false"
         src="/kylix-chip.svg"

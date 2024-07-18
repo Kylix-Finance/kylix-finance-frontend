@@ -1,4 +1,4 @@
-import { Box, Button, Switch } from "@mui/material";
+import { Box, Button, Switch, Typography } from "@mui/material";
 import FeaturedCard from "./FeaturedCard";
 
 const Featured = () => {
@@ -15,13 +15,13 @@ const Featured = () => {
           size="small"
           className="px-1.5 py-2.5 !border-[#1A433B1A] !rounded-lg !capitalize !text-primary-800 !font-semibold !text-xs !leading-4 !text-center load-more-ripple"
         >
-          <p>+ Load more</p>
+          <Typography variant="caption">+ Load more</Typography>
         </Button>
         <Box className="flex items-center gap-1.5">
           {/* <Switch /> */}
-          <p className="text-xs font-semibold leading-4 text-primary-800">
+          <Typography variant="caption" className="text-primary-800">
             Detailed View
-          </p>
+          </Typography>
         </Box>
       </Box>
     </Box>

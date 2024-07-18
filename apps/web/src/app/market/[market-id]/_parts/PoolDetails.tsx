@@ -1,4 +1,4 @@
-import { Box, Card } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { Icons } from "~/assets/svgs";
@@ -49,19 +49,19 @@ const PoolDetails = () => {
               height={24}
             />
             <Box className="flex flex-col">
-              <p className="font-bold text-sm leading-5 tracking-[-2%] text-primary-800">
+              <Typography variant="subtitle2" className="text-primary-800">
                 USDC
-              </p>
-              <p className="font-normal text-[10px] leading-3 tracking-[-2%] text-primary-800/50">
+              </Typography>
+              <Typography variant="caption" className="text-primary-800/50">
                 USD coin
-              </p>
+              </Typography>
             </Box>
           </Box>
         </Box>
-        <div className="flex items-center text-primary-800 font-bold gap-2.5">
-          <p className=" text-sm leading-5">Price:</p>
-          <p className="font-number">$ 1.01</p>
-        </div>
+        <Box className="flex items-center text-primary-800 gap-2.5">
+          <Typography variant="subtitle2">Price:</Typography>
+          <Typography variant="body1">$ 1.01</Typography>
+        </Box>
       </Box>
       {/* Pool status */}
       <Card

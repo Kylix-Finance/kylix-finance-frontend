@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Doughnut from "~/components/Charts/DoughnutChart";
 import { LineBreak, FinanceSummary } from "~/components";
 import { palette } from "~/config/palette";
@@ -7,9 +7,10 @@ import { numToLocalString } from "~/utils";
 const TotalLocked = () => {
   return (
     <Box className="flex flex-col h-full">
-      <p className="mb-9">
-        {numToLocalString(65800200)} <span>USD</span>
-      </p>
+      <Typography variant="h4" marginBottom="36px">
+        {numToLocalString(65800200)}{" "}
+        <Typography variant="body3">USD</Typography>
+      </Typography>
       <Box className="flex mb-auto">
         <Doughnut />
         <Box className="flex flex-col gap-5 ml-4">
@@ -26,10 +27,13 @@ const TotalLocked = () => {
         </Box>
       </Box>
       <LineBreak />
-      <p className="mb-2">Kylix Treasury Amount</p>
-      <p>
-        {numToLocalString(20800000)} <span>USD</span>
-      </p>
+      <Typography variant="body1" marginBottom="8px">
+        Kylix Treasury Amount
+      </Typography>
+      <Typography variant="h4">
+        {numToLocalString(20800000)}{" "}
+        <Typography variant="body3">USD</Typography>
+      </Typography>
     </Box>
   );
 };
