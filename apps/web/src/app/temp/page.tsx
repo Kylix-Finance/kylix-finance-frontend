@@ -25,6 +25,8 @@ const PolkadotConnection: React.FC = () => {
   const [balance, setBalance] = useState<string | null>(null);
 
   // const { connect } = useConnect("PolkadotConnection");
+  const { connect, data: accounts } = useConnect();
+  console.log("accounts___", accounts);
 
   useEffect(() => {
     const connectToApi = async () => {
@@ -63,6 +65,7 @@ const PolkadotConnection: React.FC = () => {
   // useEffect(() => {
   //   handleConnect(wallets![0]!);
   // }, []);
+
   return (
     <>
       <Modal center />

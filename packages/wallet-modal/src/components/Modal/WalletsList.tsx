@@ -9,7 +9,7 @@ const WalletsList: React.FC = () => {
   const availableWallets = useAvailableWallets();
   const [selectedWalletId, setSelectedWalletId] = useState<string | null>(null);
   const { setStatus } = useModalStore();
-  const { connectWallet } = useConnect("__0__");
+  const { connectAsync } = useConnect();
   const { setStage } = useModalStore();
 
   const updatedWallets = useMemo(() => {
@@ -29,7 +29,7 @@ const WalletsList: React.FC = () => {
   const handleConnect = async () => {
     const wallet = updatedWallets.find((item) => item.id === selectedWalletId);
     if (wallet) {
-      await connectWallet(wallet);
+      await connectAsync({ wallet });
       setStage("accountsList");
     }
   };
