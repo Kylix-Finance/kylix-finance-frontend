@@ -29,7 +29,7 @@ const VaultChart = () => {
               <Typography variant="body2">Total Borrowings</Typography>
             </Box>
             <Box className="flex gap-2 items-center">
-              <Box className="w-6 border-2  border-secondary-500  rounded-md"></Box>
+              <Box className="w-6 border-2  border-secondary-500 rounded-md"></Box>
               <Typography variant="body2">Total Supply</Typography>
             </Box>
           </Box>
