@@ -1,16 +1,13 @@
 "use client";
 
-import {
-  Paper,
-  PaperProps,
-  Table as TableBase,
-  TableContainer,
-} from "@mui/material";
+import { Paper, Table as TableBase, TableContainer } from "@mui/material";
 import React, { ReactNode } from "react";
 
 import TBody from "./TBody";
 import THead from "./THead";
 import TablePagination from "./TablePagination";
+import { createStyles, makeStyles } from "@mui/styles";
+
 import {
   Order,
   TableData,
@@ -27,6 +24,7 @@ interface Props<K extends string> {
   data: TableData<K>;
   defaultSortKey: keyof TData<K>;
   hasPagination?: boolean;
+  hiddenTHeadsText?: Array<K>;
   rowSpacing?: string;
   tableName: GlobalStore.TableName;
   tBaseProps?: TBaseProps;
@@ -35,13 +33,13 @@ interface Props<K extends string> {
   tContainerProps?: TContainerProps;
   tHeadProps?: THeadProps;
   tRowProps?: TRowProps;
-  hiddenTHeadsText?: Array<K>;
 }
 
 export function Table<K extends string>({
   data,
   defaultSortKey,
   hasPagination = false,
+  hiddenTHeadsText,
   rowSpacing,
   tableName,
   tBaseProps,
@@ -50,7 +48,6 @@ export function Table<K extends string>({
   tContainerProps,
   tHeadProps,
   tRowProps,
-  hiddenTHeadsText,
 }: Props<K>) {
   type DataItemKey = keyof TData<K>;
 
@@ -75,6 +72,7 @@ export function Table<K extends string>({
 
   return (
     <TableContainer
+      className="hide-scrollbar"
       {...tContainerProps}
       sx={{
         height: "100%",

@@ -1,4 +1,4 @@
-import { TableCellProps, TableRow } from "@mui/material";
+import { Box, TableCellProps, TableRow } from "@mui/material";
 
 import TCell from "./TCell";
 import { Header, TData, TRowProps } from "./types";
@@ -8,6 +8,7 @@ interface Props<K extends string> extends TRowProps {
   headers: Header;
   tCellProps?: TableCellProps;
   tCellClassnames?: string;
+  rowSpacing?: string;
 }
 
 function TRow<K extends string>({
@@ -15,6 +16,7 @@ function TRow<K extends string>({
   row,
   tCellProps,
   tCellClassnames,
+  rowSpacing,
   ...rest
 }: Props<K>) {
   return (

@@ -1,7 +1,8 @@
-import { Box, TableBody } from "@mui/material";
+import { Box, TableBody, TableRow } from "@mui/material";
 
 import TRow from "./TRow";
 import { TableData, Header, TBodyProps, TRowProps } from "./types";
+import TCell from "./TCell";
 
 interface Props<K extends string> {
   data: TableData<K>;
@@ -24,14 +25,18 @@ function TBody<K extends string>({
     <TableBody {...tBody}>
       {data.map((row, index) => (
         <>
-          {rowSpacing && <Box mt={rowSpacing} />}
-
           <TRow
             tCellClassnames={tCellClassnames}
+            rowSpacing={rowSpacing}
             key={index}
             headers={headers}
             row={row}
             {...tRowProps}
+          />
+          <TableRow
+            style={{
+              height: rowSpacing,
+            }}
           />
         </>
       ))}

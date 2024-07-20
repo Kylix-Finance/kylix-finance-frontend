@@ -45,11 +45,8 @@ function THead<K extends string>({
     };
 
   return (
-    <TableHead
-      component={(props: PaperProps) => <Paper {...props} elevation={0} />}
-      {...rest}
-    >
-      <TableRow style={{}} {...tRowProps}>
+    <TableHead {...rest}>
+      <TableRow {...tRowProps}>
         {headers.map((header) => (
           <TCell
             className="!bg-[#FFF]"

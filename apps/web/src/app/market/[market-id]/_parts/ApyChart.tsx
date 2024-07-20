@@ -6,6 +6,7 @@ import { palette } from "~/config/palette";
 import { vaultData } from "~/mock/chart";
 import { ChangeEvent, useState } from "react";
 import { Info } from "@mui/icons-material";
+import TransactionForm from "./TransactionForm";
 
 const ApyChart = () => {
   const [checked, setChecked] = useState(false);
