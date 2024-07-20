@@ -28,8 +28,11 @@ const WalletsList: React.FC = () => {
 
   const handleConnect = async () => {
     const wallet = updatedWallets.find((item) => item.id === selectedWalletId);
+    console.log("kkk", selectedWalletId);
     if (wallet) {
+      console.log("kkk11", wallet);
       await connectAsync({ wallet });
+      console.log("kkk22");
       setStage("accountsList");
     }
   };
