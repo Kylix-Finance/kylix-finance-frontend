@@ -41,7 +41,6 @@ const KylixChip = ({
         className
       )}
     >
-      {/* TODO: Replace with MUI Components */}
       <Typography variant="caption">{value}</Typography>
       <Image
         draggable="false"

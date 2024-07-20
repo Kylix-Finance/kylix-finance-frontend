@@ -40,7 +40,6 @@ const IconWithBackground = ({ icon: Icon, iconColor }: IconProps) => (
 );
 
 const Title = ({ title }: TitleProps) => (
-  // FIXME: 'font-bold' applies the same CSS properties as 'font-medium'
   <Typography variant="h6"> {title}</Typography>
 );
 

@@ -20,7 +20,6 @@ function TRow<K extends string>({
   ...rest
 }: Props<K>) {
   return (
-    // TODO: Refactor classNames
     <TableRow className="bg-light" {...rest}>
       {headers.map((header) => {
         return (

@@ -5,7 +5,6 @@ import ThemeLink from "./themeComponents/ThemeLink";
 import { fonts } from "~/assets/fonts";
 import { palette } from "./palette";
 
-// TODO: Move colors to palette
 export const theme = createTheme({
   palette,
   typography: {
@@ -112,7 +111,7 @@ export const theme = createTheme({
           transitionDuration: "300ms",
           "&.Mui-checked": {
             transform: "translateX(7px)",
-            color: "#fff",
+            color: palette.background.default,
             "& + .MuiSwitch-track": {
               backgroundColor: palette.primary.main,
               opacity: 1,
@@ -124,7 +123,7 @@ export const theme = createTheme({
           },
           "&.Mui-focusVisible .MuiSwitch-thumb": {
             color: palette.primary.main,
-            border: "6px solid #fff",
+            border: `6px solid ${palette.background.default}`,
           },
           "&.Mui-disabled .MuiSwitch-thumb": {
             color: palette.secondary.dark,
