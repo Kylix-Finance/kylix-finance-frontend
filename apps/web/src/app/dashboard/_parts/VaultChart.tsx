@@ -1,67 +1,74 @@
-"use client";
-
-import { Box } from "@mui/material";
-import { Line } from "react-chartjs-2";
+import { Box, Button, IconButton, Typography } from "@mui/material";
+import MultiLineChart from "~/components/Charts/MultiLineChart";
+import { palette } from "~/config/palette";
+import { vaultData } from "~/mock/chart";
+import { MoreHoriz, CalendarMonth } from "@mui/icons-material";
 
 const VaultChart = () => {
   return (
     <Box>
-      <h1>VaultChart</h1>
-      <Line
-        data={{
-          labels: ["1/3", "5/3", "10/3", "15/3", "20/3", "25/3", "30/3"],
-          datasets: [
-            {
-              label: "Dataset 1",
-              data: [20000, 30000, 28000, 35000, 32000, 31000, 30000],
-              borderColor: "rgba(75, 192, 192, 1)",
-              backgroundColor: "rgba(75, 192, 192, 0.5)",
-              tension: 0.1,
-            },
-            {
-              label: "Dataset 2",
-              data: [25000, 28000, 27000, 32000, 34000, 33000, 31000],
-              borderColor: "rgba(153, 102, 255, 1)",
-              backgroundColor: "rgba(153, 102, 255, 0.5)",
-              tension: 0.1,
-            },
-          ],
-        }}
-        options={{
-          responsive: true,
-          plugins: {
-            legend: {
-              position: "top",
-            },
-            tooltip: {
-              callbacks: {
-                label: function (context) {
-                  let label = context.dataset.label || "";
-                  if (label) {
-                    label += ": ";
-                  }
-                  if (context.parsed.y !== null) {
-                    label += new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                    }).format(context.parsed.y);
-                  }
-                  return label;
-                },
-              },
-            },
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              ticks: {
-                callback: function (value) {
-                  return "$" + value;
-                },
-              },
+      <Box className="flex justify-between">
+        <Box className="flex gap-12">
+          <Box>
+            <Typography variant="body1">Supplied TVL</Typography>
+            <Typography variant="h5">$ 800M</Typography>
+          </Box>
+          <Box>
+            <Typography variant="body1">Borrowed TVL</Typography>
+            <Typography variant="h5">$ 600M</Typography>
+          </Box>
+          <Box>
+            <Typography variant="body1">Available Borrow</Typography>
+            <Typography variant="h5">$ 120M</Typography>
+          </Box>
+        </Box>
+        <Box className="flex flex-col items-end gap-3">
+          <Box className="flex gap-6">
+            <Box className="flex gap-2 items-center">
+              <Box className="w-6 border-2 border-primary-500 rounded-md"></Box>
+              <Typography variant="body2">Total Borrowings</Typography>
+            </Box>
+            <Box className="flex gap-2 items-center">
+              <Box className="w-6 border-2  border-secondary-500  rounded-md"></Box>
+              <Typography variant="body2">Total Supply</Typography>
+            </Box>
+          </Box>
+          <Box className="flex gap-3 mb-3">
+            <Button
+              variant="outlined"
+              color="secondary"
+              endIcon={<CalendarMonth />}
+            >
+              March 2024
+            </Button>
+            <IconButton>
+              <MoreHoriz />
+            </IconButton>
+          </Box>
+        </Box>
+      </Box>
+
+      <MultiLineChart
+        datasets={[
+          {
+            data: vaultData.supply,
+            borderColor: palette.primary.main,
+            tension: 0.5,
+            parsing: {
+              xAxisKey: "timestamp",
+              yAxisKey: "price",
             },
           },
-        }}
+          {
+            data: vaultData.borrow,
+            borderColor: palette.secondary.main,
+            tension: 0.5,
+            parsing: {
+              xAxisKey: "timestamp",
+              yAxisKey: "price",
+            },
+          },
+        ]}
       />
     </Box>
   );

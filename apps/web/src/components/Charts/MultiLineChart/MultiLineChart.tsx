@@ -1,39 +1,24 @@
 "use client";
+
+import { Box } from "@mui/material";
+import { TypedChartComponent } from "node_modules/react-chartjs-2/dist/types";
+import { ComponentProps } from "react";
 import { Line } from "react-chartjs-2";
 import { palette } from "~/config/palette";
-import { kylixPriceData } from "~/mock/chart";
 import { formatNumber } from "~/utils";
-import "chartjs-adapter-date-fns"; // This imports the adapter
-import { Box } from "@mui/material";
 
-const LineChart = () => {
+type LineProps = ComponentProps<typeof Line>;
+
+type MultiLineChartProps = {
+  datasets: LineProps["data"]["datasets"];
+};
+
+export const MultiLineChart = ({ datasets }: MultiLineChartProps) => {
   return (
-    <Box height={180} width="100%">
+    <Box height={280} width="100%">
       <Line
         data={{
-          datasets: [
-            {
-              data: kylixPriceData,
-              parsing: {
-                xAxisKey: "timestamp",
-                yAxisKey: "price",
-              },
-              fill: "origin",
-              borderColor: palette.primary.light,
-              backgroundColor: (context) => {
-                if (!context.chart.chartArea) return;
-                const {
-                  ctx,
-                  chartArea: { top, bottom },
-                } = context.chart;
-                const gradientBg = ctx.createLinearGradient(0, top, 0, bottom);
-                gradientBg.addColorStop(0, "rgba(69, 169, 150, 0.2)");
-                gradientBg.addColorStop(1, "rgba(69, 169, 150, 0)");
-                return gradientBg;
-              },
-              tension: 0.1, // Smoothing of the line
-            },
-          ],
+          datasets,
         }}
         options={{
           responsive: true,
@@ -71,26 +56,15 @@ const LineChart = () => {
             y: {
               display: true,
               beginAtZero: false,
-              grid: {
-                drawTicks: false,
-              },
               border: {
                 display: false,
-                dash: [8, 8],
               },
               ticks: {
                 color: palette.text.disabled,
                 count: 4,
-                callback: (value, index) => {
-                  if (index === 0) return;
+                callback: (value) => {
                   return formatNumber(value);
                 },
-                // padding: 10,
-              },
-              afterDataLimits: (axis) => {
-                const padding = 0.15;
-                axis.min -= axis.min * padding;
-                axis.max += axis.max * padding;
               },
             },
           },
@@ -99,12 +73,9 @@ const LineChart = () => {
               radius: 1,
             },
           },
-
           maintainAspectRatio: false,
         }}
       />
     </Box>
   );
 };
-
-export default LineChart;
