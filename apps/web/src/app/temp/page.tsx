@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { ApiPromise, WsProvider } from "@polkadot/api";
 import { useConnect, Button, Modal } from "@repo/wallet-modal";
+import { useActiveAccount } from "@repo/onchain-utils";
 
 const POLKADOT_WS_PROVIDER = "wss://westend-rpc.polkadot.io";
 
@@ -50,6 +51,8 @@ const PolkadotConnection: React.FC = () => {
 
     connectToApi();
   }, []);
+  const { activeAccount } = useActiveAccount();
+  console.log("activeAccount____", activeAccount);
 
   // const handleConnect = async (wallet: Wallet) => {
   //   const connectionRequest = await connect(wallet);

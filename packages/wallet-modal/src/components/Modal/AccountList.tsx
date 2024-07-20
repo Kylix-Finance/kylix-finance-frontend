@@ -1,29 +1,20 @@
-import { useState } from "react";
 import { useModalStore } from "../../stores";
-import { useAccountsStore } from "../../stores/accounts";
-import Button from "./Button";
 import { useAccounts } from "@repo/onchain-utils";
+import { useActivateAccount } from "../../hooks/useActiveAccount";
+import { InjectedAccount } from "@polkadot/extension-inject/types";
 
 const AccountList = () => {
-  // const { accounts, setActiveAccount } = useAccountsStore();
   const { accounts } = useAccounts();
+  const { activateAccount, activeAccount } = useActivateAccount();
 
-  const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
-    null
-  );
   const { setStage, setStatus } = useModalStore();
 
-  const accountHandler = (account: string) => setSelectedAccountId(account);
-  const handlePreviousStep = () => {
-    setStage("walletsList");
-  };
-  const handleSelectAccount = () => {
-    if (selectedAccountId) {
-      // setActiveAccount(selectedAccountId);
-      setStatus(false);
-      setSelectedAccountId(null);
+  const handleSelectAccount = (account: InjectedAccount) => {
+    activateAccount({ account });
+    setStatus(false);
+    setTimeout(() => {
       setStage("walletsList");
-    }
+    }, 300);
   };
 
   return (
@@ -32,33 +23,18 @@ const AccountList = () => {
         {accounts?.map((item) => (
           <button
             key={item.address}
-            className={`bg-[#F7F7F7] rounded-lg p-4 border-2 transition-colors duration-75 ${
-              item.address === selectedAccountId
+            className={`bg-primary-100/50 hover:bg-primary-500/30 rounded-lg p-4 border-2 transition-colors duration-75 ${
+              item.address === activeAccount?.address
                 ? "border-primary-500"
                 : "border-[#F7F7F7]"
             }`}
-            onClick={() => accountHandler(item.address)}
+            onClick={() => handleSelectAccount(item)}
           >
             <p className="text-[#383E42] font-bold text-sm leading-5">
               {item.name}
             </p>
           </button>
         ))}
-      </div>
-      <div className="flex items-center gap-2 w-full">
-        <Button
-          onClick={handlePreviousStep}
-          className="text-[#4C5452] bg-white hover:bg-gray-50/90 border border-[#767F7D26]"
-        >
-          Previous step
-        </Button>
-        <Button
-          onClick={handleSelectAccount}
-          disabled={!selectedAccountId}
-          className="text-white bg-primary-500 hover:bg-primary-500/90 border-[#767F7D26] disabled:bg-primary-500/80 disabled:cursor-not-allowed"
-        >
-          Connect
-        </Button>
       </div>
     </div>
   );
