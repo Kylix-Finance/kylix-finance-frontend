@@ -1,31 +1,54 @@
 "use client";
-
-import { Box, Drawer, Link, List, ListItem, Typography } from "@mui/material";
+import {
+  Box,
+  Drawer,
+  Link,
+  List,
+  ListItem,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { sidebar, socialMediaLinks } from "~/assets/data";
 import { Item } from "./Item";
 import { Icons } from "~/assets/svgs";
+import { useSidebarStore } from "~/store";
+import { useEffect } from "react";
+import { useTheme } from "@mui/material/styles";
+import ClientOnly from "../ClientOnly";
 
 const Sidebar = () => {
+  const { isSidebarOpen, setSidebarOpen, setMobile } = useSidebarStore();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+
+  useEffect(() => {
+    setMobile(isMobile);
+    if (!isMobile) {
+      setSidebarOpen(true);
+    }
+  }, [isMobile, isSidebarOpen, setMobile, setSidebarOpen]);
+
   return (
-    <Drawer
-      variant="persistent"
-      anchor="left"
-      className="w-[290px] h-screen bg-white"
-      open
-      PaperProps={{
-        component: "div",
-        className:
-          "w-[inherit] bg-[inherit] !bg-[inherit] !border-none hide-scrollbar ",
-      }}
-    >
-      <Box className="flex flex-col items-center justify-between h-[inherit] pb-6 w-full">
-        <Box className="flex flex-col w-full">
-          <Box className="w-full h-full bg-primary-500 flex flex-col justify-center items-center py-10 px-16 sticky top-0">
-            <Icons.KylixLogo />
-          </Box>
-          <Box className="flex flex-col mt-6 gap-8">
-            {sidebar.map((section) => {
-              return (
+    <ClientOnly>
+      <Drawer
+        variant={isMobile ? "temporary" : "persistent"}
+        anchor="left"
+        open={isSidebarOpen}
+        onClose={() => setSidebarOpen(!isSidebarOpen)}
+        className="w-[290px] h-screen bg-white"
+        PaperProps={{
+          component: "div",
+          className:
+            "w-[inherit] bg-[inherit] !bg-[inherit] !border-none hide-scrollbar",
+        }}
+      >
+        <Box className="flex flex-col items-center justify-between h-[inherit] pb-6 w-full">
+          <Box className="flex flex-col w-full">
+            <Box className="w-full h-full bg-primary-500 flex flex-col justify-center items-center py-10 px-16 sticky top-0">
+              <Icons.KylixLogo />
+            </Box>
+            <Box className="flex flex-col mt-6 gap-8">
+              {sidebar.map((section) => (
                 <Box
                   key={section.heading}
                   className="text-black flex flex-col w-full px-6"
@@ -44,25 +67,29 @@ const Sidebar = () => {
                     ))}
                   </List>
                 </Box>
-              );
-            })}
+              ))}
+            </Box>
+          </Box>
+          <Box className="flex flex-col items-center">
+            <Box className="flex items-center justify-center">
+              {socialMediaLinks.map(({ icon: Icon, link }) => (
+                <Link key={link} href={link}>
+                  <Icon className="text-primary-500 w-10 h-10" />
+                </Link>
+              ))}
+            </Box>
+            <Typography
+              variant="caption"
+              className="text-primary-300 select-none"
+            >
+              <span>&#169;</span>
+              <span>KYLIX Version 1.0</span>
+            </Typography>
           </Box>
         </Box>
-        <Box className="flex flex-col items-center">
-          <Box className="flex items-center justify-center">
-            {socialMediaLinks.map(({ icon: Icon, link }) => (
-              <Link key={link} href={link}>
-                <Icon className="text-primary-500 w-10 h-10" />
-              </Link>
-            ))}
-          </Box>
-          <p className="text-primary-300 font-medium text-xs leading-5 tracking-[-2%] select-none">
-            <span>&#169;</span>
-            <span>KYLIX Version 1.0</span>
-          </p>
-        </Box>
-      </Box>
-    </Drawer>
+      </Drawer>
+    </ClientOnly>
   );
 };
+
 export default Sidebar;
