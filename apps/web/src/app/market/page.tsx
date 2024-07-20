@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import Borrow from "./_parts/Borrow";
 import MarketsTable from "./_parts/MarketsTable";
 import Supply from "./_parts/Supply";
-import TransactionForm from "./[market-id]/_parts/TransactionForm";
 
 export default function page() {
   return (

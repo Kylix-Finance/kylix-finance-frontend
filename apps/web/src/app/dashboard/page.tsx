@@ -53,12 +53,12 @@ const Page = () => {
         <Card className={styles.vault_chart}>
           <VaultChart />
         </Card>
-        {/* <Card className={styles.supply} title="Assets to Supply">
+        <Card className={styles.supply} title="Assets to Supply">
           <Supply />
         </Card>
         <Card className={styles.borrow} title="Assets to Borrow">
           <Borrow />
-        </Card> */}
+        </Card>
       </div>
     </div>
   );

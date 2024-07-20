@@ -1,38 +1,8 @@
-import { Balance } from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/material";
-import Image from "next/image";
 import { Table } from "~/components";
+import { Asset } from "~/components/Asset";
 
 type TKey = "Asset" | "APY" | "Balance" | "Status" | "Actions";
-
-// CLEANME: Duplicate component
-const Asset = ({
-  helperText: helperText,
-  label,
-}: {
-  helperText: string;
-  label: string;
-}) => {
-  return (
-    <Box className="flex flex-row items-center justify-start gap-[8px]">
-      <Box>
-        <Image
-          draggable="false"
-          src="/kylix-chip.svg"
-          alt="Asset Icon"
-          width={24}
-          height={24}
-        />
-      </Box>
-      <Box className="flex flex-col">
-        <Typography variant="md" fontWeight={"bold"}>
-          {label}
-        </Typography>
-        {helperText && <Typography variant="xs">{helperText}</Typography>}
-      </Box>
-    </Box>
-  );
-};
 
 export const SupplyChart = () => {
   return (

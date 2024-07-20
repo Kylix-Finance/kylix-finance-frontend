@@ -1,7 +1,8 @@
-import { Box, Button, Switch, TextField, Typography } from "@mui/material";
-import Image from "next/image";
-import { Icons } from "~/assets/svgs";
+import { Box, Switch, Typography } from "@mui/material";
 import { Card, Table, KylixChip } from "~/components";
+import { Asset } from "~/components/Asset";
+import { RightComponent } from "./RightComponent";
+import { TableActions } from "../TableActions";
 
 type TKey =
   | "Asset"
@@ -12,81 +13,6 @@ type TKey =
   | "Collateral"
   | "Wallet Balance"
   | "Actions";
-
-const Actions = () => {
-  return (
-    <Box className="flex gap-1">
-      <Button style={{ padding: "4px 12px" }} variant="contained">
-        <Typography
-          className="!text-[#FFF]"
-          variant="md"
-          fontWeight={600}
-          fontFamily={"Poppins"}
-        >
-          Supply
-        </Typography>
-      </Button>
-      <Button style={{ padding: "4px 12px" }} variant="outlined">
-        <Typography
-          className="!text-primary-500"
-          variant="md"
-          fontWeight={600}
-          fontFamily={"Poppins"}
-        >
-          Borrow
-        </Typography>
-      </Button>
-    </Box>
-  );
-};
-
-const Asset = ({
-  helperText: helperText,
-  label,
-}: {
-  helperText: string;
-  label: string;
-}) => {
-  return (
-    <Box className="flex flex-row items-center justify-start gap-[8px]">
-      <Box>
-        <Image
-          draggable="false"
-          src="/kylix-chip.svg"
-          alt="Asset Icon"
-          width={24}
-          height={24}
-        />
-      </Box>
-      <Box className="flex flex-col">
-        <Typography variant="md" fontWeight={"bold"}>
-          {label}
-        </Typography>
-        <Typography variant="xs">{helperText}</Typography>
-      </Box>
-    </Box>
-  );
-};
-
-const RightComponent = () => {
-  return (
-    <TextField
-      style={{
-        fontSize: "10px",
-      }}
-      placeholder="Search by market"
-      size="small"
-      InputProps={{
-        style: { fontSize: "14px", color: "#C7C7C7", backgroundImage: "none" },
-        startAdornment: (
-          <Box className="pr-2">
-            <Icons.Search />
-          </Box>
-        ),
-      }}
-    />
-  );
-};
 
 const MarketsTable = () => {
   return (
@@ -130,7 +56,7 @@ const MarketsTable = () => {
               {Number(item["Wallet Balance"].value).toLocaleString()}
             </Typography>
           ),
-          Actions: <Actions />,
+          Actions: <TableActions />,
         }))}
         defaultSortKey="Asset"
         tableName="markets"

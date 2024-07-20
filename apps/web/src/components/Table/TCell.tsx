@@ -9,7 +9,7 @@ function TCell(props: Props) {
     <TableCell {...props}>
       <Box
         sx={{
-          minWidth: 100,
+          // minWidth: 100,
           overflow: "hidden",
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",
