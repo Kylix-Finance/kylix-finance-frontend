@@ -99,7 +99,53 @@ export const theme = createTheme({
         component: ThemeLink,
       },
     },
-    MuiSwitch: {},
+    MuiSwitch: {
+      styleOverrides: {
+        root: {
+          width: 25,
+          height: 16,
+          padding: 0,
+        },
+        switchBase: {
+          padding: 0,
+          margin: 2,
+          transitionDuration: "300ms",
+          "&.Mui-checked": {
+            transform: "translateX(7px)",
+            color: "#fff",
+            "& + .MuiSwitch-track": {
+              backgroundColor: palette.primary.main,
+              opacity: 1,
+              border: 0,
+            },
+            "&.Mui-disabled + .MuiSwitch-track": {
+              opacity: 0.5,
+            },
+          },
+          "&.Mui-focusVisible .MuiSwitch-thumb": {
+            color: palette.primary.main,
+            border: "6px solid #fff",
+          },
+          "&.Mui-disabled .MuiSwitch-thumb": {
+            color: palette.secondary.dark,
+          },
+          "&.Mui-disabled + .MuiSwitch-track": {
+            opacity: 0.7,
+          },
+        },
+        thumb: {
+          boxSizing: "border-box",
+          width: 14,
+          height: 14,
+          marginTop: -1,
+        },
+        track: {
+          borderRadius: 16 / 2,
+          backgroundColor: "#E9E9EA",
+          opacity: 1,
+        },
+      },
+    },
     MuiCard: {
       styleOverrides: {
         root: {
