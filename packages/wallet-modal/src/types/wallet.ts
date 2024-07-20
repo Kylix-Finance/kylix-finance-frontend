@@ -18,9 +18,6 @@ export type Config = {
   dappName: string;
 };
 
-export interface Accounts {
-  accounts: InjectedAccount[];
-}
 export interface ActiveAccount {
   activeAccount: InjectedAccount | undefined;
 }

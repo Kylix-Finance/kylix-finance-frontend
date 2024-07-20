@@ -25,15 +25,15 @@ const WalletsList: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col justify-between  h-[90%] ">
-      <div className="flex flex-col gap-1.5 overflow-y-scroll">
+    <div className="flex flex-col justify-between">
+      <div className="flex flex-col gap-1.5">
         {updatedWallets.map((item) => (
           <button
             key={item.id}
             disabled={!item.isInstalled}
             className={`bg-primary-100/50 hover:bg-primary-500/30 disabled:grayscale-[50] rounded-lg p-4 border-2 transition-colors duration-75 ${
               item.id === connectData?.connector.id
-                ? "border-primary-500"
+                ? "border-primary-500 bg-primary-200"
                 : "border-[#F7F7F7]"
             }`}
             onClick={() => handleConnect(item)}

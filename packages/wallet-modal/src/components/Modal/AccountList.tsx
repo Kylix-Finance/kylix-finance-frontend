@@ -2,9 +2,12 @@ import { useState } from "react";
 import { useModalStore } from "../../stores";
 import { useAccountsStore } from "../../stores/accounts";
 import Button from "./Button";
+import { useAccounts } from "@repo/onchain-utils";
 
 const AccountList = () => {
-  const { accounts, setActiveAccount } = useAccountsStore();
+  // const { accounts, setActiveAccount } = useAccountsStore();
+  const { accounts } = useAccounts();
+
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
     null
   );
@@ -16,7 +19,7 @@ const AccountList = () => {
   };
   const handleSelectAccount = () => {
     if (selectedAccountId) {
-      setActiveAccount(selectedAccountId);
+      // setActiveAccount(selectedAccountId);
       setStatus(false);
       setSelectedAccountId(null);
       setStage("walletsList");

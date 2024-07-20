@@ -1,9 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Accounts, Status, Wallet } from "../types";
+import { Status, Wallet } from "../types";
 import { useReadConfig } from "./useReadConfig";
 import { baseKey } from "../constants";
 import { connectorQueryKey } from "./useActiveConnector";
 import { statusQueryKey } from "./useStatus";
+import { Accounts } from "@repo/types";
 
 const getWalletExtension = (walletId: string) =>
   window.injectedWeb3?.[walletId];
