@@ -11,6 +11,7 @@ import TotalLocked from "./_parts/TotalLocked";
 import VaultChart from "./_parts/VaultChart";
 import { Card } from "~/components";
 import { Icons } from "~/assets/svgs";
+import TransactionForm from "../market/[market-id]/_parts/TransactionForm";
 
 export const metadata: Metadata = metadataGenerator({
   title: "Dashboard",

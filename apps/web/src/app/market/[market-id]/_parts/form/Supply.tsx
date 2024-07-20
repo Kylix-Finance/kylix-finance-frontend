@@ -1,6 +1,15 @@
 "use client";
-import { Box, Button, InputAdornment, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputAdornment,
+  TextField,
+  TextFieldProps,
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
 import { List, ListItem } from "~/components";
+import { getDecimalRegex } from "~/utils";
 
 const items: Array<ListItem> = [
   {
@@ -36,8 +45,18 @@ const items: Array<ListItem> = [
     valueClassName: "!text-primary-500",
   },
 ];
-//FIXME: add pattern to input(accept only number) and fix style of input
 const Supply = () => {
+  const [value, setValue] = useState("");
+
+  const handleInputChange: TextFieldProps["onChange"] = ({
+    target: { value },
+  }) => {
+    // TODO: Wrap this `if` check in some utility or something
+    if (value === "") return setValue(value);
+    const isValid = getDecimalRegex(6).test(value);
+    if (isValid) setValue(value);
+  };
+
   return (
     <Box display="flex" flexDirection="column" gap="24px">
       <Box flexDirection="column" gap="6px" alignItems="center" display="flex">
@@ -58,27 +77,18 @@ const Supply = () => {
           </Button>
         </Box>
         <TextField
+          value={value}
+          onChange={handleInputChange}
           size="small"
           fullWidth
           className="!rounded-md !font-number !font-bold !text-base bg-primary-500/10 !text-primary-800 !leading-5 !py-2 !px-1"
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                border: "none",
-              },
-              "&:hover fieldset": {
-                border: "none",
-              },
-              "&.Mui-focused fieldset": {
-                border: "none",
-              },
-            },
-          }}
           inputMode="numeric"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start" className="">
-                $
+                <Typography color="#aB5D0CB" variant="subtitle1">
+                  $
+                </Typography>
               </InputAdornment>
             ),
           }}

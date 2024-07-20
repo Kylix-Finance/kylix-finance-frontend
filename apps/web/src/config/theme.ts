@@ -98,6 +98,37 @@ export const theme = createTheme({
         component: ThemeLink,
       },
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "& fieldset": {
+            border: "none",
+          },
+          "&:hover fieldset": {
+            border: "none",
+          },
+          "&.Mui-focused fieldset": {
+            border: "none",
+          },
+        },
+        input: {
+          fontSize: "16px",
+          color: "#1A433B",
+          fontFamily: "Poppins",
+          fontStyle: "normal",
+          fontWeight: 700,
+          lineHeight: "140%" /* 22.4px */,
+        },
+        inputAdornedStart: {
+          fontWeight: 700,
+          fontSize: "16px",
+        },
+        adornedStart: {
+          fontWeight: 700,
+          fontSize: "16px",
+        },
+      },
+    },
     MuiSwitch: {
       styleOverrides: {
         root: {
