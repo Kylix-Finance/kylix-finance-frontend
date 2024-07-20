@@ -3,10 +3,28 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    scroll-behavior: smooth;
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1c443c;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #1c443c;
+  }
+
+  html {
+    scrollbar-color: #1c443c #f1f1f1;
+    scrollbar-width: thin;
   }
 }
 
@@ -16,31 +34,5 @@
 @layer components {
   .load-more-ripple .MuiTouchRipple-root {
     @apply text-primary-800/20;
-  }
-
-  .scrollbar::-webkit-scrollbar {
-    @apply hidden;
-
-    .scrollbar {
-      @apply relative overflow-y-auto h-screen;
-    }
-    .scrollbar ::before,
-    ::after {
-      content: "";
-      @apply top-0 right-0 w-1 absolute;
-    }
-    .scrollbar::before {
-      @apply h-full bg-primary-500 z-[1];
-    }
-    .scrollbar::after {
-      @apply bg-primary-500 rounded-md z-[2];
-    }
-
-    .scrollbar:hover::after {
-      @apply bg-primary-500;
-    }
-  }
-  .scrollbar-thumb {
-    @apply absolute right-0 w-1 bg-primary-500 rounded-md z-[2] transition-colors duration-300 hover:bg-primary-500/90;
   }
 }
