@@ -10,17 +10,9 @@ interface ModalStore {
   setStage: (stage: Stage) => void;
 }
 
-export const useModalStore = create<ModalStore>()(
-  persist(
-    (set) => ({
-      status: false,
-      stage: "walletsList",
-      setStage: (stage: Stage) => set({ stage }),
-      setStatus: (status: boolean) => set({ status }),
-    }),
-    {
-      name: STORAGE_KEYS.POLKA_WALLET_MODAL_EXTENSIONS,
-      storage: createJSONStorage(() => sessionStorage),
-    }
-  )
-);
+export const useModalStore = create<ModalStore>()((set) => ({
+  status: false,
+  stage: "walletsList",
+  setStage: (stage: Stage) => set({ stage }),
+  setStatus: (status: boolean) => set({ status }),
+}));

@@ -117,6 +117,9 @@ importers:
       '@mui/utils':
         specifier: ^5.16.1
         version: 5.16.1(@types/react@18.2.61)(react@19.0.0-rc-f994737d14-20240522)
+      '@repo/onchain-utils':
+        specifier: workspace:*
+        version: link:../../packages/onchain-utils
       '@repo/wallet-modal':
         specifier: workspace:*
         version: link:../../packages/wallet-modal
@@ -199,6 +202,9 @@ importers:
 
   packages/onchain-utils:
     dependencies:
+      '@polkadot/extension-inject':
+        specifier: ^0.48.2
+        version: 0.48.2(@polkadot/api@12.2.1)(@polkadot/util@13.0.2)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -206,12 +212,46 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../types
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@turbo/gen':
         specifier: ^1.12.4
         version: 1.13.4(@types/node@20.11.24)(typescript@5.4.5)
+      '@types/eslint':
+        specifier: ^8.56.5
+        version: 8.56.10
+      '@types/node':
+        specifier: ^20.11.24
+        version: 20.11.24
+      '@types/react':
+        specifier: ^18.2.61
+        version: 18.2.61
+      '@types/react-dom':
+        specifier: ^18.2.19
+        version: 18.2.19
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.0
+      typescript:
+        specifier: ^5.3.3
+        version: 5.4.5
+
+  packages/types:
+    dependencies:
+      '@polkadot/extension-inject':
+        specifier: ^0.48.2
+        version: 0.48.2(@polkadot/api@12.2.1)(@polkadot/util@13.0.2)
+    devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
       '@types/eslint':
         specifier: ^8.56.5
         version: 8.56.10
@@ -251,6 +291,12 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@repo/onchain-utils':
+        specifier: workspace:*
+        version: link:../onchain-utils
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../types
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
