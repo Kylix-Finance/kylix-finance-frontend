@@ -100,5 +100,13 @@ export const theme = createTheme({
       },
     },
     MuiSwitch: {},
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          padding: 16,
+        },
+      },
+    },
   },
 });

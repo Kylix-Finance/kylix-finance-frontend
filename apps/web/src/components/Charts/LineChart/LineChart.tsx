@@ -3,7 +3,7 @@ import { Line } from "react-chartjs-2";
 import { palette } from "~/config/palette";
 import { kylixPriceData } from "~/mock/chart";
 import { formatNumber } from "~/utils";
-import "chartjs-adapter-date-fns"; // This imports the adapter
+import "chartjs-adapter-date-fns";
 import { Box } from "@mui/material";
 
 const LineChart = () => {

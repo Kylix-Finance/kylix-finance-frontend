@@ -66,7 +66,8 @@ const PoolDetails = () => {
       {/* Pool status */}
       <Card
         elevation={0}
-        className="!bg-white border !border-primary-800/20 !p-4 !rounded-lg flex flex-col lg:flex-row justify-between"
+        variant="outlined"
+        className="flex flex-col lg:flex-row justify-between"
       >
         <List items={items} />
         <List items={items2} />

@@ -1,11 +1,12 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { TypedChartComponent } from "node_modules/react-chartjs-2/dist/types";
 import { ComponentProps } from "react";
 import { Line } from "react-chartjs-2";
 import { palette } from "~/config/palette";
 import { formatNumber } from "~/utils";
+import "chartjs-adapter-date-fns";
+import "chart.js/auto";
 
 type LineProps = ComponentProps<typeof Line>;
 
