@@ -18,6 +18,11 @@ const MarketsTable = () => {
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
       <Table<TKey>
+        tRowProps={
+          {
+            // className: "cursor-pointer",
+          }
+        }
         hiddenTHeadsText={["Actions"]}
         rowSpacing="11px"
         data={tableData.map((item) => ({

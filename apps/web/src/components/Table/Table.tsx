@@ -1,12 +1,11 @@
 "use client";
 
-import { Paper, Table as TableBase, TableContainer } from "@mui/material";
+import { Table as TableBase, TableContainer } from "@mui/material";
 import React, { ReactNode } from "react";
 
 import TBody from "./TBody";
 import THead from "./THead";
 import TablePagination from "./TablePagination";
-import { createStyles, makeStyles } from "@mui/styles";
 
 import {
   Order,
@@ -89,7 +88,6 @@ export function Table<K extends string>({
           orderBy={orderBy}
           onRequestSort={handleRequestSort}
           {...tHeadProps}
-          tRowProps={tRowProps}
         />
         <TBody
           tCellClassnames={tCellClassnames}
@@ -97,6 +95,7 @@ export function Table<K extends string>({
           data={sortedData}
           headers={headers}
           tBody={tBodyProps}
+          tRowProps={tRowProps}
         />
       </TableBase>
       {hasPagination && <TablePagination tableName={tableName} />}

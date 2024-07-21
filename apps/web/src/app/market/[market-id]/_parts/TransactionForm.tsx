@@ -7,27 +7,27 @@ const tabItems: Array<TabType> = [
     value: "supply",
     label: "Supply",
     content: <Supply />,
-    disable: true,
+    disable: false,
   },
   {
     value: "withdraw",
     label: "Withdraw",
     content: <Withdraw />,
-    disable: true,
+    disable: false,
   },
   {
     value: "borrow",
     label: "Borrow",
     content: <Borrow />,
-    disable: true,
+    disable: false,
   },
   {
     value: "repay",
     label: "Repay",
     content: <Repay />,
-    disable: true,
+    disable: false,
   },
-];
+] as const;
 
 const TransactionForm = () => {
   return (
