@@ -1,10 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { baseKey } from "../constants";
 import { Accounts } from "@repo/types";
 
 export const accountQueryKey = [baseKey, "accounts"];
 
-export const useAccounts = () => {
+type UseAccountsReturnType = {
+  accounts?: Accounts["accounts"];
+} & Omit<UseQueryResult<Accounts>, "data">;
+
+export const useAccounts = (): UseAccountsReturnType => {
   const { data, ...rest } = useQuery<Accounts>({ queryKey: accountQueryKey });
 
   return { accounts: data?.accounts, ...rest };
