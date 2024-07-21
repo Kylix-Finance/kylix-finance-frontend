@@ -18,7 +18,7 @@ const Featured = () => {
           <Typography variant="caption">+ Load more</Typography>
         </Button>
         <Box className="flex items-center gap-1.5">
-          {/* <Switch /> */}
+          <Switch />
           <Typography variant="caption" className="text-primary-800">
             Detailed View
           </Typography>
