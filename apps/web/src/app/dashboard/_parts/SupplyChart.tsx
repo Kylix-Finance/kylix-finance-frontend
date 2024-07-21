@@ -19,8 +19,8 @@ export const SupplyChart = () => {
         Balance: <Typography variant="subtitle1">{item.Balance}</Typography>,
         Status: <Typography variant="subtitle1">{item.Status}</Typography>,
         Actions: (
-          <Box>
-            <Button style={{ padding: "4px 12px" }} variant="outlined">
+          <Box className="flex justify-end gap-1">
+            <Button variant="outlined">
               <Typography
                 className="!text-primary-500"
                 variant="subtitle1"

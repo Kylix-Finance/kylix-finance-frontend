@@ -77,6 +77,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "capitalize",
+          padding: "4px 12px",
         },
       },
     },

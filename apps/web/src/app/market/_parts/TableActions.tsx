@@ -2,8 +2,8 @@ import { Box, Button, Typography } from "@mui/material";
 
 export const TableActions = () => {
   return (
-    <Box className="flex gap-1">
-      <Button style={{ padding: "4px 12px" }} variant="contained">
+    <Box className="flex justify-end gap-1">
+      <Button variant="contained">
         <Typography
           className="!text-[#FFF]"
           variant="md"
@@ -13,7 +13,7 @@ export const TableActions = () => {
           Supply
         </Typography>
       </Button>
-      <Button style={{ padding: "4px 12px" }} variant="outlined">
+      <Button variant="outlined">
         <Typography
           className="!text-primary-500"
           variant="md"
