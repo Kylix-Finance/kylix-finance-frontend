@@ -12,12 +12,10 @@ interface Props {
 const Providers = ({ children, config }: Props) => {
   const queryClient = useQueryClient();
   useEffect(() => {
-    queryClient.setQueryData([baseKey, "config"], () => {
-      if (config.dappName === "") {
-        throw new Error("dappName van not be empty!");
-      }
-      return config;
-    });
+    if (!config.dappName) {
+      throw new Error("dappName van not be empty!");
+    }
+    queryClient.setQueryData([baseKey, "config"], config);
   }, [config]);
   return <>{children}</>;
 };
