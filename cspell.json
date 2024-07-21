@@ -3,15 +3,7 @@
   "ignorePaths": [],
   "dictionaryDefinitions": [],
   "dictionaries": [],
-  "ignoreWords": [
-    "CLEANME",
-    "tailwindcss"
-  ],
+  "ignoreWords": ["CLEANME", "tailwindcss"],
   "import": [],
-  "words": [
-    "imbursed",
-    "nextjs",
-    "noimageindex",
-    "polkadot"
-  ]
+  "words": ["imbursed", "nextjs", "noimageindex", "polkadot", "tanstack"]
 }

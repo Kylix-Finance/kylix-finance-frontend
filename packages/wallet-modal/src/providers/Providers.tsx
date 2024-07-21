@@ -9,7 +9,7 @@ interface Props {
   config: Config;
 }
 
-const Providers = ({ children, config }: Props) => {
+export const Providers = ({ children, config }: Props) => {
   const queryClient = useQueryClient();
   useEffect(() => {
     if (!config.dappName) {
@@ -19,4 +19,3 @@ const Providers = ({ children, config }: Props) => {
   }, [config]);
   return <>{children}</>;
 };
-export default Providers;
