@@ -4,12 +4,13 @@ import { Accounts } from "@repo/types";
 
 export const accountQueryKey = [baseKey, "accounts"];
 
-type UseAccountsReturnType = {
-  accounts?: Accounts["accounts"];
-} & Omit<UseQueryResult<Accounts>, "data">;
-
-export const useAccounts = (): UseAccountsReturnType => {
-  const { data, ...rest } = useQuery<Accounts>({ queryKey: accountQueryKey });
+export const useAccounts = () => {
+  const { data, ...rest } = useQuery({
+    queryKey: accountQueryKey,
+    queryFn: (): Accounts => {
+      return {} as Accounts;
+    },
+  });
 
   return { accounts: data?.accounts, ...rest };
 };
