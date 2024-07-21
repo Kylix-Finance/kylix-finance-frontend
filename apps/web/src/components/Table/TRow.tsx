@@ -1,4 +1,4 @@
-import { Box, TableCellProps, TableRow } from "@mui/material";
+import { TableCellProps, TableRow } from "@mui/material";
 
 import TCell from "./TCell";
 import { Header, TData, TRowProps } from "./types";
@@ -17,10 +17,11 @@ function TRow<K extends string>({
   tCellProps,
   tCellClassnames,
   rowSpacing,
+  className,
   ...rest
 }: Props<K>) {
   return (
-    <TableRow className="bg-light" {...rest}>
+    <TableRow className={`bg-light ${className}`} {...rest}>
       {headers.map((header) => {
         return (
           <TCell
