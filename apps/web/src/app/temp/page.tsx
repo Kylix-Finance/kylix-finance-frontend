@@ -1,7 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ApiPromise, WsProvider } from "@polkadot/api";
-import { useConnect, Button, Modal } from "@repo/wallet-modal";
+import {
+  useConnect,
+  Button,
+  Modal,
+  useSwitchAccount,
+} from "@repo/wallet-modal";
 import { useActiveAccount } from "@repo/onchain-utils";
 
 const POLKADOT_WS_PROVIDER = "wss://westend-rpc.polkadot.io";
@@ -26,8 +31,15 @@ const PolkadotConnection: React.FC = () => {
   const [balance, setBalance] = useState<string | null>(null);
 
   // const { connect } = useConnect("PolkadotConnection");
-  // const { connect, data: accounts } = useConnect();
+  // const { data: accounts } = useConnect();
   // console.log("accounts___", accounts);
+  // const { activeAccount } = useActiveAccount();
+  // console.log("accounts-active___", activeAccount);
+  // const switchAccount = useSwitchAccount()
+
+  // const switchAccountHandler = () => {
+  //   switchAccount(activeAccount?.address!)
+  // }
 
   useEffect(() => {
     const connectToApi = async () => {
@@ -51,8 +63,6 @@ const PolkadotConnection: React.FC = () => {
 
     connectToApi();
   }, []);
-  const { activeAccount } = useActiveAccount();
-  console.log("activeAccount____", activeAccount);
 
   // const handleConnect = async (wallet: Wallet) => {
   //   const connectionRequest = await connect(wallet);
@@ -85,6 +95,7 @@ const PolkadotConnection: React.FC = () => {
             <p>Balance: {balance !== null ? balance : "Loading..."}</p>
           </div>
         )}
+        {/* <button onClick={switchAccountHandler}>Switch account</button> */}
       </div>
     </>
   );
