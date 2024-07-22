@@ -11,19 +11,6 @@ import { useActiveAccount } from "@repo/onchain-utils";
 
 const POLKADOT_WS_PROVIDER = "wss://westend-rpc.polkadot.io";
 
-const wallets = [
-  { name: "Fearless Wallet", id: "fearless-wallet" },
-  {
-    name: "SubWallet - Polkadot Wallet",
-    id: "subwallet-js",
-  },
-  {
-    name: "Talisman - Ethereum and Polkadot Wallet",
-    id: "talisman",
-  },
-  { name: "Enkrypt Crypto Wallet", id: "enkrypt" },
-];
-
 const PolkadotConnection: React.FC = () => {
   const [api, setApi] = useState<ApiPromise | null>(null);
   const [blockNumber, setBlockNumber] = useState<number | null>(null);
