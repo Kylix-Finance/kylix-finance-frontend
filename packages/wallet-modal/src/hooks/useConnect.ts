@@ -3,8 +3,8 @@ import { Status, Wallet } from "../types";
 import { useReadConfig } from "./useReadConfig";
 import { baseKey } from "../constants";
 import { connectorQueryKey } from "./useActiveConnector";
-import { statusQueryKey } from "./useStatus";
 import { Accounts } from "@repo/types";
+import { queryKeys } from "@repo/constants";
 
 const getWalletExtension = (walletId: string) =>
   window.injectedWeb3?.[walletId];
@@ -14,7 +14,7 @@ const useConnect = () => {
   const { data: config } = useReadConfig();
 
   const { mutate, mutateAsync, ...rest } = useMutation({
-    mutationKey: [baseKey, "connection-request"],
+    mutationKey: queryKeys.connectionRequest,
     mutationFn: async ({ wallet }: { wallet: Wallet }) => {
       const walletExtension = getWalletExtension(wallet.id);
       if (!walletExtension)
@@ -31,10 +31,10 @@ const useConnect = () => {
       return { accounts, connector: wallet };
     },
     onSuccess({ accounts, connector }) {
-      queryClient.setQueryData<Accounts>([baseKey, "accounts"], () => ({
+      queryClient.setQueryData<Accounts>(queryKeys.accounts, () => ({
         accounts,
       }));
-      queryClient.setQueryData<Status>(statusQueryKey, () => "connecting");
+      queryClient.setQueryData<Status>(queryKeys.status, () => "connecting");
       queryClient.setQueryData<Wallet>(connectorQueryKey, () => connector);
     },
   });

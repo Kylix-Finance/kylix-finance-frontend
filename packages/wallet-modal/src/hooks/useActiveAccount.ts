@@ -1,23 +1,22 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Status } from "../types";
 import { baseKey } from "../constants";
-import { statusQueryKey } from "./useStatus";
 import { InjectedAccount } from "@polkadot/extension-inject/types";
-
+import { queryKeys } from "@repo/constants";
 const useActivateAccount = () => {
   const queryClient = useQueryClient();
 
   const { mutate, mutateAsync, data, ...rest } = useMutation({
-    mutationKey: [baseKey, "activate-account"],
+    mutationKey: queryKeys.activeAccount,
     mutationFn: async ({ account }: { account: InjectedAccount }) => {
       return { account };
     },
     onSuccess({ account }) {
       queryClient.setQueryData<InjectedAccount>(
-        [baseKey, "active-account"],
+        queryKeys.activeAccount,
         () => account
       );
-      queryClient.setQueryData<Status>(statusQueryKey, () => "connected");
+      queryClient.setQueryData<Status>(queryKeys.status, () => "connected");
     },
   });
 

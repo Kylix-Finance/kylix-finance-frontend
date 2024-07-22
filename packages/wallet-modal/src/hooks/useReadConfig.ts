@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { Config } from "../types";
 import { baseKey } from "../constants";
-
-export const configQueryKey = [baseKey, "config"];
+import { queryKeys } from "@repo/constants";
 
 export const useReadConfig = () => {
   return useQuery<Config>({
-    queryKey: configQueryKey,
+    queryKey: queryKeys.config,
   });
 };

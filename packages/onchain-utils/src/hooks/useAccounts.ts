@@ -1,12 +1,10 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { baseKey } from "../constants";
+import { useQuery } from "@tanstack/react-query";
 import { Accounts } from "@repo/types";
-
-export const accountQueryKey = [baseKey, "accounts"];
+import { queryKeys } from "@repo/constants";
 
 export const useAccounts = () => {
   const { data, ...rest } = useQuery({
-    queryKey: accountQueryKey,
+    queryKey: queryKeys.accounts,
     queryFn: (): Accounts => {
       return {} as Accounts;
     },
