@@ -52,12 +52,6 @@ const useProvider = (params: Provider): UseProviderResult => {
           `Error connecting to the ${params.name} network: ${err.message}`
         );
         setIsConnected(false);
-        if (apiInstance) {
-          apiInstance.disconnect();
-        }
-        if (provider) {
-          provider.disconnect();
-        }
       }
     },
     [params.name, setStatus]
@@ -65,16 +59,6 @@ const useProvider = (params: Provider): UseProviderResult => {
 
   useEffect(() => {
     connect(params.url);
-
-    return () => {
-      if (api) {
-        api.disconnect();
-        setStatus(
-          "disconnected",
-          `Disconnected from the ${params.name} network.`
-        );
-      }
-    };
   }, [params.url, connect, setStatus, api]);
 
   return {
