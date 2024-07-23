@@ -1,8 +1,6 @@
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
-import { STORAGE_KEYS } from "../constants";
 
-type Stage = "walletsList" | "accountsList";
+type Stage = "walletsList" | "accountsList" | "switchAccount";
 interface ModalStore {
   status: boolean;
   stage: Stage;

@@ -1,15 +1,12 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys, useAccountStore } from "@repo/shared";
-import { Status } from "../types";
+import { useModalStore } from "../stores";
 
 const useSwitchAccount = () => {
-  const queryClient = useQueryClient();
-
-  const { setAccount } = useAccountStore();
-
-  const switchAccount = (walletAddress: string) => {
-    setAccount(walletAddress);
-    queryClient.setQueryData<Status>(queryKeys.status, "connected");
+  const { setStage, setStatus } = useModalStore();
+  const switchAccount = () => {
+    setStage("switchAccount");
+    setTimeout(() => {
+      setStatus(true);
+    }, 200);
   };
 
   return switchAccount;

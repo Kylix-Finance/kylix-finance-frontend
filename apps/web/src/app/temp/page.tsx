@@ -20,7 +20,7 @@ const PolkadotConnection: React.FC = () => {
   const switchAccount = useSwitchAccount();
 
   const switchAccountHandler = () => {
-    switchAccount("5FU165x6HT2eZYTW3QAxqhiJZfTJ9Vqdtfe6owkNLeGSSbV");
+    switchAccount();
   };
 
   const { api, isConnected, status } = useProvider({
