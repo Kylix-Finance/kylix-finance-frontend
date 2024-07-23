@@ -1,16 +1,15 @@
 import { useModalStore } from "../../stores";
 import { useAccounts } from "@repo/onchain-utils";
-import { useActivateAccount } from "../../hooks/useActiveAccount";
 import { InjectedAccount } from "@polkadot/extension-inject/types";
+import { useAccountStore } from "@repo/shared";
 
 const AccountList = () => {
   const { accounts } = useAccounts();
-  const { activateAccount, activeAccount } = useActivateAccount();
-
+  const { account, setAccount } = useAccountStore();
   const { setStage, setStatus } = useModalStore();
 
   const handleSelectAccount = (account: InjectedAccount) => {
-    activateAccount({ account });
+    setAccount(account.address);
     setStatus(false);
     setTimeout(() => {
       setStage("walletsList");
@@ -24,7 +23,7 @@ const AccountList = () => {
           <button
             key={item.address}
             className={`flex justify-between gap-4 bg-primary-100/50 hover:bg-primary-500/30 rounded-lg p-4 border-2 transition-colors duration-75 ${
-              item.address === activeAccount?.address
+              item.address === account
                 ? "border-primary-500"
                 : "border-[#F7F7F7]"
             }`}

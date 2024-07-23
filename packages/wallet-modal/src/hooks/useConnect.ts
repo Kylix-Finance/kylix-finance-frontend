@@ -1,9 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Status, Wallet } from "../types";
-import { connectorQueryKey } from "./useActiveConnector";
+import { Status } from "../types";
 import { queryKeys } from "../../../shared/src/constants";
 import { useModalStore } from "../stores";
-import { getWalletExtension } from "@repo/shared";
+import { getWalletExtension, useAccountStore, Wallet } from "@repo/shared";
 import { InjectedAccount } from "@polkadot/extension-inject/types";
 import { useConfig } from "@repo/onchain-utils";
 
@@ -11,6 +10,7 @@ const useConnect = () => {
   const queryClient = useQueryClient();
   const { config } = useConfig();
   const { setStage } = useModalStore();
+  const { setConnectorId } = useAccountStore();
 
   const { mutate, mutateAsync, ...rest } = useMutation({
     mutationKey: queryKeys.connectionRequest,
@@ -31,9 +31,9 @@ const useConnect = () => {
     },
     onSuccess({ accounts, connector }) {
       setStage("accountsList");
+      setConnectorId(connector.id);
       queryClient.setQueryData<InjectedAccount[]>(queryKeys.accounts, accounts);
       queryClient.setQueryData<Status>(queryKeys.status, "connecting");
-      queryClient.setQueryData<Wallet>(connectorQueryKey, connector);
     },
   });
 

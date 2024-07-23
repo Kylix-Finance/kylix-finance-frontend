@@ -1,31 +1,15 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { baseKey } from "../constants";
-import { InjectedAccount } from "@polkadot/extension-inject/types";
-import { useActivateAccount } from "./useActiveAccount";
+import { queryKeys, useAccountStore } from "@repo/shared";
+import { Status } from "../types";
 
 const useSwitchAccount = () => {
   const queryClient = useQueryClient();
-  const { activateAccount } = useActivateAccount();
+
+  const { setAccount } = useAccountStore();
 
   const switchAccount = (walletAddress: string) => {
-    const accounts = queryClient.getQueryData<InjectedAccount[]>([
-      baseKey,
-      "accounts",
-    ]);
-
-    if (!accounts) {
-      throw new Error("No accounts exist.");
-    }
-
-    const accountExists = accounts.find(
-      (account) => account.address === walletAddress
-    );
-
-    if (!accountExists) {
-      throw new Error(`No account found with address ${walletAddress}.`);
-    }
-
-    activateAccount({ account: accountExists });
+    setAccount(walletAddress);
+    queryClient.setQueryData<Status>(queryKeys.status, "connected");
   };
 
   return switchAccount;

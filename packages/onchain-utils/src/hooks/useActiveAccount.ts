@@ -6,7 +6,7 @@ export const useActiveAccount = () => {
   const { accounts, ...rest } = useAccounts();
 
   const activeAccount = accounts?.find(
-    (account) => account.address === storedAccount?.address
+    (account) => account.address === storedAccount
   );
 
   return { ...rest, activeAccount };

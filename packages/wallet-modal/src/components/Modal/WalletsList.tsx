@@ -2,7 +2,7 @@ import { useAvailableWallets } from "../../hooks/useAvailableWallets";
 import { wallets } from "../../constants";
 import { useModalStore } from "../../stores";
 import { useConnect } from "../../hooks";
-import { Wallet } from "../../types";
+import { Wallet } from "@repo/shared";
 
 const WalletsList = () => {
   const availableWallets = useAvailableWallets();

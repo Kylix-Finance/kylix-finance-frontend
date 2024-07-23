@@ -4,16 +4,15 @@ import { queryKeys, getWalletExtension } from "@repo/shared/";
 import { useConfig } from "./useConfig";
 
 export const useAccounts = () => {
-  const { account } = useAccountStore();
+  const { connectorId } = useAccountStore();
   const { config } = useConfig();
 
-  const enabled = !!account && !!config;
+  const enabled = !!connectorId && !!config;
 
   const { data, ...rest } = useQuery({
     queryKey: queryKeys.accounts,
     queryFn: enabled
       ? async () => {
-          const { connectorId } = account;
           const walletExtension = getWalletExtension(connectorId);
 
           if (!walletExtension) throw new Error(`No extension found`);

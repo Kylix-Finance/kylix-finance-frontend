@@ -3,12 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": [
-    "src",
-    "global.d.ts",
-    "../shared/src/store/account.ts",
-    "../shared/src/types/global.d.ts",
-    "../shared/src/useConfig.ts"
-  ],
+  "include": ["src", "global.d.ts", "../shared/src/constants/wallets.ts"],
   "exclude": ["node_modules", "dist"]
 }

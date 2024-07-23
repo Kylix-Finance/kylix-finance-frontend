@@ -6,4 +6,5 @@ export const queryKeys = {
   connectionRequest: [baseKey, "connection-request"],
   config: [baseKey, "config"],
   status: [baseKey, "status"],
+  connector: [baseKey, "connector"],
 };
