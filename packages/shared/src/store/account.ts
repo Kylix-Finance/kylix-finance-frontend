@@ -1,16 +1,21 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+type Account = {
+  address: string;
+  connectorId: string;
+};
+
 type UseAccountStore = {
-  account: string | null;
-  setAccount: (account: string) => void;
+  account: Account | null;
+  setAccount: (account: Account) => void;
 };
 
 export const useAccountStore = create<UseAccountStore>()(
   persist(
     (set) => ({
       account: null,
-      setAccount: (account: string) =>
+      setAccount: (account: Account) =>
         set({
           account,
         }),

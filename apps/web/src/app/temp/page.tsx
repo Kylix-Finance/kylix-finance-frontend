@@ -17,6 +17,8 @@ const PolkadotConnection: React.FC = () => {
   const [account, setAccount] = useState<string | null>(null);
   const [balance, setBalance] = useState<string | null>(null);
 
+  const { activeAccount } = useActiveAccount();
+
   // const { connect } = useConnect("PolkadotConnection");
   // const { data: accounts } = useConnect();
   // console.log("accounts___", accounts);
@@ -82,6 +84,7 @@ const PolkadotConnection: React.FC = () => {
             <p>Balance: {balance !== null ? balance : "Loading..."}</p>
           </div>
         )}
+        <p>Active ACcount: {JSON.stringify(activeAccount, null, 2)}</p>
         {/* <button onClick={switchAccountHandler}>Switch account</button> */}
       </div>
     </>

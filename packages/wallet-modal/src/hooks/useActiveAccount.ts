@@ -1,9 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Status } from "../types";
-import { baseKey } from "../constants";
 import { InjectedAccount } from "@polkadot/extension-inject/types";
 import { queryKeys } from "../../../shared/src/constants";
-import { useAccountStore } from "../stores/account";
+import { useAccountStore } from "@repo/shared";
 const useActivateAccount = () => {
   const queryClient = useQueryClient();
   const { setAccount } = useAccountStore();
@@ -14,7 +13,10 @@ const useActivateAccount = () => {
       return { account };
     },
     onSuccess({ account }) {
-      setAccount(account.address);
+      setAccount({
+        address: account.address,
+        connectorId: "subwallet-js",
+      });
 
       queryClient.setQueryData<InjectedAccount>(
         queryKeys.activeAccount,

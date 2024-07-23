@@ -1,16 +1,33 @@
-import { useQuery } from "@tanstack/react-query";
-import { Accounts } from "../../../shared/src";
-import { queryKeys } from "../../../shared/src/constants";
+import { skipToken, useQuery } from "@tanstack/react-query";
+import { useAccountStore } from "../../../shared/src";
+import { queryKeys, getWalletExtension } from "@repo/shared/";
+import { useConfig } from "./useConfig";
 
 export const useAccounts = () => {
-  // const {} = useAccou
+  const { account } = useAccountStore();
+  const { config } = useConfig();
+
+  const enabled = !!account && !!config;
 
   const { data, ...rest } = useQuery({
     queryKey: queryKeys.accounts,
-    queryFn: () => {
-      return {} as Accounts;
-    },
+    queryFn: enabled
+      ? async () => {
+          const { connectorId } = account;
+          const walletExtension = getWalletExtension(connectorId);
+
+          if (!walletExtension) throw new Error(`No extension found`);
+          if (!walletExtension.enable)
+            throw new Error(`extension does not support enable`);
+
+          const connectionRequest = await walletExtension.enable(
+            config.dappName
+          );
+          const accounts = await connectionRequest.accounts.get();
+          return accounts;
+        }
+      : skipToken,
   });
 
-  return { accounts: data?.accounts, ...rest };
+  return { ...rest, accounts: data };
 };

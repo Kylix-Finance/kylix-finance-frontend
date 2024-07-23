@@ -1,7 +1,7 @@
 import { QueryClient, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { baseKey } from "../constants";
 import { Config } from "../types";
+import { queryKeys } from "@repo/shared";
 
 interface Props {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ export const Providers = ({ children, config }: Props) => {
     if (!config.dappName) {
       throw new Error("dappName van not be empty!");
     }
-    queryClient.setQueryData([baseKey, "config"], config);
+    queryClient.setQueryData(queryKeys.config, config);
   }, [config]);
   return <>{children}</>;
 };

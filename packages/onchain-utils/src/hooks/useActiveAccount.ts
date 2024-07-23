@@ -1,11 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { InjectedAccount } from "@polkadot/extension-inject/types";
-import { queryKeys } from "../../../shared/src/constants";
+import { useAccountStore } from "@repo/shared";
+import { useAccounts } from "./useAccounts";
 
 export const useActiveAccount = () => {
-  const { data, ...rest } = useQuery<InjectedAccount>({
-    queryKey: queryKeys.activeAccount,
-  });
+  const { account: storedAccount } = useAccountStore();
+  const { accounts, ...rest } = useAccounts();
 
-  return { activeAccount: data, ...rest };
+  const activeAccount = accounts?.find(
+    (account) => account.address === storedAccount?.address
+  );
+
+  return { ...rest, activeAccount };
 };
