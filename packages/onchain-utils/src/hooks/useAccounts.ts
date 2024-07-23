@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { Accounts } from "@repo/types";
-import { queryKeys } from "@repo/constants";
+import { Accounts } from "../../../shared/src";
+import { queryKeys } from "../../../shared/src/constants";
 
 export const useAccounts = () => {
+  // const {} = useAccou
+
   const { data, ...rest } = useQuery({
     queryKey: queryKeys.accounts,
-    queryFn: (): Accounts => {
+    queryFn: () => {
       return {} as Accounts;
     },
   });

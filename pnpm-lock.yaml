@@ -17,6 +17,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.51.1
         version: 5.51.11(react@19.0.0-rc-f994737d14-20240522)
+      '@tanstack/react-query-devtools':
+        specifier: ^5.51.11
+        version: 5.51.11(@tanstack/react-query@5.51.11(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
     devDependencies:
       '@cspell/eslint-plugin':
         specifier: ^8.8.1
@@ -191,27 +194,6 @@ importers:
         specifier: ^5
         version: 5.5.3
 
-  packages/constants:
-    devDependencies:
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-      '@types/eslint':
-        specifier: ^8.56.5
-        version: 8.56.10
-      '@types/node':
-        specifier: ^20.11.24
-        version: 20.14.11
-      eslint:
-        specifier: ^8.57.0
-        version: 8.57.0
-      typescript:
-        specifier: ^5.3.3
-        version: 5.5.3
-
   packages/eslint-config:
     dependencies:
       '@types/lodash':
@@ -230,15 +212,12 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
     devDependencies:
-      '@repo/constants':
-        specifier: workspace:*
-        version: link:../constants
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@repo/types':
+      '@repo/shared':
         specifier: workspace:*
-        version: link:../types
+        version: link:../shared
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -264,7 +243,7 @@ importers:
         specifier: ^5.3.3
         version: 5.5.3
 
-  packages/types:
+  packages/shared:
     dependencies:
       '@polkadot/extension-inject':
         specifier: ^0.48.2
@@ -312,18 +291,15 @@ importers:
         specifier: ^4.5.4
         version: 4.5.4(@types/react@18.3.3)(react@18.3.1)
     devDependencies:
-      '@repo/constants':
-        specifier: workspace:*
-        version: link:../constants
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
       '@repo/onchain-utils':
         specifier: workspace:*
         version: link:../onchain-utils
-      '@repo/types':
+      '@repo/shared':
         specifier: workspace:*
-        version: link:../types
+        version: link:../shared
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -2042,6 +2018,15 @@ packages:
 
   '@tanstack/query-core@5.51.9':
     resolution: {integrity: sha512-HsAwaY5J19MD18ykZDS3aVVh+bAt0i7m6uQlFC2b77DLV9djo+xEN7MWQAQQTR8IM+7r/zbozTQ7P0xr0bHuew==}
+
+  '@tanstack/query-devtools@5.51.9':
+    resolution: {integrity: sha512-FQqJynaEDuwQxoFLP3/i10HQwNYh4wxgs0NeSoL24BLWvpUdstgHqUm2zgwRov8Tmh5kjndPIWaXenwl0D47EA==}
+
+  '@tanstack/react-query-devtools@5.51.11':
+    resolution: {integrity: sha512-8nQRbhdtvl/J9bO+bk/kPQesCOtDgk+oI4AmZJDnkf5OfKTJL3J4tTe+fhuXph7KP4DUOS+ge9o9TGt0OgWFHw==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.51.11
+      react: ^18 || ^19
 
   '@tanstack/react-query@5.51.11':
     resolution: {integrity: sha512-4Kq2x0XpDlpvSnaLG+8pHNH60zEc3mBvb3B2tOMDjcPCi/o+Du3p/9qpPLwJOTliVxxPJAP27fuIhLrsRdCr7A==}
@@ -7213,6 +7198,14 @@ snapshots:
       tslib: 2.6.3
 
   '@tanstack/query-core@5.51.9': {}
+
+  '@tanstack/query-devtools@5.51.9': {}
+
+  '@tanstack/react-query-devtools@5.51.11(@tanstack/react-query@5.51.11(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)':
+    dependencies:
+      '@tanstack/query-devtools': 5.51.9
+      '@tanstack/react-query': 5.51.11(react@19.0.0-rc-f994737d14-20240522)
+      react: 19.0.0-rc-f994737d14-20240522
 
   '@tanstack/react-query@5.51.11(react@19.0.0-rc-f994737d14-20240522)':
     dependencies:

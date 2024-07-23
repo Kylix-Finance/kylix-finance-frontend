@@ -1,10 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Status, Wallet } from "../types";
 import { useReadConfig } from "./useReadConfig";
-import { baseKey } from "../constants";
+import { baseKey, wallets } from "../constants";
 import { connectorQueryKey } from "./useActiveConnector";
-import { Accounts } from "@repo/types";
-import { queryKeys } from "@repo/constants";
+import { Accounts } from "../../../shared/src";
+import { queryKeys } from "../../../shared/src/constants";
+import { useModalStore } from "../stores";
+import { useAccountStore } from "../stores/account";
 
 const getWalletExtension = (walletId: string) =>
   window.injectedWeb3?.[walletId];
@@ -12,6 +14,7 @@ const getWalletExtension = (walletId: string) =>
 const useConnect = () => {
   const queryClient = useQueryClient();
   const { data: config } = useReadConfig();
+  const { setStage } = useModalStore();
 
   const { mutate, mutateAsync, ...rest } = useMutation({
     mutationKey: queryKeys.connectionRequest,
@@ -31,6 +34,7 @@ const useConnect = () => {
       return { accounts, connector: wallet };
     },
     onSuccess({ accounts, connector }) {
+      setStage("accountsList");
       queryClient.setQueryData<Accounts>(queryKeys.accounts, () => ({
         accounts,
       }));

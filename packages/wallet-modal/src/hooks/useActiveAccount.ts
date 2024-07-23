@@ -2,9 +2,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Status } from "../types";
 import { baseKey } from "../constants";
 import { InjectedAccount } from "@polkadot/extension-inject/types";
-import { queryKeys } from "@repo/constants";
+import { queryKeys } from "../../../shared/src/constants";
+import { useAccountStore } from "../stores/account";
 const useActivateAccount = () => {
   const queryClient = useQueryClient();
+  const { setAccount } = useAccountStore();
 
   const { mutate, mutateAsync, data, ...rest } = useMutation({
     mutationKey: queryKeys.activeAccount,
@@ -12,6 +14,8 @@ const useActivateAccount = () => {
       return { account };
     },
     onSuccess({ account }) {
+      setAccount(account.address);
+
       queryClient.setQueryData<InjectedAccount>(
         queryKeys.activeAccount,
         account
