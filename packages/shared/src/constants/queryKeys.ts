@@ -1,4 +1,4 @@
-const baseKey = process.env.NEXT_PUBLIC_REACT_QUERY_BASE_KEY;
+const baseKey = "kylix";
 
 export const queryKeys = {
   accounts: [baseKey, "accounts"],

@@ -18,17 +18,11 @@ const PolkadotConnection: React.FC = () => {
   const [balance, setBalance] = useState<string | null>(null);
 
   const { activeAccount } = useActiveAccount();
+  const switchAccount = useSwitchAccount();
 
-  // const { connect } = useConnect("PolkadotConnection");
-  // const { data: accounts } = useConnect();
-  // console.log("accounts___", accounts);
-  // const { activeAccount } = useActiveAccount();
-  // console.log("accounts-active___", activeAccount);
-  // const switchAccount = useSwitchAccount()
-
-  // const switchAccountHandler = () => {
-  //   switchAccount(activeAccount?.address!)
-  // }
+  const switchAccountHandler = () => {
+    switchAccount("5FU165x6HT2eZYTW3QAxqhiJZfTJ9Vqdtfe6owkNLeGSSbV");
+  };
 
   useEffect(() => {
     const connectToApi = async () => {
@@ -53,21 +47,6 @@ const PolkadotConnection: React.FC = () => {
     connectToApi();
   }, []);
 
-  // const handleConnect = async (wallet: Wallet) => {
-  //   const connectionRequest = await connect(wallet);
-  //   console.log("connectionRequest", connectionRequest);
-  //   if (connectionRequest && api) {
-  //     //@ts-expect-error tt
-  //     const {
-  //       data: { free: accountBalance },
-  //     } = await api.query.system.account(connectionRequest);
-  //     setBalance(accountBalance.toString());
-  //   }
-  // };
-  // useEffect(() => {
-  //   handleConnect(wallets![0]!);
-  // }, []);
-
   return (
     <>
       <Modal center />
@@ -85,7 +64,7 @@ const PolkadotConnection: React.FC = () => {
           </div>
         )}
         <p>Active ACcount: {JSON.stringify(activeAccount, null, 2)}</p>
-        {/* <button onClick={switchAccountHandler}>Switch account</button> */}
+        <button onClick={switchAccountHandler}>Switch account</button>
       </div>
     </>
   );
