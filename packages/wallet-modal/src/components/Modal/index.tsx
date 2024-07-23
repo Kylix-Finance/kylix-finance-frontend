@@ -2,22 +2,18 @@
 import { Modal as ModalBase, ModalProps } from "react-responsive-modal";
 import { useModalStore } from "../../stores/modal";
 import WalletsList from "./WalletsList";
-import { useState } from "react";
-import { useAccountsStore } from "../../stores/accounts";
 import AccountList from "./AccountList";
 import { useStatusStore } from "../../stores";
 import { STATUS } from "../../constants";
 
 const Modal = ({ ...rest }: Omit<ModalProps, "onClose" | "close" | "open">) => {
   const { setStatus: setModalStatus, stage, status } = useModalStore();
-  const { setAccounts, setActiveAccount } = useAccountsStore();
   const { setStatus } = useStatusStore();
   const modalCloseHandler = () => {
     setModalStatus(false);
-    setAccounts(undefined);
-    setActiveAccount(undefined);
     setStatus(STATUS.CANCELED);
   };
+
   return (
     <ModalBase
       {...rest}

@@ -1,6 +1,5 @@
 import { Box, Chip, Typography } from "@mui/material";
 import Image from "next/image";
-import { FC } from "react";
 import { cn } from "~/utils";
 
 interface Props {

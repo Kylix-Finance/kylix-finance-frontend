@@ -14,7 +14,7 @@ const useActivateAccount = () => {
     onSuccess({ account }) {
       queryClient.setQueryData<InjectedAccount>(
         queryKeys.activeAccount,
-        () => account
+        account
       );
       queryClient.setQueryData<Status>(queryKeys.status, () => "connected");
     },
