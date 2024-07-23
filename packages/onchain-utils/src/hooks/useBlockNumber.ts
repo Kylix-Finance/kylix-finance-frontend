@@ -3,12 +3,12 @@ import { useProvider } from "./useProvider";
 
 const useBlockNumber = () => {
   const { api, isConnected, status } = useProvider({
-    url: "wss://westend-rpc.polkadot.io",
+    url: "https://51.20.192.52:443",
     name: "Westend",
   });
   const [blockNumber, setBlockNumber] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+  api?.rpc;
   useEffect(() => {
     const fetchBlockNumber = async () => {
       if (api) {

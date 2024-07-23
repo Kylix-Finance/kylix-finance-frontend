@@ -1,7 +1,35 @@
 import { useEffect, useState, useCallback } from "react";
-import { ApiPromise, WsProvider } from "@polkadot/api";
+import { ApiPromise, HttpProvider } from "@polkadot/api";
 import { useProviderStore } from "../store";
 import { ConnectionStatus, Provider } from "../types";
+
+export const types = {
+  LendingPool: {
+    id: "u32",
+    asset: "String",
+    collateral_q: "f64",
+    utilization: "f64",
+    borrow_apy: "f64",
+    supply_apy: "f64",
+    collateral: "bool",
+    balance: "u64",
+  },
+  LendingPoolsResponse: {
+    lendingPools: "Vec<LendingPool>",
+    totalSupply: "u64",
+    totalBorrow: "u64",
+  },
+};
+
+export const rpc = {
+  lending: {
+    getLendingPools: {
+      description: "Get lending pools",
+      params: [],
+      type: "LendingPoolsResponse",
+    },
+  },
+};
 
 type UseProviderResult = {
   api: ApiPromise | null;
@@ -16,12 +44,16 @@ const useProvider = (params: Provider): UseProviderResult => {
 
   const connect = useCallback(
     async (url: string) => {
-      let provider: WsProvider | null = null;
+      let provider: HttpProvider | null = null;
       let apiInstance: ApiPromise | null = null;
 
       try {
-        provider = new WsProvider(url);
-        apiInstance = await ApiPromise.create({ provider });
+        provider = new HttpProvider(url);
+        apiInstance = await ApiPromise.create({
+          provider,
+          types,
+          rpc,
+        });
 
         apiInstance.on("connected", () => {
           setStatus(
