@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ApiPromise, WsProvider } from "@polkadot/api";
+import { ApiPromise } from "@polkadot/api";
 import {
   useConnect,
   Button,
@@ -8,14 +8,13 @@ import {
   useSwitchAccount,
 } from "@repo/wallet-modal";
 import { useActiveAccount } from "@repo/onchain-utils";
+import { useProvider } from "@repo/onchain-utils";
 
-const POLKADOT_WS_PROVIDER = "wss://westend-rpc.polkadot.io";
+const POLKADOT_WS_PROVIDER = "https://51.20.192.52:443";
 
 const PolkadotConnection: React.FC = () => {
-  const [api, setApi] = useState<ApiPromise | null>(null);
   const [blockNumber, setBlockNumber] = useState<number | null>(null);
-  const [account, setAccount] = useState<string | null>(null);
-  const [balance, setBalance] = useState<string | null>(null);
+  const [lendingPools, setLendingPools] = useState<any | null>(null);
 
   const { activeAccount } = useActiveAccount();
   const switchAccount = useSwitchAccount();
@@ -24,47 +23,66 @@ const PolkadotConnection: React.FC = () => {
     switchAccount("5FU165x6HT2eZYTW3QAxqhiJZfTJ9Vqdtfe6owkNLeGSSbV");
   };
 
+  const { api, isConnected, status } = useProvider({
+    name: "Polkadot",
+    url: POLKADOT_WS_PROVIDER,
+  });
+
   useEffect(() => {
-    const connectToApi = async () => {
-      try {
-        const provider = new WsProvider(POLKADOT_WS_PROVIDER);
-        const api = await ApiPromise.create({ provider });
-        setApi(api);
+    if (api && isConnected) {
+      const fetchLendingPools = async () => {
+        try {
+          //@ts-expect-error sssss
+          const pools = await api.rpc.lending.getLendingPools();
+          setLendingPools(pools.toHuman());
+        } catch (error) {
+          console.error("Failed to fetch lending pools", error);
+        }
+      };
 
-        const unsub = await api.rpc.chain.subscribeNewHeads((lastHeader) => {
-          setBlockNumber(lastHeader.number.toNumber());
-        });
+      const subscribeToBlocks = async () => {
+        try {
+          const unsub = await api.rpc.chain.subscribeNewHeads((lastHeader) => {
+            setBlockNumber(lastHeader.number.toNumber());
+          });
 
-        return () => {
-          unsub();
-          api.disconnect();
-        };
-      } catch (error) {
-        console.error("Failed to connect to the Polkadot API", error);
-      }
-    };
+          return () => {
+            unsub();
+          };
+        } catch (error) {
+          console.error("Failed to subscribe to new blocks", error);
+        }
+      };
 
-    connectToApi();
-  }, []);
+      fetchLendingPools();
+      subscribeToBlocks();
+    }
+  }, [api, isConnected]);
 
   return (
     <>
       <Modal center />
       <div>
-        <h1>Polkadot Westend Testnet</h1>
+        <h1>Polkadot Testnet</h1>
         <p>
           Current Block Number:{" "}
           {blockNumber !== null ? blockNumber : "Loading..."}
         </p>
         <Button />
-        {account && (
+        {activeAccount && (
           <div>
-            <p>Connected Account: {account}</p>
-            <p>Balance: {balance !== null ? balance : "Loading..."}</p>
+            <p>Active Account: {JSON.stringify(activeAccount, null, 2)}</p>
           </div>
         )}
-        <p>Active ACcount: {JSON.stringify(activeAccount, null, 2)}</p>
         <button onClick={switchAccountHandler}>Switch account</button>
+        <div>
+          <h2>Lending Pools</h2>
+          {lendingPools ? (
+            <pre>{JSON.stringify(lendingPools, null, 2)}</pre>
+          ) : (
+            <p>Loading lending pools...</p>
+          )}
+        </div>
       </div>
     </>
   );
