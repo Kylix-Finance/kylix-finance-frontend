@@ -1,21 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { ApiPromise } from "@polkadot/api";
+import React, { useEffect } from "react";
+import { Button, Modal, useSwitchAccount } from "@repo/wallet-modal";
 import {
-  useConnect,
-  Button,
-  Modal,
-  useSwitchAccount,
-} from "@repo/wallet-modal";
-import { useActiveAccount } from "@repo/onchain-utils";
+  useActiveAccount,
+  useBalance,
+  useBlockNumber,
+} from "@repo/onchain-utils";
 import { useProvider } from "@repo/onchain-utils";
+import { ApiPromise, HttpProvider, WsProvider } from "@polkadot/api";
 
-const POLKADOT_WS_PROVIDER = "https://51.20.192.52:443";
+const POLKADOT_WS_PROVIDER = "wss://westend-rpc.polkadot.io";
 
 const PolkadotConnection: React.FC = () => {
-  const [blockNumber, setBlockNumber] = useState<number | null>(null);
-  const [lendingPools, setLendingPools] = useState<any | null>(null);
-
+  const { api } = useProvider({
+    name: "Westnet",
+    url: POLKADOT_WS_PROVIDER,
+  });
   const { activeAccount } = useActiveAccount();
   const switchAccount = useSwitchAccount();
 
@@ -23,42 +23,11 @@ const PolkadotConnection: React.FC = () => {
     switchAccount();
   };
 
-  const { api, isConnected, status } = useProvider({
-    name: "Polkadot",
-    url: POLKADOT_WS_PROVIDER,
-  });
-
-  useEffect(() => {
-    if (api && isConnected) {
-      const fetchLendingPools = async () => {
-        try {
-          //@ts-expect-error sssss
-          const pools = await api.rpc.lending.getLendingPools();
-          setLendingPools(pools.toHuman());
-        } catch (error) {
-          console.error("Failed to fetch lending pools", error);
-        }
-      };
-
-      const subscribeToBlocks = async () => {
-        try {
-          const unsub = await api.rpc.chain.subscribeNewHeads((lastHeader) => {
-            setBlockNumber(lastHeader.number.toNumber());
-          });
-
-          return () => {
-            unsub();
-          };
-        } catch (error) {
-          console.error("Failed to subscribe to new blocks", error);
-        }
-      };
-
-      fetchLendingPools();
-      subscribeToBlocks();
-    }
-  }, [api, isConnected]);
-
+  const { blockNumber } = useBlockNumber(api);
+  const { balance } = useBalance(
+    "5FU165x6HT2eZYTW3QAxqhiJZfTJ9Vqdtfe6owkNLeGSBSbV",
+    api
+  );
   return (
     <>
       <Modal center />
@@ -68,24 +37,23 @@ const PolkadotConnection: React.FC = () => {
           Current Block Number:{" "}
           {blockNumber !== null ? blockNumber : "Loading..."}
         </p>
+        <p>
+          Current Balance Number: {balance !== null ? balance : "Loading..."}
+        </p>
         <Button />
         {activeAccount && (
           <div>
             <p>Active Account: {JSON.stringify(activeAccount, null, 2)}</p>
           </div>
         )}
+
         <button onClick={switchAccountHandler}>Switch account</button>
-        <div>
-          <h2>Lending Pools</h2>
-          {lendingPools ? (
-            <pre>{JSON.stringify(lendingPools, null, 2)}</pre>
-          ) : (
-            <p>Loading lending pools...</p>
-          )}
-        </div>
       </div>
     </>
   );
 };
 
 export default PolkadotConnection;
+function getLendingPools() {
+  throw new Error("Function not implemented.");
+}
