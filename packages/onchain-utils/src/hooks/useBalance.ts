@@ -1,57 +1,51 @@
-import { useState, useEffect } from "react";
-import { ApiPromise } from "@polkadot/api";
-const getBalance = async (
-  address: string,
-  api: ApiPromise
-): Promise<string> => {
-  if (!address) {
-    throw new Error("Address is required");
-  }
+import { useEffect, useState } from "react";
+import { useProvider } from "./useProvider";
 
-  if (!api?.query?.system?.account) {
-    throw new Error(
-      "API is not properly initialized or does not support account querying"
-    );
-  }
-
-  try {
-    const result = ((await api.query.system.account(address)).toJSON() as any)
-      .data;
-    return result.free.toString();
-  } catch (err: any) {
-    throw new Error(`Failed to fetch balance: ${err.message}`);
-  }
-};
 interface UseBalanceResult {
   balance: string | null;
+  isLoading: boolean;
   error: string | null;
 }
 
-const useBalance = (
-  address: string,
-  api: ApiPromise | null
-): UseBalanceResult => {
+const useBalance = (address: string | undefined): UseBalanceResult => {
+  const { api, isLoading } = useProvider();
   const [balance, setBalance] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (!address || !api) {
+    if (!api || !address) {
+      setLoading(false);
       return;
     }
 
     const fetchBalance = async () => {
       try {
-        const balance = await getBalance(address, api);
-        setBalance(balance);
+        if (!api.query?.system?.account) {
+          throw new Error(
+            "API provider is not initialized properly or does not support account querying."
+          );
+        }
+
+        const result = await api.query.system.account(address);
+        const data = (result.toJSON() as any).data;
+        const freeBalance = data.free.toString();
+        setBalance(freeBalance);
+        setLoading(false);
       } catch (err: any) {
-        setError(err.message);
+        setError(`Error fetching balance: ${err.message}`);
+        setLoading(false);
       }
     };
 
     fetchBalance();
-  }, [address, api]);
+  }, [api, address]);
 
-  return { balance, error };
+  return {
+    balance,
+    isLoading: isLoading || loading,
+    error: error,
+  };
 };
 
 export { useBalance };

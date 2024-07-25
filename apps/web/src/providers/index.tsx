@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import ReactQueryProvider from "./ReactQueryProvider";
 import { Providers as WalletProvider } from "@repo/wallet-modal";
-
+import { Provider as OnchainProvider } from "@repo/onchain-utils";
 interface Props {
   children: React.ReactNode;
 }
@@ -21,7 +21,16 @@ const Providers: FC<Props> = ({ children }) => {
             dappName: "Kylix",
           }}
         >
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <OnchainProvider
+            options={{
+              provider: {
+                name: "Westnet",
+                url: "wss://westend-rpc.polkadot.io",
+              },
+            }}
+          >
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </OnchainProvider>
         </WalletProvider>
       </ReactQueryProvider>
       <ToastContainer className="flex flex-col gap-2" />

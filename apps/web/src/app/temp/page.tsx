@@ -7,15 +7,9 @@ import {
   useBlockNumber,
 } from "@repo/onchain-utils";
 import { useProvider } from "@repo/onchain-utils";
-import { ApiPromise, HttpProvider, WsProvider } from "@polkadot/api";
-
-const POLKADOT_WS_PROVIDER = "wss://westend-rpc.polkadot.io";
 
 const PolkadotConnection: React.FC = () => {
-  const { api } = useProvider({
-    name: "Westnet",
-    url: POLKADOT_WS_PROVIDER,
-  });
+  const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
   const switchAccount = useSwitchAccount();
 
@@ -23,11 +17,8 @@ const PolkadotConnection: React.FC = () => {
     switchAccount();
   };
 
-  const { blockNumber } = useBlockNumber(api);
-  const { balance } = useBalance(
-    "5FU165x6HT2eZYTW3QAxqhiJZfTJ9Vqdtfe6owkNLeGSBSbV",
-    api
-  );
+  const { blockNumber } = useBlockNumber();
+  const { balance } = useBalance(activeAccount?.address);
   return (
     <>
       <Modal center />
@@ -46,7 +37,6 @@ const PolkadotConnection: React.FC = () => {
             <p>Active Account: {JSON.stringify(activeAccount, null, 2)}</p>
           </div>
         )}
-
         <button onClick={switchAccountHandler}>Switch account</button>
       </div>
     </>
@@ -54,6 +44,3 @@ const PolkadotConnection: React.FC = () => {
 };
 
 export default PolkadotConnection;
-function getLendingPools() {
-  throw new Error("Function not implemented.");
-}

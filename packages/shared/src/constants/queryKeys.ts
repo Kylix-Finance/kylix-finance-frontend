@@ -7,4 +7,6 @@ export const queryKeys = {
   config: [baseKey, "config"],
   status: [baseKey, "status"],
   connector: [baseKey, "connector"],
+  options: [baseKey, "onchain", "options"],
+  provider: [baseKey, "onchain", "provider"],
 };

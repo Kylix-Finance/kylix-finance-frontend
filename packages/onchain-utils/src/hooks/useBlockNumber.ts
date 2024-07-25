@@ -1,26 +1,35 @@
 import { useEffect, useState } from "react";
-import { ApiPromise } from "@polkadot/api";
+import { useProvider } from "./useProvider";
 
-const useBlockNumber = (api: ApiPromise | null) => {
+interface UseBlockNumberResult {
+  blockNumber: number | null;
+  isLoading: boolean;
+  error: string | null;
+}
+
+const useBlockNumber = (): UseBlockNumberResult => {
+  const { api, isLoading } = useProvider();
   const [blockNumber, setBlockNumber] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    if (!api) {
+      return;
+    }
+
     const fetchBlockNumber = async () => {
       try {
-        if (!api) {
-          throw new Error(
-            "API provider is not initialized. Make sure the provider is correctly set up."
-          );
-        }
-        api.rpc.chain.subscribeNewHeads((header) => {
+        const unsubscribe = await api.rpc.chain.subscribeNewHeads((header) => {
           setBlockNumber(header.number.toNumber());
           setLoading(false);
         });
+
+        return () => {
+          unsubscribe();
+        };
       } catch (err: any) {
-        console.error("Error useBlockNumber:", err.message);
-        setError(err);
+        setError(`Error fetching block number: ${err.message}`);
         setLoading(false);
       }
     };
@@ -28,7 +37,11 @@ const useBlockNumber = (api: ApiPromise | null) => {
     fetchBlockNumber();
   }, [api]);
 
-  return { blockNumber, error, loading };
+  return {
+    blockNumber,
+    isLoading: isLoading || loading,
+    error: error,
+  };
 };
 
 export { useBlockNumber };

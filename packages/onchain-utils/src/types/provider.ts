@@ -9,3 +9,7 @@ export type Provider = {
   url: string;
   name: string;
 };
+
+export type Options = {
+  provider: Provider;
+};
