@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect } from "react";
 import {
   ConnectButton,
   Modal,
@@ -13,7 +12,7 @@ import {
 } from "@repo/onchain-utils";
 import { useProvider } from "@repo/onchain-utils";
 
-const PolkadotConnection: React.FC = () => {
+const PolkadotConnection = () => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
   const switchAccount = useSwitchAccount();
