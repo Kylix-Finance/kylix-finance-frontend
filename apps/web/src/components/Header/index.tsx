@@ -6,9 +6,13 @@ import { usePathname } from "next/navigation";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useSidebarStore } from "~/store";
 import { ConnectButton } from "@repo/wallet-modal";
+import { useActiveAccount } from "@repo/onchain-utils";
 
 const Header = () => {
-  const { isMobile, isSidebarOpen, setSidebarOpen } = useSidebarStore();
+  const { isMobile, setSidebarOpen } = useSidebarStore();
+
+  const { activeAccount } = useActiveAccount();
+
   const pathname = usePathname();
   const pathnames = pathname.split("/").filter((x) => x);
   return (
@@ -34,7 +38,7 @@ const Header = () => {
           User balance
         </p>
 
-        <ConnectButton />
+        <ConnectButton address={activeAccount?.address} />
       </Box>
     </Box>
   );

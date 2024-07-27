@@ -31,7 +31,7 @@ const PolkadotConnection: React.FC = () => {
         <p>
           Current Balance Number: {balance !== null ? balance : "Loading..."}
         </p>
-        <ConnectButton />
+        <ConnectButton address={activeAccount?.address} />
         {activeAccount && (
           <div>
             <p>Active Account: {JSON.stringify(activeAccount, null, 2)}</p>
