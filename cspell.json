@@ -5,5 +5,12 @@
   "dictionaries": [],
   "ignoreWords": ["CLEANME", "tailwindcss"],
   "import": [],
-  "words": ["imbursed", "nextjs", "noimageindex", "polkadot", "tanstack"]
+  "words": [
+    "imbursed",
+    "nextjs",
+    "noimageindex",
+    "polkadot",
+    "tanstack",
+    "ts-nocheck"
+  ]
 }

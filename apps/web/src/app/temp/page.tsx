@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { Button, Modal, useSwitchAccount } from "@repo/wallet-modal";
+import { ConnectButton, Modal, useSwitchAccount } from "@repo/wallet-modal";
 import {
   useActiveAccount,
   useBalance,
@@ -31,7 +31,7 @@ const PolkadotConnection: React.FC = () => {
         <p>
           Current Balance Number: {balance !== null ? balance : "Loading..."}
         </p>
-        <Button />
+        <ConnectButton />
         {activeAccount && (
           <div>
             <p>Active Account: {JSON.stringify(activeAccount, null, 2)}</p>

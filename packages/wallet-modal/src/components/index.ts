@@ -1,3 +1,3 @@
-import Button from "./Button";
-import Modal from "./Modal"
-export { Button, Modal };
+import ConnectButton from "./ConnectButton";
+import Modal from "./Modal";
+export { ConnectButton, Modal };

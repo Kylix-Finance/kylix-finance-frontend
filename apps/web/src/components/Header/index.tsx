@@ -1,10 +1,11 @@
 "use client";
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import Breadcrumbs from "./Breadcrumbs";
 import Heading from "./Heading";
 import { usePathname } from "next/navigation";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useSidebarStore } from "~/store";
+import { ConnectButton } from "@repo/wallet-modal";
 
 const Header = () => {
   const { isMobile, isSidebarOpen, setSidebarOpen } = useSidebarStore();
@@ -32,9 +33,8 @@ const Header = () => {
         <p className="h-full bg-primary-500 px-2 py-1 text-white items-center text-center flex">
           User balance
         </p>
-        <p className="h-full bg-primary-500 px-2 py-1 text-white items-center text-center flex">
-          Connect
-        </p>
+
+        <ConnectButton />
       </Box>
     </Box>
   );
