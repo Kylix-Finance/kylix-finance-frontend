@@ -1,6 +1,11 @@
 "use client";
 import React, { useEffect } from "react";
-import { ConnectButton, Modal, useSwitchAccount } from "@repo/wallet-modal";
+import {
+  ConnectButton,
+  Modal,
+  useDisconnect,
+  useSwitchAccount,
+} from "@repo/wallet-modal";
 import {
   useActiveAccount,
   useBalance,
@@ -19,6 +24,7 @@ const PolkadotConnection: React.FC = () => {
 
   const { blockNumber } = useBlockNumber();
   const { balance } = useBalance(activeAccount?.address);
+  const { disconnect } = useDisconnect();
   return (
     <>
       <Modal center />
@@ -38,6 +44,7 @@ const PolkadotConnection: React.FC = () => {
           </div>
         )}
         <button onClick={switchAccountHandler}>Switch account</button>
+        <button onClick={() => disconnect()}>Disconnect</button>
       </div>
     </>
   );

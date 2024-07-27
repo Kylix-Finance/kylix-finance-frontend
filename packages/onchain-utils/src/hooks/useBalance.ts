@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useProvider } from "./useProvider";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 interface UseBalanceResult {
   balance: string | null;

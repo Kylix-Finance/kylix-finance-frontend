@@ -7,6 +7,7 @@ export const queryKeys = {
   config: [baseKey, "wallet-modal", "config"],
   status: [baseKey, "wallet-modal", "status"],
   connector: [baseKey, "wallet-modal", "connector"],
+  disconnectRequest: [baseKey, "wallet-modal", "disconnect-request"],
   options: [baseKey, "onchain", "options"],
   provider: [baseKey, "onchain", "provider"],
 };
