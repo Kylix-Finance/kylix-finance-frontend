@@ -1,6 +1,5 @@
 import { useAvailableWallets } from "../../hooks/useAvailableWallets";
 import { wallets } from "../../constants";
-import { useModalStore } from "../../stores";
 import { useConnect } from "../../hooks";
 import { Wallet } from "@repo/shared";
 
@@ -28,7 +27,7 @@ const WalletsList = () => {
               wallet.id === connectData?.connector.id
                 ? "border-primary-500 bg-primary-200"
                 : "border-[#F7F7F7]"
-            }`}
+            } ${!wallet.isInstalled && "bg-gray-300/75"}`}
             onClick={() => handleConnect(wallet)}
           >
             <div className="text-gray-700 flex items-center justify-between gap-2">
@@ -44,7 +43,21 @@ const WalletsList = () => {
               </div>
               {!wallet.isInstalled && (
                 <a href={wallet.installation_url} target="_blank">
-                  DOWNLOAD
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="#222222"
+                    width="20px"
+                    height="20px"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+                    />
+                  </svg>
                 </a>
               )}
             </div>

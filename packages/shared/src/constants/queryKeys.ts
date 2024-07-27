@@ -1,12 +1,12 @@
 const baseKey = "kylix";
 
 export const queryKeys = {
-  accounts: [baseKey, "accounts"],
-  activeAccount: [baseKey, "active-account"],
-  connectionRequest: [baseKey, "connection-request"],
-  config: [baseKey, "config"],
-  status: [baseKey, "status"],
-  connector: [baseKey, "connector"],
+  accounts: [baseKey, "wallet-modal", "accounts"],
+  activeAccount: [baseKey, "wallet-modal", "active-account"],
+  connectionRequest: [baseKey, "wallet-modal", "connection-request"],
+  config: [baseKey, "wallet-modal", "config"],
+  status: [baseKey, "wallet-modal", "status"],
+  connector: [baseKey, "wallet-modal", "connector"],
   options: [baseKey, "onchain", "options"],
   provider: [baseKey, "onchain", "provider"],
 };
