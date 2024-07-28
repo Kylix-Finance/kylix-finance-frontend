@@ -1,5 +1,5 @@
 "use client";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import Breadcrumbs from "./Breadcrumbs";
 import Heading from "./Heading";
 import { usePathname } from "next/navigation";
@@ -7,9 +7,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useSidebarStore } from "~/store";
 import { ConnectButton } from "@repo/wallet-modal";
 import { useActiveAccount } from "@repo/onchain-utils";
+import { useDialogState } from "~/hooks";
 
 const Header = () => {
   const { isMobile, setSidebarOpen } = useSidebarStore();
+
+  const userBalanceDialog = useDialogState("userBalance");
 
   const { activeAccount } = useActiveAccount();
 
@@ -38,7 +41,10 @@ const Header = () => {
           User balance
         </p> */}
 
-        <ConnectButton address={activeAccount?.address} />
+        <ConnectButton
+          address={activeAccount?.address}
+          onClickWhenConnected={userBalanceDialog.open}
+        />
       </Box>
     </Box>
   );

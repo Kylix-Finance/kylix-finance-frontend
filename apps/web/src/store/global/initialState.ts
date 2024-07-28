@@ -1,6 +1,7 @@
 import { DialogState, State } from "./types";
 
-export const dialogNames = [] as const;
+// TODO: Add to dialog store
+export const dialogNames = ["userBalance"] as const;
 
 const defaultPaginationState = {
   page: 1,

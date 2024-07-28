@@ -153,6 +153,9 @@ importers:
       react-dom:
         specifier: 19.0.0-rc-f994737d14-20240522
         version: 19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522)
+      react-responsive-modal:
+        specifier: ^6.4.2
+        version: 6.4.2(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
       react-toastify:
         specifier: ^10.0.5
         version: 10.0.5(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
@@ -5988,9 +5991,18 @@ snapshots:
       '@bedrock-layout/use-stateful-ref': 1.4.1(react@18.3.1)
       react: 18.3.1
 
+  '@bedrock-layout/use-forwarded-ref@1.6.1(react@19.0.0-rc-f994737d14-20240522)':
+    dependencies:
+      '@bedrock-layout/use-stateful-ref': 1.4.1(react@19.0.0-rc-f994737d14-20240522)
+      react: 19.0.0-rc-f994737d14-20240522
+
   '@bedrock-layout/use-stateful-ref@1.4.1(react@18.3.1)':
     dependencies:
       react: 18.3.1
+
+  '@bedrock-layout/use-stateful-ref@1.4.1(react@19.0.0-rc-f994737d14-20240522)':
+    dependencies:
+      react: 19.0.0-rc-f994737d14-20240522
 
   '@cspell/cspell-bundled-dicts@8.11.0':
     dependencies:
@@ -10029,6 +10041,14 @@ snapshots:
       classnames: 2.5.1
       react: 18.3.1
       react-dom: 19.0.0-rc-f994737d14-20240522(react@18.3.1)
+
+  react-responsive-modal@6.4.2(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522):
+    dependencies:
+      '@bedrock-layout/use-forwarded-ref': 1.6.1(react@19.0.0-rc-f994737d14-20240522)
+      body-scroll-lock: 3.1.5
+      classnames: 2.5.1
+      react: 19.0.0-rc-f994737d14-20240522
+      react-dom: 19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522)
 
   react-smooth@4.0.1(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522):
     dependencies:

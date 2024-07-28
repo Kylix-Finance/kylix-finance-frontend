@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import ReactQueryProvider from "./ReactQueryProvider";
 import { Providers as WalletProvider } from "@repo/wallet-modal";
 import { Provider as OnchainProvider } from "@repo/onchain-utils";
+import { PortalContainer } from "./Portal";
 interface Props {
   children: React.ReactNode;
 }
@@ -32,6 +33,7 @@ const Providers: FC<Props> = ({ children }) => {
             <ThemeProvider theme={theme}>{children}</ThemeProvider>
           </OnchainProvider>
         </WalletProvider>
+        <PortalContainer />
       </ReactQueryProvider>
       <ToastContainer className="flex flex-col gap-2" />
     </AppRouterCacheProvider>
