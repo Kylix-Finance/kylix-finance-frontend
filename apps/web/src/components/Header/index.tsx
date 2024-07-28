@@ -34,9 +34,9 @@ const Header = () => {
         </Box>
       </Box>
       <Box className="flex gap-3 h-full items-center text-center">
-        <p className="h-full bg-primary-500 px-2 py-1 text-white items-center text-center flex">
+        {/* <p className="h-full bg-primary-500 px-2 py-1 text-white items-center text-center flex">
           User balance
-        </p>
+        </p> */}
 
         <ConnectButton address={activeAccount?.address} />
       </Box>
