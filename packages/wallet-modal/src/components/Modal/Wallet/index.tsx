@@ -18,16 +18,11 @@ type Stages = Record<
 type Props = Omit<ModalProps, "onClose" | "close" | "open">;
 
 export const WalletModal: React.FC<Props> = (props) => {
-  const {
-    setStatus: setModalStatus,
-    stage,
-    status,
-    setStage,
-  } = useModalStore();
+  const { isOpen, setIsOpen, setStage, stage } = useModalStore();
 
   const { setStatus } = useStatusStore();
   const modalCloseHandler = () => {
-    setModalStatus(false);
+    setIsOpen(false);
     setStatus(STATUS.CANCELED);
     setTimeout(() => {
       setStage("walletsList");
@@ -45,7 +40,7 @@ export const WalletModal: React.FC<Props> = (props) => {
   return (
     <ModalBase
       {...props}
-      open={status}
+      open={isOpen}
       onClose={modalCloseHandler}
       classNames={{
         root: "!z-[999999999]",

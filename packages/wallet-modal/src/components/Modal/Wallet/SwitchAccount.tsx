@@ -7,7 +7,7 @@ const SwitchAccount = () => {
   const { accounts } = useAccounts();
   const { setAccount } = useAccountStore();
   const { activeAccount } = useActiveAccount();
-  const { setStatus, setStage } = useModalStore();
+  const { setIsOpen: setStatus, setStage } = useModalStore();
   const handleSelectAccount = (account: InjectedAccount) => {
     setAccount(account.address);
     setStatus(false);

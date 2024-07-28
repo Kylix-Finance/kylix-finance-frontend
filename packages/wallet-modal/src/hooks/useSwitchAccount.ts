@@ -1,7 +1,7 @@
 import { useModalStore } from "../stores";
 
 const useSwitchAccount = () => {
-  const { setStage, setStatus } = useModalStore();
+  const { setStage, setIsOpen: setStatus } = useModalStore();
   const switchAccount = () => {
     setStage("switchAccount");
     setTimeout(() => {

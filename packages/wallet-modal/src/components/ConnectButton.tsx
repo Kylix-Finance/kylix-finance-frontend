@@ -14,7 +14,7 @@ export const ConnectButton: React.FC<Props> = ({
 }) => {
   const modalState = useModalStore();
 
-  const handleOpenWalletModal = () => modalState.setStatus(true);
+  const handleOpenWalletModal = () => modalState.setIsOpen(true);
 
   const currentHandler = address ? onClickWhenConnected : handleOpenWalletModal;
 
