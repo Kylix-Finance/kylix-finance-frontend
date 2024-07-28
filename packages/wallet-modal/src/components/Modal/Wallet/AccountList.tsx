@@ -1,4 +1,4 @@
-import { useModalStore } from "../../stores";
+import { useModalStore } from "../../../stores";
 import { useAccounts, useActiveAccount } from "@repo/onchain-utils";
 import { InjectedAccount } from "@polkadot/extension-inject/types";
 import { useAccountStore } from "@repo/shared";

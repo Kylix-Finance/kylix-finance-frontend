@@ -1,6 +1,6 @@
-import { useAvailableWallets } from "../../hooks/useAvailableWallets";
-import { wallets } from "../../constants";
-import { useConnect } from "../../hooks";
+import { useAvailableWallets } from "../../../hooks/useAvailableWallets";
+import { wallets } from "../../../constants";
+import { useConnect } from "../../../hooks";
 import { Wallet } from "@repo/shared";
 
 const WalletsList = () => {

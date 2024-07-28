@@ -1,10 +1,10 @@
 "use client";
 import { Modal as ModalBase, ModalProps } from "react-responsive-modal";
-import { ModalStore, useModalStore } from "../../stores/modal";
+import { ModalStore, useModalStore } from "../../../stores/modal";
 import WalletsList from "./WalletsList";
 import AccountList from "./AccountList";
-import { useStatusStore } from "../../stores";
-import { STATUS } from "../../constants";
+import { useStatusStore } from "../../../stores";
+import { STATUS } from "../../../constants";
 import SwitchAccount from "./SwitchAccount";
 
 type Stages = Record<
@@ -15,7 +15,7 @@ type Stages = Record<
   }
 >;
 
-const WalletModal = ({
+export const WalletModal = ({
   ...rest
 }: Omit<ModalProps, "onClose" | "close" | "open">) => {
   const {
@@ -61,5 +61,3 @@ const WalletModal = ({
     </ModalBase>
   );
 };
-
-export default WalletModal;

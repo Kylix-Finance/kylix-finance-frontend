@@ -7,7 +7,7 @@ interface Props {
   address: string | undefined;
 }
 
-const ConnectButton: React.FC<Props> = ({ address }) => {
+export const ConnectButton: React.FC<Props> = ({ address }) => {
   const modalState = useModalStore();
 
   const clickHandler = {
@@ -46,5 +46,3 @@ const ConnectButton: React.FC<Props> = ({ address }) => {
 export const ButtonText: React.FC<{ text: string }> = ({ text }) => {
   return <span className="font-[500] w-full text-[12px]">{text}</span>;
 };
-
-export default ConnectButton;
