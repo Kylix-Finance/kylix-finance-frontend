@@ -10,6 +10,11 @@ interface Props {
 const ConnectButton: React.FC<Props> = ({ address }) => {
   const modalState = useModalStore();
 
+  const clickHandler = {
+    0: "",
+    1: "",
+  };
+
   return (
     <button
       className="select-none shadow-md cursor-pointer transition transform hover:shadow-lg hover:-translate-y-1 active:shadow-md active:translate-y-0 flex justify-between items-center gap-2 p-2 rounded-sm bg-[#FFF] text-[#5C5E64] w-[143px] h-[40px]"

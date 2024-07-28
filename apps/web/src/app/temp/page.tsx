@@ -1,7 +1,7 @@
 "use client";
 import {
   ConnectButton,
-  Modal,
+  WalletModal,
   useDisconnect,
   useSwitchAccount,
 } from "@repo/wallet-modal";
@@ -113,7 +113,7 @@ const PolkadotConnection = () => {
 
   return (
     <>
-      <Modal center />
+      <WalletModal center />
       <div className="flex flex-col">
         <h1>Polkadot Testnet</h1>
         <p>

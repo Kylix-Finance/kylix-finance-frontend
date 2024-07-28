@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 type Stage = "walletsList" | "accountsList" | "switchAccount";
-interface ModalStore {
+export interface ModalStore {
   status: boolean;
   stage: Stage;
   setStatus: (isOpen: boolean) => void;

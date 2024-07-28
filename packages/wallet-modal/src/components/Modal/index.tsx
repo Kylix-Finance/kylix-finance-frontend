@@ -1,19 +1,30 @@
 "use client";
 import { Modal as ModalBase, ModalProps } from "react-responsive-modal";
-import { useModalStore } from "../../stores/modal";
+import { ModalStore, useModalStore } from "../../stores/modal";
 import WalletsList from "./WalletsList";
 import AccountList from "./AccountList";
 import { useStatusStore } from "../../stores";
 import { STATUS } from "../../constants";
 import SwitchAccount from "./SwitchAccount";
 
-const Modal = ({ ...rest }: Omit<ModalProps, "onClose" | "close" | "open">) => {
+type Stages = Record<
+  ModalStore["stage"],
+  {
+    title: string;
+    Component: React.FC;
+  }
+>;
+
+const WalletModal = ({
+  ...rest
+}: Omit<ModalProps, "onClose" | "close" | "open">) => {
   const {
     setStatus: setModalStatus,
     stage,
     status,
     setStage,
   } = useModalStore();
+
   const { setStatus } = useStatusStore();
   const modalCloseHandler = () => {
     setModalStatus(false);
@@ -22,6 +33,14 @@ const Modal = ({ ...rest }: Omit<ModalProps, "onClose" | "close" | "open">) => {
       setStage("walletsList");
     }, 200);
   };
+
+  const stages: Stages = {
+    walletsList: { title: "Connect Your Wallet", Component: WalletsList },
+    accountsList: { title: "Choose your account", Component: AccountList },
+    switchAccount: { title: "Change your account", Component: SwitchAccount },
+  };
+
+  const currentStage = stages[stage];
 
   return (
     <ModalBase
@@ -36,15 +55,11 @@ const Modal = ({ ...rest }: Omit<ModalProps, "onClose" | "close" | "open">) => {
       }}
     >
       <h2 className="font-bold text-sm leading-5 text-center text-[#383E42] mb-2">
-        {stage === "walletsList" && "Connect Your Wallet"}
-        {stage === "accountsList" && "Choose your account"}
-        {stage === "switchAccount" && "Change your account"}
+        {currentStage.title}
       </h2>
-      {stage === "walletsList" && <WalletsList />}
-      {stage === "accountsList" && <AccountList />}
-      {stage === "switchAccount" && <SwitchAccount />}
+      {<currentStage.Component />}
     </ModalBase>
   );
 };
 
-export default Modal;
+export default WalletModal;
