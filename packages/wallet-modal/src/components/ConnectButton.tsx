@@ -12,7 +12,7 @@ const ConnectButton: React.FC<Props> = ({ address }) => {
 
   return (
     <button
-      className="shadow-md cursor-pointer transition transform hover:shadow-lg hover:-translate-y-1 active:shadow-md active:translate-y-0 flex justify-between items-center gap-2 p-2 rounded-sm bg-[#FFF] text-[#5C5E64] w-[143px] h-[40px]"
+      className="select-none shadow-md cursor-pointer transition transform hover:shadow-lg hover:-translate-y-1 active:shadow-md active:translate-y-0 flex justify-between items-center gap-2 p-2 rounded-sm bg-[#FFF] text-[#5C5E64] w-[143px] h-[40px]"
       onClick={() => modalState.setStatus(true)}
     >
       {address ? (
