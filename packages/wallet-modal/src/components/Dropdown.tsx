@@ -3,6 +3,7 @@ import React, { PropsWithChildren, useState } from "react";
 export interface DropdownOption {
   name: "switchAccount" | "disconnect";
   label: string;
+  Icon?: React.JSX.Element | React.FC;
 }
 
 interface Props extends PropsWithChildren {
@@ -39,20 +40,28 @@ export const Dropdown: React.FC<Props> = ({
       <div
         className={`${
           open ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        } origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-150 ease-out`}
+        } origin-top-right absolute right-0 mt-2 w-56 rounded-sm shadow-lg bg-white transition-all duration-150 ease-out`}
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="menu-button"
       >
-        <div className="py-1" role="none">
+        <div className="p-1" role="none">
           {options.map((option) => (
             <button
               key={option.name}
-              className="text-gray-700 block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+              className="flex gap-2 items-center text-gray-700 w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
               role="menuitem"
               onClick={() => handleMenuItemClick(option.name)}
             >
-              {option.label}
+              {typeof option.Icon === "function" ? (
+                <option.Icon />
+              ) : (
+                option.Icon
+              )}
+
+              <span className="font-[500] text-[12px] text-[#5C5E64]">
+                {option.label}
+              </span>
             </button>
           ))}
         </div>

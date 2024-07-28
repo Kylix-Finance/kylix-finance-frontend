@@ -32,6 +32,19 @@ export const ConnectButton: React.FC<Props> = ({ address }) => {
 
   const onConnectClick = address ? undefined : handleOpenWalletModal;
 
+  const options: DropdownOption[] = [
+    {
+      name: "switchAccount",
+      label: "switch Account",
+      Icon: () => <SwitchIcon />,
+    },
+    {
+      name: "disconnect",
+      label: "Disconnect",
+      Icon: () => <UserFillIcon />,
+    },
+  ];
+
   return (
     <Dropdown
       onItemClick={handleDropdownItemClick}
@@ -44,9 +57,7 @@ export const ConnectButton: React.FC<Props> = ({ address }) => {
       >
         {address ? (
           <>
-            <span className="size-[24px] bg-[#F4FAF9] flex justify-center items-center gap-[10px] rounded-sm">
-              <UserFill />
-            </span>
+            <UserFillIcon />
 
             <span className="w-[63px]">
               <ButtonText
@@ -54,9 +65,7 @@ export const ConnectButton: React.FC<Props> = ({ address }) => {
               />
             </span>
 
-            <span className="size-[24px] bg-[#45A996] flex justify-center items-center gap-[10px] rounded-sm">
-              <Settings />
-            </span>
+            <SwitchIcon />
           </>
         ) : (
           <ButtonText text="Connect Wallet" />
@@ -66,17 +75,22 @@ export const ConnectButton: React.FC<Props> = ({ address }) => {
   );
 };
 
-const options: DropdownOption[] = [
-  {
-    name: "switchAccount",
-    label: "switch Account",
-  },
-  {
-    name: "disconnect",
-    label: "Disconnect",
-  },
-];
-
-export const ButtonText: React.FC<{ text: string }> = ({ text }) => {
+const ButtonText: React.FC<{ text: string }> = ({ text }) => {
   return <span className="font-[500] w-full text-[12px]">{text}</span>;
+};
+
+const SwitchIcon = () => {
+  return (
+    <span className="size-[24px] bg-[#45A996] flex justify-center items-center gap-[10px] rounded-sm">
+      <Settings />
+    </span>
+  );
+};
+
+const UserFillIcon = () => {
+  return (
+    <span className="size-[24px] bg-[#F4FAF9] flex justify-center items-center gap-[10px] rounded-sm">
+      <UserFill />
+    </span>
+  );
 };
