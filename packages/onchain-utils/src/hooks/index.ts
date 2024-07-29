@@ -5,3 +5,4 @@ export * from "./useActiveConnector";
 export * from "./useProvider";
 export * from "./useBlockNumber";
 export * from "./useBalance";
+export * from "./useLendingPools";

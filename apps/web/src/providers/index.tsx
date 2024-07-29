@@ -25,8 +25,8 @@ const Providers: FC<Props> = ({ children }) => {
           <OnchainProvider
             options={{
               provider: {
-                name: "Westnet",
-                url: "wss://westend-rpc.polkadot.io",
+                name: "Kylix",
+                url: "wss://test-dashboard.kylix.finance",
               },
             }}
           >

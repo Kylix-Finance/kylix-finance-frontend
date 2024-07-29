@@ -9,6 +9,7 @@ import {
   useActiveAccount,
   useBalance,
   useBlockNumber,
+  useLendingPools,
 } from "@repo/onchain-utils";
 import { useProvider } from "@repo/onchain-utils";
 import { useEffect, useState } from "react";
@@ -21,7 +22,6 @@ import {
 
 const PolkadotConnection = () => {
   const rpcGHJGKHG = {
-    // Example of adding a custom RPC, modify accordingly
     chainHead: {
       body: {
         description: "Get chain head body",
@@ -33,7 +33,6 @@ const PolkadotConnection = () => {
         ],
         type: "Bytes",
       },
-      // Add other chainHead methods here
     },
     chainSpec: {
       chainName: {
@@ -41,7 +40,6 @@ const PolkadotConnection = () => {
         params: [],
         type: "Text",
       },
-      // Add other chainSpec methods here
     },
     transactionWatch: {
       submitAndWatch: {
@@ -54,9 +52,7 @@ const PolkadotConnection = () => {
         ],
         type: "Hash",
       },
-      // Add other transactionWatch methods here
     },
-    // Add other custom RPCs as needed
   };
 
   const typesjhghjg = {
@@ -87,6 +83,8 @@ const PolkadotConnection = () => {
   const { activeAccount } = useActiveAccount();
   const switchAccount = useSwitchAccount();
   const [isExtensionEnabled, setExtensionEnabled] = useState(false);
+  const { lendingPools } = useLendingPools();
+  // console.log("lendingPools", lendingPools);
 
   useEffect(() => {
     const enableExtension = async () => {
@@ -165,6 +163,8 @@ const PolkadotConnection = () => {
         >
           create auction
         </button>
+
+        <div className="flex flex-col gap-4"></div>
       </div>
     </>
   );
