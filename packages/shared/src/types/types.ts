@@ -11,3 +11,11 @@ export type Wallet = {
   is_installed: boolean;
   installation_url: string;
 };
+export type Provider = {
+  url: string;
+  name: string;
+};
+
+export type Options = {
+  provider: Provider;
+};

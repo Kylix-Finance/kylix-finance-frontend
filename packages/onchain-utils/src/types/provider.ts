@@ -5,15 +5,6 @@ export type ConnectionStatus =
   | "decorated"
   | "ready";
 
-export type Provider = {
-  url: string;
-  name: string;
-};
-
-export type Options = {
-  provider: Provider;
-};
-
 export type ProviderInterfaceCallback = (
   error: Error | null,
   result: any

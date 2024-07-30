@@ -6,3 +6,4 @@ export * from "./useProvider";
 export * from "./useBlockNumber";
 export * from "./useBalance";
 export * from "./useRead";
+export * from "./useGetLendingPools";

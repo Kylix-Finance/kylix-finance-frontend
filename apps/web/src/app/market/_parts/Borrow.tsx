@@ -1,26 +1,31 @@
+"use client";
 import { Typography } from "@mui/material";
+import { useGetLendingPools } from "@repo/onchain-utils";
 import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
 
 const Borrow = () => {
+  const { totalBorrow } = useGetLendingPools();
+
   return (
     <Card
-      title="Total Borrow"
-      iconColor="text-secondary-500"
+      title="Total Supply"
       icon={Icons.WalletFill}
       rightComponent={
         <Typography variant="h5" className="text-primary-800">
-          $ 1,820,140
+          {totalBorrow !== undefined
+            ? `$ ${totalBorrow.toLocaleString()}`
+            : "Unavailable"}
         </Typography>
       }
     >
-      <Typography
-        variant="caption"
+      {/* <Typography
+        variant="body3"
         className="flex items-center text-primary-800/50"
       >
-        <span>Borrowers: </span>
-        <span>1,421</span>
-      </Typography>
+        <span>Suppliers: </span>
+        <span>1,200</span>
+      </Typography> */}
     </Card>
   );
 };

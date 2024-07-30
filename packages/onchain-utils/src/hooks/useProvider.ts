@@ -1,23 +1,27 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+"use client";
+
+import { skipToken, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ApiPromise, WsProvider } from "@polkadot/api";
-import { queryKeys } from "@repo/shared";
-import { Options } from "../types";
+import { Options, queryKeys } from "@repo/shared";
+import { useEffect, useState } from "react";
+import { useConfig } from "./useConfig";
 
 const useProvider = () => {
-  const queryClient = useQueryClient();
-  const params = queryClient.getQueryData<Options>(queryKeys.options);
+  const { config } = useConfig();
+  const rpc = config?.rpc;
 
   const result = useQuery({
     queryKey: queryKeys.provider,
-    enabled: !!params,
-    queryFn: async () => {
-      const provider = new WsProvider(params?.provider.url);
-      const apiInstance = await ApiPromise.create({ provider });
-      return {
-        api: apiInstance,
-        provider,
-      };
-    },
+    queryFn: rpc
+      ? async () => {
+          const provider = new WsProvider(rpc.url);
+          const apiInstance = await ApiPromise.create({ provider });
+          return {
+            api: apiInstance,
+            provider,
+          };
+        }
+      : skipToken,
   });
 
   return result;

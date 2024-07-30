@@ -3,6 +3,7 @@ import { Box, TableBody, TableRow } from "@mui/material";
 import TRow from "./TRow";
 import { TableData, Header, TBodyProps, TRowProps } from "./types";
 import TCell from "./TCell";
+import { Fragment } from "react";
 
 interface Props<K extends string> {
   data: TableData<K>;
@@ -24,11 +25,10 @@ function TBody<K extends string>({
   return (
     <TableBody {...tBody}>
       {data.map((row, index) => (
-        <>
+        <Fragment key={index}>
           <TRow
             tCellClassnames={tCellClassnames}
             rowSpacing={rowSpacing}
-            key={index}
             headers={headers}
             row={row}
             {...tRowProps}
@@ -40,7 +40,7 @@ function TBody<K extends string>({
               }}
             />
           )}
-        </>
+        </Fragment>
       ))}
     </TableBody>
   );

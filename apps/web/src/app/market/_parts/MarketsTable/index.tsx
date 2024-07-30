@@ -1,8 +1,12 @@
+"use client";
+
 import { Box, Switch, Typography } from "@mui/material";
 import { Card, Table, KylixChip } from "~/components";
 import { Asset } from "~/components/Asset";
 import { RightComponent } from "./RightComponent";
 import { TableActions } from "../TableActions";
+import { useGetLendingPools } from "@repo/onchain-utils";
+import { useMemo } from "react";
 
 type TKey =
   | "Asset"
@@ -15,6 +19,22 @@ type TKey =
   | "Actions";
 
 const MarketsTable = () => {
+  const { lendingPool } = useGetLendingPools();
+
+  const transformedData = useMemo(() => {
+    return lendingPool?.map((item) => {
+      return {
+        Asset: { name: item.asset, label: item.asset },
+        "Collateral Q": { value: `%${item.collateral_q}` },
+        Collateral: { value: item.collateral },
+        Utilization: { value: `%${item.utilization}` },
+        "Borrow APY": { value: `%${item.borrow_apy}` },
+        "Supply APY": { value: `%${item.supply_apy}` },
+        "Wallet Balance": { value: item.balance },
+      };
+    });
+  }, [lendingPool]);
+
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
       <Table<TKey>
@@ -25,44 +45,51 @@ const MarketsTable = () => {
         }
         hiddenTHeadsText={["Actions"]}
         rowSpacing="11px"
-        data={tableData.map((item) => ({
-          Asset: (
-            <Asset helperText={item.Asset.label} label={item.Asset.name} />
-          ),
-          "Collateral Q": (
-            <Typography variant="subtitle1">
-              {item["Collateral Q"].value}
-            </Typography>
-          ),
-          Utilization: (
-            <Typography variant="subtitle1">
-              {item.Utilization.value}
-            </Typography>
-          ),
-          "Borrow APY": (
-            <Box className="flex flex-col">
-              <Typography variant="subtitle1">
-                {item["Borrow APY"].value}
-              </Typography>
-              <KylixChip value={`${(Math.random() * 10).toFixed()}%`} />
-            </Box>
-          ),
-          "Supply APY": (
-            <Box className="flex flex-col">
-              <Typography variant="subtitle1">
-                {item["Supply APY"].value}
-              </Typography>
-              <KylixChip value={`${(Math.random() * 10).toFixed()}%`} />
-            </Box>
-          ),
-          Collateral: <Switch />,
-          "Wallet Balance": (
-            <Typography variant="subtitle1">
-              {Number(item["Wallet Balance"].value).toLocaleString()}
-            </Typography>
-          ),
-          Actions: <TableActions />,
-        }))}
+        data={
+          transformedData
+            ? transformedData?.map((item) => ({
+                Asset: (
+                  <Asset
+                    helperText={item.Asset.label}
+                    label={item.Asset.name}
+                  />
+                ),
+                "Collateral Q": (
+                  <Typography variant="subtitle1">
+                    {item["Collateral Q"].value}
+                  </Typography>
+                ),
+                Utilization: (
+                  <Typography variant="subtitle1">
+                    {item.Utilization.value}
+                  </Typography>
+                ),
+                "Borrow APY": (
+                  <Box className="flex flex-col">
+                    <Typography variant="subtitle1">
+                      {item["Borrow APY"].value}
+                    </Typography>
+                    <KylixChip value={`${(Math.random() * 10).toFixed()}%`} />
+                  </Box>
+                ),
+                "Supply APY": (
+                  <Box className="flex flex-col">
+                    <Typography variant="subtitle1">
+                      {item["Supply APY"].value}
+                    </Typography>
+                    <KylixChip value={`${(Math.random() * 10).toFixed()}%`} />
+                  </Box>
+                ),
+                Collateral: <Switch checked={item["Collateral"].value} />,
+                "Wallet Balance": (
+                  <Typography variant="subtitle1">
+                    {Number(item["Wallet Balance"].value).toLocaleString()}
+                  </Typography>
+                ),
+                Actions: <TableActions />,
+              }))
+            : []
+        }
         defaultSortKey="Asset"
         tableName="markets"
         hasPagination={false}

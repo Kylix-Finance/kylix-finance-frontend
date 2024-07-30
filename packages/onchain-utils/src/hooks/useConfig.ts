@@ -1,3 +1,5 @@
+"use client";
+
 import { useQuery } from "@tanstack/react-query";
 import { Config } from "../../../wallet-modal/src/types";
 import { queryKeys } from "@repo/shared/src/constants";

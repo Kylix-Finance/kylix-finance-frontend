@@ -10,4 +10,5 @@ export const queryKeys = {
   disconnectRequest: [baseKey, "wallet-modal", "disconnect-request"],
   options: [baseKey, "onchain", "options"],
   provider: [baseKey, "onchain", "provider"],
+  lendingPools: [baseKey, "onchain", "lendingPools"],
 };

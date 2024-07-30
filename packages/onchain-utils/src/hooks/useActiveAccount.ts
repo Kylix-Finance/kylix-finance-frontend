@@ -1,3 +1,5 @@
+"use client";
+
 import { useAccountStore } from "@repo/shared";
 import { useAccounts } from "./useAccounts";
 

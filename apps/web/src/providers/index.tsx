@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import ReactQueryProvider from "./ReactQueryProvider";
 import { Providers as WalletProvider } from "@repo/wallet-modal";
-import { Provider as OnchainProvider } from "@repo/onchain-utils";
 import { PortalContainer } from "./Portal";
 interface Props {
   children: React.ReactNode;
@@ -20,18 +19,13 @@ const Providers: FC<Props> = ({ children }) => {
         <WalletProvider
           config={{
             dappName: "Kylix",
+            rpc: {
+              name: "Kylix",
+              url: "wss://test-dashboard.kylix.finance",
+            },
           }}
         >
-          <OnchainProvider
-            options={{
-              provider: {
-                name: "Kylix",
-                url: "wss://test-dashboard.kylix.finance",
-              },
-            }}
-          >
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
-          </OnchainProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </WalletProvider>
         <PortalContainer />
       </ReactQueryProvider>

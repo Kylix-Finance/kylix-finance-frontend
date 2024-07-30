@@ -1,3 +1,4 @@
+"use client";
 import { WsProvider } from "@polkadot/api";
 import { IOCollection, SubscriptionHandler } from "../types";
 import { useProvider } from "./useProvider";
@@ -21,7 +22,7 @@ async function read<T extends keyof IOCollection>(
 export function useRead<T extends keyof IOCollection>(
   method: T,
   params: IOCollection[T]["params"],
-  isCacheable: boolean = false,
+  isCacheable: boolean = true,
   subscription?: SubscriptionHandler
 ) {
   const [result, setResult] = useState<IOCollection[T]["output"] | null>(null);
@@ -29,8 +30,10 @@ export function useRead<T extends keyof IOCollection>(
   const [error, setError] = useState<Error | null>(null);
   const { data } = useProvider();
   const provider = data?.provider;
+
   useEffect(() => {
     if (!provider) return;
+
     const fetchData = async () => {
       setLoading(true);
       try {

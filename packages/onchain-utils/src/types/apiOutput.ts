@@ -16,4 +16,4 @@ interface LendingPoolsSummary {
 
 type LendingPoolsResponse = [LendingPool[], LendingPoolsSummary];
 
-export type { LendingPoolsResponse };
+export type { LendingPoolsResponse, LendingPool };
