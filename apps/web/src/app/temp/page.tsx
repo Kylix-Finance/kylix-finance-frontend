@@ -9,7 +9,7 @@ import {
   useActiveAccount,
   useBalance,
   useBlockNumber,
-  useLendingPools,
+  useRead,
 } from "@repo/onchain-utils";
 import { useProvider } from "@repo/onchain-utils";
 import { useEffect, useState } from "react";
@@ -79,12 +79,12 @@ const PolkadotConnection = () => {
     return api;
   }
 
-  const { api } = useProvider();
+  // const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
   const switchAccount = useSwitchAccount();
   const [isExtensionEnabled, setExtensionEnabled] = useState(false);
-  const { lendingPools } = useLendingPools();
-  // console.log("lendingPools", lendingPools);
+  const { data } = useRead("getLendingPools", [], true);
+  console.log("data", data);
 
   useEffect(() => {
     const enableExtension = async () => {

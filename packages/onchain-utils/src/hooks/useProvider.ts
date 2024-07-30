@@ -7,20 +7,20 @@ const useProvider = () => {
   const queryClient = useQueryClient();
   const params = queryClient.getQueryData<Options>(queryKeys.options);
 
-  const { data: api, ...rest } = useQuery({
+  const result = useQuery({
     queryKey: queryKeys.provider,
     enabled: !!params,
     queryFn: async () => {
       const provider = new WsProvider(params?.provider.url);
       const apiInstance = await ApiPromise.create({ provider });
-      return apiInstance;
+      return {
+        api: apiInstance,
+        provider,
+      };
     },
   });
 
-  return {
-    api,
-    ...rest,
-  };
+  return result;
 };
 
 export { useProvider };

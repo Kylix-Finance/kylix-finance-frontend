@@ -8,11 +8,11 @@ interface UseBlockNumberResult {
 }
 
 const useBlockNumber = (): UseBlockNumberResult => {
-  const { api, isLoading } = useProvider();
+  const { data, isLoading } = useProvider();
   const [blockNumber, setBlockNumber] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-
+  const api = data?.api;
   useEffect(() => {
     if (!api) {
       return;

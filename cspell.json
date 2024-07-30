@@ -6,6 +6,7 @@
   "ignoreWords": ["CLEANME", "tailwindcss"],
   "import": [],
   "words": [
+    "Cacheable",
     "imbursed",
     "nextjs",
     "noimageindex",
