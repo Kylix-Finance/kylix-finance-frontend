@@ -44,9 +44,9 @@ export const WalletModal: React.FC<Props> = (props) => {
       onClose={modalCloseHandler}
       classNames={{
         root: "!z-[999999999]",
-        closeButton: "bg-red-500",
+        // closeButton: "bg-",
         closeIcon: "stroke-none fill-[#9FAAA8] w-4 h-4",
-        modal: "rounded-lg bg-red-500 p-4 lg:min-w-[30%] w-[450px] h-[450px]",
+        modal: "rounded-lg bg-white p-4 lg:min-w-[30%] w-[450px] h-[450px]",
       }}
     >
       <h2 className="font-bold text-sm leading-5 text-center text-[#383E42] mb-2">
