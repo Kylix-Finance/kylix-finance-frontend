@@ -4,6 +4,8 @@ import { useDisconnect } from "../hooks";
 import { useModalStore } from "../stores/modal";
 import Dropdown, { DropdownOption } from "./Dropdown";
 import { Settings, UserFill } from "./Icons";
+import { Disconnect } from "./Icons/Disconnect";
+import { SwitchAccount } from "./Icons/SwitchAccount";
 
 interface Props {
   address: string | undefined;
@@ -36,12 +38,12 @@ export const ConnectButton: React.FC<Props> = ({ address }) => {
     {
       name: "switchAccount",
       label: "switch Account",
-      Icon: () => <SwitchIcon />,
+      Icon: () => <SwitchAccountIcon />,
     },
     {
       name: "disconnect",
       label: "Disconnect",
-      Icon: () => <UserFillIcon />,
+      Icon: () => <DisconnectIcon />,
     },
   ];
 
@@ -65,7 +67,7 @@ export const ConnectButton: React.FC<Props> = ({ address }) => {
               />
             </span>
 
-            <SwitchIcon />
+            <SettingsIcon />
           </>
         ) : (
           <ButtonText text="Connect Wallet" />
@@ -79,7 +81,7 @@ const ButtonText: React.FC<{ text: string }> = ({ text }) => {
   return <span className="font-[500] w-full text-[12px]">{text}</span>;
 };
 
-const SwitchIcon = () => {
+const SettingsIcon = () => {
   return (
     <span className="size-[24px] bg-[#45A996] flex justify-center items-center gap-[10px] rounded-sm">
       <Settings />
@@ -91,6 +93,22 @@ const UserFillIcon = () => {
   return (
     <span className="size-[24px] bg-[#F4FAF9] flex justify-center items-center gap-[10px] rounded-sm">
       <UserFill />
+    </span>
+  );
+};
+
+const SwitchAccountIcon = () => {
+  return (
+    <span className="size-4 flex justify-center items-center gap-[10px] rounded-sm">
+      <SwitchAccount />
+    </span>
+  );
+};
+
+const DisconnectIcon = () => {
+  return (
+    <span className="size-4 flex justify-center items-center gap-[10px] rounded-sm">
+      <Disconnect />
     </span>
   );
 };

@@ -34,7 +34,7 @@ export const Dropdown: React.FC<Props> = ({
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-left z-[9999]">
       <div onClick={isEnabled ? handleToggle : undefined}>{children}</div>
 
       <div
