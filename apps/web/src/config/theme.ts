@@ -112,14 +112,14 @@ export const theme = createTheme({
             border: "none",
           },
         },
-        input: {
+        input: (props) => ({
           fontSize: "16px",
           color: "#1A433B",
           fontFamily: "Poppins",
           fontStyle: "normal",
-          fontWeight: 700,
+          fontWeight: props.style?.fontWeight || 700,
           lineHeight: "140%" /* 22.4px */,
-        },
+        }),
         inputAdornedStart: {
           fontWeight: 700,
           fontSize: "16px",

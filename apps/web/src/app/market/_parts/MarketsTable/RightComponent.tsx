@@ -6,9 +6,16 @@ export const RightComponent = () => {
     <TextField
       style={{
         fontSize: "10px",
+        borderRadius: "4px",
+        border: "#C7C7C7 1px solid",
       }}
       placeholder="Search by market"
       size="small"
+      inputProps={{
+        style: {
+          fontWeight: "normal",
+        },
+      }}
       InputProps={{
         style: {
           backgroundImage: "none",

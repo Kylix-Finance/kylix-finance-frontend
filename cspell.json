@@ -3,7 +3,7 @@
   "ignorePaths": [],
   "dictionaryDefinitions": [],
   "dictionaries": [],
-  "ignoreWords": ["CLEANME", "tailwindcss"],
+  "ignoreWords": ["CLEANME", "Skel", "tailwindcss"],
   "import": [],
   "words": [
     "Cacheable",

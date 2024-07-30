@@ -8,6 +8,7 @@ import { Fragment } from "react";
 interface Props<K extends string> {
   data: TableData<K>;
   headers: Header;
+  isLoading?: boolean;
   rowSpacing?: string;
   tBody?: TBodyProps;
   tCellClassnames?: string;
@@ -17,6 +18,7 @@ interface Props<K extends string> {
 function TBody<K extends string>({
   data,
   headers,
+  isLoading,
   rowSpacing,
   tBody,
   tCellClassnames,
@@ -27,6 +29,7 @@ function TBody<K extends string>({
       {data.map((row, index) => (
         <Fragment key={index}>
           <TRow
+            isLoading={isLoading}
             tCellClassnames={tCellClassnames}
             rowSpacing={rowSpacing}
             headers={headers}

@@ -26,7 +26,7 @@ export function useRead<T extends keyof IOCollection>(
   subscription?: SubscriptionHandler
 ) {
   const [result, setResult] = useState<IOCollection[T]["output"] | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const { data } = useProvider();
   const provider = data?.provider;
@@ -35,7 +35,7 @@ export function useRead<T extends keyof IOCollection>(
     if (!provider) return;
 
     const fetchData = async () => {
-      setLoading(true);
+      setIsLoading(true);
       try {
         const result = await read(
           method,
@@ -48,12 +48,12 @@ export function useRead<T extends keyof IOCollection>(
       } catch (err: any) {
         setError(err);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, [method, params, isCacheable, subscription, provider]);
 
-  return { data: result, loading, error };
+  return { data: result, isLoading, error };
 }

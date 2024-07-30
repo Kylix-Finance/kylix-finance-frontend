@@ -24,6 +24,7 @@ interface Props<K extends string> {
   defaultSortKey: keyof TData<K>;
   hasPagination?: boolean;
   hiddenTHeadsText?: Array<K>;
+  isLoading?: boolean;
   rowSpacing?: string;
   tableName: GlobalStore.TableName;
   tBaseProps?: TBaseProps;
@@ -39,6 +40,7 @@ export function Table<K extends string>({
   defaultSortKey,
   hasPagination = false,
   hiddenTHeadsText,
+  isLoading,
   rowSpacing,
   tableName,
   tBaseProps,
@@ -90,6 +92,7 @@ export function Table<K extends string>({
           {...tHeadProps}
         />
         <TBody
+          isLoading={isLoading}
           tCellClassnames={tCellClassnames}
           rowSpacing={rowSpacing}
           data={sortedData}

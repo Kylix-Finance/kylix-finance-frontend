@@ -10,7 +10,7 @@ export const useGetLendingPools = () => {
   );
   const [totalBorrow, setTotalBorrow] = useState<number | undefined>(undefined);
   const [totalSupply, setTotalSupply] = useState<number | undefined>(undefined);
-  const { data } = useRead<"getLendingPools">("getLendingPools", []);
+  const { data, isLoading } = useRead<"getLendingPools">("getLendingPools", []);
 
   useEffect(() => {
     setLendingPool(data?.[0]);
@@ -21,5 +21,6 @@ export const useGetLendingPools = () => {
     lendingPool,
     totalBorrow,
     totalSupply,
+    isLoading,
   };
 };

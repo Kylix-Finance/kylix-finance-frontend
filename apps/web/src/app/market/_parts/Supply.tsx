@@ -4,9 +4,10 @@ import { Typography } from "@mui/material";
 import { useGetLendingPools } from "@repo/onchain-utils";
 import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
+import Skeleton from "~/components/Skeleton";
 
 const Supply = () => {
-  const { totalSupply } = useGetLendingPools();
+  const { totalSupply, isLoading } = useGetLendingPools();
 
   return (
     <Card
@@ -14,9 +15,11 @@ const Supply = () => {
       icon={Icons.WalletFill}
       rightComponent={
         <Typography variant="h5" className="text-primary-800">
-          {totalSupply !== undefined
-            ? `$ ${totalSupply.toLocaleString()}`
-            : "Unavailable"}
+          <Skeleton minWidth={80} isLoading={isLoading}>
+            {totalSupply !== undefined
+              ? `$ ${totalSupply.toLocaleString()}`
+              : "Unavailable"}
+          </Skeleton>
         </Typography>
       }
     >

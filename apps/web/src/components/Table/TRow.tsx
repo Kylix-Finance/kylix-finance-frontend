@@ -2,13 +2,15 @@ import { TableCellProps, TableRow } from "@mui/material";
 
 import TCell from "./TCell";
 import { Header, TData, TRowProps } from "./types";
+import Skeleton from "../Skeleton";
 
 interface Props<K extends string> extends TRowProps {
-  row: TData<K>;
   headers: Header;
-  tCellProps?: TableCellProps;
-  tCellClassnames?: string;
+  isLoading?: boolean;
+  row: TData<K>;
   rowSpacing?: string;
+  tCellClassnames?: string;
+  tCellProps?: TableCellProps;
 }
 
 function TRow<K extends string>({
@@ -18,6 +20,7 @@ function TRow<K extends string>({
   tCellClassnames,
   rowSpacing,
   className,
+  isLoading,
   ...rest
 }: Props<K>) {
   return (
@@ -29,7 +32,9 @@ function TRow<K extends string>({
             {...tCellProps}
             key={header}
           >
-            {row[header as keyof TData<K>]}
+            <Skeleton height={40} isLoading={isLoading}>
+              {row[header as keyof TData<K>]}
+            </Skeleton>
           </TCell>
         );
       })}
