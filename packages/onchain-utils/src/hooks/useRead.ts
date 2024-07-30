@@ -2,7 +2,7 @@
 import { WsProvider } from "@polkadot/api";
 import { IOCollection, SubscriptionHandler } from "../types";
 import { useProvider } from "./useProvider";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 async function read<T extends keyof IOCollection>(
   method: T,
@@ -27,6 +27,7 @@ export function useRead<T extends keyof IOCollection>(
 ) {
   const [result, setResult] = useState<IOCollection[T]["output"] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const isInitialized = useRef(false);
   const [error, setError] = useState<Error | null>(null);
   const { data } = useProvider();
 
@@ -36,7 +37,11 @@ export function useRead<T extends keyof IOCollection>(
     if (!provider) return;
 
     const fetchData = async () => {
-      setIsLoading(true);
+      // TODO: Implement isUpdating
+      if (isInitialized.current === false) {
+        isInitialized.current = true;
+        setIsLoading(true);
+      }
       try {
         const result = await read(
           method,
