@@ -29,6 +29,7 @@ export function useRead<T extends keyof IOCollection>(
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const { data } = useProvider();
+
   const provider = data?.provider;
 
   useEffect(() => {
