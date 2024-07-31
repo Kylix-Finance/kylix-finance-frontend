@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useProvider } from "./useProvider";
-import { useSuspenseQuery } from "@tanstack/react-query";
-
+import { hexToBigInt, formatBalance } from "../utils";
+import { useBalanceStore } from "../store";
 interface UseBalanceResult {
   balance: string | null;
   isLoading: boolean;
@@ -12,10 +12,11 @@ interface UseBalanceResult {
 
 const useBalance = (address: string | undefined): UseBalanceResult => {
   const { data, isLoading } = useProvider();
-  const [balance, setBalance] = useState<string | null>(null);
+  const { balance, setBalance } = useBalanceStore();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const api = data?.api;
+
   useEffect(() => {
     if (!api || !address) {
       setLoading(false);
@@ -31,9 +32,12 @@ const useBalance = (address: string | undefined): UseBalanceResult => {
         }
 
         const result = await api.query.system.account(address);
-        const data = (result.toJSON() as any).data;
-        const freeBalance = data.free.toString();
-        setBalance(freeBalance);
+        const data = result.toJSON() as any;
+        const freeBalanceHex = data.data.free;
+        const freeBalanceBigInt = hexToBigInt(freeBalanceHex);
+        const freeBalanceFormatted = formatBalance(freeBalanceBigInt);
+
+        setBalance(freeBalanceFormatted);
         setLoading(false);
       } catch (err: any) {
         setError(`Error fetching balance: ${err.message}`);
@@ -47,7 +51,7 @@ const useBalance = (address: string | undefined): UseBalanceResult => {
   return {
     balance,
     isLoading: isLoading || loading,
-    error: error,
+    error,
   };
 };
 

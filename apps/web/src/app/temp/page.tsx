@@ -1,4 +1,7 @@
 "use client";
+
+import { useActiveAccount, useBalance } from "@repo/onchain-utils";
+
 // import {
 //   ConnectButton,
 //   WalletModal,
@@ -172,43 +175,16 @@
 
 // export default PolkadotConnection;
 
-import React, { useState } from "react";
-import { useSigner } from "@repo/onchain-utils";
-
 const SignMessage: React.FC = () => {
-  const { signer, activeAccount } = useSigner();
-  const [message, setMessage] = useState("");
-  const [signedMessage, setSignedMessage] = useState("");
-
-  const signMessage = async () => {
-    if (!signer || !activeAccount || !signer.signRaw) return;
-
-    try {
-      const { signature } = await signer.signRaw({
-        address: activeAccount,
-        data: message,
-        type: "payload",
-      });
-      setSignedMessage(signature);
-    } catch (error) {
-      console.error("Signing failed", error);
-    }
-  };
+  const { activeAccount } = useActiveAccount();
+  // const { balance } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
+  const { balance } = useBalance(activeAccount?.address);
 
   return (
-    <div>
-      <input
-        type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Enter a message"
-      />
-      <button onClick={signMessage}>Sign Message</button>
-      {signedMessage && (
-        <div>
-          <p>Signed Message: {signedMessage}</p>
-        </div>
-      )}
+    <div className="flex flex-col gap-3">
+      <div>
+        <p>Balance is : {balance}</p>
+      </div>
     </div>
   );
 };
