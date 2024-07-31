@@ -182,8 +182,8 @@ import { useEffect } from "react";
 // export default PolkadotConnection;
 
 const SignMessage: React.FC = () => {
-  const { data } = useAsset({ asset: "USDC" });
-  console.log(data);
+  const { data } = useAsset(1);
+
   const { activeAccount } = useActiveAccount();
   // const { balance } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
   const { balance } = useBalance(activeAccount?.address);

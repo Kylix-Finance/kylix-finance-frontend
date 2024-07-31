@@ -1,17 +1,17 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { useProvider } from "./useProvider";
-
-export const useAsset = ({ asset }: { asset: string }) => {
+import { queryKeys } from "@repo/shared";
+export const useAsset = (assetId: number) => {
   const { data } = useProvider();
   const api = data?.api;
   const enabled = !!api;
 
   return useQuery({
-    queryKey: ["asset"],
+    queryKey: queryKeys.assets(assetId),
     queryFn: enabled
       ? async () => {
-          const assetInfo = await api?.query?.tokens?.assets?.(asset);
-          return assetInfo?.toHuman() || {};
+          const assetsInfo = await api?.query?.assets?.asset?.(assetId);
+          return assetsInfo?.toJSON() || {};
         }
       : skipToken,
   });
