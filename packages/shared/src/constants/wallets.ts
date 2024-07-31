@@ -2,6 +2,22 @@ import { Wallet } from "../types";
 
 export const wallets: Wallet[] = [
   {
+    name: "Polkadot-js",
+    id: "polkadot-js",
+    installation_url: "https://polkadot.js.org/extension/",
+    image:
+      "https://lh3.googleusercontent.com/jV6YRsCAS32AEYteo_om_MdYkUWDt4WuuyVuVdJE2VR5OC31DDzWZzL1oYuaMpGBf0YBpsJGnWVoAZ8vqfIjN-RP=s120",
+    is_installed: false,
+  },
+  {
+    name: "Talisman",
+    id: "talisman",
+    image:
+      "https://lh3.googleusercontent.com/ijBVcpVJFs9AFddzZoFIkU3MP2aNb14RLQe6v_5uK0GwfGnJ3r66WwXQKi42OUU4CXb7j2Bibmkh1UqBZteMrepfHFY=s120",
+    installation_url: "https://www.talisman.xyz/",
+    is_installed: false,
+  },
+  {
     name: "Fearless Wallet",
     id: "fearless-wallet",
     image:
@@ -17,14 +33,7 @@ export const wallets: Wallet[] = [
     installation_url: "https://www.subwallet.app/download.html",
     is_installed: false,
   },
-  {
-    name: "Talisman",
-    id: "talisman",
-    image:
-      "https://lh3.googleusercontent.com/ijBVcpVJFs9AFddzZoFIkU3MP2aNb14RLQe6v_5uK0GwfGnJ3r66WwXQKi42OUU4CXb7j2Bibmkh1UqBZteMrepfHFY=s120",
-    installation_url: "https://www.talisman.xyz/",
-    is_installed: false,
-  },
+
   {
     name: "Enkrypt",
     id: "enkrypt",
