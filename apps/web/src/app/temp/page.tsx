@@ -1,6 +1,11 @@
 "use client";
 
-import { useActiveAccount, useBalance, useSupply } from "@repo/onchain-utils";
+import {
+  useActiveAccount,
+  useAsset,
+  useBalance,
+  useSupply,
+} from "@repo/onchain-utils";
 import { useEffect } from "react";
 
 // import {
@@ -177,6 +182,8 @@ import { useEffect } from "react";
 // export default PolkadotConnection;
 
 const SignMessage: React.FC = () => {
+  const { data } = useAsset({ asset: "USDC" });
+  console.log(data);
   const { activeAccount } = useActiveAccount();
   // const { balance } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
   const { balance } = useBalance(activeAccount?.address);
