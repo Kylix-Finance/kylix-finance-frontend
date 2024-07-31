@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 // import {
 //   ConnectButton,
 //   WalletModal,
@@ -172,12 +172,45 @@
 
 // export default PolkadotConnection;
 
-const temp = () => {
+import React, { useState } from "react";
+import { useSigner } from "@repo/onchain-utils";
+
+const SignMessage: React.FC = () => {
+  const { signer, activeAccount } = useSigner();
+  const [message, setMessage] = useState("");
+  const [signedMessage, setSignedMessage] = useState("");
+
+  const signMessage = async () => {
+    if (!signer || !activeAccount || !signer.signRaw) return;
+
+    try {
+      const { signature } = await signer.signRaw({
+        address: activeAccount,
+        data: message,
+        type: "payload",
+      });
+      setSignedMessage(signature);
+    } catch (error) {
+      console.error("Signing failed", error);
+    }
+  };
+
   return (
-    <>
-      <p>Temp</p>
-    </>
+    <div>
+      <input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Enter a message"
+      />
+      <button onClick={signMessage}>Sign Message</button>
+      {signedMessage && (
+        <div>
+          <p>Signed Message: {signedMessage}</p>
+        </div>
+      )}
+    </div>
   );
 };
 
-export default temp;
+export default SignMessage;
