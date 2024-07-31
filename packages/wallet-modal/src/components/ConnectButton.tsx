@@ -78,7 +78,7 @@ export const ConnectButton: React.FC<Props> = ({ address }) => {
 };
 
 const ButtonText: React.FC<{ text: string }> = ({ text }) => {
-  return <span className="font-[500] w-full text-[12px]">{text}</span>;
+  return <span className="w-full text-[12px] font-bold">{text}</span>;
 };
 
 const SettingsIcon = () => {
