@@ -48,7 +48,7 @@ const sidebar: Array<Sidebar> = [
       },
       {
         name: "Market",
-        href: "/market",
+        href: "/markets",
         icon: sidebarIcons.Market,
       },
       {
