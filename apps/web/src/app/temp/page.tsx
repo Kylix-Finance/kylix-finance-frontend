@@ -4,6 +4,7 @@ import {
   useActiveAccount,
   useAsset,
   useBalance,
+  useMetadata,
   useSupply,
 } from "@repo/onchain-utils";
 import { useEffect } from "react";
@@ -182,9 +183,12 @@ import { useEffect } from "react";
 // export default PolkadotConnection;
 
 const SignMessage: React.FC = () => {
-  const { data } = useAsset(1);
+  // const { data } = useAsset(1);
 
   const { activeAccount } = useActiveAccount();
+  const { data } = useMetadata(1);
+  console.log(data);
+
   // const { balance } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
   const { balance } = useBalance(activeAccount?.address);
   const { submitSupply } = useSupply();

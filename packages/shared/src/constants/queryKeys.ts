@@ -12,4 +12,5 @@ export const queryKeys = {
   provider: [baseKey, "onchain", "provider"],
   lendingPools: [baseKey, "onchain", "lendingPools"],
   assets: (assetId: number) => [baseKey, "onchain", assetId],
+  metadata: (assetId: number) => [baseKey, "onchain", assetId],
 };

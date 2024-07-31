@@ -10,3 +10,4 @@ export * from "./useGetLendingPools";
 export * from "./useSigner";
 export * from "./useSupply";
 export * from "./useAsset";
+export * from "./useMetadata";
