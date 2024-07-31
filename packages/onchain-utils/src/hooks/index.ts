@@ -8,3 +8,4 @@ export * from "./useBalance";
 export * from "./useRead";
 export * from "./useGetLendingPools";
 export * from "./useSigner";
+export * from "./useSupply";

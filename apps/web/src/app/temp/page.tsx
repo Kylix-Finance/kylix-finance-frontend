@@ -1,6 +1,7 @@
 "use client";
 
-import { useActiveAccount, useBalance } from "@repo/onchain-utils";
+import { useActiveAccount, useBalance, useSupply } from "@repo/onchain-utils";
+import { useEffect } from "react";
 
 // import {
 //   ConnectButton,
@@ -179,12 +180,14 @@ const SignMessage: React.FC = () => {
   const { activeAccount } = useActiveAccount();
   // const { balance } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
   const { balance } = useBalance(activeAccount?.address);
+  const { submitSupply } = useSupply();
 
   return (
     <div className="flex flex-col gap-3">
       <div>
         <p>Balance is : {balance}</p>
       </div>
+      <button onClick={() => submitSupply(1, BigInt(1))}>Supply</button>
     </div>
   );
 };
