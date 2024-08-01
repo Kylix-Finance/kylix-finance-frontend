@@ -5,6 +5,8 @@ import { TableData, Header, TBodyProps, TRowProps } from "./types";
 import TCell from "./TCell";
 import { Fragment } from "react";
 
+export type OnTRowClick = (index: number) => void;
+
 interface Props<K extends string> {
   data: TableData<K>;
   headers: Header;
@@ -13,12 +15,14 @@ interface Props<K extends string> {
   tBody?: TBodyProps;
   tCellClassnames?: string;
   tRowProps?: TRowProps;
+  onTRowClick?: OnTRowClick;
 }
 
 function TBody<K extends string>({
   data,
   headers,
   isLoading,
+  onTRowClick,
   rowSpacing,
   tBody,
   tCellClassnames,
@@ -35,6 +39,9 @@ function TBody<K extends string>({
             headers={headers}
             row={row}
             {...tRowProps}
+            onClick={() => {
+              onTRowClick?.(index);
+            }}
           />
           {rowSpacing && (
             <TableRow

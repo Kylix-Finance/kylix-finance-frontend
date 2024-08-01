@@ -12,6 +12,7 @@ export type TData<K extends string> = Record<
   K,
   string | number | React.ReactNode
 >;
+
 export type TableData<K extends string> = Array<TData<K>>;
 export type Header = Array<string>;
 export type TRowProps = TableRowProps;

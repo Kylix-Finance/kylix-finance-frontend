@@ -3,7 +3,7 @@
 import { Table as TableBase, TableContainer } from "@mui/material";
 import React, { ReactNode } from "react";
 
-import TBody from "./TBody";
+import TBody, { OnTRowClick } from "./TBody";
 import THead from "./THead";
 import TablePagination from "./TablePagination";
 
@@ -25,6 +25,7 @@ interface Props<K extends string> {
   hasPagination?: boolean;
   hiddenTHeadsText?: Array<K>;
   isLoading?: boolean;
+  onTRowClick?: OnTRowClick;
   rowSpacing?: string;
   tableName: GlobalStore.TableName;
   tBaseProps?: TBaseProps;
@@ -49,6 +50,7 @@ export function Table<K extends string>({
   tContainerProps,
   tHeadProps,
   tRowProps,
+  onTRowClick,
 }: Props<K>) {
   type DataItemKey = keyof TData<K>;
 
@@ -84,20 +86,21 @@ export function Table<K extends string>({
     >
       <TableBase {...tBaseProps} stickyHeader>
         <THead
-          hiddenTHeadsText={hiddenTHeadsText}
           headers={headers}
+          hiddenTHeadsText={hiddenTHeadsText}
+          onRequestSort={handleRequestSort}
           order={order}
           orderBy={orderBy}
-          onRequestSort={handleRequestSort}
           {...tHeadProps}
         />
         <TBody
-          isLoading={isLoading}
-          tCellClassnames={tCellClassnames}
-          rowSpacing={rowSpacing}
           data={sortedData}
           headers={headers}
+          isLoading={isLoading}
+          onTRowClick={onTRowClick}
+          rowSpacing={rowSpacing}
           tBody={tBodyProps}
+          tCellClassnames={tCellClassnames}
           tRowProps={tRowProps}
         />
       </TableBase>

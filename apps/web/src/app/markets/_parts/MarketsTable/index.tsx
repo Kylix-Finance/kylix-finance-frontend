@@ -7,6 +7,8 @@ import { RightComponent } from "./RightComponent";
 import { TableActions } from "../TableActions";
 import { useGetLendingPools } from "@repo/onchain-utils";
 import { useMemo } from "react";
+import { OnTRowClick } from "~/components/Table/TBody";
+import { useRouter } from "next/navigation";
 
 type TKey =
   | "Asset"
@@ -46,6 +48,8 @@ const placeholderData = Array.from({ length: 5 }).map(() => ({
 const MarketsTable = () => {
   const { lendingPool, isLoading } = useGetLendingPools();
 
+  const router = useRouter();
+
   const transformedData = useMemo(() => {
     return lendingPool?.map((item) => {
       return {
@@ -56,22 +60,28 @@ const MarketsTable = () => {
         "Borrow APY": { value: `%${item.borrow_apy}` },
         "Supply APY": { value: `%${item.supply_apy}` },
         "Wallet Balance": { value: item.balance },
+        id: item.id,
       };
     });
   }, [lendingPool]);
+
+  // TODO: remove index
+  const handleTRowClick: OnTRowClick = (index) => {
+    const item = transformedData?.[index];
+    if (item) router.push(`markets/${item.id}`);
+  };
 
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
       <Table<TKey>
         isLoading={isLoading}
-        tRowProps={
-          {
-            // className: "cursor-pointer",
-          }
-        }
+        tRowProps={{
+          className: "cursor-pointer",
+        }}
+        onTRowClick={handleTRowClick}
         hiddenTHeadsText={["Actions"]}
         rowSpacing="11px"
-        data={(transformedData || placeholderData)?.map((item) => ({
+        data={(transformedData || placeholderData).map((item) => ({
           Asset: (
             <Asset helperText={item.Asset.label} label={item.Asset.name} />
           ),
