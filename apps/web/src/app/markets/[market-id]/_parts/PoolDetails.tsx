@@ -38,7 +38,7 @@ const PoolDetails = () => {
       {/* Heading */}
       <Box className="flex items-center justify-between">
         <Box className="flex items-center">
-          <Link href="/market">
+          <Link href="/markets">
             <Icons.LeftArrow className="text-black" />
           </Link>
           <Box className="p-1.5 flex gap-2 items-center">
