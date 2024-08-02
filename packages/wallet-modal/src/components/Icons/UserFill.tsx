@@ -8,7 +8,7 @@ export const UserFill = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g id="mingcute:user-2-fill" clip-path="url(#clip0_17_171)">
+      <g id="mingcute:user-2-fill" clipPath="url(#clip0_17_171)">
         <g id="Group">
           <path
             id="Vector"
