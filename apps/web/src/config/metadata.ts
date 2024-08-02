@@ -1,42 +1,47 @@
 import type { Metadata } from "next";
+import { merge } from "lodash-es";
 
-interface Props {
-  title: string;
-  description?: string;
-}
+const baseMetadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_FRONTEND_URL!),
+  openGraph: {
+    url: "./",
+    siteName: "Kylix",
+    images: {
+      url: "/cover.png",
+      width: 400,
+      height: 400,
+      type: "image/jpg",
+    },
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/cover.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+    },
+  },
+};
 
-export const metadataGenerator = ({ title, description }: Props): Metadata => {
-  return {
+export const mergeMetadata = (metadata: Metadata = {}): Metadata => {
+  const { title, description } = metadata;
+
+  const sharedMetadata = {
     title,
     description,
-    metadataBase: new URL(process.env.NEXT_PUBLIC_FRONTEND_URL || ""),
     openGraph: {
       title,
       description,
-      url: process.env.NEXT_PUBLIC_FRONTEND_URL || "",
-      siteName: title,
-      images: {
-        url: "/cover.png",
-        width: 400,
-        height: 400,
-        type: "image/jpg",
-      },
     },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: ["/cover.jpg"],
-    },
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        noimageindex: false,
-      },
-    },
+    twitter: { title, description },
   };
+
+  const mergedMetadata = merge({}, baseMetadata, metadata, sharedMetadata);
+  return mergedMetadata;
 };

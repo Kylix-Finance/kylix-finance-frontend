@@ -1,6 +1,5 @@
 import styles from "./_parts/styles.module.css";
 import { Metadata } from "next";
-import { metadataGenerator } from "~/config/metadata";
 import Borrow from "./_parts/Borrow";
 import Burned from "./_parts/Burned";
 import Featured from "./_parts/Featured";
@@ -11,9 +10,9 @@ import TotalLocked from "./_parts/TotalLocked";
 import VaultChart from "./_parts/VaultChart";
 import { Card } from "~/components";
 import { Icons } from "~/assets/svgs";
-import TransactionForm from "../markets/[market-id]/_parts/TransactionForm";
+import { mergeMetadata } from "~/config/metadata";
 
-export const metadata: Metadata = metadataGenerator({
+export const metadata: Metadata = mergeMetadata({
   title: "Dashboard",
 });
 
