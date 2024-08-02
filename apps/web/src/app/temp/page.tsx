@@ -1,13 +1,13 @@
 "use client";
 
-import {
-  useActiveAccount,
-  useAsset,
-  useBalance,
-  useMetadata,
-  useSupply,
-} from "@repo/onchain-utils";
-import { useEffect } from "react";
+// import {
+//   useActiveAccount,
+//   useAsset,
+//   useBalance,
+//   useMetadata,
+//   useSupply,
+// } from "@repo/onchain-utils";
+// import { useEffect } from "react";
 
 // import {
 //   ConnectButton,
@@ -185,20 +185,18 @@ import { useEffect } from "react";
 const SignMessage: React.FC = () => {
   // const { data } = useAsset(1);
 
-  const { activeAccount } = useActiveAccount();
-  const { data } = useMetadata(1);
-  console.log(data);
+  // const { activeAccount } = useActiveAccount();
+  // const { data } = useMetadata(1);
+  // console.log(data);
 
   // const { balance } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
-  const { balance } = useBalance(activeAccount?.address);
-  const { submitSupply } = useSupply();
+  // const { balance } = useBalance(activeAccount?.address);
+  // const { submitSupply } = useSupply();
 
   return (
     <div className="flex flex-col gap-3">
-      <div>
-        <p>Balance is : {balance}</p>
-      </div>
-      <button onClick={() => submitSupply(1, BigInt(1))}>Supply</button>
+      <div>{/* <p>Balance is : {balance}</p> */}</div>
+      {/* <button onClick={() => submitSupply(1, BigInt(1))}>Supply</button> */}
     </div>
   );
 };
