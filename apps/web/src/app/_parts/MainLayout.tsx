@@ -10,9 +10,9 @@ const MainLayout = ({ children }: Props) => {
   return (
     <Box className="flex">
       <Sidebar />
-      <Box className="w-full h-screen overflow-y-scroll flex flex-col px-6">
+      <Box className="w-full min-h-full flex flex-col p-6">
         <Header />
-        <Box component="main" className="w-full flex flex-col">
+        <Box component="main" className="w-full h-full flex flex-col">
           {children}
         </Box>
       </Box>

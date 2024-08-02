@@ -16,7 +16,7 @@ const Header = () => {
   const pathname = usePathname();
   const pathnames = pathname.split("/").filter((x) => x);
   return (
-    <Box className={"w-full h-[50px] mt-12 mb-4 flex justify-between"}>
+    <Box className="w-full mb-4 flex justify-between">
       <Box className="flex">
         {isMobile && (
           <IconButton
