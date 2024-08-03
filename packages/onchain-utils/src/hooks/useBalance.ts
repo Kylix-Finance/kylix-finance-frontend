@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useProvider } from "./useProvider";
-import { hexToBigInt, formatBalance } from "../utils";
-import { useBalanceStore } from "../store";
 import { useMetadata } from "./useMetadata";
+import { formatUnit } from "../utils";
 interface UseBalanceResult {
   balance: string | null;
   isLoading: boolean;
@@ -40,8 +39,9 @@ const useBalance = (
         let decimals = 12;
 
         let freeBalance: string;
-        if (assetId && assetMetaData?.decimals) {
-          decimals = Number(assetMetaData.decimals);
+        if (assetId) {
+          if (!assetMetaData?.decimals) return;
+          decimals = Number(assetMetaData?.decimals);
 
           const assetBalance = await api?.query?.assets?.account?.(
             assetId,
@@ -56,11 +56,13 @@ const useBalance = (
           freeBalance = data.data.free;
         }
         const freeBalanceBigInt = BigInt(freeBalance);
-        const freeBalanceFormatted =
-          (freeBalanceBigInt * BigInt(10 ** 3)) / BigInt(10 ** decimals);
-        const finalNumber = Number(freeBalanceFormatted.toString()) / 10 ** 3;
 
-        setBalance(finalNumber.toString());
+        const freeBalanceFormatted = formatUnit(
+          freeBalanceBigInt.toString(),
+          decimals
+        );
+
+        setBalance(freeBalanceFormatted);
         setLoading(false);
       } catch (err: any) {
         setError(`Error fetching balance: ${err.message}`);
@@ -69,7 +71,7 @@ const useBalance = (
     };
 
     fetchBalance();
-  }, [api, accountAddress]);
+  }, [api, accountAddress, assetMetaData]);
 
   return {
     balance,
