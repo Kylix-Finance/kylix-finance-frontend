@@ -1,5 +1,15 @@
 "use client";
 
+import {
+  parseUnit,
+  useActiveAccount,
+  useAsset,
+  useBalance,
+  useMetadata,
+  useSupply,
+} from "@repo/onchain-utils";
+import { formatUnit } from "@repo/onchain-utils";
+
 // import {
 //   useActiveAccount,
 //   useAsset,
@@ -183,20 +193,25 @@
 // export default PolkadotConnection;
 
 const SignMessage: React.FC = () => {
-  // const { data } = useAsset(1);
+  // const { data:asset } = useAsset(257);
 
   // const { activeAccount } = useActiveAccount();
-  // const { data } = useMetadata(1);
-  // console.log(data);
+  const { balance } = useBalance(
+    "5DLHrZpgL2MP9VQvvkKPFp4BufMkaS5HxECHL26VPY3jsGkQ",
+    257
+  );
 
-  // const { balance } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
+  // const { balance:balance1 } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
   // const { balance } = useBalance(activeAccount?.address);
-  // const { submitSupply } = useSupply();
+  const { submitSupply } = useSupply();
+  // console.log("asset",asset,"activeAccount",activeAccount, "metadata",data,"balance1",balance1,"balance",balance );
+
+  console.log("balaaaanxe", balance);
 
   return (
     <div className="flex flex-col gap-3">
       <div>{/* <p>Balance is : {balance}</p> */}</div>
-      {/* <button onClick={() => submitSupply(1, BigInt(1))}>Supply</button> */}
+      <button onClick={() => submitSupply(1, BigInt(1))}>Supply</button>
     </div>
   );
 };

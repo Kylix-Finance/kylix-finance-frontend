@@ -10,13 +10,13 @@ type MetadataResult = {
   isFrozen: boolean;
 };
 
-const useMetadata = (assetId: number) => {
+const useMetadata = (assetId?: number) => {
   const { data } = useProvider();
   const api = data?.api;
-  const enabled = !!api;
+  const enabled = !!api && !!assetId;
 
   return useQuery({
-    queryKey: queryKeys.metadata(assetId),
+    queryKey: queryKeys.metadata(assetId || -1),
     queryFn: enabled
       ? async () => {
           const metadata = await api?.query?.assets?.metadata?.(assetId);

@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  getWalletExtension,
-  queryKeys,
-  useAccountStore,
-  Wallet,
-  wallets,
-} from "@repo/shared";
+import { queryKeys, useAccountStore, wallets } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
 
 export const useActiveConnector = () => {

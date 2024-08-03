@@ -2,23 +2,28 @@
 
 import { useEffect, useState } from "react";
 import { useProvider } from "./useProvider";
-import { hexToBigInt, formatBalance } from "../utils";
-import { useBalanceStore } from "../store";
+import { useMetadata } from "./useMetadata";
+import { formatUnit } from "../utils";
 interface UseBalanceResult {
   balance: string | null;
   isLoading: boolean;
   error: string | null;
 }
 
-const useBalance = (address: string | undefined): UseBalanceResult => {
+const useBalance = (
+  accountAddress: string | undefined,
+  assetId?: number
+): UseBalanceResult => {
   const { data, isLoading } = useProvider();
-  const { balance, setBalance } = useBalanceStore();
+  const [balance, setBalance] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const api = data?.api;
 
+  const { data: assetMetaData } = useMetadata(assetId);
+
   useEffect(() => {
-    if (!api || !address) {
+    if (!api || !accountAddress) {
       setLoading(false);
       return;
     }
@@ -31,11 +36,31 @@ const useBalance = (address: string | undefined): UseBalanceResult => {
           );
         }
 
-        const result = await api.query.system.account(address);
-        const data = result.toJSON() as any;
-        const freeBalanceHex = data.data.free;
-        const freeBalanceBigInt = hexToBigInt(freeBalanceHex);
-        const freeBalanceFormatted = formatBalance(freeBalanceBigInt);
+        let decimals = 12;
+
+        let freeBalance: string;
+        if (assetId) {
+          if (!assetMetaData?.decimals) return;
+          decimals = Number(assetMetaData?.decimals);
+
+          const assetBalance = await api?.query?.assets?.account?.(
+            assetId,
+            accountAddress
+          );
+          freeBalance = BigInt(
+            (assetBalance?.toJSON() as any)?.balance
+          ).toString();
+        } else {
+          const result = await api.query.system.account(accountAddress);
+          const data = result.toJSON() as any;
+          freeBalance = data.data.free;
+        }
+        const freeBalanceBigInt = BigInt(freeBalance);
+
+        const freeBalanceFormatted = formatUnit(
+          freeBalanceBigInt.toString(),
+          decimals
+        );
 
         setBalance(freeBalanceFormatted);
         setLoading(false);
@@ -46,7 +71,7 @@ const useBalance = (address: string | undefined): UseBalanceResult => {
     };
 
     fetchBalance();
-  }, [api, address]);
+  }, [api, accountAddress, assetMetaData]);
 
   return {
     balance,
