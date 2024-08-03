@@ -7,7 +7,7 @@ export const useAsset = (assetId: number) => {
   const enabled = !!api;
 
   return useQuery({
-    queryKey: queryKeys.assets(assetId),
+    queryKey: queryKeys.asset(assetId),
     queryFn: enabled
       ? async () => {
           const assetsInfo = await api?.query?.assets?.asset?.(assetId);
