@@ -4,20 +4,24 @@ import { useProvider } from "./useProvider";
 import { useMetadata } from "./useMetadata";
 import { formatUnit } from "../utils";
 import { skipToken, useQuery } from "@tanstack/react-query";
+import { queryKeys } from "@repo/shared";
+import { useActiveAccount } from "./useActiveAccount";
 
 const useBalance = (accountAddress: string | undefined, assetId?: number) => {
   const { data: providerData } = useProvider();
   const api = providerData?.api;
 
+  const { activeAccount } = useActiveAccount();
+  const address = accountAddress ?? activeAccount?.address;
   const { data: assetMetaData } = useMetadata(assetId);
 
-  const enabled = !!api && !!accountAddress;
+  const enabled = !!api && !!address;
 
   const { data, ...rest } = useQuery({
-    queryKey: ["balance", accountAddress, assetId],
+    queryKey: queryKeys.balance({ address, assetId }),
     queryFn: enabled
       ? async () => {
-          if (!api || !accountAddress) {
+          if (!api || !address) {
             throw new Error("API provider or account address is missing.");
           }
 
@@ -38,13 +42,13 @@ const useBalance = (accountAddress: string | undefined, assetId?: number) => {
 
             const assetBalance = await api?.query?.assets?.account?.(
               assetId,
-              accountAddress
+              address
             );
             freeBalance = BigInt(
               (assetBalance?.toJSON() as any)?.balance
             ).toString();
           } else {
-            const result = await api.query.system.account(accountAddress);
+            const result = await api.query.system.account(address);
             const data = result.toJSON() as any;
             freeBalance = data.data.free;
           }
