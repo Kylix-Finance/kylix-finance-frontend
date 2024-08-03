@@ -77,6 +77,7 @@ const baseConfig = defineConfig({
         varsIgnorePattern: "^_",
       },
     ],
+    "prefer-const": ["off"],
   },
 });
 

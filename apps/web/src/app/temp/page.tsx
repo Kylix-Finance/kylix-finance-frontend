@@ -1,12 +1,14 @@
 "use client";
 
 import {
+  parseUnit,
   useActiveAccount,
   useAsset,
   useBalance,
   useMetadata,
   useSupply,
 } from "@repo/onchain-utils";
+import { formatUnit } from "@repo/onchain-utils";
 
 // import {
 //   useActiveAccount,
@@ -194,15 +196,16 @@ const SignMessage: React.FC = () => {
   // const { data:asset } = useAsset(257);
 
   // const { activeAccount } = useActiveAccount();
-  const { balance } = useBalance(
-    "5DLHrZpgL2MP9VQvvkKPFp4BufMkaS5HxECHL26VPY3jsGkQ"
-  );
+  // const { balance } = useBalance(
+  //   "5DLHrZpgL2MP9VQvvkKPFp4BufMkaS5HxECHL26VPY3jsGkQ"
+  // );
 
   // const { balance:balance1 } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
   // const { balance } = useBalance(activeAccount?.address);
   const { submitSupply } = useSupply();
   // console.log("asset",asset,"activeAccount",activeAccount, "metadata",data,"balance1",balance1,"balance",balance );
-  console.log("balaaaanxe", balance);
+
+  console.log("balaaaanxe", formatUnit("4546.46546", 18));
 
   return (
     <div className="flex flex-col gap-3">

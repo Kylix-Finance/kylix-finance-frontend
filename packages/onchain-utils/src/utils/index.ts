@@ -1,3 +1,5 @@
+export { formatUnit } from "./formatUnit";
+export { parseUnit } from "./parseUnit";
 export const hexToBigInt = (hex: string): bigint => {
   return BigInt(hex);
 };
