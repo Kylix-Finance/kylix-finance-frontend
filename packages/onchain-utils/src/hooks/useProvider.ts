@@ -10,7 +10,7 @@ const useProvider = () => {
   const { config } = useConfig();
   const rpc = config?.rpc;
 
-  const result = useQuery({
+  const { data, ...rest } = useQuery({
     queryKey: queryKeys.provider,
     queryFn: rpc
       ? async () => {
@@ -24,7 +24,7 @@ const useProvider = () => {
       : skipToken,
   });
 
-  return result;
+  return { provider: data?.provider, api: data?.api, ...rest };
 };
 
 export { useProvider };

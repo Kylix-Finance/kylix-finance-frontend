@@ -11,3 +11,4 @@ export * from "./useSigner";
 export * from "./useSupply";
 export * from "./useAsset";
 export * from "./useMetadata";
+export * from "./useEvent";

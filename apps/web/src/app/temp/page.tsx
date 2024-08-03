@@ -5,6 +5,7 @@ import {
   useActiveAccount,
   useAsset,
   useBalance,
+  useEvent,
   useMetadata,
   useSupply,
 } from "@repo/onchain-utils";
@@ -206,12 +207,15 @@ const SignMessage: React.FC = () => {
   const { submitSupply } = useSupply();
   // console.log("asset",asset,"activeAccount",activeAccount, "metadata",data,"balance1",balance1,"balance",balance );
 
-  console.log("balaaaanxe", balance);
-
+  // console.log("balaaaanxe", balance);
+  const { data } = useEvent();
+  console.log("eveeeeeeeent", data);
   return (
     <div className="flex flex-col gap-3">
       <div>{/* <p>Balance is : {balance}</p> */}</div>
-      <button onClick={() => submitSupply(1, BigInt(1))}>Supply</button>
+      <button onClick={() => submitSupply(257, BigInt(parseUnit("555", 18)))}>
+        Supply
+      </button>
     </div>
   );
 };

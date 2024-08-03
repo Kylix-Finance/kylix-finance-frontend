@@ -8,8 +8,7 @@ import { queryKeys } from "@repo/shared";
 import { useActiveAccount } from "./useActiveAccount";
 
 const useBalance = (accountAddress: string | undefined, assetId?: number) => {
-  const { data: providerData } = useProvider();
-  const api = providerData?.api;
+  const { api } = useProvider();
 
   const { activeAccount } = useActiveAccount();
   const address = accountAddress ?? activeAccount?.address;

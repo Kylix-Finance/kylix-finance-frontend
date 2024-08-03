@@ -2,8 +2,7 @@ import { skipToken, useQuery } from "@tanstack/react-query";
 import { useProvider } from "./useProvider";
 import { queryKeys } from "@repo/shared";
 export const useAsset = (assetId: number) => {
-  const { data } = useProvider();
-  const api = data?.api;
+  const { api } = useProvider();
   const enabled = !!api;
 
   return useQuery({

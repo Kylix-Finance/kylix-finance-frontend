@@ -11,8 +11,7 @@ type MetadataResult = {
 };
 
 const useMetadata = (assetId?: number) => {
-  const { data } = useProvider();
-  const api = data?.api;
+  const { api } = useProvider();
   const enabled = !!api && !!assetId;
 
   return useQuery({

@@ -11,12 +11,11 @@ interface UseSupplyExtrinsicResult {
 }
 
 export const useSupply = (): UseSupplyExtrinsicResult => {
-  const { data } = useProvider();
+  const { api } = useProvider();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
-  const api = data?.api;
 
   const submitSupply = useCallback(
     async (asset: number, balance: bigint) => {
