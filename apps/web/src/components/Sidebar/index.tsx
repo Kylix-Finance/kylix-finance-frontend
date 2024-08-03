@@ -61,7 +61,7 @@ const Sidebar = () => {
                       key={item.name}
                       className="w-full flex flex-col !px-0 !py-0"
                     >
-                      <Item data={item} collapsable={!!item.items?.length} />
+                      <Item data={item} collapsible={!!item.items?.length} />
                     </ListItem>
                   ))}
                 </List>

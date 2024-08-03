@@ -20,18 +20,18 @@ const linkBaseStyles =
 
 interface ItemProps {
   data: SidebarItem;
-  collapsable?: boolean;
+  collapsible?: boolean;
 }
 
 export const Item = ({
   data,
-  collapsable = false,
+  collapsible = false,
 }: ItemProps): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   const clickHandler = (e: MouseEvent<HTMLAnchorElement>) => {
-    if (collapsable) {
+    if (collapsible) {
       e.preventDefault();
       e.stopPropagation();
       setIsOpen((prevState) => !prevState);
@@ -41,7 +41,7 @@ export const Item = ({
   const isCurrentPath = pathname === data.href;
 
   return (
-    <>
+    <Box className="flex flex-col gap-2 w-full">
       <Link
         onClick={clickHandler}
         className={cn(
@@ -65,7 +65,7 @@ export const Item = ({
               fontWeight: isCurrentPath ? 700 : 500,
             }}
           />
-          {collapsable &&
+          {collapsible &&
             (isOpen ? (
               <ExpandLess className="w-4 h-4" />
             ) : (
@@ -73,7 +73,7 @@ export const Item = ({
             ))}
         </ListItemButton>
       </Link>
-      {collapsable && (
+      {collapsible && (
         <Collapse
           in={isOpen}
           timeout="auto"
@@ -82,7 +82,11 @@ export const Item = ({
         >
           <Box className="flex gap-3.5 h-full">
             <Box height="100%" width="2px" bgcolor="#EAF6F4" />
-            <List component="div" disablePadding className="w-full">
+            <List
+              component="div"
+              disablePadding
+              className="flex flex-col gap-2  w-full"
+            >
               {data.items?.map((subItem) => (
                 <SubItem
                   linkBaseStyles={linkBaseStyles}
@@ -95,6 +99,6 @@ export const Item = ({
           </Box>
         </Collapse>
       )}
-    </>
+    </Box>
   );
 };
