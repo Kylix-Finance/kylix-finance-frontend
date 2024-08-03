@@ -5,6 +5,7 @@ import {
   useActiveAccount,
   useAsset,
   useBalance,
+  useDownloadEvents,
   useEvent,
   useMetadata,
   useSupply,
@@ -208,8 +209,9 @@ const SignMessage: React.FC = () => {
   // console.log("asset",asset,"activeAccount",activeAccount, "metadata",data,"balance1",balance1,"balance",balance );
 
   // console.log("balaaaanxe", balance);
-  const { data } = useEvent();
-  console.log("eveeeeeeeent", data);
+  // const { data } = useEvent()
+  const { data } = useDownloadEvents();
+  // console.log("eveeeeeeeent", data);
   return (
     <div className="flex flex-col gap-3">
       <div>{/* <p>Balance is : {balance}</p> */}</div>

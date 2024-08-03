@@ -12,3 +12,4 @@ export * from "./useSupply";
 export * from "./useAsset";
 export * from "./useMetadata";
 export * from "./useEvent";
+export * from "./useDownloadEvents";
