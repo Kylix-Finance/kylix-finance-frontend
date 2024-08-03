@@ -38,7 +38,7 @@ export const Item = ({
     }
   };
 
-  const isCurrentPath = pathname === data.href;
+  const isCurrentPath = data.href ? pathname?.includes(data.href) : false;
 
   return (
     <Box className="flex flex-col gap-2 w-full">

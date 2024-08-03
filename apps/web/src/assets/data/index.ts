@@ -23,6 +23,7 @@ const socialMediaLinks: Array<SocialMedia> = [
     icon: Icons.Discord,
   },
 ];
+
 const sidebar: Array<Sidebar> = [
   {
     heading: "MAIN",
