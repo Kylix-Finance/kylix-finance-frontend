@@ -18,14 +18,14 @@ export const Dropdown: React.FC<Props> = ({
   isEnabled,
   options,
 }) => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setIsOpen((prevOpen) => !prevOpen);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setIsOpen(false);
   };
 
   const handleMenuItemClick = (name: DropdownOption["name"]) => {
@@ -34,13 +34,29 @@ export const Dropdown: React.FC<Props> = ({
   };
 
   return (
-    <div className="relative inline-block text-left z-[9999]">
+    <div className="relative  inline-block text-left z-[9999]">
       <div onClick={isEnabled ? handleToggle : undefined}>{children}</div>
+
+      {isOpen && (
+        <div
+          className="w-[100vw] h-[100vh]"
+          style={{
+            position: "fixed",
+            backgroundColor: "transparent",
+            zIndex: 9998,
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+          }}
+          onClick={isEnabled ? handleToggle : undefined}
+        />
+      )}
 
       <div
         className={`${
-          open ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        } origin-top-right absolute right-0 mt-2 w-56 rounded-sm shadow-lg bg-white transition-all duration-150 ease-out`}
+          isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
+        } origin-top-right absolute z-[9999] right-0 mt-2 w-56 rounded-sm shadow-lg bg-white transition-all duration-150 ease-out`}
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="menu-button"
