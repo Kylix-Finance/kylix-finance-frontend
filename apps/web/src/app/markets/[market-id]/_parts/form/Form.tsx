@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 "use client";
 import {
   Box,
@@ -7,24 +8,40 @@ import {
   TextFieldProps,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { Dispatch, MouseEventHandler, SetStateAction, useState } from "react";
 import { List, ListItem } from "~/components";
 import { getDecimalRegex } from "~/utils";
 
+interface SubmitButton {
+  content: string;
+  onclick: MouseEventHandler<HTMLButtonElement>;
+  status: boolean;
+}
+
 interface Props {
   items: ListItem[];
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
+  maxHandler: MouseEventHandler<HTMLButtonElement>;
+  decimals: number;
+  submitButton: SubmitButton;
 }
 
 // eslint-disable-next-line react/prop-types
-export const Form: React.FC<Props> = ({ items }) => {
-  const [value, setValue] = useState("");
-
+export const Form: React.FC<Props> = ({
+  items,
+  maxHandler,
+  setValue,
+  value,
+  decimals,
+  submitButton,
+}) => {
   const handleInputChange: TextFieldProps["onChange"] = ({
     target: { value },
   }) => {
     // TODO: Wrap this `if` check in some utility or something
     if (value === "") return setValue(value);
-    const isValid = getDecimalRegex(6).test(value);
+    const isValid = getDecimalRegex(decimals).test(value);
     if (isValid) setValue(value);
   };
 
@@ -43,6 +60,7 @@ export const Form: React.FC<Props> = ({ items }) => {
             variant="text"
             disableElevation
             size="small"
+            onClick={maxHandler}
           >
             Max
           </Button>
@@ -71,8 +89,10 @@ export const Form: React.FC<Props> = ({ items }) => {
         className="!capitalize !text-white !text-xs !font-semibold !leading-5 !text-center !rounded !py-2 !px-3"
         size="large"
         disableElevation
+        onClick={submitButton.onclick}
+        disabled={submitButton.status}
       >
-        Supply
+        {submitButton.content}
       </Button>
     </Box>
   );

@@ -1,6 +1,7 @@
 "use client";
 import { ListItem } from "~/components";
 import { Form } from "./Form";
+import { useState } from "react";
 
 const items: Array<ListItem> = [
   {
@@ -32,6 +33,23 @@ const items: Array<ListItem> = [
   },
 ];
 
-export const Repay = () => <Form items={items} />;
+export const Withdraw = () => {
+  const [value, setValue] = useState("");
+  const onclick = () => {};
+  return (
+    <Form
+      items={items}
+      decimals={18}
+      maxHandler={() => {}}
+      setValue={setValue}
+      value={value}
+      submitButton={{
+        onclick,
+        status: false,
+        content: "Withdraw",
+      }}
+    />
+  );
+};
 
-export default Repay;
+export default Withdraw;
