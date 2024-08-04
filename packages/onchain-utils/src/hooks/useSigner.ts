@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useAccountStore } from "@repo/shared";
 import { getWalletExtension } from "@repo/shared";
 import { Signer } from "@polkadot/api/types";
-import { web3Enable, web3FromAddress } from "@polkadot/extension-dapp";
 
 interface UseSignerResult {
   signer: Signer | null;
@@ -23,8 +22,12 @@ export const useSigner = (): UseSignerResult => {
       if (!walletExtension.enable)
         throw new Error(`Extension does not support enable`);
 
+      const { web3Enable, web3FromAddress } = await import(
+        "@polkadot/extension-dapp"
+      );
+
       // const injector = await walletExtension.enable(activeAccount);
-      const extensions = await web3Enable("kylix");
+      await web3Enable("kylix");
       const injector = await web3FromAddress(activeAccount);
       setSigner(injector.signer);
     };

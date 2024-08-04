@@ -7,9 +7,7 @@ interface IO<P, O> {
 
 interface GetLendingPools extends IO<[], LendingPoolsResponse> {}
 
-type IOCollection = {
+export type IOCollection = {
   getLendingPools: GetLendingPools;
   getLending: GetLendingPools;
 };
-
-export type { IOCollection };
