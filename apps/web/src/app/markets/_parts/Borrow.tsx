@@ -12,7 +12,7 @@ const Borrow = () => {
 
   return (
     <Card
-      title="Total Supply"
+      title="Total Borrow"
       icon={Icons.WalletFill}
       rightComponent={
         <Typography variant="h5" className="text-primary-800">
