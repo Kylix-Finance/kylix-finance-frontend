@@ -46,7 +46,7 @@ const placeholderData = Array.from({ length: 5 }).map(() => ({
 }));
 
 const MarketsTable = () => {
-  const { lendingPool, isLoading } = useGetLendingPools();
+  const { lendingPool } = useGetLendingPools();
 
   const router = useRouter();
 
@@ -74,7 +74,7 @@ const MarketsTable = () => {
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
       <Table<TKey>
-        isLoading={isLoading}
+        isLoading={!lendingPool}
         tRowProps={{
           className: "cursor-pointer",
         }}

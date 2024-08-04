@@ -6,7 +6,9 @@ import { Card } from "~/components";
 import Skeleton from "~/components/Skeleton";
 
 const Borrow = () => {
-  const { totalBorrow, isLoading } = useGetLendingPools();
+  const { totalBorrow } = useGetLendingPools();
+
+  console.log("totalBorrow", totalBorrow);
 
   return (
     <Card
@@ -14,10 +16,8 @@ const Borrow = () => {
       icon={Icons.WalletFill}
       rightComponent={
         <Typography variant="h5" className="text-primary-800">
-          <Skeleton isLoading={isLoading} minWidth={80}>
-            {totalBorrow !== undefined
-              ? `$ ${totalBorrow.toLocaleString()}`
-              : "Unavailable"}
+          <Skeleton isLoading={!totalBorrow} minWidth={80}>
+            {totalBorrow ? `$ ${totalBorrow.toLocaleString()}` : "Unavailable"}
           </Skeleton>
         </Typography>
       }
