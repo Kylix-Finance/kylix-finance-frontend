@@ -123,6 +123,12 @@ importers:
       '@repo/onchain-utils':
         specifier: workspace:*
         version: link:../../packages/onchain-utils
+      '@repo/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       '@repo/wallet-modal':
         specifier: workspace:*
         version: link:../../packages/wallet-modal
@@ -178,6 +184,9 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
@@ -292,7 +301,73 @@ importers:
         specifier: ^5.3.3
         version: 5.5.3
 
+  packages/types: {}
+
   packages/typescript-config: {}
+
+  packages/ui:
+    dependencies:
+      '@emotion/react':
+        specifier: ^11.11.4
+        version: 11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
+      '@emotion/styled':
+        specifier: ^11.11.5
+        version: 11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
+      '@mui/icons-material':
+        specifier: ^5.16.0
+        version: 5.16.4(@mui/material@5.16.4(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
+      '@mui/lab':
+        specifier: 5.0.0-alpha.171
+        version: 5.0.0-alpha.171(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@mui/material@5.16.4(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
+      '@mui/material':
+        specifier: ^5.16.0
+        version: 5.16.4(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
+      '@mui/material-nextjs':
+        specifier: ^5.15.11
+        version: 5.16.4(@emotion/cache@11.13.0)(@mui/material@5.16.4(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(next@15.0.0-rc.0(@babel/core@7.24.9)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
+      '@mui/styles':
+        specifier: ^5.16.4
+        version: 5.16.4(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
+      '@mui/utils':
+        specifier: ^5.16.1
+        version: 5.16.4(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../utils
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      date-fns:
+        specifier: ^3.6.0
+        version: 3.6.0
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+      react:
+        specifier: 19.0.0-rc-f994737d14-20240522
+        version: 19.0.0-rc-f994737d14-20240522
+      react-dom:
+        specifier: 19.0.0-rc-f994737d14-20240522
+        version: 19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522)
+      zustand:
+        specifier: ^4.5.4
+        version: 4.5.4(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
+    devDependencies:
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../types
+      '@types/react':
+        specifier: ^18
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: ^18
+        version: 18.3.0
+
+  packages/utils:
+    dependencies:
+      zustand:
+        specifier: ^4.5.4
+        version: 4.5.4(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
 
   packages/wallet-modal:
     dependencies:

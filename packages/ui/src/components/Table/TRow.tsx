@@ -2,7 +2,7 @@ import { TableCellProps, TableRow } from "@mui/material";
 
 import TCell from "./TCell";
 import { Header, TData, TRowProps } from "./types";
-import { Skeleton } from "@repo/ui";
+import { Skeleton } from "../Skeleton";
 
 interface Props<K extends string> extends TRowProps {
   headers: Header;

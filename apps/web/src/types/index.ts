@@ -25,16 +25,6 @@ export type NotificationType =
   | "success"
   | "message";
 
-export type VoidNoArgs = () => void;
-
-export type StoreSetFn<StoreType> = (
-  partial:
-    | StoreType
-    | Partial<StoreType>
-    | ((state: StoreType) => StoreType | Partial<StoreType>),
-  replace?: boolean | undefined
-) => void;
-
 export type NotificationParams = {
   type: "information" | "warning" | "error" | "success" | "message";
   message: string;

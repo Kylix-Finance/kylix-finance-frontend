@@ -7,7 +7,13 @@ interface Props extends SkeletonProps {
   minWidth?: CSSProperties["minWidth"];
 }
 
-const Skeleton = ({ minWidth, isLoading, children, style, ...rest }: Props) => {
+export const Skeleton = ({
+  minWidth,
+  isLoading,
+  children,
+  style,
+  ...rest
+}: Props) => {
   if (isLoading) {
     return (
       <MuiSkeleton
@@ -21,5 +27,3 @@ const Skeleton = ({ minWidth, isLoading, children, style, ...rest }: Props) => {
   }
   return children;
 };
-
-export default Skeleton;

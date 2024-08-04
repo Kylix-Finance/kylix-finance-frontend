@@ -1,9 +1,9 @@
 "use client";
 import { Typography } from "@mui/material";
 import { useGetLendingPools } from "@repo/onchain-utils";
+import { Skeleton } from "@repo/ui";
 import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
-import Skeleton from "~/components/Skeleton";
 
 const Borrow = () => {
   const { totalBorrow } = useGetLendingPools();
