@@ -59,11 +59,12 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
         );
       } catch (err) {
         setError((err as Error).message);
+        console.log(err);
       } finally {
         setIsSubmitting(false);
       }
     },
-    [api]
+    [api, signer, activeAccount]
   );
 
   return {
