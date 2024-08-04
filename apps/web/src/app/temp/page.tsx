@@ -221,7 +221,7 @@ const SignMessage: React.FC = () => {
 
   // console.log("balaaaanxe", balance);
   // const { data } = useEvent()
-  const { data } = useDownloadEvents();
+  // const { data } = useDownloadEvents();
   // console.log("eveeeeeeeent", data);
   return (
     <div className="flex flex-col gap-3">
