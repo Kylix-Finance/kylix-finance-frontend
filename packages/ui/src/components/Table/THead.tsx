@@ -1,7 +1,5 @@
 import {
   Box,
-  Paper,
-  PaperProps,
   TableHead,
   TableRow,
   TableRowProps,
@@ -11,65 +9,78 @@ import {
 import { visuallyHidden } from "@mui/utils";
 
 import TCell from "./TCell";
-import { Order, TData, THeadProps } from "./types";
-import { Icons } from "~/assets/svgs";
+import { Order, THeadProps } from "./types";
+import { SortIcon } from "./SortIcon";
 
-interface Props<K extends string> extends THeadProps {
-  headers: Array<K>;
-  tRowProps?: TableRowProps;
+export type Headers<K extends string | number | symbol> = Record<
+  K,
+  string | number | undefined
+>;
+
+interface Props<Schema, ExtraFields extends string = string>
+  extends THeadProps {
   disablePadding?: boolean;
+  headers: Partial<Headers<keyof Schema>>;
+  hiddenTHeads?: Array<keyof Schema | ExtraFields>;
   numeric?: boolean;
-  orderBy: string;
   order: Order;
-  hiddenTHeadsText?: Array<K>;
+  orderBy: keyof Schema;
+  tRowProps?: TableRowProps;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
-    property: keyof TData<K>
+    property: keyof Schema
   ) => void;
 }
 
-function THead<K extends string>({
+function THead<Schema, ExtraFields extends string = string>({
   disablePadding,
   headers,
+  hiddenTHeads,
   numeric,
   onRequestSort,
   order,
   orderBy,
   tRowProps,
-  hiddenTHeadsText,
   ...rest
-}: Props<K>) {
+}: Props<Schema, ExtraFields>) {
   const createSortHandler =
-    (property: K) => (event: React.MouseEvent<unknown>) => {
+    (property: keyof Schema) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
+
+  const isHeaderHidden = (name: string) =>
+    hiddenTHeads?.includes(name as keyof Schema);
 
   return (
     <TableHead {...rest}>
       <TableRow {...tRowProps}>
-        {headers.map((header) => (
+        {Object.entries(headers).map(([name, value], index) => (
           <TCell
             className="!bg-[#FFF]"
-            key={header}
+            key={`${name}+${index}`}
             align={numeric ? "right" : "left"}
             padding={disablePadding ? "none" : "checkbox"}
-            sortDirection={orderBy === header ? order : false}
+            sortDirection={orderBy === name ? order : false}
           >
-            <TableSortLabel
-              IconComponent={Icons.Sort}
-              active={orderBy === header}
-              direction={orderBy === header ? order : "asc"}
-              onClick={createSortHandler(header)}
-            >
-              <Typography variant="s">
-                {hiddenTHeadsText?.includes(header) ? "" : header}
-              </Typography>
-              {orderBy === header ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </Box>
-              ) : null}
-            </TableSortLabel>
+            {isHeaderHidden(name) ? (
+              ""
+            ) : (
+              <TableSortLabel
+                IconComponent={SortIcon}
+                active={orderBy === name}
+                direction={orderBy === name ? order : "asc"}
+                onClick={createSortHandler(name as keyof Schema)}
+              >
+                <Typography variant="s">{value as string}</Typography>
+                {orderBy === name ? (
+                  <Box component="span" sx={visuallyHidden}>
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
+                  </Box>
+                ) : null}
+              </TableSortLabel>
+            )}
           </TCell>
         ))}
       </TableRow>

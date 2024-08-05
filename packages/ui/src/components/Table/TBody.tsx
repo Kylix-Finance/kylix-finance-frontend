@@ -1,24 +1,23 @@
 import { Box, TableBody, TableRow } from "@mui/material";
 
-import TRow from "./TRow";
-import { TableData, Header, TBodyProps, TRowProps } from "./types";
-import TCell from "./TCell";
+import TRow, { CellValueComponent, CellValueComponents } from "./TRow";
+import { TableData, Header, TBodyProps, TRowProps, OnTRowClick } from "./types";
 import { Fragment } from "react";
+import { Headers } from "./THead";
 
-export type OnTRowClick = (index: number) => void;
-
-interface Props<K extends string> {
-  data: TableData<K>;
-  headers: Header;
+interface Props<Schema, ExtraFields extends string = string> {
+  data: TableData<Schema>;
+  headers: Partial<Headers<keyof Schema>>;
   isLoading?: boolean;
   rowSpacing?: string;
   tBody?: TBodyProps;
   tCellClassnames?: string;
   tRowProps?: TRowProps;
-  onTRowClick?: OnTRowClick;
+  onTRowClick?: OnTRowClick<Schema>;
+  components: CellValueComponents<Schema, ExtraFields>;
 }
 
-function TBody<K extends string>({
+function TBody<Schema, ExtraFields extends string = string>({
   data,
   headers,
   isLoading,
@@ -27,7 +26,8 @@ function TBody<K extends string>({
   tBody,
   tCellClassnames,
   tRowProps,
-}: Props<K>) {
+  components,
+}: Props<Schema, ExtraFields>) {
   return (
     <TableBody {...tBody}>
       {data.map((row, index) => (
@@ -38,9 +38,10 @@ function TBody<K extends string>({
             rowSpacing={rowSpacing}
             headers={headers}
             row={row}
+            components={components}
             {...tRowProps}
             onClick={() => {
-              onTRowClick?.(index);
+              onTRowClick?.(row);
             }}
           />
           {rowSpacing && (

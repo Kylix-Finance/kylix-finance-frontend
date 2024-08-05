@@ -3,31 +3,36 @@
 import { Table as TableBase, TableContainer } from "@mui/material";
 import React, { ReactNode } from "react";
 
-import TBody, { OnTRowClick } from "./TBody";
-import THead from "./THead";
+import TBody from "./TBody";
+import THead, { Headers } from "./THead";
 import TablePagination from "./TablePagination";
 
 import {
+  OnTRowClick,
   Order,
   TableData,
   TBaseProps,
   TBodyProps,
   TContainerProps,
-  TData,
   THeadProps,
   TRowProps,
 } from "./types";
-import { GlobalStore } from "~/store";
+import { TableStore } from "../../store";
+import { CellValueComponents } from "./TRow";
 
-interface Props<K extends string> {
-  data: TableData<K>;
-  defaultSortKey: keyof TData<K>;
+// ? ExtraData is the data which is not going to render in the table
+
+interface Props<Schema, ExtraFields extends string = string> {
+  components: CellValueComponents<Schema, ExtraFields>;
+  data: TableData<Schema>;
+  defaultSortKey: keyof Schema;
   hasPagination?: boolean;
-  hiddenTHeadsText?: Array<K>;
+  headers: Partial<Headers<keyof Schema | ExtraFields>>;
+  hiddenTHeads?: Array<keyof Schema | ExtraFields>;
   isLoading?: boolean;
-  onTRowClick?: OnTRowClick;
+  onTRowClick?: OnTRowClick<Schema>;
   rowSpacing?: string;
-  tableName: GlobalStore.TableName;
+  tableName: TableStore.TableName;
   tBaseProps?: TBaseProps;
   tBodyProps?: TBodyProps;
   tCellClassnames?: string;
@@ -36,12 +41,15 @@ interface Props<K extends string> {
   tRowProps?: TRowProps;
 }
 
-export function Table<K extends string>({
+export function Table<Schema, ExtraFields extends string = string>({
+  components,
   data,
   defaultSortKey,
   hasPagination = false,
-  hiddenTHeadsText,
+  headers,
+  hiddenTHeads,
   isLoading,
+  onTRowClick,
   rowSpacing,
   tableName,
   tBaseProps,
@@ -50,18 +58,15 @@ export function Table<K extends string>({
   tContainerProps,
   tHeadProps,
   tRowProps,
-  onTRowClick,
-}: Props<K>) {
-  type DataItemKey = keyof TData<K>;
+}: Props<Schema, ExtraFields>) {
+  type Key = keyof Schema;
 
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<DataItemKey>(defaultSortKey);
-
-  const headers = Array.from(new Set(data.flatMap(Object.keys))) as K[];
+  const [orderBy, setOrderBy] = React.useState<Key>(defaultSortKey);
 
   const handleRequestSort = (
     _event: React.MouseEvent<unknown>,
-    property: DataItemKey
+    property: Key
   ) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -86,14 +91,15 @@ export function Table<K extends string>({
     >
       <TableBase {...tBaseProps} stickyHeader>
         <THead
+          hiddenTHeads={hiddenTHeads}
           headers={headers}
-          hiddenTHeadsText={hiddenTHeadsText}
           onRequestSort={handleRequestSort}
           order={order}
           orderBy={orderBy}
           {...tHeadProps}
         />
         <TBody
+          components={components}
           data={sortedData}
           headers={headers}
           isLoading={isLoading}
@@ -119,13 +125,10 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-function getComparator<Key extends keyof any>(
+function getComparator<Schema>(
   order: Order,
-  orderBy: Key
-): (
-  a: { [key in Key]: number | string | ReactNode },
-  b: { [key in Key]: number | string | ReactNode }
-) => number {
+  orderBy: keyof Schema
+): (a: Schema, b: Schema) => number {
   return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);

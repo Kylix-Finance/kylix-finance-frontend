@@ -1,39 +1,58 @@
 import { TableCellProps, TableRow } from "@mui/material";
 
 import TCell from "./TCell";
-import { Header, TData, TRowProps } from "./types";
+import { TRowProps } from "./types";
 import { Skeleton } from "../Skeleton";
+import { Headers } from "./THead";
+import React from "react";
 
-interface Props<K extends string> extends TRowProps {
-  headers: Header;
+export type CellValueComponent<Schema> = (item: Schema) => React.ReactNode;
+
+export type CellValueComponents<
+  Schema,
+  ExtraFields extends string = string,
+> = Partial<Record<keyof Schema | ExtraFields, CellValueComponent<Schema>>>;
+
+interface Props<Schema, ExtraFields extends string = string> extends TRowProps {
+  components: CellValueComponents<Schema, ExtraFields>;
+  headers: Partial<Headers<keyof Schema>>;
   isLoading?: boolean;
-  row: TData<K>;
+  row: Schema;
   rowSpacing?: string;
   tCellClassnames?: string;
   tCellProps?: TableCellProps;
 }
 
-function TRow<K extends string>({
-  headers,
-  row,
-  tCellProps,
-  tCellClassnames,
-  rowSpacing,
+function TRow<Schema, ExtraFields extends string = string>({
   className,
+  components,
+  headers,
   isLoading,
+  row,
+  rowSpacing,
+  tCellClassnames,
+  tCellProps,
   ...rest
-}: Props<K>) {
+}: Props<Schema, ExtraFields>) {
+  type Key = keyof Schema;
+
   return (
     <TableRow className={`bg-light ${className}`} {...rest}>
-      {headers.map((header) => {
+      {Object.entries(headers).map(([name], index) => {
+        // TODO: Remove assertion
+        const ValueComponent = components[name as Key] as
+          | CellValueComponent<Schema>
+          | undefined;
+
         return (
           <TCell
             className={`rounded-none first:rounded-[8px_0_0_8px] last:rounded-[0_8px_8px_0] !border-none ${tCellClassnames}`}
             {...tCellProps}
-            key={header}
+            key={`${name}+${index}`}
           >
             <Skeleton height={40} isLoading={isLoading}>
-              {row[header as keyof TData<K>]}
+              {/* TODO: Convert to component - ValueComponent */}
+              <>{ValueComponent ? ValueComponent(row) : row[name as Key]}</>
             </Skeleton>
           </TCell>
         );
