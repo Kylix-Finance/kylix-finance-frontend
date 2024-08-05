@@ -13,6 +13,7 @@ import {
 import { formatUnit } from "@repo/onchain-utils";
 import { useEffect } from "react";
 import { notify } from "~/components";
+import { useGetAsset } from "~/hooks/api";
 
 // import {
 //   useActiveAccount,
@@ -223,12 +224,19 @@ const SignMessage: React.FC = () => {
   // const { data } = useEvent()
   // const { data } = useDownloadEvents();
   // console.log("eveeeeeeeent", data);
+  const { data } = useGetAsset({
+    symbol: "BTC",
+    size: "64x64",
+  });
+  console.log("data", data);
+
   return (
     <div className="flex flex-col gap-3">
       <div>{/* <p>Balance is : {balance}</p> */}</div>
       <button onClick={() => submitSupply(257, BigInt(parseUnit("555", 18)))}>
         Supply
       </button>
+      <button>Get Assets</button>
     </div>
   );
 };

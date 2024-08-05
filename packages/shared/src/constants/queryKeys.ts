@@ -19,6 +19,7 @@ const keys = {
   LENDING_POOLS: "LENDING_POOLS",
   ASSET: "ASSET",
   METADATA: "METADATA",
+  TOKEN: "TOKEN",
 };
 
 export const queryKeys = {
@@ -40,4 +41,5 @@ export const queryKeys = {
     address,
     assetId,
   ],
+  token: (symbol: string, size: string) => [baseKey, keys.TOKEN, symbol, size],
 };

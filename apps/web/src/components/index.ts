@@ -9,6 +9,7 @@ import LineBreak from "./LineBreak";
 import List, { ListItem } from "./List";
 import Modal from "./Modal";
 import TabsManager, { TabType } from "./TabsManager";
+import Icon from "./Icon";
 export {
   Card,
   Header,
@@ -21,5 +22,6 @@ export {
   List,
   Modal,
   TabsManager,
+  Icon,
 };
 export type { ListItem, TabType };

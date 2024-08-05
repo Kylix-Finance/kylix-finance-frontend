@@ -30,3 +30,10 @@ export type NotificationParams = {
   message: string;
   title: string;
 };
+export interface Asset {
+  id: number;
+  name: string;
+  symbol: string;
+  slug: string;
+  image: string;
+}
