@@ -22,12 +22,12 @@ import { CellValueComponents } from "./TRow";
 
 // ? ExtraData is the data which is not going to render in the table
 
-interface Props<Schema, ExtraFields extends string = string> {
+interface Props<Schema, ExtraFields extends string> {
   components: CellValueComponents<Schema, ExtraFields>;
   data: TableData<Schema>;
   defaultSortKey: keyof Schema;
   hasPagination?: boolean;
-  headers: Partial<Headers<keyof Schema | ExtraFields>>;
+  headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   hiddenTHeads?: Array<keyof Schema | ExtraFields>;
   isLoading?: boolean;
   onTRowClick?: OnTRowClick<Schema>;

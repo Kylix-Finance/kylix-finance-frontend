@@ -50,7 +50,7 @@ const MarketsTable = () => {
 
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
-      <Table<TableData[number]>
+      <Table<TableData[number], "actions">
         headers={{
           asset: "Asset",
           collateralQ: "Collateral Q",

@@ -7,14 +7,14 @@ import { Headers } from "./THead";
 
 interface Props<Schema, ExtraFields extends string = string> {
   data: TableData<Schema>;
-  headers: Partial<Headers<keyof Schema>>;
+  headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   isLoading?: boolean;
   rowSpacing?: string;
   tBody?: TBodyProps;
   tCellClassnames?: string;
   tRowProps?: TRowProps;
   onTRowClick?: OnTRowClick<Schema>;
-  components: CellValueComponents<Schema, ExtraFields>;
+  components: Partial<CellValueComponents<Schema, ExtraFields>>;
 }
 
 function TBody<Schema, ExtraFields extends string = string>({

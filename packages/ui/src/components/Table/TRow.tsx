@@ -15,7 +15,7 @@ export type CellValueComponents<
 
 interface Props<Schema, ExtraFields extends string = string> extends TRowProps {
   components: CellValueComponents<Schema, ExtraFields>;
-  headers: Partial<Headers<keyof Schema>>;
+  headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   isLoading?: boolean;
   row: Schema;
   rowSpacing?: string;

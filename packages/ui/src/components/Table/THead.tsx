@@ -20,7 +20,7 @@ export type Headers<K extends string | number | symbol> = Record<
 interface Props<Schema, ExtraFields extends string = string>
   extends THeadProps {
   disablePadding?: boolean;
-  headers: Partial<Headers<keyof Schema>>;
+  headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   hiddenTHeads?: Array<keyof Schema | ExtraFields>;
   numeric?: boolean;
   order: Order;
