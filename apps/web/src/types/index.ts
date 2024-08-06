@@ -1,4 +1,4 @@
-import { ComponentType, SVGProps } from "react";
+import { ComponentType, ReactNode, SVGProps } from "react";
 export type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 export type SocialMedia = {
   name: string;
@@ -36,4 +36,8 @@ export interface Asset {
   symbol: string;
   slug: string;
   image: string;
+}
+
+export interface StaticData {
+  coins: Record<string, Icon>;
 }

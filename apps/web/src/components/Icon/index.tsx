@@ -1,36 +1,34 @@
 "use client";
-import { Box } from "@mui/material";
-import { Skeleton } from "@repo/ui";
-import Image from "next/image";
-import { useGetAsset } from "~/hooks/api";
+import { data } from "~/config/data";
+
 interface Props {
   symbol: string;
   width?: string | number | undefined;
   height?: string | number | undefined;
+  className?: string;
 }
 
-const Icon = ({ symbol, height = "32px", width = "32px" }: Props) => {
-  const { data, isLoading } = useGetAsset({
-    size: "128x128",
-    symbol,
-  });
+const Icon = ({
+  symbol,
+  height = "32px",
+  width = "32px",
+  className,
+}: Props) => {
+  const IconComponent = data.coins[symbol];
+
+  if (!IconComponent) {
+    return;
+  }
 
   return (
-    <Box
-      sx={{
-        width,
-        height,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        position: "relative",
-      }}
-    >
-      {" "}
-      <Skeleton isLoading={isLoading} height={"64px"} width={"64px"}>
-        {data && <Image src={data.image} alt={data.name} fill />}
-      </Skeleton>
-    </Box>
+    <IconComponent
+      height={height}
+      width={width}
+      preserveAspectRatio="xMidYMid meet"
+      className={className}
+      viewBox="0 0 32 32"
+    />
   );
 };
+
 export default Icon;

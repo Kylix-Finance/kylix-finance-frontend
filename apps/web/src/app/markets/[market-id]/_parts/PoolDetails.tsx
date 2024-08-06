@@ -42,7 +42,7 @@ const PoolDetails = () => {
             <Icons.LeftArrow className="text-black" />
           </Link>
           <Box className="p-1.5 flex gap-2 items-center">
-            <Icon symbol="USDC" />{" "}
+            <Icon symbol="BTC" />{" "}
             <Box className="flex flex-col">
               <Typography variant="subtitle2" className="text-primary-800">
                 USDC

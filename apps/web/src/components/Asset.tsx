@@ -10,8 +10,8 @@ export const Asset = ({
   label: string;
 }) => {
   return (
-    <Box className="flex flex-row items-center justify-start gap-[8px]">
-      <Icon symbol="ARB" />
+    <Box className="flex flex-row align-middle items-center justify-start gap-[8px]">
+      <Icon symbol="Aave" />
       <Box className="flex flex-col">
         <Typography variant="md" fontWeight={"bold"}>
           {label}
