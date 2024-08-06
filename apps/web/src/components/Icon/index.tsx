@@ -1,3 +1,4 @@
+"use client";
 import { Box } from "@mui/material";
 import { Skeleton } from "@repo/ui";
 import Image from "next/image";

@@ -2,7 +2,7 @@ import { Box, Card, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { Icons } from "~/assets/svgs";
-import { List, ListItem } from "~/components";
+import { Icon, List, ListItem } from "~/components";
 
 const items: Array<ListItem> = [
   {
@@ -42,12 +42,7 @@ const PoolDetails = () => {
             <Icons.LeftArrow className="text-black" />
           </Link>
           <Box className="p-1.5 flex gap-2 items-center">
-            <Image
-              src="/kylix-chip.svg"
-              alt="Coin icon"
-              width={24}
-              height={24}
-            />
+            <Icon symbol="USDC" />{" "}
             <Box className="flex flex-col">
               <Typography variant="subtitle2" className="text-primary-800">
                 USDC
