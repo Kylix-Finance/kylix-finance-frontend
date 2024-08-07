@@ -19,6 +19,8 @@
     "start:production": "next start"
   },
   "dependencies": {
+    "@dicebear/collection": "^9.2.1",
+    "@dicebear/core": "^9.2.1",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.16.0",
@@ -28,8 +30,8 @@
     "@mui/styles": "^5.16.4",
     "@mui/utils": "^5.16.1",
     "@repo/onchain-utils": "workspace:*",
-    "@repo/ui": "workspace:*",
     "@repo/shared": "workspace:*",
+    "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",
     "@repo/wallet-modal": "workspace:*",
     "@svgr/webpack": "^8.1.0",
