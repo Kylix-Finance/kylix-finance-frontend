@@ -49,28 +49,27 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
         });
         return;
       }
-      setIsSubmitting(true);
       setPhase({
         type: "information",
         title: "Starting",
         message: "Starting transaction...",
       });
       try {
+        setIsSubmitting(true);
         api.setSigner(signer);
         //@ts-expect-error type
         const extrinsic = api?.tx?.lending?.supply(asset, balance);
         //@ts-expect-error type
         const unsubscribe = await extrinsic.signAndSend(
           activeAccount.address,
-          ({ status, events, dispatchError }: SubmittableResultValue) => {
+          ({ status, dispatchError }: SubmittableResultValue) => {
             if (dispatchError) {
               if (dispatchError.isModule) {
                 // Extract the error
                 const decoded = api.registry.findMetaError(
                   dispatchError.asModule
                 );
-                const { method, section, docs } = decoded;
-                const errorMsg = `${section}.${method}: ${docs.join(" ")}`;
+                const { docs } = decoded;
                 setPhase({
                   type: "error",
                   title: "Transaction failed",
@@ -83,8 +82,8 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
                   message: dispatchError.toString(),
                 });
               }
+              setIsSubmitting(false);
             } else {
-              // Update phase message based on transaction status
               if (status.isInBlock) {
                 setPhase({
                   type: "information",
@@ -103,7 +102,7 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
                   title: "Finalized",
                   message: "Transaction finalized.",
                 });
-                console.log("Transaction finalized");
+                setIsSubmitting(false);
                 unsubscribe();
               } else {
                 setPhase({
@@ -122,9 +121,8 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
           title: "An error occurred during the transaction.",
           message: errorMsg,
         });
-        console.log(err);
-      } finally {
         setIsSubmitting(false);
+        console.log(err);
       }
     },
     [api, signer, activeAccount]

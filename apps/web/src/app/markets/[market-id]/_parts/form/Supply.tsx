@@ -44,7 +44,7 @@ const items: Array<ListItem> = [
 
 export const Supply = () => {
   const [value, setValue] = useState("");
-  const [status, setStatus] = useState(false);
+  const [isValid, setIsValid] = useState(false);
   const { data: assetMetaData, isLoading } = useMetadata(ASSET_ID);
   const { balance } = useBalance({ assetId: ASSET_ID });
   const { submitSupply, isSubmitting, phase } = useSupply();
@@ -60,8 +60,8 @@ export const Supply = () => {
   }, [phase]);
 
   useEffect(() => {
-    setStatus(!balance && isSubmitting && !isLoading);
-  }, [balance, isLoading, isSubmitting]);
+    setIsValid(!balance || isLoading || isSubmitting || !assetMetaData);
+  }, [assetMetaData, balance, isLoading, isSubmitting]);
 
   const handleClick = useCallback(() => {
     submitSupply(
@@ -72,7 +72,7 @@ export const Supply = () => {
 
   const handleMax = useCallback(() => {
     if (balance) {
-      setValue(balance);
+      setValue(balance.toString());
     }
   }, [balance]);
 
@@ -83,10 +83,10 @@ export const Supply = () => {
       maxHandler={handleMax}
       setValue={setValue}
       value={value}
+      disabled={isValid}
       submitButton={{
         onclick: handleClick,
-        status,
-        content: "Supply",
+        content: isValid ? "Loading" : "Supply",
       }}
     />
   );

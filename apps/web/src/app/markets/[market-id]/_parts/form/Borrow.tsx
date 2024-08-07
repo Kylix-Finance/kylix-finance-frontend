@@ -43,9 +43,9 @@ export const Borrow = () => {
       maxHandler={() => {}}
       setValue={setValue}
       value={value}
+      disabled={true}
       submitButton={{
         onclick,
-        status: false,
         content: "Borrow",
       }}
     />

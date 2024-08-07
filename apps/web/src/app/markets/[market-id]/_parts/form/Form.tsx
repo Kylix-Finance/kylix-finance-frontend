@@ -15,7 +15,6 @@ import { getDecimalRegex } from "~/utils";
 interface SubmitButton {
   content: string;
   onclick: MouseEventHandler<HTMLButtonElement>;
-  status: boolean;
 }
 
 interface Props {
@@ -25,6 +24,7 @@ interface Props {
   maxHandler: MouseEventHandler<HTMLButtonElement>;
   decimals: number;
   submitButton: SubmitButton;
+  disabled: boolean;
 }
 
 export const Form = ({
@@ -34,6 +34,7 @@ export const Form = ({
   value,
   decimals,
   submitButton,
+  disabled,
 }: Props) => {
   const handleInputChange: TextFieldProps["onChange"] = ({
     target: { value },
@@ -55,6 +56,7 @@ export const Form = ({
         >
           <p className="text-primary-800 font-bold text-sm leading-5">Amount</p>
           <Button
+            disabled={disabled}
             className="!text-primary-500 !capitalize"
             variant="text"
             disableElevation
@@ -65,6 +67,7 @@ export const Form = ({
           </Button>
         </Box>
         <TextField
+          disabled={disabled}
           value={value}
           onChange={handleInputChange}
           size="small"
@@ -89,7 +92,7 @@ export const Form = ({
         size="large"
         disableElevation
         onClick={submitButton.onclick}
-        disabled={submitButton.status}
+        disabled={disabled}
       >
         {submitButton.content}
       </Button>

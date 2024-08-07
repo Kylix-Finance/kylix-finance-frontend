@@ -43,9 +43,9 @@ export const Repay = () => {
       maxHandler={() => {}}
       setValue={setValue}
       value={value}
+      disabled={true}
       submitButton={{
         onclick,
-        status: false,
         content: "Repay",
       }}
     />

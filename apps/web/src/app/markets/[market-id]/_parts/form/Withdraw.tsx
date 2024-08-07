@@ -43,9 +43,9 @@ export const Withdraw = () => {
       maxHandler={() => {}}
       setValue={setValue}
       value={value}
+      disabled={true}
       submitButton={{
         onclick,
-        status: false,
         content: "Withdraw",
       }}
     />
