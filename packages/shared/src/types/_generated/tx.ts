@@ -1,6 +1,5 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
-//@ts-nocheck
 
 // import type lookup before we augment - in some environments
 // this is required to allow for ambient/previous definitions
@@ -29,13 +28,7 @@ import type {
   MultiAddress,
 } from "@polkadot/types/interfaces/runtime";
 
-export type __AugmentedSubmittable = AugmentedSubmittable<() => unknown>;
-export type __SubmittableExtrinsic<ApiType extends ApiTypes> =
-  SubmittableExtrinsic<ApiType>;
-export type __SubmittableExtrinsicFunction<ApiType extends ApiTypes> =
-  SubmittableExtrinsicFunction<ApiType>;
-
-interface AugmentedSubmittables<ApiType extends ApiTypes> {
+export interface ChainTX {
   assets: {
     /**
      * See [`Pallet::approve_transfer`].
@@ -53,7 +46,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         amount: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress, Compact<u128>]
     >;
     /**
@@ -71,7 +64,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | { Address20: any }
           | string
           | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress]
     >;
     /**
@@ -90,7 +83,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         amount: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress, Compact<u128>]
     >;
     /**
@@ -108,7 +101,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | { Address20: any }
           | string
           | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress]
     >;
     /**
@@ -117,7 +110,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     clearMetadata: AugmentedSubmittable<
       (
         id: Compact<u32> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>]
     >;
     /**
@@ -136,7 +129,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         minBalance: u128 | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress, u128]
     >;
     /**
@@ -145,7 +138,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     destroyAccounts: AugmentedSubmittable<
       (
         id: Compact<u32> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>]
     >;
     /**
@@ -154,7 +147,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     destroyApprovals: AugmentedSubmittable<
       (
         id: Compact<u32> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>]
     >;
     /**
@@ -163,7 +156,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     finishDestroy: AugmentedSubmittable<
       (
         id: Compact<u32> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>]
     >;
     /**
@@ -211,7 +204,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
         minBalance: Compact<u128> | AnyNumber | Uint8Array,
         isSufficient: bool | boolean | Uint8Array,
         isFrozen: bool | boolean | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [
         Compact<u32>,
         MultiAddress,
@@ -247,7 +240,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | { Address20: any }
           | string
           | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress, MultiAddress]
     >;
     /**
@@ -256,7 +249,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     forceClearMetadata: AugmentedSubmittable<
       (
         id: Compact<u32> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>]
     >;
     /**
@@ -276,7 +269,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | Uint8Array,
         isSufficient: bool | boolean | Uint8Array,
         minBalance: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress, bool, Compact<u128>]
     >;
     /**
@@ -289,7 +282,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
         symbol: Bytes | string | Uint8Array,
         decimals: u8 | AnyNumber | Uint8Array,
         isFrozen: bool | boolean | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, Bytes, Bytes, u8, bool]
     >;
     /**
@@ -317,7 +310,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         amount: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress, MultiAddress, Compact<u128>]
     >;
     /**
@@ -335,7 +328,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | { Address20: any }
           | string
           | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress]
     >;
     /**
@@ -344,7 +337,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     freezeAsset: AugmentedSubmittable<
       (
         id: Compact<u32> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>]
     >;
     /**
@@ -363,7 +356,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         amount: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress, Compact<u128>]
     >;
     /**
@@ -373,7 +366,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
       (
         id: Compact<u32> | AnyNumber | Uint8Array,
         allowBurn: bool | boolean | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, bool]
     >;
     /**
@@ -391,7 +384,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | { Address20: any }
           | string
           | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress]
     >;
     /**
@@ -403,7 +396,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
         name: Bytes | string | Uint8Array,
         symbol: Bytes | string | Uint8Array,
         decimals: u8 | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, Bytes, Bytes, u8]
     >;
     /**
@@ -413,7 +406,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
       (
         id: Compact<u32> | AnyNumber | Uint8Array,
         minBalance: u128 | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, u128]
     >;
     /**
@@ -449,7 +442,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | { Address20: any }
           | string
           | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress, MultiAddress, MultiAddress]
     >;
     /**
@@ -458,7 +451,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     startDestroy: AugmentedSubmittable<
       (
         id: Compact<u32> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>]
     >;
     /**
@@ -476,7 +469,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | { Address20: any }
           | string
           | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress]
     >;
     /**
@@ -485,7 +478,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     thawAsset: AugmentedSubmittable<
       (
         id: Compact<u32> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>]
     >;
     /**
@@ -494,7 +487,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     touch: AugmentedSubmittable<
       (
         id: Compact<u32> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>]
     >;
     /**
@@ -512,7 +505,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | { Address20: any }
           | string
           | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress]
     >;
     /**
@@ -531,7 +524,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         amount: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress, Compact<u128>]
     >;
     /**
@@ -559,7 +552,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         amount: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress, MultiAddress, Compact<u128>]
     >;
     /**
@@ -578,7 +571,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         amount: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress, Compact<u128>]
     >;
     /**
@@ -596,13 +589,13 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | { Address20: any }
           | string
           | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u32>, MultiAddress]
     >;
     /**
      * Generic tx
      **/
-    [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    [key: string]: SubmittableExtrinsicFunction<"promise">;
   };
   balances: {
     /**
@@ -620,7 +613,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         newFree: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [MultiAddress, Compact<u128>]
     >;
     /**
@@ -647,7 +640,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         value: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [MultiAddress, MultiAddress, Compact<u128>]
     >;
     /**
@@ -665,7 +658,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         amount: u128 | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [MultiAddress, u128]
     >;
     /**
@@ -684,7 +677,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | Uint8Array,
         newFree: Compact<u128> | AnyNumber | Uint8Array,
         oldReserved: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [MultiAddress, Compact<u128>, Compact<u128>]
     >;
     /**
@@ -702,7 +695,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         value: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [MultiAddress, Compact<u128>]
     >;
     /**
@@ -720,7 +713,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         keepAlive: bool | boolean | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [MultiAddress, bool]
     >;
     /**
@@ -738,7 +731,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         value: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [MultiAddress, Compact<u128>]
     >;
     /**
@@ -756,7 +749,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         value: Compact<u128> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [MultiAddress, Compact<u128>]
     >;
     /**
@@ -765,64 +758,21 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     upgradeAccounts: AugmentedSubmittable<
       (
         who: Vec<AccountId32> | (AccountId32 | string | Uint8Array)[]
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Vec<AccountId32>]
     >;
     /**
      * Generic tx
      **/
-    [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    [key: string]: SubmittableExtrinsicFunction<"promise">;
   };
-  grandpa: {
-    /**
-     * See [`Pallet::note_stalled`].
-     **/
-    noteStalled: AugmentedSubmittable<
-      (
-        delay: u32 | AnyNumber | Uint8Array,
-        bestFinalizedBlockNumber: u32 | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
-      [u32, u32]
-    >;
-    /**
-     * See [`Pallet::report_equivocation`].
-     **/
-    reportEquivocation: AugmentedSubmittable<
-      (
-        equivocationProof:
-          | SpConsensusGrandpaEquivocationProof
-          | { setId?: any; equivocation?: any }
-          | string
-          | Uint8Array,
-        keyOwnerProof: SpCoreVoid | null
-      ) => SubmittableExtrinsic<ApiType>,
-      [SpConsensusGrandpaEquivocationProof, SpCoreVoid]
-    >;
-    /**
-     * See [`Pallet::report_equivocation_unsigned`].
-     **/
-    reportEquivocationUnsigned: AugmentedSubmittable<
-      (
-        equivocationProof:
-          | SpConsensusGrandpaEquivocationProof
-          | { setId?: any; equivocation?: any }
-          | string
-          | Uint8Array,
-        keyOwnerProof: SpCoreVoid | null
-      ) => SubmittableExtrinsic<ApiType>,
-      [SpConsensusGrandpaEquivocationProof, SpCoreVoid]
-    >;
-    /**
-     * Generic tx
-     **/
-    [key: string]: SubmittableExtrinsicFunction<ApiType>;
-  };
+
   lending: {
     /**
      * See [`Pallet::activate_lending_pool`].
      **/
     activateLendingPool: AugmentedSubmittable<
-      (asset: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>,
+      (asset: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<"promise">,
       [u32]
     >;
     /**
@@ -834,14 +784,16 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
         balance: u128 | AnyNumber | Uint8Array,
         collateralAsset: u32 | AnyNumber | Uint8Array,
         collateralBalance: u128 | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [u32, u128, u32, u128]
     >;
     /**
      * See [`Pallet::claim_rewards`].
      **/
     claimRewards: AugmentedSubmittable<
-      (balance: u128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>,
+      (
+        balance: u128 | AnyNumber | Uint8Array
+      ) => SubmittableExtrinsic<"promise">,
       [u128]
     >;
     /**
@@ -852,14 +804,14 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
         id: u32 | AnyNumber | Uint8Array,
         asset: u32 | AnyNumber | Uint8Array,
         balance: u128 | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [u32, u32, u128]
     >;
     /**
      * See [`Pallet::deactivate_lending_pool`].
      **/
     deactivateLendingPool: AugmentedSubmittable<
-      (asset: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>,
+      (asset: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<"promise">,
       [u32]
     >;
     /**
@@ -870,7 +822,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
         asset: u32 | AnyNumber | Uint8Array,
         balance: u128 | AnyNumber | Uint8Array,
         collateralAsset: u32 | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [u32, u128, u32]
     >;
     /**
@@ -881,7 +833,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
         asset1: u32 | AnyNumber | Uint8Array,
         asset2: u32 | AnyNumber | Uint8Array,
         price: u128 | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [u32, u32, u128]
     >;
     /**
@@ -891,21 +843,21 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
       (
         asset: u32 | AnyNumber | Uint8Array,
         balance: u128 | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [u32, u128]
     >;
     /**
      * See [`Pallet::update_pool_kink`].
      **/
     updatePoolKink: AugmentedSubmittable<
-      (asset: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>,
+      (asset: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<"promise">,
       [u32]
     >;
     /**
      * See [`Pallet::update_pool_rate_model`].
      **/
     updatePoolRateModel: AugmentedSubmittable<
-      (asset: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>,
+      (asset: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<"promise">,
       [u32]
     >;
     /**
@@ -915,13 +867,13 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
       (
         asset: u32 | AnyNumber | Uint8Array,
         balance: u128 | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [u32, u128]
     >;
     /**
      * Generic tx
      **/
-    [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    [key: string]: SubmittableExtrinsicFunction<"promise">;
   };
   sudo: {
     /**
@@ -938,7 +890,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | { Address20: any }
           | string
           | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [MultiAddress]
     >;
     /**
@@ -947,7 +899,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     sudo: AugmentedSubmittable<
       (
         call: Call | IMethod | string | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Call]
     >;
     /**
@@ -965,27 +917,13 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
           | string
           | Uint8Array,
         call: Call | IMethod | string | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [MultiAddress, Call]
-    >;
-    /**
-     * See [`Pallet::sudo_unchecked_weight`].
-     **/
-    sudoUncheckedWeight: AugmentedSubmittable<
-      (
-        call: Call | IMethod | string | Uint8Array,
-        weight:
-          | SpWeightsWeightV2Weight
-          | { refTime?: any; proofSize?: any }
-          | string
-          | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
-      [Call, SpWeightsWeightV2Weight]
     >;
     /**
      * Generic tx
      **/
-    [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    [key: string]: SubmittableExtrinsicFunction<"promise">;
   };
   system: {
     /**
@@ -995,7 +933,7 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
       (
         prefix: Bytes | string | Uint8Array,
         subkeys: u32 | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Bytes, u32]
     >;
     /**
@@ -1004,42 +942,42 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     killStorage: AugmentedSubmittable<
       (
         keys: Vec<Bytes> | (Bytes | string | Uint8Array)[]
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Vec<Bytes>]
     >;
     /**
      * See [`Pallet::remark`].
      **/
     remark: AugmentedSubmittable<
-      (remark: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>,
+      (remark: Bytes | string | Uint8Array) => SubmittableExtrinsic<"promise">,
       [Bytes]
     >;
     /**
      * See [`Pallet::remark_with_event`].
      **/
     remarkWithEvent: AugmentedSubmittable<
-      (remark: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>,
+      (remark: Bytes | string | Uint8Array) => SubmittableExtrinsic<"promise">,
       [Bytes]
     >;
     /**
      * See [`Pallet::set_code`].
      **/
     setCode: AugmentedSubmittable<
-      (code: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>,
+      (code: Bytes | string | Uint8Array) => SubmittableExtrinsic<"promise">,
       [Bytes]
     >;
     /**
      * See [`Pallet::set_code_without_checks`].
      **/
     setCodeWithoutChecks: AugmentedSubmittable<
-      (code: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>,
+      (code: Bytes | string | Uint8Array) => SubmittableExtrinsic<"promise">,
       [Bytes]
     >;
     /**
      * See [`Pallet::set_heap_pages`].
      **/
     setHeapPages: AugmentedSubmittable<
-      (pages: u64 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>,
+      (pages: u64 | AnyNumber | Uint8Array) => SubmittableExtrinsic<"promise">,
       [u64]
     >;
     /**
@@ -1050,13 +988,13 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
         items:
           | Vec<ITuple<[Bytes, Bytes]>>
           | [Bytes | string | Uint8Array, Bytes | string | Uint8Array][]
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Vec<ITuple<[Bytes, Bytes]>>]
     >;
     /**
      * Generic tx
      **/
-    [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    [key: string]: SubmittableExtrinsicFunction<"promise">;
   };
   timestamp: {
     /**
@@ -1065,12 +1003,12 @@ interface AugmentedSubmittables<ApiType extends ApiTypes> {
     set: AugmentedSubmittable<
       (
         now: Compact<u64> | AnyNumber | Uint8Array
-      ) => SubmittableExtrinsic<ApiType>,
+      ) => SubmittableExtrinsic<"promise">,
       [Compact<u64>]
     >;
     /**
      * Generic tx
      **/
-    [key: string]: SubmittableExtrinsicFunction<ApiType>;
+    [key: string]: SubmittableExtrinsicFunction<"promise">;
   };
 } // AugmentedSubmittables
