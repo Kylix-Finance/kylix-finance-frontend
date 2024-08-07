@@ -5,6 +5,7 @@ import { Form } from "./Form";
 import { useEffect, useState, useCallback } from "react";
 import {
   parseUnit,
+  useActiveAccount,
   useBalance,
   useMetadata,
   useSupply,
@@ -70,11 +71,8 @@ const useNotifications = (
 export const Supply = () => {
   const [value, setValue] = useState("");
   const [status, setStatus] = useState(false);
-  const { data, isLoading } = useMetadata(ASSET_ID);
-  const { balance } = useBalance({
-    accountAddress: "5DLHrZpgL2MP9VQvvkKPFp4BufMkaS5HxECHL26VPY3jsGkQ",
-    assetId: ASSET_ID,
-  });
+  const { data: assetMetaData, isLoading } = useMetadata(ASSET_ID);
+  const { balance } = useBalance({ assetId: ASSET_ID });
   const { submitSupply, isSubmitting, error } = useSupply();
 
   useNotifications(isSubmitting, value, error);
@@ -84,8 +82,11 @@ export const Supply = () => {
   }, [balance, isLoading, isSubmitting]);
 
   const handleClick = useCallback(() => {
-    submitSupply(ASSET_ID, BigInt(parseUnit(value, 18)));
-  }, [value, submitSupply]);
+    submitSupply(
+      ASSET_ID,
+      BigInt(parseUnit(value, Number(assetMetaData?.decimals) || 18))
+    );
+  }, [value, submitSupply, assetMetaData]);
 
   const handleMax = useCallback(() => {
     if (balance) {
@@ -96,7 +97,7 @@ export const Supply = () => {
   return (
     <Form
       items={items}
-      decimals={Number(data?.decimals) || 18}
+      decimals={Number(assetMetaData?.decimals) || 18}
       maxHandler={handleMax}
       setValue={setValue}
       value={value}
