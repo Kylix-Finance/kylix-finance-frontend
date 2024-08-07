@@ -27,15 +27,14 @@ interface Props {
   submitButton: SubmitButton;
 }
 
-// eslint-disable-next-line react/prop-types
-export const Form: React.FC<Props> = ({
+export const Form = ({
   items,
   maxHandler,
   setValue,
   value,
   decimals,
   submitButton,
-}) => {
+}: Props) => {
   const handleInputChange: TextFieldProps["onChange"] = ({
     target: { value },
   }) => {

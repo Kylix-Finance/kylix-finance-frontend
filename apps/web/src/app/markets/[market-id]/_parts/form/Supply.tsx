@@ -10,7 +10,7 @@ import {
   useSupply,
 } from "@repo/onchain-utils";
 
-const ASSET_ID = 257;
+const ASSET_ID = 1;
 const items: Array<ListItem> = [
   {
     label: "Available to supply",
@@ -96,7 +96,7 @@ export const Supply = () => {
   return (
     <Form
       items={items}
-      decimals={Number(data?.decimals) ?? 18}
+      decimals={Number(data?.decimals) || 18}
       maxHandler={handleMax}
       setValue={setValue}
       value={value}
