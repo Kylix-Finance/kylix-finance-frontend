@@ -7,6 +7,7 @@ import {
   TextField,
   TextFieldProps,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { Dispatch, MouseEventHandler, SetStateAction, useState } from "react";
 import { List, ListItem } from "~/components";
@@ -36,6 +37,7 @@ export const Form = ({
   submitButton,
   disabled,
 }: Props) => {
+  const theme = useTheme();
   const handleInputChange: TextFieldProps["onChange"] = ({
     target: { value },
   }) => {
@@ -72,7 +74,10 @@ export const Form = ({
           onChange={handleInputChange}
           size="small"
           fullWidth
-          className="!rounded-md !font-number !font-bold !text-base bg-primary-500/10 !text-primary-800 !leading-5 !py-2 !px-1"
+          className="!rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5 !py-2 !px-1"
+          sx={{
+            backgroundColor: disabled ? theme.palette.grey[200] : "#45A9961A",
+          }}
           inputMode="numeric"
           InputProps={{
             startAdornment: (
