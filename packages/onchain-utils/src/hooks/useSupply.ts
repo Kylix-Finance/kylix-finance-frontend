@@ -4,34 +4,57 @@ import { SubmittableResultValue } from "@polkadot/api/types";
 import { useActiveAccount } from "./useActiveAccount";
 import { useSigner } from "./useSigner";
 
+interface Phase {
+  type: "error" | "success" | "information" | "warning" | "message";
+  title: string;
+  message: string;
+}
+
 interface UseSupplyExtrinsicResult {
   submitSupply: (asset: number, balance: bigint) => Promise<void>;
   isSubmitting: boolean;
-  error: string | null;
+  phase: Phase | null;
 }
 
 export const useSupply = (): UseSupplyExtrinsicResult => {
   const { api } = useProvider();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [phase, setPhase] = useState<Phase | null>(null);
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
 
   const submitSupply = useCallback(
     async (asset: number, balance: bigint) => {
       if (!api) {
-        setError("API is not initialized");
+        setPhase({
+          type: "error",
+          title: "Error",
+          message: "API is not initialized",
+        });
         return;
       }
       if (!activeAccount) {
-        setError("Wallet address is not available.");
+        setPhase({
+          type: "error",
+          title: "Error",
+          message: "Wallet address is not available.",
+        });
         return;
       }
       if (!signer) {
+        setPhase({
+          type: "error",
+          title: "Error",
+          message: "Signer is not available.",
+        });
         return;
       }
       setIsSubmitting(true);
-      setError(null);
+      setPhase({
+        type: "information",
+        title: "Starting",
+        message: "Starting transaction...",
+      });
       try {
         api.setSigner(signer);
         //@ts-expect-error type
@@ -47,18 +70,58 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
                   dispatchError.asModule
                 );
                 const { method, section, docs } = decoded;
-                setError(`${section}.${method}: ${docs.join(" ")}`);
+                const errorMsg = `${section}.${method}: ${docs.join(" ")}`;
+                setPhase({
+                  type: "error",
+                  title: "Transaction failed",
+                  message: docs.join(" "),
+                });
               } else {
-                setError(dispatchError.toString());
+                setPhase({
+                  type: "error",
+                  title: "Transaction failed",
+                  message: dispatchError.toString(),
+                });
               }
-            } else if (status.isFinalized) {
-              console.log("Transaction finalized");
-              unsubscribe();
+            } else {
+              // Update phase message based on transaction status
+              if (status.isInBlock) {
+                setPhase({
+                  type: "information",
+                  title: "In Block",
+                  message: "Transaction included in block.",
+                });
+              } else if (status.isBroadcast) {
+                setPhase({
+                  type: "information",
+                  title: "Broadcast",
+                  message: "Transaction broadcasted.",
+                });
+              } else if (status.isFinalized) {
+                setPhase({
+                  type: "success",
+                  title: "Finalized",
+                  message: "Transaction finalized.",
+                });
+                console.log("Transaction finalized");
+                unsubscribe();
+              } else {
+                setPhase({
+                  type: "information",
+                  title: "Status",
+                  message: `Transaction status: ${status.type}`,
+                });
+              }
             }
           }
         );
       } catch (err) {
-        setError((err as Error).message);
+        const errorMsg = (err as Error).message;
+        setPhase({
+          type: "error",
+          title: "An error occurred during the transaction.",
+          message: errorMsg,
+        });
         console.log(err);
       } finally {
         setIsSubmitting(false);
@@ -70,6 +133,6 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
   return {
     submitSupply,
     isSubmitting,
-    error,
+    phase,
   };
 };

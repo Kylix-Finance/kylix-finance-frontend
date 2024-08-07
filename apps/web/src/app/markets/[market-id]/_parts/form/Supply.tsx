@@ -11,7 +11,7 @@ import {
   useSupply,
 } from "@repo/onchain-utils";
 
-const ASSET_ID = 1;
+const ASSET_ID = 8;
 const items: Array<ListItem> = [
   {
     label: "Available to supply",
@@ -42,40 +42,22 @@ const items: Array<ListItem> = [
   },
 ];
 
-const useNotifications = (
-  isSubmitting: boolean,
-  value: string,
-  error: string | null
-) => {
-  useEffect(() => {
-    if (isSubmitting) {
-      notify({
-        type: "information",
-        title: "Supplying",
-        message: `Supplying ${value} with asset id of ${ASSET_ID}`,
-      });
-    }
-  }, [isSubmitting, value]);
-
-  useEffect(() => {
-    if (error) {
-      notify({
-        type: "error",
-        title: "Error",
-        message: error?.toString() || "",
-      });
-    }
-  }, [error]);
-};
-
 export const Supply = () => {
   const [value, setValue] = useState("");
   const [status, setStatus] = useState(false);
   const { data: assetMetaData, isLoading } = useMetadata(ASSET_ID);
   const { balance } = useBalance({ assetId: ASSET_ID });
-  const { submitSupply, isSubmitting, error } = useSupply();
+  const { submitSupply, isSubmitting, phase } = useSupply();
 
-  useNotifications(isSubmitting, value, error);
+  useEffect(() => {
+    if (phase) {
+      notify({
+        type: phase.type,
+        message: phase.message,
+        title: phase.title,
+      });
+    }
+  }, [phase]);
 
   useEffect(() => {
     setStatus(!balance && isSubmitting && !isLoading);
