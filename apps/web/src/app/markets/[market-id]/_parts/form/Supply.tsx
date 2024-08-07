@@ -71,10 +71,10 @@ export const Supply = () => {
   const [value, setValue] = useState("");
   const [status, setStatus] = useState(false);
   const { data, isLoading } = useMetadata(ASSET_ID);
-  const { balance } = useBalance(
-    "5DLHrZpgL2MP9VQvvkKPFp4BufMkaS5HxECHL26VPY3jsGkQ",
-    ASSET_ID
-  );
+  const { balance } = useBalance({
+    accountAddress: "5DLHrZpgL2MP9VQvvkKPFp4BufMkaS5HxECHL26VPY3jsGkQ",
+    assetId: ASSET_ID,
+  });
   const { submitSupply, isSubmitting, error } = useSupply();
 
   useNotifications(isSubmitting, value, error);

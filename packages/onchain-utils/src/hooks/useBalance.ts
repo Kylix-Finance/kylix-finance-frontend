@@ -6,8 +6,12 @@ import { formatUnit } from "../utils";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@repo/shared";
 import { useActiveAccount } from "./useActiveAccount";
+interface Props {
+  accountAddress?: string;
+  assetId?: number;
+}
 
-const useBalance = (accountAddress: string | undefined, assetId?: number) => {
+const useBalance = ({ accountAddress, assetId }: Props) => {
   const { api } = useProvider();
 
   const { activeAccount } = useActiveAccount();

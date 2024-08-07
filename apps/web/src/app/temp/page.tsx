@@ -201,10 +201,7 @@ const SignMessage: React.FC = () => {
   // const { data:asset } = useAsset(257);
 
   const { activeAccount } = useActiveAccount();
-  const { balance } = useBalance(
-    "5DLHrZpgL2MP9VQvvkKPFp4BufMkaS5HxECHL26VPY3jsGkQ",
-    257
-  );
+  const { balance } = useBalance({ assetId: 1 });
 
   // const { balance:balance1 } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
   // const { balance } = useBalance(activeAccount?.address);
@@ -224,11 +221,11 @@ const SignMessage: React.FC = () => {
   // const { data } = useEvent()
   // const { data } = useDownloadEvents();
   // console.log("eveeeeeeeent", data);
-  const { data } = useGetAsset({
-    symbol: "BTC",
-    size: "64x64",
-  });
-  console.log("data", data);
+  // const { data } = useGetAsset({
+  //   symbol: "BTC",
+  //   size: "64x64",
+  // });
+  console.log("balance", balance);
 
   return (
     <div className="flex flex-col gap-3">
