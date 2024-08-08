@@ -55,6 +55,9 @@ export const Supply = () => {
         message: phase.message,
         title: phase.title,
       });
+      if (phase.type === "success" || phase.type === "error") {
+        setValue("");
+      }
     }
   }, [phase]);
 

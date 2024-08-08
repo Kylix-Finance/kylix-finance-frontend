@@ -9,6 +9,7 @@ import {
   useEvent,
   useMetadata,
   usePool,
+  useProvider,
   useSupply,
 } from "@repo/onchain-utils";
 import { formatUnit } from "@repo/onchain-utils";
@@ -218,27 +219,36 @@ const SignMessage: React.FC = () => {
   //   symbol: "BTC",
   //   size: "64x64",
   // });
-  const { pool } = usePool({ assetId: "9" });
+  const { pool } = usePool({ assetId: "8" });
 
   const { balance } = useBalance({ assetId: pool?.id });
 
-  const { data: assetMetaData } = useMetadata(pool?.lendTokenId);
+  // const { data: assetMetaData } = useMetadata(pool?.lendTokenId);
 
   console.log("balance in the pool", balance);
+  // console.log(pool);
+  // const { api } = useProvider();
+  // const getPool = async () => {
+  //   console.log(await api?.query?.lending?.lendingPoolStorage?.entries())
+
+  // }
+
+  console.log("pool", pool);
 
   return (
     <div className="flex flex-col gap-3">
       <div>{/* <p>Balance is : {balance}</p> */}</div>
-      <button
+      {/* <button
         onClick={() =>
           submitSupply(
             pool?.id || 9,
-            parseUnit("1234", Number(assetMetaData?.decimals) || 18)
+            parseUnit("1", Number(assetMetaData?.decimals) || 1)
           )
         }
       >
         Supply
-      </button>
+      </button> */}
+      {/* <button onClick={getPool}>Pools</button> */}
       <button>Get Assets</button>
     </div>
   );
