@@ -8,6 +8,7 @@ import {
   useActiveAccount,
   useBalance,
   useMetadata,
+  usePool,
   useSupply,
 } from "@repo/onchain-utils";
 
@@ -44,6 +45,7 @@ const items: Array<ListItem> = [
 
 export const Supply = () => {
   const [value, setValue] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const { data: assetMetaData, isLoading } = useMetadata(ASSET_ID);
   const { balance } = useBalance({ assetId: ASSET_ID });
   const { submitSupply, isSubmitting, phase } = useSupply();
@@ -62,11 +64,22 @@ export const Supply = () => {
   }, [phase]);
 
   const handleClick = useCallback(() => {
+    console.log(balance);
+
+    if (!balance || value > balance) {
+      setError("You don't have enough balance.");
+      return;
+    }
+    if (!value) {
+      setError("Please enter an amount.");
+      return;
+    }
+    setError(null);
     submitSupply(
       ASSET_ID,
       parseUnit(value, Number(assetMetaData?.decimals) || 18)
     );
-  }, [value, submitSupply, assetMetaData]);
+  }, [balance, value, submitSupply, assetMetaData?.decimals]);
 
   const handleMax = useCallback(() => {
     if (balance) {
@@ -83,6 +96,7 @@ export const Supply = () => {
       setValue={setValue}
       value={value}
       disabled={isValid}
+      error={error}
       submitButton={{
         onclick: handleClick,
         content: isValid ? "Loading" : "Supply",

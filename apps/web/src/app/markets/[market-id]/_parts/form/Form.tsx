@@ -26,6 +26,7 @@ interface Props {
   decimals: number;
   submitButton: SubmitButton;
   disabled: boolean;
+  error?: string | null;
 }
 
 export const Form = ({
@@ -36,6 +37,7 @@ export const Form = ({
   decimals,
   submitButton,
   disabled,
+  error,
 }: Props) => {
   const theme = useTheme();
   const handleInputChange: TextFieldProps["onChange"] = ({
@@ -74,12 +76,21 @@ export const Form = ({
           onChange={handleInputChange}
           size="small"
           fullWidth
-          className="!rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5 !py-2 !px-1"
-          sx={{
-            backgroundColor: disabled ? theme.palette.grey[200] : "#45A9961A",
-          }}
+          className="!rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
+          error={!!error}
+          helperText={error}
           inputMode="numeric"
+          FormHelperTextProps={{
+            sx: {
+              fontWeight: "bold",
+            },
+          }}
           InputProps={{
+            sx: {
+              backgroundColor: disabled ? theme.palette.grey[200] : "#45A9961A",
+              paddingY: "8px",
+              paddingX: "16px",
+            },
             startAdornment: (
               <InputAdornment position="start" className="">
                 <Typography color="#aB5D0CB" variant="subtitle1">
