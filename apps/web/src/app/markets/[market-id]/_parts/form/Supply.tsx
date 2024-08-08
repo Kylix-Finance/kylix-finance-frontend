@@ -49,6 +49,7 @@ export const Supply = () => {
   const { data: assetMetaData, isLoading } = useMetadata(ASSET_ID);
   const { balance } = useBalance({ assetId: ASSET_ID });
   const { submitSupply, isSubmitting, phase } = useSupply();
+  const [buttonContent, setButtonContent] = useState("Supply");
 
   useEffect(() => {
     if (phase) {
@@ -60,8 +61,22 @@ export const Supply = () => {
       if (phase.type === "success" || phase.type === "error") {
         setValue("");
       }
+      if (phase.type === "success" || phase.type === "error") {
+        setValue("");
+        setButtonContent("Supply");
+      }
     }
   }, [phase]);
+
+  useEffect(() => {
+    if (isLoading) {
+      setButtonContent("Loading...");
+    } else if (isSubmitting) {
+      setButtonContent("Supplying...");
+    } else {
+      setButtonContent("Supply");
+    }
+  }, [isLoading, isSubmitting]);
 
   const handleClick = useCallback(() => {
     console.log(balance);
@@ -99,7 +114,7 @@ export const Supply = () => {
       error={error}
       submitButton={{
         onclick: handleClick,
-        content: isValid ? "Loading" : "Supply",
+        content: buttonContent,
       }}
     />
   );
