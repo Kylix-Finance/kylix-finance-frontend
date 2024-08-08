@@ -1,2 +1,2 @@
 export * from "./types";
-export * from "./_generated/tx";
+export * from "./_generated";

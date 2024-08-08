@@ -8,6 +8,7 @@ import {
   useDownloadEvents,
   useEvent,
   useMetadata,
+  usePool,
   useSupply,
 } from "@repo/onchain-utils";
 import { formatUnit } from "@repo/onchain-utils";
@@ -217,7 +218,9 @@ const SignMessage: React.FC = () => {
   //   symbol: "BTC",
   //   size: "64x64",
   // });
-  console.log("balance", balance);
+  const { pool } = usePool({ assetId: "9" });
+
+  console.log("pool", pool);
 
   return (
     <div className="flex flex-col gap-3">

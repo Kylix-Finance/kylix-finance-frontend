@@ -44,7 +44,6 @@ const items: Array<ListItem> = [
 
 export const Supply = () => {
   const [value, setValue] = useState("");
-  const [isValid, setIsValid] = useState(false);
   const { data: assetMetaData, isLoading } = useMetadata(ASSET_ID);
   const { balance } = useBalance({ assetId: ASSET_ID });
   const { submitSupply, isSubmitting, phase } = useSupply();
@@ -59,14 +58,10 @@ export const Supply = () => {
     }
   }, [phase]);
 
-  useEffect(() => {
-    setIsValid(!balance || isLoading || isSubmitting || !assetMetaData);
-  }, [assetMetaData, balance, isLoading, isSubmitting]);
-
   const handleClick = useCallback(() => {
     submitSupply(
       ASSET_ID,
-      BigInt(parseUnit(value, Number(assetMetaData?.decimals) || 18))
+      parseUnit(value, Number(assetMetaData?.decimals) || 18)
     );
   }, [value, submitSupply, assetMetaData]);
 
@@ -76,6 +71,7 @@ export const Supply = () => {
     }
   }, [balance]);
 
+  const isValid = !balance || isLoading || isSubmitting || !assetMetaData;
   return (
     <Form
       items={items}

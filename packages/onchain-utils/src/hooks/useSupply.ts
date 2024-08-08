@@ -11,7 +11,7 @@ interface Phase {
 }
 
 interface UseSupplyExtrinsicResult {
-  submitSupply: (asset: number, balance: bigint) => Promise<void>;
+  submitSupply: (asset: number, balance: bigint | string) => Promise<void>;
   isSubmitting: boolean;
   phase: Phase | null;
 }
@@ -24,7 +24,7 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
   const { signer } = useSigner();
 
   const submitSupply = useCallback(
-    async (asset: number, balance: bigint) => {
+    async (asset: number, balance: bigint | string) => {
       if (!api) {
         setPhase({
           type: "error",
