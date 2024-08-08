@@ -202,7 +202,7 @@ const SignMessage: React.FC = () => {
   // const { data:asset } = useAsset(257);
 
   const { activeAccount } = useActiveAccount();
-  const { balance } = useBalance({ assetId: 1 });
+  // const { balance } = useBalance({ assetId: 1 });
 
   // const { balance:balance1 } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
   // const { balance } = useBalance(activeAccount?.address);
@@ -220,12 +220,23 @@ const SignMessage: React.FC = () => {
   // });
   const { pool } = usePool({ assetId: "9" });
 
-  console.log("pool", pool);
+  const { balance } = useBalance({ assetId: pool?.id });
+
+  const { data: assetMetaData } = useMetadata(pool?.lendTokenId);
+
+  console.log("balance in the pool", balance);
 
   return (
     <div className="flex flex-col gap-3">
       <div>{/* <p>Balance is : {balance}</p> */}</div>
-      <button onClick={() => submitSupply(257, BigInt(parseUnit("555", 18)))}>
+      <button
+        onClick={() =>
+          submitSupply(
+            pool?.id || 9,
+            parseUnit("1234", Number(assetMetaData?.decimals) || 18)
+          )
+        }
+      >
         Supply
       </button>
       <button>Get Assets</button>
