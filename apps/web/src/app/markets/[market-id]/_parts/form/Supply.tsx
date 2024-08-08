@@ -5,10 +5,8 @@ import { Form } from "./Form";
 import { useEffect, useState, useCallback } from "react";
 import {
   parseUnit,
-  useActiveAccount,
   useBalance,
   useMetadata,
-  usePool,
   useSupply,
 } from "@repo/onchain-utils";
 
@@ -79,8 +77,6 @@ export const Supply = () => {
   }, [isLoading, isSubmitting]);
 
   const handleClick = useCallback(() => {
-    console.log(balance);
-
     if (!balance || value > balance) {
       setError("You don't have enough balance.");
       return;

@@ -4,13 +4,13 @@ import { getWalletExtension } from "@repo/shared";
 import { Signer } from "@polkadot/api/types";
 
 interface UseSignerResult {
-  signer: Signer | null;
+  signer: Signer | undefined;
   activeAccount: string | null;
 }
 
 export const useSigner = (): UseSignerResult => {
   const { connectorId, account: activeAccount } = useAccountStore();
-  const [signer, setSigner] = useState<Signer | null>(null);
+  const [signer, setSigner] = useState<Signer | undefined>(undefined);
 
   useEffect(() => {
     const fetchSigner = async () => {

@@ -3,6 +3,7 @@ import { useProvider } from "./useProvider";
 import { SubmittableResultValue } from "@polkadot/api/types";
 import { useActiveAccount } from "./useActiveAccount";
 import { useSigner } from "./useSigner";
+import { useBalance } from "./useBalance";
 
 interface Phase {
   type: "error" | "success" | "information" | "warning" | "message";
@@ -22,9 +23,17 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
   const [phase, setPhase] = useState<Phase | null>(null);
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
-
+  // const [assetId, setAssetId] = useState<number | undefined>(undefined)
+  // const { balance } = useBalance({ accountAddress: activeAccount?.address, assetId })
   const submitSupply = useCallback(
     async (asset: number, balance: bigint | string) => {
+      if (!asset) {
+        setPhase({
+          type: "error",
+          title: "Error",
+          message: "Asset ID is not provided.",
+        });
+      }
       if (!api) {
         setPhase({
           type: "error",
@@ -49,6 +58,7 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
         });
         return;
       }
+      // setAssetId(asset)
       setPhase({
         type: "information",
         title: "Starting",
@@ -57,15 +67,28 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
       try {
         setIsSubmitting(true);
         api.setSigner(signer);
-        //@ts-expect-error type
-        const extrinsic = api?.tx?.lending?.supply(asset, balance);
-        //@ts-expect-error type
-        const unsubscribe = await extrinsic.signAndSend(
+        const extrinsic = api?.tx?.lending?.supply?.(asset, balance);
+        // const estimatedGas = (await extrinsic?.paymentInfo(activeAccount.address, {
+        //   signer
+        // }))?.partialFee.toNumber().toString();
+
+        // if (!estimatedGas) {
+        //   throw new Error("Unable to estimate gas fees.");
+        // }
+        // if (balance && estimatedGas > balance.toString()) {
+        //   setPhase({
+        //     type: "error",
+        //     title: "Insufficient Balance",
+        //     message: "You do not have enough balance to cover the transaction fees.",
+        //   });
+        //   setIsSubmitting(false);
+        //   return;
+        // }
+        const unsubscribe = await extrinsic?.signAndSend(
           activeAccount.address,
           ({ status, dispatchError }: SubmittableResultValue) => {
             if (dispatchError) {
               if (dispatchError.isModule) {
-                // Extract the error
                 const decoded = api.registry.findMetaError(
                   dispatchError.asModule
                 );
@@ -103,7 +126,7 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
                   message: "Transaction finalized.",
                 });
                 setIsSubmitting(false);
-                unsubscribe();
+                unsubscribe?.();
               } else {
                 setPhase({
                   type: "information",
