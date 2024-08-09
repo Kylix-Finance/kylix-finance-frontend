@@ -8,8 +8,6 @@ import { Card } from "~/components";
 const Borrow = () => {
   const { totalBorrow } = useGetLendingPools();
 
-  console.log("totalBorrow", totalBorrow);
-
   return (
     <Card
       title="Total Borrow"

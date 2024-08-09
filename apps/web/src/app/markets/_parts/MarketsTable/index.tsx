@@ -5,7 +5,7 @@ import { Card, KylixChip } from "~/components";
 import { Asset } from "~/components/Asset";
 import { RightComponent } from "./RightComponent";
 import { TableActions } from "../TableActions";
-import { useGetLendingPools } from "@repo/onchain-utils";
+import { useGetLendingPools, usePools } from "@repo/onchain-utils";
 import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { OnTRowClick, Table } from "@repo/ui";
@@ -25,6 +25,9 @@ type TableData = typeof placeholderData;
 
 const MarketsTable = () => {
   const { lendingPool } = useGetLendingPools();
+  const { data, isLoading } = usePools();
+  console.log("isLoading", isLoading);
+  console.log("data", data);
 
   const router = useRouter();
 

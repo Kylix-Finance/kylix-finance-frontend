@@ -14,3 +14,4 @@ export * from "./useMetadata";
 export * from "./useEvent";
 export * from "./useDownloadEvents";
 export * from "./usePool";
+export * from "./usePools";
