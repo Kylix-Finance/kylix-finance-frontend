@@ -207,7 +207,7 @@ const SignMessage: React.FC = () => {
 
   // const { balance:balance1 } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
   // const { balance } = useBalance(activeAccount?.address);
-  const { submitSupply } = useSupply();
+  // const { submitSupply } = useSupply();
 
   // console.log("asset",asset,"activeAccount",activeAccount, "metadata",data,"balance1",balance1,"balance",balance );
 

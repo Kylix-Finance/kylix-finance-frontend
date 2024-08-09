@@ -43,46 +43,20 @@ const items: Array<ListItem> = [
 
 export const Supply = () => {
   const [value, setValue] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const { data: assetMetaData, isLoading } = useMetadata(ASSET_ID);
-  const { submitSupply, isSubmitting, phase } = useSupply();
-  const [buttonContent, setButtonContent] = useState("Supply");
-  const { formattedBalance, refetch } = useBalance({
+  const { mutate, isPending } = useSupply();
+  const { formattedBalance } = useBalance({
     assetId: ASSET_ID,
   });
-  useEffect(() => {
-    if (phase) {
-      notify({
-        type: phase.type,
-        message: phase.message,
-        title: phase.title,
-      });
-      if (phase.type === "success" || phase.type === "error") {
-        setValue("");
-        setButtonContent("Supply");
-        refetch();
-      }
-    }
-  }, [phase, refetch]);
-
-  useEffect(() => {
-    if (isLoading) {
-      setButtonContent("Loading...");
-    } else if (isSubmitting) {
-      setButtonContent("Supplying...");
-    } else {
-      setButtonContent("Supply");
-    }
-  }, [isLoading, isSubmitting]);
 
   const handleClick = useCallback(() => {
-    submitSupply(
-      ASSET_ID,
-      parseUnit(value, Number(assetMetaData?.decimals) || 18)
-    );
-  }, [value, submitSupply, assetMetaData?.decimals]);
+    mutate({
+      asset: ASSET_ID,
+      balance: parseUnit(value, Number(assetMetaData?.decimals) || 18),
+    });
+  }, [mutate, value, assetMetaData?.decimals]);
 
-  const isValid = isLoading || isSubmitting || !assetMetaData;
+  const isValid = isLoading || isPending || !assetMetaData;
   return (
     <Form
       assetId={ASSET_ID}
@@ -94,10 +68,9 @@ export const Supply = () => {
       setValue={setValue}
       value={value}
       disabled={isValid}
-      error={error}
       submitButton={{
         onclick: handleClick,
-        content: buttonContent,
+        content: "Supply",
       }}
     />
   );

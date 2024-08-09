@@ -1,3 +1,5 @@
+import { Signer } from "@polkadot/api/types";
+
 const baseKey = "kylix";
 
 interface Balance {
@@ -21,6 +23,7 @@ const keys = {
   METADATA: "METADATA",
   TOKEN: "TOKEN",
   POOL_DATA: "POOL_DATA",
+  SUPPLY: "SUPPLY",
 };
 
 export const queryKeys = {
@@ -43,5 +46,6 @@ export const queryKeys = {
     assetId,
   ],
   token: (symbol: string, size: string) => [baseKey, keys.TOKEN, symbol, size],
-  poolData: (assetId: string | number) => [baseKey, assetId],
+  poolData: (assetId: string | number) => [baseKey, keys.POOL_DATA, assetId],
+  supply: [baseKey, keys.SUPPLY],
 };
