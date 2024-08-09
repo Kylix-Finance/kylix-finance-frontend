@@ -13,6 +13,7 @@ import { Dispatch, MouseEventHandler, SetStateAction, useState } from "react";
 import { List, ListItem } from "~/components";
 import { getDecimalRegex } from "~/utils";
 import AlertContainer from "../AlertContainer";
+import { useBalance } from "@repo/onchain-utils";
 
 interface SubmitButton {
   content: string;
@@ -28,6 +29,7 @@ interface Props {
   submitButton: SubmitButton;
   disabled: boolean;
   error?: string | null;
+  assetId: number | string;
 }
 
 export const Form = ({
@@ -39,12 +41,14 @@ export const Form = ({
   submitButton,
   disabled,
   error,
+  assetId,
 }: Props) => {
   const theme = useTheme();
+  const { balance } = useBalance({ assetId: assetId });
+
   const handleInputChange: TextFieldProps["onChange"] = ({
     target: { value },
   }) => {
-    console.log("00000000000000000000000000000____");
     // TODO: Wrap this `if` check in some utility or something
     if (value === "") return setValue(value);
     const isValid = getDecimalRegex(decimals).test(value);
@@ -114,7 +118,10 @@ export const Form = ({
       >
         {submitButton.content}
       </Button>
-      <AlertContainer isInputEmptyOrZero={!value} />
+      <AlertContainer
+        isInputEmptyOrZero={!value}
+        isInsufficientBalance={!balance || value > balance}
+      />
     </Box>
   );
 };

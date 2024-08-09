@@ -45,7 +45,6 @@ export const Supply = () => {
   const [value, setValue] = useState("");
   const [error, setError] = useState<string | null>(null);
   const { data: assetMetaData, isLoading } = useMetadata(ASSET_ID);
-  const { balance } = useBalance({ assetId: ASSET_ID });
   const { submitSupply, isSubmitting, phase } = useSupply();
   const [buttonContent, setButtonContent] = useState("Supply");
 
@@ -77,34 +76,19 @@ export const Supply = () => {
   }, [isLoading, isSubmitting]);
 
   const handleClick = useCallback(() => {
-    // if (!balance || value > balance) {
-    //   setError("You don't have enough balance.");
-    //   return;
-    // }
-    // if (!value) {
-    //   setError("Please enter an amount.");
-    //   return;
-    // }
-    // setError(null);
-
     submitSupply(
       ASSET_ID,
       parseUnit(value, Number(assetMetaData?.decimals) || 18)
     );
   }, [value, submitSupply, assetMetaData?.decimals]);
 
-  const handleMax = useCallback(() => {
-    if (balance) {
-      setValue(balance.toString());
-    }
-  }, [balance]);
-
-  const isValid = !balance || isLoading || isSubmitting || !assetMetaData;
+  const isValid = isLoading || isSubmitting || !assetMetaData;
   return (
     <Form
+      assetId={ASSET_ID}
       items={items}
       decimals={Number(assetMetaData?.decimals) || 18}
-      maxHandler={handleMax}
+      maxHandler={() => {}}
       setValue={setValue}
       value={value}
       disabled={isValid}

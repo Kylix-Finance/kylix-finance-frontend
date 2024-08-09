@@ -5,13 +5,20 @@ import { FormAlert } from "~/components/FormAlert";
 
 interface AlertContainerProps {
   isInputEmptyOrZero: boolean;
+  isInsufficientBalance: boolean;
 }
 
-const AlertContainer = ({ isInputEmptyOrZero }: AlertContainerProps) => {
+const AlertContainer = ({
+  isInputEmptyOrZero,
+  isInsufficientBalance,
+}: AlertContainerProps) => {
   return (
     <Box className={cn("flex flex-col gap-1")}>
       {isInputEmptyOrZero && (
         <FormAlert severity="error" message="Please enter a valid amount!" />
+      )}
+      {isInsufficientBalance && (
+        <FormAlert severity="error" message="Insufficient Balance!" />
       )}
     </Box>
   );

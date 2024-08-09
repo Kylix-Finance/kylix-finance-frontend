@@ -8,7 +8,7 @@ import { queryKeys } from "@repo/shared";
 import { useActiveAccount } from "./useActiveAccount";
 interface Props {
   accountAddress?: string;
-  assetId?: number;
+  assetId?: number | string;
 }
 
 const useBalance = ({ accountAddress, assetId }: Props = {}) => {

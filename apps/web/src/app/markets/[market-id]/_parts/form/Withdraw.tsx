@@ -38,6 +38,7 @@ export const Withdraw = () => {
   const onclick = () => {};
   return (
     <Form
+      assetId={9}
       items={items}
       decimals={18}
       maxHandler={() => {}}

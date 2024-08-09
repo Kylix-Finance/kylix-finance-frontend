@@ -2,7 +2,7 @@ const baseKey = "kylix";
 
 interface Balance {
   address: string | undefined;
-  assetId: number | undefined;
+  assetId: number | string | undefined;
 }
 
 const keys = {
@@ -35,7 +35,7 @@ export const queryKeys = {
   provider: [baseKey, keys.PROVIDER],
   lendingPools: [baseKey, keys.LENDING_POOLS],
   asset: (assetId: number) => [baseKey, keys.ASSET, assetId],
-  metadata: (assetId: number) => [baseKey, keys.METADATA, assetId],
+  metadata: (assetId: number | string) => [baseKey, keys.METADATA, assetId],
   balance: ({ address, assetId }: Balance) => [
     baseKey,
     keys.BALANCE,
