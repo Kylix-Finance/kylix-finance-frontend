@@ -11,7 +11,7 @@ interface Props {
   assetId?: number;
 }
 
-const useBalance = ({ accountAddress, assetId }: Props) => {
+const useBalance = ({ accountAddress, assetId }: Props = {}) => {
   const { api } = useProvider();
 
   const { activeAccount } = useActiveAccount();

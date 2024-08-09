@@ -24,7 +24,7 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
   // const [assetId, setAssetId] = useState<number | undefined>(undefined)
-  // const { balance } = useBalance({ accountAddress: activeAccount?.address, assetId })
+  const { balance: gasBalance } = useBalance();
   const submitSupply = useCallback(
     async (asset: number, balance: bigint | string) => {
       if (!asset) {
@@ -68,22 +68,27 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
         setIsSubmitting(true);
         api.setSigner(signer);
         const extrinsic = api?.tx?.lending?.supply?.(asset, balance);
-        // const estimatedGas = (await extrinsic?.paymentInfo(activeAccount.address, {
-        //   signer
-        // }))?.partialFee.toNumber().toString();
+        const estimatedGas = (
+          await extrinsic?.paymentInfo(activeAccount.address, {
+            signer,
+          })
+        )?.partialFee
+          .toNumber()
+          .toString();
 
-        // if (!estimatedGas) {
-        //   throw new Error("Unable to estimate gas fees.");
-        // }
-        // if (balance && estimatedGas > balance.toString()) {
-        //   setPhase({
-        //     type: "error",
-        //     title: "Insufficient Balance",
-        //     message: "You do not have enough balance to cover the transaction fees.",
-        //   });
-        //   setIsSubmitting(false);
-        //   return;
-        // }
+        if (!estimatedGas) {
+          throw new Error("Unable to estimate gas fees.");
+        }
+        if (gasBalance && BigInt(estimatedGas) > BigInt(gasBalance)) {
+          setPhase({
+            type: "error",
+            title: "Insufficient Balance",
+            message:
+              "You do not have enough balance to cover the transaction fees.",
+          });
+          setIsSubmitting(false);
+          return;
+        }
         const unsubscribe = await extrinsic?.signAndSend(
           activeAccount.address,
           ({ status, dispatchError }: SubmittableResultValue) => {
