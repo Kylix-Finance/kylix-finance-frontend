@@ -10,7 +10,7 @@ type MetadataResult = {
   isFrozen: boolean;
 };
 
-const useMetadata = (assetId?: number) => {
+const useMetadata = (assetId?: number | string) => {
   const { api } = useProvider();
   const enabled = !!api && !!assetId;
 

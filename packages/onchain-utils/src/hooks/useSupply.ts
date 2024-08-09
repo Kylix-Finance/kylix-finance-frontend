@@ -1,75 +1,49 @@
-import { useCallback, useState } from "react";
 import { useProvider } from "./useProvider";
-import { SubmittableResultValue } from "@polkadot/api/types";
 import { useActiveAccount } from "./useActiveAccount";
 import { useSigner } from "./useSigner";
-
-interface UseSupplyExtrinsicResult {
-  submitSupply: (asset: number, balance: bigint) => Promise<void>;
-  isSubmitting: boolean;
-  error: string | null;
-}
-
-export const useSupply = (): UseSupplyExtrinsicResult => {
+import { useBalance } from "./useBalance";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { supplyTransaction } from "../api/supply";
+import { queryKeys } from "@repo/shared";
+export const useSupply = () => {
   const { api } = useProvider();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
-
-  const submitSupply = useCallback(
-    async (asset: number, balance: bigint) => {
-      if (!api) {
-        setError("API is not initialized");
-        return;
-      }
-      if (!activeAccount) {
-        setError("Wallet address is not available.");
-        return;
-      }
-      if (!signer) {
-        return;
-      }
-      setIsSubmitting(true);
-      setError(null);
-      try {
-        api.setSigner(signer);
-        //@ts-expect-error type
-        const extrinsic = api?.tx?.lending?.supply(asset, balance);
-        //@ts-expect-error type
-        const unsubscribe = await extrinsic.signAndSend(
-          activeAccount.address,
-          ({ status, events, dispatchError }: SubmittableResultValue) => {
-            if (dispatchError) {
-              if (dispatchError.isModule) {
-                // Extract the error
-                const decoded = api.registry.findMetaError(
-                  dispatchError.asModule
-                );
-                const { method, section, docs } = decoded;
-                setError(`${section}.${method}: ${docs.join(" ")}`);
-              } else {
-                setError(dispatchError.toString());
-              }
-            } else if (status.isFinalized) {
-              console.log("Transaction finalized");
-              unsubscribe();
-            }
-          }
-        );
-      } catch (err) {
-        setError((err as Error).message);
-        console.log(err);
-      } finally {
-        setIsSubmitting(false);
-      }
+  const { balance: getBalance } = useBalance();
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: queryKeys.supply,
+    mutationFn: (params: { asset: number; balance: string | bigint }) =>
+      supplyTransaction(params, {
+        api,
+        signer,
+        getBalance,
+        activeAccount: activeAccount?.address,
+      }),
+    onError: () => {
+      queryClient.refetchQueries({
+        queryKey: queryKeys.balance({
+          address: activeAccount?.address,
+          assetId: undefined,
+        }),
+        exact: true,
+      });
     },
-    [api, signer, activeAccount]
-  );
-
-  return {
-    submitSupply,
-    isSubmitting,
-    error,
-  };
+    onSuccess: (_, { asset }) => {
+      queryClient.refetchQueries({
+        queryKey: queryKeys.balance({
+          address: activeAccount?.address,
+          assetId: asset,
+        }),
+        exact: true,
+      });
+      queryClient.refetchQueries({
+        queryKey: queryKeys.balance({
+          address: activeAccount?.address,
+          assetId: undefined,
+        }),
+        exact: true,
+      });
+    },
+  });
 };

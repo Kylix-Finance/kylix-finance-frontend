@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   productionBrowserSourceMaps: false,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "s2.coinmarketcap.com",
+        port: "",
+        pathname: "**",
+      },
+    ],
+  },
   experimental: {
     turbo: {
       rules: {

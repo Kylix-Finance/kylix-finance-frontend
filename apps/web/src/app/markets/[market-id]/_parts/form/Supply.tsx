@@ -10,7 +10,7 @@ import {
   useSupply,
 } from "@repo/onchain-utils";
 
-const ASSET_ID = 257;
+const ASSET_ID = 8;
 const items: Array<ListItem> = [
   {
     label: "Available to supply",
@@ -41,68 +41,35 @@ const items: Array<ListItem> = [
   },
 ];
 
-const useNotifications = (
-  isSubmitting: boolean,
-  value: string,
-  error: string | null
-) => {
-  useEffect(() => {
-    if (isSubmitting) {
-      notify({
-        type: "information",
-        title: "Supplying",
-        message: `Supplying ${value} with asset id of ${ASSET_ID}`,
-      });
-    }
-  }, [isSubmitting, value]);
-
-  useEffect(() => {
-    if (error) {
-      notify({
-        type: "error",
-        title: "Error",
-        message: error?.toString() || "",
-      });
-    }
-  }, [error]);
-};
-
 export const Supply = () => {
   const [value, setValue] = useState("");
-  const [status, setStatus] = useState(false);
-  const { data, isLoading } = useMetadata(ASSET_ID);
-  const { balance } = useBalance(
-    "5DLHrZpgL2MP9VQvvkKPFp4BufMkaS5HxECHL26VPY3jsGkQ",
-    ASSET_ID
-  );
-  const { submitSupply, isSubmitting, error } = useSupply();
-
-  useNotifications(isSubmitting, value, error);
-
-  useEffect(() => {
-    setStatus(!balance && isSubmitting && !isLoading);
-  }, [balance, isLoading, isSubmitting]);
+  const { data: assetMetaData, isLoading } = useMetadata(ASSET_ID);
+  const { mutate, isPending } = useSupply();
+  const { formattedBalance } = useBalance({
+    assetId: ASSET_ID,
+  });
 
   const handleClick = useCallback(() => {
-    submitSupply(ASSET_ID, BigInt(parseUnit(value, 18)));
-  }, [value, submitSupply]);
+    mutate({
+      asset: ASSET_ID,
+      balance: parseUnit(value, Number(assetMetaData?.decimals) || 18),
+    });
+  }, [mutate, value, assetMetaData?.decimals]);
 
-  const handleMax = useCallback(() => {
-    if (balance) {
-      setValue(balance);
-    }
-  }, [balance]);
-
+  const isValid = isLoading || isPending || !assetMetaData;
   return (
     <Form
+      assetId={ASSET_ID}
       items={items}
-      decimals={Number(data?.decimals) ?? 18}
-      maxHandler={handleMax}
+      decimals={Number(assetMetaData?.decimals) || 18}
+      maxHandler={() => {
+        formattedBalance && setValue(formattedBalance);
+      }}
       setValue={setValue}
       value={value}
+      disabled={isValid}
       submitButton={{
         onclick: handleClick,
-        status,
         content: "Supply",
       }}
     />

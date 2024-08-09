@@ -7,12 +7,12 @@ import {
   useTheme,
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import { useTablePagination } from "~/hooks";
-import { GlobalStore } from "~/store";
 import * as React from "react";
+import { useTablePagination } from "../../hooks/useTablePagination";
+import { TableStore } from "../../store";
 
 interface Props {
-  tableName: GlobalStore.TableName;
+  tableName: TableStore.TableName;
 }
 interface PaginationAmount {
   label: string;
@@ -39,6 +39,7 @@ const paginationAmount: Array<PaginationAmount> = [
 const TablePagination: React.FC<Props> = ({ tableName }) => {
   const { pagination, updatePagination } = useTablePagination(tableName);
   const { palette } = useTheme();
+
   const handleChangePage = (_event: unknown, newPage: number) => {
     updatePagination({
       page: newPage,

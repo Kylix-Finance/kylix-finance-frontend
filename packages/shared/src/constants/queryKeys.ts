@@ -1,8 +1,10 @@
+import { Signer } from "@polkadot/api/types";
+
 const baseKey = "kylix";
 
 interface Balance {
   address: string | undefined;
-  assetId: number | undefined;
+  assetId: number | string | undefined;
 }
 
 const keys = {
@@ -19,6 +21,9 @@ const keys = {
   LENDING_POOLS: "LENDING_POOLS",
   ASSET: "ASSET",
   METADATA: "METADATA",
+  TOKEN: "TOKEN",
+  POOL_DATA: "POOL_DATA",
+  SUPPLY: "SUPPLY",
 };
 
 export const queryKeys = {
@@ -33,11 +38,14 @@ export const queryKeys = {
   provider: [baseKey, keys.PROVIDER],
   lendingPools: [baseKey, keys.LENDING_POOLS],
   asset: (assetId: number) => [baseKey, keys.ASSET, assetId],
-  metadata: (assetId: number) => [baseKey, keys.METADATA, assetId],
+  metadata: (assetId: number | string) => [baseKey, keys.METADATA, assetId],
   balance: ({ address, assetId }: Balance) => [
     baseKey,
     keys.BALANCE,
     address,
     assetId,
   ],
+  token: (symbol: string, size: string) => [baseKey, keys.TOKEN, symbol, size],
+  poolData: (assetId: string | number) => [baseKey, keys.POOL_DATA, assetId],
+  supply: [baseKey, keys.SUPPLY],
 };

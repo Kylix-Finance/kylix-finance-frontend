@@ -6,8 +6,12 @@ import { formatUnit } from "../utils";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@repo/shared";
 import { useActiveAccount } from "./useActiveAccount";
+interface Props {
+  accountAddress?: string;
+  assetId?: number | string;
+}
 
-const useBalance = (accountAddress: string | undefined, assetId?: number) => {
+const useBalance = ({ accountAddress, assetId }: Props = {}) => {
   const { api } = useProvider();
 
   const { activeAccount } = useActiveAccount();
@@ -53,13 +57,20 @@ const useBalance = (accountAddress: string | undefined, assetId?: number) => {
           }
 
           const freeBalanceBigInt = BigInt(freeBalance);
-          return formatUnit(freeBalanceBigInt.toString(), decimals);
+          return {
+            formattedBalance: formatUnit(
+              freeBalanceBigInt.toString(),
+              decimals
+            ),
+            realBalance: freeBalanceBigInt,
+          };
         }
       : skipToken,
   });
 
   return {
-    balance: data,
+    formattedBalance: data?.formattedBalance,
+    balance: data?.realBalance,
     ...rest,
   };
 };

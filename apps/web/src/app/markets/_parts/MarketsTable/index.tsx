@@ -1,125 +1,107 @@
 "use client";
 
 import { Box, Switch, Typography } from "@mui/material";
-import { Card, Table, KylixChip, TData } from "~/components";
+import { Card, KylixChip } from "~/components";
 import { Asset } from "~/components/Asset";
 import { RightComponent } from "./RightComponent";
 import { TableActions } from "../TableActions";
-import { useGetLendingPools } from "@repo/onchain-utils";
+import { useGetLendingPools, usePools } from "@repo/onchain-utils";
 import { useMemo } from "react";
-import { OnTRowClick } from "~/components/Table/TBody";
 import { useRouter } from "next/navigation";
-
-type TKey =
-  | "Asset"
-  | "Collateral Q"
-  | "Utilization"
-  | "Borrow APY"
-  | "Supply APY"
-  | "Collateral"
-  | "Wallet Balance"
-  | "Actions";
+import { OnTRowClick, Table } from "@repo/ui";
 
 const placeholderData = Array.from({ length: 5 }).map(() => ({
-  Asset: {
-    name: "",
-    label: "",
-  },
-  "Collateral Q": {
-    value: "",
-  },
-  Collateral: {
-    value: false,
-  },
-  Utilization: {
-    value: "",
-  },
-  "Borrow APY": {
-    value: "",
-  },
-  "Supply APY": {
-    value: "",
-  },
-  "Wallet Balance": {
-    value: "",
-  },
+  asset: "",
+  borrowApy: "",
+  collateral: false,
+  collateralQ: "",
+  id: 0,
+  supplyApy: "",
+  utilization: "",
+  walletBalance: 0,
 }));
+
+type TableData = typeof placeholderData;
 
 const MarketsTable = () => {
   const { lendingPool } = useGetLendingPools();
+  const { data, isLoading } = usePools();
+  console.log("isLoading", isLoading);
+  console.log("data", data);
 
   const router = useRouter();
 
   const transformedData = useMemo(() => {
     return lendingPool?.map((item) => {
       return {
-        Asset: { name: item.asset, label: item.asset },
-        "Collateral Q": { value: `%${item.collateral_q}` },
-        Collateral: { value: item.collateral },
-        Utilization: { value: `%${item.utilization}` },
-        "Borrow APY": { value: `%${item.borrow_apy}` },
-        "Supply APY": { value: `%${item.supply_apy}` },
-        "Wallet Balance": { value: item.balance },
+        asset: item.asset,
+        collateralQ: `%${item.collateral_q}`,
+        collateral: item.collateral,
+        utilization: `%${item.utilization}`,
+        borrowApy: `%${item.borrow_apy}`,
+        supplyApy: `%${item.supply_apy}`,
+        walletBalance: item.balance,
         id: item.id,
       };
     });
   }, [lendingPool]);
 
   // TODO: remove index
-  const handleTRowClick: OnTRowClick = (index) => {
-    const item = transformedData?.[index];
+  const handleTRowClick: OnTRowClick<TableData[number]> = (item) => {
     if (item) router.push(`markets/${item.id}`);
   };
 
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
-      <Table<TKey>
+      <Table<TableData[number], "actions">
+        headers={{
+          asset: "Asset",
+          collateralQ: "Collateral Q",
+          utilization: "Utilization",
+          borrowApy: "Borrow Apy",
+          supplyApy: "Supply Apy",
+          collateral: "Collateral",
+          walletBalance: "Wallet Balance",
+          actions: "Actions",
+        }}
         isLoading={!lendingPool}
         tRowProps={{
           className: "cursor-pointer",
         }}
         onTRowClick={handleTRowClick}
-        hiddenTHeadsText={["Actions"]}
         rowSpacing="11px"
-        data={(transformedData || placeholderData).map((item) => ({
-          Asset: (
-            <Asset helperText={item.Asset.label} label={item.Asset.name} />
+        components={{
+          asset: (item) => (
+            <Asset helperText={item.asset} label={item.asset.toString()} />
           ),
-          "Collateral Q": (
-            <Typography variant="subtitle1">
-              {item["Collateral Q"].value}
-            </Typography>
+          collateralQ: (item) => (
+            <Typography variant="subtitle1">{item.collateralQ}</Typography>
           ),
-          Utilization: (
-            <Typography variant="subtitle1">
-              {item.Utilization.value}
-            </Typography>
+          utilization: (item) => (
+            <Typography variant="subtitle1">{item.utilization}</Typography>
           ),
-          "Borrow APY": (
+          borrowApy: (item) => (
             <Box className="flex flex-col">
-              <Typography variant="subtitle1">
-                {item["Borrow APY"].value}
-              </Typography>
+              <Typography variant="subtitle1">{item.borrowApy}</Typography>
               <KylixChip value={`${(Math.random() * 10).toFixed()}%`} />
             </Box>
           ),
-          "Supply APY": (
+          supplyApy: (item) => (
             <Box className="flex flex-col">
-              <Typography variant="subtitle1">
-                {item["Supply APY"].value}
-              </Typography>
+              <Typography variant="subtitle1">{item.supplyApy}</Typography>
               <KylixChip value={`${(Math.random() * 10).toFixed()}%`} />
             </Box>
           ),
-          Collateral: <Switch checked={item["Collateral"].value} />,
-          "Wallet Balance": (
+          collateral: (item) => <Switch checked={item.collateral} />,
+          walletBalance: (item) => (
             <Typography variant="subtitle1">
-              {Number(item["Wallet Balance"].value).toLocaleString()}
+              {Number(item.walletBalance).toLocaleString()}
             </Typography>
           ),
-          Actions: <TableActions />,
-        }))}
-        defaultSortKey="Asset"
+          actions: () => <TableActions />,
+        }}
+        data={transformedData || placeholderData}
+        defaultSortKey="asset"
         tableName="markets"
         hasPagination={false}
       />

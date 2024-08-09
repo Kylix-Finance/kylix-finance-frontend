@@ -1,4 +1,4 @@
-import { ComponentType, SVGProps } from "react";
+import { ComponentType, ReactNode, SVGProps } from "react";
 export type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 export type SocialMedia = {
   name: string;
@@ -25,18 +25,19 @@ export type NotificationType =
   | "success"
   | "message";
 
-export type VoidNoArgs = () => void;
-
-export type StoreSetFn<StoreType> = (
-  partial:
-    | StoreType
-    | Partial<StoreType>
-    | ((state: StoreType) => StoreType | Partial<StoreType>),
-  replace?: boolean | undefined
-) => void;
-
 export type NotificationParams = {
   type: "information" | "warning" | "error" | "success" | "message";
   message: string;
   title: string;
 };
+export interface Asset {
+  id: number;
+  name: string;
+  symbol: string;
+  slug: string;
+  image: string;
+}
+
+export interface StaticData {
+  coins: Record<string, Icon>;
+}

@@ -11,9 +11,18 @@ importers:
       '@polkadot/api':
         specifier: ^12.2.1
         version: 12.2.1
+      '@polkadot/api-base':
+        specifier: ^12.3.1
+        version: 12.3.1
       '@polkadot/extension-dapp':
         specifier: ^0.48.2
         version: 0.48.2(@polkadot/api@12.2.1)(@polkadot/util-crypto@13.0.2(@polkadot/util@13.0.2))(@polkadot/util@13.0.2)
+      '@polkadot/types':
+        specifier: ^12.3.1
+        version: 12.3.1
+      '@polkadot/types-codec':
+        specifier: ^12.3.1
+        version: 12.3.1
       '@tanstack/react-query':
         specifier: ^5.51.1
         version: 5.51.11(react@19.0.0-rc-f994737d14-20240522)
@@ -96,6 +105,12 @@ importers:
 
   apps/web:
     dependencies:
+      '@dicebear/collection':
+        specifier: ^9.2.1
+        version: 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/core':
+        specifier: ^9.2.1
+        version: 9.2.1
       '@emotion/react':
         specifier: ^11.11.4
         version: 11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
@@ -123,6 +138,15 @@ importers:
       '@repo/onchain-utils':
         specifier: workspace:*
         version: link:../../packages/onchain-utils
+      '@repo/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      '@repo/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       '@repo/wallet-modal':
         specifier: workspace:*
         version: link:../../packages/wallet-modal
@@ -178,6 +202,9 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
@@ -292,7 +319,73 @@ importers:
         specifier: ^5.3.3
         version: 5.5.3
 
+  packages/types: {}
+
   packages/typescript-config: {}
+
+  packages/ui:
+    dependencies:
+      '@emotion/react':
+        specifier: ^11.11.4
+        version: 11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
+      '@emotion/styled':
+        specifier: ^11.11.5
+        version: 11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
+      '@mui/icons-material':
+        specifier: ^5.16.0
+        version: 5.16.4(@mui/material@5.16.4(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
+      '@mui/lab':
+        specifier: 5.0.0-alpha.171
+        version: 5.0.0-alpha.171(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@mui/material@5.16.4(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
+      '@mui/material':
+        specifier: ^5.16.0
+        version: 5.16.4(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
+      '@mui/material-nextjs':
+        specifier: ^5.15.11
+        version: 5.16.4(@emotion/cache@11.13.0)(@mui/material@5.16.4(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(@types/react@18.3.3)(next@15.0.0-rc.0(@babel/core@7.24.9)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
+      '@mui/styles':
+        specifier: ^5.16.4
+        version: 5.16.4(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
+      '@mui/utils':
+        specifier: ^5.16.1
+        version: 5.16.4(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../utils
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      date-fns:
+        specifier: ^3.6.0
+        version: 3.6.0
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+      react:
+        specifier: 19.0.0-rc-f994737d14-20240522
+        version: 19.0.0-rc-f994737d14-20240522
+      react-dom:
+        specifier: 19.0.0-rc-f994737d14-20240522
+        version: 19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522)
+      zustand:
+        specifier: ^4.5.4
+        version: 4.5.4(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
+    devDependencies:
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../types
+      '@types/react':
+        specifier: ^18
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: ^18
+        version: 18.3.0
+
+  packages/utils:
+    dependencies:
+      zustand:
+        specifier: ^4.5.4
+        version: 4.5.4(@types/react@18.3.3)(react@19.0.0-rc-f994737d14-20240522)
 
   packages/wallet-modal:
     dependencies:
@@ -1223,6 +1316,196 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
+  '@dicebear/adventurer-neutral@9.2.1':
+    resolution: {integrity: sha512-iP6Tc6CgrJt63j08i/hlyNiGEbDNgP9Ws6WKT9n/0oTU9X/DKLncGStV3uhgYPIOVQE/tw9a/GjbGjrwBlN8CQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/adventurer@9.2.1':
+    resolution: {integrity: sha512-utJr8oEOwPy9y+7rIOnB7mls+2XQrc3Kdlx/ay9KBY/HEUMnwMoN/GJhg4HcyGnV+DS7VhN6JSrnwwD9+SQyBw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/avataaars-neutral@9.2.1':
+    resolution: {integrity: sha512-yceQMVBLimAHgZDL8VKCDGNs5JQ8BERaUMNIJXXRKEYZXlofoXZpYtcWPKQY9lmRJJznO1GX7ZK12ILnZjRPBQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/avataaars@9.2.1':
+    resolution: {integrity: sha512-WIZL7CWSsmzLswY/4ZrgtE/7EvnaNrYreLyT8hjiGyVb9J4cQaVZXSMuDIGFa5wT062AW/4/i82kh/7nh0oL+w==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/big-ears-neutral@9.2.1':
+    resolution: {integrity: sha512-98qOCFEhbqCHeyO7ZXBAMMov8bquZt8vhtjj0YeHjGjI/OEWbA2gxq2ryv1BHSehVc/vTrd1KbHag7yYoeCDuw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/big-ears@9.2.1':
+    resolution: {integrity: sha512-BUVTonwSYiGKcnk8wdwUHZ1b34GhfzRpG1kguK4kWAKlayBq7Q+iDJlmk4Bch0XdDQc2bqFf1GQCCj+xXWRHyg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/big-smile@9.2.1':
+    resolution: {integrity: sha512-bspur+wtnlv/Z4QDvRWg9rs3snf+iuBkamkgw4nZOUFKMlZdPQGqNoh1DkycRcLXNX1Q61KM172K6bS60ZlKxw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/bottts-neutral@9.2.1':
+    resolution: {integrity: sha512-uwd+xcbRQUIHKQ1iEiLjf5RwCaVzOfBgIu2WRE+6MUaahYi6cJ0eJAs0h1q+zpgYyvqPDPDAi9j7AUwjmig0GA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/bottts@9.2.1':
+    resolution: {integrity: sha512-AQQ/WKd54G9sa+TkQptcu6c+Tjfc9hitgB70uA5GqJe+w6Bal+gwY6kPm5sJ1CY2mk/UBh1rXBuauQZ25bgTcQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/collection@9.2.1':
+    resolution: {integrity: sha512-Su1eygO8llKuJ68N+xhBCzBN2Lqrsx9ZNdlvfZeH/s70RjL0raNQaI6/hRABDmlbLYwW4AjRh2lOgDdGfCp5DQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/core@9.2.1':
+    resolution: {integrity: sha512-Y3E59+3xO2UWKdf3Zt/rwMdy9r7uccTgM89Kv8aXN1vmdrnA4YYmr4jslRRRqPLVpenuT4105nkboC4rMnDgHw==}
+    engines: {node: '>=18.0.0'}
+
+  '@dicebear/croodles-neutral@9.2.1':
+    resolution: {integrity: sha512-2iyr+B/y795P7cSIpFg4RjxUu6kljesKjtepvMzfeBR9xKyI84exBNHRoCTEVwOCFePmlPJX1qtw/YWM0sAPJw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/croodles@9.2.1':
+    resolution: {integrity: sha512-V7+m21BizYTGgLgxmh5dxHHADeD3gkeuPYkhKqP8Uu8jZFBgh5wKFqqfVI/XSQkx/+lRla5c6l55mymgjt4k8Q==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/dylan@9.2.1':
+    resolution: {integrity: sha512-UeKz3Gxprh4bJ73Q2DjDpmjt854G3xfakc5KfeBmPV25EP+al7HCsM/HE+ZgKTSh+PPz5/mVtZQYU40pTzJEyg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/fun-emoji@9.2.1':
+    resolution: {integrity: sha512-F08p+Ggdxo4Ryji+3aCJXAKnjx4rM4UMtrJU4eA2t8lAkpwFNgfGK6mpMYPnxmKULYljGOgySmw7AyWcbX8s2Q==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/glass@9.2.1':
+    resolution: {integrity: sha512-UoErQwg7/qkEKWyEDTyt8FYhw/aZryP0Tr7cwBEuxMXZ585NUTvEel0K5j9aDkBrimJVEM+jKzOFIIMAGLlR0g==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/icons@9.2.1':
+    resolution: {integrity: sha512-0VuWohGMiv4n1nxwehYi6w+PIT9OBRlV721yNoewQWgQCrnMKBvM0cFRX9Dtg+MvwLMslQCIU3pEauEZ5FNmFA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/identicon@9.2.1':
+    resolution: {integrity: sha512-Dlqpn3tzqimR8KPIRkSJCKd5XwKgTLVXzT5KiY+2ysMZZQh4uJvBjVfY5SLrHDHC2a42W6EdwQxU6tFTRiKQuQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/initials@9.2.1':
+    resolution: {integrity: sha512-d6Shnt1LiCf9yAEck3y/w4pXG4bWYVjBFCeI43l0BAR39Mk2Dq05UEFZH5Dtj2kyfNozMjh6vG1cQyBigtamug==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/lorelei-neutral@9.2.1':
+    resolution: {integrity: sha512-4YkkR697qXAYxN5N/zVsRe955QLhw0yLib2CzeBga1QXXMIkywq2nRFa3fr4toSRPl45kl1eF8J5HC17CU9inw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/lorelei@9.2.1':
+    resolution: {integrity: sha512-DNjZpUpe/CxKK8Byn1meBvRz/NJWtBizcoS2DzIIyqPYOwA5cLIa2g/qKkESvXzU9naEMkiHfMZb1RYYzN2FAA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/micah@9.2.1':
+    resolution: {integrity: sha512-FK91igiVpPNhGCsfGpOgwYFKRP+FNR1V45Z4Tg/f82ux9TBdTmeoIfkgwrfhcXmCgagoYg2EAY+L72stUVapcA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/miniavs@9.2.1':
+    resolution: {integrity: sha512-r0TcaSrKJDPMqMYIiXNArq9i//cZzA1yuiXJw46iTloBDTh7yL1tpnL84CDxMpQ+OZLeMiRA6jVBx0coer4vmg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/notionists-neutral@9.2.1':
+    resolution: {integrity: sha512-Vi/FwMXzc1m/U2TjBnY9NHedoLbPc3BBsNQL8jPU27wdkXoyJHuXBevcUtsF0Zf8OuRbNpZKPbfYy6OYBr9qvw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/notionists@9.2.1':
+    resolution: {integrity: sha512-oAyvPlp3xfFnDpW3nXhdAPGVm5WYj6VW6RgdzLAHoRO2EOYDNkQruIXd+d8JYo1DMTLUbgp3onr5AF9UU2OBzw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/open-peeps@9.2.1':
+    resolution: {integrity: sha512-oPA/ljbPtuj2cdM0QtyJu2i24AaEMTIIk/FJbnrBK765WPnQcCZh84w+ZuInTMIfF9gYszNY34gaRD8Z6UiYxQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/personas@9.2.1':
+    resolution: {integrity: sha512-OgtyT9dnY8U60sUo0SLKCFVt0+dIr3a4vR0bDs/zwK4Qb/yTdB1VPdfxq0Fwk2q1vfn9YgbDrb0YYRgMRl60qQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/pixel-art-neutral@9.2.1':
+    resolution: {integrity: sha512-GUtxJYX7/9XDgSZhkx24PB+yLcKkLHblDldvRr5xGlGxhgAovTBQFHLgCJxmUJgIaNW7pvSWCw7txguyxbBN9A==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/pixel-art@9.2.1':
+    resolution: {integrity: sha512-ftKPKCvnS1cJ2OvuQLmtEIwdb9PzF5C2ofWBdVI/RFvhH1BhYc3OsdQ28o90+ZJQO4fivKwfsh8MPUTaqToQ7Q==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/rings@9.2.1':
+    resolution: {integrity: sha512-BlFYCaKB+wdpWWS28ZnQ/MvHeuNSRvkvWRoiw7pgS653LXx4kz/erVMmeVMSAr82y4BV+K8He2Rl2dMjuLyrXw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/shapes@9.2.1':
+    resolution: {integrity: sha512-cQzTcYimtuiAun55uPdIIhK53QTyjWqF/YN7LqEBGBqrJuGqHZBm1HXCcj7wPpoQ3zSy/2u8Rp0Etv7+5XFzyw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
+  '@dicebear/thumbs@9.2.1':
+    resolution: {integrity: sha512-ziX5HFmhiApO2k7QKj41+dGXbMdmQUUgFBYPyzTwnubhkDldJk7tpRoa5u2OsyTVDQCcPMv5mFSQpbANfmFwMg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      '@dicebear/core': ^9.0.0
+
   '@emnapi/runtime@1.2.0':
     resolution: {integrity: sha512-bV21/9LQmcQeCPEg3BDFtvwL6cwiTMksYNWQQ4KOxCZikEGalWtenoZ0wCiukJINlGCIi2KXx01g4FoH/LxpzQ==}
 
@@ -1739,6 +2022,10 @@ packages:
     resolution: {integrity: sha512-xyGt1/iK40/mLHrcmvjzdUWcOoES04+M9XlQ7WC3Hp+Tv/qk+WARXWkJKPIt3HqKrRu2mkyXvqPw2C/k7IhmHg==}
     engines: {node: '>=18'}
 
+  '@polkadot/api-base@12.3.1':
+    resolution: {integrity: sha512-vNbxXNjn4APfXg+ui99gurX2Jzns+eezmWranxoGXT7q0mme1zAtWus5t4e+qe1qRjDNZZYPruF7YJA8dL5k8A==}
+    engines: {node: '>=18'}
+
   '@polkadot/api-derive@12.2.1':
     resolution: {integrity: sha512-zk8/20QsUomEipN/DKB2MIgnFMr6JNIv/L/Rf3PsZXGkzOgVnFpjCjbIhHT4IscZXkO7jWmjnA3ID6sJ2+yA9Q==}
     engines: {node: '>=18'}
@@ -1781,24 +2068,48 @@ packages:
     resolution: {integrity: sha512-rKOyknD7rlZyvdsTq42EPSi4sPikBXRTb7svJ7+t0DwskSbpqLWOFvaX/hGhV4P0ZwobuIn5D82tkxG8c+mwDg==}
     engines: {node: '>=18'}
 
+  '@polkadot/rpc-augment@12.3.1':
+    resolution: {integrity: sha512-/tZLl5IuQ4vdGlUAbd8x3ShZ35XDSeyknKHCC+9kIrM/+KIyoCYBob2RXP9uqX8m516AWkXUrjsSO6DFPBpRGg==}
+    engines: {node: '>=18'}
+
   '@polkadot/rpc-core@12.2.1':
     resolution: {integrity: sha512-ZAxA2Ymi+9ajyW89yD5W7R80fbgTX15Bu7DujhJZQXl7Gd+bUtejdvf8HhleMHRLKSK+YD6+c0qON4ucs2eC4A==}
+    engines: {node: '>=18'}
+
+  '@polkadot/rpc-core@12.3.1':
+    resolution: {integrity: sha512-bNo26P20nRpLfANTK4sWEakxvqBJpKwAp/Gt7KlxoGgoTUbWFapyGKScFxp/pblycEziEbC+ZjkLMkaWaqi69g==}
     engines: {node: '>=18'}
 
   '@polkadot/rpc-provider@12.2.1':
     resolution: {integrity: sha512-8RdJjmbJygCP4MZ4xrqUUqG0X4EQsT3A4QyZ5lQvxEVvY4Ti2ExIwpVYzYbaSpGut5kdg3atI0jh+qTju/s29Q==}
     engines: {node: '>=18'}
 
+  '@polkadot/rpc-provider@12.3.1':
+    resolution: {integrity: sha512-Tg1Oj/1ldivqwnnOWepcNHEHYgpOBffxlrZMEXH1XX6D3AZaUhAWbatizyisydpuMbknTQ9FGYSnb9rOc2QBJw==}
+    engines: {node: '>=18'}
+
   '@polkadot/types-augment@12.2.1':
     resolution: {integrity: sha512-4lVAc3HjcP6gjvX6Vea4/Fo7C98ktuavLtxVD5rYBCsNr8IPjG2kc21N+FL1pcv0vDiE0U7RnalWUhdX2nlZQg==}
+    engines: {node: '>=18'}
+
+  '@polkadot/types-augment@12.3.1':
+    resolution: {integrity: sha512-I3ggJt7W3UOScP6WA6PNmNsmpCfZtXkRJvSJkX7bi2LsSm/iF0xo0KdpQK02dHu7nGRFD9O5cSoVawzZJifGLA==}
     engines: {node: '>=18'}
 
   '@polkadot/types-codec@12.2.1':
     resolution: {integrity: sha512-lOtY/9rTHrk8c9cQsks3vcNjd2VAC7KEgaCgn/FNyIFuwWP16lBH7SZXJBFq362nGJBiBEvembSDUdtpSYfRng==}
     engines: {node: '>=18'}
 
+  '@polkadot/types-codec@12.3.1':
+    resolution: {integrity: sha512-yZ4exsQI+eVkE/fZNuJBOajAgOH/YncKWOOf0N4lc6iq28oYp22DCAXc50Ym372l4HO+uhC9QdMPH9EiWwT2pQ==}
+    engines: {node: '>=18'}
+
   '@polkadot/types-create@12.2.1':
     resolution: {integrity: sha512-ifhQUMJ/mpXC9+9DZ+/THyfU+KEk54FkDfGJ6IU8TgrYI9WynGsnToNjcv6ZLHMIg6rMkPBfUOxpGvZR4cVMVg==}
+    engines: {node: '>=18'}
+
+  '@polkadot/types-create@12.3.1':
+    resolution: {integrity: sha512-Jf9BByWB64FPW3lM5/Mcc/foyPJ3L9t0QwHVHaYWaonZt6l7SPX71rQmD7twJiTj9q1d1WidDKg/TtRDNbm1yA==}
     engines: {node: '>=18'}
 
   '@polkadot/types-known@12.2.1':
@@ -1809,8 +2120,16 @@ packages:
     resolution: {integrity: sha512-rPquPHi0KKCnyVEeVbFaSjlxMtkvg7I7UwFQRfwbUanOsI4jgR4sqYXgTJSWZwRiiVe0TmfSY5VMX4Gp06bJ9w==}
     engines: {node: '>=18'}
 
+  '@polkadot/types-support@12.3.1':
+    resolution: {integrity: sha512-TwL5M5HkZ4jQGKekD+qJFLba7UXWASfwlPy2OpKj0LOnnmq4tudXgN13UFdQ7HoOmisPhr+vYo9vteYeBZ0jTA==}
+    engines: {node: '>=18'}
+
   '@polkadot/types@12.2.1':
     resolution: {integrity: sha512-axVbEnWLU9H7TMgRyECV79FWbfB4bNU9tkrCrBiOifTpJ4DT9AIbkNTgxI+wexywFbn8ATG6y1kw8leUnLDYvg==}
+    engines: {node: '>=18'}
+
+  '@polkadot/types@12.3.1':
+    resolution: {integrity: sha512-4MkTF1znpgp9mZc/ZZPdFe7/5it9v+EJmzXc/DEOX9kVWs2BuKOWopzOFyO3reVUUB+v7dxfSOArSsxkMUcuoA==}
     engines: {node: '>=18'}
 
   '@polkadot/util-crypto@12.6.2':
@@ -6212,6 +6531,164 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
+  '@dicebear/adventurer-neutral@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/adventurer@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/avataaars-neutral@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/avataaars@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/big-ears-neutral@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/big-ears@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/big-smile@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/bottts-neutral@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/bottts@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/collection@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/adventurer': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/adventurer-neutral': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/avataaars': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/avataaars-neutral': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/big-ears': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/big-ears-neutral': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/big-smile': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/bottts': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/bottts-neutral': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/core': 9.2.1
+      '@dicebear/croodles': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/croodles-neutral': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/dylan': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/fun-emoji': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/glass': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/icons': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/identicon': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/initials': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/lorelei': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/lorelei-neutral': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/micah': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/miniavs': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/notionists': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/notionists-neutral': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/open-peeps': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/personas': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/pixel-art': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/pixel-art-neutral': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/rings': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/shapes': 9.2.1(@dicebear/core@9.2.1)
+      '@dicebear/thumbs': 9.2.1(@dicebear/core@9.2.1)
+
+  '@dicebear/core@9.2.1':
+    dependencies:
+      '@types/json-schema': 7.0.15
+
+  '@dicebear/croodles-neutral@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/croodles@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/dylan@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/fun-emoji@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/glass@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/icons@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/identicon@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/initials@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/lorelei-neutral@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/lorelei@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/micah@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/miniavs@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/notionists-neutral@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/notionists@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/open-peeps@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/personas@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/pixel-art-neutral@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/pixel-art@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/rings@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/shapes@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
+  '@dicebear/thumbs@9.2.1(@dicebear/core@9.2.1)':
+    dependencies:
+      '@dicebear/core': 9.2.1
+
   '@emnapi/runtime@1.2.0':
     dependencies:
       tslib: 2.6.3
@@ -6736,6 +7213,18 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  '@polkadot/api-base@12.3.1':
+    dependencies:
+      '@polkadot/rpc-core': 12.3.1
+      '@polkadot/types': 12.3.1
+      '@polkadot/util': 13.0.2
+      rxjs: 7.8.1
+      tslib: 2.6.3
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+
   '@polkadot/api-derive@12.2.1':
     dependencies:
       '@polkadot/api': 12.2.1
@@ -6833,11 +7322,36 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  '@polkadot/rpc-augment@12.3.1':
+    dependencies:
+      '@polkadot/rpc-core': 12.3.1
+      '@polkadot/types': 12.3.1
+      '@polkadot/types-codec': 12.3.1
+      '@polkadot/util': 13.0.2
+      tslib: 2.6.3
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+
   '@polkadot/rpc-core@12.2.1':
     dependencies:
       '@polkadot/rpc-augment': 12.2.1
       '@polkadot/rpc-provider': 12.2.1
       '@polkadot/types': 12.2.1
+      '@polkadot/util': 13.0.2
+      rxjs: 7.8.1
+      tslib: 2.6.3
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+
+  '@polkadot/rpc-core@12.3.1':
+    dependencies:
+      '@polkadot/rpc-augment': 12.3.1
+      '@polkadot/rpc-provider': 12.3.1
+      '@polkadot/types': 12.3.1
       '@polkadot/util': 13.0.2
       rxjs: 7.8.1
       tslib: 2.6.3
@@ -6867,10 +7381,38 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  '@polkadot/rpc-provider@12.3.1':
+    dependencies:
+      '@polkadot/keyring': 13.0.2(@polkadot/util-crypto@13.0.2(@polkadot/util@13.0.2))(@polkadot/util@13.0.2)
+      '@polkadot/types': 12.3.1
+      '@polkadot/types-support': 12.3.1
+      '@polkadot/util': 13.0.2
+      '@polkadot/util-crypto': 13.0.2(@polkadot/util@13.0.2)
+      '@polkadot/x-fetch': 13.0.2
+      '@polkadot/x-global': 13.0.2
+      '@polkadot/x-ws': 13.0.2
+      eventemitter3: 5.0.1
+      mock-socket: 9.3.1
+      nock: 13.5.4
+      tslib: 2.6.3
+    optionalDependencies:
+      '@substrate/connect': 0.8.10
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+
   '@polkadot/types-augment@12.2.1':
     dependencies:
       '@polkadot/types': 12.2.1
       '@polkadot/types-codec': 12.2.1
+      '@polkadot/util': 13.0.2
+      tslib: 2.6.3
+
+  '@polkadot/types-augment@12.3.1':
+    dependencies:
+      '@polkadot/types': 12.3.1
+      '@polkadot/types-codec': 12.3.1
       '@polkadot/util': 13.0.2
       tslib: 2.6.3
 
@@ -6880,9 +7422,21 @@ snapshots:
       '@polkadot/x-bigint': 13.0.2
       tslib: 2.6.3
 
+  '@polkadot/types-codec@12.3.1':
+    dependencies:
+      '@polkadot/util': 13.0.2
+      '@polkadot/x-bigint': 13.0.2
+      tslib: 2.6.3
+
   '@polkadot/types-create@12.2.1':
     dependencies:
       '@polkadot/types-codec': 12.2.1
+      '@polkadot/util': 13.0.2
+      tslib: 2.6.3
+
+  '@polkadot/types-create@12.3.1':
+    dependencies:
+      '@polkadot/types-codec': 12.3.1
       '@polkadot/util': 13.0.2
       tslib: 2.6.3
 
@@ -6900,12 +7454,28 @@ snapshots:
       '@polkadot/util': 13.0.2
       tslib: 2.6.3
 
+  '@polkadot/types-support@12.3.1':
+    dependencies:
+      '@polkadot/util': 13.0.2
+      tslib: 2.6.3
+
   '@polkadot/types@12.2.1':
     dependencies:
       '@polkadot/keyring': 13.0.2(@polkadot/util-crypto@13.0.2(@polkadot/util@13.0.2))(@polkadot/util@13.0.2)
       '@polkadot/types-augment': 12.2.1
       '@polkadot/types-codec': 12.2.1
       '@polkadot/types-create': 12.2.1
+      '@polkadot/util': 13.0.2
+      '@polkadot/util-crypto': 13.0.2(@polkadot/util@13.0.2)
+      rxjs: 7.8.1
+      tslib: 2.6.3
+
+  '@polkadot/types@12.3.1':
+    dependencies:
+      '@polkadot/keyring': 13.0.2(@polkadot/util-crypto@13.0.2(@polkadot/util@13.0.2))(@polkadot/util@13.0.2)
+      '@polkadot/types-augment': 12.3.1
+      '@polkadot/types-codec': 12.3.1
+      '@polkadot/types-create': 12.3.1
       '@polkadot/util': 13.0.2
       '@polkadot/util-crypto': 13.0.2(@polkadot/util@13.0.2)
       rxjs: 7.8.1

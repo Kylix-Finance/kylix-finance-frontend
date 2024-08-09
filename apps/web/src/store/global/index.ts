@@ -1,5 +1,5 @@
-import { createStore } from "~/utils";
 import { handlers } from "./handlers";
+import { createStore } from "@repo/utils";
 import { initialState } from "./initialState";
 import * as GlobalStore from "./types";
 

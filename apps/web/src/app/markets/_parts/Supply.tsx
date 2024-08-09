@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 import { useGetLendingPools } from "@repo/onchain-utils";
 import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
-import Skeleton from "~/components/Skeleton";
+import { Skeleton } from "@repo/ui";
 
 const Supply = () => {
   const { totalSupply } = useGetLendingPools();

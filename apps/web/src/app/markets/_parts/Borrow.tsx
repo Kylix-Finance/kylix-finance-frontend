@@ -1,18 +1,16 @@
 "use client";
 import { Typography } from "@mui/material";
 import { useGetLendingPools } from "@repo/onchain-utils";
+import { Skeleton } from "@repo/ui";
 import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
-import Skeleton from "~/components/Skeleton";
 
 const Borrow = () => {
   const { totalBorrow } = useGetLendingPools();
 
-  console.log("totalBorrow", totalBorrow);
-
   return (
     <Card
-      title="Total Supply"
+      title="Total Borrow"
       icon={Icons.WalletFill}
       rightComponent={
         <Typography variant="h5" className="text-primary-800">

@@ -7,15 +7,17 @@ import {
   TextField,
   TextFieldProps,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { Dispatch, MouseEventHandler, SetStateAction, useState } from "react";
 import { List, ListItem } from "~/components";
 import { getDecimalRegex } from "~/utils";
+import AlertContainer from "../AlertContainer";
+import { useBalance } from "@repo/onchain-utils";
 
 interface SubmitButton {
   content: string;
   onclick: MouseEventHandler<HTMLButtonElement>;
-  status: boolean;
 }
 
 interface Props {
@@ -25,17 +27,25 @@ interface Props {
   maxHandler: MouseEventHandler<HTMLButtonElement>;
   decimals: number;
   submitButton: SubmitButton;
+  disabled: boolean;
+  error?: string | null;
+  assetId: number | string;
 }
 
-// eslint-disable-next-line react/prop-types
-export const Form: React.FC<Props> = ({
+export const Form = ({
   items,
   maxHandler,
   setValue,
   value,
   decimals,
   submitButton,
-}) => {
+  disabled,
+  error,
+  assetId,
+}: Props) => {
+  const theme = useTheme();
+  const { formattedBalance } = useBalance({ assetId: assetId });
+
   const handleInputChange: TextFieldProps["onChange"] = ({
     target: { value },
   }) => {
@@ -56,6 +66,7 @@ export const Form: React.FC<Props> = ({
         >
           <p className="text-primary-800 font-bold text-sm leading-5">Amount</p>
           <Button
+            disabled={disabled}
             className="!text-primary-500 !capitalize"
             variant="text"
             disableElevation
@@ -66,13 +77,26 @@ export const Form: React.FC<Props> = ({
           </Button>
         </Box>
         <TextField
+          disabled={disabled}
           value={value}
           onChange={handleInputChange}
           size="small"
           fullWidth
-          className="!rounded-md !font-number !font-bold !text-base bg-primary-500/10 !text-primary-800 !leading-5 !py-2 !px-1"
+          className="!rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
+          error={!!error}
+          helperText={error}
           inputMode="numeric"
+          FormHelperTextProps={{
+            sx: {
+              fontWeight: "bold",
+            },
+          }}
           InputProps={{
+            sx: {
+              backgroundColor: disabled ? theme.palette.grey[200] : "#45A9961A",
+              paddingY: "8px",
+              paddingX: "16px",
+            },
             startAdornment: (
               <InputAdornment position="start" className="">
                 <Typography color="#aB5D0CB" variant="subtitle1">
@@ -90,10 +114,14 @@ export const Form: React.FC<Props> = ({
         size="large"
         disableElevation
         onClick={submitButton.onclick}
-        disabled={submitButton.status}
+        disabled={disabled}
       >
         {submitButton.content}
       </Button>
+      <AlertContainer
+        isInputEmptyOrZero={!value}
+        isInsufficientBalance={!formattedBalance || value > formattedBalance}
+      />
     </Box>
   );
 };
