@@ -44,7 +44,7 @@ export const Form = ({
   assetId,
 }: Props) => {
   const theme = useTheme();
-  const { balance } = useBalance({ assetId: assetId });
+  const { formattedBalance } = useBalance({ assetId: assetId });
 
   const handleInputChange: TextFieldProps["onChange"] = ({
     target: { value },
@@ -120,7 +120,7 @@ export const Form = ({
       </Button>
       <AlertContainer
         isInputEmptyOrZero={!value}
-        isInsufficientBalance={!balance || value > balance}
+        isInsufficientBalance={!formattedBalance || value > formattedBalance}
       />
     </Box>
   );

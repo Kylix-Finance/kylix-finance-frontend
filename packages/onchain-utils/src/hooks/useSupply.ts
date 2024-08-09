@@ -4,6 +4,7 @@ import { SubmittableResultValue } from "@polkadot/api/types";
 import { useActiveAccount } from "./useActiveAccount";
 import { useSigner } from "./useSigner";
 import { useBalance } from "./useBalance";
+import { parseUnit } from "../utils";
 
 interface Phase {
   type: "error" | "success" | "information" | "warning" | "message";
@@ -23,8 +24,8 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
   const [phase, setPhase] = useState<Phase | null>(null);
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
-  // const [assetId, setAssetId] = useState<number | undefined>(undefined)
-  const { balance: gasBalance } = useBalance();
+  const { balance: getBalance } = useBalance();
+
   const submitSupply = useCallback(
     async (asset: number, balance: bigint | string) => {
       if (!asset) {
@@ -58,7 +59,6 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
         });
         return;
       }
-      // setAssetId(asset)
       setPhase({
         type: "information",
         title: "Starting",
@@ -72,14 +72,12 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
           await extrinsic?.paymentInfo(activeAccount.address, {
             signer,
           })
-        )?.partialFee
-          .toNumber()
-          .toString();
+        )?.partialFee.toBigInt();
 
         if (!estimatedGas) {
           throw new Error("Unable to estimate gas fees.");
         }
-        if (gasBalance && BigInt(estimatedGas) > BigInt(gasBalance)) {
+        if (getBalance && estimatedGas > getBalance) {
           setPhase({
             type: "error",
             title: "Insufficient Balance",
@@ -146,7 +144,7 @@ export const useSupply = (): UseSupplyExtrinsicResult => {
         const errorMsg = (err as Error).message;
         setPhase({
           type: "error",
-          title: "An error occurred during the transaction.",
+          title: "Error",
           message: errorMsg,
         });
         setIsSubmitting(false);

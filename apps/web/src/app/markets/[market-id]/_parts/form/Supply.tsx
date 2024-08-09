@@ -47,7 +47,9 @@ export const Supply = () => {
   const { data: assetMetaData, isLoading } = useMetadata(ASSET_ID);
   const { submitSupply, isSubmitting, phase } = useSupply();
   const [buttonContent, setButtonContent] = useState("Supply");
-
+  const { formattedBalance, refetch } = useBalance({
+    assetId: ASSET_ID,
+  });
   useEffect(() => {
     if (phase) {
       notify({
@@ -57,13 +59,11 @@ export const Supply = () => {
       });
       if (phase.type === "success" || phase.type === "error") {
         setValue("");
-      }
-      if (phase.type === "success" || phase.type === "error") {
-        setValue("");
         setButtonContent("Supply");
+        refetch();
       }
     }
-  }, [phase]);
+  }, [phase, refetch]);
 
   useEffect(() => {
     if (isLoading) {
@@ -88,7 +88,9 @@ export const Supply = () => {
       assetId={ASSET_ID}
       items={items}
       decimals={Number(assetMetaData?.decimals) || 18}
-      maxHandler={() => {}}
+      maxHandler={() => {
+        formattedBalance && setValue(formattedBalance);
+      }}
       setValue={setValue}
       value={value}
       disabled={isValid}

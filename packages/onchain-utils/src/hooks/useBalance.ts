@@ -57,13 +57,20 @@ const useBalance = ({ accountAddress, assetId }: Props = {}) => {
           }
 
           const freeBalanceBigInt = BigInt(freeBalance);
-          return formatUnit(freeBalanceBigInt.toString(), decimals);
+          return {
+            formattedBalance: formatUnit(
+              freeBalanceBigInt.toString(),
+              decimals
+            ),
+            realBalance: freeBalanceBigInt,
+          };
         }
       : skipToken,
   });
 
   return {
-    balance: data,
+    formattedBalance: data?.formattedBalance,
+    balance: data?.realBalance,
     ...rest,
   };
 };
