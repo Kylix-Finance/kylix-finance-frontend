@@ -77,20 +77,21 @@ export const Supply = () => {
   }, [isLoading, isSubmitting]);
 
   const handleClick = useCallback(() => {
-    if (!balance || value > balance) {
-      setError("You don't have enough balance.");
-      return;
-    }
-    if (!value) {
-      setError("Please enter an amount.");
-      return;
-    }
-    setError(null);
+    // if (!balance || value > balance) {
+    //   setError("You don't have enough balance.");
+    //   return;
+    // }
+    // if (!value) {
+    //   setError("Please enter an amount.");
+    //   return;
+    // }
+    // setError(null);
+
     submitSupply(
       ASSET_ID,
       parseUnit(value, Number(assetMetaData?.decimals) || 18)
     );
-  }, [balance, value, submitSupply, assetMetaData?.decimals]);
+  }, [value, submitSupply, assetMetaData?.decimals]);
 
   const handleMax = useCallback(() => {
     if (balance) {
