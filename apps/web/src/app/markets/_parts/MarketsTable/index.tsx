@@ -43,7 +43,8 @@ const MarketsTable = () => {
 
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
-      <Table<TableData[number], "actions">
+      <Table<TableData[number]>
+        hiddenTHeads={["actions"]}
         headers={{
           asset: "Asset",
           collateralQ: "Collateral Q",
@@ -52,7 +53,7 @@ const MarketsTable = () => {
           supplyApy: "Supply Apy",
           collateral: "Collateral",
           walletBalance: "Wallet Balance",
-          actions: "Actions",
+          actions: "",
         }}
         isLoading={!lendingPools}
         rowSpacing="11px"
