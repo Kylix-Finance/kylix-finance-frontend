@@ -43,13 +43,15 @@ const useBalance = ({ accountAddress, assetId }: Props = {}) => {
             }
             decimals = Number(assetMetaData?.decimals);
 
-            const assetBalance = await api?.query?.assets?.account?.(
+            const balanceReq = await api?.query?.assets?.account?.(
               assetId,
               address
             );
-            freeBalance = BigInt(
-              (assetBalance?.toJSON() as any)?.balance
-            ).toString();
+            const result = balanceReq?.toJSON() as unknown as {
+              balance: number | null;
+            };
+
+            freeBalance = BigInt(result?.balance || 0).toString();
           } else {
             const result = await api.query.system.account(address);
             const data = result.toJSON() as any;

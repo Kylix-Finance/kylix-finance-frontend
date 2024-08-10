@@ -218,9 +218,9 @@ const SignMessage: React.FC = () => {
   //   symbol: "BTC",
   //   size: "64x64",
   // });
-  const { pool } = usePool({ assetId: "8" });
+  const { pool } = usePool({ assetId: "9" });
 
-  const { balance } = useBalance({ assetId: pool?.id });
+  const { balance } = useBalance({ assetId: 20 });
 
   // const { data: assetMetaData } = useMetadata(pool?.lendTokenId);
 
@@ -232,7 +232,7 @@ const SignMessage: React.FC = () => {
 
   // }
 
-  console.log("pool", pool);
+  console.log("________balance", balance);
 
   return (
     <div className="flex flex-col gap-3">

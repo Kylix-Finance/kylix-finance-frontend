@@ -45,14 +45,15 @@ export const usePools = () => {
           const kTokenId = poolData.id;
           const assetMetadata = (
             await api?.query?.assets?.metadata?.(lendTokenId)
-          )?.toJSON() as unknown as MetadataResult;
+          )?.toHuman() as unknown as MetadataResult;
+
           const requestAssetBalance = await api?.query?.assets?.account?.(
             kTokenId,
             activeAccount?.address
           );
 
           const assetBalance = requestAssetBalance?.toJSON() as unknown as {
-            balance: number;
+            balance: number | null;
           };
 
           totalBorrow += BigInt(poolData.borrowedBalance);
@@ -69,12 +70,13 @@ export const usePools = () => {
             assetId: lendTokenId,
             poolId: kTokenId,
             balance: formatUnit(
-              assetBalance.balance,
+              assetBalance?.balance || 0,
               Number(assetMetadata.decimals)
             ),
           };
         })
       );
+      console.log("formattedPools", formattedPools);
       return {
         pools: formattedPools,
         totalBorrow,

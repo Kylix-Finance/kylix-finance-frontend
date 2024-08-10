@@ -41,6 +41,7 @@ const MarketsTable = () => {
     });
   }, [lendingPools?.pools]);
 
+  console.log("lendingPools", lendingPools);
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
       <Table<TableData[number]>
