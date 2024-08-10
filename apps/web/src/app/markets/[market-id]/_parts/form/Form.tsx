@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Dispatch, MouseEventHandler, SetStateAction, useState } from "react";
 import { List, ListItem } from "~/components";
-import { getDecimalRegex } from "~/utils";
+import { getDecimalRegex, isValidInput } from "~/utils";
 import AlertContainer from "../AlertContainer";
 import { useBalance } from "@repo/onchain-utils";
 import { LoadingButton } from "@mui/lab";
@@ -55,9 +55,13 @@ export const Form = ({
     target: { value },
   }) => {
     // TODO: Wrap this `if` check in some utility or something
-    if (value === "") return setValue(value);
-    const isValid = getDecimalRegex(decimals).test(value);
-    if (isValid) setValue(value);
+    // if (value === "") return setValue(value);
+    // const isValid = getDecimalRegex(decimals).test(value);
+    // if (isValid) setValue(value);
+
+    if (value === "" || isValidInput(value, decimals)) {
+      setValue(value);
+    }
   };
 
   const isInputEmpty = Number(value) === 0;
