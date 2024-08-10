@@ -60,9 +60,6 @@ const MarketsTable = () => {
           actions: "Actions",
         }}
         isLoading={!lendingPool}
-        tRowProps={{
-          className: "cursor-pointer",
-        }}
         rowSpacing="11px"
         components={{
           asset: (item) => (
