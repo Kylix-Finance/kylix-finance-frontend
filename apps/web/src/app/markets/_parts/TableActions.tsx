@@ -1,9 +1,13 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Link, Typography } from "@mui/material";
 
-export const TableActions = () => {
+interface Props {
+  assetId: number | string;
+}
+
+export const TableActions = ({ assetId }: Props) => {
   return (
     <Box className="flex justify-end gap-1">
-      <Button variant="contained">
+      <Link href={`/markets/${assetId}`}>
         <Typography
           className="!text-[#FFF]"
           variant="md"
@@ -12,8 +16,8 @@ export const TableActions = () => {
         >
           Supply
         </Typography>
-      </Button>
-      <Button variant="outlined">
+      </Link>
+      <Link href={`/markets/${assetId}`}>
         <Typography
           className="!text-primary-500"
           variant="md"
@@ -22,7 +26,7 @@ export const TableActions = () => {
         >
           Borrow
         </Typography>
-      </Button>
+      </Link>
     </Box>
   );
 };

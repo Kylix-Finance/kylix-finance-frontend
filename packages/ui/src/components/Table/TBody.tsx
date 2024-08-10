@@ -21,7 +21,6 @@ function TBody<Schema, ExtraFields extends string = string>({
   data,
   headers,
   isLoading,
-  onTRowClick,
   rowSpacing,
   tBody,
   tCellClassnames,
@@ -40,9 +39,6 @@ function TBody<Schema, ExtraFields extends string = string>({
             row={row}
             components={components}
             {...tRowProps}
-            onClick={() => {
-              onTRowClick?.(row);
-            }}
           />
           {rowSpacing && (
             <TableRow
