@@ -27,7 +27,7 @@ const MarketsTable = () => {
   const { lendingPool } = useGetLendingPools();
   const { data, isLoading } = usePools();
   console.log("isLoading", isLoading);
-  console.log("data", data);
+  console.log("data", lendingPool);
 
   const router = useRouter();
 

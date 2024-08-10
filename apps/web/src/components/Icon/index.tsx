@@ -2,8 +2,8 @@
 import React from "react";
 import { createAvatar } from "@dicebear/core";
 import { glass } from "@dicebear/collection";
-import { data } from "~/config/data";
 import Image from "next/image";
+import { TokenIcons } from "~/config";
 
 interface Props {
   symbol: string;
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Icon = ({ symbol, height = 32, width = 32, className }: Props) => {
-  const IconComponent = data.coins[symbol];
+  const IconComponent = TokenIcons[symbol];
 
   if (!IconComponent) {
     const avatar = createAvatar(glass, {
