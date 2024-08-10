@@ -8,14 +8,13 @@ import {
   useDownloadEvents,
   useEvent,
   useMetadata,
-  usePool,
   useProvider,
-  useSupply,
 } from "@repo/onchain-utils";
 import { formatUnit } from "@repo/onchain-utils";
 import { useEffect } from "react";
 import { notify } from "~/components";
 import { useGetAsset } from "~/hooks/api";
+import { usePool } from "~/hooks/chain/usePool";
 
 // import {
 //   useActiveAccount,

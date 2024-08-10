@@ -3,12 +3,8 @@
 import { ListItem, notify } from "~/components";
 import { Form } from "./Form";
 import { useState } from "react";
-import {
-  parseUnit,
-  useBalance,
-  useMetadata,
-  useSupply,
-} from "@repo/onchain-utils";
+import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
+import { useSupply } from "~/hooks/chain/useSupply";
 
 const ASSET_ID = 8;
 const items: Array<ListItem> = [

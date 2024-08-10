@@ -5,7 +5,10 @@
  * @param decimals - The number of decimals to consider for the conversion.
  * @returns The human-readable representation of the value as a string.
  */
-export function formatUnit(value: string, decimals: number = 18): string {
+export function formatUnit(
+  value: string | number | bigint,
+  decimals: number = 18
+): string {
   let valueStr: string = value.toString();
   if (valueStr.length <= decimals) {
     valueStr = valueStr.padStart(decimals + 1, "0");

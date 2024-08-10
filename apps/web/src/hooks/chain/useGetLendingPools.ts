@@ -1,9 +1,7 @@
-"use client";
-
-import { skipToken, useQuery } from "@tanstack/react-query";
-import { useProvider } from "./useProvider";
-import { getLendingPool } from "../api/getLendingPools";
+import { WsProvider } from "@polkadot/api";
+import { LendingPoolsResponse, useProvider } from "@repo/onchain-utils";
 import { queryKeys } from "@repo/shared";
+import { skipToken, useQuery } from "@tanstack/react-query";
 
 export const useGetLendingPools = () => {
   const { provider } = useProvider();
@@ -23,4 +21,8 @@ export const useGetLendingPools = () => {
     totalSupply,
     isLoading,
   };
+};
+
+export const getLendingPool = ({ provider }: { provider: WsProvider }) => {
+  return provider.send<LendingPoolsResponse>("getLendingPools", []);
 };

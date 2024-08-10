@@ -2,7 +2,7 @@ import { skipToken, useQuery } from "@tanstack/react-query";
 import { useProvider } from "./useProvider";
 import { queryKeys } from "@repo/shared";
 
-type MetadataResult = {
+export type MetadataResult = {
   deposit: string;
   name: string;
   symbol: string;

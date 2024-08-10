@@ -1,12 +1,25 @@
+import {
+  formatUnit,
+  MetadataResult,
+  useActiveAccount,
+  useProvider,
+} from "@repo/onchain-utils";
+import { LendingLendingPool } from "@repo/shared";
 import { useQuery } from "@tanstack/react-query";
-import { useProvider } from "./useProvider";
-import { LendingLendingPool, PalletAssetsAssetMetadata } from "@repo/shared";
-import { useActiveAccount } from "./useActiveAccount";
+import { assets } from "~/config";
 
 type Pool = {
-  assetInfo: PalletAssetsAssetMetadata;
-  wallet_balance: number;
-} & LendingLendingPool;
+  balance: string;
+  assetName: string;
+  collateralQ: string;
+  collateral: boolean;
+  utilization: string;
+  borrowApy: string;
+  supplyApy: string;
+  walletBalance: number;
+  assetId: number;
+  poolId: number;
+};
 
 interface PoolsResponse {
   pools: Pool[];
@@ -29,24 +42,36 @@ export const usePools = () => {
         pools.map(async ([ـ, value]) => {
           const poolData = value.toJSON() as unknown as LendingLendingPool;
           const lendTokenId = poolData.lendTokenId;
-          const assetMetadata =
-            await api?.query?.assets?.metadata?.(lendTokenId);
+          const kTokenId = poolData.id;
+          const assetMetadata = (
+            await api?.query?.assets?.metadata?.(lendTokenId)
+          )?.toJSON() as unknown as MetadataResult;
           const requestAssetBalance = await api?.query?.assets?.account?.(
-            lendTokenId,
+            kTokenId,
             activeAccount?.address
           );
+
           const assetBalance = requestAssetBalance?.toJSON() as unknown as {
             balance: number;
           };
 
-          const assetInfo =
-            assetMetadata?.toHuman() as unknown as PalletAssetsAssetMetadata;
           totalBorrow += BigInt(poolData.borrowedBalance);
           totalSupply += BigInt(poolData.reserveBalance);
+
+          const assetStaticData = assets[lendTokenId.toString()];
+
           return {
-            wallet_balance: assetBalance.balance,
-            assetInfo,
-            ...poolData,
+            assetName: assetMetadata.name,
+            collateralQ: assetStaticData?.collateralQ,
+            utilization: assetStaticData?.utilization,
+            borrowApy: assetStaticData?.borrowApy,
+            supplyApy: assetStaticData?.supplyApy,
+            assetId: lendTokenId,
+            poolId: kTokenId,
+            balance: formatUnit(
+              assetBalance.balance,
+              Number(assetMetadata.decimals)
+            ),
           };
         })
       );

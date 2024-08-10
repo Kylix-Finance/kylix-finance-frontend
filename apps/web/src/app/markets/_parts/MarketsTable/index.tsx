@@ -4,10 +4,10 @@ import { Box, Switch, Typography } from "@mui/material";
 import { Asset, Card, KylixChip } from "~/components";
 import { RightComponent } from "./RightComponent";
 import { TableActions } from "../TableActions";
-import { useGetLendingPools, usePools } from "@repo/onchain-utils";
 import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { OnTRowClick, Table } from "@repo/ui";
+import { usePools } from "~/hooks/chain/usePools";
 
 const placeholderData = Array.from({ length: 5 }).map(() => ({
   asset: "",
@@ -17,33 +17,29 @@ const placeholderData = Array.from({ length: 5 }).map(() => ({
   id: 0,
   supplyApy: "",
   utilization: "",
-  walletBalance: 0,
+  walletBalance: "0",
 }));
 
 type TableData = typeof placeholderData;
 
 const MarketsTable = () => {
-  const { lendingPool } = useGetLendingPools();
-  const { data, isLoading } = usePools();
-  console.log("isLoading", isLoading);
-  console.log("data", lendingPool);
-
-  const router = useRouter();
+  // const { lendingPool } = useGetLendingPools();
+  const { data: lendingPools } = usePools();
 
   const transformedData = useMemo(() => {
-    return lendingPool?.map((item) => {
+    return lendingPools?.pools?.map((item) => {
       return {
-        asset: item.asset,
-        collateralQ: `%${item.collateral_q}`,
+        asset: item.assetName,
+        collateralQ: `%${item.collateralQ}`,
         collateral: item.collateral,
         utilization: `%${item.utilization}`,
-        borrowApy: `%${item.borrow_apy}`,
-        supplyApy: `%${item.supply_apy}`,
+        borrowApy: `%${item.borrowApy}`,
+        supplyApy: `%${item.supplyApy}`,
         walletBalance: item.balance,
-        id: item.id,
+        id: item.assetId,
       };
     });
-  }, [lendingPool]);
+  }, [lendingPools?.pools]);
 
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
@@ -58,7 +54,7 @@ const MarketsTable = () => {
           walletBalance: "Wallet Balance",
           actions: "Actions",
         }}
-        isLoading={!lendingPool}
+        isLoading={!lendingPools}
         rowSpacing="11px"
         components={{
           asset: (item) => (
