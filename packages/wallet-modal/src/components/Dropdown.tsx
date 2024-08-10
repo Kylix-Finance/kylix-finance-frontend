@@ -38,50 +38,50 @@ export const Dropdown: React.FC<Props> = ({
       <div onClick={isEnabled ? handleToggle : undefined}>{children}</div>
 
       {isOpen && (
-        <div
-          className="w-[100vw] h-[100vh]"
-          style={{
-            position: "fixed",
-            backgroundColor: "transparent",
-            zIndex: 9998,
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-          }}
-          onClick={isEnabled ? handleToggle : undefined}
-        />
+        <>
+          <div
+            className="w-[100vw] h-[100vh]"
+            style={{
+              position: "fixed",
+              backgroundColor: "transparent",
+              zIndex: 9998,
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+            }}
+            onClick={isEnabled ? handleToggle : undefined}
+          />
+
+          <div
+            className={`opacity-100 scale-100 origin-top-right absolute z-[9999] right-0 mt-2 w-56 rounded-sm shadow-lg bg-white transition-all duration-150 ease-out`}
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="menu-button"
+          >
+            <div className="p-1" role="none">
+              {options.map((option) => (
+                <button
+                  key={option.name}
+                  className="flex gap-2 items-center text-gray-700 w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                  role="menuitem"
+                  onClick={() => handleMenuItemClick(option.name)}
+                >
+                  {typeof option.Icon === "function" ? (
+                    <option.Icon />
+                  ) : (
+                    option.Icon
+                  )}
+
+                  <span className="font-[500] text-[12px] text-[#5C5E64]">
+                    {option.label}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
       )}
-
-      <div
-        className={`${
-          isOpen ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        } origin-top-right absolute z-[9999] right-0 mt-2 w-56 rounded-sm shadow-lg bg-white transition-all duration-150 ease-out`}
-        role="menu"
-        aria-orientation="vertical"
-        aria-labelledby="menu-button"
-      >
-        <div className="p-1" role="none">
-          {options.map((option) => (
-            <button
-              key={option.name}
-              className="flex gap-2 items-center text-gray-700 w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
-              role="menuitem"
-              onClick={() => handleMenuItemClick(option.name)}
-            >
-              {typeof option.Icon === "function" ? (
-                <option.Icon />
-              ) : (
-                option.Icon
-              )}
-
-              <span className="font-[500] text-[12px] text-[#5C5E64]">
-                {option.label}
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
