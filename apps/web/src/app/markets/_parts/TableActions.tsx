@@ -1,4 +1,4 @@
-import { Box, Button, Link, Typography } from "@mui/material";
+import { Box, Button, ButtonProps, Link, Typography } from "@mui/material";
 
 interface Props {
   assetId: number | string;
@@ -7,7 +7,7 @@ interface Props {
 export const TableActions = ({ assetId }: Props) => {
   return (
     <Box className="flex justify-end gap-1">
-      <Link href={`/markets/${assetId}`}>
+      <Link href={`/markets/${assetId}`} component={ContainedButton}>
         <Typography
           className="!text-[#FFF]"
           variant="md"
@@ -17,7 +17,7 @@ export const TableActions = ({ assetId }: Props) => {
           Supply
         </Typography>
       </Link>
-      <Link href={`/markets/${assetId}`}>
+      <Link href={`/markets/${assetId}`} component={ContainedButton}>
         <Typography
           className="!text-primary-500"
           variant="md"
@@ -30,3 +30,7 @@ export const TableActions = ({ assetId }: Props) => {
     </Box>
   );
 };
+
+function ContainedButton(props: ButtonProps) {
+  return <Button {...props} variant="contained" />;
+}
