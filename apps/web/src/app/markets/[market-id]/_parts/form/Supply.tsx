@@ -1,8 +1,8 @@
 "use client";
 
-import { ListItem, notify } from "~/components";
+import { ListItem } from "~/components";
 import { Form } from "./Form";
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import {
   parseUnit,
   useBalance,

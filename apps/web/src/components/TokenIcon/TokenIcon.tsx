@@ -12,7 +12,7 @@ interface Props {
   className?: string;
 }
 
-const Icon = ({ symbol, height = 32, width = 32, className }: Props) => {
+const TokenIcon = ({ symbol, height = 32, width = 32, className }: Props) => {
   const IconComponent = TokenIcons[symbol];
 
   if (!IconComponent) {
@@ -44,4 +44,4 @@ const Icon = ({ symbol, height = 32, width = 32, className }: Props) => {
   );
 };
 
-export default Icon;
+export default TokenIcon;

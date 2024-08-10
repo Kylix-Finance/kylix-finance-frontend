@@ -1,8 +1,7 @@
 "use client";
 
 import { Box, Switch, Typography } from "@mui/material";
-import { Card, KylixChip } from "~/components";
-import { Asset } from "~/components/Asset";
+import { Asset, Card, KylixChip } from "~/components";
 import { RightComponent } from "./RightComponent";
 import { TableActions } from "../TableActions";
 import { useGetLendingPools, usePools } from "@repo/onchain-utils";
