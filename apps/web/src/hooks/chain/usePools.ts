@@ -47,14 +47,20 @@ export const usePools = () => {
             await api?.query?.assets?.metadata?.(lendTokenId)
           )?.toHuman() as unknown as MetadataResult;
 
-          const requestAssetBalance = await api?.query?.assets?.account?.(
-            kTokenId,
-            activeAccount?.address
-          );
-
-          const assetBalance = requestAssetBalance?.toJSON() as unknown as {
-            balance: number | null;
-          };
+          let balance = "-";
+          if (activeAccount?.address) {
+            const requestAssetBalance = await api?.query?.assets?.account?.(
+              kTokenId,
+              activeAccount?.address
+            );
+            const assetBalance = requestAssetBalance?.toJSON() as unknown as {
+              balance: number | null;
+            };
+            balance = formatUnit(
+              assetBalance?.balance || 0,
+              Number(assetMetadata.decimals)
+            );
+          }
 
           totalBorrow += BigInt(poolData.borrowedBalance);
           totalSupply += BigInt(poolData.reserveBalance);
@@ -69,10 +75,7 @@ export const usePools = () => {
             supplyApy: assetStaticData?.supplyApy,
             assetId: lendTokenId,
             poolId: kTokenId,
-            balance: formatUnit(
-              assetBalance?.balance || 0,
-              Number(assetMetadata.decimals)
-            ),
+            balance,
           };
         })
       );

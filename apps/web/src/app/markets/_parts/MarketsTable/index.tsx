@@ -82,7 +82,9 @@ const MarketsTable = () => {
           collateral: (item) => <Switch checked={item.collateral} />,
           walletBalance: (item) => (
             <Typography variant="subtitle1">
-              {Number(item.walletBalance).toLocaleString()}
+              {item.walletBalance === "-"
+                ? "-"
+                : Number(item.walletBalance).toLocaleString()}
             </Typography>
           ),
           actions: (item) => <TableActions assetId={item.id} />,
