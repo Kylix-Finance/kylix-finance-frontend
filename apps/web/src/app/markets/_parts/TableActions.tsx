@@ -17,7 +17,7 @@ export const TableActions = ({ assetId }: Props) => {
           Supply
         </Typography>
       </Link>
-      <Link href={`/markets/${assetId}`} component={ContainedButton}>
+      <Link href={`/markets/${assetId}`} component={OutlinedButton}>
         <Typography
           className="!text-primary-500"
           variant="md"
@@ -33,4 +33,7 @@ export const TableActions = ({ assetId }: Props) => {
 
 function ContainedButton(props: ButtonProps) {
   return <Button {...props} variant="contained" />;
+}
+function OutlinedButton(props: ButtonProps) {
+  return <Button {...props} variant="outlined" />;
 }
