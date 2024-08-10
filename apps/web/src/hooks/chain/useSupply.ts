@@ -8,6 +8,12 @@ import {
 } from "@repo/onchain-utils";
 import { queryKeys } from "@repo/shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+interface MutationFnProps {
+  asset: number | string;
+  balance: string | bigint;
+}
+
 export const useSupply = () => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
@@ -16,7 +22,7 @@ export const useSupply = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: queryKeys.supply,
-    mutationFn: (params: { asset: number; balance: string | bigint }) =>
+    mutationFn: (params: MutationFnProps) =>
       supplyTransaction(params, {
         api,
         signer,
@@ -49,7 +55,7 @@ export const useSupply = () => {
 };
 
 export const supplyTransaction = async (
-  { asset, balance }: { asset: number; balance: string | bigint },
+  { asset, balance }: MutationFnProps,
   {
     api,
     activeAccount,

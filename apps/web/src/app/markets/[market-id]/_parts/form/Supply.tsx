@@ -5,8 +5,8 @@ import { Form } from "./Form";
 import { useState } from "react";
 import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
 import { useSupply } from "~/hooks/chain/useSupply";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 
-const ASSET_ID = 8;
 const items: Array<ListItem> = [
   {
     label: "Available to supply",
@@ -38,17 +38,19 @@ const items: Array<ListItem> = [
 ];
 
 export const Supply = () => {
+  const params = useParams();
+  const lendTokenId = params["market-id"] as string;
   const [value, setValue] = useState("");
-  const { data: assetMetaData, isLoading } = useMetadata(ASSET_ID);
+  const { data: assetMetaData, isLoading } = useMetadata(lendTokenId);
   const { mutate, isPending } = useSupply();
   const { formattedBalance } = useBalance({
-    assetId: ASSET_ID,
+    assetId: lendTokenId,
   });
 
   const handleClick = () => {
     mutate(
       {
-        asset: ASSET_ID,
+        asset: lendTokenId,
         balance: parseUnit(value, Number(assetMetaData?.decimals) || 18),
       },
       {
@@ -66,7 +68,7 @@ export const Supply = () => {
   const isValid = isLoading || isPending || !assetMetaData;
   return (
     <Form
-      assetId={ASSET_ID}
+      assetId={lendTokenId}
       items={items}
       decimals={Number(assetMetaData?.decimals) || 18}
       maxHandler={() => {
