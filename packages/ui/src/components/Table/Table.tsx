@@ -49,7 +49,6 @@ export function Table<Schema, ExtraFields extends string = string>({
   headers,
   hiddenTHeads,
   isLoading,
-  onTRowClick,
   rowSpacing,
   tableName,
   tBaseProps,
@@ -103,7 +102,6 @@ export function Table<Schema, ExtraFields extends string = string>({
           data={sortedData}
           headers={headers}
           isLoading={isLoading}
-          onTRowClick={onTRowClick}
           rowSpacing={rowSpacing}
           tBody={tBodyProps}
           tCellClassnames={tCellClassnames}

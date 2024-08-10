@@ -46,11 +46,6 @@ const MarketsTable = () => {
     });
   }, [lendingPool]);
 
-  // TODO: remove index
-  const handleTRowClick: OnTRowClick<TableData[number]> = (item) => {
-    if (item) router.push(`markets/${item.id}`);
-  };
-
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
       <Table<TableData[number], "actions">
@@ -68,7 +63,6 @@ const MarketsTable = () => {
         tRowProps={{
           className: "cursor-pointer",
         }}
-        onTRowClick={handleTRowClick}
         rowSpacing="11px"
         components={{
           asset: (item) => (
@@ -98,7 +92,7 @@ const MarketsTable = () => {
               {Number(item.walletBalance).toLocaleString()}
             </Typography>
           ),
-          actions: () => <TableActions />,
+          actions: (item) => <TableActions assetId={item.id} />,
         }}
         data={transformedData || placeholderData}
         defaultSortKey="asset"
