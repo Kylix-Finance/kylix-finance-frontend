@@ -3,10 +3,10 @@ import { Typography } from "@mui/material";
 import { Skeleton } from "@repo/ui";
 import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
-import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
+import { usePools } from "~/hooks/chain/usePools";
 
 const Borrow = () => {
-  const { totalBorrow } = useGetLendingPools();
+  const { totalBorrow } = usePools();
 
   return (
     <Card

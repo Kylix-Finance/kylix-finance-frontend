@@ -30,7 +30,7 @@ interface PoolsResponse {
 export const usePools = () => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
-  return useQuery({
+  const { data, ...rest } = useQuery({
     queryKey: ["poolsData"],
     enabled: !!api,
     queryFn: async () => {
@@ -76,7 +76,6 @@ export const usePools = () => {
           };
         })
       );
-      console.log("formattedPools", formattedPools);
       return {
         pools: formattedPools,
         totalBorrow,
@@ -84,4 +83,10 @@ export const usePools = () => {
       } as PoolsResponse;
     },
   });
+  return {
+    pools: data?.pools,
+    totalBorrow: data?.totalBorrow,
+    totalSupply: data?.totalSupply,
+    ...rest,
+  };
 };

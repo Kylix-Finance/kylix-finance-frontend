@@ -24,10 +24,10 @@ type TableData = typeof placeholderData;
 
 const MarketsTable = () => {
   // const { lendingPool } = useGetLendingPools();
-  const { data: lendingPools } = usePools();
+  const { pools } = usePools();
 
   const transformedData = useMemo(() => {
-    return lendingPools?.pools?.map((item) => {
+    return pools?.map((item) => {
       return {
         asset: item.assetName,
         collateralQ: `%${item.collateralQ}`,
@@ -39,9 +39,8 @@ const MarketsTable = () => {
         id: item.assetId,
       };
     });
-  }, [lendingPools?.pools]);
+  }, [pools]);
 
-  console.log("lendingPools", lendingPools);
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
       <Table<TableData[number]>
@@ -56,7 +55,7 @@ const MarketsTable = () => {
           walletBalance: "Wallet Balance",
           actions: "",
         }}
-        isLoading={!lendingPools}
+        isLoading={!pools}
         rowSpacing="11px"
         components={{
           asset: (item) => (

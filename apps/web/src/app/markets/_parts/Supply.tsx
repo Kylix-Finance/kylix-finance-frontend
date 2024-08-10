@@ -4,10 +4,10 @@ import { Typography } from "@mui/material";
 import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
 import { Skeleton } from "@repo/ui";
-import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
+import { usePools } from "~/hooks/chain/usePools";
 
 const Supply = () => {
-  const { totalSupply } = useGetLendingPools();
+  const { totalSupply } = usePools();
 
   return (
     <Card
