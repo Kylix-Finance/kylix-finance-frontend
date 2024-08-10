@@ -1,9 +1,10 @@
 import { Box, Chip, Typography } from "@mui/material";
 import Image from "next/image";
+import { useMemo } from "react";
 import { cn } from "~/utils";
 
 interface Props {
-  value: string;
+  value?: string;
   className?: string;
   iconDimension?: {
     width: number;
@@ -19,6 +20,9 @@ const KylixChip = ({
     width: 10,
   },
 }: Props) => {
+  const finalValue = useMemo(() => {
+    return `${(1 + Math.random() * 10).toFixed()}%`;
+  }, []);
   return (
     <Box
       sx={{
@@ -40,7 +44,7 @@ const KylixChip = ({
         className
       )}
     >
-      <Typography variant="caption">{value}</Typography>
+      <Typography variant="caption">{finalValue}</Typography>
       <Image
         draggable="false"
         src="/kylix-chip.svg"

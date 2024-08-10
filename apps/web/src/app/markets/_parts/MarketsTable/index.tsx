@@ -70,13 +70,13 @@ const MarketsTable = () => {
           borrowApy: (item) => (
             <Box className="flex flex-col">
               <Typography variant="subtitle1">{item.borrowApy}</Typography>
-              <KylixChip value={`${(Math.random() * 10).toFixed()}%`} />
+              <KylixChip />
             </Box>
           ),
           supplyApy: (item) => (
             <Box className="flex flex-col">
               <Typography variant="subtitle1">{item.supplyApy}</Typography>
-              <KylixChip value={`${(Math.random() * 10).toFixed()}%`} />
+              <KylixChip />
             </Box>
           ),
           collateral: (item) => <Switch checked={item.collateral} />,
