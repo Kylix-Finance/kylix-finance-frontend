@@ -49,12 +49,23 @@ export const Supply = () => {
     assetId: ASSET_ID,
   });
 
-  const handleClick = useCallback(() => {
-    mutate({
-      asset: ASSET_ID,
-      balance: parseUnit(value, Number(assetMetaData?.decimals) || 18),
-    });
-  }, [mutate, value, assetMetaData?.decimals]);
+  const handleClick = () => {
+    mutate(
+      {
+        asset: ASSET_ID,
+        balance: parseUnit(value, Number(assetMetaData?.decimals) || 18),
+      },
+      {
+        onSuccess: ({ blockNumber }) => {
+          notify({
+            type: "success",
+            title: "Success",
+            message: "Transaction completed on block " + blockNumber,
+          });
+        },
+      }
+    );
+  };
 
   const isValid = isLoading || isPending || !assetMetaData;
   return (
@@ -72,6 +83,7 @@ export const Supply = () => {
         onclick: handleClick,
         content: "Supply",
       }}
+      isSubmitting={isPending}
     />
   );
 };

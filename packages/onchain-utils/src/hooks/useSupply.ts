@@ -26,7 +26,6 @@ export const useSupply = () => {
           address: activeAccount?.address,
           assetId: undefined,
         }),
-        exact: true,
       });
     },
     onSuccess: (_, { asset }) => {
@@ -35,14 +34,12 @@ export const useSupply = () => {
           address: activeAccount?.address,
           assetId: asset,
         }),
-        exact: true,
       });
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,
           assetId: undefined,
         }),
-        exact: true,
       });
     },
   });

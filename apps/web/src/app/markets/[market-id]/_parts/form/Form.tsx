@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 "use client";
 import {
   Box,
@@ -14,6 +13,7 @@ import { List, ListItem } from "~/components";
 import { getDecimalRegex } from "~/utils";
 import AlertContainer from "../AlertContainer";
 import { useBalance } from "@repo/onchain-utils";
+import { LoadingButton } from "@mui/lab";
 
 interface SubmitButton {
   content: string;
@@ -30,6 +30,7 @@ interface Props {
   disabled: boolean;
   error?: string | null;
   assetId: number | string;
+  isSubmitting?: boolean;
 }
 
 export const Form = ({
@@ -42,6 +43,7 @@ export const Form = ({
   disabled,
   error,
   assetId,
+  isSubmitting = false,
 }: Props) => {
   const theme = useTheme();
   const { formattedBalance } = useBalance({ assetId: assetId });
@@ -108,16 +110,16 @@ export const Form = ({
         />
       </Box>
       <List items={items} />
-      <Button
+      <LoadingButton
         variant="contained"
-        className="!capitalize !text-white !text-xs !font-semibold !leading-5 !text-center !rounded !py-2 !px-3"
         size="large"
         disableElevation
         onClick={submitButton.onclick}
         disabled={disabled}
+        loading={isSubmitting}
       >
         {submitButton.content}
-      </Button>
+      </LoadingButton>
       <AlertContainer
         isInputEmptyOrZero={!value}
         isInsufficientBalance={!formattedBalance || value > formattedBalance}
