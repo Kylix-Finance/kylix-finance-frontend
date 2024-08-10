@@ -41,10 +41,9 @@ export const Borrow = () => {
       assetId={9}
       items={items}
       decimals={18}
-      maxHandler={() => {}}
+      onMaxClick={() => {}}
       setValue={setValue}
       value={value}
-      disabled={true}
       submitButton={{
         onclick,
         content: "Borrow",

@@ -41,9 +41,9 @@ export const Supply = () => {
   const params = useParams();
   const lendTokenId = params["market-id"] as string;
   const [value, setValue] = useState("");
-  const { data: assetMetaData, isLoading } = useMetadata(lendTokenId);
+  const { data: assetMetaData } = useMetadata(lendTokenId);
   const { mutate, isPending } = useSupply();
-  const { formattedBalance } = useBalance({
+  const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
     assetId: lendTokenId,
   });
 
@@ -65,23 +65,22 @@ export const Supply = () => {
     );
   };
 
-  const isValid = isLoading || isPending || !assetMetaData;
+  const onMaxClick = () => formattedBalance && setValue(formattedBalance);
+
   return (
     <Form
       assetId={lendTokenId}
       items={items}
       decimals={Number(assetMetaData?.decimals) || 18}
-      maxHandler={() => {
-        formattedBalance && setValue(formattedBalance);
-      }}
       setValue={setValue}
       value={value}
-      disabled={isValid}
       submitButton={{
         onclick: handleClick,
         content: "Supply",
       }}
       isSubmitting={isPending}
+      isMaxLoading={isBalanceLoading}
+      onMaxClick={onMaxClick}
     />
   );
 };

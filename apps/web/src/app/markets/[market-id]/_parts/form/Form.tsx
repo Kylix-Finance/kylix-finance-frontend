@@ -1,5 +1,6 @@
 "use client";
 import {
+  Alert,
   Box,
   Button,
   InputAdornment,
@@ -14,6 +15,7 @@ import { getDecimalRegex } from "~/utils";
 import AlertContainer from "../AlertContainer";
 import { useBalance } from "@repo/onchain-utils";
 import { LoadingButton } from "@mui/lab";
+import { FormAlert } from "~/components/FormAlert";
 
 interface SubmitButton {
   content: string;
@@ -24,29 +26,30 @@ interface Props {
   items: ListItem[];
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
-  maxHandler: MouseEventHandler<HTMLButtonElement>;
   decimals: number;
   submitButton: SubmitButton;
-  disabled: boolean;
   error?: string | null;
   assetId: number | string;
   isSubmitting?: boolean;
+  onMaxClick: () => void;
+  isMaxLoading?: boolean;
 }
 
 export const Form = ({
   items,
-  maxHandler,
   setValue,
   value,
   decimals,
   submitButton,
-  disabled,
   error,
   assetId,
   isSubmitting = false,
+  onMaxClick,
+  isMaxLoading = false,
 }: Props) => {
-  const theme = useTheme();
-  const { formattedBalance } = useBalance({ assetId: assetId });
+  const { formattedBalance } = useBalance({
+    assetId: assetId,
+  });
 
   const handleInputChange: TextFieldProps["onChange"] = ({
     target: { value },
@@ -56,6 +59,9 @@ export const Form = ({
     const isValid = getDecimalRegex(decimals).test(value);
     if (isValid) setValue(value);
   };
+
+  const isInputEmpty = Number(value) === 0;
+  const isInsufficientBalance = Number(value) > Number(formattedBalance);
 
   return (
     <Box display="flex" flexDirection="column" gap="24px">
@@ -68,18 +74,17 @@ export const Form = ({
         >
           <p className="text-primary-800 font-bold text-sm leading-5">Amount</p>
           <Button
-            disabled={disabled}
+            disabled={isMaxLoading}
             className="!text-primary-500 !capitalize"
             variant="text"
             disableElevation
             size="small"
-            onClick={maxHandler}
+            onClick={onMaxClick}
           >
             Max
           </Button>
         </Box>
         <TextField
-          disabled={disabled}
           value={value}
           onChange={handleInputChange}
           size="small"
@@ -88,6 +93,7 @@ export const Form = ({
           error={!!error}
           helperText={error}
           inputMode="numeric"
+          autoComplete="off"
           FormHelperTextProps={{
             sx: {
               fontWeight: "bold",
@@ -95,7 +101,7 @@ export const Form = ({
           }}
           InputProps={{
             sx: {
-              backgroundColor: disabled ? theme.palette.grey[200] : "#45A9961A",
+              backgroundColor: "#45A9961A",
               paddingY: "8px",
               paddingX: "16px",
             },
@@ -115,15 +121,16 @@ export const Form = ({
         size="large"
         disableElevation
         onClick={submitButton.onclick}
-        disabled={disabled}
+        disabled={isInputEmpty || isInsufficientBalance}
         loading={isSubmitting}
       >
         {submitButton.content}
       </LoadingButton>
-      <AlertContainer
-        isInputEmptyOrZero={!value}
-        isInsufficientBalance={!formattedBalance || value > formattedBalance}
-      />
+      <AlertContainer>
+        {isInsufficientBalance && (
+          <FormAlert severity="error" message="Insufficient Balance!" />
+        )}
+      </AlertContainer>
     </Box>
   );
 };
