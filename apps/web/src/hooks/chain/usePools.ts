@@ -47,7 +47,6 @@ export const usePools = () => {
       const formattedPools = await Promise.all(
         pools.map(async ([, value]) => {
           const poolData = value.toJSON() as unknown as LendingLendingPool;
-          console.log(poolData);
           const lendTokenId = poolData.lendTokenId;
           const kTokenId = poolData.id;
           const assetMetadata = (
