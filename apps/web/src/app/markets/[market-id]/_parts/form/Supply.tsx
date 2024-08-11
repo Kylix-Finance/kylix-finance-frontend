@@ -55,6 +55,7 @@ export const Supply = () => {
       },
       {
         onSuccess: ({ blockNumber }) => {
+          setValue("");
           notify({
             type: "success",
             title: "Success",
