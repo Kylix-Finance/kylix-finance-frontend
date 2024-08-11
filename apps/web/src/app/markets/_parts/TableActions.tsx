@@ -20,6 +20,7 @@ export const TableActions = ({ assetId }: Props) => {
           </Typography>
         </Link>
       </Button>
+      {/*FIXME: remove styles for milestone 2 */}
       <Button
         variant="outlined"
         disabled
