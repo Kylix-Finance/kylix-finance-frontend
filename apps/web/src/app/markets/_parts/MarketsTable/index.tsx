@@ -5,9 +5,10 @@ import { Asset, Card, KylixChip } from "~/components";
 import { RightComponent } from "./RightComponent";
 import { TableActions } from "../TableActions";
 import { useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { OnTRowClick, Table } from "@repo/ui";
+import { useSearchParams } from "next/navigation";
+import { Table } from "@repo/ui";
 import { usePools } from "~/hooks/chain/usePools";
+import { QUEY_SEARCH_MARKETS } from "~/constants";
 
 const placeholderData = Array.from({ length: 5 }).map(() => ({
   asset: "",
@@ -24,22 +25,31 @@ type TableData = typeof placeholderData;
 
 const MarketsTable = () => {
   // const { lendingPool } = useGetLendingPools();
+
   const { pools } = usePools();
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get(QUEY_SEARCH_MARKETS);
 
   const transformedData = useMemo(() => {
-    return pools?.map((item) => {
-      return {
-        asset: item.assetName,
-        collateralQ: `%${item.collateralQ}`,
-        collateral: item.collateral,
-        utilization: `%${item.utilization}`,
-        borrowApy: `%${item.borrowApy}`,
-        supplyApy: `%${item.supplyApy}`,
-        walletBalance: item.balance,
-        id: item.assetId,
-      };
-    });
-  }, [pools]);
+    return pools
+      ?.filter((pool) => {
+        if (!searchQuery) return pool;
+        const poolName = pool.assetName?.toLowerCase() || "";
+        return poolName.includes(searchQuery);
+      })
+      .map((item) => {
+        return {
+          asset: item.assetName,
+          collateralQ: `%${item.collateralQ}`,
+          collateral: item.collateral,
+          utilization: `%${item.utilization}`,
+          borrowApy: `%${item.borrowApy}`,
+          supplyApy: `%${item.supplyApy}`,
+          walletBalance: item.balance,
+          id: item.assetId,
+        };
+      });
+  }, [pools, searchQuery]);
 
   return (
     <Card title="Markets" rightComponent={<RightComponent />}>
