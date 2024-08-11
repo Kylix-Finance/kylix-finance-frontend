@@ -48,6 +48,7 @@ export const Borrow = () => {
         onclick,
         content: "Borrow",
       }}
+      balance=""
     />
   );
 };

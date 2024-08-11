@@ -33,6 +33,7 @@ interface Props {
   isSubmitting?: boolean;
   onMaxClick: () => void;
   isMaxLoading?: boolean;
+  balance: string | undefined;
 }
 
 export const Form = ({
@@ -46,11 +47,8 @@ export const Form = ({
   isSubmitting = false,
   onMaxClick,
   isMaxLoading = false,
+  balance,
 }: Props) => {
-  const { formattedBalance } = useBalance({
-    assetId: assetId,
-  });
-
   const handleInputChange: TextFieldProps["onChange"] = ({
     target: { value },
   }) => {
@@ -61,7 +59,7 @@ export const Form = ({
   };
 
   const isInputEmpty = Number(value) === 0;
-  const isInsufficientBalance = Number(value) > Number(formattedBalance);
+  const isInsufficientBalance = Number(value) > Number(balance);
 
   return (
     <Box display="flex" flexDirection="column" gap="24px">

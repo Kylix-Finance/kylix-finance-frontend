@@ -14,7 +14,7 @@ const Tab = ({ ...rest }: Props) => {
         },
         "&.Mui-disabled": {
           "&.Mui-selected": {
-            backgroundColor: "#A5CAC3 !important",
+            backgroundColor: "red !important",
           },
         },
         minHeight: "auto",

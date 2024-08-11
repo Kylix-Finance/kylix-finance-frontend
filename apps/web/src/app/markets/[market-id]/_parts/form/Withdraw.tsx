@@ -4,7 +4,6 @@ import { Form } from "./Form";
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
-import { useSupply } from "~/hooks/chain/useSupply";
 import { useWithdraw } from "~/hooks/chain/useWithdraw";
 import { usePool } from "~/hooks/chain/usePool";
 
@@ -80,11 +79,12 @@ export const Withdraw = () => {
       value={value}
       submitButton={{
         onclick: handleClick,
-        content: "Supply",
+        content: "Withdraw",
       }}
       isSubmitting={isPending}
       isMaxLoading={isBalanceLoading}
       onMaxClick={onMaxClick}
+      balance={formattedBalance}
     />
   );
 };

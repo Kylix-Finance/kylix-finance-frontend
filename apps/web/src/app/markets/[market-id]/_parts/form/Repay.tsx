@@ -48,6 +48,7 @@ export const Repay = () => {
         onclick,
         content: "Repay",
       }}
+      balance=""
     />
   );
 };

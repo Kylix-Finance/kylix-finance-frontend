@@ -82,6 +82,7 @@ export const Supply = () => {
       isSubmitting={isPending}
       isMaxLoading={isBalanceLoading}
       onMaxClick={onMaxClick}
+      balance={formattedBalance}
     />
   );
 };
