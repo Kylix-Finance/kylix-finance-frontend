@@ -6,6 +6,9 @@ interface Balance {
   address: string | undefined;
   assetId: number | string | undefined;
 }
+interface Pools {
+  activeAccount: string | undefined;
+}
 
 const keys = {
   BALANCE: "BALANCE",
@@ -51,5 +54,5 @@ export const queryKeys = {
   poolData: (assetId: string | number) => [baseKey, keys.POOL_DATA, assetId],
   supply: [baseKey, keys.SUPPLY],
   withdraw: [baseKey, keys.WITHDRAW],
-  pools: [baseKey, keys.POOLS],
+  pools: ({ activeAccount }: Pools) => [baseKey, keys.POOLS, activeAccount],
 };

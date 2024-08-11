@@ -28,8 +28,8 @@ type Pool = {
 
 interface PoolsResponse {
   pools: Pool[];
-  totalBorrow: number;
-  totalSupply: number;
+  totalBorrow: string;
+  totalSupply: string;
 }
 
 export const usePools = () => {
@@ -37,16 +37,18 @@ export const usePools = () => {
   const { activeAccount } = useActiveAccount();
 
   const { data, ...rest } = useQuery({
-    queryKey: queryKeys.pools,
+    queryKey: queryKeys.pools({ activeAccount: activeAccount?.address }),
     enabled: !!api,
     queryFn: async () => {
       const pools = await api?.query?.lending?.lendingPoolStorage?.entries();
       if (!pools) return;
-      let totalBorrow = 0;
-      let totalSupply = 0;
+      let totalBorrow = BigInt(0);
+      let totalSupply = BigInt(0);
       const formattedPools = await Promise.all(
         pools.map(async ([, value]) => {
           const poolData = value.toJSON() as unknown as LendingLendingPool;
+          console.log("poolData", poolData);
+
           const lendTokenId = poolData.lendTokenId;
           const kTokenId = poolData.id;
           const assetMetadata = (
@@ -71,7 +73,7 @@ export const usePools = () => {
           }
           const assetStaticData = assets[lendTokenId.toString()];
 
-          const getAssetPrice =
+          const assetPrice =
             ((
               await api?.query.lending?.assetPrices?.([
                 lendTokenId,
@@ -79,19 +81,24 @@ export const usePools = () => {
               ])
             )?.toJSON() as number) || 0;
 
-          const assetDecimal =
-            +baseAssetMetadata.decimals + +assetMetadata.decimals;
-          const formatBorrowedBalance = formatUnit(
-            poolData.borrowedBalance * getAssetPrice,
-            assetDecimal
-          );
-          const formatReserveBalance = formatUnit(
-            poolData.reserveBalance * getAssetPrice,
-            assetDecimal
-          );
+          const assetDecimal = Number(assetMetadata.decimals);
+          const calcBorrow =
+            BigInt(poolData.borrowedBalance) / BigInt(assetPrice);
+          const calcSupply =
+            BigInt("0x00000000033b2e3c9fd0772498f5b674") / BigInt(assetPrice);
+          const formatBorrowedBalance = formatUnit(calcSupply, assetDecimal);
+          const formatReserveBalance = formatUnit(calcBorrow, assetDecimal);
 
-          totalBorrow += Number(formatBorrowedBalance);
-          totalSupply += Number(formatReserveBalance);
+          totalBorrow += BigInt(formatBorrowedBalance);
+          totalSupply += BigInt(formatReserveBalance);
+
+          console.log(
+            "calcSupply",
+            calcBorrow,
+            BigInt(poolData.reserveBalance),
+            BigInt(assetPrice)
+          );
+          console.log(totalSupply, calcSupply);
 
           return {
             assetName: assetMetadata.name,
@@ -105,18 +112,19 @@ export const usePools = () => {
           };
         })
       );
+
       return {
         pools: formattedPools,
-        totalBorrow,
-        totalSupply,
+        totalBorrow: totalBorrow.toString(),
+        totalSupply: totalBorrow.toString(),
       } as PoolsResponse;
     },
   });
 
   return {
     pools: data?.pools,
-    totalBorrow: fixPrecision(data?.totalBorrow ?? 0, 2),
-    totalSupply: fixPrecision(data?.totalSupply ?? 0, 2),
+    totalBorrow: data?.totalBorrow,
+    totalSupply: data?.totalSupply,
     ...rest,
   };
 };

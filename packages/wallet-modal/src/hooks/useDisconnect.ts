@@ -17,9 +17,6 @@ const useDisconnect = () => {
       setBalance(null);
       queryClient.setQueryData<InjectedAccount[]>(queryKeys.accounts, []);
       queryClient.setQueryData<Status>(queryKeys.status, "disconnected");
-      queryClient.refetchQueries({
-        queryKey: queryKeys.pools,
-      });
     },
   });
 
