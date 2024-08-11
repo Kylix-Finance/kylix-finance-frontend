@@ -222,7 +222,7 @@ const SignMessage: React.FC = () => {
 
   // const { balance } = useBalance({ assetId: 20 });
 
-  // const { data: assetMetaData } = useMetadata(pool?.lendTokenId);
+  // const { assetMetaData } = useMetadata(pool?.lendTokenId);
 
   // console.log("balance in the pool", balance);
   // console.log(pool);

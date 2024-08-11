@@ -16,7 +16,7 @@ export const formatBigNumbers = (
     const beforeDecimal = bigNumStr.split(".")[0] || bigNumStr;
     const significant = beforeDecimal.slice(0, 5);
     const exponent = beforeDecimal.length - 1;
-    return `${significant[0]}.${significant.slice(1)} x 10<sup>${exponent}</sup>`;
+    return `${significant[0]}.${significant.slice(1)} x 10^${exponent}`;
   } else if (formattedBigNum >= THRESHOLDS.TRILLION) {
     return `${(formattedBigNum / 1e12).toFixed(decimals)} T`;
   } else if (formattedBigNum >= THRESHOLDS.BILLION) {

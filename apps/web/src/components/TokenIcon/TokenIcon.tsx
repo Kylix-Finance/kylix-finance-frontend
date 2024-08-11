@@ -6,13 +6,18 @@ import Image from "next/image";
 import { TokenIcons } from "~/config";
 
 interface Props {
-  symbol: string;
+  symbol?: string;
   width?: number | undefined;
   height?: number | undefined;
   className?: string;
 }
 
-const TokenIcon = ({ symbol, height = 32, width = 32, className }: Props) => {
+const TokenIcon = ({
+  symbol = "",
+  height = 32,
+  width = 32,
+  className,
+}: Props) => {
   const IconComponent = TokenIcons[symbol];
 
   if (!IconComponent) {

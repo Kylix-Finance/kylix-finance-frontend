@@ -9,7 +9,7 @@ import { useActiveAccount } from "./useActiveAccount";
 interface Props {
   accountAddress?: string;
   assetId?: number | string;
-  customDecimals?: string;
+  customDecimals?: number;
   enabled?: boolean;
 }
 
@@ -23,7 +23,7 @@ const useBalance = ({
 
   const { activeAccount } = useActiveAccount();
   const address = accountAddress ?? activeAccount?.address;
-  const { data: assetMetaData } = useMetadata(assetId);
+  const { assetMetaData } = useMetadata(assetId);
   const finalEnabled = !!api && !!address && enabled;
 
   const { data, ...rest } = useQuery({
@@ -49,7 +49,7 @@ const useBalance = ({
             if (!assetDecimals) {
               throw new Error("Asset metadata is missing.");
             }
-            decimals = Number(assetDecimals);
+            decimals = assetDecimals;
 
             const balanceReq = await api?.query?.assets?.account?.(
               assetId,

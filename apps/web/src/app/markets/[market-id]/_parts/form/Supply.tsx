@@ -18,7 +18,7 @@ export const Supply = () => {
   const lendTokenId = params["market-id"] as string;
   const { pool } = usePool({ assetId: lendTokenId });
   const [value, setValue] = useState("");
-  const { data: assetMetaData } = useMetadata(lendTokenId);
+  const { assetMetaData } = useMetadata(lendTokenId);
   const { mutate, isPending } = useSupply();
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
     assetId: lendTokenId,
@@ -87,7 +87,7 @@ export const Supply = () => {
     <Form
       assetId={lendTokenId}
       items={items}
-      decimals={Number(assetMetaData?.decimals) || 18}
+      decimals={assetMetaData?.decimals}
       setValue={setValue}
       value={value}
       submitButton={{

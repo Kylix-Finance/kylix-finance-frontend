@@ -16,13 +16,9 @@ const Borrow = () => {
       rightComponent={
         <Typography variant="h5" className="text-primary-800">
           <Skeleton isLoading={!totalBorrow} minWidth={80}>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: totalBorrow
-                  ? formatBigNumbers(totalBorrow, 2) + "$"
-                  : "Unavailable",
-              }}
-            />
+            {totalBorrow
+              ? formatBigNumbers(totalBorrow, 2) + "$"
+              : "Unavailable"}
           </Skeleton>
         </Typography>
       }

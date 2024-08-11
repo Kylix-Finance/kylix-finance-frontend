@@ -16,13 +16,9 @@ const Supply = () => {
       rightComponent={
         <Typography variant="h5" className="text-primary-800">
           <Skeleton minWidth={80} isLoading={!totalSupply}>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: totalSupply
-                  ? formatBigNumbers(totalSupply, 2) + "$"
-                  : "Unavailable",
-              }}
-            />
+            {totalSupply
+              ? formatBigNumbers(totalSupply, 2) + "$"
+              : "Unavailable"}
           </Skeleton>
         </Typography>
       }

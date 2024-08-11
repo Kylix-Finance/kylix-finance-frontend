@@ -6,43 +6,62 @@ import { Icons } from "~/assets/svgs";
 import { List, ListItem, TokenIcon } from "~/components";
 import { useParams } from "next/navigation";
 import { usePool } from "~/hooks/chain/usePool";
-import { useMetadata } from "@repo/onchain-utils";
+import { formatBigNumbers, formatUnit, useMetadata } from "@repo/onchain-utils";
 import { Skeleton } from "@repo/ui";
-
-const items: Array<ListItem> = [
-  {
-    label: "Total Supply:",
-    value: "$ 1,800,140",
-  },
-  {
-    label: "Total Borrow:",
-    value: "$ 1,400,321",
-  },
-  {
-    label: "Liquidation:",
-    value: "$ 102 M",
-  },
-];
-
-const items2: Array<ListItem> = [
-  {
-    label: "Supply APY:",
-    value: "%1.2",
-    kylixValue: "%4",
-  },
-  {
-    label: "Borrow APY:",
-    value: "%1.6",
-    kylixValue: "%4",
-  },
-];
+import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
+import { PRICE_BASE_ASSET_ID } from "@repo/shared";
 
 const PoolDetails = () => {
   const params = useParams();
   const lendTokenId = params["market-id"] as string;
   const { pool } = usePool({ assetId: lendTokenId });
-  const { data: assetMetaData } = useMetadata(lendTokenId);
+  const { assetMetaData } = useMetadata(lendTokenId);
 
+  const { assetPrice } = useAssetPrice({ assetId: lendTokenId });
+
+  const totalSupply =
+    assetMetaData &&
+    assetPrice &&
+    formatUnit(
+      BigInt(pool?.reserveBalance || 0) * BigInt(assetPrice || 0),
+      assetMetaData.decimals
+    );
+
+  const totalBorrow =
+    assetMetaData &&
+    assetPrice &&
+    formatUnit(
+      BigInt(pool?.borrowedBalance || 0) * BigInt(assetPrice || 0),
+      assetMetaData.decimals
+    );
+
+  const items: Array<ListItem> = [
+    {
+      label: "Total Supply:",
+      value: `$ ${formatBigNumbers(totalSupply || "0", 2)}`,
+    },
+    {
+      label: "Total Borrow:",
+      value: `$ ${formatBigNumbers(totalBorrow || "0", 2)}`,
+    },
+    {
+      label: "Liquidation:",
+      value: `$ ${formatBigNumbers(pool?.liquidationThreshold || "0", 2)}`,
+    },
+  ];
+
+  const items2: Array<ListItem> = [
+    {
+      label: "Supply APY:",
+      value: "%1.2",
+      kylixValue: "%4",
+    },
+    {
+      label: "Borrow APY:",
+      value: "%1.6",
+      kylixValue: "%4",
+    },
+  ];
   return (
     <Box className="flex flex-col gap-4">
       {/* Heading */}
@@ -52,7 +71,7 @@ const PoolDetails = () => {
             <Icons.LeftArrow className="text-black" />
           </Link>
           <Box className="p-1.5 flex gap-2 items-center">
-            <TokenIcon symbol="BTC" />{" "}
+            <TokenIcon symbol={assetMetaData?.symbol} />{" "}
             <Box className="flex flex-col">
               <Typography variant="subtitle2" className="text-primary-800">
                 <Skeleton minWidth={20} isLoading={!assetMetaData}>
@@ -69,7 +88,7 @@ const PoolDetails = () => {
         </Box>
         <Box className="flex items-center text-primary-800 gap-2.5">
           <Typography variant="subtitle2">Price:</Typography>
-          <Typography variant="body1">$ 1.01</Typography>
+          <Typography variant="body1">$ {assetPrice}</Typography>
         </Box>
       </Box>
       {/* Pool status */}

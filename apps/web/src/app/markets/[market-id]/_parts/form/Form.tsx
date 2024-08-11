@@ -26,7 +26,7 @@ interface Props {
   items: ListItem[];
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
-  decimals: number;
+  decimals?: number;
   submitButton: SubmitButton;
   error?: string | null;
   assetId: number | string;
@@ -54,7 +54,8 @@ export const Form = ({
   }) => {
     // TODO: Wrap this `if` check in some utility or something
     if (value === "") return setValue(value);
-    const isValid = getDecimalRegex(decimals).test(value);
+    // default is 6 to don't allow user to write a lot of decimal digits
+    const isValid = getDecimalRegex(decimals || 6).test(value);
     if (isValid) setValue(value);
   };
 

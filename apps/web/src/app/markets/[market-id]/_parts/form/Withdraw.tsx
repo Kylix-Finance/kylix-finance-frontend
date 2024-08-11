@@ -41,7 +41,7 @@ export const Withdraw = () => {
   const params = useParams();
   const lendTokenId = params["market-id"] as string;
   const [value, setValue] = useState("");
-  const { data: assetMetaData } = useMetadata(lendTokenId);
+  const { assetMetaData } = useMetadata(lendTokenId);
   const { mutate, isPending } = useWithdraw();
   const { pool } = usePool({
     assetId: lendTokenId,

@@ -6,7 +6,7 @@ export type MetadataResult = {
   deposit: string;
   name: string;
   symbol: string;
-  decimals: string;
+  decimals: number;
   isFrozen: boolean;
 };
 
@@ -14,7 +14,7 @@ const useMetadata = (assetId?: number | string) => {
   const { api } = useProvider();
   const enabled = !!api && !!assetId;
 
-  return useQuery({
+  const { data, ...rest } = useQuery<MetadataResult>({
     queryKey: queryKeys.metadata(assetId || -1),
     queryFn: enabled
       ? async () => {
@@ -23,5 +23,18 @@ const useMetadata = (assetId?: number | string) => {
         }
       : skipToken,
   });
+
+  const assetMetaData = data
+    ? {
+        ...data,
+        decimals: Number(data.decimals),
+      }
+    : undefined;
+
+  return {
+    ...rest,
+    assetMetaData,
+  };
 };
+
 export { useMetadata };
