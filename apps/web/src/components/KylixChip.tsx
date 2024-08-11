@@ -44,7 +44,7 @@ const KylixChip = ({
         className
       )}
     >
-      <Typography variant="caption">{finalValue}</Typography>
+      <Typography variant="caption">{value || finalValue}</Typography>
       <Image
         draggable="false"
         src="/kylix-chip.svg"
