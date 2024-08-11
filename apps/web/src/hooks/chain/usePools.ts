@@ -6,7 +6,11 @@ import {
   useMetadata,
   useProvider,
 } from "@repo/onchain-utils";
-import { LendingLendingPool, PRICE_BASE_ASSET_ID } from "@repo/shared";
+import {
+  LendingLendingPool,
+  PRICE_BASE_ASSET_ID,
+  queryKeys,
+} from "@repo/shared";
 import { useQuery } from "@tanstack/react-query";
 import { assets } from "~/config";
 type Pool = {
@@ -33,7 +37,7 @@ export const usePools = () => {
   const { activeAccount } = useActiveAccount();
 
   const { data, ...rest } = useQuery({
-    queryKey: ["poolsData"],
+    queryKey: queryKeys.pools,
     enabled: !!api,
     queryFn: async () => {
       const pools = await api?.query?.lending?.lendingPoolStorage?.entries();
@@ -43,6 +47,7 @@ export const usePools = () => {
       const formattedPools = await Promise.all(
         pools.map(async ([, value]) => {
           const poolData = value.toJSON() as unknown as LendingLendingPool;
+          console.log(poolData);
           const lendTokenId = poolData.lendTokenId;
           const kTokenId = poolData.id;
           const assetMetadata = (

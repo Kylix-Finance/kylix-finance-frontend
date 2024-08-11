@@ -25,6 +25,7 @@ const keys = {
   POOL_DATA: "POOL_DATA",
   SUPPLY: "SUPPLY",
   WITHDRAW: "WITHDRAW",
+  POOLS: "POOLS",
 };
 
 export const queryKeys = {
@@ -50,4 +51,5 @@ export const queryKeys = {
   poolData: (assetId: string | number) => [baseKey, keys.POOL_DATA, assetId],
   supply: [baseKey, keys.SUPPLY],
   withdraw: [baseKey, keys.WITHDRAW],
+  pools: [baseKey, keys.POOLS],
 };

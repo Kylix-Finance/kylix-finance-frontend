@@ -34,6 +34,9 @@ const useConnect = () => {
       setConnectorId(connector.id);
       queryClient.setQueryData<InjectedAccount[]>(queryKeys.accounts, accounts);
       queryClient.setQueryData<Status>(queryKeys.status, "connecting");
+      queryClient.refetchQueries({
+        queryKey: queryKeys.pools,
+      });
     },
   });
 
