@@ -1,5 +1,6 @@
 "use client";
 import { Typography } from "@mui/material";
+import { formatBigNumbers } from "@repo/onchain-utils";
 import { Skeleton } from "@repo/ui";
 import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
@@ -15,7 +16,13 @@ const Borrow = () => {
       rightComponent={
         <Typography variant="h5" className="text-primary-800">
           <Skeleton isLoading={!totalBorrow} minWidth={80}>
-            {totalBorrow ? `$ ${totalBorrow.toLocaleString()}` : "Unavailable"}
+            <p
+              dangerouslySetInnerHTML={{
+                __html: totalBorrow
+                  ? formatBigNumbers(totalBorrow, 2) + "$"
+                  : "Unavailable",
+              }}
+            />
           </Skeleton>
         </Typography>
       }

@@ -5,10 +5,10 @@ import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
 import { Skeleton } from "@repo/ui";
 import { usePools } from "~/hooks/chain/usePools";
+import { formatBigNumbers } from "@repo/onchain-utils";
 
 const Supply = () => {
   const { totalSupply } = usePools();
-
   return (
     <Card
       title="Total Supply"
@@ -16,7 +16,13 @@ const Supply = () => {
       rightComponent={
         <Typography variant="h5" className="text-primary-800">
           <Skeleton minWidth={80} isLoading={!totalSupply}>
-            {totalSupply ? `$ ${totalSupply.toLocaleString()}` : "Unavailable"}
+            <p
+              dangerouslySetInnerHTML={{
+                __html: totalSupply
+                  ? formatBigNumbers(totalSupply, 2) + "$"
+                  : "Unavailable",
+              }}
+            />
           </Skeleton>
         </Typography>
       }
