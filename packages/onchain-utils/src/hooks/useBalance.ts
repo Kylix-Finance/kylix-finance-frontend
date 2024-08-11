@@ -4,7 +4,7 @@ import { useProvider } from "./useProvider";
 import { useMetadata } from "./useMetadata";
 import { formatUnit } from "../utils";
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@repo/shared";
+import { DEFAULT_TOKEN_DECIMALS, queryKeys } from "@repo/shared";
 import { useActiveAccount } from "./useActiveAccount";
 interface Props {
   accountAddress?: string;
@@ -35,7 +35,7 @@ const useBalance = ({ accountAddress, assetId, decimal }: Props = {}) => {
             );
           }
 
-          let decimals = 12;
+          let decimals = DEFAULT_TOKEN_DECIMALS;
           let freeBalance: string;
 
           if (assetId) {
