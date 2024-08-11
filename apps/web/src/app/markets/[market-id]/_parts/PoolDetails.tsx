@@ -1,8 +1,13 @@
+"use client";
 import { Box, Card, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { Icons } from "~/assets/svgs";
 import { List, ListItem, TokenIcon } from "~/components";
+import { useParams } from "next/navigation";
+import { usePool } from "~/hooks/chain/usePool";
+import { useMetadata } from "@repo/onchain-utils";
+import { Skeleton } from "@repo/ui";
 
 const items: Array<ListItem> = [
   {
@@ -33,6 +38,11 @@ const items2: Array<ListItem> = [
 ];
 
 const PoolDetails = () => {
+  const params = useParams();
+  const lendTokenId = params["market-id"] as string;
+  const { pool } = usePool({ assetId: lendTokenId });
+  const { data: assetMetaData } = useMetadata(lendTokenId);
+
   return (
     <Box className="flex flex-col gap-4">
       {/* Heading */}
@@ -45,10 +55,14 @@ const PoolDetails = () => {
             <TokenIcon symbol="BTC" />{" "}
             <Box className="flex flex-col">
               <Typography variant="subtitle2" className="text-primary-800">
-                USDC
+                <Skeleton minWidth={20} isLoading={!assetMetaData}>
+                  {assetMetaData?.symbol}
+                </Skeleton>
               </Typography>
               <Typography variant="caption" className="text-primary-800/50">
-                USD coin
+                <Skeleton minWidth={20} isLoading={!assetMetaData}>
+                  {assetMetaData?.name}
+                </Skeleton>
               </Typography>
             </Box>
           </Box>

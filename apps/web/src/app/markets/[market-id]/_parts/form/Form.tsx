@@ -87,6 +87,7 @@ export const Form = ({
           onChange={handleInputChange}
           size="small"
           fullWidth
+          placeholder="0"
           className="!rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
           error={!!error}
           helperText={error}
