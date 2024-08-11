@@ -11,15 +11,25 @@ import {
 } from "@repo/onchain-utils";
 import { useSupply } from "~/hooks/chain/useSupply";
 import { useParams } from "next/navigation";
+import { usePool } from "~/hooks/chain/usePool";
 
 export const Supply = () => {
   const params = useParams();
   const lendTokenId = params["market-id"] as string;
+  const { pool } = usePool({ assetId: lendTokenId });
   const [value, setValue] = useState("");
   const { data: assetMetaData } = useMetadata(lendTokenId);
   const { mutate, isPending } = useSupply();
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
     assetId: lendTokenId,
+  });
+  const {
+    formattedBalance: formattedKTokenBalance,
+    isLoading: isFormattedKTokenBalanceLoading,
+  } = useBalance({
+    assetId: pool?.id,
+    customDecimals: assetMetaData?.decimals,
+    enabled: !!assetMetaData && !!pool,
   });
 
   const handleClick = () => {
@@ -57,7 +67,7 @@ export const Supply = () => {
     },
     {
       label: "Supplied",
-      value: "$64",
+      value: "$" + Number(formattedKTokenBalance || 0).toLocaleString(),
       valueClassName: "!text-[#4E5B72]",
     },
     {

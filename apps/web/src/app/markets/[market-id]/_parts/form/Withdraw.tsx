@@ -48,7 +48,7 @@ export const Withdraw = () => {
   });
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
     assetId: pool?.id,
-    decimal: assetMetaData?.decimals,
+    customDecimals: assetMetaData?.decimals,
   });
   const handleClick = () => {
     mutate(

@@ -9,21 +9,26 @@ import { useActiveAccount } from "./useActiveAccount";
 interface Props {
   accountAddress?: string;
   assetId?: number | string;
-  decimal?: string;
+  customDecimals?: string;
+  enabled?: boolean;
 }
 
-const useBalance = ({ accountAddress, assetId, decimal }: Props = {}) => {
+const useBalance = ({
+  accountAddress,
+  assetId,
+  customDecimals,
+  enabled = true,
+}: Props = {}) => {
   const { api } = useProvider();
 
   const { activeAccount } = useActiveAccount();
   const address = accountAddress ?? activeAccount?.address;
   const { data: assetMetaData } = useMetadata(assetId);
-  const finalDecimal = decimal ?? assetMetaData?.decimals;
-  const enabled = !!api && !!address;
+  const finalEnabled = !!api && !!address && enabled;
 
   const { data, ...rest } = useQuery({
     queryKey: queryKeys.balance({ address, assetId }),
-    queryFn: enabled
+    queryFn: finalEnabled
       ? async () => {
           if (!api || !address) {
             throw new Error("API provider or account address is missing.");
@@ -39,10 +44,12 @@ const useBalance = ({ accountAddress, assetId, decimal }: Props = {}) => {
           let freeBalance: string;
 
           if (assetId) {
-            if (!finalDecimal) {
+            const assetDecimals = customDecimals ?? assetMetaData?.decimals;
+
+            if (!assetDecimals) {
               throw new Error("Asset metadata is missing.");
             }
-            decimals = Number(finalDecimal);
+            decimals = Number(assetDecimals);
 
             const balanceReq = await api?.query?.assets?.account?.(
               assetId,
