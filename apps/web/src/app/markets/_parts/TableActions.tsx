@@ -1,4 +1,5 @@
-import { Box, Button, ButtonProps, Link, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import Link from "next/link";
 
 interface Props {
   assetId: number | string;
@@ -7,33 +8,36 @@ interface Props {
 export const TableActions = ({ assetId }: Props) => {
   return (
     <Box className="flex justify-end gap-1">
-      <Link href={`/markets/${assetId}`} component={ContainedButton}>
-        <Typography
-          className="!text-[#FFF]"
-          variant="md"
-          fontWeight={600}
-          fontFamily={"Poppins"}
-        >
-          Supply
-        </Typography>
-      </Link>
-      <Link href={`/markets/${assetId}`} component={OutlinedButton}>
-        <Typography
-          className="!text-primary-500"
-          variant="md"
-          fontWeight={600}
-          fontFamily={"Poppins"}
-        >
+      <Button variant="contained">
+        <Link href={`/markets/${assetId}`}>
+          <Typography
+            className="!text-[#FFF]"
+            variant="md"
+            fontWeight={600}
+            fontFamily={"Poppins"}
+          >
+            Supply
+          </Typography>
+        </Link>
+      </Button>
+      <Button
+        variant="outlined"
+        disabled
+        sx={{
+          color: "#48484820",
+          borderColor: "#48484820",
+          "&:hover": {
+            borderColor: "#48484820",
+          },
+          "& .MuiTypography-root": {
+            color: "#48484820",
+          },
+        }}
+      >
+        <Typography variant="md" fontWeight={600} fontFamily={"Poppins"}>
           Borrow
         </Typography>
-      </Link>
+      </Button>
     </Box>
   );
 };
-
-function ContainedButton(props: ButtonProps) {
-  return <Button {...props} variant="contained" />;
-}
-function OutlinedButton(props: ButtonProps) {
-  return <Button {...props} variant="outlined" />;
-}
