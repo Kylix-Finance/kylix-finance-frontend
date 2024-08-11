@@ -1,7 +1,12 @@
 "use client";
-import { ListItem } from "~/components";
+import { ListItem, notify } from "~/components";
 import { Form } from "./Form";
 import { useState } from "react";
+import { useParams } from "next/navigation";
+import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
+import { useSupply } from "~/hooks/chain/useSupply";
+import { useWithdraw } from "~/hooks/chain/useWithdraw";
+import { usePool } from "~/hooks/chain/usePool";
 
 const items: Array<ListItem> = [
   {
@@ -34,20 +39,52 @@ const items: Array<ListItem> = [
 ];
 
 export const Withdraw = () => {
+  const params = useParams();
+  const lendTokenId = params["market-id"] as string;
   const [value, setValue] = useState("");
-  const onclick = () => {};
+  const { data: assetMetaData } = useMetadata(lendTokenId);
+  const { mutate, isPending } = useWithdraw();
+  const { pool } = usePool({
+    assetId: lendTokenId,
+  });
+  const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
+    assetId: pool?.id,
+    decimal: assetMetaData?.decimals,
+  });
+  const handleClick = () => {
+    mutate(
+      {
+        asset: lendTokenId,
+        balance: parseUnit(value, Number(assetMetaData?.decimals) || 18),
+      },
+      {
+        onSuccess: ({ blockNumber }) => {
+          setValue("");
+          notify({
+            type: "success",
+            title: "Success",
+            message: "Transaction completed on block " + blockNumber,
+          });
+        },
+      }
+    );
+  };
+
+  const onMaxClick = () => formattedBalance && setValue(formattedBalance);
   return (
     <Form
-      assetId={9}
+      assetId={lendTokenId}
       items={items}
-      decimals={18}
-      onMaxClick={() => {}}
+      decimals={Number(assetMetaData?.decimals) || 18}
       setValue={setValue}
       value={value}
       submitButton={{
-        onclick,
-        content: "Withdraw",
+        onclick: handleClick,
+        content: "Supply",
       }}
+      isSubmitting={isPending}
+      isMaxLoading={isBalanceLoading}
+      onMaxClick={onMaxClick}
     />
   );
 };

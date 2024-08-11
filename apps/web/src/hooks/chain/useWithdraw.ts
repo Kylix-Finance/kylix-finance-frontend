@@ -16,7 +16,10 @@ export const useWithdraw = () => {
 
   return useMutation({
     mutationKey: queryKeys.withdraw,
-    mutationFn: (params: { asset: number; balance: string | bigint }) =>
+    mutationFn: (params: {
+      asset: number | string;
+      balance: string | bigint;
+    }) =>
       withdrawTransaction(params, {
         api,
         signer,
@@ -52,7 +55,7 @@ export const useWithdraw = () => {
 };
 
 export const withdrawTransaction = async (
-  { asset, balance }: { asset: number; balance: string | bigint },
+  { asset, balance }: { asset: number | string; balance: string | bigint },
   {
     api,
     activeAccount,

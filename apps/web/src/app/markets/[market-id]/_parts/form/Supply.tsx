@@ -5,7 +5,7 @@ import { Form } from "./Form";
 import { useState } from "react";
 import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
 import { useSupply } from "~/hooks/chain/useSupply";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 const items: Array<ListItem> = [
   {
