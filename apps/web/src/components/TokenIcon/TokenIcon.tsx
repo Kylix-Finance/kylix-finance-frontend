@@ -18,7 +18,8 @@ const TokenIcon = ({
   width = 32,
   className,
 }: Props) => {
-  const IconComponent = TokenIcons[symbol];
+  const upperCaseSymbol = symbol.toUpperCase();
+  const IconComponent = TokenIcons[upperCaseSymbol];
 
   if (!IconComponent) {
     const avatar = createAvatar(glass, {

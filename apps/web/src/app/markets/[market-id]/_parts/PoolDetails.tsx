@@ -62,6 +62,7 @@ const PoolDetails = () => {
       kylixValue: "%4",
     },
   ];
+  console.log("assetMetaData", assetMetaData);
   return (
     <Box className="flex flex-col gap-4">
       {/* Heading */}
