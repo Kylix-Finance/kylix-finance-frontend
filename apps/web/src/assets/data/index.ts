@@ -4,22 +4,17 @@ import { Icons, sidebarIcons } from "../svgs";
 const socialMediaLinks: Array<SocialMedia> = [
   {
     name: "X",
-    link: "https://x.com/",
+    link: "https://x.com/kylixfinance",
     icon: Icons.Twitter,
   },
   {
-    name: "Linkedin",
-    link: "linkedin.com",
-    icon: Icons.Linkedin,
-  },
-  {
-    name: "Instagram",
-    link: "https://www.instagram.com/",
-    icon: Icons.Instagram,
+    name: "Official website",
+    link: "https://www.kylix.finance",
+    icon: Icons.World,
   },
   {
     name: "Discord",
-    link: "https://discord.com/",
+    link: "https://discord.gg/UkRcWaTh5p",
     icon: Icons.Discord,
   },
 ];

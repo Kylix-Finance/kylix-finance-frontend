@@ -26,6 +26,7 @@ import Sort from "./sort.svg";
 import KylixLogo from "./kylix-logo.svg";
 import Search from "./search.svg";
 import { Coins } from "./coins";
+import World from "./world.svg";
 export const sidebarIcons = {
   Notification,
   CrossSwap,
@@ -60,5 +61,6 @@ export const Icons = {
   Twitter,
   WalletFill,
   XIcon,
+  World,
 };
 export { Coins };
