@@ -12,7 +12,7 @@ const baseMetadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/cover.jpg"],
+    images: "/cover.png",
   },
   robots: {
     index: true,
