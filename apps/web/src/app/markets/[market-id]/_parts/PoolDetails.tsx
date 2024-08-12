@@ -16,23 +16,27 @@ const PoolDetails = () => {
   const lendTokenId = params["market-id"] as string;
   const { pool } = usePool({ assetId: lendTokenId });
   const { assetMetaData } = useMetadata(lendTokenId);
-
-  const { assetPrice } = useAssetPrice({ assetId: lendTokenId });
+  const { assetMetaData: baseAssetMetadata } = useMetadata(PRICE_BASE_ASSET_ID);
+  const { assetPrice, formattedPrice } = useAssetPrice({
+    assetId: lendTokenId,
+  });
 
   const totalSupply =
     assetMetaData &&
     assetPrice &&
+    baseAssetMetadata &&
     formatUnit(
       BigInt(pool?.reserveBalance || 0) * BigInt(assetPrice || 0),
-      assetMetaData.decimals
+      assetMetaData.decimals + baseAssetMetadata.decimals
     );
 
   const totalBorrow =
     assetMetaData &&
     assetPrice &&
+    baseAssetMetadata &&
     formatUnit(
       BigInt(pool?.borrowedBalance || 0) * BigInt(assetPrice || 0),
-      assetMetaData.decimals
+      assetMetaData.decimals + baseAssetMetadata.decimals
     );
 
   const items: Array<ListItem> = [
@@ -62,7 +66,6 @@ const PoolDetails = () => {
       kylixValue: "%4",
     },
   ];
-  console.log("assetMetaData", assetMetaData);
   return (
     <Box className="flex flex-col gap-4">
       {/* Heading */}
@@ -89,7 +92,7 @@ const PoolDetails = () => {
         </Box>
         <Box className="flex items-center text-primary-800 gap-2.5">
           <Typography variant="subtitle2">Price:</Typography>
-          <Typography variant="body1">$ {assetPrice}</Typography>
+          <Typography variant="body1">$ {formattedPrice}</Typography>
         </Box>
       </Box>
       {/* Pool status */}

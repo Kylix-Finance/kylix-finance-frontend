@@ -4,7 +4,7 @@ import {
   PRICE_BASE_ASSET_ID,
   queryKeys,
 } from "@repo/shared";
-import { useProvider } from "@repo/onchain-utils";
+import { formatUnit, useMetadata, useProvider } from "@repo/onchain-utils";
 
 interface Props {
   assetId: number | string;
@@ -12,9 +12,10 @@ interface Props {
 
 export const useAssetPrice = ({ assetId }: Props) => {
   const { api } = useProvider();
-
-  const disabled = !!api;
-  const { data, ...rest } = useQuery<number>({
+  const { assetMetaData: baseAssetMetadata, isLoading } =
+    useMetadata(PRICE_BASE_ASSET_ID);
+  const disabled = !!api && isLoading;
+  const { data, ...rest } = useQuery({
     queryKey: queryKeys.assetPrice({ assetId }),
     queryFn: disabled
       ? async () => {
@@ -22,11 +23,19 @@ export const useAssetPrice = ({ assetId }: Props) => {
             assetId,
             PRICE_BASE_ASSET_ID,
           ]);
-
-          return assetPrice?.toJSON() as number;
+          const price = assetPrice?.toJSON() as number;
+          const formattedPrice = formatUnit(
+            BigInt(price),
+            baseAssetMetadata?.decimals
+          );
+          return { price, formattedPrice };
         }
       : skipToken,
   });
 
-  return { assetPrice: data, ...rest };
+  return {
+    assetPrice: data?.price,
+    formattedPrice: data?.formattedPrice,
+    ...rest,
+  };
 };

@@ -9,6 +9,7 @@ import { formatBigNumbers } from "@repo/onchain-utils";
 
 const Supply = () => {
   const { totalSupply } = usePools();
+
   return (
     <Card
       title="Total Supply"
