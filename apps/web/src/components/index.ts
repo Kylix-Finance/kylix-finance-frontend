@@ -9,6 +9,9 @@ import LineBreak from "./LineBreak";
 import List, { ListItem } from "./List";
 import Modal from "./Modal";
 import TabsManager, { TabType } from "./TabsManager";
+import { TokenIcon } from "./TokenIcon";
+import { Asset } from "./Asset";
+
 export {
   Card,
   Header,
@@ -21,7 +24,7 @@ export {
   List,
   Modal,
   TabsManager,
+  TokenIcon,
+  Asset,
 };
 export type { ListItem, TabType };
-
-export * from "./Table";

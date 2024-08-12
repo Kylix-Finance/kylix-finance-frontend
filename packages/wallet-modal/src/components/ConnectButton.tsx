@@ -37,13 +37,13 @@ export const ConnectButton: React.FC<Props> = ({ address }) => {
   const options: DropdownOption[] = [
     {
       name: "switchAccount",
-      label: "switch Account",
-      Icon: () => <SwitchAccountIcon />,
+      label: "Switch Account",
+      Icon: SwitchAccountIcon,
     },
     {
       name: "disconnect",
       label: "Disconnect",
-      Icon: () => <DisconnectIcon />,
+      Icon: DisconnectIcon,
     },
   ];
 
@@ -54,7 +54,7 @@ export const ConnectButton: React.FC<Props> = ({ address }) => {
       isEnabled={!!address}
     >
       <button
-        className="select-none cursor-pointer transition transform hover:shadow-lg hover:-translate-y-1 active:shadow-md active:translate-y-0 flex justify-between items-center gap-2 p-2 rounded-sm bg-[#FFF] text-[#5C5E64] w-[143px] h-[40px]"
+        className="select-none cursor-pointer transition transform hover:shadow-lg active:shadow-md active:translate-y-0 flex justify-between items-center gap-2 p-2 rounded-sm bg-[#FFF] text-[#5C5E64] w-[143px] h-[40px]"
         onClick={onConnectClick}
       >
         {address ? (

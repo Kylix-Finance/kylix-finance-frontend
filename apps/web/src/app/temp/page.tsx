@@ -8,11 +8,13 @@ import {
   useDownloadEvents,
   useEvent,
   useMetadata,
-  useSupply,
+  useProvider,
 } from "@repo/onchain-utils";
 import { formatUnit } from "@repo/onchain-utils";
 import { useEffect } from "react";
 import { notify } from "~/components";
+import { useGetAsset } from "~/hooks/api";
+import { usePool } from "~/hooks/chain/usePool";
 
 // import {
 //   useActiveAccount,
@@ -200,35 +202,58 @@ const SignMessage: React.FC = () => {
   // const { data:asset } = useAsset(257);
 
   const { activeAccount } = useActiveAccount();
-  const { balance } = useBalance(
-    "5DLHrZpgL2MP9VQvvkKPFp4BufMkaS5HxECHL26VPY3jsGkQ",
-    257
-  );
+  // const { balance } = useBalance({ assetId: 1 });
 
   // const { balance:balance1 } = useBalance("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY")
   // const { balance } = useBalance(activeAccount?.address);
-  const { submitSupply, error } = useSupply();
-  useEffect(() => {
-    if (error) {
-      notify({
-        type: "error",
-        title: "Supply",
-        message: error?.toString() || "",
-      });
-    }
-  }, [error]);
+  // const { submitSupply } = useSupply();
+
   // console.log("asset",asset,"activeAccount",activeAccount, "metadata",data,"balance1",balance1,"balance",balance );
 
   // console.log("balaaaanxe", balance);
   // const { data } = useEvent()
   // const { data } = useDownloadEvents();
   // console.log("eveeeeeeeent", data);
+  // const { data } = useGetAsset({
+  //   symbol: "BTC",
+  //   size: "64x64",
+  // });
+  // const { pool } = usePool({ assetId: "9" });
+
+  // const { balance } = useBalance({ assetId: 20 });
+
+  // const { assetMetaData } = useMetadata(pool?.lendTokenId);
+
+  // console.log("balance in the pool", balance);
+  // console.log(pool);
+  // const { api } = useProvider();
+  // const getPool = async () => {
+  //   console.log(await api?.query?.lending?.lendingPoolStorage?.entries())
+
+  // }
+
+  // console.log("________balance", balance);
+
+  const { api } = useProvider();
+  const assetPrice = async () => {
+    const getPrice = await api?.query.lending?.assetPrices?.([9, 1]);
+    console.log(getPrice?.toJSON());
+  };
   return (
     <div className="flex flex-col gap-3">
       <div>{/* <p>Balance is : {balance}</p> */}</div>
-      <button onClick={() => submitSupply(257, BigInt(parseUnit("555", 18)))}>
+      {/* <button
+        onClick={() =>
+          submitSupply(
+            pool?.id || 9,
+            parseUnit("1", Number(assetMetaData?.decimals) || 1)
+          )
+        }
+      >
         Supply
-      </button>
+      </button> */}
+      {/* <button onClick={getPool}>Pools</button> */}
+      <button onClick={assetPrice}>Get Price</button>
     </div>
   );
 };

@@ -20,5 +20,3 @@ export const numToLocalString = (num: number) => num.toLocaleString();
 export const getDecimalRegex = (decimals: number) => {
   return new RegExp(`^(0|[1-9]\\d{0,19})(\\.\\d?\\d{0,${decimals - 1}})?$`);
 };
-
-export * from "./store";

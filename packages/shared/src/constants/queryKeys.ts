@@ -1,8 +1,16 @@
+import { Signer } from "@polkadot/api/types";
+
 const baseKey = "kylix";
 
 interface Balance {
   address: string | undefined;
-  assetId: number | undefined;
+  assetId: number | string | undefined;
+}
+interface AssetPrice {
+  assetId: number | string | undefined;
+}
+interface Pools {
+  activeAccount: string | undefined;
 }
 
 const keys = {
@@ -19,6 +27,12 @@ const keys = {
   LENDING_POOLS: "LENDING_POOLS",
   ASSET: "ASSET",
   METADATA: "METADATA",
+  TOKEN: "TOKEN",
+  POOL_DATA: "POOL_DATA",
+  SUPPLY: "SUPPLY",
+  WITHDRAW: "WITHDRAW",
+  POOLS: "POOLS",
+  ASSET_PRICE: "ASSET_PRICE",
 };
 
 export const queryKeys = {
@@ -33,11 +47,17 @@ export const queryKeys = {
   provider: [baseKey, keys.PROVIDER],
   lendingPools: [baseKey, keys.LENDING_POOLS],
   asset: (assetId: number) => [baseKey, keys.ASSET, assetId],
-  metadata: (assetId: number) => [baseKey, keys.METADATA, assetId],
+  metadata: (assetId: number | string) => [baseKey, keys.METADATA, assetId],
   balance: ({ address, assetId }: Balance) => [
     baseKey,
     keys.BALANCE,
     address,
     assetId,
   ],
+  assetPrice: ({ assetId }: AssetPrice) => [baseKey, keys.ASSET_PRICE, assetId],
+  token: (symbol: string, size: string) => [baseKey, keys.TOKEN, symbol, size],
+  poolData: (assetId: string | number) => [baseKey, keys.POOL_DATA, assetId],
+  supply: [baseKey, keys.SUPPLY],
+  withdraw: [baseKey, keys.WITHDRAW],
+  pools: ({ activeAccount }: Pools) => [baseKey, keys.POOLS, activeAccount],
 };

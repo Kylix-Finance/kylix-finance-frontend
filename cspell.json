@@ -6,6 +6,8 @@
   "ignoreWords": ["CLEANME", "Skel", "tailwindcss"],
   "import": [],
   "words": [
+    "Aave",
+    "Ankr",
     "Cacheable",
     "imbursed",
     "nextjs",

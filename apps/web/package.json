@@ -19,6 +19,8 @@
     "start:production": "next start"
   },
   "dependencies": {
+    "@dicebear/collection": "^9.2.1",
+    "@dicebear/core": "^9.2.1",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.16.0",
@@ -28,11 +30,15 @@
     "@mui/styles": "^5.16.4",
     "@mui/utils": "^5.16.1",
     "@repo/onchain-utils": "workspace:*",
+    "@repo/shared": "workspace:*",
+    "@repo/ui": "workspace:*",
+    "@repo/utils": "workspace:*",
     "@repo/wallet-modal": "workspace:*",
     "@svgr/webpack": "^8.1.0",
     "chart.js": "^4.4.3",
     "chartjs-adapter-date-fns": "^3.0.0",
     "clsx": "^2.1.1",
+    "cryptocurrency-icons": "^0.18.1",
     "date-fns": "^3.6.0",
     "lodash-es": "^4.17.21",
     "next": "15.0.0-rc.0",
@@ -48,6 +54,7 @@
   "devDependencies": {
     "@polkadot/extension-inject": "^0.48.2",
     "@repo/eslint-config": "workspace:*",
+    "@repo/types": "workspace:*",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20",
     "@types/react": "^18",

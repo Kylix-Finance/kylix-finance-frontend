@@ -38,16 +38,17 @@ export const Borrow = () => {
   const onclick = () => {};
   return (
     <Form
+      assetId={9}
       items={items}
       decimals={18}
-      maxHandler={() => {}}
+      onMaxClick={() => {}}
       setValue={setValue}
       value={value}
       submitButton={{
         onclick,
-        status: false,
         content: "Borrow",
       }}
+      balance=""
     />
   );
 };

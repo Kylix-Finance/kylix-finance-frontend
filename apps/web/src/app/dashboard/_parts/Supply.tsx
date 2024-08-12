@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
-import { SupplyChart } from "./SupplyChart";
+import { SupplyTable } from "./SupplyTable";
 
 const Supply = () => {
   return (
     <Box>
-      <SupplyChart />
+      <SupplyTable />
     </Box>
   );
 };
