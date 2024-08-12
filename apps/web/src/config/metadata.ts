@@ -8,9 +8,6 @@ const baseMetadata: Metadata = {
     siteName: "Kylix",
     images: {
       url: "/cover.png",
-      width: 400,
-      height: 400,
-      type: "image/jpg",
     },
   },
   twitter: {
