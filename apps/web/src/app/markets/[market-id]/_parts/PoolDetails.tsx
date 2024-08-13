@@ -79,12 +79,12 @@ const PoolDetails = () => {
             <Box className="flex flex-col">
               <Typography variant="subtitle2" className="text-primary-800">
                 <Skeleton minWidth={20} isLoading={!assetMetaData}>
-                  {assetMetaData?.symbol}
+                  {assetMetaData?.name}
                 </Skeleton>
               </Typography>
               <Typography variant="caption" className="text-primary-800/50">
                 <Skeleton minWidth={20} isLoading={!assetMetaData}>
-                  {assetMetaData?.name}
+                  {assetMetaData?.symbol}
                 </Skeleton>
               </Typography>
             </Box>
