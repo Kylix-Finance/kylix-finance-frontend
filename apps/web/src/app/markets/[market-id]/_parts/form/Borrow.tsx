@@ -49,6 +49,7 @@ export const Borrow = () => {
         content: "Borrow",
       }}
       balance=""
+      symbol={undefined}
     />
   );
 };

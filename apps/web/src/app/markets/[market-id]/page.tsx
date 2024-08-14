@@ -12,7 +12,7 @@ export default function page() {
         <Box className="flex flex-col col-span-full lg:col-span-7 gap-4">
           <PoolDetails />
           <ApyChart />
-          <VaultChart />
+          {/* <VaultChart /> */}
         </Box>
         <Box className="col-span-full lg:col-span-4">
           <TransactionForm />

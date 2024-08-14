@@ -69,11 +69,15 @@ const Sidebar = () => {
             ))}
           </Box>
         </Box>
-        <Box className="flex flex-col items-center">
-          <Box className="flex items-center justify-center">
+        <Box className="flex flex-col items-center gap-2.5">
+          <Box className="flex items-center justify-center  gap-3">
             {socialMediaLinks.map(({ icon: Icon, link }) => (
-              <Link key={link} href={link}>
-                <Icon className="text-primary-500 w-10 h-10" />
+              <Link
+                key={link}
+                href={link}
+                className="flex items-center justify-center rounded-full border border-primary-500/20"
+              >
+                <Icon className="text-primary-500" />
               </Link>
             ))}
           </Box>

@@ -10,6 +10,7 @@ import { formatBigNumbers, formatUnit, useMetadata } from "@repo/onchain-utils";
 import { Skeleton } from "@repo/ui";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
 import { PRICE_BASE_ASSET_ID } from "@repo/shared";
+import ValueItemWrapper from "./form/ValueItemWrapper";
 
 const PoolDetails = () => {
   const params = useParams();
@@ -42,15 +43,36 @@ const PoolDetails = () => {
   const items: Array<ListItem> = [
     {
       label: "Total Supply:",
-      value: `$ ${formatBigNumbers(totalSupply || "0", 2)}`,
+      value: (
+        <ValueItemWrapper
+          value={formatBigNumbers(totalSupply || "0", 2)}
+          iconName={assetMetaData?.symbol}
+          iconWidth={20}
+          iconHeight={20}
+        />
+      ),
     },
     {
       label: "Total Borrow:",
-      value: `$ ${formatBigNumbers(totalBorrow || "0", 2)}`,
+      value: (
+        <ValueItemWrapper
+          value={formatBigNumbers(totalBorrow || "0", 2)}
+          iconName={assetMetaData?.symbol}
+          iconWidth={20}
+          iconHeight={20}
+        />
+      ),
     },
     {
       label: "Liquidation:",
-      value: `$ ${formatBigNumbers(pool?.liquidationThreshold || "0", 2)}`,
+      value: (
+        <ValueItemWrapper
+          value={formatBigNumbers(pool?.liquidationThreshold || "0", 2)}
+          iconName={assetMetaData?.symbol}
+          iconWidth={20}
+          iconHeight={20}
+        />
+      ),
     },
   ];
 
@@ -79,12 +101,12 @@ const PoolDetails = () => {
             <Box className="flex flex-col">
               <Typography variant="subtitle2" className="text-primary-800">
                 <Skeleton minWidth={20} isLoading={!assetMetaData}>
-                  {assetMetaData?.symbol}
+                  {assetMetaData?.name}
                 </Skeleton>
               </Typography>
               <Typography variant="caption" className="text-primary-800/50">
                 <Skeleton minWidth={20} isLoading={!assetMetaData}>
-                  {assetMetaData?.name}
+                  {assetMetaData?.symbol}
                 </Skeleton>
               </Typography>
             </Box>

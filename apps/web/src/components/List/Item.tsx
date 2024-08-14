@@ -36,13 +36,17 @@ const Item = ({
         )}
       </Box>
       <Box display="flex" gap="10px" alignItems="center">
-        <Typography
-          className={cn("text-primary-800 font-number", valueClassName)}
-          variant="subtitle2"
-          fontWeight="600"
-        >
-          {value}
-        </Typography>
+        {typeof value === "string" ? (
+          <Typography
+            className={cn("text-primary-800 font-number", valueClassName)}
+            variant="subtitle2"
+            fontWeight="600"
+          >
+            {value}
+          </Typography>
+        ) : (
+          value
+        )}
         {kylixValue && (
           <ClientOnly>
             <KylixChip

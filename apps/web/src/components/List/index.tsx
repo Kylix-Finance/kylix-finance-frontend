@@ -1,8 +1,9 @@
 import { List as MUIList } from "@mui/material";
 import Item from "./Item";
+import { ReactNode } from "react";
 export type ListItem = {
   label: string;
-  value: string;
+  value: string | ReactNode;
   kylixValue?: string;
   tooltipTitle?: string;
   labelClassName?: string;

@@ -49,6 +49,7 @@ export const Repay = () => {
         content: "Repay",
       }}
       balance=""
+      symbol={undefined}
     />
   );
 };
