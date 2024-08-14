@@ -10,10 +10,9 @@ import {
   useTheme,
 } from "@mui/material";
 import { Dispatch, MouseEventHandler, SetStateAction, useState } from "react";
-import { List, ListItem } from "~/components";
+import { List, ListItem, TokenIcon } from "~/components";
 import { getDecimalRegex } from "~/utils";
 import AlertContainer from "../AlertContainer";
-import { useBalance } from "@repo/onchain-utils";
 import { LoadingButton } from "@mui/lab";
 import { FormAlert } from "~/components/FormAlert";
 
@@ -34,6 +33,7 @@ interface Props {
   onMaxClick: () => void;
   isMaxLoading?: boolean;
   balance: string | undefined;
+  symbol: string | undefined;
 }
 
 export const Form = ({
@@ -48,6 +48,7 @@ export const Form = ({
   onMaxClick,
   isMaxLoading = false,
   balance,
+  symbol,
 }: Props) => {
   const handleInputChange: TextFieldProps["onChange"] = ({
     target: { value },
@@ -107,9 +108,7 @@ export const Form = ({
             },
             startAdornment: (
               <InputAdornment position="start" className="">
-                <Typography color="#aB5D0CB" variant="subtitle1">
-                  $
-                </Typography>
+                <TokenIcon symbol={symbol} width={24} height={24} />
               </InputAdornment>
             ),
           }}

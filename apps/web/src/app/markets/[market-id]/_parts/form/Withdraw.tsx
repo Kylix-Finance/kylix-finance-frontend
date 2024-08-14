@@ -1,11 +1,13 @@
 "use client";
-import { ListItem, notify } from "~/components";
+import { ListItem, notify, TokenIcon } from "~/components";
 import { Form } from "./Form";
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
 import { useWithdraw } from "~/hooks/chain/useWithdraw";
 import { usePool } from "~/hooks/chain/usePool";
+import { Box, Typography } from "@mui/material";
+import ValueItemWrapper from "./ValueItemWrapper";
 
 export const Withdraw = () => {
   const params = useParams();
@@ -41,11 +43,17 @@ export const Withdraw = () => {
   };
 
   const onMaxClick = () => formattedBalance && setValue(formattedBalance);
-
   const items: Array<ListItem> = [
     {
       label: "Available to withdraw",
-      value: "$" + Number(formattedBalance || 0).toLocaleString(),
+      value: (
+        <ValueItemWrapper
+          value={Number(formattedBalance || 0).toLocaleString()}
+          iconName={assetMetaData?.symbol}
+          iconHeight={20}
+          iconWidth={20}
+        />
+      ),
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -56,7 +64,14 @@ export const Withdraw = () => {
     },
     {
       label: "Supplied",
-      value: "$" + Number(formattedBalance || 0).toLocaleString(),
+      value: (
+        <ValueItemWrapper
+          value={Number(formattedBalance || 0).toLocaleString()}
+          iconName={assetMetaData?.symbol}
+          iconHeight={20}
+          iconWidth={20}
+        />
+      ),
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -86,6 +101,7 @@ export const Withdraw = () => {
       isMaxLoading={isBalanceLoading}
       onMaxClick={onMaxClick}
       balance={formattedBalance}
+      symbol={assetMetaData?.symbol}
     />
   );
 };
