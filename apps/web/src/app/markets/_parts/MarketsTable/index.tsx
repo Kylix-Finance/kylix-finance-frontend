@@ -12,11 +12,11 @@ import { QUEY_SEARCH_MARKETS } from "~/constants";
 
 const placeholderData = Array.from({ length: 5 }).map(() => ({
   asset: "",
-  borrowApy: "",
+  borrowRate: "",
   collateral: false,
   collateralQ: "",
   id: 0,
-  supplyApy: "",
+  supplyRate: "",
   utilization: "",
   walletBalance: "0",
 }));
@@ -43,8 +43,8 @@ const MarketsTable = () => {
           collateralQ: `%${item.collateralQ}`,
           collateral: item.collateral,
           utilization: `%${item.utilization}`,
-          borrowApy: `%${item.borrowApy}`,
-          supplyApy: `%${item.supplyApy}`,
+          borrowRate: `%${item.borrowApy}`,
+          supplyRate: `%${item.supplyApy}`,
           walletBalance: item.balance,
           id: item.assetId,
         };
@@ -59,8 +59,8 @@ const MarketsTable = () => {
           asset: "Asset",
           collateralQ: "Collateral Q",
           utilization: "Utilization",
-          borrowApy: "Borrow Apy",
-          supplyApy: "Supply Apy",
+          borrowRate: "Borrow Rate",
+          supplyRate: "Supply Rate",
           collateral: "Collateral",
           walletBalance: "Wallet Balance",
           actions: "",
@@ -77,15 +77,15 @@ const MarketsTable = () => {
           utilization: (item) => (
             <Typography variant="subtitle1">{item.utilization}</Typography>
           ),
-          borrowApy: (item) => (
+          borrowRate: (item) => (
             <Box className="flex flex-col">
-              <Typography variant="subtitle1">{item.borrowApy}</Typography>
+              <Typography variant="subtitle1">{item.borrowRate}</Typography>
               <KylixChip />
             </Box>
           ),
-          supplyApy: (item) => (
+          supplyRate: (item) => (
             <Box className="flex flex-col">
-              <Typography variant="subtitle1">{item.supplyApy}</Typography>
+              <Typography variant="subtitle1">{item.supplyRate}</Typography>
               <KylixChip />
             </Box>
           ),
