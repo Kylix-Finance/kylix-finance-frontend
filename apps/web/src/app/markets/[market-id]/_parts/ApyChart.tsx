@@ -53,8 +53,8 @@ const ApyChart = () => {
             borderColor: palette.primary.main,
             tension: 0.5,
             parsing: {
-              xAxisKey: "timestamp",
-              yAxisKey: "price",
+              xAxisKey: "x",
+              yAxisKey: "y",
             },
           },
           {
@@ -62,8 +62,8 @@ const ApyChart = () => {
             borderColor: palette.secondary.main,
             tension: 0.5,
             parsing: {
-              xAxisKey: "timestamp",
-              yAxisKey: "price",
+              xAxisKey: "x",
+              yAxisKey: "y",
             },
           },
         ]}

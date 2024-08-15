@@ -34,15 +34,16 @@ export const MultiLineChart = ({ datasets }: MultiLineChartProps) => {
           },
           scales: {
             x: {
-              type: "time",
-              time: {
-                unit: "day",
-                tooltipFormat: "MMM dd",
-                displayFormats: {
-                  month: "MMM dd",
-                },
-              },
+              type: "linear",
+              // time: {
+              //   unit: "day",
+              //   tooltipFormat: "MMM dd",
+              //   displayFormats: {
+              //     month: "MMM dd",
+              //   },
+              // },
               display: true,
+              beginAtZero: true,
               grid: {
                 display: false,
               },
@@ -56,13 +57,13 @@ export const MultiLineChart = ({ datasets }: MultiLineChartProps) => {
             },
             y: {
               display: true,
-              beginAtZero: false,
+              beginAtZero: true,
               border: {
                 display: false,
               },
               ticks: {
                 color: palette.text.disabled,
-                count: 4,
+                count: 6,
                 callback: (value) => {
                   return formatNumber(value);
                 },
