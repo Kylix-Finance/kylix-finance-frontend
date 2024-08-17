@@ -36,9 +36,11 @@ function TRow<Schema, ExtraFields extends string = string>({
 }: Props<Schema, ExtraFields>) {
   type Key = keyof Schema;
 
+  const headersList = Object.entries(headers);
+
   return (
     <TableRow className={`bg-light ${className}`} {...rest}>
-      {Object.entries(headers).map(([name], index) => {
+      {headersList.map(([name], index) => {
         // TODO: Remove assertion
         const ValueComponent = components[name as Key] as
           | CellValueComponent<Schema>
@@ -49,6 +51,17 @@ function TRow<Schema, ExtraFields extends string = string>({
             className={`rounded-none first:rounded-[8px_0_0_8px] last:rounded-[0_8px_8px_0] !border-none ${tCellClassnames}`}
             {...tCellProps}
             key={`${name}+${index}`}
+            style={
+              index === headersList.length - 1
+                ? {
+                    position: "sticky",
+                    backgroundColor: "rgb(244, 250, 249)",
+                    right: 0,
+                    zIndex: "9999",
+                    boxShadow: "-4px 0px 4px -4px rgba(0,0,0,0.2)",
+                  }
+                : {}
+            }
           >
             <Skeleton height={40} isLoading={isLoading}>
               {/* TODO: Convert to component - ValueComponent */}

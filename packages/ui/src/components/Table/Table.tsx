@@ -79,7 +79,6 @@ export function Table<Schema, ExtraFields extends string = string>({
 
   return (
     <TableContainer
-      className="hide-scrollbar"
       {...tContainerProps}
       sx={{
         height: "100%",

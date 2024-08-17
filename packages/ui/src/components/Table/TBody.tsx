@@ -40,7 +40,7 @@ function TBody<Schema, ExtraFields extends string = string>({
             components={components}
             {...tRowProps}
           />
-          {rowSpacing && (
+          {rowSpacing && index < data.length - 1 && (
             <TableRow
               style={{
                 height: rowSpacing,
