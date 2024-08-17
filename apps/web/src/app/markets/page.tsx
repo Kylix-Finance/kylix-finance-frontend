@@ -5,6 +5,7 @@ import MarketsTable from "./_parts/MarketsTable";
 import { Suspense } from "react";
 import { Card } from "~/components";
 import { RightComponent } from "./_parts/MarketsTable/RightComponent";
+import { FancyLoader } from "~/components/Loaders";
 
 export default function Page() {
   return (
@@ -30,10 +31,9 @@ export default function Page() {
       >
         <Suspense
           fallback={
-            <Skeleton
-              variant="rectangular"
-              sx={{ width: "100%", height: 640, borderRadius: "6px" }}
-            />
+            <div className="w-full h-[500px] flex justify-center items-center">
+              <FancyLoader />
+            </div>
           }
         >
           <MarketsTable />
