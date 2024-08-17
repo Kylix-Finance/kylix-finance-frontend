@@ -35,6 +35,7 @@ const TokenIcon = ({
         height={height}
         width={width}
         draggable="false"
+        style={{ flexShrink: 0 }}
       />
     );
   }
@@ -45,6 +46,7 @@ const TokenIcon = ({
       width={width}
       preserveAspectRatio="xMidYMid meet"
       className={className}
+      style={{ flexShrink: 0 }}
       viewBox="0 0 32 32"
     />
   );

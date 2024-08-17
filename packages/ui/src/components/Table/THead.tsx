@@ -61,7 +61,7 @@ function THead<Schema, ExtraFields extends string = string>({
             align={numeric ? "right" : "left"}
             padding={disablePadding ? "none" : "checkbox"}
             sortDirection={orderBy === name ? order : false}
-            sx={{ paddingLeft: 2 }}
+            sx={{ paddingLeft: index === 0 ? "16px" : "32px" }}
           >
             {isHeaderHidden(name) ? (
               ""

@@ -73,26 +73,32 @@ const MarketsTable = () => {
           <Asset helperText={item.asset} label={item.asset.toString()} />
         ),
         collateralQ: (item) => (
-          <Typography variant="subtitle1">{item.collateralQ}</Typography>
+          <Typography variant="subtitle1" className="pl-4">
+            {item.collateralQ}
+          </Typography>
         ),
         utilization: (item) => (
-          <Typography variant="subtitle1">{item.utilization}</Typography>
+          <Typography variant="subtitle1" className="pl-4">
+            {item.utilization}
+          </Typography>
         ),
         borrowRate: (item) => (
-          <Box className="flex flex-col">
+          <Box className="flex flex-col pl-4">
             <Typography variant="subtitle1">{item.borrowRate}</Typography>
             <KylixChip />
           </Box>
         ),
         supplyRate: (item) => (
-          <Box className="flex flex-col">
+          <Box className="flex flex-col pl-4">
             <Typography variant="subtitle1">{item.supplyRate}</Typography>
             <KylixChip />
           </Box>
         ),
-        collateral: (item) => <Switch checked={item.collateral} />,
+        collateral: (item) => (
+          <Switch className="pl-4" checked={item.collateral} />
+        ),
         walletBalance: (item) => (
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle1" className="pl-4">
             {item.walletBalance === "-"
               ? "-"
               : Number(item.walletBalance).toLocaleString()}
