@@ -51,17 +51,22 @@ function THead<Schema, ExtraFields extends string = string>({
   const isHeaderHidden = (name: string) =>
     hiddenTHeads?.includes(name as keyof Schema);
 
+  const headersList = Object.entries(headers);
+
   return (
     <TableHead {...rest}>
       <TableRow {...tRowProps}>
-        {Object.entries(headers).map(([name, value], index) => (
+        {headersList.map(([name, value], index) => (
           <TCell
             className="!bg-[#FFF]"
             key={`${name}+${index}`}
             align={numeric ? "right" : "left"}
             padding={disablePadding ? "none" : "checkbox"}
             sortDirection={orderBy === name ? order : false}
-            sx={{ paddingLeft: index === 0 ? "16px" : "32px" }}
+            sx={{
+              paddingLeft: index === 0 ? "16px" : "32px",
+              width: index === headersList.length - 1 ? "100px" : "auto",
+            }}
           >
             {isHeaderHidden(name) ? (
               ""
