@@ -2,18 +2,24 @@
 import React from "react";
 import { createAvatar } from "@dicebear/core";
 import { glass } from "@dicebear/collection";
-import { data } from "~/config/data";
 import Image from "next/image";
+import { TokenIcons } from "~/config";
 
 interface Props {
-  symbol: string;
+  symbol?: string;
   width?: number | undefined;
   height?: number | undefined;
   className?: string;
 }
 
-const Icon = ({ symbol, height = 32, width = 32, className }: Props) => {
-  const IconComponent = data.coins[symbol];
+const TokenIcon = ({
+  symbol = "",
+  height = 32,
+  width = 32,
+  className,
+}: Props) => {
+  const upperCaseSymbol = symbol.toUpperCase();
+  const IconComponent = TokenIcons[upperCaseSymbol];
 
   if (!IconComponent) {
     const avatar = createAvatar(glass, {
@@ -29,6 +35,7 @@ const Icon = ({ symbol, height = 32, width = 32, className }: Props) => {
         height={height}
         width={width}
         draggable="false"
+        style={{ flexShrink: 0 }}
       />
     );
   }
@@ -39,9 +46,10 @@ const Icon = ({ symbol, height = 32, width = 32, className }: Props) => {
       width={width}
       preserveAspectRatio="xMidYMid meet"
       className={className}
+      style={{ flexShrink: 0 }}
       viewBox="0 0 32 32"
     />
   );
 };
 
-export default Icon;
+export default TokenIcon;

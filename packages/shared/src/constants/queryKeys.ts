@@ -6,6 +6,12 @@ interface Balance {
   address: string | undefined;
   assetId: number | string | undefined;
 }
+interface AssetPrice {
+  assetId: number | string | undefined;
+}
+interface Pools {
+  activeAccount: string | undefined;
+}
 
 const keys = {
   BALANCE: "BALANCE",
@@ -24,6 +30,9 @@ const keys = {
   TOKEN: "TOKEN",
   POOL_DATA: "POOL_DATA",
   SUPPLY: "SUPPLY",
+  WITHDRAW: "WITHDRAW",
+  POOLS: "POOLS",
+  ASSET_PRICE: "ASSET_PRICE",
 };
 
 export const queryKeys = {
@@ -45,7 +54,10 @@ export const queryKeys = {
     address,
     assetId,
   ],
+  assetPrice: ({ assetId }: AssetPrice) => [baseKey, keys.ASSET_PRICE, assetId],
   token: (symbol: string, size: string) => [baseKey, keys.TOKEN, symbol, size],
   poolData: (assetId: string | number) => [baseKey, keys.POOL_DATA, assetId],
   supply: [baseKey, keys.SUPPLY],
+  withdraw: [baseKey, keys.WITHDRAW],
+  pools: ({ activeAccount }: Pools) => [baseKey, keys.POOLS, activeAccount],
 };

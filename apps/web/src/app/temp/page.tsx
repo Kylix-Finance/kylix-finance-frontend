@@ -8,14 +8,13 @@ import {
   useDownloadEvents,
   useEvent,
   useMetadata,
-  usePool,
   useProvider,
-  useSupply,
 } from "@repo/onchain-utils";
 import { formatUnit } from "@repo/onchain-utils";
 import { useEffect } from "react";
 import { notify } from "~/components";
 import { useGetAsset } from "~/hooks/api";
+import { usePool } from "~/hooks/chain/usePool";
 
 // import {
 //   useActiveAccount,
@@ -219,13 +218,13 @@ const SignMessage: React.FC = () => {
   //   symbol: "BTC",
   //   size: "64x64",
   // });
-  const { pool } = usePool({ assetId: "8" });
+  // const { pool } = usePool({ assetId: "9" });
 
-  const { balance } = useBalance({ assetId: pool?.id });
+  // const { balance } = useBalance({ assetId: 20 });
 
-  // const { data: assetMetaData } = useMetadata(pool?.lendTokenId);
+  // const { assetMetaData } = useMetadata(pool?.lendTokenId);
 
-  console.log("balance in the pool", balance);
+  // console.log("balance in the pool", balance);
   // console.log(pool);
   // const { api } = useProvider();
   // const getPool = async () => {
@@ -233,8 +232,13 @@ const SignMessage: React.FC = () => {
 
   // }
 
-  console.log("pool", pool);
+  // console.log("________balance", balance);
 
+  const { api } = useProvider();
+  const assetPrice = async () => {
+    const getPrice = await api?.query.lending?.assetPrices?.([9, 1]);
+    console.log(getPrice?.toJSON());
+  };
   return (
     <div className="flex flex-col gap-3">
       <div>{/* <p>Balance is : {balance}</p> */}</div>
@@ -249,7 +253,7 @@ const SignMessage: React.FC = () => {
         Supply
       </button> */}
       {/* <button onClick={getPool}>Pools</button> */}
-      <button>Get Assets</button>
+      <button onClick={assetPrice}>Get Price</button>
     </div>
   );
 };

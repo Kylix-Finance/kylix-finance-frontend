@@ -79,6 +79,9 @@ export const theme = createTheme({
           textTransform: "capitalize",
           padding: "4px 12px",
         },
+        contained: {
+          color: palette.background.default,
+        },
       },
     },
     MuiTableCell: {

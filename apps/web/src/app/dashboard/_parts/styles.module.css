@@ -70,7 +70,7 @@
 
 @media (max-width: 768px) {
   .top {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-template-areas:
       "reward"
       "burned"
@@ -79,7 +79,7 @@
   }
 
   .bottom {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-template-areas:
       "featured "
       "vault_chart"

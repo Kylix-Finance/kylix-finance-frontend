@@ -1,77 +1,118 @@
 "use client";
 
-import { ListItem, notify } from "~/components";
+import { ListItem, notify, TokenIcon } from "~/components";
 import { Form } from "./Form";
-import { useEffect, useState, useCallback } from "react";
+import { useState } from "react";
 import {
+  formatUnit,
   parseUnit,
   useBalance,
   useMetadata,
-  useSupply,
 } from "@repo/onchain-utils";
-
-const ASSET_ID = 8;
-const items: Array<ListItem> = [
-  {
-    label: "Available to supply",
-    value: "$100",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Supply APY",
-    value: "6.4 %",
-    kylixValue: "%4",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Supply",
-    value: "$64",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Interest",
-    value: "$ 24",
-    kylixValue: "12",
-    tooltipTitle: "Interest tooltip title.",
-    action: {
-      title: "Claim",
-      onClick: () => {},
-    },
-    valueClassName: "!text-primary-500",
-  },
-];
+import { useSupply } from "~/hooks/chain/useSupply";
+import { useParams } from "next/navigation";
+import { usePool } from "~/hooks/chain/usePool";
+import { Box, Typography } from "@mui/material";
+import ValueItemWrapper from "./ValueItemWrapper";
 
 export const Supply = () => {
+  const params = useParams();
+  const lendTokenId = params["market-id"] as string;
+  const { pool } = usePool({ assetId: lendTokenId });
   const [value, setValue] = useState("");
-  const { data: assetMetaData, isLoading } = useMetadata(ASSET_ID);
+  const { assetMetaData } = useMetadata(lendTokenId);
   const { mutate, isPending } = useSupply();
-  const { formattedBalance } = useBalance({
-    assetId: ASSET_ID,
+  const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
+    assetId: lendTokenId,
+  });
+  const {
+    formattedBalance: formattedKTokenBalance,
+    isLoading: isFormattedKTokenBalanceLoading,
+  } = useBalance({
+    assetId: pool?.id,
+    customDecimals: assetMetaData?.decimals,
+    enabled: !!assetMetaData && !!pool,
   });
 
-  const handleClick = useCallback(() => {
-    mutate({
-      asset: ASSET_ID,
-      balance: parseUnit(value, Number(assetMetaData?.decimals) || 18),
-    });
-  }, [mutate, value, assetMetaData?.decimals]);
+  const handleClick = () => {
+    mutate(
+      {
+        asset: lendTokenId,
+        balance: parseUnit(value, Number(assetMetaData?.decimals)),
+      },
+      {
+        onSuccess: ({ blockNumber }) => {
+          setValue("");
+          notify({
+            type: "success",
+            title: "Success",
+            message: "Transaction completed on block " + blockNumber,
+          });
+        },
+      }
+    );
+  };
+  const onMaxClick = () => formattedBalance && setValue(formattedBalance);
+  const items: Array<ListItem> = [
+    {
+      label: "Available to supply",
+      value: (
+        <ValueItemWrapper
+          value={Number(formattedBalance || 0).toLocaleString()}
+          iconName={assetMetaData?.symbol}
+          iconHeight={20}
+          iconWidth={20}
+        />
+      ),
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Supply APY",
+      value: "6.4 %",
+      kylixValue: "%4",
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Supplied",
+      value: (
+        <ValueItemWrapper
+          value={Number(formattedKTokenBalance || 0).toLocaleString()}
+          iconName={assetMetaData?.symbol}
+          iconHeight={20}
+          iconWidth={20}
+        />
+      ),
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Interest",
+      value: "$ 24",
+      kylixValue: "12",
+      tooltipTitle: "Interest tooltip title.",
+      action: {
+        title: "Claim",
+        onClick: () => {},
+      },
+      valueClassName: "!text-primary-500",
+    },
+  ];
 
-  const isValid = isLoading || isPending || !assetMetaData;
   return (
     <Form
-      assetId={ASSET_ID}
+      assetId={lendTokenId}
       items={items}
-      decimals={Number(assetMetaData?.decimals) || 18}
-      maxHandler={() => {
-        formattedBalance && setValue(formattedBalance);
-      }}
+      decimals={assetMetaData?.decimals}
       setValue={setValue}
       value={value}
-      disabled={isValid}
       submitButton={{
         onclick: handleClick,
         content: "Supply",
       }}
+      isSubmitting={isPending}
+      isMaxLoading={isBalanceLoading}
+      onMaxClick={onMaxClick}
+      balance={formattedBalance}
+      symbol={assetMetaData?.symbol}
     />
   );
 };

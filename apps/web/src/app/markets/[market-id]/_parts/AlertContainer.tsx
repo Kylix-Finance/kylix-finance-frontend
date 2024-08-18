@@ -1,27 +1,13 @@
 import React from "react";
-import { Box, Alert } from "@mui/material";
+import { Box } from "@mui/material";
 import { cn } from "~/utils";
-import { FormAlert } from "~/components/FormAlert";
 
 interface AlertContainerProps {
-  isInputEmptyOrZero: boolean;
-  isInsufficientBalance: boolean;
+  children: React.ReactNode;
 }
 
-const AlertContainer = ({
-  isInputEmptyOrZero,
-  isInsufficientBalance,
-}: AlertContainerProps) => {
-  return (
-    <Box className={cn("flex flex-col gap-1")}>
-      {isInputEmptyOrZero && (
-        <FormAlert severity="error" message="Please enter a valid amount!" />
-      )}
-      {isInsufficientBalance && (
-        <FormAlert severity="error" message="Insufficient Balance!" />
-      )}
-    </Box>
-  );
+const AlertContainer = ({ children }: AlertContainerProps) => {
+  return <Box className={cn("flex flex-col gap-1")}>{children}</Box>;
 };
 
 export default AlertContainer;

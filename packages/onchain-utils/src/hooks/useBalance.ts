@@ -4,25 +4,31 @@ import { useProvider } from "./useProvider";
 import { useMetadata } from "./useMetadata";
 import { formatUnit } from "../utils";
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@repo/shared";
+import { DEFAULT_TOKEN_DECIMALS, queryKeys } from "@repo/shared";
 import { useActiveAccount } from "./useActiveAccount";
 interface Props {
   accountAddress?: string;
   assetId?: number | string;
+  customDecimals?: number;
+  enabled?: boolean;
 }
 
-const useBalance = ({ accountAddress, assetId }: Props = {}) => {
+const useBalance = ({
+  accountAddress,
+  assetId,
+  customDecimals,
+  enabled = true,
+}: Props = {}) => {
   const { api } = useProvider();
 
   const { activeAccount } = useActiveAccount();
   const address = accountAddress ?? activeAccount?.address;
-  const { data: assetMetaData } = useMetadata(assetId);
-
-  const enabled = !!api && !!address;
+  const { assetMetaData } = useMetadata(assetId);
+  const finalEnabled = !!api && !!address && enabled;
 
   const { data, ...rest } = useQuery({
     queryKey: queryKeys.balance({ address, assetId }),
-    queryFn: enabled
+    queryFn: finalEnabled
       ? async () => {
           if (!api || !address) {
             throw new Error("API provider or account address is missing.");
@@ -34,22 +40,26 @@ const useBalance = ({ accountAddress, assetId }: Props = {}) => {
             );
           }
 
-          let decimals = 12;
+          let decimals = DEFAULT_TOKEN_DECIMALS;
           let freeBalance: string;
 
           if (assetId) {
-            if (!assetMetaData?.decimals) {
+            const assetDecimals = customDecimals ?? assetMetaData?.decimals;
+
+            if (!assetDecimals) {
               throw new Error("Asset metadata is missing.");
             }
-            decimals = Number(assetMetaData?.decimals);
+            decimals = assetDecimals;
 
-            const assetBalance = await api?.query?.assets?.account?.(
+            const balanceReq = await api?.query?.assets?.account?.(
               assetId,
               address
             );
-            freeBalance = BigInt(
-              (assetBalance?.toJSON() as any)?.balance
-            ).toString();
+            const result = balanceReq?.toJSON() as unknown as {
+              balance: number | null;
+            };
+
+            freeBalance = BigInt(result?.balance || 0).toString();
           } else {
             const result = await api.query.system.account(address);
             const data = result.toJSON() as any;

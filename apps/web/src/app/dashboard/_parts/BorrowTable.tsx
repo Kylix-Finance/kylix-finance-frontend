@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Table } from "@repo/ui";
-import { Asset } from "~/components/Asset";
+import { Asset } from "~/components";
 
 export const BorrowTable = () => {
   return (

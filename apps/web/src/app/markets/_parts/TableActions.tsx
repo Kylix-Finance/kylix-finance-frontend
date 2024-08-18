@@ -1,25 +1,42 @@
 import { Box, Button, Typography } from "@mui/material";
+import Link from "next/link";
 
-export const TableActions = () => {
+interface Props {
+  assetId: number | string;
+}
+
+export const TableActions = ({ assetId }: Props) => {
   return (
     <Box className="flex justify-end gap-1">
-      <Button variant="contained">
-        <Typography
-          className="!text-[#FFF]"
-          variant="md"
-          fontWeight={600}
-          fontFamily={"Poppins"}
-        >
-          Supply
-        </Typography>
-      </Button>
-      <Button variant="outlined">
-        <Typography
-          className="!text-primary-500"
-          variant="md"
-          fontWeight={600}
-          fontFamily={"Poppins"}
-        >
+      <Link href={`/markets/${assetId}`}>
+        <Button variant="contained">
+          <Typography
+            className="!text-[#FFF]"
+            variant="md"
+            fontWeight={600}
+            fontFamily={"Poppins"}
+          >
+            Supply
+          </Typography>
+        </Button>
+      </Link>
+
+      {/*FIXME: remove styles for milestone 2 */}
+      <Button
+        variant="outlined"
+        disabled
+        sx={{
+          color: "#48484820",
+          borderColor: "#48484820",
+          "&:hover": {
+            borderColor: "#48484820",
+          },
+          "& .MuiTypography-root": {
+            color: "#48484820",
+          },
+        }}
+      >
+        <Typography variant="md" fontWeight={600} fontFamily={"Poppins"}>
           Borrow
         </Typography>
       </Button>

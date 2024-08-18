@@ -1,54 +1,107 @@
 "use client";
-import { ListItem } from "~/components";
+import { ListItem, notify, TokenIcon } from "~/components";
 import { Form } from "./Form";
 import { useState } from "react";
-
-const items: Array<ListItem> = [
-  {
-    label: "Available to withdraw",
-    value: "$100",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Supply APY",
-    value: "6.4 %",
-    kylixValue: "%4",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Supplied",
-    value: "$64",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Interest",
-    value: "$ 24",
-    kylixValue: "12",
-    tooltipTitle: "Interest tooltip title.",
-    action: {
-      title: "Claim",
-      onClick: () => {},
-    },
-    valueClassName: "!text-primary-500",
-  },
-];
+import { useParams } from "next/navigation";
+import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
+import { useWithdraw } from "~/hooks/chain/useWithdraw";
+import { usePool } from "~/hooks/chain/usePool";
+import { Box, Typography } from "@mui/material";
+import ValueItemWrapper from "./ValueItemWrapper";
 
 export const Withdraw = () => {
+  const params = useParams();
+  const lendTokenId = params["market-id"] as string;
   const [value, setValue] = useState("");
-  const onclick = () => {};
+  const { assetMetaData } = useMetadata(lendTokenId);
+  const { mutate, isPending } = useWithdraw();
+  const { pool } = usePool({
+    assetId: lendTokenId,
+  });
+  const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
+    assetId: pool?.id,
+    customDecimals: assetMetaData?.decimals,
+    enabled: !!assetMetaData && !!pool,
+  });
+  const handleClick = () => {
+    mutate(
+      {
+        asset: lendTokenId,
+        balance: parseUnit(value, Number(assetMetaData?.decimals) || 18),
+      },
+      {
+        onSuccess: ({ blockNumber }) => {
+          setValue("");
+          notify({
+            type: "success",
+            title: "Success",
+            message: "Transaction completed on block " + blockNumber,
+          });
+        },
+      }
+    );
+  };
+
+  const onMaxClick = () => formattedBalance && setValue(formattedBalance);
+  const items: Array<ListItem> = [
+    {
+      label: "Available to withdraw",
+      value: (
+        <ValueItemWrapper
+          value={Number(formattedBalance || 0).toLocaleString()}
+          iconName={assetMetaData?.symbol}
+          iconHeight={20}
+          iconWidth={20}
+        />
+      ),
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Supply APY",
+      value: "6.4 %",
+      kylixValue: "%4",
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Supplied",
+      value: (
+        <ValueItemWrapper
+          value={Number(formattedBalance || 0).toLocaleString()}
+          iconName={assetMetaData?.symbol}
+          iconHeight={20}
+          iconWidth={20}
+        />
+      ),
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Interest",
+      value: "$ 24",
+      kylixValue: "12",
+      tooltipTitle: "Interest tooltip title.",
+      action: {
+        title: "Claim",
+        onClick: () => {},
+      },
+      valueClassName: "!text-primary-500",
+    },
+  ];
   return (
     <Form
-      assetId={9}
+      assetId={lendTokenId}
       items={items}
-      decimals={18}
-      maxHandler={() => {}}
+      decimals={Number(assetMetaData?.decimals) || 18}
       setValue={setValue}
       value={value}
-      disabled={true}
       submitButton={{
-        onclick,
+        onclick: handleClick,
         content: "Withdraw",
       }}
+      isSubmitting={isPending}
+      isMaxLoading={isBalanceLoading}
+      onMaxClick={onMaxClick}
+      balance={formattedBalance}
+      symbol={assetMetaData?.symbol}
     />
   );
 };

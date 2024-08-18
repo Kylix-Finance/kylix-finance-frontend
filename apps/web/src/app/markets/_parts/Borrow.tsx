@@ -1,12 +1,13 @@
 "use client";
 import { Typography } from "@mui/material";
-import { useGetLendingPools } from "@repo/onchain-utils";
+import { formatBigNumbers } from "@repo/onchain-utils";
 import { Skeleton } from "@repo/ui";
 import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
+import { usePools } from "~/hooks/chain/usePools";
 
 const Borrow = () => {
-  const { totalBorrow } = useGetLendingPools();
+  const { totalBorrow } = usePools();
 
   return (
     <Card
@@ -15,7 +16,9 @@ const Borrow = () => {
       rightComponent={
         <Typography variant="h5" className="text-primary-800">
           <Skeleton isLoading={!totalBorrow} minWidth={80}>
-            {totalBorrow ? `$ ${totalBorrow.toLocaleString()}` : "Unavailable"}
+            {totalBorrow
+              ? formatBigNumbers(totalBorrow, 2) + "$"
+              : "Unavailable"}
           </Skeleton>
         </Typography>
       }

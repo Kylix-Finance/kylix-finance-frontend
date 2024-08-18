@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import { Icon } from "~/components";
+import { TokenIcon } from "..";
 
-export const Asset = ({
+const Asset = ({
   helperText: helperText,
   label,
 }: {
@@ -11,7 +11,7 @@ export const Asset = ({
 }) => {
   return (
     <Box className="flex flex-row align-middle items-center justify-start gap-[8px]">
-      <Icon symbol="Aave" />
+      <TokenIcon symbol={label} />
       <Box className="flex flex-col">
         <Typography variant="md" fontWeight={"bold"}>
           {label}
@@ -21,3 +21,5 @@ export const Asset = ({
     </Box>
   );
 };
+
+export default Asset;

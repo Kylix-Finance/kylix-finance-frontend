@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src"],
+  "include": ["src", "../../apps/web/src/hooks/chain/useWithdraw.ts"],
   "exclude": ["node_modules", "dist"]
 }

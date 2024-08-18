@@ -12,6 +12,7 @@ import KylixChip from "../KylixChip";
 import { ListItem } from "./index";
 import { InfoRounded } from "@mui/icons-material";
 import { cn } from "~/utils";
+import ClientOnly from "../ClientOnly";
 
 const Item = ({
   label,
@@ -35,22 +36,28 @@ const Item = ({
         )}
       </Box>
       <Box display="flex" gap="10px" alignItems="center">
-        <Typography
-          className={cn("text-primary-800 font-number", valueClassName)}
-          variant="subtitle2"
-          fontWeight="600"
-        >
-          {value}
-        </Typography>
+        {typeof value === "string" ? (
+          <Typography
+            className={cn("text-primary-800 font-number", valueClassName)}
+            variant="subtitle2"
+            fontWeight="600"
+          >
+            {value}
+          </Typography>
+        ) : (
+          value
+        )}
         {kylixValue && (
-          <KylixChip
-            value={kylixValue}
-            className="px-2.5 py-0.5 text-sm"
-            iconDimension={{
-              height: 14,
-              width: 14,
-            }}
-          />
+          <ClientOnly>
+            <KylixChip
+              value={kylixValue}
+              className="px-2.5 py-0.5 text-sm"
+              iconDimension={{
+                height: 14,
+                width: 14,
+              }}
+            />
+          </ClientOnly>
         )}
         {action && (
           <Button

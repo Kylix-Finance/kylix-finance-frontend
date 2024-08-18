@@ -1,8 +1,6 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { useProvider } from "./useProvider";
 import { LendingLendingPool, queryKeys } from "@repo/shared";
-import { toU32Format } from "../utils";
-import { Codec } from "@polkadot/types-codec/types";
+import { useProvider } from "@repo/onchain-utils";
 
 interface Props {
   assetId: number | string;

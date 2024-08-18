@@ -1,9 +1,22 @@
+"use client";
 import { Box, TextField } from "@mui/material";
+import { useQueryState } from "nuqs";
 import { Icons } from "~/assets/svgs";
+import { QUEY_SEARCH_MARKETS } from "~/constants";
 
 export const RightComponent = () => {
+  const [searchQuery, setSearchQuery] = useQueryState(QUEY_SEARCH_MARKETS, {
+    clearOnDefault: true,
+    defaultValue: "",
+  });
+
+  const handleSearch = (searchQuery: string) => {
+    setSearchQuery(searchQuery);
+  };
+
   return (
     <TextField
+      onChange={(e) => handleSearch(e.target.value)}
       style={{
         fontSize: "10px",
         borderRadius: "4px",
@@ -11,6 +24,7 @@ export const RightComponent = () => {
       }}
       placeholder="Search by market"
       size="small"
+      defaultValue={searchQuery}
       inputProps={{
         style: {
           fontWeight: "normal",
