@@ -1,1 +1,1 @@
-export const QUEY_SEARCH_MARKETS = "marketsSearch";
+export const QUEY_SEARCH_MARKETS = "q";
