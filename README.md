@@ -42,36 +42,12 @@ Before running the project, ensure you have the following installed on your mach
    To start the development server for all packages, run:
 
    ```bash
-   pnpm turbo run dev
+   turbo run dev
    ```
 
 2. **Access the application:**
 
    Once the server is running, you can access the application by navigating to `http://localhost:3000` in your web browser.
-
-### Running Individual Packages
-
-You can also run or build individual packages using Turborepo with `pnpm`:
-
-1. **Run the `wallet-modal` package:**
-
-   ```bash
-    turbo run dev --filter=wallet-modal
-   ```
-
-2. **Run the `onchain-utils` package:**
-
-   ```bash
-    turbo run dev --filter=onchain-utils
-   ```
-
-3. **Build all packages:**
-
-   To build all packages at once:
-
-   ```bash
-    turbo run build
-   ```
 
 ## Adding a New Icon to the `TokenIcon` Component
 
