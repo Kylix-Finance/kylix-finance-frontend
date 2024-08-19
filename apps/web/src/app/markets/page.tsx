@@ -4,8 +4,10 @@ import Supply from "./_parts/Supply";
 import MarketsTable from "./_parts/MarketsTable";
 import { Suspense } from "react";
 import { Card } from "~/components";
-import { RightComponent } from "./_parts/MarketsTable/RightComponent";
+import Search from "./_parts/MarketsTable/Search";
 import { FancyLoader } from "~/components/Loaders";
+import SearchUI from "./_parts/MarketsTable/SearchUI";
+import MarketsTableUI from "./_parts/MarketsTable/MarketsTable";
 
 export default function Page() {
   return (
@@ -17,25 +19,12 @@ export default function Page() {
       <Card
         title="Markets"
         rightComponent={
-          <Suspense
-            fallback={
-              <Skeleton
-                variant="rectangular"
-                sx={{ width: 248, minHeight: 40, borderRadius: "6px" }}
-              />
-            }
-          >
-            <RightComponent />
+          <Suspense fallback={<SearchUI />}>
+            <Search />
           </Suspense>
         }
       >
-        <Suspense
-          fallback={
-            <div className="w-full h-[500px] flex justify-center items-center">
-              <FancyLoader />
-            </div>
-          }
-        >
+        <Suspense fallback={<MarketsTableUI />}>
           <MarketsTable />
         </Suspense>
       </Card>

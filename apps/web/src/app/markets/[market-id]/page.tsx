@@ -4,17 +4,20 @@ import PoolDetails from "./_parts/PoolDetails";
 import { Box } from "@mui/material";
 import VaultChart from "./_parts/VaultChart";
 import ApyChart from "./_parts/ApyChart";
+import styles from "./ styles.module.css";
 
 export default function page() {
   return (
     <Card>
-      <Box className="grid grid-cols-1 lg:grid-cols-11 gap-4">
-        <Box className="flex flex-col col-span-full lg:col-span-7 gap-4">
+      <Box className={styles.container}>
+        <Box className={styles.details}>
           <PoolDetails />
-          <ApyChart />
-          {/* <VaultChart /> */}
         </Box>
-        <Box className="col-span-full lg:col-span-4">
+        <Box className={styles.apy_chart}>
+          <ApyChart />
+        </Box>
+        {/* <VaultChart /> */}
+        <Box className={styles.form}>
           <TransactionForm />
         </Box>
       </Box>
