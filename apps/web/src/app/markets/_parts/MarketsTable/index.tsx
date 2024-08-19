@@ -1,11 +1,11 @@
 "use client";
 
-import { QUEY_SEARCH_MARKETS } from "~/constants";
+import { QUERY_SEARCH_MARKETS } from "~/constants";
 import { useQueryState } from "nuqs";
 import MarketsTableUI from "./MarketsTable";
 
 const MarketsTable = () => {
-  const [searchQuery] = useQueryState(QUEY_SEARCH_MARKETS, {
+  const [searchQuery] = useQueryState(QUERY_SEARCH_MARKETS, {
     clearOnDefault: true,
     defaultValue: "",
   });

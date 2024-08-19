@@ -7,7 +7,7 @@ import { TableActions } from "../TableActions";
 import { Suspense, useMemo } from "react";
 import { Table } from "@repo/ui";
 import { usePools } from "~/hooks/chain/usePools";
-import { QUEY_SEARCH_MARKETS } from "~/constants";
+import { QUERY_SEARCH_MARKETS } from "~/constants";
 import { useQueryState } from "nuqs";
 
 const placeholderData = Array.from({ length: 5 }).map(() => ({

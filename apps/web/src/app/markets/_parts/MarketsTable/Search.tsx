@@ -2,11 +2,11 @@
 import { Box, TextField } from "@mui/material";
 import { useQueryState } from "nuqs";
 import { Icons } from "~/assets/svgs";
-import { QUEY_SEARCH_MARKETS } from "~/constants";
+import { QUERY_SEARCH_MARKETS } from "~/constants";
 import SearchUI from "./SearchUI";
 
 const Search = () => {
-  const [searchQuery, setSearchQuery] = useQueryState(QUEY_SEARCH_MARKETS, {
+  const [searchQuery, setSearchQuery] = useQueryState(QUERY_SEARCH_MARKETS, {
     clearOnDefault: true,
     defaultValue: "",
   });
