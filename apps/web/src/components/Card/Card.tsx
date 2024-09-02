@@ -56,10 +56,12 @@ const Card = ({
       className={`shadow-box rounded-lg p-6 bg-white w-full h-full flex flex-col ${className}`}
     >
       <Box className="flex justify-between items-center w-full mb-2">
-        <Box className={`flex items-center gap-2`}>
-          {Icon && <IconWithBackground icon={Icon} iconColor={iconColor} />}
-          {title && <Title title={title} />}
-        </Box>
+        {(Icon || title) && (
+          <Box className={`flex items-center gap-2`}>
+            {Icon && <IconWithBackground icon={Icon} iconColor={iconColor} />}
+            {title && <Title title={title} />}
+          </Box>
+        )}
         {RightComponent}
       </Box>
       {children}
