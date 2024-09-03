@@ -13,7 +13,7 @@ const Page = () => {
     // <Card rightComponent={<Header />}>
     //   <LiquidationsTable />
     // </Card>
-    null
+    <></>
   );
 };
 
