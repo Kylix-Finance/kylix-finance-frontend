@@ -10,9 +10,10 @@ export const metadata: Metadata = mergeMetadata({
 
 const Page = () => {
   return (
-    <Card rightComponent={<Header />}>
-      <LiquidationsTable />
-    </Card>
+    // <Card rightComponent={<Header />}>
+    //   <LiquidationsTable />
+    // </Card>
+    null
   );
 };
 
