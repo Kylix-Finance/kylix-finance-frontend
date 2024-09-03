@@ -1,8 +1,6 @@
 import Providers from "~/providers";
 import "./globals.css";
-import MainLayout from "./_parts/MainLayout";
 import { fonts } from "~/assets/fonts";
-import { WalletModal } from "@repo/wallet-modal";
 import { Metadata } from "next";
 import { mergeMetadata } from "~/config/metadata";
 
@@ -26,10 +24,7 @@ export default function RootLayout({
       className={`${fonts.inter.variable} ${fonts.poppins.variable}`}
     >
       <body className="font-body !bg-[#F4FAF9]">
-        <Providers>
-          <MainLayout>{children}</MainLayout>
-          <WalletModal center />
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
