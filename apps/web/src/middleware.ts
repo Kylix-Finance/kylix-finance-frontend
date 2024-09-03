@@ -2,17 +2,21 @@ import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
 export async function middleware(request: NextRequest) {
-  const authCookie = request.cookies.get("token");
-  if (process.env!.NEXT_PUBLIC_ENV !== "production") {
+  const isProduction = process!.env.NEXT_PUBLIC_NODE_ENV === "production";
+
+  if (!isProduction) {
     return NextResponse.next();
   }
+
+  const authCookie = request.cookies.get("token");
+
   if (!authCookie) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
   try {
     const secret = new TextEncoder().encode(
-      process.env!.NEXT_PUBLIC_JWT_SECRET
+      process!.env.NEXT_PUBLIC_JWT_SECRET
     );
     await jwtVerify(authCookie.value, secret);
 
