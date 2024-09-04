@@ -9,12 +9,16 @@ import {
   Button,
   Typography,
   CardActions,
+  useTheme,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const theme = useTheme();
+
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,30 +67,38 @@ export default function Page() {
           >
             Login
           </Typography>
-          <TextField
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            size="small"
-            fullWidth
-            placeholder="Enter your password"
-            className="!rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
-            autoComplete="off"
-            type="password"
-            helperText={error}
-            FormHelperTextProps={{
-              sx: {
-                fontWeight: "bold",
-              },
-            }}
-            sx={{
-              backgroundColor: "#F5F5F5",
-              borderRadius: 2,
-              "& .MuiInputBase-root": {
-                paddingY: "10px",
-                paddingX: "16px",
-              },
-            }}
-          />
+          <Box className="flex flex-col gap-2">
+            <TextField
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              size="small"
+              fullWidth
+              placeholder="Enter your password"
+              className="!rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
+              autoComplete="off"
+              type="password"
+              FormHelperTextProps={{
+                sx: {
+                  fontWeight: "bold",
+                },
+              }}
+              sx={{
+                backgroundColor: "#F5F5F5",
+                borderRadius: 2,
+                "& .MuiInputBase-root": {
+                  paddingY: "10px",
+                  paddingX: "16px",
+                },
+              }}
+            />
+            <Typography
+              color={theme.palette.error.main}
+              fontWeight={"bold"}
+              variant="caption"
+            >
+              {error}
+            </Typography>
+          </Box>
         </CardContent>
         <CardActions sx={{ justifyContent: "center" }}>
           <Button
