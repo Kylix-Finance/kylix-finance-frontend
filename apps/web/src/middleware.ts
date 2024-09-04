@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
 export async function middleware(request: NextRequest) {
-  const isProduction = process!.env.NEXT_PUBLIC_NODE_ENV === "production";
+  const isProduction = process!.env.NEXT_PUBLIC_ENV === "production";
 
   if (!isProduction) {
     return NextResponse.next();
