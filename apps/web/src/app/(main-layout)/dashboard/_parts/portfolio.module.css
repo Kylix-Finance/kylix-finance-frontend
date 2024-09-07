@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.top {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-areas:
+    "total collateral borrow"
+    "progress_bar progress_bar progress_bar";
+}
+
+.total {
+  grid-area: total;
+}
+
+.collateral {
+  grid-area: collateral;
+}
+
+.borrow {
+  grid-area: borrow;
+}
+
+.progress_bar {
+  grid-area: progress_bar;
+}
+
+@media (max-width: 1024px) {
+  .top {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas:
+      "total"
+      "collateral"
+      "borrow"
+      "progress_bar";
+  }
+}
+
+@media (max-width: 768px) {
+  .top {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas:
+      "total"
+      "collateral"
+      "borrow"
+      "progress_bar";
+  }
+}
