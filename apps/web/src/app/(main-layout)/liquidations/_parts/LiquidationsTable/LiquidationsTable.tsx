@@ -165,7 +165,7 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         },
 
         actions: (item) => (
-          <Link href={`/markets/${item.id}`}>
+          <Link href={`/liquidations/${item.id}`}>
             <Button variant="contained">
               <Typography
                 className="text-[#FFF]"

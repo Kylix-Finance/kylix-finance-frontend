@@ -6,7 +6,11 @@ export interface PaginationDefaultProps {
   total: number;
 }
 
-export type TableName = "markets" | "supply" | "liquidations";
+export type TableName =
+  | "markets"
+  | "supply"
+  | "liquidations"
+  | "latestLiquidation";
 
 export type PaginationState = {
   [key in TableName]: PaginationDefaultProps;
