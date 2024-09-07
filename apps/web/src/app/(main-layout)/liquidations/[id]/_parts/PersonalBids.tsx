@@ -17,7 +17,7 @@ const PersonalBids = () => {
           discount: "Discount",
           filled: "Filled",
         }}
-        tableName="supply"
+        tableName="personalBids"
         components={{
           asset: (item) => <Asset label={item.asset} helperText="" />,
           amount: (item) => (
