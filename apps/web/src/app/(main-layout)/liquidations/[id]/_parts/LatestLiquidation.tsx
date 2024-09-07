@@ -5,7 +5,7 @@ import { Card } from "~/components";
 
 const LatestLiquidation = () => {
   return (
-    <Card title="Recent liquidation" className="max-h-80">
+    <Card title="Recent liquidation" className="h-80">
       <Table<TableData[number]>
         tCellClassnames={"!p-3 font-number"}
         rowSpacing="10px"
@@ -78,48 +78,6 @@ const tableData = [
     liquidated: "522",
     paid: "102.50",
     price: "0.0115",
-  },
-  {
-    time: "22 Jul, 2024 - 14:23:41",
-    liquidated: "620",
-    paid: "120.75",
-    price: "0.0120",
-  },
-  {
-    time: "23 Jul, 2024 - 16:28:10",
-    liquidated: "415",
-    paid: "81.10",
-    price: "0.0130",
-  },
-  {
-    time: "24 Jul, 2024 - 18:33:25",
-    liquidated: "489",
-    paid: "92.35",
-    price: "0.0128",
-  },
-  {
-    time: "25 Jul, 2024 - 20:40:02",
-    liquidated: "570",
-    paid: "115.60",
-    price: "0.0118",
-  },
-  {
-    time: "26 Jul, 2024 - 22:45:45",
-    liquidated: "498",
-    paid: "95.20",
-    price: "0.0126",
-  },
-  {
-    time: "27 Jul, 2024 - 09:12:33",
-    liquidated: "435",
-    paid: "85.45",
-    price: "0.0123",
-  },
-  {
-    time: "28 Jul, 2024 - 11:18:21",
-    liquidated: "512",
-    paid: "100.00",
-    price: "0.0121",
   },
 ];
 
