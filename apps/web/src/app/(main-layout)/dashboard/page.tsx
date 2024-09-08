@@ -1,5 +1,4 @@
 import styles from "./_parts/styles.module.css";
-import portfolio from "./_parts/portfolio.module.css";
 import { Metadata } from "next";
 import Borrow from "./_parts/Borrow";
 import Burned from "./_parts/Burned";
@@ -8,7 +7,7 @@ import KylixChart from "./_parts/KylixChart";
 import Reward from "./_parts/Reward";
 import Supply from "./_parts/Supply";
 import TotalLocked from "./_parts/TotalLocked";
-import TotalValue from "./_parts/TotalValue";
+import TotalValue from "../portfolio/_parts/TotalValue";
 import VaultChart from "./_parts/VaultChart";
 import { Card } from "~/components";
 import { Icons } from "~/assets/svgs";
@@ -16,9 +15,9 @@ import { mergeMetadata } from "~/config/metadata";
 import { PoolSelect } from "~/components/PoolSelect";
 import { usePoolStore } from "~/store";
 import QuickBorrow from "./_parts/QuickBorrow";
-import CollateralValue from "./_parts/CollateralValue";
-import BorrowValue from "./_parts/BorrowValue";
-import ProgressBar from "./_parts/ProgressBar";
+import CollateralValue from "../portfolio/_parts/CollateralValue";
+import BorrowValue from "../portfolio/_parts/BorrowValue";
+import ProgressBar from "../portfolio/_parts/ProgressBar";
 
 export const metadata: Metadata = mergeMetadata({
   title: "Dashboard",
@@ -52,34 +51,6 @@ const Page = () => {
         </Card>
         <Card className={styles.kylix_chart}>
           <KylixChart />
-        </Card>
-      </div>
-
-      <div className={portfolio.top}>
-        <Card
-          className={portfolio.total}
-          title="Total value"
-          icon={Icons.WalletFill}
-          hasIconBackground
-        >
-          <TotalValue />
-        </Card>
-
-        <Card
-          className={portfolio.collateral}
-          title="Collateral value"
-          icon={Icons.WalletFill}
-          hasIconBackground
-        >
-          <CollateralValue />
-        </Card>
-
-        <Card className={portfolio.borrow} hasIconBackground>
-          <BorrowValue />
-        </Card>
-
-        <Card className={`${portfolio.progress_bar}`}>
-          <ProgressBar />
         </Card>
       </div>
 
