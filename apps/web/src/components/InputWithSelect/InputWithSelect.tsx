@@ -1,10 +1,16 @@
-import { TextField, TextFieldProps } from "@mui/material";
+import {
+  Button,
+  InputAdornment,
+  TextField,
+  TextFieldProps,
+} from "@mui/material";
 import { usePoolStore } from "~/store";
 import { PoolSelect } from "../PoolSelect";
-import { getDecimalRegex } from "~/utils";
+import { getDecimalRegex, handleInputChange } from "~/utils";
 import { useState } from "react";
 import { usePools } from "~/hooks/chain/usePools";
 import { SelectOption } from "~/types";
+import { useMetadata } from "@repo/onchain-utils";
 
 export const InputWithSelect = () => {
   const { pools } = usePools();
@@ -16,19 +22,13 @@ export const InputWithSelect = () => {
     })) || [];
 
   const { setPool, pool } = usePoolStore();
-  const [value, setValue] = useState("");
-  let decimals: number | undefined = undefined;
-  const handleInputChange: TextFieldProps["onChange"] = ({
-    target: { value },
-  }) => {
-    if (value === "") return setValue(value);
-    const isValid = getDecimalRegex(decimals || 6).test(value);
-    if (isValid) setValue(value);
-  };
+  const [value, setValue] = useState<string>("");
+  const { assetMetaData } = useMetadata(pool.value);
+
   return (
     <div className="w-full flex justify-center items-center">
       <PoolSelect
-        className="w-1/2"
+        className="!w-1/2"
         options={options}
         setValue={setPool}
         value={pool}
@@ -38,10 +38,12 @@ export const InputWithSelect = () => {
       </div>
       <TextField
         value={value}
-        onChange={handleInputChange}
+        onChange={(e) =>
+          handleInputChange(e, setValue, assetMetaData?.decimals || 6)
+        }
         fullWidth
         placeholder="0"
-        className="w-1/2 !rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
+        className="!w-1/2 !rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
         // error={!!error}
         // helperText={error}
         inputMode="numeric"
@@ -57,6 +59,21 @@ export const InputWithSelect = () => {
             borderBottomLeftRadius: "0",
             backgroundColor: "#45A9961A",
           },
+          endAdornment: (
+            <InputAdornment position="end">
+              <Button
+                // onClick={() => setValue(maxValue)}
+                size="small"
+                sx={{
+                  textTransform: "none",
+                  minWidth: "auto",
+                  padding: "0 8px",
+                }}
+              >
+                Max
+              </Button>
+            </InputAdornment>
+          ),
         }}
       />
     </div>
