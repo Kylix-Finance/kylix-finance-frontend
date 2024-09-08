@@ -1,28 +1,8 @@
 "use client";
 
-import { Info } from "@mui/icons-material";
-import { Box, Slider, Stack, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { Icons } from "~/assets/svgs";
-
-const marks = [
-  {
-    value: 42.1,
-    label: "42.1 %",
-  },
-  {
-    value: 63.6,
-    label: "63.6 %",
-  },
-  {
-    value: 72.01,
-    label: "72.01 %",
-  },
-];
-
-function valuetext(value: number) {
-  return `${value} %`;
-}
 
 const ProgressBar = () => {
   return (
@@ -63,22 +43,61 @@ const ProgressBar = () => {
         })}
       </Box>
 
-      <Box>
-        <Slider
-          aria-label="Always visible"
-          getAriaValueText={valuetext}
-          step={1}
-          marks={marks}
-          sx={{
-            "& .MuiSlider-thumb": {
-              visibility: "hidden",
-            },
-          }}
-          valueLabelDisplay="off"
-        />
+      <Box className="relative w-full">
+        <Box className="relative h-4 w-full bg-[#ECF6F4] rounded-[4px] overflow-hidden">
+          <Box
+            className="h-full"
+            style={{
+              width: "42.1%",
+              backgroundImage:
+                "repeating-linear-gradient(-45deg, rgba(90, 195, 181,1), rgba(90, 195, 181,1) 2px, #45A996 2px, #45A996 6px)",
+            }}
+          />
+          <Box className="absolute top-0 left-[63.6%] h-full w-[5px] bg-orange-400 rounded" />
+          <Box className="absolute top-0 left-[72.01%] h-full w-[5px] bg-red-400 rounded" />
+        </Box>
+
+        <Box className="pb-6">
+          <Box className="absolute left-[42.1%] -translate-x-1/3  ">
+            <Icons.ArrowUp />
+
+            <Box className="-mt-2">
+              <Percent value={42.1} />
+            </Box>
+          </Box>
+
+          <Box className="absolute left-[63.6%] -translate-x-1/3">
+            <Box className="invisible">
+              <Icons.ArrowUp />
+            </Box>
+            <Box className="-mt-2">
+              <Percent value={63.6} />
+            </Box>
+          </Box>
+
+          <Box className="absolute left-[72.01%] -translate-x-1/3">
+            <Box className="invisible">
+              <Icons.ArrowUp />
+            </Box>
+            <Box className="-mt-2">
+              <Percent value={72.01} />
+            </Box>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
 };
 
 export default ProgressBar;
+
+const Percent = ({ value }: { value: number }) => {
+  return (
+    <Typography
+      fontFamily="Poppins"
+      className="!text-[12px] !text-[#4E5B72] !font-[600] !leading-[24px]"
+    >
+      {value} %
+    </Typography>
+  );
+};

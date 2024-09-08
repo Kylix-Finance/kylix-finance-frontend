@@ -75,7 +75,7 @@ const Page = () => {
           <BorrowValue />
         </Card>
 
-        <Card className={portfolio.progress_bar}>
+        <Card className={`${portfolio.progress_bar}`}>
           <ProgressBar />
         </Card>
       </div>

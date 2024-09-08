@@ -1,5 +1,6 @@
 import { Coins } from "./coins";
 import ArrowRight from "./arrow-right.svg";
+import ArrowUp from "./arrow-up.svg";
 import CrossSwap from "./cross-swap.svg";
 import Dashboard from "./dashboard.svg";
 import Discord from "./discord.svg";
@@ -64,5 +65,6 @@ export const Icons = {
   WalletFill,
   World,
   XIcon,
+  ArrowUp,
 };
 export { Coins };
