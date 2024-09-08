@@ -23,7 +23,8 @@
   grid-template-areas:
     "featured featured"
     "vault_chart vault_chart"
-    "supply borrow";
+    "supply borrow"
+    "quick_supply quick_borrow";
 }
 
 .total {
@@ -58,6 +59,13 @@
   grid-area: borrow;
 }
 
+.quick_supply {
+  grid-area: quick_supply;
+}
+.quick_borrow {
+  grid-area: quick_borrow;
+}
+
 @media (max-width: 1024px) {
   .top {
     grid-template-columns: repeat(2, 1fr);
@@ -84,6 +92,8 @@
       "featured "
       "vault_chart"
       "supply"
-      "borrow";
+      "borrow"
+      "quick_supply"
+      "quick_borrow";
   }
 }

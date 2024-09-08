@@ -16,7 +16,9 @@ export const SupplyTable = () => {
         apy: "APY",
         balance: "Balance",
         status: "Status",
+        actions: "Action",
       }}
+      hiddenTHeads={["actions"]}
       tableName="supply"
       components={{
         asset: (item) => <Asset label={item.asset} helperText="" />,

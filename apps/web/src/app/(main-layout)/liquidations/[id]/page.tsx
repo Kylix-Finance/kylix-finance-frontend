@@ -1,6 +1,6 @@
-import { Card } from "~/components";
 import { Box } from "@mui/material";
-import LatestLiquidation from "./_parts/Latestiquidation";
+import LatestLiquidation from "./_parts/LatestLiquidation";
+import PersonalBids from "./_parts/PersonalBids";
 
 export default function page() {
   return (
@@ -8,6 +8,7 @@ export default function page() {
       {/* Chart area */}
       <Box className="flex gap-4">
         <LatestLiquidation />
+        <PersonalBids />
       </Box>
     </Box>
   );

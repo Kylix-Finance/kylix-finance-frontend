@@ -10,7 +10,8 @@ export type TableName =
   | "markets"
   | "supply"
   | "liquidations"
-  | "latestLiquidation";
+  | "latestLiquidation"
+  | "personalBids";
 
 export type PaginationState = {
   [key in TableName]: PaginationDefaultProps;

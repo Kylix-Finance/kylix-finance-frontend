@@ -12,5 +12,6 @@ export const initialState: State = {
     supply: defaultPaginationState,
     liquidations: defaultPaginationState,
     latestLiquidation: defaultPaginationState,
+    personalBids: defaultPaginationState,
   },
 };
