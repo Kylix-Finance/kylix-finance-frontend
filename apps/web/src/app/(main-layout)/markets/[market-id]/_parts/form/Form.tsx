@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Dispatch, MouseEventHandler, SetStateAction, useState } from "react";
 import { List, ListItem, TokenIcon } from "~/components";
-import { getDecimalRegex } from "~/utils";
+import { getDecimalRegex, handleInputChange } from "~/utils";
 import AlertContainer from "../AlertContainer";
 import { LoadingButton } from "@mui/lab";
 import { FormAlert } from "~/components/FormAlert";
@@ -50,16 +50,6 @@ export const Form = ({
   balance,
   symbol,
 }: Props) => {
-  const handleInputChange: TextFieldProps["onChange"] = ({
-    target: { value },
-  }) => {
-    // TODO: Wrap this `if` check in some utility or something
-    if (value === "") return setValue(value);
-    // default is 6 to don't allow user to write a lot of decimal digits
-    const isValid = getDecimalRegex(decimals || 6).test(value);
-    if (isValid) setValue(value);
-  };
-
   const isInputEmpty = Number(value) === 0;
   const isInsufficientBalance = Number(value) > Number(balance);
 
@@ -86,7 +76,7 @@ export const Form = ({
         </Box>
         <TextField
           value={value}
-          onChange={handleInputChange}
+          onChange={(e) => handleInputChange(e, setValue, decimals || 6)}
           size="small"
           fullWidth
           placeholder="0"

@@ -50,7 +50,7 @@ export const PoolSelect = ({ setValue, value, options, className }: Props) => {
             ...params.InputProps,
             startAdornment: (
               <InputAdornment position="start">
-                <TokenIcon symbol={value.label} />
+                <TokenIcon width={28} height={28} symbol={value.label} />
               </InputAdornment>
             ),
           }}
