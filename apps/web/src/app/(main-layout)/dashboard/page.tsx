@@ -11,6 +11,9 @@ import VaultChart from "./_parts/VaultChart";
 import { Card } from "~/components";
 import { Icons } from "~/assets/svgs";
 import { mergeMetadata } from "~/config/metadata";
+import { PoolSelect } from "~/components/PoolSelect";
+import { usePoolStore } from "~/store";
+import QuickBorrow from "./_parts/QuickBorrow";
 
 export const metadata: Metadata = mergeMetadata({
   title: "Dashboard",
@@ -57,6 +60,12 @@ const Page = () => {
           <Supply />
         </Card>
         <Card className={styles.borrow} title="Assets to Borrow">
+          <Borrow />
+        </Card>
+        <Card className={styles.quick_supply} title="Quick Supply">
+          <QuickBorrow />
+        </Card>
+        <Card className={styles.quick_borrow} title="Quick Borrow">
           <Borrow />
         </Card>
       </div>
