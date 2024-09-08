@@ -9,7 +9,7 @@ import { SelectOption } from "~/types";
 import { SelectRenderOption } from "./SelectRenderOption";
 import { cn } from "~/utils";
 import { TokenIcon } from "../TokenIcon";
-
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 interface Props {
   options: SelectOption[];
   setValue: (value: SelectOption) => void;
@@ -41,6 +41,7 @@ export const PoolSelect = ({ setValue, value, options, className }: Props) => {
       disableClearable
       getOptionLabel={(option: SelectOption) => option.label}
       renderOption={SelectRenderOption}
+      popupIcon={<ExpandMoreIcon />}
       renderInput={(params) => (
         <TextField
           {...params}

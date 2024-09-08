@@ -1,4 +1,9 @@
-import { TextField, TextFieldProps } from "@mui/material";
+import {
+  Button,
+  InputAdornment,
+  TextField,
+  TextFieldProps,
+} from "@mui/material";
 import { usePoolStore } from "~/store";
 import { PoolSelect } from "../PoolSelect";
 import { getDecimalRegex, handleInputChange } from "~/utils";
@@ -17,7 +22,7 @@ export const InputWithSelect = () => {
     })) || [];
 
   const { setPool, pool } = usePoolStore();
-  const [value, setValue] = useState<SelectOption>();
+  const [value, setValue] = useState<string>("");
   const { assetMetaData } = useMetadata(pool.value);
 
   return (
@@ -54,6 +59,21 @@ export const InputWithSelect = () => {
             borderBottomLeftRadius: "0",
             backgroundColor: "#45A9961A",
           },
+          endAdornment: (
+            <InputAdornment position="end">
+              <Button
+                // onClick={() => setValue(maxValue)}
+                size="small"
+                sx={{
+                  textTransform: "none",
+                  minWidth: "auto",
+                  padding: "0 8px",
+                }}
+              >
+                Max
+              </Button>
+            </InputAdornment>
+          ),
         }}
       />
     </div>
