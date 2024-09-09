@@ -7,17 +7,10 @@ import KylixChart from "./_parts/KylixChart";
 import Reward from "./_parts/Reward";
 import Supply from "./_parts/Supply";
 import TotalLocked from "./_parts/TotalLocked";
-import TotalValue from "../portfolio/_parts/TotalValue";
 import VaultChart from "./_parts/VaultChart";
 import { Card } from "~/components";
 import { Icons } from "~/assets/svgs";
 import { mergeMetadata } from "~/config/metadata";
-import { PoolSelect } from "~/components/PoolSelect";
-import { usePoolStore } from "~/store";
-import QuickBorrow from "./_parts/QuickBorrow";
-import CollateralValue from "../portfolio/_parts/CollateralValue";
-import BorrowValue from "../portfolio/_parts/BorrowValue";
-import ProgressBar from "../portfolio/_parts/ProgressBar";
 
 export const metadata: Metadata = mergeMetadata({
   title: "Dashboard",
@@ -65,12 +58,6 @@ const Page = () => {
           <Supply />
         </Card>
         <Card className={styles.borrow} title="Assets to Borrow">
-          <Borrow />
-        </Card>
-        <Card className={styles.quick_supply} title="Quick Supply">
-          <QuickBorrow />
-        </Card>
-        <Card className={styles.quick_borrow} title="Quick Borrow">
           <Borrow />
         </Card>
       </div>

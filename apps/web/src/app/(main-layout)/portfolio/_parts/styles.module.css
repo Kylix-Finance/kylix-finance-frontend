@@ -12,7 +12,8 @@
 
   grid-template-areas:
     "total collateral borrow"
-    "progress_bar progress_bar progress_bar";
+    "progress_bar progress_bar progress_bar"
+    "quick_borrow quick_borrow";
 }
 
 .total {
@@ -31,6 +32,10 @@
   grid-area: progress_bar;
 }
 
+.quick_borrow {
+  grid-area: quick_borrow;
+}
+
 @media (max-width: 1024px) {
   .top {
     grid-template-columns: repeat(1, 1fr);
@@ -38,7 +43,8 @@
       "total"
       "collateral"
       "borrow"
-      "progress_bar";
+      "progress_bar"
+      "quick_borrow";
   }
 }
 
@@ -49,6 +55,7 @@
       "total"
       "collateral"
       "borrow"
-      "progress_bar";
+      "progress_bar"
+      "quick_borrow";
   }
 }
