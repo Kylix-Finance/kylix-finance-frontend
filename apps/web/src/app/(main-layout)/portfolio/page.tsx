@@ -7,6 +7,8 @@ import CollateralValue from "./_parts/CollateralValue";
 import BorrowValue from "./_parts/BorrowValue";
 import ProgressBar from "./_parts/ProgressBar";
 import QuickBorrow from "./_parts/QuickBorrow";
+import Supplied from "./_parts/Supplied";
+import Borrowed from "./_parts/Borrowed";
 
 export default function Page() {
   return (
@@ -32,6 +34,12 @@ export default function Page() {
       </Card>
       <Card className={styles.progress_bar}>
         <ProgressBar />
+      </Card>
+      <Card className={styles.supplied} title="Your Supplies">
+        <Supplied />
+      </Card>
+      <Card className={styles.borrowed} title="Your Borrows">
+        <Borrowed />
       </Card>
       <Card className={styles.quick_borrow} title="Quick Supply">
         <QuickBorrow />

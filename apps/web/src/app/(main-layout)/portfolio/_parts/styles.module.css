@@ -5,6 +5,7 @@
   grid-template-areas:
     "total total collateral collateral borrow borrow"
     "progress_bar progress_bar progress_bar progress_bar progress_bar progress_bar"
+    "supplied supplied supplied borrowed borrowed borrowed"
     "quick_borrow quick_borrow quick_borrow x x x ";
 }
 
@@ -23,6 +24,12 @@
 .progress_bar {
   grid-area: progress_bar;
 }
+.supplied {
+  grid-area: supplied;
+}
+.borrowed {
+  grid-area: borrowed;
+}
 
 .quick_borrow {
   grid-area: quick_borrow;
@@ -36,6 +43,8 @@
       "collateral"
       "borrow"
       "progress_bar"
+      "supplied"
+      "borrowed"
       "quick_borrow";
   }
 }
