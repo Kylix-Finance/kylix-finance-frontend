@@ -1,19 +1,11 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding-bottom: 20px;
-}
-
-.top {
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
-
+  grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
-    "total collateral borrow"
-    "progress_bar progress_bar progress_bar"
-    "quick_borrow quick_borrow";
+    "total total collateral collateral borrow borrow"
+    "progress_bar progress_bar progress_bar progress_bar progress_bar progress_bar"
+    "quick_borrow quick_borrow quick_borrow x x x ";
 }
 
 .total {
@@ -37,8 +29,8 @@
 }
 
 @media (max-width: 1024px) {
-  .top {
-    grid-template-columns: repeat(1, 1fr);
+  .container {
+    grid-template-columns: 1fr;
     grid-template-areas:
       "total"
       "collateral"
@@ -49,8 +41,8 @@
 }
 
 @media (max-width: 768px) {
-  .top {
-    grid-template-columns: repeat(1, 1fr);
+  .container {
+    grid-template-columns: 1fr;
     grid-template-areas:
       "total"
       "collateral"
