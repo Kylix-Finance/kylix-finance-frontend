@@ -12,6 +12,8 @@ import { Card, TokenIcon } from "~/components";
 
 const percentages = ["25", "50", "75", "100"];
 
+const MOCK_AMOUNT = 1700;
+
 const Bid = () => {
   const [discount, setDiscount] = useState("10");
   const [amount, setAmount] = useState("");
@@ -43,7 +45,7 @@ const Bid = () => {
       <Box className="mb-2 flex justify-between items-center mt-6">
         <Typography variant="body2">Bid amount</Typography>
         <Typography variant="subtitle1">
-          1,700 <span className="text-primary-400">USDT</span>{" "}
+          {MOCK_AMOUNT} <span className="text-primary-400">USDT</span>{" "}
         </Typography>
       </Box>
       <TextField
@@ -74,7 +76,7 @@ const Bid = () => {
             key={percentage}
             variant="outlined"
             className="flex-1"
-            onClick={() => setAmount(percentage)}
+            onClick={() => setAmount(String((+percentage * MOCK_AMOUNT) / 100))}
           >
             {percentage}%
           </Button>
