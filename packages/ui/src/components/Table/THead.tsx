@@ -9,7 +9,7 @@ import {
 import { visuallyHidden } from "@mui/utils";
 
 import TCell from "./TCell";
-import { Order, THeadProps } from "./types";
+import { Numeric, Order, TCellProps, THeadProps, TRowProps } from "./types";
 import { SortIcon } from "./SortIcon";
 
 export type Headers<K extends string | number | symbol> = Record<
@@ -22,10 +22,10 @@ interface Props<Schema, ExtraFields extends string = string>
   disablePadding?: boolean;
   headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   hiddenTHeads?: Array<keyof Schema | ExtraFields>;
-  numeric?: boolean;
   order: Order;
   orderBy: keyof Schema;
   tRowProps?: TableRowProps;
+  numeric?: Numeric<Schema>;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
     property: keyof Schema
@@ -58,15 +58,11 @@ function THead<Schema, ExtraFields extends string = string>({
       <TableRow {...tRowProps}>
         {headersList.map(([name, value], index) => (
           <TCell
+            align={numeric?.some((item) => item === name) ? "right" : "left"}
             className="!bg-[#FFF]"
             key={`${name}+${index}`}
-            align={numeric ? "right" : "left"}
-            padding={disablePadding ? "none" : "checkbox"}
+            padding={disablePadding ? "none" : "normal"}
             sortDirection={orderBy === name ? order : false}
-            sx={{
-              paddingLeft: index === 0 ? "16px" : "32px",
-              width: index === headersList.length - 1 ? "100px" : "auto",
-            }}
           >
             {isHeaderHidden(name) ? (
               ""

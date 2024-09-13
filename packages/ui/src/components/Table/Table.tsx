@@ -23,13 +23,14 @@ import { CellValueComponents } from "./TRow";
 // ? ExtraData is the data which is not going to render in the table
 
 interface Props<Schema, ExtraFields extends string> {
-  components: CellValueComponents<Schema, ExtraFields>;
+  components?: CellValueComponents<Schema, ExtraFields>;
   data: TableData<Schema>;
   defaultSortKey: keyof Schema;
   hasPagination?: boolean;
   headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   hiddenTHeads?: Array<keyof Schema | ExtraFields>;
   isLoading?: boolean;
+  numeric?: Array<keyof Schema>;
   onTRowClick?: OnTRowClick<Schema>;
   rowSpacing?: string;
   tableName: TableStore.TableName;
@@ -49,6 +50,7 @@ export function Table<Schema, ExtraFields extends string = string>({
   headers,
   hiddenTHeads,
   isLoading,
+  numeric,
   rowSpacing,
   tableName,
   tBaseProps,
@@ -89,6 +91,7 @@ export function Table<Schema, ExtraFields extends string = string>({
     >
       <TableBase {...tBaseProps} stickyHeader>
         <THead
+          numeric={numeric}
           hiddenTHeads={hiddenTHeads}
           headers={headers}
           onRequestSort={handleRequestSort}
@@ -97,6 +100,7 @@ export function Table<Schema, ExtraFields extends string = string>({
           {...tHeadProps}
         />
         <TBody
+          numeric={numeric}
           components={components}
           data={sortedData}
           headers={headers}

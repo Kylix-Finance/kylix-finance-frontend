@@ -3,7 +3,7 @@
 import { Button, Typography } from "@mui/material";
 import { Asset, KylixChip } from "~/components";
 import { useMemo } from "react";
-import { Table } from "@repo/ui";
+import { Table, TableData } from "@repo/ui";
 import Link from "next/link";
 
 const mockedData = [
@@ -70,8 +70,6 @@ const placeholderData = Array.from({ length: 5 }).map(() => ({
   id: "",
 }));
 
-type TableData = typeof placeholderData;
-
 type MarketsTableUIProps = {
   searchQuery?: string;
 };
@@ -99,7 +97,7 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
   }, [searchQuery]);
 
   return (
-    <Table<TableData[number]>
+    <Table
       hiddenTHeads={["actions"]}
       headers={{
         health: "Health",
@@ -109,17 +107,14 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         poolSize: "Pool Size",
         maxDiscount: "Max Discount",
         myBid: "My Bid",
+
         actions: "Actions",
       }}
       isLoading={!mockedData}
       rowSpacing="11px"
       components={{
         health: (item) => {
-          return (
-            <Typography variant="subtitle1" className="pl-4">
-              {item.health}
-            </Typography>
-          );
+          return <Typography variant="subtitle1">{item.health}</Typography>;
         },
         collateral: (item) => {
           return (
@@ -136,32 +131,18 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
           );
         },
         tvl: (item) => {
-          return (
-            <Typography variant="subtitle1" className="pl-4">
-              {item.tvl}
-            </Typography>
-          );
+          return <Typography variant="subtitle1">{item.tvl}</Typography>;
         },
         poolSize: (item) => {
-          return (
-            <Typography variant="subtitle1" className="pl-4">
-              {item.poolSize}
-            </Typography>
-          );
+          return <Typography variant="subtitle1">{item.poolSize}</Typography>;
         },
         maxDiscount: (item) => {
           return (
-            <Typography variant="subtitle1" className="pl-4">
-              {item.maxDiscount}
-            </Typography>
+            <Typography variant="subtitle1">{item.maxDiscount}</Typography>
           );
         },
         myBid: (item) => {
-          return (
-            <Typography variant="subtitle1" className="pl-4">
-              {item.myBid}
-            </Typography>
-          );
+          return <Typography variant="subtitle1">{item.myBid}</Typography>;
         },
 
         actions: (item) => (
