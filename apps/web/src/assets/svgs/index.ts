@@ -29,6 +29,7 @@ import WalletFill from "./wallet-fill.svg";
 import WarningAlert from "./warning.svg";
 import World from "./world.svg";
 import XIcon from "./x.svg";
+import Health from "./health.svg";
 export const sidebarIcons = {
   CrossSwap,
   Dashboard,
@@ -66,5 +67,6 @@ export const Icons = {
   World,
   XIcon,
   ArrowUp,
+  Health,
 };
 export { Coins };
