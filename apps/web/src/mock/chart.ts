@@ -253,3 +253,16 @@ export const vaultData = {
     { x: 100, y: 54 },
   ],
 };
+
+export const PoolValue = [
+  { percentage: 0, value: 400 },
+  { percentage: 2, value: 200 },
+  { percentage: 4, value: 450 },
+  { percentage: 6, value: 230 },
+  { percentage: 8, value: 850 },
+  { percentage: 10, value: 570 },
+  { percentage: 12, value: 80 },
+  { percentage: 14, value: 600 },
+  { percentage: 16, value: 820 },
+  { percentage: 18, value: 580 },
+];
