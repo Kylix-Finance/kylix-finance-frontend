@@ -1,27 +1,44 @@
 "use client";
 import { Bar } from "react-chartjs-2";
 import { palette } from "~/config/palette";
-import { PoolValue } from "~/mock/chart";
-import { formatNumber } from "~/utils";
-import "chartjs-adapter-date-fns";
 import { Box } from "@mui/material";
 import "chart.js/auto";
-import { useEffect, useRef } from "react";
 
-export const BarChart = () => {
+type BarChartProps = {
+  gradient: {
+    start: string;
+    end: string;
+  };
+  data: Record<string, string | number>[];
+  parsing: {
+    xAxisKey: string;
+    yAxisKey: string;
+  };
+  height: number;
+  maxBarThickness?: number;
+  reverse?: boolean;
+  x?: boolean;
+};
+
+export const BarChart = ({
+  gradient,
+  data,
+  parsing,
+  height,
+  maxBarThickness,
+  reverse = false,
+  x = true,
+}: BarChartProps) => {
   return (
-    <Box height={250} width="100%">
+    <Box height={height} width="100%">
       <Bar
         data={{
           datasets: [
             {
-              maxBarThickness: 30,
+              maxBarThickness,
               barPercentage: 0.8,
-              data: PoolValue,
-              parsing: {
-                xAxisKey: "percentage",
-                yAxisKey: "value",
-              },
+              data,
+              parsing,
               borderColor: palette.primary.light,
               backgroundColor: (context) => {
                 const { chart, dataIndex } = context;
@@ -36,16 +53,11 @@ export const BarChart = () => {
                 const { y = 0, base = 0 } = bar.getProps(["y", "base"], false);
 
                 const gradientBg = ctx.createLinearGradient(0, base, 0, y);
-                gradientBg.addColorStop(1, "#45A996");
-                gradientBg.addColorStop(0, "#A67B97");
+                gradientBg.addColorStop(1, gradient.start);
+                gradientBg.addColorStop(0, gradient.end);
                 return gradientBg;
               },
-              borderRadius: {
-                topLeft: 7,
-                topRight: 7,
-                bottomLeft: 0,
-                bottomRight: 0,
-              },
+              borderRadius: 7,
             },
           ],
         }}
@@ -69,7 +81,7 @@ export const BarChart = () => {
           scales: {
             x: {
               type: "linear",
-              display: true,
+              display: x,
               grid: {
                 display: false,
               },
@@ -83,8 +95,9 @@ export const BarChart = () => {
               },
             },
             y: {
+              reverse,
               display: true,
-              beginAtZero: false,
+              beginAtZero: true,
               grid: {
                 drawTicks: false,
               },
@@ -105,6 +118,9 @@ export const BarChart = () => {
                 const padding = 0.15;
                 axis.min -= axis.min * padding;
                 axis.max += axis.max * padding;
+              },
+              afterFit: (axis) => {
+                axis.width = 40;
               },
             },
           },

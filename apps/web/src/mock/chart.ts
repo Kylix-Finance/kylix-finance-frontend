@@ -254,7 +254,7 @@ export const vaultData = {
   ],
 };
 
-export const PoolValue = [
+export const liquidatedValue = [
   { percentage: 0, value: 400 },
   { percentage: 2, value: 200 },
   { percentage: 4, value: 450 },
@@ -265,4 +265,17 @@ export const PoolValue = [
   { percentage: 14, value: 600 },
   { percentage: 16, value: 820 },
   { percentage: 18, value: 580 },
+];
+
+export const liquidatedEmptied = [
+  { percentage: 0, value: 10 },
+  { percentage: 2, value: 15 },
+  { percentage: 4, value: 12 },
+  { percentage: 6, value: 5 },
+  { percentage: 8, value: 10 },
+  { percentage: 10, value: 17 },
+  { percentage: 12, value: 7 },
+  { percentage: 14, value: 8 },
+  { percentage: 16, value: 5 },
+  { percentage: 18, value: 11 },
 ];
