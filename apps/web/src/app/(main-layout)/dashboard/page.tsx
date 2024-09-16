@@ -46,6 +46,7 @@ const Page = () => {
           <KylixChart />
         </Card>
       </div>
+
       <div className={styles.bottom}>
         <Card className={styles.featured} title="Featured Market">
           <Featured />

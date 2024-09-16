@@ -1,15 +1,26 @@
 "use client";
 
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { Asset, KylixChip } from "~/components";
 import { useMemo } from "react";
-import { Table } from "@repo/ui";
+import { Table, TableData } from "@repo/ui";
 import Link from "next/link";
+import { Icons } from "~/assets/svgs";
+const getHealthColors = (health: string): [string, string, string] => {
+  const healthValue = parseFloat(health);
+  if (healthValue >= 70) {
+    return ["#45A996", "#45A996", "#45A996"];
+  } else if (healthValue >= 30) {
+    return ["#A67B9766", "#A67B9766", "#5C5E641A"];
+  } else {
+    return ["#F07979", "#5C5E641A", "#5C5E641A"];
+  }
+};
 
 const mockedData = [
   {
     id: "1",
-    health: "85%",
+    health: "25%",
     collateral: "POL",
     bidDenom: "UST",
     tvl: "10,000,000 UST",
@@ -39,7 +50,7 @@ const mockedData = [
   },
   {
     id: "4",
-    health: "65%",
+    health: "45%",
     collateral: "ETH",
     bidDenom: "USDC",
     tvl: "20,000 ETH",
@@ -52,10 +63,20 @@ const mockedData = [
     health: "95%",
     collateral: "BTC",
     bidDenom: "USDT",
-    tvl: "50BTC",
+    tvl: "50 BTC",
     poolSize: "25 BTC",
     maxDiscount: "5%",
     myBid: "0.25 BTC",
+  },
+  {
+    id: "6",
+    health: "15%",
+    collateral: "SOL",
+    bidDenom: "USDC",
+    tvl: "1,000,000 USDC",
+    poolSize: "500,000 USDC",
+    maxDiscount: "20%",
+    myBid: "100 USDC",
   },
 ];
 
@@ -69,8 +90,6 @@ const placeholderData = Array.from({ length: 5 }).map(() => ({
   myBid: "",
   id: "",
 }));
-
-type TableData = typeof placeholderData;
 
 type MarketsTableUIProps = {
   searchQuery?: string;
@@ -99,7 +118,7 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
   }, [searchQuery]);
 
   return (
-    <Table<TableData[number]>
+    <Table
       hiddenTHeads={["actions"]}
       headers={{
         health: "Health",
@@ -109,16 +128,20 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         poolSize: "Pool Size",
         maxDiscount: "Max Discount",
         myBid: "My Bid",
+
         actions: "Actions",
       }}
       isLoading={!mockedData}
       rowSpacing="11px"
       components={{
         health: (item) => {
+          const [first, second, third] = getHealthColors(item.health);
           return (
-            <Typography variant="subtitle1" className="pl-4">
-              {item.health}
-            </Typography>
+            <Box className="flex flex-col gap-0.5 w-full justify-center items-center">
+              <Icons.Health style={{ color: third }} />
+              <Icons.Health style={{ color: second }} />
+              <Icons.Health style={{ color: first }} />
+            </Box>
           );
         },
         collateral: (item) => {
@@ -136,32 +159,18 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
           );
         },
         tvl: (item) => {
-          return (
-            <Typography variant="subtitle1" className="pl-4">
-              {item.tvl}
-            </Typography>
-          );
+          return <Typography variant="subtitle1">{item.tvl}</Typography>;
         },
         poolSize: (item) => {
-          return (
-            <Typography variant="subtitle1" className="pl-4">
-              {item.poolSize}
-            </Typography>
-          );
+          return <Typography variant="subtitle1">{item.poolSize}</Typography>;
         },
         maxDiscount: (item) => {
           return (
-            <Typography variant="subtitle1" className="pl-4">
-              {item.maxDiscount}
-            </Typography>
+            <Typography variant="subtitle1">{item.maxDiscount}</Typography>
           );
         },
         myBid: (item) => {
-          return (
-            <Typography variant="subtitle1" className="pl-4">
-              {item.myBid}
-            </Typography>
-          );
+          return <Typography variant="subtitle1">{item.myBid}</Typography>;
         },
 
         actions: (item) => (

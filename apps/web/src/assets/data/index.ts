@@ -31,16 +31,7 @@ const sidebar: Array<Sidebar> = [
       {
         name: "Portfolio",
         icon: sidebarIcons.Wallet,
-        items: [
-          {
-            name: "Account",
-            href: "/portfolio/account",
-          },
-          {
-            name: "PnL",
-            href: "/portfolio/pnl",
-          },
-        ],
+        href: "/portfolio",
       },
       {
         name: "Market",

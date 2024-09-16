@@ -5,7 +5,6 @@ import MarketsTable from "./_parts/MarketsTable";
 import { Suspense } from "react";
 import { Card } from "~/components";
 import Search from "./_parts/MarketsTable/Search";
-import { FancyLoader } from "~/components/Loaders";
 import SearchUI from "./_parts/MarketsTable/SearchUI";
 import MarketsTableUI from "./_parts/MarketsTable/MarketsTable";
 

@@ -41,3 +41,8 @@ export interface Asset {
 export interface StaticData {
   coins: Record<string, Icon>;
 }
+
+export interface SelectOption {
+  value: string;
+  label: string;
+}

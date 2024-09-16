@@ -23,10 +23,12 @@ interface IconProps {
 
 interface TitleProps {
   title: string;
+  fontSize?: number | string;
 }
 
 interface Props extends PropsWithChildren, Header {
   className?: string;
+  headingFontSize?: number | string;
 }
 
 const IconWithBackground = ({ icon: Icon, iconColor }: IconProps) => (
@@ -39,8 +41,11 @@ const IconWithBackground = ({ icon: Icon, iconColor }: IconProps) => (
   </Box>
 );
 
-const Title = ({ title }: TitleProps) => (
-  <Typography variant="h6"> {title}</Typography>
+const Title = ({ title, fontSize }: TitleProps) => (
+  <Typography variant="h6" fontSize={fontSize}>
+    {" "}
+    {title}
+  </Typography>
 );
 
 const Card = ({
@@ -50,6 +55,7 @@ const Card = ({
   rightComponent: RightComponent,
   className,
   iconColor,
+  headingFontSize,
 }: Props) => {
   return (
     <Box
@@ -59,7 +65,7 @@ const Card = ({
         {(Icon || title) && (
           <Box className={`flex items-center gap-2`}>
             {Icon && <IconWithBackground icon={Icon} iconColor={iconColor} />}
-            {title && <Title title={title} />}
+            {title && <Title title={title} fontSize={headingFontSize} />}
           </Box>
         )}
         {RightComponent}

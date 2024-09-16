@@ -2,9 +2,11 @@
 
 import { Box, Button, Typography } from "@mui/material";
 import { Table } from "@repo/ui";
+import Image from "next/image";
+import { Icons } from "~/assets/svgs";
 import { Asset } from "~/components";
 
-export const SupplyTable = () => {
+const Borrowed = () => {
   return (
     <Table<TableData[number]>
       tCellClassnames={"!p-3"}
@@ -13,9 +15,9 @@ export const SupplyTable = () => {
       defaultSortKey="asset"
       headers={{
         asset: "Asset",
-        apy: "APY",
         balance: "Balance",
-        status: "Status",
+        apy: "APY",
+        borrowed: "Borrowed",
         actions: "Action",
       }}
       hiddenTHeads={["actions"]}
@@ -24,13 +26,22 @@ export const SupplyTable = () => {
         asset: (item) => <Asset label={item.asset} helperText="" />,
         apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,
         balance: (item) => (
-          <Typography variant="subtitle1">{item.balance}</Typography>
+          <Typography variant="subtitle1">{item.borrowed}</Typography>
         ),
-        status: (item) => (
-          <Typography variant="subtitle1">{item.status}</Typography>
+        supplied: (item) => (
+          <Typography variant="subtitle1">{item.supplied}</Typography>
         ),
         actions: () => (
-          <Box className="flex justify-end gap-1">
+          <Box className="flex justify-end gap-1 items-center">
+            <Button variant="contained">
+              <Typography
+                variant="subtitle1"
+                fontWeight={600}
+                fontFamily={"Poppins"}
+              >
+                Repay
+              </Typography>
+            </Button>
             <Button variant="outlined">
               <Typography
                 className="!text-primary-500"
@@ -38,7 +49,7 @@ export const SupplyTable = () => {
                 fontWeight={600}
                 fontFamily={"Poppins"}
               >
-                Supply
+                Borrow
               </Typography>
             </Button>
           </Box>
@@ -49,10 +60,11 @@ export const SupplyTable = () => {
   );
 };
 
+export default Borrowed;
 const tableData = [
-  { asset: "Dot", apy: "5%", balance: "0.202", status: "0.001" },
-  { asset: "KYL", apy: "2%", balance: "210.2", status: "0.21" },
-  { asset: "USDT", apy: "1%", balance: "1200", status: "212" },
+  { asset: "Dot", apy: "5%", borrowed: "0.202", supplied: "100" },
+  { asset: "KYL", apy: "2%", borrowed: "210.2", supplied: "150" },
+  { asset: "USDT", apy: "1%", borrowed: "1200", supplied: "212" },
 ];
 
 type TableData = typeof tableData;

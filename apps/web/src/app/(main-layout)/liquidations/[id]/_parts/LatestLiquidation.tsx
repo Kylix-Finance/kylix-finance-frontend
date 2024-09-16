@@ -1,23 +1,14 @@
 "use client";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Table } from "@repo/ui";
 import { Card } from "~/components";
 
 const LatestLiquidation = () => {
   return (
     <Card title="Recent liquidation" className="h-80">
-      <Table<TableData[number]>
-        tCellClassnames={"!p-3 font-number"}
+      <Table
+        tCellClassnames={"font-number"}
         rowSpacing="10px"
-        hasPagination={false}
-        defaultSortKey="time"
-        headers={{
-          time: "Time",
-          liquidated: "kyl.USDT Liquidated",
-          paid: "USDT paid",
-          price: "Average price",
-        }}
-        tableName="latestLiquidation"
         components={{
           time: (item) => {
             const date = item.time.split("-")[0];
@@ -52,6 +43,15 @@ const LatestLiquidation = () => {
             </Box>
           ),
         }}
+        hasPagination={false}
+        defaultSortKey="time"
+        headers={{
+          time: "Time",
+          liquidated: "kyl.USDT Liquidated",
+          paid: "USDT paid",
+          price: "Average price",
+        }}
+        tableName="latestLiquidation"
         data={tableData}
       />
     </Card>
@@ -80,5 +80,3 @@ const tableData = [
     price: "0.0115",
   },
 ];
-
-type TableData = typeof tableData;
