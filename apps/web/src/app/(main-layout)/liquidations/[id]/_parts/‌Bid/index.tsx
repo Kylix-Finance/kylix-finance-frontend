@@ -19,7 +19,10 @@ const Bid = () => {
   const [amount, setAmount] = useState("");
 
   return (
-    <Card title="Place a Bid" className="w-[360px] ml-auto">
+    <Box className="w-full p-4 border rounded-md lg:w-[360px]">
+      <Box className="mb-6">
+        <Typography variant="body1">Place a Bid</Typography>
+      </Box>
       <Box className="mb-2">
         <Typography variant="body2">Premium (discount)</Typography>
       </Box>
@@ -82,8 +85,10 @@ const Bid = () => {
           </Button>
         ))}
       </Box>
-      <Button variant="contained">Place My Bid</Button>
-    </Card>
+      <Button className="w-full" variant="contained">
+        Place My Bid
+      </Button>
+    </Box>
   );
 };
 

@@ -18,6 +18,7 @@ type BarChartProps = {
   maxBarThickness?: number;
   reverse?: boolean;
   x?: boolean;
+  yLabel?: string;
 };
 
 export const BarChart = ({
@@ -28,6 +29,7 @@ export const BarChart = ({
   maxBarThickness,
   reverse = false,
   x = true,
+  yLabel,
 }: BarChartProps) => {
   return (
     <Box height={height} width="100%">
@@ -95,6 +97,15 @@ export const BarChart = ({
               },
             },
             y: {
+              title: {
+                display: true,
+                text: yLabel,
+                padding: -20,
+                font: {
+                  weight: "bold",
+                  size: 12,
+                },
+              },
               reverse,
               display: true,
               beginAtZero: true,
@@ -121,6 +132,7 @@ export const BarChart = ({
               },
               afterFit: (axis) => {
                 axis.width = 40;
+                axis.paddingLeft = 60;
               },
             },
           },

@@ -8,10 +8,10 @@ import { Card } from "~/components";
 export default function page() {
   return (
     <Box display="flex" flexDirection="column" gap="16px">
-      <Card>
+      <Box className="flex flex-col bg-white p-3 gap-4 items-start lg:flex-row">
         <PoolValueChart />
-      </Card>
-      <Bid />
+        <Bid />
+      </Box>
       <Box className="flex gap-4">
         <LatestLiquidation />
         <PersonalBids />
