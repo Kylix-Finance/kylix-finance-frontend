@@ -6,7 +6,6 @@ import TotalValue from "./_parts/TotalValue";
 import CollateralValue from "./_parts/CollateralValue";
 import BorrowValue from "./_parts/BorrowValue";
 import ProgressBar from "./_parts/ProgressBar";
-import QuickBorrow from "./_parts/QuickBorrow";
 import Supplied from "./_parts/Supplied";
 import Borrowed from "./_parts/Borrowed";
 
