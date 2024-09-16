@@ -28,10 +28,7 @@ export default function page() {
         <LatestLiquidation />
         <PersonalBids />
       </Box>
-      <Card
-        title="Quick Market"
-        className="w-full justify-between items-end flex-col lg:flex-row"
-      >
+      <Card title="Quick Market" className="w-full justify-between items-end">
         <Box className="flex justify-between w-full gap-5">
           <Box className="flex flex-col  gap-3 w-full">
             <MuiCard
