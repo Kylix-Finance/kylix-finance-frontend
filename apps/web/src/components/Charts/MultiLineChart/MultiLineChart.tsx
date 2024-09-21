@@ -12,9 +12,19 @@ type LineProps = ComponentProps<typeof Line>;
 
 type MultiLineChartProps = {
   datasets: LineProps["data"]["datasets"];
+  xLabel?: string;
+  yLabel?: string;
+  xGrid?: boolean;
+  yGrid?: boolean;
 };
 
-export const MultiLineChart = ({ datasets }: MultiLineChartProps) => {
+export const MultiLineChart = ({
+  datasets,
+  xLabel,
+  yLabel,
+  xGrid = false,
+  yGrid = true,
+}: MultiLineChartProps) => {
   return (
     <Box height={280} width="100%">
       <Line
@@ -35,17 +45,10 @@ export const MultiLineChart = ({ datasets }: MultiLineChartProps) => {
           scales: {
             x: {
               type: "linear",
-              // time: {
-              //   unit: "day",
-              //   tooltipFormat: "MMM dd",
-              //   displayFormats: {
-              //     month: "MMM dd",
-              //   },
-              // },
               display: true,
               beginAtZero: true,
               grid: {
-                display: false,
+                display: xGrid,
               },
               border: {
                 display: false,
@@ -54,6 +57,14 @@ export const MultiLineChart = ({ datasets }: MultiLineChartProps) => {
                 color: palette.text.disabled,
                 align: "inner",
               },
+              title: {
+                display: true,
+                text: xLabel,
+                color: palette.text.primary,
+                font: {
+                  size: 14,
+                },
+              },
             },
             y: {
               display: true,
@@ -61,11 +72,23 @@ export const MultiLineChart = ({ datasets }: MultiLineChartProps) => {
               border: {
                 display: false,
               },
+              grid: {
+                display: yGrid,
+              },
               ticks: {
                 color: palette.text.disabled,
                 count: 6,
                 callback: (value) => {
                   return formatNumber(value);
+                },
+              },
+              title: {
+                display: true,
+                text: yLabel,
+                color: palette.text.primary,
+                padding: 20,
+                font: {
+                  size: 14,
                 },
               },
             },
