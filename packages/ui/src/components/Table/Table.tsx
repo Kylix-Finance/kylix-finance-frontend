@@ -1,6 +1,6 @@
 "use client";
 
-import { Table as TableBase, TableContainer } from "@mui/material";
+import { Table as TableBase, TableContainer, TableRow } from "@mui/material";
 import React, { ReactNode } from "react";
 
 import TBody from "./TBody";
@@ -18,7 +18,7 @@ import {
   TRowProps,
 } from "./types";
 import { TableStore } from "../../store";
-import { CellValueComponents } from "./TRow";
+import TRow, { CellValueComponents } from "./TRow";
 
 // ? ExtraData is the data which is not going to render in the table
 
@@ -31,7 +31,8 @@ interface Props<Schema, ExtraFields extends string> {
   hiddenTHeads?: Array<keyof Schema | ExtraFields>;
   isLoading?: boolean;
   numeric?: Array<keyof Schema>;
-  onTRowClick?: OnTRowClick<Schema>;
+  // UNUSED
+  // onTRowClick?: OnTRowClick<Schema>;
   rowSpacing?: string;
   tableName: TableStore.TableName;
   tBaseProps?: TBaseProps;
@@ -40,6 +41,7 @@ interface Props<Schema, ExtraFields extends string> {
   tContainerProps?: TContainerProps;
   tHeadProps?: THeadProps;
   tRowProps?: TRowProps;
+  middleComponent?: React.FC;
 }
 
 export function Table<Schema, ExtraFields extends string = string>({
@@ -50,6 +52,7 @@ export function Table<Schema, ExtraFields extends string = string>({
   headers,
   hiddenTHeads,
   isLoading,
+  middleComponent,
   numeric,
   rowSpacing,
   tableName,
@@ -84,27 +87,29 @@ export function Table<Schema, ExtraFields extends string = string>({
       {...tContainerProps}
       sx={{
         height: "100%",
-        width: "100%",
         position: "relative",
+        width: "100%",
         ...tContainerProps?.sx,
       }}
     >
       <TableBase {...tBaseProps} stickyHeader>
         <THead
-          numeric={numeric}
-          hiddenTHeads={hiddenTHeads}
           headers={headers}
+          hiddenTHeads={hiddenTHeads}
+          numeric={numeric}
           onRequestSort={handleRequestSort}
           order={order}
           orderBy={orderBy}
           {...tHeadProps}
         />
+
         <TBody
-          numeric={numeric}
           components={components}
           data={sortedData}
           headers={headers}
           isLoading={isLoading}
+          middleComponent={middleComponent}
+          numeric={numeric}
           rowSpacing={rowSpacing}
           tBody={tBodyProps}
           tCellClassnames={tCellClassnames}

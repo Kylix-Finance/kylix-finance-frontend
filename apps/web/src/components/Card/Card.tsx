@@ -10,11 +10,12 @@ import {
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 
 interface Header {
-  title?: string;
-  icon?: Icon;
   hasIconBackground?: boolean;
-  rightComponent?: ReactNode;
+  icon?: Icon;
   iconColor?: string;
+  rightComponent?: ReactNode;
+  subTitle?: string;
+  title?: string;
 }
 interface IconProps {
   icon: Icon;
@@ -29,6 +30,7 @@ interface TitleProps {
 interface Props extends PropsWithChildren, Header {
   className?: string;
   headingFontSize?: number | string;
+  subHeadingFontSize?: number | string;
 }
 
 const IconWithBackground = ({ icon: Icon, iconColor }: IconProps) => (
@@ -41,21 +43,33 @@ const IconWithBackground = ({ icon: Icon, iconColor }: IconProps) => (
   </Box>
 );
 
-const Title = ({ title, fontSize }: TitleProps) => (
+const Heading = ({ title, fontSize }: TitleProps) => (
   <Typography variant="h6" fontSize={fontSize}>
     {" "}
     {title}
   </Typography>
 );
 
+const SubHeading = ({ title, fontSize }: TitleProps) => (
+  <Typography
+    className="!text-[19px] !font-[400] !leading-[20px] !tracking-[-0.02em]"
+    fontSize={fontSize}
+  >
+    {title}
+  </Typography>
+);
+
 const Card = ({
-  icon: Icon,
-  title,
   children,
-  rightComponent: RightComponent,
   className,
-  iconColor,
+  hasIconBackground,
   headingFontSize,
+  icon: Icon,
+  iconColor,
+  rightComponent: RightComponent,
+  subHeadingFontSize = "19px",
+  subTitle,
+  title,
 }: Props) => {
   return (
     <Box
@@ -63,9 +77,21 @@ const Card = ({
     >
       <Box className="flex justify-between items-center w-full mb-2">
         {(Icon || title) && (
-          <Box className={`flex items-center gap-2`}>
-            {Icon && <IconWithBackground icon={Icon} iconColor={iconColor} />}
-            {title && <Title title={title} fontSize={headingFontSize} />}
+          <Box>
+            <Box className={`flex items-center gap-2`}>
+              {Icon &&
+                (hasIconBackground ? (
+                  <IconWithBackground icon={Icon} iconColor={iconColor} />
+                ) : (
+                  <Icon />
+                ))}
+              <Box className="flex flex-col gap-[16px]">
+                {title && <Heading title={title} fontSize={headingFontSize} />}
+                {subTitle && (
+                  <SubHeading title={subTitle} fontSize={subHeadingFontSize} />
+                )}
+              </Box>
+            </Box>
           </Box>
         )}
         {RightComponent}

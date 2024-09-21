@@ -37,3 +37,50 @@
 * {
   min-width: 0;
 }
+
+/* UNUSED */
+.border-dashed {
+  background-image: repeating-linear-gradient(
+      -60deg,
+      #333333,
+      #333333 2px,
+      transparent 2px,
+      transparent 4px,
+      #333333 4px
+    ),
+    repeating-linear-gradient(
+      30deg,
+      #333333,
+      #333333 2px,
+      transparent 2px,
+      transparent 4px,
+      #333333 4px
+    ),
+    repeating-linear-gradient(
+      120deg,
+      #333333,
+      #333333 2px,
+      transparent 2px,
+      transparent 4px,
+      #333333 4px
+    ),
+    repeating-linear-gradient(
+      210deg,
+      #333333,
+      #333333 2px,
+      transparent 2px,
+      transparent 4px,
+      #333333 4px
+    );
+  background-size:
+    1px 100%,
+    100% 1px,
+    1px 100%,
+    100% 1px;
+  background-position:
+    0 0,
+    0 0,
+    100% 0,
+    0 100%;
+  background-repeat: no-repeat;
+}

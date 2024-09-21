@@ -1,4 +1,4 @@
-import { StoreSetFn, VoidNoArgs } from "@repo/types";
+import { StoreSetFn } from "@repo/types";
 
 export interface PaginationDefaultProps {
   page: number;
@@ -7,11 +7,12 @@ export interface PaginationDefaultProps {
 }
 
 export type TableName =
-  | "markets"
-  | "supply"
-  | "liquidations"
   | "latestLiquidation"
-  | "personalBids";
+  | "liquidations"
+  | "loanPositions"
+  | "markets"
+  | "personalBids"
+  | "supply";
 
 export type PaginationState = {
   [key in TableName]: PaginationDefaultProps;
