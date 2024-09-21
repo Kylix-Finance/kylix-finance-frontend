@@ -23,7 +23,7 @@ const PositionManagementDetail = () => {
     <Card variant="outlined" className="flex flex-col gap-6 flex-[0.5] w-full">
       <List items={items} />
       <Button variant="contained" size="large">
-        Quick Barrow
+        Create SR Loan
       </Button>
     </Card>
   );
