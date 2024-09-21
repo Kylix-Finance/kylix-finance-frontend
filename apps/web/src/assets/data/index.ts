@@ -59,8 +59,8 @@ const sidebar: Array<Sidebar> = [
         icon: sidebarIcons.Liquidations,
       },
       {
-        name: "Staking",
-        href: "/staking",
+        name: "SRL",
+        href: "/srl",
         icon: sidebarIcons.Staking,
       },
       {
