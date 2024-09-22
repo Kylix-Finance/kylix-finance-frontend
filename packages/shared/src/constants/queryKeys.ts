@@ -31,6 +31,7 @@ const keys = {
   POOL_DATA: "POOL_DATA",
   SUPPLY: "SUPPLY",
   BORROW: "BORROW",
+  QUICK_BORROW: "QUICK_BORROW",
   WITHDRAW: "WITHDRAW",
   POOLS: "POOLS",
   ASSET_PRICE: "ASSET_PRICE",
@@ -60,6 +61,7 @@ export const queryKeys = {
   poolData: (assetId: string | number) => [baseKey, keys.POOL_DATA, assetId],
   supply: [baseKey, keys.SUPPLY],
   borrow: [baseKey, keys.BORROW],
+  quickBorrow: [baseKey, keys.QUICK_BORROW],
   withdraw: [baseKey, keys.WITHDRAW],
   pools: ({ activeAccount }: Pools) => [baseKey, keys.POOLS, activeAccount],
 };

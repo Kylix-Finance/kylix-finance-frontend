@@ -1,13 +1,13 @@
 "use client";
 
 import { Box, Button, Card as MuiCard, Typography } from "@mui/material";
-import { useBalance } from "@repo/onchain-utils";
+import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
 import { useState } from "react";
-import { Card, List, ListItem } from "~/components";
+import { Card, List } from "~/components";
 import { InputWithSelect } from "~/components/InputWithSelect";
-import { PoolSelect } from "~/components/PoolSelect";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
 import { usePools } from "~/hooks/chain/usePools";
+import { useQuickBorrow } from "~/hooks/chain/useQuickBorrow";
 import { SelectOption } from "~/types";
 
 const QuickBorrow = () => {
@@ -17,6 +17,7 @@ const QuickBorrow = () => {
       value: pool.assetId.toString(),
       label: pool.assetName,
     })) || [];
+  const { mutate } = useQuickBorrow();
 
   const [supplyPool, setSupplyPool] = useState<SelectOption>();
   const [supplyValue, setSupplyValue] = useState<string>("");
@@ -31,6 +32,7 @@ const QuickBorrow = () => {
   });
   const supplyValueInUSD =
     Number(supplyValue || 0) * Number(supplyAssetPrice || 0);
+  const { assetMetaData: supplyAssetMetadata } = useMetadata(supplyPool?.value);
 
   const { assetPrice: borrowAssetPrice } = useAssetPrice({
     assetId: borrowPool?.value || 0,
@@ -40,6 +42,22 @@ const QuickBorrow = () => {
   });
   const borrowValueInUSD =
     Number(borrowValue || 0) * Number(borrowAssetPrice || 0);
+  const { assetMetaData: borrowAssetMetadata } = useMetadata(borrowPool?.value);
+
+  const borrowHandler = () => {
+    mutate({
+      borrowPoolId: borrowPool?.value || "0",
+      borrowValue: parseUnit(
+        borrowValue,
+        borrowAssetMetadata?.decimals || 6
+      ).toString(),
+      supplyPoolId: supplyPool?.value || "0",
+      supplyValue: parseUnit(
+        supplyValue,
+        supplyAssetMetadata?.decimals || 6
+      ).toString(),
+    });
+  };
 
   return (
     <Card title="Quick Market" className="w-full justify-between items-end">
@@ -141,7 +159,7 @@ const QuickBorrow = () => {
           />
         </Box>
       </Box>
-      <Button variant="contained" size="large">
+      <Button variant="contained" size="large" onClick={borrowHandler}>
         Quick Barrow
       </Button>
     </Card>
