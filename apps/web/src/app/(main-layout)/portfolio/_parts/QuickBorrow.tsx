@@ -3,6 +3,7 @@
 import { Box, Button, Card as MuiCard, Typography } from "@mui/material";
 import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
 import { useState } from "react";
+import { Icons } from "~/assets/svgs";
 import { Card, List } from "~/components";
 import { InputWithSelect } from "~/components/InputWithSelect";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
@@ -68,7 +69,7 @@ const QuickBorrow = () => {
             variant="outlined"
             className="flex flex-col  gap-3 w-full"
           >
-            <Typography variant="subtitle1" fontSize={"16px"}>
+            <Typography variant="subtitle1" fontSize={"1rem"}>
               Deposit
             </Typography>
             <Box className="flex flex-col gap-1.5">
@@ -76,7 +77,7 @@ const QuickBorrow = () => {
                 <Typography
                   className="text-secondary-800"
                   variant="subtitle1"
-                  fontSize={"14px"}
+                  fontSize={".875rem"}
                 >
                   Amount
                 </Typography>
@@ -110,13 +111,16 @@ const QuickBorrow = () => {
             ]}
           />
         </Box>
+        <div className="w-14 h-14 mt-24">
+          <Icons.ArrowRight className="text-primary-500 " />
+        </div>
         <Box className="flex flex-col  gap-3  w-full">
           <MuiCard
             square
             variant="outlined"
             className="flex flex-col  gap-3  w-full"
           >
-            <Typography variant="subtitle1" fontSize={"16px"}>
+            <Typography variant="subtitle1" fontSize={"1rem"}>
               Borrow
             </Typography>
             <Box className="flex flex-col gap-1.5">
@@ -124,7 +128,7 @@ const QuickBorrow = () => {
                 <Typography
                   className="text-secondary-800"
                   variant="subtitle1"
-                  fontSize={"14px"}
+                  fontSize={".875rem"}
                 >
                   Amount
                 </Typography>
