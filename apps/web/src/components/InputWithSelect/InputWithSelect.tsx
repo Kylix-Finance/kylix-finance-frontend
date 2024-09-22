@@ -17,6 +17,7 @@ interface Props {
   maxValue?: string;
   pool: SelectOption | undefined;
   setPool: (pool: SelectOption) => void;
+  options: SelectOption[];
 }
 
 export const InputWithSelect = ({
@@ -24,15 +25,8 @@ export const InputWithSelect = ({
   maxValue = "0",
   pool,
   setPool,
+  options,
 }: Props) => {
-  const { pools } = usePools();
-
-  const options: SelectOption[] =
-    pools?.map((pool) => ({
-      value: pool.assetId.toString(),
-      label: pool.assetName,
-    })) || [];
-
   const { assetMetaData } = useMetadata(pool?.value);
   const [localValue, setLocalValue] = useState<string>("");
 
