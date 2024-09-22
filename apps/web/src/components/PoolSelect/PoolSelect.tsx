@@ -13,7 +13,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 interface Props {
   options: SelectOption[];
   setValue: (value: SelectOption) => void;
-  value: SelectOption;
+  value: SelectOption | undefined;
   className?: string;
 }
 
@@ -51,7 +51,7 @@ export const PoolSelect = ({ setValue, value, options, className }: Props) => {
             ...params.InputProps,
             startAdornment: (
               <InputAdornment position="start">
-                <TokenIcon width={28} height={28} symbol={value.label} />
+                <TokenIcon width={28} height={28} symbol={value?.label} />
               </InputAdornment>
             ),
           }}

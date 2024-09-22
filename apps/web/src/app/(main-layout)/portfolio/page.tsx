@@ -8,6 +8,7 @@ import BorrowValue from "./_parts/BorrowValue";
 import ProgressBar from "~/components/ProgressBar";
 import Supplied from "./_parts/Supplied";
 import Borrowed from "./_parts/Borrowed";
+import QuickBorrow from "./_parts/QuickBorrow";
 
 export default function Page() {
   return (
@@ -39,6 +40,9 @@ export default function Page() {
       </Card>
       <Card className={styles.borrowed} title="Your Borrows">
         <Borrowed />
+      </Card>
+      <Card className={styles.quick_borrow} title="Your Borrows">
+        <QuickBorrow />
       </Card>
     </Box>
   );
