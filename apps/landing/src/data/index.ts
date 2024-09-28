@@ -1,5 +1,5 @@
-import { SmartLending } from "~/types";
-
+import { Icon, SmartLending } from "~/types";
+import { AvaLaunch, Btc, Eth, Usdc } from "~/assets/svgs";
 export const smartLending: SmartLending[] = [
   {
     to: "/",
@@ -14,3 +14,4 @@ export const smartLending: SmartLending[] = [
       "Lorem ipsum dolor sit amet consectetur. Duis viverra at eu sapien venenatis sed ut. ",
   },
 ];
+export const assets: Icon[] = [Btc, Eth, Usdc, AvaLaunch];
