@@ -1,5 +1,14 @@
-import { HowItsWork, Icon, SmartLending } from "~/types";
-import { AvaLaunch, BorrowImage, Btc, Eth, Usdc } from "~/assets/svgs";
+import { HowItsWork, Icon, Security, SmartLending } from "~/types";
+import {
+  AvaLaunch,
+  BorrowImage,
+  Btc,
+  Check,
+  Eth,
+  Focus,
+  Shield,
+  Usdc,
+} from "~/assets/svgs";
 export const smartLending: SmartLending[] = [
   {
     to: "/",
@@ -34,5 +43,25 @@ export const howItsWorks: HowItsWork[] = [
     description:
       "Borrow token and enjoy your loan with negative interest rates , getting repaid through time.",
     image: BorrowImage,
+  },
+];
+export const security: Security[] = [
+  {
+    heading: "Security Measures",
+    description:
+      "Explanation of platform security protocols (e.g., smart contract audits, multi-signature wallets).",
+    icon: Shield,
+  },
+  {
+    heading: "Risk Mitigation",
+    description:
+      "How the platform protects users’ assets, with details on insurance funds, collateral liquidation processes, and audit reports.",
+    icon: Focus,
+  },
+  {
+    heading: "Audit Partners",
+    description:
+      "Names of third-party auditors or security firms that have reviewed the platform’s smart contracts.",
+    icon: Check,
   },
 ];

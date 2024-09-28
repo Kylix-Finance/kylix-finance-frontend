@@ -12,3 +12,9 @@ export type HowItsWork = {
   description: string;
   image?: Icon;
 };
+
+export type Security = {
+  heading: string;
+  description: string;
+  icon: Icon;
+};
