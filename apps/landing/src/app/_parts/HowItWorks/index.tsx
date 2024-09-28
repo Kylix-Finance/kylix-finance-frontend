@@ -1,4 +1,6 @@
 import Section from "~/components/Section";
+import { howItsWorks } from "~/data";
+import Card from "./components/Card";
 
 const HowItWorks = () => {
   return (
@@ -9,7 +11,15 @@ const HowItWorks = () => {
       }}
       description=" A visual breakdown of the lending and borrowing process, typically simplified into steps like:"
     >
-      <div>SecurityAndAudits</div>
+      <div className="how-its-works-grid-container">
+        {howItsWorks.map((item, index) => (
+          <Card
+            data={item}
+            className={`how-its-works-${item.id}`}
+            key={index}
+          />
+        ))}
+      </div>
     </Section>
   );
 };

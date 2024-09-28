@@ -6,3 +6,9 @@ export type SmartLending = {
   heading: string;
 };
 export type Icon = ComponentType<SVGProps<SVGSVGElement>>;
+export type HowItsWork = {
+  id: string;
+  heading: string;
+  description: string;
+  image?: Icon;
+};
