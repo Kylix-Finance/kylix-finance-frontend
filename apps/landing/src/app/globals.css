@@ -9,6 +9,13 @@
 }
 
 @layer components {
+  .smartLandingItem {
+    background: radial-gradient(
+      circle,
+      rgba(86, 221, 180, 1) 0%,
+      rgba(0, 0, 0, 0.0032606792717086996) 70%
+    );
+  }
 }
 
 /* ::-webkit-scrollbar {

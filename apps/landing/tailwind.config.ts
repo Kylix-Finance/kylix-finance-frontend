@@ -31,7 +31,6 @@ const config: Config = {
           900: "#010101",
         },
         primaryText: "#5C5E64",
-
         light: "#F4FAF9",
       },
       fontFamily: {
