@@ -1,0 +1,43 @@
+import { ReactNode } from "react";
+import Image from "next/image";
+
+interface Props {
+  children: ReactNode;
+  heading: {
+    right: string;
+    left: string;
+  };
+  description: string;
+}
+
+const Section = ({ children, description, heading }: Props) => {
+  return (
+    <div className="relative w-full h-full">
+      <div className="absolute inset-0 z-0 w-full h-full mt-16 md:mt-24 lg:mt-52">
+        <Image
+          src="/assets/images/section-bg.png"
+          alt="section bg"
+          fill
+          quality={100}
+          draggable="false"
+          objectFit="fill"
+        />
+        <div className="absolute w-full h-full bg-secondary-500/80" />
+      </div>
+      <div className="relative z-[1] flex flex-col gap-24 w-full h-full justify-center items-center px-8 py-10 md:px-16 md:py-20 lg:px-32 lg:py-44">
+        <div className="flex flex-col gap-2 w-full h-full justify-center items-center">
+          <h2 className="flex justify-center items-center gap-2.5 font-bold font-heading w-full h-full text-4xl md:text-5xl lg:text-6xl">
+            <span className="text-primary-500">{heading.left}</span>
+            <span className="text-white">{heading.right}</span>
+          </h2>
+          <p className="font-light text-xs md:text-sm lg:text-base leading-6 text-secondary-100 text-center">
+            {description}
+          </p>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export default Section;
