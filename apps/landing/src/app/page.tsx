@@ -1,14 +1,11 @@
-import dynamic from "next/dynamic";
-
-const Hero = dynamic(() => import("./_parts/Hero"));
-const SmartLending = dynamic(() => import("./_parts/SmartLending"));
-const MarketTrends = dynamic(() => import("./_parts/MarketTrends"));
-const SupportedAssetsAndAPY = dynamic(
-  () => import("./_parts/SupportedAssetsAndAPY")
-);
-const HowItWorks = dynamic(() => import("./_parts/HowItWorks"));
-const SecurityAndAudits = dynamic(() => import("./_parts/SecurityAndAudits"));
-const Footer = dynamic(() => import("./_parts/Footer"));
+import Section from "~/components/Section";
+import Hero from "./_parts/Hero";
+import SmartLending from "./_parts/SmartLending";
+import MarketTrends from "./_parts/MarketTrends";
+import SupportedAssetsAndAPY from "./_parts/SupportedAssetsAndAPY";
+import HowItWorks from "./_parts/HowItWorks";
+import SecurityAndAudits from "./_parts/SecurityAndAudits";
+import Footer from "./_parts/Footer";
 
 export default function page() {
   return (

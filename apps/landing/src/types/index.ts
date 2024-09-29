@@ -22,7 +22,7 @@ export type Security = {
 export type MarketTrendItem = {
   title: string;
   description: string;
-}
+};
 
 export type MarketTrend = {
   id: number;
@@ -32,11 +32,16 @@ export type MarketTrend = {
   actions: {
     primary: {
       label: string;
-      action: VoidFunction
+      action: VoidFunction;
     };
     secondary: {
       label: string;
-      action: VoidFunction
-    }
-  }
-}
+      action: VoidFunction;
+    };
+  };
+};
+
+export type Asset = {
+  src: string;
+  alt: string;
+};
