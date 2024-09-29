@@ -18,3 +18,25 @@ export type Security = {
   description: string;
   icon: Icon;
 };
+
+export type MarketTrendItem = {
+  title: string;
+  description: string;
+}
+
+export type MarketTrend = {
+  id: number;
+  label: string;
+  image: string;
+  items: MarketTrendItem[];
+  actions: {
+    primary: {
+      label: string;
+      action: VoidFunction
+    };
+    secondary: {
+      label: string;
+      action: VoidFunction
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { HowItsWork, Icon, Security, SmartLending } from "~/types";
+import { HowItsWork, Icon, MarketTrend, Security, SmartLending } from "~/types";
 import {
   AvaLaunch,
   BorrowImage,
@@ -64,4 +64,151 @@ export const security: Security[] = [
       "Names of third-party auditors or security firms that have reviewed the platform’s smart contracts.",
     icon: Check,
   },
+];
+export const marketTrends: MarketTrend[] = [
+  {
+    id: 0,
+    label: "Lending",
+    image: "/assets/images/market-trends/0.png",
+    items: [
+      {
+        title: "Lending and Borrowing",
+        description: "Clear explanations of how users can lend and borrow assets, with a focus on ease of use."
+      },
+      {
+        title: "Staking/Rewards",
+        description: "Staking options and rewards users can earn for providing liquidity or collateral."
+      },
+      {
+        title: "UI Demonstration",
+        description: "Short animated demos or screenshots showing how the platform operates."
+      }
+    ],
+    actions: {
+      primary: {
+        label: "Learn More",
+        action: () => { console.log("Lending: Learn More clicked"); }
+      },
+      secondary: {
+        label: "Get Started",
+        action: () => { console.log("Lending: Get Started clicked"); }
+      }
+    }
+  },
+  {
+    id: 1,
+    label: "Decentralized Exchanges (DEX)",
+    image: "/assets/images/market-trends/0.png",
+    items: [
+      {
+        title: "Liquidity Pools",
+        description: "Overview of how liquidity pools work and how users can provide assets to earn fees."
+      },
+      {
+        title: "Token Swaps",
+        description: "Explaining token swaps, trading pairs, and decentralized trading mechanics."
+      },
+      {
+        title: "Security and Risks",
+        description: "Information on security practices and risks associated with using decentralized exchanges."
+      }
+    ],
+    actions: {
+      primary: {
+        label: "Explore DEX",
+        action: () => { console.log("DEX: Explore clicked"); }
+      },
+      secondary: {
+        label: "Start Trading",
+        action: () => { console.log("DEX: Start Trading clicked"); }
+      }
+    }
+  },
+  {
+    id: 2,
+    label: "NFT Marketplaces",
+    image: "/assets/images/market-trends/0.png",
+    items: [
+      {
+        title: "Creating NFTs",
+        description: "A step-by-step guide on how users can create and mint their own NFTs."
+      },
+      {
+        title: "Buying and Selling",
+        description: "Explaining the process of buying and selling NFTs, including marketplace fees and royalties."
+      },
+      {
+        title: "Exploring Collections",
+        description: "Showcasing various NFT collections, highlighting popular artists and projects."
+      }
+    ],
+    actions: {
+      primary: {
+        label: "Explore NFTs",
+        action: () => { console.log("NFT: Explore clicked"); }
+      },
+      secondary: {
+        label: "Mint Now",
+        action: () => { console.log("NFT: Mint Now clicked"); }
+      }
+    }
+  },
+  {
+    id: 3,
+    label: "DAO Governance",
+    image: "/assets/images/market-trends/0.png",
+    items: [
+      {
+        title: "Participating in DAOs",
+        description: "How users can join DAOs and participate in decentralized decision-making."
+      },
+      {
+        title: "Voting Mechanisms",
+        description: "Explaining voting mechanisms and the importance of governance tokens."
+      },
+      {
+        title: "Proposals and Actions",
+        description: "Overview of creating proposals, voting on decisions, and enacting changes."
+      }
+    ],
+    actions: {
+      primary: {
+        label: "Join DAO",
+        action: () => { console.log("DAO: Join clicked"); }
+      },
+      secondary: {
+        label: "Learn More",
+        action: () => { console.log("DAO: Learn More clicked"); }
+      }
+    }
+  },
+  {
+    id: 4,
+    label: "DeFi Insurance",
+    image: "/assets/images/market-trends/0.png",
+    items: [
+      {
+        title: "Understanding DeFi Insurance",
+        description: "Explanation of how decentralized insurance protects users from various risks."
+      },
+      {
+        title: "Cover Options",
+        description: "Details on available cover options for smart contract failures, hacks, or asset loss."
+      },
+      {
+        title: "Claiming Insurance",
+        description: "Guide on how users can file claims and receive payouts in case of loss."
+      }
+    ],
+    actions: {
+      primary: {
+        label: "Get Covered",
+        action: () => { console.log("DeFi Insurance: Get Covered clicked"); }
+      },
+      secondary: {
+        label: "Learn More",
+        action: () => { console.log("DeFi Insurance: Learn More clicked"); }
+      }
+    }
+  }
 ];
