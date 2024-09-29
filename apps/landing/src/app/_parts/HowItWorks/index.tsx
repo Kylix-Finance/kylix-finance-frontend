@@ -1,6 +1,7 @@
 import Section from "~/components/Section";
 import { howItsWorks } from "~/data";
 import Card from "./components/Card";
+import styles from "./styles.module.css";
 
 const HowItWorks = () => {
   return (
@@ -11,13 +12,9 @@ const HowItWorks = () => {
       }}
       description=" A visual breakdown of the lending and borrowing process, typically simplified into steps like:"
     >
-      <div className="how-its-works-grid-container">
+      <div className={styles.container}>
         {howItsWorks.map((item, index) => (
-          <Card
-            data={item}
-            className={`how-its-works-${item.id}`}
-            key={index}
-          />
+          <Card data={item} className={styles[item.id]} key={index} />
         ))}
       </div>
     </Section>

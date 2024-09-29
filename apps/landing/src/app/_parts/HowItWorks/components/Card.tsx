@@ -11,7 +11,7 @@ const Card = ({
   return (
     <div
       className={clsx(
-        "relative rounded-3xl bg-gradient-to-br from-white/20 via-transparent border border-primary-500/30 grid-item",
+        "min-w-0 w-full relative rounded-3xl bg-gradient-to-br from-white/20 via-transparent border border-primary-500/30 grid-item",
         className
       )}
     >
