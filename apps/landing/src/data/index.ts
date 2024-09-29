@@ -1,4 +1,11 @@
-import { HowItsWork, Icon, MarketTrend, Security, SmartLending } from "~/types";
+import {
+  Asset,
+  HowItsWork,
+  Icon,
+  MarketTrend,
+  Security,
+  SmartLending,
+} from "~/types";
 import {
   AvaLaunch,
   BorrowImage,
@@ -23,7 +30,25 @@ export const smartLending: SmartLending[] = [
       "Lorem ipsum dolor sit amet consectetur. Duis viverra at eu sapien venenatis sed ut. ",
   },
 ];
-export const assets: Icon[] = [Btc, Eth, Usdc, AvaLaunch];
+
+export const assets: Asset[] = [
+  {
+    src: "/assets/images/assets/avalaunch.png",
+    alt: "Avalaunch",
+  },
+  {
+    src: "/assets/images/assets/btc.png",
+    alt: "BTC",
+  },
+  {
+    src: "/assets/images/assets/eth.png",
+    alt: "ETH",
+  },
+  {
+    src: "/assets/images/assets/usdc.png",
+    alt: "USDC",
+  },
+];
 export const howItsWorks: HowItsWork[] = [
   {
     id: "deposit",
@@ -73,27 +98,34 @@ export const marketTrends: MarketTrend[] = [
     items: [
       {
         title: "Lending and Borrowing",
-        description: "Clear explanations of how users can lend and borrow assets, with a focus on ease of use."
+        description:
+          "Clear explanations of how users can lend and borrow assets, with a focus on ease of use.",
       },
       {
         title: "Staking/Rewards",
-        description: "Staking options and rewards users can earn for providing liquidity or collateral."
+        description:
+          "Staking options and rewards users can earn for providing liquidity or collateral.",
       },
       {
         title: "UI Demonstration",
-        description: "Short animated demos or screenshots showing how the platform operates."
-      }
+        description:
+          "Short animated demos or screenshots showing how the platform operates.",
+      },
     ],
     actions: {
       primary: {
         label: "Learn More",
-        action: () => { console.log("Lending: Learn More clicked"); }
+        action: () => {
+          console.log("Lending: Learn More clicked");
+        },
       },
       secondary: {
         label: "Get Started",
-        action: () => { console.log("Lending: Get Started clicked"); }
-      }
-    }
+        action: () => {
+          console.log("Lending: Get Started clicked");
+        },
+      },
+    },
   },
   {
     id: 1,
@@ -102,27 +134,34 @@ export const marketTrends: MarketTrend[] = [
     items: [
       {
         title: "Liquidity Pools",
-        description: "Overview of how liquidity pools work and how users can provide assets to earn fees."
+        description:
+          "Overview of how liquidity pools work and how users can provide assets to earn fees.",
       },
       {
         title: "Token Swaps",
-        description: "Explaining token swaps, trading pairs, and decentralized trading mechanics."
+        description:
+          "Explaining token swaps, trading pairs, and decentralized trading mechanics.",
       },
       {
         title: "Security and Risks",
-        description: "Information on security practices and risks associated with using decentralized exchanges."
-      }
+        description:
+          "Information on security practices and risks associated with using decentralized exchanges.",
+      },
     ],
     actions: {
       primary: {
         label: "Explore DEX",
-        action: () => { console.log("DEX: Explore clicked"); }
+        action: () => {
+          console.log("DEX: Explore clicked");
+        },
       },
       secondary: {
         label: "Start Trading",
-        action: () => { console.log("DEX: Start Trading clicked"); }
-      }
-    }
+        action: () => {
+          console.log("DEX: Start Trading clicked");
+        },
+      },
+    },
   },
   {
     id: 2,
@@ -131,27 +170,34 @@ export const marketTrends: MarketTrend[] = [
     items: [
       {
         title: "Creating NFTs",
-        description: "A step-by-step guide on how users can create and mint their own NFTs."
+        description:
+          "A step-by-step guide on how users can create and mint their own NFTs.",
       },
       {
         title: "Buying and Selling",
-        description: "Explaining the process of buying and selling NFTs, including marketplace fees and royalties."
+        description:
+          "Explaining the process of buying and selling NFTs, including marketplace fees and royalties.",
       },
       {
         title: "Exploring Collections",
-        description: "Showcasing various NFT collections, highlighting popular artists and projects."
-      }
+        description:
+          "Showcasing various NFT collections, highlighting popular artists and projects.",
+      },
     ],
     actions: {
       primary: {
         label: "Explore NFTs",
-        action: () => { console.log("NFT: Explore clicked"); }
+        action: () => {
+          console.log("NFT: Explore clicked");
+        },
       },
       secondary: {
         label: "Mint Now",
-        action: () => { console.log("NFT: Mint Now clicked"); }
-      }
-    }
+        action: () => {
+          console.log("NFT: Mint Now clicked");
+        },
+      },
+    },
   },
   {
     id: 3,
@@ -160,27 +206,34 @@ export const marketTrends: MarketTrend[] = [
     items: [
       {
         title: "Participating in DAOs",
-        description: "How users can join DAOs and participate in decentralized decision-making."
+        description:
+          "How users can join DAOs and participate in decentralized decision-making.",
       },
       {
         title: "Voting Mechanisms",
-        description: "Explaining voting mechanisms and the importance of governance tokens."
+        description:
+          "Explaining voting mechanisms and the importance of governance tokens.",
       },
       {
         title: "Proposals and Actions",
-        description: "Overview of creating proposals, voting on decisions, and enacting changes."
-      }
+        description:
+          "Overview of creating proposals, voting on decisions, and enacting changes.",
+      },
     ],
     actions: {
       primary: {
         label: "Join DAO",
-        action: () => { console.log("DAO: Join clicked"); }
+        action: () => {
+          console.log("DAO: Join clicked");
+        },
       },
       secondary: {
         label: "Learn More",
-        action: () => { console.log("DAO: Learn More clicked"); }
-      }
-    }
+        action: () => {
+          console.log("DAO: Learn More clicked");
+        },
+      },
+    },
   },
   {
     id: 4,
@@ -189,26 +242,33 @@ export const marketTrends: MarketTrend[] = [
     items: [
       {
         title: "Understanding DeFi Insurance",
-        description: "Explanation of how decentralized insurance protects users from various risks."
+        description:
+          "Explanation of how decentralized insurance protects users from various risks.",
       },
       {
         title: "Cover Options",
-        description: "Details on available cover options for smart contract failures, hacks, or asset loss."
+        description:
+          "Details on available cover options for smart contract failures, hacks, or asset loss.",
       },
       {
         title: "Claiming Insurance",
-        description: "Guide on how users can file claims and receive payouts in case of loss."
-      }
+        description:
+          "Guide on how users can file claims and receive payouts in case of loss.",
+      },
     ],
     actions: {
       primary: {
         label: "Get Covered",
-        action: () => { console.log("DeFi Insurance: Get Covered clicked"); }
+        action: () => {
+          console.log("DeFi Insurance: Get Covered clicked");
+        },
       },
       secondary: {
         label: "Learn More",
-        action: () => { console.log("DeFi Insurance: Learn More clicked"); }
-      }
-    }
-  }
+        action: () => {
+          console.log("DeFi Insurance: Learn More clicked");
+        },
+      },
+    },
+  },
 ];

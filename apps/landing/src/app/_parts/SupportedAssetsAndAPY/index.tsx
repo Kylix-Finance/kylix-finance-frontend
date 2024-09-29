@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Section from "~/components/Section";
 import { assets } from "~/data";
 const SupportedAssetsAndAPY = () => {
@@ -8,13 +9,19 @@ const SupportedAssetsAndAPY = () => {
     >
       <div>
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-          {assets.map((Asset, index) => (
+          {assets.map((asset, index) => (
             <div
               key={index}
               className="p-0.5 bg-gradient-to-br from-white/20 via-transparent rounded-md"
             >
               <div className="p-9 rounded-md backdrop-blur-3xl  bg-gradient-to-tl from-white/5 to-transparent">
-                <Asset />
+                <Image
+                  src={asset.src}
+                  alt={asset.alt}
+                  width={140}
+                  height={140}
+                  draggable="false"
+                />
               </div>
             </div>
           ))}
