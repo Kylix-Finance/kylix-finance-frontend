@@ -64,6 +64,11 @@ const sidebar: Array<Sidebar> = [
         icon: sidebarIcons.Staking,
       },
       {
+        name: "SRL",
+        href: "/srl",
+        icon: sidebarIcons.Staking,
+      },
+      {
         name: "Governance",
         href: "/governance",
         icon: sidebarIcons.Governance,

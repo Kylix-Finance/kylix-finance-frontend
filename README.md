@@ -1,81 +1,141 @@
-# Turborepo starter
+# Kylix Frontend
 
-This is an official starter Turborepo.
+## Overview
 
-## Using this example
+This project is a web application built with Next.js, React, and TypeScript, utilizing the Polkadot.js API for blockchain interactions. The UI is styled with Material-UI (MUI) and TailwindCSS. We manage the project structure using a Turborepo strategy, with two main packages: `wallet-modal` and `onchain-utils`.
 
-Run the following command:
+- **`wallet-modal`**: This package includes components for connecting the application to a user's wallet, including a modal and a connect button.
+- **`onchain-utils`**: This package contains the on-chain logic, such as utility functions like `useBalance` and other blockchain interactions.
 
-```sh
-npx create-turbo@latest
+We follow Next.js's recommended `app` directory structure for organizing our components and pages.
+
+## Running the Project
+
+### Prerequisites
+
+Before running the project, ensure you have the following installed on your machine:
+
+- **Node.js** (v20.x or higher)
+- **pnpm**
+
+### Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/Kylix-Finance/kylix-finance-frontend.git
+   cd kylix-finance-frontend
+   ```
+
+2. **Install dependencies:**
+
+   Use `pnpm` to install all dependencies across the monorepo:
+
+   ```bash
+   pnpm install
+   ```
+
+### Running the Development Server
+
+1. **Start the development server:**
+
+   To start the development server for all packages, run:
+
+   ```bash
+   turbo run dev
+   ```
+
+2. **Access the application:**
+
+   Once the server is running, you can access the application by navigating to `http://localhost:3000` in your web browser.
+
+## Adding a New Icon to the `TokenIcon` Component
+
+The `TokenIcon` component is responsible for rendering or generating icons for various tokens/assets. Follow the steps below to add a new SVG icon to this component.
+
+### 1. Add the SVG File
+
+First, you need to add the SVG file for the new token.
+
+1. Navigate to the `apps/web/src/assets/svgs/coins` directory.
+2. Paste the new SVG file into this folder.
+3. Make sure the file name starts with an uppercase letter and does not contain any symbols (e.g., `FileName.svg`).
+
+### 2. Update the `index.ts` File in the `coins` Directory
+
+After adding the SVG file:
+
+1. Open the `apps/web/src/assets/svgs/coins/index.ts` file.
+2. Import your new SVG file like this:
+
+   ```typescript
+   import FileName from "./FileName.svg";
+   ```
+
+3. Add the imported icon to the `Coins` object:
+
+   ```typescript
+   export const Coins = {
+     BitCoin,
+     Dot,
+     Ankr,
+     Aave,
+     FileName, // new icon
+   };
+   ```
+
+### 3. Add the Icon to the `TokenIcons` Configuration
+
+To make your new icon available in the application:
+
+1. Open the `apps/web/src/config/icons.ts` file.
+2. Import the new icon from the `Coins` object:
+
+   ```typescript
+   import { Coins } from "~/assets/svgs";
+   ```
+
+3. Add the new icon to the `TokenIcons` object:
+
+   ```typescript
+   export const TokenIcons: Record<string, Icon> = {
+     BTC: Coins.BitCoin,
+     DOT: Coins.Dot,
+     Ankr: Coins.Ankr,
+     Aave: Coins.Aave,
+     WBTC: Wbtc,
+     WETH: Weth,
+     USDT: Usdt,
+     USDC: Usdc,
+     Symbol: Coins.FileName, // new icon
+   };
+   ```
+
+4. Ensure that the `Symbol` key corresponds to the appropriate token symbol you'll use in your application.
+
+### 4. Usage
+
+Now, you can use the new icon throughout your application by referencing it through the `TokenIcons` object.
+
+## Project Structure
+
+Here's a quick overview of the project's folder structure relevant to the icon addition process:
+
 ```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
+apps/
+├── web/
+│   ├── src/
+│   │   ├── assets/
+│   │   │   └── svgs/
+│   │   │       └── coins/
+│   │   │           ├── index.ts
+│   │   │           ├── BitCoin.svg
+│   │   │           ├── Dot.svg
+│   │   │           └── FileName.svg  // newly added icon
+│   │   ├── components/
+│   │   │   └── TokenIcon.tsx
+│   │   ├── config/
+│   │   │   └── icons.ts
+│   └── ...
+└── ...
 ```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)

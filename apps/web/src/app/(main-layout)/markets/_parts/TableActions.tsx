@@ -5,6 +5,7 @@ interface Props {
   assetId: number | string;
 }
 
+// TODO: Extract to components
 export const TableActions = ({ assetId }: Props) => {
   return (
     <Box className="flex justify-end gap-1">
