@@ -281,3 +281,33 @@ export const navItems = [
   createNavItem("About", "about"),
   createNavItem("Contact", "contact"),
 ];
+
+const createFooterItem = (label: string, link: string) => ({ label, link });
+export const footerItems = [
+  {
+    title: "Products",
+    items: [
+      createFooterItem("Lending", "lending"),
+      createFooterItem("Borrowing", "borrowing"),
+      createFooterItem("Markets", "markets"),
+    ],
+  },
+  {
+    title: "Tools",
+    items: [
+      createFooterItem("Tokens", "tokens"),
+      createFooterItem("Convert", "convert"),
+      createFooterItem("Explore Traders", "exploreTraders"),
+      createFooterItem("Pricing", "pricing"),
+    ],
+  },
+  {
+    title: "Support",
+    items: [
+      createFooterItem("Beginners Guide", "beginnersGuide"),
+      createFooterItem("Help Center", "helpCenter"),
+      createFooterItem("Feedbacks", "feedbacks"),
+      createFooterItem("API Doc", "apiDoc"),
+    ],
+  },
+];

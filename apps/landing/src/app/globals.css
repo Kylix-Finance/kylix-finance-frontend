@@ -29,3 +29,22 @@
     rgba(86, 221, 180, 0.12);
   box-shadow: 0px 0px 12px 0px rgba(86, 221, 180, 0.24) inset;
 }
+
+.footer-bg {
+  background: radial-gradient(
+      52.64% 73.09% at 52.64% -20%,
+      rgba(86, 221, 180, 0.3) 0%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    #030404;
+  border-top: 1px solid rgba(86, 221, 180, 0);
+}
+.footer-top-border {
+  background-image: linear-gradient(
+    to right,
+    rgba(86, 221, 180, 0),
+    rgba(255, 255, 255, 0.86),
+    rgba(86, 221, 180, 0)
+  );
+  height: 1px;
+}

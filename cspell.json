@@ -10,6 +10,7 @@
     "clsx",
     "jito",
     "jitosol",
+    "svgs",
     "tailwindcss"
   ],
   "import": [],
