@@ -7,14 +7,16 @@ import BorrowImage from "./borrow-image.svg";
 import Check from "./check.svg";
 import Focus from "./focus.svg";
 import Shield from "./shield.svg";
+import Kylix from "./kylix.svg";
 export {
   ArrowRight,
-  Btc,
-  Eth,
-  Usdc,
   AvaLaunch,
   BorrowImage,
+  Btc,
   Check,
+  Eth,
   Focus,
+  Kylix,
   Shield,
+  Usdc,
 };
