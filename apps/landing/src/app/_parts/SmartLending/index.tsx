@@ -10,6 +10,7 @@ const SmartLending = () => {
         right: "Lending",
       }}
       description="The new cross-chain Lending Platform, on Polkadot."
+      id="smart-lending"
     >
       <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-8">
         {smartLending.map((item, index) => (

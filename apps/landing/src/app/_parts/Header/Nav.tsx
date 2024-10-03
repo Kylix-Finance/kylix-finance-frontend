@@ -1,12 +1,13 @@
+import Link from "next/link";
 import { navItems } from "~/data";
 
 export const Nav = () => {
   return (
     <nav className="space-x-8 text-sm font-medium">
       {navItems.map(({ label, link }, index) => (
-        <a key={index} href={`#${link}`}>
+        <Link key={index} href={link}>
           {label}
-        </a>
+        </Link>
       ))}
     </nav>
   );

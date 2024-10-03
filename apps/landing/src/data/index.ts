@@ -275,11 +275,11 @@ export const marketTrends: MarketTrend[] = [
 
 const createNavItem = (label: string, link: string) => ({ label, link });
 export const navItems = [
-  createNavItem("Products", "products"),
-  createNavItem("Tools", "tools"),
-  createNavItem("Features", "features"),
-  createNavItem("About", "about"),
-  createNavItem("Contact", "contact"),
+  createNavItem("Smart Lending", "#smart-lending"),
+  createNavItem("Markets Trends", "#markets-trends"),
+  createNavItem("Supported  Assets and APY", "#supported-assets-and-apy"),
+  createNavItem("How It's Works", "#how-it's-works"),
+  createNavItem("Security And Audits", "#security-and-audits"),
 ];
 
 const createFooterItem = (label: string, link: string) => ({ label, link });
