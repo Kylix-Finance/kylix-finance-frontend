@@ -5,15 +5,18 @@ import {
   MarketTrend,
   Security,
   SmartLending,
+  SocialMedia,
 } from "~/types";
 import {
   AvaLaunch,
   BorrowImage,
   Btc,
   Check,
+  Discord,
   Eth,
   Focus,
   Shield,
+  Twitter,
   Usdc,
 } from "~/assets/svgs";
 export const smartLending: SmartLending[] = [
@@ -270,5 +273,56 @@ export const marketTrends: MarketTrend[] = [
         },
       },
     },
+  },
+];
+
+const createNavItem = (label: string, link: string) => ({ label, link });
+export const navItems = [
+  createNavItem("Smart Lending", "#smart-lending"),
+  createNavItem("Markets Trends", "#markets-trends"),
+  createNavItem("Supported  Assets and APY", "#supported-assets-and-apy"),
+  createNavItem("How It's Works", "#how-it's-works"),
+  createNavItem("Security And Audits", "#security-and-audits"),
+];
+
+const createFooterItem = (label: string, link: string) => ({ label, link });
+export const footerItems = [
+  {
+    title: "Products",
+    items: [
+      createFooterItem("Lending", "lending"),
+      createFooterItem("Borrowing", "borrowing"),
+      createFooterItem("Markets", "markets"),
+    ],
+  },
+  {
+    title: "Tools",
+    items: [
+      createFooterItem("Tokens", "tokens"),
+      createFooterItem("Convert", "convert"),
+      createFooterItem("Explore Traders", "exploreTraders"),
+      createFooterItem("Pricing", "pricing"),
+    ],
+  },
+  {
+    title: "Support",
+    items: [
+      createFooterItem("Beginners Guide", "beginnersGuide"),
+      createFooterItem("Help Center", "helpCenter"),
+      createFooterItem("Feedbacks", "feedbacks"),
+      createFooterItem("API Doc", "apiDoc"),
+    ],
+  },
+];
+export const socialMediaLinks: Array<SocialMedia> = [
+  {
+    name: "X",
+    link: "https://x.com/kylixfinance",
+    icon: Twitter,
+  },
+  {
+    name: "Discord",
+    link: "https://discord.gg/UkRcWaTh5p",
+    icon: Discord,
   },
 ];

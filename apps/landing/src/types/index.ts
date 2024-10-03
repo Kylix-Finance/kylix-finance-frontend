@@ -45,3 +45,9 @@ export type Asset = {
   src: string;
   alt: string;
 };
+
+export type SocialMedia = {
+  name: string;
+  link: string;
+  icon: Icon;
+};

@@ -1,7 +1,8 @@
-import { ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 import Image from "next/image";
+import { cn } from "~/utils";
 
-interface Props {
+interface Props extends ComponentProps<"div"> {
   children: ReactNode;
   heading: {
     right: string;
@@ -10,9 +11,9 @@ interface Props {
   description: string;
 }
 
-const Section = ({ children, description, heading }: Props) => {
+const Section = ({ children, description, heading, ...rest }: Props) => {
   return (
-    <div className="relative w-full h-full">
+    <div className={cn("relative w-full h-full", rest.className)} {...rest}>
       <div className="absolute inset-0 z-0 w-full h-full mt-16 md:mt-24 lg:mt-52">
         <Image
           src="/assets/images/section-bg.png"
