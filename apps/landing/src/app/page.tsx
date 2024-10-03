@@ -4,7 +4,7 @@ import MarketTrends from "./_parts/MarketTrends";
 import SupportedAssetsAndAPY from "./_parts/SupportedAssetsAndAPY";
 import HowItWorks from "./_parts/HowItWorks";
 import SecurityAndAudits from "./_parts/SecurityAndAudits";
-import Footer from "./_parts/Footer";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 export default function page() {

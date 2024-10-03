@@ -5,15 +5,18 @@ import {
   MarketTrend,
   Security,
   SmartLending,
+  SocialMedia,
 } from "~/types";
 import {
   AvaLaunch,
   BorrowImage,
   Btc,
   Check,
+  Discord,
   Eth,
   Focus,
   Shield,
+  Twitter,
   Usdc,
 } from "~/assets/svgs";
 export const smartLending: SmartLending[] = [
@@ -309,5 +312,17 @@ export const footerItems = [
       createFooterItem("Feedbacks", "feedbacks"),
       createFooterItem("API Doc", "apiDoc"),
     ],
+  },
+];
+export const socialMediaLinks: Array<SocialMedia> = [
+  {
+    name: "X",
+    link: "https://x.com/kylixfinance",
+    icon: Twitter,
+  },
+  {
+    name: "Discord",
+    link: "https://discord.gg/UkRcWaTh5p",
+    icon: Discord,
   },
 ];
