@@ -5,7 +5,7 @@ import SupportedAssetsAndAPY from "./_parts/SupportedAssetsAndAPY";
 import HowItWorks from "./_parts/HowItWorks";
 import SecurityAndAudits from "./_parts/SecurityAndAudits";
 import Footer from "./_parts/Footer";
-import Header from "./_parts/Header";
+import Header from "../components/Header";
 
 export default function page() {
   return (

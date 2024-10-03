@@ -14,6 +14,8 @@ import LinkedIn from "./linkedIn.svg";
 import Shield from "./shield.svg";
 import Twitter from "./twitter.svg";
 import Usdc from "./usdc.svg";
+import Menu from "./menu.svg";
+import XIcon from "./x.svg";
 export {
   ArrowRight,
   AvaLaunch,
@@ -31,4 +33,6 @@ export {
   Shield,
   Twitter,
   Usdc,
+  Menu,
+  XIcon,
 };
