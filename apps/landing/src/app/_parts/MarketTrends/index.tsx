@@ -18,7 +18,10 @@ const MarketTrends = () => {
       id="markets-trends"
     >
       <div className="flex flex-col pt-4 pb-8 px-8 gap-12 rounded-md border border-secondary-400 w-full shadow-[0px 64px 64px -48px rgba(15, 15, 15, 0.1)] bg-[#DBC5F510]">
-        <div className="flex justify-center border-b-[3px] border-[#23262F] overflow-x-scroll overflow-y-hidden hide-scrollbar">
+        <div
+          className="flex border-b-[3px] border-[#23262F] overflow-x-scroll overflow-y-hidden hide-scrollbar"
+          style={{ justifyContent: "safe center" }}
+        >
           {marketTrends.map((item) => (
             <div key={item.id} className="relative pb-0.5 shrink-0">
               <p
