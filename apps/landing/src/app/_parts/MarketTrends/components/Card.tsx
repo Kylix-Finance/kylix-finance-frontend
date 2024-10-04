@@ -58,6 +58,7 @@ const Card = ({ id }: Props) => {
       </div>
       <div className="relative w-full order-1">
         <Image
+          className="ml-auto"
           width={644}
           height={384}
           src={currentSlide.image}
