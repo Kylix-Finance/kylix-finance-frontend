@@ -6,6 +6,7 @@ const SupportedAssetsAndAPY = () => {
     <Section
       heading={{ left: "Supported ", right: " Assets and APY" }}
       description="The new cross-chain Lending Platform, on Polkadot."
+      id="supported-assets-and-apy"
     >
       <div>
         <div className="flex lg:flex-row items-center justify-between gap-6 flex-wrap">
