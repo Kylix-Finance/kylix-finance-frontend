@@ -280,9 +280,9 @@ const createNavItem = (label: string, link: string) => ({ label, link });
 export const navItems = [
   createNavItem("Smart Lending", "#smart-lending"),
   createNavItem("Markets Trends", "#markets-trends"),
-  createNavItem("Supported  Assets and APY", "#supported-assets-and-apy"),
+  createNavItem("Supported Assets", "#supported-assets-and-apy"),
   createNavItem("How It's Works", "#how-it's-works"),
-  createNavItem("Security And Audits", "#security-and-audits"),
+  createNavItem("Security", "#security-and-audits"),
 ];
 
 const createFooterItem = (label: string, link: string) => ({ label, link });

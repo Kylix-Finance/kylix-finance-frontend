@@ -13,21 +13,21 @@ const Header = () => {
   const toggleMenu = () => setIsOpen((prev) => !prev);
   useLockBodyScroll({ isLocked: isOpen });
 
-  const renderNavItems = () =>
-    navItems.map(({ label, link }, index) => (
-      <Link
-        key={index}
-        href={link}
-        className="font-medium text-sm leading-5 tracking-wide text-white"
-      >
-        {label}
-      </Link>
-    ));
+  const renderedNavItems = navItems.map(({ label, link }, index) => (
+    <Link
+      key={index}
+      href={link}
+      className="font-medium text-sm leading-5 tracking-wide text-white"
+      onClick={() => setIsOpen(false)}
+    >
+      {label}
+    </Link>
+  ));
 
   return (
     <>
       <header className="sticky top-0 z-20 text-white py-4">
-        <div className="container mx-auto py-4 px-8 flex justify-between items-center rounded-2xl border border-primary-900 bg-gradient-to-r from-[#11121439] to-[#0C0D0F45] backdrop-blur-sm">
+        <div className="mx-6 py-4 px-8 flex justify-between items-center rounded-2xl border border-primary-900 bg-gradient-to-r from-[#11121439] to-[#0C0D0F45] backdrop-blur-md">
           <Link href="/" className="font-bold text-lg">
             <span className="tracking-wide">
               <Kylix />
@@ -47,7 +47,7 @@ const Header = () => {
             </button>
           </div>
           <nav className="hidden lg:flex space-x-8 text-sm font-medium items-center">
-            {renderNavItems()}
+            {renderedNavItems}
           </nav>
           <Link
             href=""
@@ -65,9 +65,9 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="lg:hidden bg-secondary-900/70 bg-opacity-90 z-30 flex flex-col absolute w-screen h-screen text-white top-0 left-0"
+            className="lg:hidden bg-secondary-900/70 bg-opacity-90 z-30 flex flex-col fixed w-screen h-screen text-white top-0 left-0"
           >
-            <div className="flex flex-col gap-3 w-full h-full bg-secondary-500 p-6">
+            <div className="flex flex-col gap-3 w-full h-full bg-secondary-500 p-6 ">
               <div className="flex items-center justify-between">
                 <Kylix />
                 <span onClick={toggleMenu}>
@@ -75,7 +75,7 @@ const Header = () => {
                 </span>
               </div>
               <div className="flex flex-col w-full h-full gap-4">
-                {renderNavItems()}
+                {renderedNavItems}
               </div>
             </div>
           </motion.nav>

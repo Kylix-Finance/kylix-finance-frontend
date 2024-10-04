@@ -18,13 +18,16 @@ const MarketTrends = () => {
       id="markets-trends"
     >
       <div className="flex flex-col pt-4 pb-8 px-8 gap-12 rounded-md border border-secondary-400 w-full shadow-[0px 64px 64px -48px rgba(15, 15, 15, 0.1)] bg-[#DBC5F510]">
-        <div className="flex justify-center items-center gap-7 border-b-[3px] border-[#23262F]">
+        <div
+          className="flex border-b-[3px] border-[#23262F] overflow-x-scroll overflow-y-hidden hide-scrollbar"
+          style={{ justifyContent: "safe center" }}
+        >
           {marketTrends.map((item) => (
-            <div key={item.id} className="relative pb-0.5">
+            <div key={item.id} className="relative pb-0.5 shrink-0">
               <p
                 onClick={() => setCurrentSlide(item.id)}
                 className={clsx(
-                  "text-sm  leading-4 py-2 px-4  cursor-pointer",
+                  "text-sm leading-4 py-2 px-4 cursor-pointer transition-all whitespace-nowrap",
                   currentSlide === item.id
                     ? "text-white font-bold"
                     : "text-secondary-100 font-normal"
@@ -32,28 +35,18 @@ const MarketTrends = () => {
               >
                 {item.label}
               </p>
-              <AnimatePresence>
-                {item.id === currentSlide && (
-                  <motion.div
-                    layout
-                    layoutId="underline"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    transition={{
-                      duration: 0.5,
-                      ease: "easeInOut",
-                      type: "tween",
-                    }}
-                    className="w-full h-1 bg-primary-500 absolute rounded-full"
-                  />
-                )}
-              </AnimatePresence>
+              {item.id === currentSlide && (
+                <motion.div
+                  layout
+                  layoutId="underline"
+                  className="w-full h-1 bg-primary-500 absolute rounded-full"
+                />
+              )}
             </div>
           ))}
         </div>
         <AnimatePresence mode="wait">
-          <Card id={currentSlide} />
+          <Card key={currentSlide} id={currentSlide} />
         </AnimatePresence>
       </div>
     </Section>
