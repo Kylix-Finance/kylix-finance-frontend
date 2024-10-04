@@ -70,3 +70,26 @@
   );
   height: 1px;
 }
+
+* {
+  /* For Firefox */
+  scrollbar-width: thin; /* Makes scrollbar thinner */
+  scrollbar-color: #56ddb4 transparent; /* Thumb color and track color */
+
+  /* For Internet Explorer and Edge (Legacy) */
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Auto-hide scrollbars */
+}
+
+/* For Webkit browsers (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #56ddb4; /* Color of the scrollbar */
+  border-radius: 10px; /* Rounded corners */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent; /* Background of the scrollbar track */
+}
