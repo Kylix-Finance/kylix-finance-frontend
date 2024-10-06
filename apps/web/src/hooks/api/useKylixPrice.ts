@@ -1,5 +1,6 @@
 import { queryKeys } from "@repo/shared";
 import { useQuery } from "@tanstack/react-query";
+import { kylixPriceSchema } from "~/types";
 
 type Params = {
   startDate: string;
@@ -18,7 +19,7 @@ export const useKylixPrice = ({ endDate, startDate }: Params) => {
         throw new Error("Network response was not ok");
       }
 
-      const data = await response.json();
+      const data = (await response.json()) as kylixPriceSchema[];
       return data;
     },
     enabled: !!startDate && !!endDate,
