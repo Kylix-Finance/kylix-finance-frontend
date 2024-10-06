@@ -35,6 +35,7 @@ const keys = {
   WITHDRAW: "WITHDRAW",
   POOLS: "POOLS",
   ASSET_PRICE: "ASSET_PRICE",
+  KYLIX_PRICE: "KYLIX_PRICE",
 };
 
 export const queryKeys = {
@@ -64,4 +65,11 @@ export const queryKeys = {
   quickBorrow: [baseKey, keys.QUICK_BORROW],
   withdraw: [baseKey, keys.WITHDRAW],
   pools: ({ activeAccount }: Pools) => [baseKey, keys.POOLS, activeAccount],
+  kylixPrice: ({
+    endDate,
+    startDate,
+  }: {
+    startDate: string;
+    endDate: string;
+  }) => [baseKey, keys.KYLIX_PRICE, startDate, endDate],
 };
