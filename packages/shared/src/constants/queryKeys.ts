@@ -36,6 +36,7 @@ const keys = {
   POOLS: "POOLS",
   ASSET_PRICE: "ASSET_PRICE",
   KYLIX_PRICE: "KYLIX_PRICE",
+  TOTAL_SUPPLY: "TOTAL_SUPPLY",
 };
 
 export const queryKeys = {
@@ -72,4 +73,11 @@ export const queryKeys = {
     startDate: string;
     endDate: string;
   }) => [baseKey, keys.KYLIX_PRICE, startDate, endDate],
+  totalSupply: ({
+    endDate,
+    startDate,
+  }: {
+    startDate: string;
+    endDate: string;
+  }) => [baseKey, keys.TOTAL_SUPPLY, startDate, endDate],
 };
