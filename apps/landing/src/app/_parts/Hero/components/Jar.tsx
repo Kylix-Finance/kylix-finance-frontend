@@ -24,10 +24,17 @@ const Jar = ({ scrollYProgress }: Props) => {
     bounce: 0,
     mass: 1,
   });
+  const scale = useTransform(scrollYProgress, [0, 1], [1.25, 1.5]);
+  const sScale = useSpring(scale, {
+    damping: 60,
+    stiffness: 1000,
+    bounce: 0,
+    mass: 1,
+  });
 
   return (
     <motion.group
-      scale={[1.25, 1.25, 1.25]}
+      scale={sScale}
       dispose={null}
       rotation-x={sRotation}
       rotation-y={-0.04}
