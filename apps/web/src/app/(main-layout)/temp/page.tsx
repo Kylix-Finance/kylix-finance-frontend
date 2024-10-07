@@ -12,10 +12,7 @@ export default function Page() {
     startDate,
     endDate,
   });
-  const { data: totalSupply } = useTotalSupply({
-    endDate,
-    startDate,
-  });
+  const { data: totalSupply } = useTotalSupply(30);
   useEffect(() => {
     console.log(kylixPrice);
     console.log(totalSupply);

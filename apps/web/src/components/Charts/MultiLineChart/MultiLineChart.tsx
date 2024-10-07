@@ -44,9 +44,15 @@ export const MultiLineChart = ({
           },
           scales: {
             x: {
-              type: "linear",
+              type: "time",
+              time: {
+                unit: "day",
+                tooltipFormat: "MMM dd",
+                displayFormats: {
+                  month: "MMM dd",
+                },
+              },
               display: true,
-              beginAtZero: true,
               grid: {
                 display: xGrid,
               },

@@ -7,7 +7,7 @@ type GetKylixPrice = {
 };
 
 export const getKylixPrice = async ({ startDate, endDate }: GetKylixPrice) => {
-  const data = await axios.get<kylixPriceSchema[]>("/kylix_token", {
+  const { data } = await axios.get<kylixPriceSchema[]>("/kylix_token", {
     params: {
       start_date: startDate,
       end_date: endDate,

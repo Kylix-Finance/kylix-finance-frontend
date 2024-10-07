@@ -57,3 +57,9 @@ export interface TotalSupplySchema {
   total_borrow: number;
   total_supply: number;
 }
+
+export interface SupplyChartDataset {
+  time: Date;
+  total_borrow: number;
+  total_supply: number;
+}

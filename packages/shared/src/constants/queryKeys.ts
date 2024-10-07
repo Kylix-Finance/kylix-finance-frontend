@@ -73,11 +73,5 @@ export const queryKeys = {
     startDate: string;
     endDate: string;
   }) => [baseKey, keys.KYLIX_PRICE, startDate, endDate],
-  totalSupply: ({
-    endDate,
-    startDate,
-  }: {
-    startDate: string;
-    endDate: string;
-  }) => [baseKey, keys.TOTAL_SUPPLY, startDate, endDate],
+  totalSupply: (days: number) => [baseKey, keys.TOTAL_SUPPLY, days],
 };
