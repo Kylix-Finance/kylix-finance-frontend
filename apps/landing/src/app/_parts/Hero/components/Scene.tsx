@@ -20,7 +20,7 @@ const Scene = ({ scrollYProgress }: Props) => {
   return (
     <MotionConfig>
       <MotionCanvas shadows dpr={[1, 2]} style={{ height: "100vh" }}>
-        <LayoutCamera makeDefault position={[0, 0.6, -2.5]} fov={85} />
+        <LayoutCamera makeDefault position={[0, 0, -2.9]} fov={85} />
         <OrbitControls
           enablePan={false}
           enableZoom={false}

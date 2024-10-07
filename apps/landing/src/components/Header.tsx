@@ -26,7 +26,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 text-white py-4">
+      <header className="fixed w-full top-0 z-20 text-white py-4">
         <div className="mx-6 py-4 px-8 flex justify-between items-center rounded-2xl border border-primary-900 bg-gradient-to-r from-[#11121439] to-[#0C0D0F45] backdrop-blur-md">
           <Link href="/" className="font-bold text-lg">
             <span className="tracking-wide">

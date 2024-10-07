@@ -19,10 +19,10 @@ export default function Home() {
   );
 
   return (
-    <div className="flex flex-col w-full h-full" ref={scrollContainerRef}>
-      <div className="h-[2000px]">
-        <motion.div className="sticky top-0 ">
-          <div className="absolute top-0 z-0 w-full h-screen mt-16 md:mt-24 lg:mt-52">
+    <div className="flex flex-col w-full h-full " ref={scrollContainerRef}>
+      <div className="h-[2000px] ">
+        <motion.div className="sticky top-16">
+          <div className="absolute top-0 z-0 w-full h-[calc(100vh-64px)]">
             <Image
               src="/assets/images/section-bg.png"
               alt="section bg"
