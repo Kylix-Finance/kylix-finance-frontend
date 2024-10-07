@@ -2,28 +2,17 @@ import { queryKeys } from "@repo/shared";
 import { useQuery } from "@tanstack/react-query";
 import { TotalSupplySchema } from "~/types";
 import axios from "~/lib/axios";
+import { getTotalSupply } from "~/api/getTotalSupply";
 
 type Params = {
   startDate: string;
   endDate: string;
 };
 
-export const useTotalSupply = ({ endDate, startDate }: Params) => {
+export const useTotalSupply = ({ startDate, endDate }: Params) => {
   return useQuery({
-    queryKey: queryKeys.totalSupply({ endDate, startDate }),
-    queryFn: async () => {
-      const data = await axios.get<TotalSupplySchema[]>(
-        "/total_supply_borrow",
-        {
-          params: {
-            start_date: startDate,
-            end_date: endDate,
-          },
-        }
-      );
-
-      return data;
-    },
+    queryKey: queryKeys.totalSupply({ startDate, endDate }),
+    queryFn: () => getTotalSupply({ startDate, endDate }),
     enabled: !!startDate && !!endDate,
   });
 };

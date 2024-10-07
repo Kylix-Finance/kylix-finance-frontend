@@ -1,25 +1,16 @@
 import { queryKeys } from "@repo/shared";
 import { useQuery } from "@tanstack/react-query";
-import { kylixPriceSchema } from "~/types";
-import axios from "~/lib/axios";
+import { getKylixPrice } from "~/api/getKylixPrice";
 
 type Params = {
   startDate: string;
   endDate: string;
 };
 
-export const useKylixPrice = ({ endDate, startDate }: Params) => {
+export const useKylixPrice = ({ startDate, endDate }: Params) => {
   return useQuery({
-    queryKey: queryKeys.kylixPrice({ endDate, startDate }),
-    queryFn: async () => {
-      const data = await axios.get<kylixPriceSchema[]>("/kylix_token", {
-        params: {
-          start_date: startDate,
-          end_date: endDate,
-        },
-      });
-      return data;
-    },
+    queryKey: queryKeys.kylixPrice({ startDate, endDate }),
+    queryFn: () => getKylixPrice({ startDate, endDate }),
     enabled: !!startDate && !!endDate,
   });
 };
