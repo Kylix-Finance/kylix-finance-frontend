@@ -10,7 +10,11 @@ interface Props {
 const Jar = ({ scrollYProgress }: Props) => {
   const { nodes } = useGLTF("/jar.glb");
 
-  const rotation = useTransform(scrollYProgress, [0, 1], [-Math.PI / 2.3, 0]);
+  const rotation = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [-Math.PI / 2.3, -0.3]
+  );
   const sRotation = useSpring(rotation, {
     damping: 60,
     stiffness: 1000,

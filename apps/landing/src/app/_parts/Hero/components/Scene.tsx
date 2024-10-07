@@ -1,6 +1,11 @@
 "use client";
 
-import { Environment, OrbitControls } from "@react-three/drei";
+import {
+  Environment,
+  OrbitControls,
+  OrthographicCamera,
+  PerspectiveCamera,
+} from "@react-three/drei";
 import Jar from "./Jar";
 import { Suspense, useEffect, useRef } from "react";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
@@ -20,7 +25,16 @@ const Scene = ({ scrollYProgress }: Props) => {
   return (
     <MotionConfig>
       <MotionCanvas shadows dpr={[1, 2]} style={{ height: "100vh" }}>
-        <LayoutCamera makeDefault position={[0, 0, -2.9]} fov={85} />
+        <OrthographicCamera
+          makeDefault
+          position={[0, 0, -10]}
+          near={1}
+          far={1000}
+          left={-4}
+          right={4}
+          top={2}
+          bottom={-2}
+        />
         <OrbitControls
           enablePan={false}
           enableZoom={false}
