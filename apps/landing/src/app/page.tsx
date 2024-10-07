@@ -6,10 +6,12 @@ import HowItWorks from "./_parts/HowItWorks";
 import SecurityAndAudits from "./_parts/SecurityAndAudits";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import BackGround from "~/components/BackGround";
 
 export default function page() {
   return (
-    <div>
+    <div className="relative w-full h-full">
+      <BackGround />
       <Header />
       <Hero />
       <SmartLending />
