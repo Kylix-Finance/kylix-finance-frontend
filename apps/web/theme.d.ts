@@ -24,11 +24,11 @@ declare module "@mui/material/styles" {
 
 declare module "@mui/material/styles" {
   interface TypographyVariants {
-    // lg: React.CSSProperties;
-    // md: React.CSSProperties;
-    // s: React.CSSProperties;
-    // xl: React.CSSProperties;
-    // xs: React.CSSProperties;
+    lg: React.CSSProperties;
+    md: React.CSSProperties;
+    s: React.CSSProperties;
+    xl: React.CSSProperties;
+    xs: React.CSSProperties;
     body3: TypographyStyleOptions | undefined;
   }
 
