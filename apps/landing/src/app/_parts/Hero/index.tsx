@@ -19,18 +19,29 @@ export default function Home() {
     [0, 1]
   );
 
+  const imageOpacity = useTransform(scrollYProgress, [0, 0.05, 1], [1, 0, 0]);
+  const imageTranslateY = useTransform(
+    scrollYProgress,
+    [0, 0.05, 1],
+    [0, -30, 0]
+  );
+
   return (
     <div className="flex flex-col w-full h-full " ref={scrollContainerRef}>
       <div className="h-[2000px]">
         <motion.div className="sticky top-16">
           <Scene scrollYProgress={scrollYProgress} />
-          <Image
-            className="absolute  bottom-16 left-1/2 translate-x-[-250px] "
-            src={logoImg}
-            alt="kylix"
-            width={500}
-            height={500}
-          />
+          <motion.div
+            style={{
+              opacity: imageOpacity,
+              scale: imageOpacity,
+              translateY: imageTranslateY,
+              translateX: "-250px",
+            }}
+            className="absolute bottom-16 left-1/2 "
+          >
+            <Image src={logoImg} alt="kylix" width={500} height={500} />
+          </motion.div>
         </motion.div>
       </div>
     </div>
