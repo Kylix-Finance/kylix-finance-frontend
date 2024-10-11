@@ -7,28 +7,39 @@ import { MotionValue, useSpring, useTransform } from "framer-motion";
 interface Props {
   scrollYProgress: MotionValue<number>;
 }
+
+type inputRange = [number[], number[]];
+const scaleRange: inputRange = [
+  [0, 0.7, 1],
+  [2, 3, 5],
+];
+const positionRange: inputRange = [
+  [0, 0.7, 1],
+  [0.5, 0, -1],
+];
+const rotationRange: inputRange = [
+  [0, 0.7, 1],
+  [-Math.PI / 2.3, -Math.PI / 1.8, 0],
+];
+
 const Jar = ({ scrollYProgress }: Props) => {
   const { nodes } = useGLTF("/jar.glb");
 
-  const rotation = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [-Math.PI / 2.3, -0.3]
-  );
+  const rotation = useTransform(scrollYProgress, ...rotationRange);
   const sRotation = useSpring(rotation, {
     damping: 60,
     stiffness: 1000,
     bounce: 0,
     mass: 1,
   });
-  const position = useTransform(scrollYProgress, [0, 1], [0.2, -0.5]);
+  const position = useTransform(scrollYProgress, ...positionRange);
   const sPosition = useSpring(position, {
     damping: 60,
     stiffness: 1000,
     bounce: 0,
     mass: 1,
   });
-  const scale = useTransform(scrollYProgress, [0, 1], [1.25, 1.5]);
+  const scale = useTransform(scrollYProgress, ...scaleRange);
   const sScale = useSpring(scale, {
     damping: 60,
     stiffness: 1000,

@@ -13,7 +13,9 @@ import { MotionCanvas, LayoutCamera } from "framer-motion-3d";
 import { MotionConfig, MotionValue, useTransform } from "framer-motion";
 
 import * as THREE from "three";
-import { extend } from "@react-three/fiber";
+import { extend, useThree } from "@react-three/fiber";
+import { OrthographicCamera as ThreeOrthographicCamera } from "three";
+import Camera from "./Camera";
 
 extend(THREE);
 
@@ -25,16 +27,8 @@ const Scene = ({ scrollYProgress }: Props) => {
   return (
     <MotionConfig>
       <MotionCanvas shadows dpr={[1, 2]} style={{ height: "100vh" }}>
-        <OrthographicCamera
-          makeDefault
-          position={[0, 0, -10]}
-          near={1}
-          far={1000}
-          left={-4}
-          right={4}
-          top={2}
-          bottom={-2}
-        />
+        <Camera />
+
         <OrbitControls
           enablePan={false}
           enableZoom={false}
