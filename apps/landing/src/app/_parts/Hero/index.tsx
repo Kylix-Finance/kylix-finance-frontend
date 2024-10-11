@@ -22,7 +22,7 @@ export default function Home() {
     <div className="flex flex-col w-full h-full " ref={scrollContainerRef}>
       <div className="h-[2000px] ">
         <motion.div className="sticky top-16">
-          <div className="absolute top-0 z-0 w-full h-[calc(100vh-64px)]">
+          {/* <div className="absolute top-0 z-0 w-full h-[calc(100vh-64px)]">
             <Image
               src="/assets/images/section-bg.png"
               alt="section bg"
@@ -32,7 +32,7 @@ export default function Home() {
               objectFit="fill"
             />
             <div className="absolute w-full h-full bg-secondary-500/80" />
-          </div>
+          </div> */}
           <Scene scrollYProgress={scrollYProgress} />
         </motion.div>
       </div>
