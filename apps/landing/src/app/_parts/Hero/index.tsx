@@ -24,7 +24,17 @@ export default function Home() {
   const imageTranslateY = useTransform(
     scrollYProgress,
     [0, 0.05, 1],
-    [0, -30, 0]
+    [0, -30, -30]
+  );
+  const firstTextOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.45, 1],
+    [1, 1, 0, 0]
+  );
+  const firstTextTranslateY = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.45, 1],
+    [0, -90, -90, -90]
   );
 
   return (
@@ -44,7 +54,13 @@ export default function Home() {
             <Image src={logoImg} alt="kylix" width={500} height={500} />
           </motion.div>
           {/* FIRST Text START */}
-          <div className="absolute top-[20%] flex flex-col gap-2 justify-center items-center z-50">
+          <motion.div
+            style={{
+              opacity: firstTextOpacity,
+              translateY: firstTextTranslateY,
+            }}
+            className="absolute top-[20%] flex flex-col gap-2 justify-center items-center z-50"
+          >
             <h2 className="flex flex-col sm:flex-row justify-center items-center gap-2.5 font-bold font-heading w-full h-full text-4xl md:text-5xl lg:text-6xl">
               <span className="text-primary-500">Multi-chain Lending.</span>
               <span className="text-white"> Evolved</span>
@@ -59,7 +75,7 @@ export default function Home() {
                 Learn more
               </Button>
             </div>
-          </div>
+          </motion.div>
           {/* FIRST Text END */}
         </motion.div>
       </div>
