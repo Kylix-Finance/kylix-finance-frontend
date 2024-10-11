@@ -15,9 +15,9 @@ const Camera = () => {
       const frustumSize = 5;
 
       cameraRef.current.left = (frustumSize * aspect) / -2;
-      cameraRef.current.right = (frustumSize * aspect) / 2;
-      cameraRef.current.top = frustumSize / 2;
-      cameraRef.current.bottom = frustumSize / -2;
+      cameraRef.current.right = (frustumSize * aspect) / 2.01;
+      cameraRef.current.top = frustumSize / 2.08;
+      cameraRef.current.bottom = frustumSize / -2.08;
       cameraRef.current.updateProjectionMatrix();
     }
   }, [viewport]);

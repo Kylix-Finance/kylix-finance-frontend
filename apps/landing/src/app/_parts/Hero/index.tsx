@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { useScroll, useTransform } from "framer-motion";
 import { useWindowSize } from "usehooks-ts";
 import Image from "next/image";
+import { logoImg } from "~/assets/images";
 export default function Home() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -20,20 +21,16 @@ export default function Home() {
 
   return (
     <div className="flex flex-col w-full h-full " ref={scrollContainerRef}>
-      <div className="h-[2000px] ">
+      <div className="h-[2000px]">
         <motion.div className="sticky top-16">
-          {/* <div className="absolute top-0 z-0 w-full h-[calc(100vh-64px)]">
-            <Image
-              src="/assets/images/section-bg.png"
-              alt="section bg"
-              fill
-              quality={100}
-              draggable="false"
-              objectFit="fill"
-            />
-            <div className="absolute w-full h-full bg-secondary-500/80" />
-          </div> */}
           <Scene scrollYProgress={scrollYProgress} />
+          <Image
+            className="absolute  bottom-16 left-1/2 translate-x-[-250px] "
+            src={logoImg}
+            alt="kylix"
+            width={500}
+            height={500}
+          />
         </motion.div>
       </div>
     </div>
