@@ -9,17 +9,12 @@ interface Props {
 }
 
 type inputRange = [number[], number[]];
-const scaleRange: inputRange = [
-  [0, 0.7, 1],
-  [2, 3, 5],
-];
-const positionRange: inputRange = [
-  [0, 0.7, 1],
-  [0.5, 0, -1],
-];
+const range = [0, 0.3, 0.5, 1];
+const positionRange: inputRange = [range, [-0.7, -0.7, -1, 0]];
+const scaleRange: inputRange = [range, [1.3, 2, 3, 3]];
 const rotationRange: inputRange = [
-  [0, 0.7, 1],
-  [-Math.PI / 2.3, -Math.PI / 1.8, 0],
+  range,
+  [-Math.PI / 2.3, -Math.PI / 10, 0, 0],
 ];
 
 const Jar = ({ scrollYProgress }: Props) => {
