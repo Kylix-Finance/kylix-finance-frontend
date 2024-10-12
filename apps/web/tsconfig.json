@@ -3,15 +3,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/*": ["testSrc/*"],
       "#/*": ["public/*"],
       "~/*": ["src/*"]
     }
   },
   "include": [
-    "./react-app-env.d.ts",
     "src",
-    ".next/types/**/*.ts",
-    "./theme.d.ts"
-  ],
-  "exclude": ["node_modules"]
+    "next-env.d.ts",
+    "./react-app-env.d.ts",
+    "../../theme.d.ts"
+  ]
 }
