@@ -7,6 +7,7 @@ import SecurityAndAudits from "./_parts/SecurityAndAudits";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import BackGround from "~/components/BackGround";
+import FeaturedPartners from "./_parts/FeaturedPartners";
 
 export default function page() {
   return (
@@ -14,6 +15,7 @@ export default function page() {
       <BackGround />
       <Header />
       <Hero />
+      <FeaturedPartners />
       <SmartLending />
       <MarketTrends />
       <SupportedAssetsAndAPY />
