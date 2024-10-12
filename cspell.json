@@ -3,7 +3,16 @@
   "ignorePaths": [],
   "dictionaryDefinitions": [],
   "dictionaries": [],
-  "ignoreWords": ["CLEANME", "Skel", "tailwindcss"],
+  "ignoreWords": [
+    "Acala",
+    "CLEANME",
+    "Skel",
+    "clsx",
+    "jito",
+    "jitosol",
+    "svgs",
+    "tailwindcss"
+  ],
   "import": [],
   "words": [
     "Aave",

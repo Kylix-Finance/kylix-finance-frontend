@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth !important;
+  }
+  body {
+    position: relative;
+  }
+}
+
+@layer utilities {
+}
+
+@layer components {
+}
+
+.get-start-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: linear-gradient(
+      180deg,
+      rgba(86, 221, 180, 0) 0%,
+      rgba(11, 154, 111, 0.05) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(145, 235, 208, 0) 0%,
+      rgba(86, 221, 180, 0.06) 100%
+    ),
+    rgba(86, 221, 180, 0.12);
+  box-shadow: 0px 0px 12px 0px rgba(86, 221, 180, 0.24) inset;
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.get-start-btn:hover {
+  background: linear-gradient(
+      180deg,
+      rgba(86, 221, 180, 0) 0%,
+      rgba(11, 154, 111, 0.2) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(145, 235, 208, 0) 0%,
+      rgba(86, 221, 180, 0.2) 100%
+    ),
+    rgba(86, 221, 180, 0.24);
+  box-shadow: 0px 0px 16px 4px rgba(86, 221, 180, 0.4) inset;
+}
+
+.footer-bg {
+  background: radial-gradient(
+      52.64% 73.09% at 52.64% -20%,
+      rgba(86, 221, 180, 0.3) 0%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    #030404;
+  border-top: 1px solid rgba(86, 221, 180, 0);
+}
+.footer-top-border {
+  background-image: linear-gradient(
+    to right,
+    rgba(86, 221, 180, 0),
+    rgba(255, 255, 255, 0.86),
+    rgba(86, 221, 180, 0)
+  );
+  height: 1px;
+}
+
+* {
+  /* For Firefox */
+  scrollbar-width: thin; /* Makes scrollbar thinner */
+  scrollbar-color: #56ddb4 transparent; /* Thumb color and track color */
+
+  /* For Internet Explorer and Edge (Legacy) */
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* Auto-hide scrollbars */
+}
+
+/* For Webkit browsers (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #56ddb4; /* Color of the scrollbar */
+  border-radius: 10px; /* Rounded corners */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent; /* Background of the scrollbar track */
+}

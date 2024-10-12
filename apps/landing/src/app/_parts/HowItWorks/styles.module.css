@@ -1,0 +1,30 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "deposit borrow"
+    "convert borrow";
+  gap: 24px;
+}
+
+.deposit {
+  grid-area: deposit;
+}
+
+.convert {
+  grid-area: convert;
+}
+
+.borrow {
+  grid-area: borrow;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "deposit"
+      "convert"
+      "borrow";
+  }
+}

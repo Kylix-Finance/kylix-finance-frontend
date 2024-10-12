@@ -21,3 +21,5 @@ export type TCellProps = TableCellProps;
 
 export type Order = "asc" | "desc";
 export type OnTRowClick<Schema> = (item: Schema) => void;
+
+export type Numeric<Schema> = Array<keyof Schema>;

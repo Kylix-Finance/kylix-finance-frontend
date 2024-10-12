@@ -4,7 +4,18 @@ import { Doughnut } from "react-chartjs-2";
 import { palette } from "~/config/palette";
 import "chart.js/auto";
 
-const DoughnutChart = () => {
+// TODO: Remove optional for `data` and `backgroundColor`
+interface Props {
+  backgroundColor?: Array<string>;
+  labels?: Array<string>;
+  data?: Array<number>;
+}
+
+const DoughnutChart: React.FC<Props> = ({
+  backgroundColor = [palette.primary.main, palette.secondary.main],
+  data = [12, 19],
+  labels = ["Total Deposit", "Total Borrow"],
+}) => {
   return (
     <div className="w-25 h-25">
       <Doughnut
@@ -13,13 +24,13 @@ const DoughnutChart = () => {
         data={{
           datasets: [
             {
-              data: [12, 19],
-              backgroundColor: [palette.primary.main, palette.secondary.main],
+              backgroundColor,
               borderRadius: 1000,
+              data,
               spacing: 2,
             },
           ],
-          labels: ["Total Deposit", "Total Borrow"],
+          labels,
         }}
         options={{
           cutout: "78%",

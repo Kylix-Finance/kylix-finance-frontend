@@ -1,0 +1,62 @@
+.container {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas:
+    "total total collateral collateral borrow borrow"
+    "progress_bar progress_bar progress_bar progress_bar progress_bar progress_bar"
+    "supplied supplied supplied borrowed borrowed borrowed"
+    "quick_borrow quick_borrow quick_borrow quick_borrow quick_borrow quick_borrow ";
+}
+
+.total {
+  grid-area: total;
+}
+
+.collateral {
+  grid-area: collateral;
+}
+
+.borrow {
+  grid-area: borrow;
+}
+
+.progress_bar {
+  grid-area: progress_bar;
+}
+.supplied {
+  grid-area: supplied;
+}
+.borrowed {
+  grid-area: borrowed;
+}
+
+.quick_borrow {
+  grid-area: quick_borrow;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "total"
+      "collateral"
+      "borrow"
+      "progress_bar"
+      "supplied"
+      "borrowed"
+      "quick_borrow";
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "total"
+      "collateral"
+      "borrow"
+      "progress_bar"
+      "quick_borrow";
+  }
+}
