@@ -12,6 +12,11 @@ import Shield from "./shield.svg";
 import Twitter from "./twitter.svg";
 import Menu from "./menu.svg";
 import XIcon from "./x.svg";
+import DefiSaver from "./defi-saver.svg";
+import IdleFinance from "./idle-finance.svg";
+import InstaDapp from "./instadapp.svg";
+import Lido from "./lido.svg";
+import StakeHouse from "./stakehouse.svg";
 export {
   ArrowRight,
   BorrowImage,
@@ -27,4 +32,9 @@ export {
   Twitter,
   Menu,
   XIcon,
+  DefiSaver,
+  IdleFinance,
+  InstaDapp,
+  Lido,
+  StakeHouse,
 };

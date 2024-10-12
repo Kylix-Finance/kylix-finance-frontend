@@ -51,3 +51,21 @@ export type SocialMedia = {
   link: string;
   icon: Icon;
 };
+
+export type FeaturedPartners = {
+  link: string;
+  name: string;
+  icon: Icon;
+};
+export type FooterItem = {
+  title: string;
+  items: {
+    label: string;
+    link: string;
+  }[];
+};
+
+export type NavItem = {
+  label: string;
+  link: string;
+};
