@@ -8,7 +8,7 @@ interface Props {
 export const TableActions = ({ assetId }: Props) => {
   return (
     <Box className="flex justify-end gap-1">
-      <Link href={`/staking/${assetId}`}>
+      <Link href={`/srl/${assetId}`}>
         <Button variant="contained">
           <Typography
             className="!text-[#FFF]"

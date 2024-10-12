@@ -8,16 +8,12 @@ import {
   SocialMedia,
 } from "~/types";
 import {
-  AvaLaunch,
   BorrowImage,
-  Btc,
   Check,
   Discord,
-  Eth,
   Focus,
   Shield,
   Twitter,
-  Usdc,
 } from "~/assets/svgs";
 export const smartLending: SmartLending[] = [
   {

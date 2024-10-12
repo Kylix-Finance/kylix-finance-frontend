@@ -46,3 +46,14 @@ export interface SelectOption {
   value: string;
   label: string;
 }
+
+export interface kylixPriceSchema {
+  kylix_token: string;
+  time: string;
+}
+
+export interface TotalSupplySchema {
+  time: string;
+  total_borrow: number;
+  total_supply: number;
+}
