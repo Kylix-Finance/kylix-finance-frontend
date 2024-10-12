@@ -1,8 +1,11 @@
 import {
   Asset,
+  FeaturedPartners,
+  FooterItem,
   HowItsWork,
   Icon,
   MarketTrend,
+  NavItem,
   Security,
   SmartLending,
   SocialMedia,
@@ -10,10 +13,15 @@ import {
 import {
   BorrowImage,
   Check,
+  DefiSaver,
   Discord,
   Focus,
+  InstaDapp,
+  Lido,
   Shield,
+  StakeHouse,
   Twitter,
+  IdleFinance,
 } from "~/assets/svgs";
 export const smartLending: SmartLending[] = [
   {
@@ -272,41 +280,88 @@ export const marketTrends: MarketTrend[] = [
   },
 ];
 
-const createNavItem = (label: string, link: string) => ({ label, link });
-export const navItems = [
-  createNavItem("Smart Lending", "#smart-lending"),
-  createNavItem("Markets Trends", "#markets-trends"),
-  createNavItem("Supported Assets", "#supported-assets-and-apy"),
-  createNavItem("How It's Works", "#how-it's-works"),
-  createNavItem("Security", "#security-and-audits"),
+// const createNavItem = (label: string, link: string) => ({ label, link });
+export const navItems: NavItem[] = [
+  {
+    label: "Smart Lending",
+    link: "#smart-lending",
+  },
+  {
+    label: "Markets Trends",
+    link: "#markets-trends",
+  },
+  {
+    label: "Supported Assets",
+    link: "#supported-assets-and-apy",
+  },
+  {
+    label: "How It's Works",
+    link: "#how-it's-works",
+  },
+  {
+    label: "Security",
+    link: "#security-and-audits",
+  },
 ];
 
-const createFooterItem = (label: string, link: string) => ({ label, link });
-export const footerItems = [
+export const footerItems: FooterItem[] = [
   {
     title: "Products",
     items: [
-      createFooterItem("Lending", "lending"),
-      createFooterItem("Borrowing", "borrowing"),
-      createFooterItem("Markets", "markets"),
+      {
+        label: "Lending",
+        link: "lending",
+      },
+      {
+        label: "Borrowing",
+        link: "borrowing",
+      },
+      {
+        label: "Markets",
+        link: "markets",
+      },
     ],
   },
   {
     title: "Tools",
     items: [
-      createFooterItem("Tokens", "tokens"),
-      createFooterItem("Convert", "convert"),
-      createFooterItem("Explore Traders", "exploreTraders"),
-      createFooterItem("Pricing", "pricing"),
+      {
+        label: "Tokens",
+        link: "tokens",
+      },
+      {
+        label: "Convert",
+        link: "convert",
+      },
+      {
+        label: "Explore Traders",
+        link: "exploreTraders",
+      },
+      {
+        label: "Pricing",
+        link: "pricing",
+      },
     ],
   },
   {
     title: "Support",
     items: [
-      createFooterItem("Beginners Guide", "beginnersGuide"),
-      createFooterItem("Help Center", "helpCenter"),
-      createFooterItem("Feedbacks", "feedbacks"),
-      createFooterItem("API Doc", "apiDoc"),
+      {
+        label: "Beginners Guide",
+        link: "beginnersGuide",
+      },
+      {
+        label: "Help Center",
+        link: "helpCenter",
+      },
+      {
+        label: "Feedbacks",
+        link: "feedbacks",
+      },
+      {
+        label: "API Doc",
+        link: "apiDoc",
+      },
     ],
   },
 ];
@@ -320,5 +375,33 @@ export const socialMediaLinks: Array<SocialMedia> = [
     name: "Discord",
     link: "https://discord.gg/UkRcWaTh5p",
     icon: Discord,
+  },
+];
+
+export const featuredPartners: Array<FeaturedPartners> = [
+  {
+    link: "/",
+    name: "Instadapp",
+    icon: InstaDapp,
+  },
+  {
+    link: "/",
+    name: "Idle Finance",
+    icon: IdleFinance,
+  },
+  {
+    link: "/",
+    name: "Lido",
+    icon: Lido,
+  },
+  {
+    link: "/",
+    name: "Defi Saver",
+    icon: DefiSaver,
+  },
+  {
+    link: "/",
+    name: "Stakehouse",
+    icon: StakeHouse,
   },
 ];
