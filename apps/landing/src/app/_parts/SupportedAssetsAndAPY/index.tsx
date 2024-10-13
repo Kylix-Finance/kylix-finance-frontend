@@ -1,17 +1,17 @@
 import Image from "next/image";
 import Section from "~/components/Section";
-import { assets } from "~/data";
+import { supportedAssetsData } from "~/data";
 
 const SupportedAssetsAndAPY = () => {
   return (
     <Section
-      heading={{ left: "Supported ", right: " Assets and APY" }}
-      description="The new cross-chain Lending Platform, on Polkadot."
-      id="supported-assets-and-apy"
+      heading={supportedAssetsData.heading}
+      description={supportedAssetsData.description}
+      id={supportedAssetsData.id}
     >
       <div>
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-          {assets.map((asset, index) => (
+          {supportedAssetsData.items.map((asset, index) => (
             <div
               key={index}
               className="p-0.5 bg-gradient-to-br from-white/20 via-transparent rounded-md"

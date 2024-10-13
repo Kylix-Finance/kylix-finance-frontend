@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { Card } from "~/components";
-import { mergeMetadata } from "~/config/metadata";
+import { mergeMetadata } from "@repo/shared";
 import LiquidationsTable from "./_parts/LiquidationsTable";
 import Header from "./_parts/Header";
 import { Suspense } from "react";

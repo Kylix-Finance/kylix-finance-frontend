@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { Metadata } from "next";
-import { mergeMetadata } from "~/config/metadata";
+import { mergeMetadata } from "@repo/shared";
 
 export const metadata: Metadata = mergeMetadata({ title: "Portfolio" });
 
