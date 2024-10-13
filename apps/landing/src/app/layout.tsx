@@ -4,11 +4,11 @@ import { mergeMetadata } from "@repo/shared";
 import { Metadata } from "next";
 export const metadata: Metadata = mergeMetadata({
   title: {
-    default: "Kylix",
-    template: "%s | Kylix",
+    default: "Kylix Finance",
+    template: "%s | Kylix Finance",
   },
   description:
-    "Kylix Finance addresses the gaps in the current DeFi landscape on Polkadot by providing a comprehensive on-chain lending solution. ",
+    "A new-gen multi-chain Lending platform for managing over-collateralized loans & aggregating cross-chain Liquidity.",
 });
 export default function RootLayout({
   children,
