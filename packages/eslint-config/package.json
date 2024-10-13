@@ -3,5 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "main": "./src/index.js",
-  "dependencies": {}
+  "scripts": {
+    "check:format": "prettier --write  --list-different ./",
+    "check:lint": "eslint ./",
+    "check:lint:fix": "eslint --fix ./",
+    "check:lint:fix:strict": "eslint --fix --max-warnings 0 ./",
+    "check:style": "pnpm run check:format && pnpm run check:lint:fix"
+  }
 }

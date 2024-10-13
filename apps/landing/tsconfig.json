@@ -11,7 +11,8 @@
     "./react-app-env.d.ts",
     "src",
     ".next/types/**/*.ts",
-    "../../theme.d.ts"
+    "../../theme.d.ts",
+    "../../global.d.ts"
   ],
   "exclude": ["node_modules"]
 }

@@ -2,7 +2,7 @@
 
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { useAccountStore } from "../../../shared/src";
-import { queryKeys, getWalletExtension } from "@repo/shared/";
+import { queryKeys, getWalletExtension } from "@repo/shared";
 import { useConfig } from "./useConfig";
 
 export const useAccounts = () => {
