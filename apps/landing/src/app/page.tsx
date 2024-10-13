@@ -1,4 +1,10 @@
-import Hero from "./_parts/Hero";
+import dynamic from "next/dynamic";
+
+const Hero = dynamic(() => import("./_parts/Hero"), {
+  ssr: false,
+  loading: () => <div className="w-full h-screen" />,
+});
+
 import SmartLending from "./_parts/SmartLending";
 import MarketTrends from "./_parts/MarketTrends";
 import SupportedAssetsAndAPY from "./_parts/SupportedAssetsAndAPY";

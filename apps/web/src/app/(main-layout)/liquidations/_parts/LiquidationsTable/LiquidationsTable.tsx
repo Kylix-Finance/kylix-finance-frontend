@@ -178,7 +178,7 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
             <Button variant="contained">
               <Typography
                 className="text-[#FFF]"
-                variant="md"
+                variant="body3"
                 fontWeight={600}
                 fontFamily={"Poppins"}
               >

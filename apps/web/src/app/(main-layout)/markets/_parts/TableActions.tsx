@@ -13,7 +13,7 @@ export const TableActions = ({ assetId }: Props) => {
         <Button variant="contained">
           <Typography
             className="!text-[#FFF]"
-            variant="md"
+            variant="body3"
             fontWeight={600}
             fontFamily={"Poppins"}
           >
@@ -37,7 +37,7 @@ export const TableActions = ({ assetId }: Props) => {
           },
         }}
       >
-        <Typography variant="md" fontWeight={600} fontFamily={"Poppins"}>
+        <Typography variant="body3" fontWeight={600} fontFamily={"Poppins"}>
           Borrow
         </Typography>
       </Button>
