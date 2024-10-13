@@ -10,7 +10,7 @@ import TotalLocked from "./_parts/TotalLocked";
 import VaultChart from "./_parts/VaultChart";
 import { Card } from "~/components";
 import { Icons } from "~/assets/svgs";
-import { mergeMetadata } from "~/config/metadata";
+import { mergeMetadata } from "@repo/shared";
 
 export const metadata: Metadata = mergeMetadata({
   title: "Dashboard",

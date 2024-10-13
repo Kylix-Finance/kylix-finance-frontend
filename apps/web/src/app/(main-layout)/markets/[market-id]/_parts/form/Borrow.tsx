@@ -1,7 +1,12 @@
 "use client";
-import { ListItem } from "~/components";
+import { ListItem, notify } from "~/components";
 import { Form } from "./Form";
 import { useState } from "react";
+import { useBorrow } from "~/hooks/chain/useBorrow";
+import { useParams } from "next/navigation";
+import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
+import { BASE_ASSET_ID } from "@repo/shared";
+import { useQuickBorrow } from "~/hooks/chain/useQuickBorrow";
 
 const items: Array<ListItem> = [
   {
@@ -35,21 +40,58 @@ const items: Array<ListItem> = [
 
 export const Borrow = () => {
   const [value, setValue] = useState("");
-  const onclick = () => {};
+  const params = useParams();
+  const lendTokenId = params["market-id"] as string;
+  const { mutate, isPending } = useQuickBorrow();
+  const { assetMetaData: baseAssetMetaData } = useMetadata(BASE_ASSET_ID);
+  const { assetMetaData: assetIdMetaData } = useMetadata(lendTokenId);
+
+  const { balance: assetBalance } = useBalance({ assetId: lendTokenId });
+  const { balance: baseAssetBalance } = useBalance({ assetId: BASE_ASSET_ID });
+  const onclick = () => {
+    if (!assetBalance || !value || !baseAssetMetaData?.decimals) return;
+    const borrowValue = parseUnit(
+      value,
+      baseAssetMetaData?.decimals
+    ).toString();
+    const supplyValue = assetBalance.toString();
+    console.log("_______________CC", borrowValue, supplyValue);
+
+    // mutate(
+    //   {
+    //     borrowPoolId: BASE_ASSET_ID.toString(),
+    //     borrowValue,
+    //     supplyPoolId: lendTokenId,
+    //     supplyValue: assetBalance.toString(),
+    //   },
+    //   {
+    //     onSuccess: ({ blockNumber }) => {
+    //       setValue("");
+
+    //       notify({
+    //         type: "success",
+    //         title: "Borrow Successful",
+    //         message: "Transaction completed on block " + blockNumber,
+    //       });
+    //     },
+    //   }
+    // );
+  };
   return (
     <Form
-      assetId={9}
+      assetId={BASE_ASSET_ID}
       items={items}
-      decimals={18}
-      onMaxClick={() => {}}
+      decimals={baseAssetMetaData?.decimals}
       setValue={setValue}
       value={value}
       submitButton={{
         onclick,
         content: "Borrow",
       }}
-      balance=""
-      symbol={undefined}
+      isSubmitting={isPending}
+      balance={baseAssetBalance?.toString()}
+      symbol={baseAssetMetaData?.symbol}
+      onMaxClick={() => {}}
     />
   );
 };

@@ -7,11 +7,20 @@
     "Acala",
     "CLEANME",
     "Skel",
+    "chartjs",
     "clsx",
+    "dicebear",
+    "drei",
     "jito",
     "jitosol",
+    "nuqs",
+    "rushstack",
+    "svgr",
     "svgs",
-    "tailwindcss"
+    "tailwindcss",
+    "toastify",
+    "trivago",
+    "usehooks"
   ],
   "import": [],
   "words": [

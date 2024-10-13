@@ -1,4 +1,14 @@
 import { ComponentType, SVGProps } from "react";
+export interface Section<T> {
+  id: string;
+  heading: {
+    left?: string;
+    right?: string;
+  };
+  header?: string;
+  description?: string;
+  items: T[];
+}
 
 export type SmartLending = {
   to: string;
@@ -50,4 +60,22 @@ export type SocialMedia = {
   name: string;
   link: string;
   icon: Icon;
+};
+
+export type FeaturedPartners = {
+  link: string;
+  name: string;
+  icon: Icon;
+};
+export type FooterItem = {
+  title: string;
+  items: {
+    label: string;
+    link: string;
+  }[];
+};
+
+export type NavItem = {
+  label: string;
+  link: string;
 };

@@ -31,6 +31,7 @@ const keys = {
   POOL_DATA: "POOL_DATA",
   SUPPLY: "SUPPLY",
   BORROW: "BORROW",
+  REPAY: "REPAY",
   QUICK_BORROW: "QUICK_BORROW",
   WITHDRAW: "WITHDRAW",
   POOLS: "POOLS",
@@ -70,4 +71,5 @@ export const queryKeys = {
   pools: ({ activeAccount }: Pools) => [baseKey, keys.POOLS, activeAccount],
   kylixPrice: (scale: ChartScale) => [baseKey, keys.KYLIX_PRICE, scale],
   totalSupply: (scale: ChartScale) => [baseKey, keys.TOTAL_SUPPLY, scale],
+  repay: [baseKey, keys.REPAY],
 };

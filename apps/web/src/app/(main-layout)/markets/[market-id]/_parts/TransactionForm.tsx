@@ -19,13 +19,13 @@ const tabItems: Array<TabType> = [
     value: "borrow",
     label: "Borrow",
     content: <Borrow />,
-    disable: true,
+    disable: false,
   },
   {
     value: "repay",
     label: "Repay",
     content: <Repay />,
-    disable: true,
+    disable: false,
   },
 ] as const;
 

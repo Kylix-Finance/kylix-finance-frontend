@@ -2,8 +2,7 @@ import Providers from "~/providers";
 import "./globals.css";
 import { fonts } from "~/assets/fonts";
 import { Metadata } from "next";
-import { mergeMetadata } from "~/config/metadata";
-
+import { mergeMetadata } from "@repo/shared";
 export const metadata: Metadata = mergeMetadata({
   title: {
     default: "Kylix",

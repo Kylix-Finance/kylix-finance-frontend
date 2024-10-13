@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable unused-imports/no-unused-imports */
 import {
   ButtonPropsVariantOverrides,
   TypographyPropsVariantOverrides,
@@ -19,39 +19,18 @@ declare module "@mui/material/styles" {
     "800": string;
     "900": string;
   }
-  interface TypographyVariantsOptions {}
-}
 
-declare module "@mui/material/styles" {
   interface TypographyVariants {
-    // lg: React.CSSProperties;
-    // md: React.CSSProperties;
-    // s: React.CSSProperties;
-    // xl: React.CSSProperties;
-    // xs: React.CSSProperties;
-    body3: TypographyStyleOptions | undefined;
+    body3: React.CSSProperties;
   }
 
   interface TypographyVariantsOptions {
-    // lg?: React.CSSProperties;
-    // md?: React.CSSProperties;
-    // s?: React.CSSProperties;
-    // xl?: React.CSSProperties;
-    // xs?: React.CSSProperties;
-    body3?: TypographyStyleOptions | undefined;
+    body3?: React.CSSProperties;
   }
 }
 
-declare module "@mui/material/Button" {
-  interface ButtonPropsVariantOverrides {}
-}
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
-    lg: true;
-    md: true;
-    s: true;
-    xl: true;
-    xs: true;
     body3: true;
   }
 }

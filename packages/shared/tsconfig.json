@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src", "../onchain-utils/src/hooks/useConfig.ts"],
+  "include": ["src", "../../global.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

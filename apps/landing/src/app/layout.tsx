@@ -1,6 +1,18 @@
 import { fonts } from "~/assets/fonts";
 import "./globals.css";
-
+import { mergeMetadata } from "@repo/shared";
+import { Metadata } from "next";
+export const metadata: Metadata = mergeMetadata(
+  {
+    title: {
+      default: "Kylix Finance",
+      template: "%s | Kylix Finance",
+    },
+    description:
+      "A new-gen multi-chain Lending platform for managing over-collateralized loans & aggregating cross-chain Liquidity.",
+  },
+  "Kylix Finance"
+);
 export default function RootLayout({
   children,
 }: Readonly<{
