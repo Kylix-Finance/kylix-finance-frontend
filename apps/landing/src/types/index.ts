@@ -1,4 +1,14 @@
 import { ComponentType, SVGProps } from "react";
+export interface Section<T> {
+  id: string;
+  heading: {
+    left?: string;
+    right?: string;
+  };
+  header?: string;
+  description?: string;
+  items: T[];
+}
 
 export type SmartLending = {
   to: string;

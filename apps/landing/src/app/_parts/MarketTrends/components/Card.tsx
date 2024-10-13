@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Button from "~/components/Button";
-import { marketTrends } from "~/data";
+import { marketTrendsData } from "~/data";
 import { motion, Variants } from "framer-motion";
 const variants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Card = ({ id }: Props) => {
-  const currentSlide = marketTrends.find((item) => item.id === id);
+  const currentSlide = marketTrendsData.items.find((item) => item.id === id);
   if (!currentSlide) return null;
 
   return (

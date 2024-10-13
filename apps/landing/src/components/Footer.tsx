@@ -6,7 +6,7 @@ import {
   LinkedIn,
   Twitter,
 } from "~/assets/svgs";
-import { footerItems, socialMediaLinks } from "~/data";
+import { footerData } from "~/data";
 
 const Footer = () => {
   return (
@@ -17,7 +17,7 @@ const Footer = () => {
           <div className="flex flex-col items-center justify-center lg:justify-start gap-7">
             <KylixCircle />
             <div className="flex items-center justify-center gap-3 mb-10">
-              {socialMediaLinks.map(({ icon: Icon, link }, index) => {
+              {footerData.left.map(({ icon: Icon, link }, index) => {
                 return (
                   <Link
                     className="w-10 h-10 flex justify-center items-center"
@@ -31,7 +31,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14">
-            {footerItems.map((item, index) => {
+            {footerData.right.map((item, index) => {
               return (
                 <div className="flex flex-col gap-5 lg:gap-8 p-2 " key={index}>
                   <p className="font-semibold lg:font-bold leading-4 lg:leading-8 text-xl lg:text-2xl">
