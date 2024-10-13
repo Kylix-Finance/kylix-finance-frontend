@@ -19,6 +19,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = mergeMetadata({
   title: "Multi-chain lending for Web3",
+  description:
+    "Kylix Finance addresses the gaps in the current DeFi landscape on Polkadot by providing a comprehensive on-chain lending solution. ",
 });
 
 export default function page() {
