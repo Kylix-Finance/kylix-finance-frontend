@@ -26,7 +26,7 @@ const Hero = () => {
               A new-generation multi-chain Lending platform, with self-repaying
               loans and a marketplace <br /> for Collateral Liquidation.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 bg-blue-500">
               <Button color="secondary">Get start</Button>
               <Button color="white" variant="outline">
                 Learn more
