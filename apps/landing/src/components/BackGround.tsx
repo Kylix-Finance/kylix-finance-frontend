@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 const objectVariant: Variants = {
-  initial: { rotate: 15 },
+  initial: { rotate: 12 },
   animate: {
     y: [0, 15, -15, 0],
     rotate: [12, 15, 9, 12],
@@ -24,7 +24,7 @@ const BackGround = () => {
         }}
       />
       <motion.div
-        className="fixed w-full h-screen  opacity-15"
+        className="fixed w-full h-screen opacity-15"
         initial="initial"
         animate="animate"
         variants={objectVariant}
