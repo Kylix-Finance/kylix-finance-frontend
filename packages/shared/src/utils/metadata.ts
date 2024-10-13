@@ -1,32 +1,39 @@
 import type { Metadata } from "next";
 import { merge } from "lodash-es";
 
-const baseMetadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_FRONTEND_URL!),
-  openGraph: {
-    url: "./",
-    siteName: "Kylix",
-    images: {
-      url: "/cover.png",
+const baseMetadata = (siteName = "Kylix"): Metadata => {
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_FRONTEND_URL!),
+    openGraph: {
+      url: "./",
+      siteName: siteName,
+      images: {
+        url: "/cover.png",
+      },
     },
-  },
-  twitter: {
-    card: "summary_large_image",
-    images: "/cover.png",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
+    twitter: {
+      card: "summary_large_image",
+      images: "/cover.png",
+    },
+    robots: {
       index: true,
       follow: true,
-      noimageindex: false,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+      },
     },
-  },
+  };
 };
 
-export const mergeMetadata = (metadata: Metadata = {}): Metadata => {
+const k = (w = "Hi") => {};
+
+export const mergeMetadata = (
+  metadata: Metadata = {},
+  siteName?: string
+): Metadata => {
   const { title, description } = metadata;
 
   const sharedMetadata = {
@@ -39,6 +46,11 @@ export const mergeMetadata = (metadata: Metadata = {}): Metadata => {
     twitter: { title, description },
   };
 
-  const mergedMetadata = merge({}, baseMetadata, metadata, sharedMetadata);
+  const mergedMetadata = merge(
+    {},
+    baseMetadata(siteName),
+    metadata,
+    sharedMetadata
+  );
   return mergedMetadata;
 };
