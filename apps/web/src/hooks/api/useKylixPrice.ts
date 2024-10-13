@@ -1,16 +1,12 @@
 import { queryKeys } from "@repo/shared";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getKylixPrice } from "~/api/getKylixPrice";
+import { ChartScale } from "~/types";
 
-type Params = {
-  startDate: string;
-  endDate: string;
-};
-
-export const useKylixPrice = ({ startDate, endDate }: Params) => {
+export const useKylixPrice = (scale: ChartScale) => {
   return useQuery({
-    queryKey: queryKeys.kylixPrice({ startDate, endDate }),
-    queryFn: () => getKylixPrice({ startDate, endDate }),
-    enabled: !!startDate && !!endDate,
+    queryKey: queryKeys.kylixPrice(scale),
+    queryFn: () => getKylixPrice(scale),
+    placeholderData: keepPreviousData,
   });
 };

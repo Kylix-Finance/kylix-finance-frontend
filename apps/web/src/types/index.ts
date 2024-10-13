@@ -48,11 +48,7 @@ export interface SelectOption {
   label: string;
 }
 
-export interface kylixPriceSchema {
-  kylix_token: string;
-  time: string;
-}
-
+export type kylixPriceSchema = [number, number];
 export type TotalSupplySchema = [number, number, number];
 
 export interface SupplyChartDataset {
