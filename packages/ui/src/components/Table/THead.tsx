@@ -73,7 +73,7 @@ function THead<Schema, ExtraFields extends string = string>({
                 direction={orderBy === name ? order : "asc"}
                 onClick={createSortHandler(name as keyof Schema)}
               >
-                <Typography variant="s">{value as string}</Typography>
+                <Typography variant="body3">{value as string}</Typography>
                 {orderBy === name ? (
                   <Box component="span" sx={visuallyHidden}>
                     {order === "desc"
