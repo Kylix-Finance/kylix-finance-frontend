@@ -17,7 +17,7 @@ const ApyChart = () => {
     setChecked(event.target.checked);
   };
 
-  const { data } = useTotalSupply(30);
+  const { data } = useTotalSupply("1d");
 
   return (
     <Card variant="outlined">
@@ -58,7 +58,7 @@ const ApyChart = () => {
             tension: 0.5,
             parsing: {
               xAxisKey: "time",
-              yAxisKey: "total_borrow",
+              yAxisKey: "borrow",
             },
           },
           {
@@ -67,7 +67,7 @@ const ApyChart = () => {
             tension: 0.5,
             parsing: {
               xAxisKey: "time",
-              yAxisKey: "total_supply",
+              yAxisKey: "supply",
             },
           },
         ]}

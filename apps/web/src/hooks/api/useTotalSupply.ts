@@ -1,10 +1,11 @@
 import { queryKeys } from "@repo/shared";
 import { useQuery } from "@tanstack/react-query";
 import { getTotalSupply } from "~/api/getTotalSupply";
+import { ChartScale } from "~/types";
 
-export const useTotalSupply = (days: number) => {
+export const useTotalSupply = (scale: ChartScale) => {
   return useQuery({
-    queryKey: queryKeys.totalSupply(days),
-    queryFn: () => getTotalSupply(days),
+    queryKey: queryKeys.totalSupply(scale),
+    queryFn: () => getTotalSupply(scale),
   });
 };

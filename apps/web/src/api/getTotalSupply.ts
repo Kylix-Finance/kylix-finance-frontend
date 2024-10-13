@@ -1,33 +1,26 @@
-import { subDays } from "date-fns";
+import { getUnixTime } from "date-fns";
 import axios from "~/lib/axios";
-import { SupplyChartDataset, TotalSupplySchema } from "~/types";
-import { toIsoString } from "~/utils/date";
+import { ChartScale, SupplyChartDataset, TotalSupplySchema } from "~/types";
 
-export const getTotalSupply = async (days: number) => {
-  const endDate = new Date();
-  const startDate = subDays(endDate, days);
+export const getTotalSupply = async (scale: ChartScale) => {
+  const endTime = getUnixTime(new Date());
 
   const { data } = await axios.get<TotalSupplySchema[]>(
     "/total_supply_borrow",
     {
       params: {
-        start_date: toIsoString(startDate),
-        end_date: toIsoString(endDate),
+        end_time: endTime,
+        scale,
+        limit: 20,
       },
     }
   );
 
-  const MINUTES_IN_DAY = 24 * 60;
+  const transformedData = data.map((dataset) => ({
+    time: dataset[0] * 1000,
+    supply: dataset[1],
+    borrow: dataset[2],
+  }));
 
-  const samples: SupplyChartDataset[] = [];
-  for (let i = 0; i < days; i++) {
-    const sample = data[i * MINUTES_IN_DAY];
-    if (sample)
-      samples.push({
-        ...sample,
-        time: new Date(sample.time),
-      });
-  }
-
-  return samples;
+  return transformedData;
 };
