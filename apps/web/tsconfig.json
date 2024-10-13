@@ -13,7 +13,8 @@
     "next-env.d.ts",
     "./react-app-env.d.ts",
     "../../theme.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "../../packages/shared/src/utils/metadata.ts"
   ],
   "exclude": ["node_modules"]
 }
