@@ -14,7 +14,7 @@
     "./react-app-env.d.ts",
     "../../theme.d.ts",
     ".next/types/**/*.ts",
-    "../../packages/shared/src/utils/metadata.ts"
+    "../../global.d.ts"
   ],
   "exclude": ["node_modules"]
 }
