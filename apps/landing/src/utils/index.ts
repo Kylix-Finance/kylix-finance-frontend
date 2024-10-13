@@ -7,7 +7,6 @@ export function cn(...args: ClassValue[]) {
 
 export function calculateBottom(h: number): number {
   const rh = 600;
-  if (h < 600) return 0;
   if (h >= 600 && h < 650) return 50 * (Math.pow(h, 3) / Math.pow(rh, 3));
   if (h >= 650 && h < 700) return 52 * (Math.pow(h, 3) / Math.pow(rh, 3));
   if (h >= 700 && h < 750) return 50 * (Math.pow(h, 3) / Math.pow(rh, 3));

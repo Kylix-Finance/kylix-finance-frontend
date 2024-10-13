@@ -17,7 +17,7 @@ const Hero3D = () => {
   const heightRatio = height / 600;
   const scrollYProgress = useTransform(
     scrollY,
-    [0, 2000 - height - 100],
+    [0, heightRatio * 2000 - height - 100],
     [0, 1]
   );
 
@@ -61,26 +61,28 @@ const Hero3D = () => {
 
   const [imgBottom, setImgBottom] = useState(0);
   useEffect(() => {
-    setImgBottom(calculateBottom(height) || 0);
+    setImgBottom(calculateBottom(height));
   }, [height]);
 
   return (
     <div className="flex flex-col w-full h-full " ref={scrollContainerRef}>
-      <div className="h-[2000px]">
+      <div style={{ height: 2000 * heightRatio }}>
         <motion.div className="sticky top-16 flex justify-center">
           <Scene key={`${width}-${height}`} scrollYProgress={scrollYProgress} />
-          <motion.div
-            style={{
-              opacity: imageOpacity,
-              scale: imageOpacity,
-              translateY: imageTranslateY,
-              translateX: "-160px",
-              bottom: imgBottom,
-            }}
-            className="absolute left-1/2 "
-          >
-            <Image src={logoImg} alt="kylix" height={320} />
-          </motion.div>
+          {imgBottom !== -1 && (
+            <motion.div
+              style={{
+                opacity: imageOpacity,
+                scale: imageOpacity,
+                translateY: imageTranslateY,
+                translateX: "-160px",
+                bottom: imgBottom,
+              }}
+              className="absolute left-1/2 "
+            >
+              <Image src={logoImg} alt="kylix" height={320} />
+            </motion.div>
+          )}
           {/* FIRST Text START */}
           <motion.div
             style={{
