@@ -5,7 +5,7 @@ import Link from "next/link";
 const FeaturedPartners = () => {
   return (
     <div
-      className="flex flex-col gap-10 justify-center items-center w-full"
+      className="flex flex-col gap-10 justify-center items-center w-full relative  bg-red-500 z-10"
       id={featuredPartnersData.id}
     >
       <h2 className="text-xl lg:text-3xl font-bold text-white">
