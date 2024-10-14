@@ -40,6 +40,8 @@ const keys = {
   TOTAL_SUPPLY: "TOTAL_SUPPLY",
 };
 
+type ChartScale = "1m" | "5m" | "15m" | "1h" | "12h" | "1d";
+
 export const queryKeys = {
   accounts: [baseKey, keys.ACCOUNTS],
   activeAccount: [baseKey, keys.ACTIVE_ACCOUNT],
@@ -67,19 +69,7 @@ export const queryKeys = {
   quickBorrow: [baseKey, keys.QUICK_BORROW],
   withdraw: [baseKey, keys.WITHDRAW],
   pools: ({ activeAccount }: Pools) => [baseKey, keys.POOLS, activeAccount],
-  kylixPrice: ({
-    endDate,
-    startDate,
-  }: {
-    startDate: string;
-    endDate: string;
-  }) => [baseKey, keys.KYLIX_PRICE, startDate, endDate],
-  totalSupply: ({
-    endDate,
-    startDate,
-  }: {
-    startDate: string;
-    endDate: string;
-  }) => [baseKey, keys.TOTAL_SUPPLY, startDate, endDate],
+  kylixPrice: (scale: ChartScale) => [baseKey, keys.KYLIX_PRICE, scale],
+  totalSupply: (scale: ChartScale) => [baseKey, keys.TOTAL_SUPPLY, scale],
   repay: [baseKey, keys.REPAY],
 };

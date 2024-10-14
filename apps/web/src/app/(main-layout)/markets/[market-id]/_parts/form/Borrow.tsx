@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
 import { BASE_ASSET_ID } from "@repo/shared";
 import { useQuickBorrow } from "~/hooks/chain/useQuickBorrow";
+import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
 
 const items: Array<ListItem> = [
   {
@@ -45,37 +46,53 @@ export const Borrow = () => {
   const { mutate, isPending } = useQuickBorrow();
   const { assetMetaData: baseAssetMetaData } = useMetadata(BASE_ASSET_ID);
   const { assetMetaData: assetIdMetaData } = useMetadata(lendTokenId);
-
-  const { balance: assetBalance } = useBalance({ assetId: lendTokenId });
-  const { balance: baseAssetBalance } = useBalance({ assetId: BASE_ASSET_ID });
+  const { formattedPrice: lendTokenPrice } = useAssetPrice({
+    assetId: lendTokenId,
+  });
+  const { balance: lendAssetBalance } = useBalance({ assetId: BASE_ASSET_ID });
+  const { balance: borrowAssetBalance } = useBalance({ assetId: lendTokenId });
   const onclick = () => {
-    if (!assetBalance || !value || !baseAssetMetaData?.decimals) return;
+    if (
+      !lendAssetBalance ||
+      !value ||
+      !baseAssetMetaData?.decimals ||
+      !borrowAssetBalance ||
+      !lendTokenPrice
+    )
+      return;
     const borrowValue = parseUnit(
       value,
       baseAssetMetaData?.decimals
     ).toString();
-    const supplyValue = assetBalance.toString();
-    console.log("_______________CC", borrowValue, supplyValue);
+    const supplyValue = (
+      ((BigInt(borrowValue) / BigInt(lendTokenPrice)) * 3n) /
+      2n
+    ).toString();
 
-    // mutate(
-    //   {
-    //     borrowPoolId: BASE_ASSET_ID.toString(),
-    //     borrowValue,
-    //     supplyPoolId: lendTokenId,
-    //     supplyValue: assetBalance.toString(),
-    //   },
-    //   {
-    //     onSuccess: ({ blockNumber }) => {
-    //       setValue("");
+    console.log("_____borrowPoolId", BASE_ASSET_ID);
+    console.log("_____supplyPoolId", lendTokenId);
+    console.log("_____borrowValue", borrowValue);
+    console.log("_____supplyValue", supplyValue);
 
-    //       notify({
-    //         type: "success",
-    //         title: "Borrow Successful",
-    //         message: "Transaction completed on block " + blockNumber,
-    //       });
-    //     },
-    //   }
-    // );
+    mutate(
+      {
+        borrowPoolId: BASE_ASSET_ID.toString(),
+        borrowValue,
+        supplyPoolId: lendTokenId,
+        supplyValue,
+      },
+      {
+        onSuccess: ({ blockNumber }) => {
+          setValue("");
+
+          notify({
+            type: "success",
+            title: "Borrow Successful",
+            message: "Transaction completed on block " + blockNumber,
+          });
+        },
+      }
+    );
   };
   return (
     <Form
@@ -89,7 +106,7 @@ export const Borrow = () => {
         content: "Borrow",
       }}
       isSubmitting={isPending}
-      balance={baseAssetBalance?.toString()}
+      balance={borrowAssetBalance?.toString()}
       symbol={baseAssetMetaData?.symbol}
       onMaxClick={() => {}}
     />

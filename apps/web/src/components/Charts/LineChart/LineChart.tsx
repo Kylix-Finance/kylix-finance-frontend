@@ -5,19 +5,27 @@ import { kylixPriceData } from "~/mock/chart";
 import { formatNumber } from "~/utils";
 import "chartjs-adapter-date-fns";
 import { Box } from "@mui/material";
+import { ComponentProps } from "react";
 
-const LineChart = () => {
+type LineProps = ComponentProps<typeof Line>;
+
+type LineChartProps = {
+  data?: Record<string, string | number>[];
+  parsing: {
+    xAxisKey: string;
+    yAxisKey: string;
+  };
+};
+
+const LineChart = ({ data, parsing }: LineChartProps) => {
   return (
     <Box height={180} width="100%">
       <Line
         data={{
           datasets: [
             {
-              data: kylixPriceData,
-              parsing: {
-                xAxisKey: "timestamp",
-                yAxisKey: "price",
-              },
+              data,
+              parsing,
               fill: "origin",
               borderColor: palette.primary.light,
               backgroundColor: (context) => {

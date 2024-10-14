@@ -99,7 +99,7 @@ const Hero3D = () => {
               A new-generation multi-chain Lending platform, with self-repaying
               loans and a marketplace <br /> for Collateral Liquidation.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 z-50">
               <Button color="secondary">Get start</Button>
               <Button color="white" variant="outline">
                 Learn more
@@ -116,7 +116,7 @@ const Hero3D = () => {
               opacity: secondTextOpacity,
               translateY: sSecondTextTranslateY,
             }}
-            className="absolute top-[35%] flex flex-col gap-2 justify-center items-center z-50"
+            className="absolute top-[35%] flex flex-col gap-2 justify-center items-center z-40"
           >
             <h2 className="flex flex-col sm:flex-row justify-center items-center gap-2.5 font-bold font-heading w-full h-full text-4xl md:text-5xl lg:text-6xl">
               <span className="text-primary-500">Multi-chain</span>
@@ -125,7 +125,7 @@ const Hero3D = () => {
             <p className="font-light text-xs md:text-sm lg:text-base leading-6 text-secondary-100 text-center ">
               The new cross-chain Lending Platform, on Polkadot.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 z-50">
               <Button color="secondary">Get start</Button>
             </div>
           </motion.div>

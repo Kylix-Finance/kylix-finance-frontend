@@ -16,12 +16,12 @@ const PoolDetails = () => {
   const params = useParams();
   const lendTokenId = params["market-id"] as string;
   const { pool } = usePool({ assetId: lendTokenId });
+
   const { assetMetaData } = useMetadata(lendTokenId);
   const { assetMetaData: baseAssetMetadata } = useMetadata(PRICE_BASE_ASSET_ID);
   const { assetPrice, formattedPrice } = useAssetPrice({
     assetId: lendTokenId,
   });
-
   const totalSupply =
     assetMetaData &&
     assetPrice &&

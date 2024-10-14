@@ -9,4 +9,10 @@ const mutationCache = new MutationCache({
 
 export const queryClient = new QueryClient({
   mutationCache,
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 60 * 1000,
+      gcTime: 24 * 60 * 60 * 1000,
+    },
+  },
 });
