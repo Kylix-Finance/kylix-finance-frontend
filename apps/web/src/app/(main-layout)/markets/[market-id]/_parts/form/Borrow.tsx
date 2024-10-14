@@ -65,7 +65,7 @@ export const Borrow = () => {
       baseAssetMetaData?.decimals
     ).toString();
     const supplyValue = (
-      (BigInt(borrowValue) * BigInt(lendTokenPrice) * 3n) /
+      ((BigInt(borrowValue) / BigInt(lendTokenPrice)) * 3n) /
       2n
     ).toString();
 
