@@ -65,8 +65,14 @@ export const usePools = () => {
             const assetBalance = requestAssetBalance?.toJSON() as unknown as {
               balance: number | null;
             };
+            console.log(
+              "________balance",
+              assetMetadata.name,
+              assetBalance?.balance
+            );
+
             balance = formatUnit(
-              assetBalance?.balance || 0,
+              BigInt(assetBalance?.balance || 0),
               Number(assetMetadata.decimals)
             );
           }
