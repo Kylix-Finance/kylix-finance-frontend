@@ -6,6 +6,7 @@ import ProgressBar from "~/components/ProgressBar";
 import { InputWithSelect } from "~/components/InputWithSelect";
 import { usePools } from "~/hooks/chain/usePools";
 import { SelectOption } from "~/types";
+import PositionManagementForm from "./PositionManagementForm";
 
 const PositionManagement = () => {
   const { pools } = usePools();
@@ -16,13 +17,13 @@ const PositionManagement = () => {
     })) || [];
   return (
     <Card title="SRL position management">
-      <Box className="flex w-full gap-2">
-        <div className="flex flex-col w-full flex-[0.5]">
-          <div></div>
-          <MCard variant="outlined">
+      <Box className="flex w-full gap-2 flex-col lg:flex-row">
+        <Box className="flex flex-col w-full flex-[0.5]">
+          <PositionManagementForm />
+          <MCard variant="outlined" className="mt-2">
             <ProgressBar />
           </MCard>
-        </div>
+        </Box>
         <PositionManagementDetail />
       </Box>
     </Card>
