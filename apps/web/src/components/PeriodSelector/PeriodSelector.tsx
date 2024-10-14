@@ -1,16 +1,17 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import { ChartScale } from "~/types";
 
 type Period = {
-  value: string;
+  value: ChartScale;
   label: string;
 };
 
 type PeriodSelectorProps = {
   periods: Period[];
-  selected: string;
-  setSelected: (selectedId: string) => void;
+  selected: ChartScale;
+  setSelected: (selectedId: ChartScale) => void;
 };
 
 export const PeriodSelector = ({
