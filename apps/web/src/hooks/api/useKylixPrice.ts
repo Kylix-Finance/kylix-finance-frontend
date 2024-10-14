@@ -1,27 +1,12 @@
 import { queryKeys } from "@repo/shared";
-import { useQuery } from "@tanstack/react-query";
-import { kylixPriceSchema } from "~/types";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { getKylixPrice } from "~/api/getKylixPrice";
+import { ChartScale } from "~/types";
 
-type Params = {
-  startDate: string;
-  endDate: string;
-};
-
-export const useKylixPrice = ({ endDate, startDate }: Params) => {
+export const useKylixPrice = (scale: ChartScale) => {
   return useQuery({
-    queryKey: queryKeys.kylixPrice({ endDate, startDate }),
-    queryFn: async () => {
-      const response = await fetch(
-        `http://ec2-16-171-18-46.eu-north-1.compute.amazonaws.com:5000/api/kylix_token?start_date=${startDate}&end_date=${endDate}`
-      );
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = (await response.json()) as kylixPriceSchema[];
-      return data;
-    },
-    enabled: !!startDate && !!endDate,
+    queryKey: queryKeys.kylixPrice(scale),
+    queryFn: () => getKylixPrice(scale),
+    placeholderData: keepPreviousData,
   });
 };

@@ -4,9 +4,11 @@ import { Box, Button, Card, Checkbox, Typography } from "@mui/material";
 import MultiLineChart from "~/components/Charts/MultiLineChart";
 import { palette } from "~/config/palette";
 import { vaultData } from "~/mock/chart";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { Info } from "@mui/icons-material";
 import TransactionForm from "./TransactionForm";
+import { useTotalSupply } from "~/hooks/api/useTotalSupply";
+import { subWeeks } from "date-fns";
 
 const ApyChart = () => {
   const [checked, setChecked] = useState(false);
@@ -14,6 +16,8 @@ const ApyChart = () => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   };
+
+  const { data } = useTotalSupply("1d");
 
   return (
     <Card variant="outlined">
@@ -49,21 +53,21 @@ const ApyChart = () => {
       <MultiLineChart
         datasets={[
           {
-            data: vaultData.supply,
+            data: data,
             borderColor: palette.primary.main,
             tension: 0.5,
             parsing: {
-              xAxisKey: "x",
-              yAxisKey: "y",
+              xAxisKey: "time",
+              yAxisKey: "borrow",
             },
           },
           {
-            data: vaultData.borrow,
+            data: data,
             borderColor: palette.secondary.main,
             tension: 0.5,
             parsing: {
-              xAxisKey: "x",
-              yAxisKey: "y",
+              xAxisKey: "time",
+              yAxisKey: "supply",
             },
           },
         ]}

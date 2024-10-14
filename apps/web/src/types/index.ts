@@ -1,4 +1,5 @@
 import { ComponentType, ReactNode, SVGProps } from "react";
+import { CHART_SCALES } from "~/constants";
 export type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 export type SocialMedia = {
   name: string;
@@ -47,13 +48,13 @@ export interface SelectOption {
   label: string;
 }
 
-export interface kylixPriceSchema {
-  kylix_token: string;
-  time: string;
-}
+export type kylixPriceSchema = [number, number];
+export type TotalSupplySchema = [number, number, number];
 
-export interface TotalSupplySchema {
-  time: string;
+export interface SupplyChartDataset {
+  time: Date;
   total_borrow: number;
   total_supply: number;
 }
+
+export type ChartScale = (typeof CHART_SCALES)[number];

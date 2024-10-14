@@ -4,17 +4,22 @@ import { Box, Chip } from "@mui/material";
 import { useState } from "react";
 import LineChart from "~/components/Charts/LineChart";
 import PeriodSelector from "~/components/PeriodSelector";
+import { CHART_SCALES } from "~/constants";
+import { useKylixPrice } from "~/hooks/api/useKylixPrice";
+import { ChartScale } from "~/types";
+
+const periods = CHART_SCALES.map((scale) => ({
+  value: scale,
+  label: scale,
+}));
 
 const KylixChart = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState("1h");
-  const periods = [
-    { value: "5m", label: "5m" },
-    { value: "15m", label: "15m" },
-    { value: "1h", label: "1h" },
-    { value: "4h", label: "4h" },
-    { value: "1d", label: "1d" },
-    { value: "1w", label: "1w" },
-  ];
+  const [selectedPeriod, setSelectedPeriod] = useState<ChartScale>("1d");
+
+  const { data } = useKylixPrice(selectedPeriod);
+
+  const price = data?.[0]?.price;
+
   return (
     <Box>
       <Box className="flex justify-between items-start mb-3">
@@ -23,7 +28,7 @@ const KylixChart = () => {
             <p className="mr-3">Kylix Price</p>
             <Chip label="2.25%" color="primary" />
           </Box>
-          <p>4.12 USD</p>
+          <p>{price} USD</p>
         </Box>
         <PeriodSelector
           periods={periods}
@@ -31,7 +36,13 @@ const KylixChart = () => {
           setSelected={setSelectedPeriod}
         />
       </Box>
-      <LineChart />
+      <LineChart
+        data={data}
+        parsing={{
+          xAxisKey: "time",
+          yAxisKey: "price",
+        }}
+      />
     </Box>
   );
 };
