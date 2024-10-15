@@ -46,7 +46,7 @@ const QuickBorrow = () => {
     assetId: borrowPool?.value || 0,
   });
   const { formattedBalance: borrowAssetBalance } = useBalance({
-    assetId: supplyPool?.value,
+    assetId: borrowPool?.value,
   });
   const borrowValueInUSD = formatBigNumbers(
     (Number(borrowValue || 0) * Number(borrowAssetPrice || 0)).toString(),
