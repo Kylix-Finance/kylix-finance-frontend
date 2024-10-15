@@ -14,7 +14,7 @@
     "check:types:watch": "pnpm run check:types --watch",
     "dev": "pnpm run start:dev",
     "start": "pnpm run start:production",
-    "start:dev": "cross-env PORT=${PORT:-3010} next dev",
+    "start:dev": "cross-env PORT=3010 next dev",
     "start:dev:watch": "pnpm run start:dev &  pnpm run check:types:watch",
     "start:production": "next start"
   }
