@@ -110,6 +110,7 @@ const QuickBorrow = () => {
                 pool={supplyPool}
                 setPool={setSupplyPool}
                 setValue={setSupplyValue}
+                maxValue={supplyAssetBalance || "0"}
               />
               <List
                 items={[{ label: "Total Value", value: supplyValueInUSD }]}
@@ -161,6 +162,7 @@ const QuickBorrow = () => {
                 pool={borrowPool}
                 setPool={setBorrowPool}
                 setValue={setBorrowValue}
+                maxValue={borrowAssetBalance || "0"}
               />
               <List
                 items={[{ label: "Total Value", value: borrowValueInUSD }]}

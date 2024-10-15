@@ -14,7 +14,7 @@ import { debounce } from "lodash-es";
 
 interface Props {
   setValue: (value: any) => void;
-  maxValue?: string;
+  maxValue: string;
   pool: SelectOption | undefined;
   setPool: (pool: SelectOption) => void;
   options: SelectOption[];
