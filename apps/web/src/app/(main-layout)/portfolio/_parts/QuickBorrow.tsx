@@ -1,7 +1,12 @@
 "use client";
 
 import { Box, Button, Card as MuiCard, Typography } from "@mui/material";
-import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
+import {
+  formatBigNumbers,
+  parseUnit,
+  useBalance,
+  useMetadata,
+} from "@repo/onchain-utils";
 import { useState } from "react";
 import { Icons } from "~/assets/svgs";
 import { Card, List } from "~/components";
@@ -25,25 +30,32 @@ const QuickBorrow = () => {
   const [borrowPool, setBorrowPool] = useState<SelectOption>();
   const [borrowValue, setBorrowValue] = useState<string>("");
 
-  const { assetPrice: supplyAssetPrice } = useAssetPrice({
+  const { formattedPrice: supplyAssetPrice } = useAssetPrice({
     assetId: supplyPool?.value || 0,
   });
   const { formattedBalance: supplyAssetBalance } = useBalance({
     assetId: supplyPool?.value,
   });
-  const supplyValueInUSD =
-    Number(supplyValue || 0) * Number(supplyAssetPrice || 0);
+  const supplyValueInUSD = formatBigNumbers(
+    (Number(supplyValue || 0) * Number(supplyAssetPrice || 0)).toString(),
+    2
+  );
   const { assetMetaData: supplyAssetMetadata } = useMetadata(supplyPool?.value);
 
-  const { assetPrice: borrowAssetPrice } = useAssetPrice({
+  const { formattedPrice: borrowAssetPrice } = useAssetPrice({
     assetId: borrowPool?.value || 0,
   });
   const { formattedBalance: borrowAssetBalance } = useBalance({
     assetId: supplyPool?.value,
   });
-  const borrowValueInUSD =
-    Number(borrowValue || 0) * Number(borrowAssetPrice || 0);
+  const borrowValueInUSD = formatBigNumbers(
+    (Number(borrowValue || 0) * Number(borrowAssetPrice || 0)).toString(),
+    2
+  );
   const { assetMetaData: borrowAssetMetadata } = useMetadata(borrowPool?.value);
+
+  console.log("_____)))))),borrowAssetPrice", borrowAssetPrice);
+  console.log("_____)))))),supplyAssetPrice", supplyAssetPrice);
 
   const borrowHandler = () => {
     mutate({
@@ -86,7 +98,7 @@ const QuickBorrow = () => {
                     className="text-secondary-800"
                     variant="subtitle1"
                   >
-                    {supplyAssetBalance}
+                    {formatBigNumbers(supplyAssetBalance || "0", 2)}
                   </Typography>
                   <Typography className="text-primary-300" variant="subtitle2">
                     {supplyPool?.label}
@@ -137,7 +149,7 @@ const QuickBorrow = () => {
                     className="text-secondary-800"
                     variant="subtitle1"
                   >
-                    {borrowAssetBalance}
+                    {formatBigNumbers(borrowAssetBalance || "0", 2)}
                   </Typography>
                   <Typography className="text-primary-300" variant="subtitle2">
                     {borrowPool?.label}
