@@ -5,10 +5,22 @@ import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
 import { Skeleton } from "@repo/ui";
 import { usePools } from "~/hooks/chain/usePools";
-import { formatBigNumbers } from "@repo/onchain-utils";
+import {
+  formatBigNumbers,
+  useAccounts,
+  useActiveAccount,
+  useProvider,
+} from "@repo/onchain-utils";
+import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
+import { useEffect } from "react";
+import { useGetBorrowCollaterals } from "~/hooks/chain/useGetBorrowCollaterals";
 
 const Supply = () => {
   const { totalSupply } = usePools();
+  const { data } = useGetBorrowCollaterals();
+  useEffect(() => {
+    console.log("_____________Data", data);
+  }, [data]);
 
   return (
     <Card
