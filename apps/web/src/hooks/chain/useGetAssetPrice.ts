@@ -19,7 +19,7 @@ export const useGetAssetPrice = ({ asset, base_asset }: UseGetAssetPrice) => {
   });
 };
 
-const getAssetPrice = (
+export const getAssetPrice = (
   provider: WsProvider,
   { asset, base_asset }: UseGetAssetPrice
 ) => {
