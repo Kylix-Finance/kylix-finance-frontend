@@ -38,6 +38,7 @@ const keys = {
   ASSET_PRICE: "ASSET_PRICE",
   KYLIX_PRICE: "KYLIX_PRICE",
   TOTAL_SUPPLY: "TOTAL_SUPPLY",
+  ASSET_WISE_BORROW_COLLATERAL: "ASSET_WISE_BORROW_COLLATERAL",
 };
 
 type ChartScale = "1m" | "5m" | "15m" | "1h" | "12h" | "1d";
@@ -71,5 +72,10 @@ export const queryKeys = {
   pools: ({ activeAccount }: Pools) => [baseKey, keys.POOLS, activeAccount],
   kylixPrice: (scale: ChartScale) => [baseKey, keys.KYLIX_PRICE, scale],
   totalSupply: (scale: ChartScale) => [baseKey, keys.TOTAL_SUPPLY, scale],
+  assetWiseBorrowsCollaterals: (account: string | undefined) => [
+    baseKey,
+    keys.ASSET_WISE_BORROW_COLLATERAL,
+    account,
+  ],
   repay: [baseKey, keys.REPAY],
 };
