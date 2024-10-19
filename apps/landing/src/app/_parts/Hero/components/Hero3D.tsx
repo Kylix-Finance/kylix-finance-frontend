@@ -92,13 +92,16 @@ const Hero3D = () => {
             className="absolute top-[20%] flex flex-col gap-2 justify-center items-center z-50"
           >
             <h2 className="flex flex-col sm:flex-row justify-center items-center gap-2.5 font-bold font-heading w-full h-full text-4xl md:text-5xl lg:text-6xl">
-              <span className="text-primary-500">Multi-chain Lending.</span>
-              <span className="text-white"> Evolved.</span>
+              <span className="text-primary-500">
+                Multi-chain&nbsp; Lending.
+              </span>
+              <span className="text-white"> &nbsp;Evolved.</span>
             </h2>
             <p className="font-light text-xs md:text-sm lg:text-base leading-6 text-secondary-100 text-center ">
               <b>
-                Borrow, lend and earn seamlessly across multiple networks <br />
-                with Kylix Finance, the new multi-chain lending platform.
+                Borrow, lend and earn seamlessly across multiple networks.{" "}
+                <br />
+                Kylix Finance, the new multi-chain lending platform.
               </b>
               <br />
               <br />
@@ -123,12 +126,16 @@ const Hero3D = () => {
             className="absolute top-[35%] flex flex-col gap-2 justify-center items-center z-40"
           >
             <h2 className="flex flex-col sm:flex-row justify-center items-center gap-2.5 font-bold font-heading w-full h-full text-4xl md:text-5xl lg:text-6xl">
-              <span className="text-primary-500">Multi-chain</span>
+              <span className="text-primary-500">Multi-chain&nbsp;</span>
               <span className="text-white"> Lending</span>
             </h2>
             <p className="font-light text-xs md:text-sm lg:text-base leading-6 text-secondary-100 text-center ">
-              Operate across all the biggest Web3 ecosystems with ease. <br />
-              Built on Substrate, secured by Polkadot, open to the world.
+              <b>
+                Operate across all the biggest Web3 ecosystems with ease. <br />
+                Built on Substrate, secured by Polkadot, open to the world.
+              </b>
+              <br />
+              <br />
             </p>
             <div className="flex gap-4 z-50">
               <Button color="secondary">Get started</Button>

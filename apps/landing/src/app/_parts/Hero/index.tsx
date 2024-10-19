@@ -19,7 +19,7 @@ const Hero = () => {
           <div className="px-6 mt-[20vh] flex flex-col gap-2 justify-center items-center z-50">
             <h2 className="flex flex-col sm:flex-row justify-center items-center gap-2.5 font-bold font-heading w-full h-full text-4xl md:text-5xl lg:text-6xl">
               <span className="text-primary-500 flex-wrap text-center">
-                Multi-chain Lending.
+                Multi-chain &nbsp;Lending.
               </span>
               <span className="text-white"> Evolved</span>
             </h2>
