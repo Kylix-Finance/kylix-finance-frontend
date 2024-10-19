@@ -32,19 +32,17 @@ export const smartLendingData: Section<SmartLending> = {
     left: "Smart",
     right: "Lending",
   },
-  description: "The new cross-chain Lending Platform, on Polkadot.",
+  description: "Multi-Chain Lending for Web3.",
   items: [
     {
       to: "/",
-      heading: "flexibility",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Duis viverra at eu sapien venenatis sed ut. Quis ullamcorper enim posuere dui est euismod blandit nunc.",
+      heading: "INNOVATIVE",
+      description: "Cappuccino is forbidden after 12:00.",
     },
     {
       to: "/",
-      heading: "multi-chain",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Duis viverra at eu sapien venenatis sed ut. ",
+      heading: "PIZZA",
+      description: "We deliver pizza. ",
     },
   ],
 };
@@ -52,7 +50,7 @@ export const smartLendingData: Section<SmartLending> = {
 export const supportedAssetsData: Section<Asset> = {
   header: "Assets",
   heading: { left: "Supported ", right: " Assets and APY" },
-  description: "The new cross-chain Lending Platform, on Polkadot.",
+  description: "The new cross-chain Lending Platform, secured by Polkadot.",
   id: "supported-assets-and-apy",
   items: [
     {
@@ -110,7 +108,7 @@ export const securityAndAuditsData: Section<Security> = {
     left: "Security",
     right: "and Audits",
   },
-  description: "The new cross-chain Lending Platform, on Polkadot.",
+  description: "The new cross-chain Lending Platform, secured by Polkadot. 1",
   id: "security-and-audits",
   items: [
     {
@@ -329,32 +327,42 @@ export const featuredPartnersData: Section<FeaturedPartners> = {
   header: "Featured partners",
   id: "featured-partners",
   heading: {
-    left: "Featured Partners",
+    left: "Proudly Supported By",
   },
   items: [
     {
       link: "/",
-      name: "Instadapp",
+      name: "Decentralised Future",
       icon: InstaDapp,
     },
     {
       link: "/",
-      name: "Idle Finance",
+      name: "Equito Network",
       icon: IdleFinance,
     },
     {
       link: "/",
-      name: "Lido",
+      name: "Hercle Financial",
       icon: Lido,
     },
     {
       link: "/",
-      name: "Defi Saver",
+      name: "Harbour Industrial Capital",
       icon: DefiSaver,
     },
     {
       link: "/",
-      name: "Stakehouse",
+      name: "Pendulum",
+      icon: StakeHouse,
+    },
+    {
+      link: "/",
+      name: "Polimec",
+      icon: StakeHouse,
+    },
+    {
+      link: "/",
+      name: "BlockDeep",
       icon: StakeHouse,
     },
   ],

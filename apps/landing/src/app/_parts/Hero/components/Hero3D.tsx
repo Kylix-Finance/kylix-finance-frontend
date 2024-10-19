@@ -93,14 +93,18 @@ const Hero3D = () => {
           >
             <h2 className="flex flex-col sm:flex-row justify-center items-center gap-2.5 font-bold font-heading w-full h-full text-4xl md:text-5xl lg:text-6xl">
               <span className="text-primary-500">Multi-chain Lending.</span>
-              <span className="text-white"> Evolved</span>
+              <span className="text-white"> Evolved.</span>
             </h2>
             <p className="font-light text-xs md:text-sm lg:text-base leading-6 text-secondary-100 text-center ">
-              A new-generation multi-chain Lending platform, with self-repaying
-              loans and a marketplace <br /> for Collateral Liquidation.
+              <b>
+                Borrow, lend and earn seamlessly across multiple networks <br />
+                with Kylix Finance, the new multi-chain lending platform.
+              </b>
+              <br />
+              <br />
             </p>
             <div className="flex gap-4 z-50">
-              <Button color="secondary">Get start</Button>
+              <Button color="secondary">Get started</Button>
               <Button color="white" variant="outline">
                 Learn more
               </Button>
@@ -123,10 +127,11 @@ const Hero3D = () => {
               <span className="text-white"> Lending</span>
             </h2>
             <p className="font-light text-xs md:text-sm lg:text-base leading-6 text-secondary-100 text-center ">
-              The new cross-chain Lending Platform, on Polkadot.
+              Operate across all the biggest Web3 ecosystems with ease. <br />
+              Built on Substrate, secured by Polkadot, open to the world.
             </p>
             <div className="flex gap-4 z-50">
-              <Button color="secondary">Get start</Button>
+              <Button color="secondary">Get started</Button>
             </div>
           </motion.div>
           {/* SECOND Text END */}
