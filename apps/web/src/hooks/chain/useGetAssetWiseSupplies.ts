@@ -53,7 +53,7 @@ export const useGetAssetWiseSupplies = ({
       return {
         totalSupplied: data?.totalSupplied,
         suppliedAssets: {
-          ...data?.suppliedAssets.filter((item) => item.assetId === 20),
+          ...data?.suppliedAssets.filter((item) => item.assetId == poolId),
         },
       };
     },
