@@ -78,6 +78,7 @@ export const getLendingPool = async ({
     asset,
     account,
   ]);
+
   const toAssetsJson: Asset[] = result[0].map((asset) => ({
     asset: String.fromCharCode(...asset.asset),
     asset_decimals: asset.asset_decimals,
@@ -87,7 +88,7 @@ export const getLendingPool = async ({
     borrow_apy: asset.borrow_apy,
     borrow_apy_s: asset.borrow_apy_s,
     collateral_q: asset.collateral_q,
-    id: asset.id,
+    id: asset.asset_id,
     is_activated: asset.is_activated,
     supply_apy: asset.supply_apy,
     supply_apy_s: asset.supply_apy_s,
