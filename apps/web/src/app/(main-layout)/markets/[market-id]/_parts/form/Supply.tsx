@@ -14,8 +14,7 @@ import { useParams } from "next/navigation";
 import { usePool } from "~/hooks/chain/usePool";
 import { Box, Typography } from "@mui/material";
 import ValueItemWrapper from "./ValueItemWrapper";
-import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
-import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetBorrowCollaterals";
+import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetAssetWiseSupplies";
 
 export const Supply = () => {
   const params = useParams();
