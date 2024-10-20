@@ -15,6 +15,7 @@ import { usePool } from "~/hooks/chain/usePool";
 import { Box, Typography } from "@mui/material";
 import ValueItemWrapper from "./ValueItemWrapper";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
+import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetBorrowCollaterals";
 
 export const Supply = () => {
   const params = useParams();
@@ -34,7 +35,8 @@ export const Supply = () => {
     customDecimals: assetMetaData?.decimals,
     enabled: !!assetMetaData && !!pool,
   });
-
+  const { data: AssetWiseData } = useGetAssetWiseSupplies({});
+  console.log("_____PPPPP", AssetWiseData);
   const handleClick = () => {
     mutate(
       {
@@ -97,11 +99,6 @@ export const Supply = () => {
       valueClassName: "!text-primary-500",
     },
   ];
-
-  const { data: AssetWise } = useGetAssetWiseBorrowsCollaterals({
-    poolId: lendTokenId,
-  });
-  console.log("_____HHH", AssetWise);
 
   return (
     <Form

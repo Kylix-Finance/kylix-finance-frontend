@@ -54,14 +54,15 @@ export const useGetAssetWiseBorrowsCollaterals = ({
             })
         : skipToken,
     select: (data) => {
+      if (!poolId) return data;
       return {
         totalBorrowed: data?.totalBorrowed,
         totalCollateral: data?.totalCollateral,
-        borrowedAsset: {
-          ...data?.borrowedAssets.filter((item) => item.assetId == 20)[0],
+        borrowedAssets: {
+          ...data?.borrowedAssets.filter((item) => item.assetId == poolId),
         },
-        collateralAsset: {
-          ...data?.collateralAssets.filter((item) => item.assetId == 20)[0],
+        collateralAssets: {
+          ...data?.collateralAssets.filter((item) => item.assetId == poolId),
         },
       };
     },
@@ -103,6 +104,3 @@ export const getAssetWiseBorrowsCollaterals = async ({
     totalBorrowed: BigInt(response?.[3] || 0),
   };
 };
-// import { formatBalance } from '@polkadot/util';
-
-// formatBalance(3271863876,{})
