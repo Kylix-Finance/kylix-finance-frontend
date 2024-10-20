@@ -1,21 +1,17 @@
 import { WsProvider } from "@polkadot/api";
 import { useActiveAccount, useProvider } from "@repo/onchain-utils";
-import { queryKeys } from "@repo/shared";
+import { decodeArrayToString, queryKeys } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
 
-interface AssetInfo {
+interface Asset {
   assetId: number;
   assetSymbol: string;
   assetName: string;
   decimals: number;
   assetIcon: string;
-  balance: string;
-}
-
-interface Asset {
-  assetInfo: AssetInfo;
-  apy?: string;
-  borrowed?: string;
+  balance: bigint;
+  apy?: bigint;
+  borrowed?: bigint;
 }
 
 type RawAsset = {
@@ -29,13 +25,18 @@ type RawAsset = {
   borrowed?: bigint;
 };
 
-type AssetWiseBorrowsCollateralsResponse = (Asset[] | bigint)[];
+type AssetWiseBorrowsCollateralsResponse = {
+  totalBorrowed: bigint;
+  totalCollateral: bigint;
+  borrowedAssets: Asset[];
+  collateralAssets: Asset[];
+};
 
 export const useGetAssetWiseBorrowsCollaterals = () => {
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
 
-  const { data, isLoading } = useQuery({
+  return useQuery({
     queryKey: queryKeys.assetWiseBorrowsCollaterals(activeAccount?.address),
     queryFn:
       provider && activeAccount?.address
@@ -46,11 +47,6 @@ export const useGetAssetWiseBorrowsCollaterals = () => {
             })
         : skipToken,
   });
-
-  return {
-    data,
-    isLoading,
-  };
 };
 
 export const getAssetWiseBorrowsCollaterals = async ({
@@ -59,30 +55,35 @@ export const getAssetWiseBorrowsCollaterals = async ({
 }: {
   provider: WsProvider;
   account: string | undefined;
-}): Promise<AssetWiseBorrowsCollateralsResponse> => {
-  if (!account) return [];
+}): Promise<AssetWiseBorrowsCollateralsResponse | undefined> => {
+  if (!account) return;
 
-  const response = await provider.send<RawAsset[][] | bigint[]>(
-    "getAssetWiseBorrowsCollaterals",
-    [account]
-  );
-
-  return response.map((group) => {
-    if (Array.isArray(group)) {
-      return group.map((asset) => ({
-        assetInfo: {
-          assetId: asset.asset_id,
-          assetSymbol: String.fromCharCode(...asset.asset_symbol),
-          assetName: String.fromCharCode(...asset.asset_name),
-          decimals: asset.decimals,
-          assetIcon: String.fromCharCode(...asset.asset_icon),
-          balance: asset.balance.toLocaleString(),
-        },
-        apy: asset.apy ? asset.apy.toLocaleString() : undefined,
-        borrowed: asset.borrowed ? asset.borrowed.toLocaleString() : undefined,
-      }));
-    } else {
-      return BigInt(group);
-    }
-  });
+  const response = await provider.send<
+    [RawAsset[], RawAsset[], number, number]
+  >("getAssetWiseBorrowsCollaterals", [account]);
+  return {
+    borrowedAssets: response[0]?.map((item) => ({
+      assetIcon: decodeArrayToString(item.asset_icon),
+      assetName: decodeArrayToString(item.asset_name),
+      assetSymbol: decodeArrayToString(item.asset_symbol),
+      balance: BigInt(item.balance),
+      borrowed: BigInt(item.borrowed || 0),
+      apy: BigInt(item.apy || 0),
+      assetId: item.asset_id,
+      decimals: item.decimals,
+    })),
+    collateralAssets: response[1]?.map((item) => ({
+      assetIcon: decodeArrayToString(item.asset_icon),
+      assetName: decodeArrayToString(item.asset_name),
+      assetSymbol: decodeArrayToString(item.asset_symbol),
+      balance: BigInt(item.balance),
+      assetId: item.asset_id,
+      decimals: item.decimals,
+    })),
+    totalCollateral: BigInt(response?.[2] || 0),
+    totalBorrowed: BigInt(response?.[3] || 0),
+  };
 };
+// import { formatBalance } from '@polkadot/util';
+
+// formatBalance(3271863876,{})

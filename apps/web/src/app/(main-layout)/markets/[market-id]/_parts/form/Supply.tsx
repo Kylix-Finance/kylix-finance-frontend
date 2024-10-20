@@ -14,6 +14,7 @@ import { useParams } from "next/navigation";
 import { usePool } from "~/hooks/chain/usePool";
 import { Box, Typography } from "@mui/material";
 import ValueItemWrapper from "./ValueItemWrapper";
+import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
 
 export const Supply = () => {
   const params = useParams();
@@ -96,6 +97,9 @@ export const Supply = () => {
       valueClassName: "!text-primary-500",
     },
   ];
+
+  const { data: XXX } = useGetAssetWiseBorrowsCollaterals();
+  console.log("_____HHH", XXX);
 
   return (
     <Form
