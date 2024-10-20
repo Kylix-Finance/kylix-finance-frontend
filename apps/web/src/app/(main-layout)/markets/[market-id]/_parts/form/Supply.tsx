@@ -98,8 +98,10 @@ export const Supply = () => {
     },
   ];
 
-  const { data: XXX } = useGetAssetWiseBorrowsCollaterals();
-  console.log("_____HHH", XXX);
+  const { data: AssetWise } = useGetAssetWiseBorrowsCollaterals({
+    poolId: lendTokenId,
+  });
+  console.log("_____HHH", AssetWise);
 
   return (
     <Form

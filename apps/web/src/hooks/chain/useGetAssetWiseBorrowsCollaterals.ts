@@ -32,12 +32,19 @@ type AssetWiseBorrowsCollateralsResponse = {
   collateralAssets: Asset[];
 };
 
-export const useGetAssetWiseBorrowsCollaterals = () => {
+export const useGetAssetWiseBorrowsCollaterals = ({
+  poolId,
+}: {
+  poolId?: string | number;
+} = {}) => {
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
 
   return useQuery({
-    queryKey: queryKeys.assetWiseBorrowsCollaterals(activeAccount?.address),
+    queryKey: queryKeys.assetWiseBorrowsCollaterals(
+      activeAccount?.address,
+      poolId
+    ),
     queryFn:
       provider && activeAccount?.address
         ? () =>
@@ -46,6 +53,18 @@ export const useGetAssetWiseBorrowsCollaterals = () => {
               account: activeAccount.address,
             })
         : skipToken,
+    select: (data) => {
+      return {
+        totalBorrowed: data?.totalBorrowed,
+        totalCollateral: data?.totalCollateral,
+        borrowedAsset: {
+          ...data?.borrowedAssets.filter((item) => item.assetId == 20)[0],
+        },
+        collateralAsset: {
+          ...data?.collateralAssets.filter((item) => item.assetId == 20)[0],
+        },
+      };
+    },
   });
 };
 
