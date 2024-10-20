@@ -34,7 +34,9 @@ export const Supply = () => {
     customDecimals: assetMetaData?.decimals,
     enabled: !!assetMetaData && !!pool,
   });
-  const { data: AssetWiseData } = useGetAssetWiseSupplies({});
+  const { data: AssetWiseData } = useGetAssetWiseSupplies({
+    poolId: lendTokenId,
+  });
   console.log("_____PPPPP", AssetWiseData);
   const handleClick = () => {
     mutate(

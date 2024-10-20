@@ -74,14 +74,16 @@ export const queryKeys = {
   pools: ({ activeAccount }: Pools) => [baseKey, keys.POOLS, activeAccount],
   kylixPrice: (scale: ChartScale) => [baseKey, keys.KYLIX_PRICE, scale],
   totalSupply: (scale: ChartScale) => [baseKey, keys.TOTAL_SUPPLY, scale],
-  assetWiseBorrowsCollaterals: (
-    account: string | undefined,
-    poolId: string | number | undefined
-  ) => [baseKey, keys.ASSET_WISE_BORROW_COLLATERAL, account, poolId],
-  assetWiseSupplies: (
-    account: string | undefined,
-    poolId: string | number | undefined
-  ) => [baseKey, keys.ASSET_WISE_SUPPLIES, account, poolId],
+  assetWiseBorrowsCollaterals: (account: string | undefined) => [
+    baseKey,
+    keys.ASSET_WISE_BORROW_COLLATERAL,
+    account,
+  ],
+  assetWiseSupplies: (account: string | undefined) => [
+    baseKey,
+    keys.ASSET_WISE_SUPPLIES,
+    account,
+  ],
   getAssetPrice: (asset: number, base_asset?: number) => [
     baseKey,
     keys.GET_ASSET_PRICE,

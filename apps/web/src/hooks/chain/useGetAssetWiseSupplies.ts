@@ -39,7 +39,7 @@ export const useGetAssetWiseSupplies = ({
   const { activeAccount } = useActiveAccount();
 
   return useQuery({
-    queryKey: queryKeys.assetWiseSupplies(activeAccount?.address, poolId),
+    queryKey: queryKeys.assetWiseSupplies(activeAccount?.address),
     queryFn:
       provider && activeAccount?.address
         ? () =>
