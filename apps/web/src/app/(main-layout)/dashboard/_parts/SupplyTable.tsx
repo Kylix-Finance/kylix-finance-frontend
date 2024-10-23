@@ -36,7 +36,6 @@ export const SupplyTable = () => {
                 className="!text-primary-500"
                 variant="subtitle1"
                 fontWeight={600}
-                fontFamily={"Poppins"}
               >
                 Supply
               </Typography>

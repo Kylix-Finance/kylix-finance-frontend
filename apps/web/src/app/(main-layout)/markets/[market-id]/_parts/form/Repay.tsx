@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { usePool } from "~/hooks/chain/usePool";
 import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
 import { useRepay } from "~/hooks/chain/useRepay";
-import { BASE_ASSET_ID } from "@repo/shared";
+const BASE_ASSET_ID = 21;
 
 const items: Array<ListItem> = [
   {
@@ -40,14 +40,15 @@ const items: Array<ListItem> = [
 
 export const Repay = () => {
   const params = useParams();
-  const lendTokenId = params["market-id"] as string;
-  const { pool } = usePool({ assetId: lendTokenId });
+  const collateralTokenId = params["market-id"] as string;
+  const { pool } = usePool({ assetId: collateralTokenId });
   const [value, setValue] = useState("");
-  const { assetMetaData } = useMetadata(lendTokenId);
+  const { assetMetaData } = useMetadata(collateralTokenId);
   const { mutate, isPending } = useRepay();
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
-    assetId: lendTokenId,
+    assetId: collateralTokenId,
   });
+
   const {
     formattedBalance: formattedKTokenBalance,
     isLoading: isFormattedKTokenBalanceLoading,
@@ -58,11 +59,12 @@ export const Repay = () => {
   });
   const { assetMetaData: baseAssetMetadata } = useMetadata(BASE_ASSET_ID);
   const onclick = () => {
+    if (!baseAssetMetadata) return;
     mutate(
       {
         asset: BASE_ASSET_ID,
-        balance: parseUnit(value, Number(baseAssetMetadata?.decimals)),
-        collateralAsset: lendTokenId,
+        balance: parseUnit(value, baseAssetMetadata.decimals),
+        collateralAsset: collateralTokenId,
       },
       {
         onSuccess: ({ blockNumber }) => {
@@ -78,7 +80,7 @@ export const Repay = () => {
   };
   return (
     <Form
-      assetId={lendTokenId}
+      assetId={collateralTokenId}
       items={items}
       decimals={assetMetaData?.decimals}
       setValue={setValue}

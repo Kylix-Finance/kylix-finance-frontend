@@ -5,10 +5,9 @@ import { useState } from "react";
 import { useBorrow } from "~/hooks/chain/useBorrow";
 import { useParams } from "next/navigation";
 import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
-import { BASE_ASSET_ID } from "@repo/shared";
 import { useQuickBorrow } from "~/hooks/chain/useQuickBorrow";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
-
+const BASE_ASSET_ID = 21;
 const items: Array<ListItem> = [
   {
     label: "Available to borrow",
@@ -42,43 +41,63 @@ const items: Array<ListItem> = [
 export const Borrow = () => {
   const [value, setValue] = useState("");
   const params = useParams();
-  const lendTokenId = params["market-id"] as string;
+  const supplyTokenId = params["market-id"] as string;
   const { mutate, isPending } = useQuickBorrow();
-  const { assetMetaData: baseAssetMetaData } = useMetadata(BASE_ASSET_ID);
-  const { assetMetaData: assetIdMetaData } = useMetadata(lendTokenId);
-  const { formattedPrice: lendTokenPrice } = useAssetPrice({
-    assetId: lendTokenId,
+  const { assetMetaData: borrowAssetMetaData } = useMetadata(BASE_ASSET_ID);
+  const { assetMetaData: supplyAssetMetaData } = useMetadata(supplyTokenId);
+  const { formattedPrice: supplyTokenPrice } = useAssetPrice({
+    assetId: supplyTokenId,
   });
-  const { balance: lendAssetBalance } = useBalance({ assetId: BASE_ASSET_ID });
-  const { balance: borrowAssetBalance } = useBalance({ assetId: lendTokenId });
+  const { formattedPrice: borrowTokenPrice } = useAssetPrice({
+    assetId: BASE_ASSET_ID,
+  });
+  const { balance: supplyAssetBalance } = useBalance({
+    assetId: BASE_ASSET_ID,
+  });
+  const { balance: borrowAssetBalance } = useBalance({
+    assetId: supplyTokenId,
+  });
   const onclick = () => {
     if (
-      !lendAssetBalance ||
+      !supplyAssetBalance ||
       !value ||
-      !baseAssetMetaData?.decimals ||
+      !borrowAssetMetaData?.decimals ||
       !borrowAssetBalance ||
-      !lendTokenPrice
+      !supplyTokenPrice ||
+      !borrowTokenPrice ||
+      !supplyAssetMetaData
     )
       return;
     const borrowValue = parseUnit(
       value,
-      baseAssetMetaData?.decimals
+      borrowAssetMetaData?.decimals
     ).toString();
-    const supplyValue = (
-      ((BigInt(borrowValue) / BigInt(lendTokenPrice)) * 3n) /
-      2n
+    const supplyValue = parseUnit(
+      (Number(value) *
+        (Number(borrowTokenPrice) / Number(supplyTokenPrice)) *
+        4) /
+        2,
+      supplyAssetMetaData?.decimals
     ).toString();
 
     console.log("_____borrowPoolId", BASE_ASSET_ID);
-    console.log("_____supplyPoolId", lendTokenId);
-    console.log("_____borrowValue", borrowValue);
-    console.log("_____supplyValue", supplyValue);
+    console.log("_____supplyPoolId", supplyTokenId);
+    console.log("_____borrow_amount", borrowValue);
+    console.log(
+      "_____borrow_value",
+      BigInt(borrowValue) * BigInt(borrowTokenPrice)
+    );
+    console.log("_____supply_amount", supplyValue);
+    console.log(
+      "_____supply_value",
+      BigInt(supplyValue) * BigInt(supplyTokenPrice)
+    );
 
     mutate(
       {
         borrowPoolId: BASE_ASSET_ID.toString(),
         borrowValue,
-        supplyPoolId: lendTokenId,
+        supplyPoolId: supplyTokenId,
         supplyValue,
       },
       {
@@ -98,7 +117,7 @@ export const Borrow = () => {
     <Form
       assetId={BASE_ASSET_ID}
       items={items}
-      decimals={baseAssetMetaData?.decimals}
+      decimals={borrowAssetMetaData?.decimals}
       setValue={setValue}
       value={value}
       submitButton={{
@@ -107,7 +126,7 @@ export const Borrow = () => {
       }}
       isSubmitting={isPending}
       balance={borrowAssetBalance?.toString()}
-      symbol={baseAssetMetaData?.symbol}
+      symbol={borrowAssetMetaData?.symbol}
       onMaxClick={() => {}}
     />
   );

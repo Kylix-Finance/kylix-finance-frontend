@@ -3,8 +3,11 @@
 import { Box } from "@mui/material";
 import { Modal } from "~/components";
 import { BorrowTable } from "./BorrowTable";
+import { useGetAssetPrice } from "~/hooks/chain/useGetAssetPrice";
 
 const Borrow = () => {
+  const { data } = useGetAssetPrice({ asset: 21 });
+  console.log(data);
   return (
     <Box>
       {/* <Modal

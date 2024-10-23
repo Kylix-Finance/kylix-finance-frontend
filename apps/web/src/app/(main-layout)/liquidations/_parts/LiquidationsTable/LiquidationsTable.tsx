@@ -180,7 +180,6 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
                 className="text-[#FFF]"
                 variant="body3"
                 fontWeight={600}
-                fontFamily={"Poppins"}
               >
                 View Market
               </Typography>

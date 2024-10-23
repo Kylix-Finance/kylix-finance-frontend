@@ -5,20 +5,26 @@ import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
 import { Skeleton } from "@repo/ui";
 import { usePools } from "~/hooks/chain/usePools";
-import { formatBigNumbers } from "@repo/onchain-utils";
+import {
+  formatBigNumbers,
+  useAccounts,
+  useActiveAccount,
+  useProvider,
+} from "@repo/onchain-utils";
+import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
+import { useEffect } from "react";
 
 const Supply = () => {
-  const { totalSupply } = usePools();
-
+  const { data, isLoading } = useGetLendingPools();
   return (
     <Card
       title="Total Supply"
       icon={Icons.WalletFill}
       rightComponent={
         <Typography variant="h5" className="text-primary-800">
-          <Skeleton minWidth={80} isLoading={!totalSupply}>
-            {totalSupply
-              ? formatBigNumbers(totalSupply, 2) + "$"
+          <Skeleton minWidth={80} isLoading={isLoading}>
+            {data?.summary
+              ? formatBigNumbers(data.summary.total_supply.toString(), 2) + "$"
               : "Unavailable"}
           </Skeleton>
         </Typography>
