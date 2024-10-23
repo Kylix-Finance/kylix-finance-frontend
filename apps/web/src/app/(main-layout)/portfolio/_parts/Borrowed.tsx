@@ -1,12 +1,24 @@
 "use client";
 
 import { Box, Button, Typography } from "@mui/material";
+import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
 import { Table } from "@repo/ui";
-import Image from "next/image";
-import { Icons } from "~/assets/svgs";
 import { Asset } from "~/components";
+import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
 
 const Borrowed = () => {
+  const { data: AssetWiseBorrowsCollaterals } =
+    useGetAssetWiseBorrowsCollaterals();
+  const borrowed: TableData | undefined =
+    AssetWiseBorrowsCollaterals?.borrowedAssets.map?.((item) => ({
+      apy: formatUnit(item.apy || 0, 18),
+      asset: item.assetSymbol,
+      balance: formatBigNumbers(formatUnit(item.balance, item.decimals), 4),
+      borrowed: formatBigNumbers(
+        formatUnit(item.borrowed || 0, item.decimals),
+        4
+      ),
+    }));
   return (
     <Table<TableData[number]>
       tCellClassnames={"!p-3"}
@@ -26,10 +38,10 @@ const Borrowed = () => {
         asset: (item) => <Asset label={item.asset} helperText="" />,
         apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,
         balance: (item) => (
-          <Typography variant="subtitle1">{item.borrowed}</Typography>
+          <Typography variant="subtitle1">{item.balance}</Typography>
         ),
-        supplied: (item) => (
-          <Typography variant="subtitle1">{item.supplied}</Typography>
+        borrowed: (item) => (
+          <Typography variant="subtitle1">{item.borrowed}</Typography>
         ),
         actions: () => (
           <Box className="flex justify-end gap-1 items-center">
@@ -55,16 +67,16 @@ const Borrowed = () => {
           </Box>
         ),
       }}
-      data={tableData}
+      data={borrowed || []}
     />
   );
 };
 
 export default Borrowed;
-const tableData = [
-  { asset: "Dot", apy: "5%", borrowed: "0.202", supplied: "100" },
-  { asset: "KYL", apy: "2%", borrowed: "210.2", supplied: "150" },
-  { asset: "USDT", apy: "1%", borrowed: "1200", supplied: "212" },
-];
 
-type TableData = typeof tableData;
+type TableData = {
+  asset: string;
+  apy: string;
+  borrowed: string;
+  balance: string;
+}[];
