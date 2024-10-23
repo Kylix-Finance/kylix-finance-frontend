@@ -1,9 +1,23 @@
+"use client";
 import { Box, Button, Typography } from "@mui/material";
 import Doughnut from "~/components/Charts/DoughnutChart";
 import { FinanceSummary } from "~/components";
 import { numToLocalString } from "~/utils";
+import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
+import {
+  fixPrecision,
+  formatBigNumbers,
+  formatUnit,
+} from "@repo/onchain-utils";
 
 const CollateralValue = () => {
+  const { data: assetWiseBorrowCollateral } =
+    useGetAssetWiseBorrowsCollaterals();
+
+  const totalCollateral = formatUnit(
+    assetWiseBorrowCollateral?.totalCollateral || 0,
+    18
+  );
   const data = [
     { label: "Asset 1", color: "#45A996", value: 20 },
     { label: "Asset 2", color: "#A67B97", value: 30 },
@@ -13,7 +27,7 @@ const CollateralValue = () => {
   return (
     <Box className="flex flex-col h-full">
       <Typography variant="h4" marginBottom="36px">
-        {numToLocalString(65800200)}{" "}
+        {formatBigNumbers(totalCollateral, 2)}
         <Typography variant="body3">USD</Typography>
       </Typography>
       <Box className="flex mb-auto gap-6">

@@ -1,6 +1,10 @@
 "use client";
 import { Box, Typography } from "@mui/material";
-import { fixPrecision, formatUnit } from "@repo/onchain-utils";
+import {
+  fixPrecision,
+  formatBigNumbers,
+  formatUnit,
+} from "@repo/onchain-utils";
 import { LineBreak } from "~/components";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
 
@@ -28,7 +32,7 @@ const BorrowValue = () => {
             lineHeight="30px"
             className="font-number"
           >
-            $ {fixPrecision(Number(totalBorrowed), 2)}
+            $ {formatBigNumbers(totalBorrowed, 2)}
           </Typography>
 
           <Typography
