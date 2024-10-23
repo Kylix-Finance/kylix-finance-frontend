@@ -2,13 +2,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import Doughnut from "~/components/Charts/DoughnutChart";
 import { FinanceSummary } from "~/components";
-import { numToLocalString } from "~/utils";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
-import {
-  fixPrecision,
-  formatBigNumbers,
-  formatUnit,
-} from "@repo/onchain-utils";
+import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
+import { assetColors } from "~/constants";
 
 const CollateralValue = () => {
   const { data: assetWiseBorrowCollateral } =
@@ -18,11 +14,16 @@ const CollateralValue = () => {
     assetWiseBorrowCollateral?.totalCollateral || 0,
     18
   );
-  const data = [
-    { label: "Asset 1", color: "#45A996", value: 20 },
-    { label: "Asset 2", color: "#A67B97", value: 30 },
-    { label: "Asset 3", color: "#C9E0DE", value: 50 },
-  ];
+
+  const data = assetWiseBorrowCollateral?.collateralAssets.map?.(
+    (item, index) => ({
+      label: item.assetSymbol,
+      value:
+        Number(formatUnit(item.balance, item.decimals)) /
+        Number(formatUnit(assetWiseBorrowCollateral.totalCollateral || 0, 18)),
+      color: assetColors[index % 10] || "#ffffff",
+    })
+  ) || [{ label: "Asset", color: "#ffffff", value: 100 }];
 
   return (
     <Box className="flex flex-col h-full">
