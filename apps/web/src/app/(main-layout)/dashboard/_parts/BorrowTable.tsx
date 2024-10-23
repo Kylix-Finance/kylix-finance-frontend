@@ -27,7 +27,6 @@ export const BorrowTable = () => {
                 className="!text-primary-500"
                 variant="subtitle1"
                 fontWeight={600}
-                fontFamily="Poppins"
               >
                 Borrow
               </Typography>

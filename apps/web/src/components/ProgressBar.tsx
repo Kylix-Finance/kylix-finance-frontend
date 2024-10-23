@@ -94,8 +94,10 @@ export default ProgressBar;
 const Percent = ({ value }: { value: number }) => {
   return (
     <Typography
-      fontFamily="Poppins"
-      className="!text-[12px] !text-[#4E5B72] !font-[600] !leading-[24px]"
+      variant="body3"
+      fontWeight={600}
+      lineHeight={"24px"}
+      className=" !text-[#4E5B72] font-number"
     >
       {value} %
     </Typography>

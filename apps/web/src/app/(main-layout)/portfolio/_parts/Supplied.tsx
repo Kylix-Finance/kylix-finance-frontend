@@ -36,11 +36,7 @@ const Supplied = () => {
             <Switch />
             <Box className="flex justify-end gap-1 items-center">
               <Button variant="contained">
-                <Typography
-                  variant="subtitle1"
-                  fontWeight={600}
-                  fontFamily={"Poppins"}
-                >
+                <Typography variant="subtitle1" fontWeight={600}>
                   Withdraw
                 </Typography>
               </Button>
@@ -49,7 +45,6 @@ const Supplied = () => {
                   className="!text-primary-500"
                   variant="subtitle1"
                   fontWeight={600}
-                  fontFamily={"Poppins"}
                 >
                   Supply
                 </Typography>
