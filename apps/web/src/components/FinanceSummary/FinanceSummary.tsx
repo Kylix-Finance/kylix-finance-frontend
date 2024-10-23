@@ -13,14 +13,16 @@ const FinanceSummary = ({ label, value, color }: FinanceSummaryProps) => {
       <Box className="flex items-center">
         <Box className="w-3 h-3 rounded-sm mr-1" bgcolor={color}></Box>
 
-        <Typography className="!text-[#1A433B80] !text-[10px] !font-[500] !leading-[15px]">
+        <Typography className="text-primary-800/40 !text-[10px] !font-[500] !leading-[15px]">
           {label}
         </Typography>
       </Box>
 
       <Typography
-        fontFamily="Poppins"
-        className="!text-[#1A433B] !text-[12px] !font-[500] !leading-[17px]"
+        variant="body3"
+        fontWeight={500}
+        lineHeight={"17px"}
+        className="text-primary-800 font-number"
       >
         $ {numToLocalString(value)}
       </Typography>

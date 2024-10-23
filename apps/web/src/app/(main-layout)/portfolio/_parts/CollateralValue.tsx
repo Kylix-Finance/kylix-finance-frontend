@@ -40,48 +40,56 @@ const CollateralValue = () => {
       </Box>
 
       <Box className="flex gap-3">
-        <Box className="flex flex-col w-[100%] h-[64] p-[12px_8px] border border-[#62938A33] rounded-[6px]">
-          <Typography className="!text-[#1A433B] !font-[700] !text-[10px] !leading-[15px]">
+        <Box className="flex flex-col w-full py-3 px-4 border border-primary-800/10 rounded-[6px]">
+          <Typography
+            variant="caption"
+            fontWeight={700}
+            lineHeight={"15px"}
+            className="text-primary-800"
+          >
             KLX Price
           </Typography>
 
           <Typography
-            className="!text-[#45A996] !text-[14px] !font-[500] !leading-[20px]"
-            fontFamily="Poppins"
+            className="text-primary-500"
+            variant="body1"
+            lineHeight="20px"
           >
             $ 0.25
           </Typography>
         </Box>
-
-        <Box className="flex flex-col w-[100%] h-[64] p-[12px_8px] border border-[#62938A33] rounded-[6px]">
-          <Typography className="!text-[#1A433B] !font-[700] !text-[10px] !leading-[15px]">
-            Rewards
-          </Typography>
-
-          <Box className="flex justify-between">
-            <Box className="flex gap-[5px] items-center">
-              <Typography
-                className="!text-[#45A996] !text-[14px] !font-[500] !leading-[20px]"
-                fontFamily="Poppins"
-              >
-                258
-              </Typography>
-              <Typography className="!text-[#45A996] !text-[10px] !font-[500] !leading-[15px]">
-                KLX
-              </Typography>
-            </Box>
-            <Button
-              className="!p-[4px_8px] !border-[#45A996] !rounded-[8px] !border-[2px]"
-              variant="outlined"
+        <Box className="flex  w-full py-3 px-4 border border-primary-800/10 rounded-md justify-between items-end">
+          <Box className="flex flex-col">
+            <Typography
+              variant="caption"
+              fontWeight={700}
+              lineHeight={"15px"}
+              className="text-primary-800"
             >
+              Rewards
+            </Typography>
+
+            <Typography
+              className="text-primary-500"
+              variant="body1"
+              lineHeight="20px"
+            >
+              258
+              <Typography variant="caption">KLX</Typography>
+            </Typography>
+          </Box>
+          <div>
+            <Button size="small" variant="outlined" disableElevation>
               <Typography
-                className="!text-[#45A996] !text-[10px] !font-[600] !leading-[14px]  "
-                fontFamily="Poppins"
+                variant="caption"
+                fontWeight={600}
+                lineHeight="13px"
+                className="capitalize text-center  min-h-0"
               >
-                Claim
+                Reward
               </Typography>
             </Button>
-          </Box>
+          </div>
         </Box>
       </Box>
     </Box>
