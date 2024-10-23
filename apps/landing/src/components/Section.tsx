@@ -9,12 +9,24 @@ interface Props extends ComponentProps<"div"> {
     left?: string;
   };
   description?: string;
+  contentClassName?: string;
 }
 
-const Section = ({ children, description, heading, ...rest }: Props) => {
+const Section = ({
+  children,
+  description,
+  heading,
+  contentClassName,
+  ...rest
+}: Props) => {
   return (
     <div className={cn("relative w-full h-full", rest.className)} {...rest}>
-      <div className="relative z-[1] flex flex-col gap-24 w-full h-full justify-center items-center px-8 py-10 md:px-16 md:py-20 lg:px-32 lg:py-44">
+      <div
+        className={cn(
+          "relative z-[1] flex flex-col gap-24 w-full h-full justify-center items-center px-8 py-10 md:px-16 md:py-20 lg:px-32 lg:py-44",
+          contentClassName
+        )}
+      >
         <div className="flex flex-col gap-2 w-full h-full justify-center items-center">
           {heading && (
             <h2 className="flex flex-col sm:flex-row justify-center items-center gap-2.5 font-bold font-heading w-full h-full text-4xl md:text-5xl lg:text-6xl">

@@ -16,6 +16,7 @@ import BackGround from "~/components/BackGround";
 import FeaturedPartners from "./_parts/FeaturedPartners";
 import { mergeMetadata } from "@repo/shared";
 import { Metadata } from "next";
+import WaitingList from "./_parts/WaitingList";
 
 export const metadata: Metadata = mergeMetadata(
   {
@@ -32,6 +33,7 @@ export default function page() {
       <BackGround />
       <Header />
       <Hero />
+      <WaitingList />
       <FeaturedPartners />
       <SmartLending />
       <MarketTrends />
