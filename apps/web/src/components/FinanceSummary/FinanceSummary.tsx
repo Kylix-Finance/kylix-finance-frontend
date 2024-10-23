@@ -3,7 +3,7 @@ import { numToLocalString } from "~/utils";
 
 type FinanceSummaryProps = {
   label: string;
-  value: number;
+  value: number | string;
   color: string;
 };
 
@@ -24,7 +24,7 @@ const FinanceSummary = ({ label, value, color }: FinanceSummaryProps) => {
         lineHeight={"17px"}
         className="text-primary-800 font-number"
       >
-        $ {numToLocalString(value)}
+        $ {value}
       </Typography>
     </Box>
   );
