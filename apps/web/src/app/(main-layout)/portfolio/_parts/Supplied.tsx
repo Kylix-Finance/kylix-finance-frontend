@@ -9,8 +9,7 @@ import { Asset } from "~/components";
 import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetAssetWiseSupplies";
 
 const Supplied = () => {
-  const { data: assetWiseSupplies } = useGetAssetWiseSupplies();
-  console.log("_____assetWiseSupplies", assetWiseSupplies);
+  const { data: assetWiseSupplies, isLoading } = useGetAssetWiseSupplies();
   const supplies:
     | TableData
     | { asset: string; apy: string; balance: string; supplied: string }[]
@@ -23,7 +22,7 @@ const Supplied = () => {
 
   return (
     <Table<TableData[number]>
-      isLoading={!assetWiseSupplies}
+      isLoading={isLoading}
       tCellClassnames={"!p-3"}
       rowSpacing="10px"
       hasPagination={false}

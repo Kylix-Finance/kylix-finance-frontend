@@ -7,7 +7,7 @@ import { Asset } from "~/components";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
 
 const Borrowed = () => {
-  const { data: AssetWiseBorrowsCollaterals } =
+  const { data: AssetWiseBorrowsCollaterals, isLoading } =
     useGetAssetWiseBorrowsCollaterals();
   const borrowed: TableData | undefined =
     AssetWiseBorrowsCollaterals?.borrowedAssets.map?.((item) => ({
@@ -21,6 +21,7 @@ const Borrowed = () => {
     }));
   return (
     <Table<TableData[number]>
+      isLoading={isLoading}
       tCellClassnames={"!p-3"}
       rowSpacing="10px"
       hasPagination={false}
