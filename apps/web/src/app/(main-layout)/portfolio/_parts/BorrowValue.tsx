@@ -1,7 +1,22 @@
+"use client";
 import { Box, Typography } from "@mui/material";
+import {
+  fixPrecision,
+  formatBigNumbers,
+  formatUnit,
+} from "@repo/onchain-utils";
 import { LineBreak } from "~/components";
+import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
 
 const BorrowValue = () => {
+  const { data: assetWiseBorrowCollateral } =
+    useGetAssetWiseBorrowsCollaterals();
+
+  const totalBorrowed = formatUnit(
+    assetWiseBorrowCollateral?.totalBorrowed || 0,
+    18
+  );
+
   return (
     <Box className="flex flex-col h-full gap-4">
       <Box className="flex flex-col p-4 border border-primary-700/10 rounded-md">
@@ -17,7 +32,7 @@ const BorrowValue = () => {
             lineHeight="30px"
             className="font-number"
           >
-            $4,100,200
+            $ {formatBigNumbers(totalBorrowed, 2)}
           </Typography>
 
           <Typography

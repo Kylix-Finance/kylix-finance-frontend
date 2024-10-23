@@ -1,14 +1,29 @@
 "use client";
 
 import { Box, Button, Switch, Typography } from "@mui/material";
+import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
 import { Table } from "@repo/ui";
 import Image from "next/image";
 import { Icons } from "~/assets/svgs";
 import { Asset } from "~/components";
+import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetAssetWiseSupplies";
 
 const Supplied = () => {
+  const { data: assetWiseSupplies } = useGetAssetWiseSupplies();
+  console.log("_____assetWiseSupplies", assetWiseSupplies);
+  const supplies:
+    | TableData
+    | { asset: string; apy: string; balance: string; supplied: string }[]
+    | undefined = assetWiseSupplies?.suppliedAssets.map?.((item) => ({
+    apy: formatUnit(item.apy, 18),
+    asset: item.assetSymbol,
+    balance: formatBigNumbers(formatUnit(item.balance, item.decimals), 4),
+    supplied: formatBigNumbers(formatUnit(item.supplied, item.decimals), 4),
+  }));
+
   return (
     <Table<TableData[number]>
+      isLoading={!assetWiseSupplies}
       tCellClassnames={"!p-3"}
       rowSpacing="10px"
       hasPagination={false}
@@ -24,7 +39,7 @@ const Supplied = () => {
       tableName="supply"
       components={{
         asset: (item) => <Asset label={item.asset} helperText="" />,
-        apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,
+        apy: (item) => <Typography variant="subtitle1">{item.apy}%</Typography>,
         balance: (item) => (
           <Typography variant="subtitle1">{item.balance}</Typography>
         ),
@@ -53,16 +68,17 @@ const Supplied = () => {
           </Box>
         ),
       }}
-      data={tableData}
+      data={supplies || []}
     />
   );
 };
 
 export default Supplied;
-const tableData = [
-  { asset: "Dot", apy: "5%", balance: "0.202", supplied: "100" },
-  { asset: "KYL", apy: "2%", balance: "210.2", supplied: "150" },
-  { asset: "USDT", apy: "1%", balance: "1200", supplied: "212" },
-];
 
-type TableData = typeof tableData;
+// TODO: remove any
+type TableData = {
+  asset: string;
+  apy: string;
+  balance: string;
+  supplied: string;
+}[];
