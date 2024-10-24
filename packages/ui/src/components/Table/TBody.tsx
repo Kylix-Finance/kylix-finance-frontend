@@ -1,4 +1,4 @@
-import { TableBody, TableRow } from "@mui/material";
+import { Box, TableBody, TableCell, TableRow } from "@mui/material";
 
 import TRow, { CellValueComponents } from "./TRow";
 import {
@@ -17,13 +17,14 @@ interface Props<Schema, ExtraFields extends string = string> {
   data: TableData<Schema>;
   headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   isLoading?: boolean;
+  middleComponent?: React.FC;
   numeric?: Numeric<Schema>;
   onTRowClick?: OnTRowClick<Schema>;
+  placeholderLength: number;
   rowSpacing?: string;
   tBody?: TBodyProps;
   tCellClassnames?: string;
   tRowProps?: TRowProps;
-  middleComponent?: React.FC;
 }
 
 function TBody<Schema, ExtraFields extends string = string>({
@@ -33,12 +34,21 @@ function TBody<Schema, ExtraFields extends string = string>({
   isLoading,
   middleComponent,
   numeric,
+  placeholderLength,
   rowSpacing,
   tBody,
   tCellClassnames,
   tRowProps,
 }: Props<Schema, ExtraFields>) {
   const FixedMiddleComponent = middleComponent || (() => null);
+
+  const placeholderArr = Array.from<null>({ length: placeholderLength }).fill(
+    null
+  );
+
+  const { length: headersLength } = Object.keys(headers);
+
+  const finalData = data.length ? data : placeholderArr;
 
   return (
     <TableBody {...tBody}>
@@ -56,26 +66,46 @@ function TBody<Schema, ExtraFields extends string = string>({
         />
       )}
 
-      {data.map((row, index) => (
-        <Fragment key={index}>
-          <TRow
-            numeric={numeric}
-            isLoading={isLoading}
-            tCellClassnames={tCellClassnames}
-            headers={headers}
-            row={row}
-            components={components}
-            {...tRowProps}
-          />
-          {rowSpacing && index < data.length - 1 && (
-            <TableRow
-              style={{
-                height: rowSpacing,
-              }}
+      {(!!data.length || isLoading) &&
+        finalData.map((row, index) => (
+          <Fragment key={index}>
+            <TRow
+              numeric={numeric}
+              isLoading={isLoading}
+              tCellClassnames={tCellClassnames}
+              headers={headers}
+              row={row}
+              components={components}
+              {...tRowProps}
             />
-          )}
-        </Fragment>
-      ))}
+
+            {rowSpacing && index < finalData.length - 1 && (
+              <TableRow
+                style={{
+                  height: rowSpacing,
+                }}
+              />
+            )}
+          </Fragment>
+        ))}
+
+      {isLoading === false &&
+        !data.length &&
+        placeholderArr.map((i, index) => {
+          return (
+            <TableRow key={index}>
+              <TableCell colSpan={headersLength}>
+                <Box className="flex justify-center items-center h-[40px]">
+                  {Math.floor(placeholderLength / 2) === index
+                    ? "No Data Available"
+                    : ""}
+                </Box>
+              </TableCell>
+            </TableRow>
+          );
+        })}
+
+      {}
     </TableBody>
   );
 }

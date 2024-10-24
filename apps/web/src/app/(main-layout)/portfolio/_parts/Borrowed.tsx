@@ -21,6 +21,7 @@ const Borrowed = () => {
     }));
   return (
     <Table<TableData[number]>
+      placeholderLength={3}
       isLoading={isLoading}
       tCellClassnames={"!p-3"}
       rowSpacing="10px"

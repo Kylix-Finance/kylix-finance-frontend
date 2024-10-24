@@ -5,6 +5,7 @@ import { Asset } from "~/components";
 export const BorrowTable = () => {
   return (
     <Table<TableData[number], "actions">
+      placeholderLength={3}
       headers={{
         asset: "Asset",
         apy: "APY",
@@ -41,9 +42,7 @@ export const BorrowTable = () => {
           <Typography variant="subtitle1">{item.balance}</Typography>
         ),
       }}
-      data={tableData.map((item) => ({
-        ...item,
-      }))}
+      data={tableData}
     />
   );
 };

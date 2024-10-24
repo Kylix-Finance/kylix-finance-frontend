@@ -6,7 +6,7 @@ import { TableActions } from "../TableActions";
 import { useMemo } from "react";
 import { Table } from "@repo/ui";
 import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
-import { formatUnit, parseUnit } from "@repo/onchain-utils";
+import { formatUnit } from "@repo/onchain-utils";
 
 const placeholderData = Array.from({ length: 5 }).map(() => ({
   asset: "",
@@ -54,6 +54,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
 
   return (
     <Table<TableData[number]>
+      placeholderLength={5}
       hiddenTHeads={["actions"]}
       headers={{
         asset: "Asset",
@@ -105,7 +106,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         ),
         actions: (item) => <TableActions assetId={item.id} />,
       }}
-      data={transformedData || placeholderData}
+      data={transformedData || []}
       defaultSortKey="asset"
       tableName="markets"
       hasPagination={false}

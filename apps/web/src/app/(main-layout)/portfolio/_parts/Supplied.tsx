@@ -23,6 +23,7 @@ const Supplied = () => {
   return (
     <Table<TableData[number]>
       isLoading={isLoading}
+      placeholderLength={3}
       tCellClassnames={"!p-3"}
       rowSpacing="10px"
       hasPagination={false}

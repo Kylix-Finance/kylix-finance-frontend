@@ -6,6 +6,7 @@
   "ignoreWords": [
     "Acala",
     "CLEANME",
+    "Showable",
     "Skel",
     "chartjs",
     "clsx",
