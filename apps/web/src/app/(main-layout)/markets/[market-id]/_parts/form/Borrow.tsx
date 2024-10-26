@@ -32,7 +32,7 @@ export const Borrow = () => {
   });
 
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
-    { poolId: supplyTokenId }
+    { poolId: BASE_ASSET_ID }
   );
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 
@@ -118,7 +118,9 @@ export const Borrow = () => {
       isSubmitting={isPending}
       balance={borrowAssetBalance?.toString()}
       symbol={borrowAssetMetaData?.symbol}
-      onMaxClick={() => {}}
+      onMaxClick={() => {
+        setValue(max);
+      }}
     />
   );
 };

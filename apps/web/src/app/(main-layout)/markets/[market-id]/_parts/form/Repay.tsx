@@ -28,20 +28,20 @@ export const Repay = () => {
     assetId: collateralTokenId,
   });
 
-  const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
-    { poolId: BASE_ASSET_ID }
-  );
-  const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
-  console.log("_____borrowAssetData", borrowAssetData);
-
   const {
     formattedBalance: formattedKTokenBalance,
     isLoading: isFormattedKTokenBalanceLoading,
   } = useBalance({
-    assetId: pool?.id,
+    assetId: collateralTokenId,
     customDecimals: assetMetaData?.decimals,
-    enabled: !!assetMetaData && !!pool,
+    enabled: !!assetMetaData,
   });
+
+  const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
+    { poolId: 21 }
+  );
+  const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
+
   const onclick = () => {
     if (!baseAssetMetadata) return;
     mutate(
@@ -66,15 +66,7 @@ export const Repay = () => {
   const items: Array<ListItem> = [
     {
       label: "Available to repay",
-      value:
-        "$" +
-        formatBigNumbers(
-          formatUnit(
-            borrowAssetData?.balance || "0",
-            baseAssetMetadata?.decimals
-          ),
-          4
-        ),
+      value: "$" + formatBigNumbers(formattedKTokenBalance || "0", 4),
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -113,7 +105,9 @@ export const Repay = () => {
       }}
       isSubmitting={isPending}
       isMaxLoading={isBalanceLoading}
-      onMaxClick={() => {}}
+      onMaxClick={() => {
+        setValue(formattedKTokenBalance || "0");
+      }}
       balance={formattedBalance}
       symbol={assetMetaData?.symbol}
     />
