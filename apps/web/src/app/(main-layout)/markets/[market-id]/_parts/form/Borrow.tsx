@@ -7,7 +7,8 @@ import { useParams } from "next/navigation";
 import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
 import { useQuickBorrow } from "~/hooks/chain/useQuickBorrow";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
-const BASE_ASSET_ID = 21;
+import { useGetEstimateCollateralAmount } from "~/hooks/chain/useGetEstimateCollateralAmount";
+const BASE_ASSET_ID = "21";
 const items: Array<ListItem> = [
   {
     label: "Available to borrow",
@@ -44,20 +45,28 @@ export const Borrow = () => {
   const supplyTokenId = params["market-id"] as string;
   const { mutate, isPending } = useQuickBorrow();
   const { assetMetaData: borrowAssetMetaData } = useMetadata(BASE_ASSET_ID);
-  const { balance: supplyAssetBalance } = useBalance({
+  const { assetMetaData: supplyAssetMetaData } = useMetadata(supplyTokenId);
+  const { formattedBalance: supplyAssetBalance } = useBalance({
     assetId: BASE_ASSET_ID,
   });
   const { balance: borrowAssetBalance } = useBalance({
     assetId: supplyTokenId,
   });
+
+  const { formattedEstimateCollateral: minCollateralRatio } =
+    useGetEstimateCollateralAmount({
+      borrowAsset: "1",
+      borrowAssetAmount: parseUnit(1, borrowAssetMetaData?.decimals).toString(),
+      collateralAsset: BASE_ASSET_ID,
+      collateralDecimals: supplyAssetMetaData?.decimals,
+    });
+
+  const max = (
+    Number(supplyAssetBalance || 1) / Number(minCollateralRatio || 1)
+  ).toString();
+
   const onclick = () => {
-    if (
-      !supplyAssetBalance ||
-      !value ||
-      !borrowAssetMetaData?.decimals ||
-      !borrowAssetBalance
-    )
-      return;
+    if (!value || !borrowAssetMetaData?.decimals || !borrowAssetBalance) return;
     const borrowValue = parseUnit(
       value,
       borrowAssetMetaData?.decimals
@@ -82,6 +91,36 @@ export const Borrow = () => {
       }
     );
   };
+
+  const items: Array<ListItem> = [
+    {
+      label: "Available to borrow",
+      value: "$" + max,
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Borrow Apy",
+      value: "6.4 %",
+      kylixValue: "%4",
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Borrowed",
+      value: "$64",
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Interest",
+      value: "$ 24",
+      kylixValue: "12",
+      tooltipTitle: "Interest tooltip title.",
+      action: {
+        title: "Claim",
+        onClick: () => {},
+      },
+      valueClassName: "!text-primary-500",
+    },
+  ];
   return (
     <Form
       assetId={BASE_ASSET_ID}
