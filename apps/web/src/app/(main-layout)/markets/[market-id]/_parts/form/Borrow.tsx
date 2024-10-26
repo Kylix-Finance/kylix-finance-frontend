@@ -75,10 +75,12 @@ export const Borrow = () => {
     );
   };
 
+  const isMaxLoading = !minCollateralRatio || !supplyAssetBalance;
+
   const items: Array<ListItem> = [
     {
       label: "Available to borrow",
-      value: "$" + formatBigNumbers(max, 4),
+      value: "$" + (isMaxLoading ? "0" : formatBigNumbers(max, 4)),
       valueClassName: "!text-[#4E5B72]",
     },
     {
