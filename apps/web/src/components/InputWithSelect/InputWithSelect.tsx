@@ -21,6 +21,7 @@ interface Props {
   setPool: (pool: SelectOption) => void;
   options: SelectOption[];
   textField?: "readonly" | "write";
+  disabledMax?: boolean;
 }
 
 export const InputWithSelect = ({
@@ -32,6 +33,7 @@ export const InputWithSelect = ({
   textField = "write",
   value,
   onMax,
+  disabledMax,
 }: Props) => {
   const { assetMetaData } = useMetadata(pool?.value);
   const [localValue, setLocalValue] = useState<string>("");
@@ -91,6 +93,7 @@ export const InputWithSelect = ({
           ) : (
             <InputAdornment position="end">
               <Button
+                disabled={disabledMax}
                 onClick={() => {
                   setValue(maxValue);
                   setLocalValue(maxValue);

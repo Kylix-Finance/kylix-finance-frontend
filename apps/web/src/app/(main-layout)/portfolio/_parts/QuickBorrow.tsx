@@ -120,7 +120,10 @@ const QuickBorrow = () => {
                     className="text-secondary-800"
                     variant="subtitle1"
                   >
-                    {formatBigNumbers(supplyAssetBalance || "0", 2)}
+                    {formatBigNumbers(
+                      (supplyPool && supplyAssetBalance) || "0",
+                      2
+                    )}
                   </Typography>
                   <Typography className="text-primary-300" variant="subtitle2">
                     {supplyPool?.label}
@@ -174,7 +177,10 @@ const QuickBorrow = () => {
                     className="text-secondary-800"
                     variant="subtitle1"
                   >
-                    {formatBigNumbers(borrowAssetBalance || "0", 2)}
+                    {formatBigNumbers(
+                      (borrowPool && borrowAssetBalance) || "0",
+                      2
+                    )}
                   </Typography>
                   <Typography className="text-primary-300" variant="subtitle2">
                     {borrowPool?.label}
@@ -187,6 +193,7 @@ const QuickBorrow = () => {
                 setPool={setBorrowPool}
                 setValue={setBorrowValue}
                 maxValue={max.toString() || "0"}
+                disabledMax={!minCollateralRatio || !supplyPool || !borrowPool}
               />
               <List
                 items={[{ label: "Total Value", value: borrowValueInUSD }]}
