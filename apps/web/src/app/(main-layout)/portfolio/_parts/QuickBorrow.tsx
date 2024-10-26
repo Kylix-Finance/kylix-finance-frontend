@@ -12,6 +12,7 @@ import { Icons } from "~/assets/svgs";
 import { Card, List } from "~/components";
 import { InputWithSelect } from "~/components/InputWithSelect";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
+import { useGetEstimateCollateralAmount } from "~/hooks/chain/useGetEstimateCollateralAmount";
 import { usePools } from "~/hooks/chain/usePools";
 import { useQuickBorrow } from "~/hooks/chain/useQuickBorrow";
 import { SelectOption } from "~/types";
@@ -54,8 +55,12 @@ const QuickBorrow = () => {
   );
   const { assetMetaData: borrowAssetMetadata } = useMetadata(borrowPool?.value);
 
-  console.log("_____)))))),borrowAssetPrice", borrowAssetPrice);
-  console.log("_____)))))),supplyAssetPrice", supplyAssetPrice);
+  const { data: estimateCollateral } = useGetEstimateCollateralAmount({
+    borrowAsset: borrowPool?.value,
+    borrowAssetAmount: borrowValue,
+    collateralAsset: supplyPool?.value,
+  });
+  console.log("_______estimateCollateral", estimateCollateral);
 
   const borrowHandler = () => {
     mutate({

@@ -13,6 +13,12 @@ interface Pools {
   activeAccount: string | undefined;
 }
 
+interface EstimateCollateral {
+  borrowAsset: string | undefined;
+  borrowAssetAmount: string | undefined;
+  collateralAsset: string | undefined;
+}
+
 const keys = {
   BALANCE: "BALANCE",
   ACCOUNTS: "ACCOUNTS",
@@ -42,6 +48,7 @@ const keys = {
   ASSET_WISE_SUPPLIES: "ASSET_WISE_SUPPLIES",
   GET_ASSET_PRICE: "GET_ASSET_PRICE",
   GET_USER_LTV: "GET_USER_LTV",
+  ESTIMATE_COLLATERAL: "ESTIMATE_COLLATERAL",
 };
 
 type ChartScale = "1m" | "5m" | "15m" | "1h" | "12h" | "1d";
@@ -84,6 +91,17 @@ export const queryKeys = {
     baseKey,
     keys.ASSET_WISE_SUPPLIES,
     account,
+  ],
+  estimateCollateral: ({
+    borrowAsset,
+    borrowAssetAmount,
+    collateralAsset,
+  }: EstimateCollateral) => [
+    baseKey,
+    keys.ESTIMATE_COLLATERAL,
+    borrowAsset,
+    borrowAssetAmount,
+    collateralAsset,
   ],
   getAssetPrice: (asset: number, base_asset?: number) => [
     baseKey,
