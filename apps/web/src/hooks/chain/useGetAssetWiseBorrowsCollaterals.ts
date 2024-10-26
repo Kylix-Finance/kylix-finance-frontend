@@ -41,7 +41,10 @@ export const useGetAssetWiseBorrowsCollaterals = ({
   const { activeAccount } = useActiveAccount();
 
   return useQuery({
-    queryKey: queryKeys.assetWiseBorrowsCollaterals(activeAccount?.address),
+    queryKey: queryKeys.assetWiseBorrowsCollaterals(
+      activeAccount?.address,
+      poolId
+    ),
     queryFn:
       provider && activeAccount?.address
         ? () =>

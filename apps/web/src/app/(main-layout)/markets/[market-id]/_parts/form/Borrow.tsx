@@ -34,11 +34,7 @@ export const Borrow = () => {
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
     { poolId: supplyTokenId }
   );
-
-  console.log(
-    "_____assetWiseBorrowCollateral",
-    assetWiseBorrowCollateral?.borrowedAssets[0]?.apy
-  );
+  const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 
   const { formattedEstimateCollateral: minCollateralRatio } =
     useGetEstimateCollateralAmount({
@@ -78,8 +74,6 @@ export const Borrow = () => {
       }
     );
   };
-
-  const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 
   const items: Array<ListItem> = [
     {
