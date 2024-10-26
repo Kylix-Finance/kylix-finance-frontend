@@ -19,11 +19,12 @@ const CollateralValue = () => {
     (item, index) => ({
       label: item.assetSymbol,
       value:
-        Number(formatUnit(item.balance, item.decimals)) /
+        Number(formatUnit(item.usdtBalance, 18)) /
         Number(formatUnit(assetWiseBorrowCollateral.totalCollateral || 0, 18)),
       color: assetColors[index % 10] || "#ffffff",
+      balance: Number(formatUnit(item.usdtBalance, 18)).toFixed(0),
     })
-  ) || [{ label: "Asset", color: "#ffffff", value: 100 }];
+  ) || [{ label: "Asset", color: "#ffffff", value: 100, balance: 0 }];
 
   return (
     <Box className="flex flex-col h-full">
@@ -45,7 +46,7 @@ const CollateralValue = () => {
                 <FinanceSummary
                   key={item.label}
                   label={item.label}
-                  value={Math.floor(item.value * Math.random() * 1000)}
+                  value={item.balance}
                   color={item.color}
                 />
               </div>

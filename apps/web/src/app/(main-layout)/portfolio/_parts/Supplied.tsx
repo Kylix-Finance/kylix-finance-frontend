@@ -23,6 +23,7 @@ const Supplied = () => {
   return (
     <Table<TableData[number]>
       isLoading={isLoading}
+      placeholderLength={3}
       tCellClassnames={"!p-3"}
       rowSpacing="10px"
       hasPagination={false}
@@ -38,7 +39,11 @@ const Supplied = () => {
       tableName="supply"
       components={{
         asset: (item) => <Asset label={item.asset} helperText="" />,
-        apy: (item) => <Typography variant="subtitle1">{item.apy}%</Typography>,
+        apy: (item) => (
+          <Typography variant="subtitle1">
+            {Number(item.apy).toFixed(2)}%
+          </Typography>
+        ),
         balance: (item) => (
           <Typography variant="subtitle1">{item.balance}</Typography>
         ),

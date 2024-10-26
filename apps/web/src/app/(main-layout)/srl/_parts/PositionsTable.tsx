@@ -60,6 +60,7 @@ export const PositionsTable = () => {
         averagePrice3: "Average Price",
         actions: "Actions",
       }}
+      placeholderLength={3}
       hiddenTHeads={["actions"]}
       tableName="loanPositions"
       data={tableData}

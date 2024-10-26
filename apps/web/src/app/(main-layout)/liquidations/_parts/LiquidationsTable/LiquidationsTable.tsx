@@ -119,6 +119,7 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
 
   return (
     <Table
+      placeholderLength={6}
       hiddenTHeads={["actions"]}
       headers={{
         health: "Health",
@@ -187,7 +188,7 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
           </Link>
         ),
       }}
-      data={transformedData || placeholderData}
+      data={transformedData}
       defaultSortKey="health"
       tableName="liquidations"
       hasPagination={false}

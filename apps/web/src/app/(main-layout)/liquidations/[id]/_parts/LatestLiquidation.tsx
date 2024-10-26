@@ -7,6 +7,7 @@ const LatestLiquidation = () => {
   return (
     <Card title="Recent liquidation" className="h-80">
       <Table
+        placeholderLength={3}
         tCellClassnames={"font-number"}
         rowSpacing="10px"
         components={{

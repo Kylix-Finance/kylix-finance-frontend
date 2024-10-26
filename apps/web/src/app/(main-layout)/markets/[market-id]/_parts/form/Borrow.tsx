@@ -4,39 +4,18 @@ import { Form } from "./Form";
 import { useState } from "react";
 import { useBorrow } from "~/hooks/chain/useBorrow";
 import { useParams } from "next/navigation";
-import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
+import {
+  formatBigNumbers,
+  formatUnit,
+  parseUnit,
+  useBalance,
+  useMetadata,
+} from "@repo/onchain-utils";
 import { useQuickBorrow } from "~/hooks/chain/useQuickBorrow";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
-const BASE_ASSET_ID = 21;
-const items: Array<ListItem> = [
-  {
-    label: "Available to borrow",
-    value: "$100",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Borrow Apy",
-    value: "6.4 %",
-    kylixValue: "%4",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Borrowed",
-    value: "$64",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Interest",
-    value: "$ 24",
-    kylixValue: "12",
-    tooltipTitle: "Interest tooltip title.",
-    action: {
-      title: "Claim",
-      onClick: () => {},
-    },
-    valueClassName: "!text-primary-500",
-  },
-];
+import { useGetEstimateCollateralAmount } from "~/hooks/chain/useGetEstimateCollateralAmount";
+import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
+const BASE_ASSET_ID = "21";
 
 export const Borrow = () => {
   const [value, setValue] = useState("");
@@ -45,60 +24,42 @@ export const Borrow = () => {
   const { mutate, isPending } = useQuickBorrow();
   const { assetMetaData: borrowAssetMetaData } = useMetadata(BASE_ASSET_ID);
   const { assetMetaData: supplyAssetMetaData } = useMetadata(supplyTokenId);
-  const { formattedPrice: supplyTokenPrice } = useAssetPrice({
-    assetId: supplyTokenId,
-  });
-  const { formattedPrice: borrowTokenPrice } = useAssetPrice({
-    assetId: BASE_ASSET_ID,
-  });
-  const { balance: supplyAssetBalance } = useBalance({
+  const { formattedBalance: supplyAssetBalance } = useBalance({
     assetId: BASE_ASSET_ID,
   });
   const { balance: borrowAssetBalance } = useBalance({
     assetId: supplyTokenId,
   });
+
+  const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
+    { poolId: BASE_ASSET_ID }
+  );
+  const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
+
+  const { formattedEstimateCollateral: minCollateralRatio } =
+    useGetEstimateCollateralAmount({
+      borrowAsset: "1",
+      borrowAssetAmount: parseUnit(1, borrowAssetMetaData?.decimals).toString(),
+      collateralAsset: BASE_ASSET_ID,
+      collateralDecimals: supplyAssetMetaData?.decimals,
+    });
+
+  const max = (
+    Number(supplyAssetBalance || 1) / Number(minCollateralRatio || 1)
+  ).toString();
+
   const onclick = () => {
-    if (
-      !supplyAssetBalance ||
-      !value ||
-      !borrowAssetMetaData?.decimals ||
-      !borrowAssetBalance ||
-      !supplyTokenPrice ||
-      !borrowTokenPrice ||
-      !supplyAssetMetaData
-    )
-      return;
+    if (!value || !borrowAssetMetaData?.decimals || !borrowAssetBalance) return;
     const borrowValue = parseUnit(
       value,
       borrowAssetMetaData?.decimals
     ).toString();
-    const supplyValue = parseUnit(
-      (Number(value) *
-        (Number(borrowTokenPrice) / Number(supplyTokenPrice)) *
-        4) /
-        2,
-      supplyAssetMetaData?.decimals
-    ).toString();
-
-    console.log("_____borrowPoolId", BASE_ASSET_ID);
-    console.log("_____supplyPoolId", supplyTokenId);
-    console.log("_____borrow_amount", borrowValue);
-    console.log(
-      "_____borrow_value",
-      BigInt(borrowValue) * BigInt(borrowTokenPrice)
-    );
-    console.log("_____supply_amount", supplyValue);
-    console.log(
-      "_____supply_value",
-      BigInt(supplyValue) * BigInt(supplyTokenPrice)
-    );
 
     mutate(
       {
         borrowPoolId: BASE_ASSET_ID.toString(),
         borrowValue,
         supplyPoolId: supplyTokenId,
-        supplyValue,
       },
       {
         onSuccess: ({ blockNumber }) => {
@@ -113,6 +74,38 @@ export const Borrow = () => {
       }
     );
   };
+
+  const isMaxLoading = !minCollateralRatio || !supplyAssetBalance;
+
+  const items: Array<ListItem> = [
+    {
+      label: "Available to borrow",
+      value: "$" + (isMaxLoading ? "0" : formatBigNumbers(max, 4)),
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Borrow Apy",
+      value: `${Number(formatUnit(borrowAssetData?.apy || "0", 18)).toFixed(2)} %`,
+      kylixValue: "%4",
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Borrowed",
+      value: `$${formatBigNumbers(formatUnit(borrowAssetData?.borrowed || "0", borrowAssetMetaData?.decimals), 4)}`,
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Interest",
+      value: "$ 24",
+      kylixValue: "12",
+      tooltipTitle: "Interest tooltip title.",
+      action: {
+        title: "Claim",
+        onClick: () => {},
+      },
+      valueClassName: "!text-primary-500",
+    },
+  ];
   return (
     <Form
       assetId={BASE_ASSET_ID}
@@ -127,7 +120,9 @@ export const Borrow = () => {
       isSubmitting={isPending}
       balance={borrowAssetBalance?.toString()}
       symbol={borrowAssetMetaData?.symbol}
-      onMaxClick={() => {}}
+      onMaxClick={() => {
+        setValue(max);
+      }}
     />
   );
 };

@@ -5,7 +5,7 @@ import {
   TextFieldProps,
 } from "@mui/material";
 import { PoolSelect } from "../PoolSelect";
-import { getDecimalRegex, handleInputChange } from "~/utils";
+import { cn, getDecimalRegex, handleInputChange } from "~/utils";
 import { useCallback, useMemo, useState } from "react";
 import { usePools } from "~/hooks/chain/usePools";
 import { SelectOption } from "~/types";
@@ -13,11 +13,15 @@ import { useMetadata } from "@repo/onchain-utils";
 import { debounce } from "lodash-es";
 
 interface Props {
-  setValue: (value: any) => void;
-  maxValue: string;
+  value?: string;
+  setValue: (value: string) => void;
+  maxValue?: string;
+  onMax?: () => void;
   pool: SelectOption | undefined;
   setPool: (pool: SelectOption) => void;
   options: SelectOption[];
+  textField?: "readonly" | "write";
+  disabledMax?: boolean;
 }
 
 export const InputWithSelect = ({
@@ -26,6 +30,10 @@ export const InputWithSelect = ({
   pool,
   setPool,
   options,
+  textField = "write",
+  value,
+  onMax,
+  disabledMax,
 }: Props) => {
   const { assetMetaData } = useMetadata(pool?.value);
   const [localValue, setLocalValue] = useState<string>("");
@@ -34,6 +42,7 @@ export const InputWithSelect = ({
     () => debounce((val: string) => setValue(val), 300),
     [setValue]
   );
+  const isReadOnly = textField === "readonly";
 
   return (
     <div className="w-full flex justify-center items-center">
@@ -47,14 +56,16 @@ export const InputWithSelect = ({
         <span className="w-0.5 h-[22px] bg-[#1A433B33]" />
       </div>
       <TextField
-        value={localValue}
+        value={isReadOnly ? value : localValue}
         onChange={(e) => {
           handleInputChange(e, setLocalValue, assetMetaData?.decimals || 6);
           debouncedSetValue(e.target.value);
         }}
         fullWidth
         placeholder="0"
-        className="!w-1/2 !rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
+        className={cn(
+          "!w-1/2 !rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
+        )}
         // error={!!error}
         // helperText={error}
         inputMode="numeric"
@@ -64,16 +75,30 @@ export const InputWithSelect = ({
             fontWeight: "bold",
           },
         }}
+        inputProps={{
+          style: { cursor: isReadOnly ? "not-allowed" : "text" },
+          className: "!font-number",
+        }}
         InputProps={{
+          readOnly: isReadOnly,
+          className: "!font-number",
+          style: { cursor: isReadOnly ? "not-allowed" : "text" },
           sx: {
             borderTopLeftRadius: "0",
             borderBottomLeftRadius: "0",
             backgroundColor: "#45A9961A",
           },
-          endAdornment: (
+          endAdornment: isReadOnly ? (
+            <></>
+          ) : (
             <InputAdornment position="end">
               <Button
-                onClick={() => setValue(maxValue)}
+                disabled={disabledMax}
+                onClick={() => {
+                  setValue(maxValue);
+                  setLocalValue(maxValue);
+                  onMax?.();
+                }}
                 size="small"
                 sx={{
                   textTransform: "none",

@@ -11,7 +11,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface Props {
   supplyPoolId: string;
-  supplyValue: string;
   borrowPoolId: string;
   borrowValue: string;
 }
@@ -49,7 +48,7 @@ export const useQuickBorrow = () => {
 };
 
 export const quickBorrowTransaction = async (
-  { borrowPoolId, borrowValue, supplyPoolId, supplyValue }: Props,
+  { borrowPoolId, borrowValue, supplyPoolId }: Props,
   {
     api,
     activeAccount,
@@ -82,8 +81,7 @@ export const quickBorrowTransaction = async (
   const extrinsic = api?.tx?.lending?.borrow?.(
     borrowPoolId,
     borrowValue,
-    supplyPoolId,
-    supplyValue
+    supplyPoolId
   );
   const estimatedGas = (
     await extrinsic?.paymentInfo?.(activeAccount)

@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Table } from "@repo/ui";
 import { Asset, Card } from "~/components";
 
@@ -8,6 +8,7 @@ const PersonalBids = () => {
     <Card title="Your Bids" className="h-80">
       <Table<TableData[number]>
         tCellClassnames={"!p-3"}
+        placeholderLength={3}
         rowSpacing="10px"
         hasPagination={false}
         defaultSortKey="asset"
