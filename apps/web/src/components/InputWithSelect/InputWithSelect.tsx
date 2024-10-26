@@ -5,7 +5,7 @@ import {
   TextFieldProps,
 } from "@mui/material";
 import { PoolSelect } from "../PoolSelect";
-import { getDecimalRegex, handleInputChange } from "~/utils";
+import { cn, getDecimalRegex, handleInputChange } from "~/utils";
 import { useCallback, useMemo, useState } from "react";
 import { usePools } from "~/hooks/chain/usePools";
 import { SelectOption } from "~/types";
@@ -18,6 +18,7 @@ interface Props {
   pool: SelectOption | undefined;
   setPool: (pool: SelectOption) => void;
   options: SelectOption[];
+  textField?: "readonly" | "write";
 }
 
 export const InputWithSelect = ({
@@ -26,6 +27,7 @@ export const InputWithSelect = ({
   pool,
   setPool,
   options,
+  textField = "write",
 }: Props) => {
   const { assetMetaData } = useMetadata(pool?.value);
   const [localValue, setLocalValue] = useState<string>("");
@@ -34,6 +36,7 @@ export const InputWithSelect = ({
     () => debounce((val: string) => setValue(val), 300),
     [setValue]
   );
+  const isReadOnly = textField === "readonly";
 
   return (
     <div className="w-full flex justify-center items-center">
@@ -54,7 +57,9 @@ export const InputWithSelect = ({
         }}
         fullWidth
         placeholder="0"
-        className="!w-1/2 !rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
+        className={cn(
+          "!w-1/2 !rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
+        )}
         // error={!!error}
         // helperText={error}
         inputMode="numeric"
@@ -64,13 +69,18 @@ export const InputWithSelect = ({
             fontWeight: "bold",
           },
         }}
+        inputProps={{ style: { cursor: isReadOnly ? "not-allowed" : "text" } }}
         InputProps={{
+          readOnly: isReadOnly,
+          style: { cursor: isReadOnly ? "not-allowed" : "text" },
           sx: {
             borderTopLeftRadius: "0",
             borderBottomLeftRadius: "0",
             backgroundColor: "#45A9961A",
           },
-          endAdornment: (
+          endAdornment: isReadOnly ? (
+            <></>
+          ) : (
             <InputAdornment position="end">
               <Button
                 onClick={() => setValue(maxValue)}

@@ -116,6 +116,7 @@ const QuickBorrow = () => {
                 setPool={setSupplyPool}
                 setValue={setSupplyValue}
                 maxValue={supplyAssetBalance || "0"}
+                textField="readonly"
               />
               <List
                 items={[{ label: "Total Value", value: supplyValueInUSD }]}
