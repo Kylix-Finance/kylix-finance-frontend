@@ -13,8 +13,10 @@ import { useMetadata } from "@repo/onchain-utils";
 import { debounce } from "lodash-es";
 
 interface Props {
-  setValue: (value: any) => void;
-  maxValue: string;
+  value?: string;
+  setValue: (value: string) => void;
+  maxValue?: string;
+  onMax?: () => void;
   pool: SelectOption | undefined;
   setPool: (pool: SelectOption) => void;
   options: SelectOption[];
@@ -28,6 +30,8 @@ export const InputWithSelect = ({
   setPool,
   options,
   textField = "write",
+  value,
+  onMax,
 }: Props) => {
   const { assetMetaData } = useMetadata(pool?.value);
   const [localValue, setLocalValue] = useState<string>("");
@@ -50,7 +54,7 @@ export const InputWithSelect = ({
         <span className="w-0.5 h-[22px] bg-[#1A433B33]" />
       </div>
       <TextField
-        value={localValue}
+        value={isReadOnly ? value : localValue}
         onChange={(e) => {
           handleInputChange(e, setLocalValue, assetMetaData?.decimals || 6);
           debouncedSetValue(e.target.value);
@@ -83,7 +87,11 @@ export const InputWithSelect = ({
           ) : (
             <InputAdornment position="end">
               <Button
-                onClick={() => setValue(maxValue)}
+                onClick={() => {
+                  setValue(maxValue);
+                  setLocalValue(maxValue);
+                  onMax?.();
+                }}
                 size="small"
                 sx={{
                   textTransform: "none",

@@ -44,13 +44,6 @@ export const Borrow = () => {
   const supplyTokenId = params["market-id"] as string;
   const { mutate, isPending } = useQuickBorrow();
   const { assetMetaData: borrowAssetMetaData } = useMetadata(BASE_ASSET_ID);
-  const { assetMetaData: supplyAssetMetaData } = useMetadata(supplyTokenId);
-  const { formattedPrice: supplyTokenPrice } = useAssetPrice({
-    assetId: supplyTokenId,
-  });
-  const { formattedPrice: borrowTokenPrice } = useAssetPrice({
-    assetId: BASE_ASSET_ID,
-  });
   const { balance: supplyAssetBalance } = useBalance({
     assetId: BASE_ASSET_ID,
   });
@@ -62,43 +55,19 @@ export const Borrow = () => {
       !supplyAssetBalance ||
       !value ||
       !borrowAssetMetaData?.decimals ||
-      !borrowAssetBalance ||
-      !supplyTokenPrice ||
-      !borrowTokenPrice ||
-      !supplyAssetMetaData
+      !borrowAssetBalance
     )
       return;
     const borrowValue = parseUnit(
       value,
       borrowAssetMetaData?.decimals
     ).toString();
-    const supplyValue = parseUnit(
-      (Number(value) *
-        (Number(borrowTokenPrice) / Number(supplyTokenPrice)) *
-        4) /
-        2,
-      supplyAssetMetaData?.decimals
-    ).toString();
-
-    console.log("_____borrowPoolId", BASE_ASSET_ID);
-    console.log("_____supplyPoolId", supplyTokenId);
-    console.log("_____borrow_amount", borrowValue);
-    console.log(
-      "_____borrow_value",
-      BigInt(borrowValue) * BigInt(borrowTokenPrice)
-    );
-    console.log("_____supply_amount", supplyValue);
-    console.log(
-      "_____supply_value",
-      BigInt(supplyValue) * BigInt(supplyTokenPrice)
-    );
 
     mutate(
       {
         borrowPoolId: BASE_ASSET_ID.toString(),
         borrowValue,
         supplyPoolId: supplyTokenId,
-        supplyValue,
       },
       {
         onSuccess: ({ blockNumber }) => {

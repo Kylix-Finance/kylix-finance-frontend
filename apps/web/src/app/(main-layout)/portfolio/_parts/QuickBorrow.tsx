@@ -7,7 +7,7 @@ import {
   useBalance,
   useMetadata,
 } from "@repo/onchain-utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icons } from "~/assets/svgs";
 import { Card, List } from "~/components";
 import { InputWithSelect } from "~/components/InputWithSelect";
@@ -41,7 +41,6 @@ const QuickBorrow = () => {
     (Number(supplyValue || 0) * Number(supplyAssetPrice || 0)).toString(),
     2
   );
-  const { assetMetaData: supplyAssetMetadata } = useMetadata(supplyPool?.value);
 
   const { formattedPrice: borrowAssetPrice } = useAssetPrice({
     assetId: borrowPool?.value || 0,
@@ -53,14 +52,36 @@ const QuickBorrow = () => {
     (Number(borrowValue || 0) * Number(borrowAssetPrice || 0)).toString(),
     2
   );
+  const { assetMetaData: supplyAssetMetadata } = useMetadata(supplyPool?.value);
   const { assetMetaData: borrowAssetMetadata } = useMetadata(borrowPool?.value);
 
-  const { data: estimateCollateral } = useGetEstimateCollateralAmount({
-    borrowAsset: borrowPool?.value,
-    borrowAssetAmount: borrowValue,
-    collateralAsset: supplyPool?.value,
-  });
-  console.log("_______estimateCollateral", estimateCollateral);
+  const { formattedEstimateCollateral: estimateCollateral } =
+    useGetEstimateCollateralAmount({
+      borrowAsset: borrowPool?.value,
+      borrowAssetAmount: parseUnit(
+        borrowValue,
+        borrowAssetMetadata?.decimals
+      ).toString(),
+      collateralAsset: supplyPool?.value,
+      collateralDecimals: supplyAssetMetadata?.decimals,
+    });
+
+  const { formattedEstimateCollateral: minCollateralRatio } =
+    useGetEstimateCollateralAmount({
+      borrowAsset: borrowPool?.value,
+      borrowAssetAmount: parseUnit(1, supplyAssetMetadata?.decimals).toString(),
+      collateralAsset: supplyPool?.value,
+      collateralDecimals: supplyAssetMetadata?.decimals,
+    });
+
+  const max = (
+    Number(supplyAssetBalance || 1) / Number(minCollateralRatio || 1)
+  ).toString();
+
+  useEffect(() => {
+    if (!estimateCollateral) return;
+    setSupplyValue(estimateCollateral.toString());
+  }, [estimateCollateral]);
 
   const borrowHandler = () => {
     mutate({
@@ -70,10 +91,6 @@ const QuickBorrow = () => {
         borrowAssetMetadata?.decimals || 6
       ).toString(),
       supplyPoolId: supplyPool?.value || "0",
-      supplyValue: parseUnit(
-        supplyValue,
-        supplyAssetMetadata?.decimals || 6
-      ).toString(),
     });
   };
 
@@ -115,8 +132,9 @@ const QuickBorrow = () => {
                 pool={supplyPool}
                 setPool={setSupplyPool}
                 setValue={setSupplyValue}
-                maxValue={supplyAssetBalance || "0"}
+                maxValue={"0"}
                 textField="readonly"
+                value={supplyValue}
               />
               <List
                 items={[{ label: "Total Value", value: supplyValueInUSD }]}
@@ -168,7 +186,7 @@ const QuickBorrow = () => {
                 pool={borrowPool}
                 setPool={setBorrowPool}
                 setValue={setBorrowValue}
-                maxValue={borrowAssetBalance || "0"}
+                maxValue={max.toString() || "0"}
               />
               <List
                 items={[{ label: "Total Value", value: borrowValueInUSD }]}
