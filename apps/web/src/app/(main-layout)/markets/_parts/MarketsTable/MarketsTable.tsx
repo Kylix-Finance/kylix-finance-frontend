@@ -7,6 +7,7 @@ import { useMemo } from "react";
 import { Table } from "@repo/ui";
 import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
 import { formatUnit } from "@repo/onchain-utils";
+import { formatPercentage } from "~/utils";
 
 const placeholderData = Array.from({ length: 5 }).map(() => ({
   asset: "",
@@ -29,27 +30,26 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
   const { data, isLoading } = useGetLendingPools();
 
   const transformedData = useMemo(() => {
-    return data?.assets
-      ?.filter((pool) => {
-        if (!searchQuery) return pool;
-        const poolName = pool.asset?.toLowerCase() || "";
-        return poolName.includes(searchQuery);
+    if (!data?.assets) return [];
+
+    return data.assets
+      .filter((pool) => {
+        if (!searchQuery) return true;
+        return pool.asset?.toLowerCase().includes(searchQuery);
       })
-      .map((item) => {
-        return {
-          asset: item.asset,
-          collateralQ: `%${item.collateral_q}`,
-          collateral: false,
-          utilization: `%${formatUnit(item.utilization, item.asset_decimals)}`,
-          borrowRate: `%${item.borrow_apy}`,
-          supplyRate: `%${item.supply_apy}`,
-          walletBalance: formatUnit(
-            item.user_asset_balance.toString(),
-            item.asset_decimals
-          ),
-          id: item.id,
-        };
-      });
+      .map((item) => ({
+        asset: item.asset,
+        collateralQ: `%${item.collateral_q}`,
+        collateral: false,
+        utilization: formatPercentage(item.utilization, item.asset_decimals),
+        borrowRate: formatPercentage(item.borrow_apy, item.asset_decimals),
+        supplyRate: `${Number(formatUnit(item.supply_apy, item.asset_decimals)).toFixed(2)}%`,
+        walletBalance: formatUnit(
+          item.user_asset_balance.toString(),
+          item.asset_decimals
+        ),
+        id: item.id,
+      }));
   }, [data, searchQuery]);
 
   return (

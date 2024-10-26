@@ -73,9 +73,13 @@ export const InputWithSelect = ({
             fontWeight: "bold",
           },
         }}
-        inputProps={{ style: { cursor: isReadOnly ? "not-allowed" : "text" } }}
+        inputProps={{
+          style: { cursor: isReadOnly ? "not-allowed" : "text" },
+          className: "!font-number",
+        }}
         InputProps={{
           readOnly: isReadOnly,
+          className: "!font-number",
           style: { cursor: isReadOnly ? "not-allowed" : "text" },
           sx: {
             borderTopLeftRadius: "0",

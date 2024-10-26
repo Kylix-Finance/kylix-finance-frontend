@@ -5,13 +5,14 @@ import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
 import { Table } from "@repo/ui";
 import { Asset } from "~/components";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
+import { formatPercentage } from "~/utils";
 
 const Borrowed = () => {
   const { data: AssetWiseBorrowsCollaterals, isLoading } =
     useGetAssetWiseBorrowsCollaterals();
   const borrowed: TableData | undefined =
     AssetWiseBorrowsCollaterals?.borrowedAssets.map?.((item) => ({
-      apy: formatUnit(item.apy || 0, 18),
+      apy: formatPercentage(item.apy?.toString() || 0, item.decimals),
       asset: item.assetSymbol,
       balance: formatBigNumbers(formatUnit(item.balance, item.decimals), 4),
       borrowed: formatBigNumbers(
@@ -38,11 +39,7 @@ const Borrowed = () => {
       tableName="supply"
       components={{
         asset: (item) => <Asset label={item.asset} helperText="" />,
-        apy: (item) => (
-          <Typography variant="subtitle1">
-            {Number(item.apy).toFixed(2)}%
-          </Typography>
-        ),
+        apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,
         balance: (item) => (
           <Typography variant="subtitle1">{item.balance}</Typography>
         ),

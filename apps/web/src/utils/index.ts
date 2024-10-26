@@ -1,4 +1,5 @@
 import { TextFieldProps } from "@mui/material";
+import { formatUnit } from "@repo/onchain-utils";
 import { clsx, type ClassValue } from "clsx";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { twMerge } from "tailwind-merge";
@@ -43,3 +44,8 @@ export const handleInputChange = (
     setValue(value);
   }
 };
+
+export const formatPercentage = (value: number | string, decimals: number) =>
+  isNaN(Number(formatUnit(value, decimals)))
+    ? "-"
+    : `${Number(formatUnit(value, decimals)).toFixed(2)}%`;
