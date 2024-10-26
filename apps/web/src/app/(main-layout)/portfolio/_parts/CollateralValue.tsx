@@ -19,7 +19,7 @@ const CollateralValue = () => {
     (item, index) => ({
       label: item.assetSymbol,
       value:
-        Number(formatUnit(item.balance, item.decimals)) /
+        Number(formatUnit(item.usdtBalance, 18)) /
         Number(formatUnit(assetWiseBorrowCollateral.totalCollateral || 0, 18)),
       color: assetColors[index % 10] || "#ffffff",
     })
