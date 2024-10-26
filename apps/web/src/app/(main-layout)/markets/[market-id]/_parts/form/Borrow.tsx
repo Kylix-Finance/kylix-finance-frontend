@@ -4,40 +4,18 @@ import { Form } from "./Form";
 import { useState } from "react";
 import { useBorrow } from "~/hooks/chain/useBorrow";
 import { useParams } from "next/navigation";
-import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
+import {
+  formatBigNumbers,
+  formatUnit,
+  parseUnit,
+  useBalance,
+  useMetadata,
+} from "@repo/onchain-utils";
 import { useQuickBorrow } from "~/hooks/chain/useQuickBorrow";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
 import { useGetEstimateCollateralAmount } from "~/hooks/chain/useGetEstimateCollateralAmount";
+import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
 const BASE_ASSET_ID = "21";
-const items: Array<ListItem> = [
-  {
-    label: "Available to borrow",
-    value: "$100",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Borrow Apy",
-    value: "6.4 %",
-    kylixValue: "%4",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Borrowed",
-    value: "$64",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Interest",
-    value: "$ 24",
-    kylixValue: "12",
-    tooltipTitle: "Interest tooltip title.",
-    action: {
-      title: "Claim",
-      onClick: () => {},
-    },
-    valueClassName: "!text-primary-500",
-  },
-];
 
 export const Borrow = () => {
   const [value, setValue] = useState("");
@@ -52,6 +30,15 @@ export const Borrow = () => {
   const { balance: borrowAssetBalance } = useBalance({
     assetId: supplyTokenId,
   });
+
+  const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
+    { poolId: supplyTokenId }
+  );
+
+  console.log(
+    "_____assetWiseBorrowCollateral",
+    assetWiseBorrowCollateral?.borrowedAssets[0]?.apy
+  );
 
   const { formattedEstimateCollateral: minCollateralRatio } =
     useGetEstimateCollateralAmount({
@@ -92,21 +79,23 @@ export const Borrow = () => {
     );
   };
 
+  const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
+
   const items: Array<ListItem> = [
     {
       label: "Available to borrow",
-      value: "$" + max,
+      value: "$" + formatBigNumbers(max, 4),
       valueClassName: "!text-[#4E5B72]",
     },
     {
       label: "Borrow Apy",
-      value: "6.4 %",
+      value: `${Number(formatUnit(borrowAssetData?.apy || "0", 18)).toFixed(2)} %`,
       kylixValue: "%4",
       valueClassName: "!text-[#4E5B72]",
     },
     {
       label: "Borrowed",
-      value: "$64",
+      value: `$${formatBigNumbers(formatUnit(borrowAssetData?.borrowed || "0", borrowAssetMetaData?.decimals), 4)}`,
       valueClassName: "!text-[#4E5B72]",
     },
     {
