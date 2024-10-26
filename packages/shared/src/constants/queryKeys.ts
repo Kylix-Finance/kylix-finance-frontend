@@ -41,6 +41,7 @@ const keys = {
   ASSET_WISE_BORROW_COLLATERAL: "ASSET_WISE_BORROW_COLLATERAL",
   ASSET_WISE_SUPPLIES: "ASSET_WISE_SUPPLIES",
   GET_ASSET_PRICE: "GET_ASSET_PRICE",
+  GET_USER_LTV: "GET_USER_LTV",
 };
 
 type ChartScale = "1m" | "5m" | "15m" | "1h" | "12h" | "1d";
@@ -91,4 +92,9 @@ export const queryKeys = {
     base_asset,
   ],
   repay: [baseKey, keys.REPAY],
+  userLtv: (account: string | undefined) => [
+    baseKey,
+    keys.GET_USER_LTV,
+    account,
+  ],
 };
