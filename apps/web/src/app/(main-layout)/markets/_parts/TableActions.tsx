@@ -16,11 +16,8 @@ export const TableActions = ({ assetId }: Props) => {
           </Typography>
         </Button>
       </Link>
-
-      {/*FIXME: remove styles for milestone 2 */}
       <Button
         variant="outlined"
-        disabled
         sx={{
           color: "#48484820",
           borderColor: "#48484820",
