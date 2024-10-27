@@ -15,7 +15,9 @@ import { useQuickBorrow } from "~/hooks/chain/useQuickBorrow";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
 import { useGetEstimateCollateralAmount } from "~/hooks/chain/useGetEstimateCollateralAmount";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
-const BASE_ASSET_ID = "21";
+import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
+import { usePool } from "~/hooks/chain/usePool";
+const BASE_ASSET_ID = "1";
 
 export const Borrow = () => {
   const [value, setValue] = useState("");
@@ -31,22 +33,16 @@ export const Borrow = () => {
     assetId: supplyTokenId,
   });
 
+  const { pool } = usePool({ assetId: supplyTokenId });
+  const maxTotalSupply = formatUnit(
+    BigInt(pool?.reserveBalance || 0),
+    supplyAssetMetaData?.decimals
+  );
+
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
     { poolId: BASE_ASSET_ID }
   );
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
-
-  const { formattedEstimateCollateral: minCollateralRatio } =
-    useGetEstimateCollateralAmount({
-      borrowAsset: "1",
-      borrowAssetAmount: parseUnit(1, borrowAssetMetaData?.decimals).toString(),
-      collateralAsset: BASE_ASSET_ID,
-      collateralDecimals: supplyAssetMetaData?.decimals,
-    });
-
-  const max = (
-    Number(supplyAssetBalance || 1) / Number(minCollateralRatio || 1)
-  ).toString();
 
   const onclick = () => {
     if (!value || !borrowAssetMetaData?.decimals || !borrowAssetBalance) return;
@@ -75,12 +71,14 @@ export const Borrow = () => {
     );
   };
 
-  const isMaxLoading = !minCollateralRatio || !supplyAssetBalance;
-
   const items: Array<ListItem> = [
     {
       label: "Available to borrow",
-      value: "$" + (isMaxLoading ? "0" : formatBigNumbers(max, 4)),
+      value:
+        "$" +
+        (!supplyAssetMetaData || !pool
+          ? "0"
+          : formatBigNumbers(maxTotalSupply, 4)),
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -121,7 +119,7 @@ export const Borrow = () => {
       balance={borrowAssetBalance?.toString()}
       symbol={borrowAssetMetaData?.symbol}
       onMaxClick={() => {
-        setValue(max);
+        setValue(maxTotalSupply);
       }}
     />
   );

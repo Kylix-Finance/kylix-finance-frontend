@@ -13,7 +13,7 @@ import {
 } from "@repo/onchain-utils";
 import { useRepay } from "~/hooks/chain/useRepay";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
-const BASE_ASSET_ID = 21;
+const BASE_ASSET_ID = 1;
 
 export const Repay = () => {
   const params = useParams();
@@ -28,17 +28,14 @@ export const Repay = () => {
     assetId: collateralTokenId,
   });
 
-  const {
-    formattedBalance: formattedKTokenBalance,
-    isLoading: isFormattedKTokenBalanceLoading,
-  } = useBalance({
-    assetId: collateralTokenId,
-    customDecimals: assetMetaData?.decimals,
-    enabled: !!assetMetaData,
+  const { formattedBalance: formattedBaseAssetBalance } = useBalance({
+    assetId: BASE_ASSET_ID,
+    customDecimals: baseAssetMetadata?.decimals,
+    enabled: !!baseAssetMetadata,
   });
 
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
-    { poolId: 21 }
+    { poolId: BASE_ASSET_ID }
   );
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 
@@ -63,10 +60,19 @@ export const Repay = () => {
     );
   };
 
+  const borrowed = formatUnit(
+    borrowAssetData?.borrowed || "0",
+    baseAssetMetadata?.decimals
+  );
+  const max = Math.min(
+    Number(borrowed),
+    Number(formattedBaseAssetBalance)
+  ).toFixed();
+
   const items: Array<ListItem> = [
     {
       label: "Available to repay",
-      value: "$" + formatBigNumbers(formattedKTokenBalance || "0", 4),
+      value: "$" + max,
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -77,7 +83,7 @@ export const Repay = () => {
     },
     {
       label: "Borrowed",
-      value: `$${formatBigNumbers(formatUnit(borrowAssetData?.borrowed || "0", baseAssetMetadata?.decimals), 4)}`,
+      value: `$${formatBigNumbers(borrowed, 4)}`,
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -106,7 +112,7 @@ export const Repay = () => {
       isSubmitting={isPending}
       isMaxLoading={isBalanceLoading}
       onMaxClick={() => {
-        setValue(formattedKTokenBalance || "0");
+        setValue(max);
       }}
       balance={formattedBalance}
       symbol={assetMetaData?.symbol}
