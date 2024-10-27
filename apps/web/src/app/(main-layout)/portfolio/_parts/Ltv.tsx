@@ -4,13 +4,14 @@ import { useGetUserLtv } from "~/hooks/chain/useGetUserLtv";
 
 const Ltv = () => {
   const { data } = useGetUserLtv();
+
   return (
     <ProgressBar
       isLoading={false}
       data={{
-        current: data?.currentLtv,
-        sale: data?.saleLtv,
-        target: data?.liquidationLtv,
+        current: Number(data?.currentLtv),
+        sale: Number(data?.saleLtv),
+        target: Number(data?.liquidationLtv),
       }}
     />
   );
