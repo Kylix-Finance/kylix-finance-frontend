@@ -40,8 +40,10 @@ export const Borrow = () => {
   );
 
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
-    { poolId: BASE_ASSET_ID }
+    { poolId: BASE_ASSET_ID, collateralId: Number(supplyTokenId) }
   );
+  console.log("______assetWiseBorrowCollateral", assetWiseBorrowCollateral);
+
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 
   const onclick = () => {
