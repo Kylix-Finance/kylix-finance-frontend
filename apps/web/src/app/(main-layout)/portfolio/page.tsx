@@ -42,9 +42,9 @@ export default function Page() {
       <Card className={styles.borrowed} title="Your Borrows">
         <Borrowed />
       </Card>
-      <Card className={styles.quick_borrow} title="Your Borrows">
+      {/* <Card className={styles.quick_borrow} title="Your Borrows">
         <QuickBorrow />
-      </Card>
+      </Card> */}
     </Box>
   );
 }
