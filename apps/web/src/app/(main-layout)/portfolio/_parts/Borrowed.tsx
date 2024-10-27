@@ -1,11 +1,19 @@
 "use client";
 
 import { Box, Button, Typography } from "@mui/material";
-import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
+import {
+  formatBigNumbers,
+  formatUnit,
+  MetadataResult,
+  useMetadata,
+  useProvider,
+} from "@repo/onchain-utils";
 import { Table } from "@repo/ui";
+import { useEffect, useState } from "react";
 import { Asset } from "~/components";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
 import { formatPercentage } from "~/utils";
+import { TableActions } from "../../markets/_parts/TableActions";
 
 const Borrowed = () => {
   const {
@@ -13,21 +21,54 @@ const Borrowed = () => {
     isLoading,
     isFetched,
   } = useGetAssetWiseBorrowsCollaterals();
-  const borrowed: TableData | undefined =
-    AssetWiseBorrowsCollaterals?.borrowedAssets.map?.((item) => ({
-      apy: formatPercentage(item.apy?.toString() || 0, item.decimals),
-      asset: item.assetSymbol,
-      balance: formatBigNumbers(formatUnit(item.balance, item.decimals), 4),
-      borrowed: formatBigNumbers(
-        formatUnit(item.borrowed || 0, item.decimals),
-        4
-      ),
-    }));
+  const { api } = useProvider();
+  const [borrowedWithMetadata, setBorrowedWithMetadata] = useState<TableData>();
+
+  useEffect(() => {
+    if (
+      !AssetWiseBorrowsCollaterals ||
+      !AssetWiseBorrowsCollaterals.borrowedAssets ||
+      !api
+    )
+      return;
+
+    const fetchMetadata = async () => {
+      const promises = AssetWiseBorrowsCollaterals?.borrowedAssets?.map?.(
+        async (item) => {
+          const metadata = await api?.query?.assets?.metadata?.(
+            item.collateralAssets?.[0]
+          );
+          const humanMetadata = metadata?.toHuman() as MetadataResult;
+
+          return {
+            id: item.collateralAssets?.[0] || 0,
+            apy: formatPercentage(item.apy?.toString() || 0, item.decimals),
+            asset: humanMetadata.symbol,
+            balance: formatBigNumbers(
+              formatUnit(item.balance, item.decimals),
+              4
+            ),
+            borrowed: formatBigNumbers(
+              formatUnit(item.borrowed || 0, item.decimals),
+              4
+            ),
+          };
+        }
+      );
+
+      const borrowedAssets = await Promise.all(promises || []);
+
+      setBorrowedWithMetadata(borrowedAssets);
+    };
+
+    fetchMetadata();
+  }, [AssetWiseBorrowsCollaterals, api]);
+
   return (
     <Table<TableData[number]>
       isFetched={isFetched}
       placeholderLength={3}
-      isLoading={isLoading}
+      isLoading={isLoading || !borrowedWithMetadata}
       tCellClassnames={"!p-3"}
       rowSpacing="10px"
       hasPagination={false}
@@ -50,26 +91,9 @@ const Borrowed = () => {
         borrowed: (item) => (
           <Typography variant="subtitle1">{item.borrowed}</Typography>
         ),
-        actions: () => (
-          <Box className="flex justify-end gap-1 items-center">
-            <Button variant="contained">
-              <Typography variant="subtitle1" fontWeight={600}>
-                Repay
-              </Typography>
-            </Button>
-            <Button variant="outlined">
-              <Typography
-                className="!text-primary-500"
-                variant="subtitle1"
-                fontWeight={600}
-              >
-                Borrow
-              </Typography>
-            </Button>
-          </Box>
-        ),
+        actions: (item) => <TableActions assetId={item.id} />,
       }}
-      data={borrowed || []}
+      data={borrowedWithMetadata || []}
     />
   );
 };
@@ -81,4 +105,5 @@ type TableData = {
   apy: string;
   borrowed: string;
   balance: string;
+  id: number;
 }[];
