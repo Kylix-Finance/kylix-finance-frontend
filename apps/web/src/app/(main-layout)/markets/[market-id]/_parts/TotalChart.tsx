@@ -45,6 +45,7 @@ const TotalChart = () => {
           {
             data,
             borderColor: palette.primary.main,
+            backgroundColor: palette.primary.main,
             tension: 0.5,
             parsing: {
               xAxisKey: "time",
@@ -54,6 +55,7 @@ const TotalChart = () => {
           {
             data,
             borderColor: palette.secondary.main,
+            backgroundColor: palette.secondary.main,
             tension: 0.5,
             parsing: {
               xAxisKey: "time",
