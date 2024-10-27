@@ -23,19 +23,7 @@ export const TableActions = ({
         </Button>
       </Link>
       <Link href={`/markets/${assetId}`}>
-        <Button
-          variant="outlined"
-          sx={{
-            color: "#48484820",
-            borderColor: "#48484820",
-            "&:hover": {
-              borderColor: "#48484820",
-            },
-            "& .MuiTypography-root": {
-              color: "#48484820",
-            },
-          }}
-        >
+        <Button variant="outlined">
           <Typography variant="body3" fontWeight={600}>
             {secondActionb}
           </Typography>
