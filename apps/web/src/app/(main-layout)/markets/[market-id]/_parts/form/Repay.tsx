@@ -64,10 +64,10 @@ export const Repay = () => {
     borrowAssetData?.borrowed || "0",
     baseAssetMetadata?.decimals
   );
-  const max = Math.min(
-    Number(borrowed || 0),
-    Number(formattedBaseAssetBalance || 0)
-  ).toFixed();
+  const max = (
+    Math.min(Number(borrowed || 0), Number(formattedBaseAssetBalance || 0)) *
+    1.1
+  ).toFixed(4);
 
   const items: Array<ListItem> = [
     {
