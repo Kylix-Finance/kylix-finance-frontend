@@ -28,7 +28,8 @@ interface Props<Schema, ExtraFields extends string> {
   hasPagination?: boolean;
   headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   hiddenTHeads?: Array<keyof Schema | ExtraFields>;
-  isLoading?: boolean;
+  isFetched: boolean;
+  isLoading: boolean;
   numeric?: Array<keyof Schema>;
   // UNUSED
   // onTRowClick?: OnTRowClick<Schema>;
@@ -51,9 +52,11 @@ export function Table<Schema, ExtraFields extends string = string>({
   hasPagination = false,
   headers,
   hiddenTHeads,
+  isFetched,
   isLoading,
   middleComponent,
   numeric,
+  placeholderLength,
   rowSpacing,
   tableName,
   tBaseProps,
@@ -62,7 +65,6 @@ export function Table<Schema, ExtraFields extends string = string>({
   tContainerProps,
   tHeadProps,
   tRowProps,
-  placeholderLength,
 }: Props<Schema, ExtraFields>) {
   type Key = keyof Schema;
 
@@ -107,9 +109,10 @@ export function Table<Schema, ExtraFields extends string = string>({
         <TBody
           placeholderLength={placeholderLength}
           components={components}
-          data={data}
+          data={sortedData}
           headers={headers}
-          isLoading={false}
+          isLoading={isLoading}
+          isFetched={isFetched}
           middleComponent={middleComponent}
           numeric={numeric}
           rowSpacing={rowSpacing}

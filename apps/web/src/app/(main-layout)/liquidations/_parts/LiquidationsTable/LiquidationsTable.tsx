@@ -119,6 +119,8 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
 
   return (
     <Table
+      isFetched={true}
+      isLoading={false}
       placeholderLength={6}
       hiddenTHeads={["actions"]}
       headers={{
@@ -132,7 +134,6 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
 
         actions: "Actions",
       }}
-      isLoading={!mockedData}
       rowSpacing="11px"
       components={{
         health: (item) => {

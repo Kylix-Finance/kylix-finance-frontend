@@ -8,8 +8,11 @@ import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWise
 import { formatPercentage } from "~/utils";
 
 const Borrowed = () => {
-  const { data: AssetWiseBorrowsCollaterals, isLoading } =
-    useGetAssetWiseBorrowsCollaterals();
+  const {
+    data: AssetWiseBorrowsCollaterals,
+    isLoading,
+    isFetched,
+  } = useGetAssetWiseBorrowsCollaterals();
   const borrowed: TableData | undefined =
     AssetWiseBorrowsCollaterals?.borrowedAssets.map?.((item) => ({
       apy: formatPercentage(item.apy?.toString() || 0, item.decimals),
@@ -22,6 +25,7 @@ const Borrowed = () => {
     }));
   return (
     <Table<TableData[number]>
+      isFetched={isFetched}
       placeholderLength={3}
       isLoading={isLoading}
       tCellClassnames={"!p-3"}

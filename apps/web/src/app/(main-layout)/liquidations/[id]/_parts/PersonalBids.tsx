@@ -9,6 +9,8 @@ const PersonalBids = () => {
       <Table<TableData[number]>
         tCellClassnames={"!p-3"}
         placeholderLength={3}
+        isFetched={true}
+        isLoading={false}
         rowSpacing="10px"
         hasPagination={false}
         defaultSortKey="asset"

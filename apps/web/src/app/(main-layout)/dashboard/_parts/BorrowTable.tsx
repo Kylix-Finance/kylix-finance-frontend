@@ -42,6 +42,8 @@ export const BorrowTable = () => {
           <Typography variant="subtitle1">{item.balance}</Typography>
         ),
       }}
+      isFetched={true}
+      isLoading={false}
       data={tableData}
     />
   );

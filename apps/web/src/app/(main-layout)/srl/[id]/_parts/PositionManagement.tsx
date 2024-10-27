@@ -15,6 +15,7 @@ const PositionManagement = () => {
       value: pool.assetId.toString(),
       label: pool.assetName,
     })) || [];
+
   return (
     <Card title="SRL position management">
       <Box className="flex w-full gap-2 flex-col lg:flex-row">

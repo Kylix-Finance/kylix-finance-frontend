@@ -16,7 +16,8 @@ interface Props<Schema, ExtraFields extends string = string> {
   components?: Partial<CellValueComponents<Schema, ExtraFields>>;
   data: TableData<Schema>;
   headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
-  isLoading?: boolean;
+  isLoading: boolean;
+  isFetched: boolean;
   middleComponent?: React.FC;
   numeric?: Numeric<Schema>;
   onTRowClick?: OnTRowClick<Schema>;
@@ -31,6 +32,7 @@ function TBody<Schema, ExtraFields extends string = string>({
   components,
   data,
   headers,
+  isFetched,
   isLoading,
   middleComponent,
   numeric,
@@ -50,6 +52,15 @@ function TBody<Schema, ExtraFields extends string = string>({
 
   const finalData = data.length ? data : placeholderArr;
 
+  console.log(isFetched, isLoading);
+
+  const shouldShowMainRows =
+    (!isLoading && !isFetched) ||
+    (isLoading && !isFetched) ||
+    (isFetched && !!data.length);
+
+  const shouldShowNoDataRow = !isLoading && isFetched && !data.length;
+
   return (
     <TableBody {...tBody}>
       <TableRow>
@@ -66,12 +77,12 @@ function TBody<Schema, ExtraFields extends string = string>({
         />
       )}
 
-      {(!!data.length || isLoading) &&
+      {shouldShowMainRows &&
         finalData.map((row, index) => (
           <Fragment key={index}>
             <TRow
               numeric={numeric}
-              isLoading={isLoading}
+              isLoading={!isFetched || isLoading}
               tCellClassnames={tCellClassnames}
               headers={headers}
               row={row}
@@ -89,9 +100,8 @@ function TBody<Schema, ExtraFields extends string = string>({
           </Fragment>
         ))}
 
-      {isLoading === false &&
-        !data.length &&
-        placeholderArr.map((i, index) => {
+      {shouldShowNoDataRow &&
+        placeholderArr.map((_i, index) => {
           return (
             <TableRow key={index}>
               <TableCell colSpan={headersLength}>

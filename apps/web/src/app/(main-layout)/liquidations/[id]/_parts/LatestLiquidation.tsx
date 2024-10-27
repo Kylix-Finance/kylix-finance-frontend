@@ -7,6 +7,8 @@ const LatestLiquidation = () => {
   return (
     <Card title="Recent liquidation" className="h-80">
       <Table
+        isFetched={true}
+        isLoading={false}
         placeholderLength={3}
         tCellClassnames={"font-number"}
         rowSpacing="10px"

@@ -27,7 +27,7 @@ type MarketsTableUIProps = {
 };
 
 const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
-  const { data, isLoading } = useGetLendingPools();
+  const { data, isLoading, isFetched } = useGetLendingPools();
 
   const transformedData = useMemo(() => {
     if (!data?.assets) return [];
@@ -106,9 +106,10 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         ),
         actions: (item) => <TableActions assetId={item.id} />,
       }}
-      data={transformedData || []}
+      data={transformedData}
       defaultSortKey="asset"
       tableName="markets"
+      isFetched={isFetched}
       hasPagination={false}
     />
   );
