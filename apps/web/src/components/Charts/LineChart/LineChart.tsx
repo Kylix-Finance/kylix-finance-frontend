@@ -27,7 +27,8 @@ const LineChart = ({ data, parsing }: LineChartProps) => {
               data,
               parsing,
               fill: "origin",
-              borderColor: palette.primary.light,
+              borderColor: palette.primary.main,
+              hoverBackgroundColor: palette.primary.main,
               backgroundColor: (context) => {
                 if (!context.chart.chartArea) return;
                 const {
@@ -52,6 +53,16 @@ const LineChart = ({ data, parsing }: LineChartProps) => {
             tooltip: {
               mode: "index",
               intersect: false,
+              callbacks: {
+                labelColor: function (context) {
+                  return {
+                    borderColor: palette.primary.main,
+                    backgroundColor: palette.primary.main,
+                    borderWidth: 1,
+                    borderRadius: 0,
+                  };
+                },
+              },
             },
           },
           scales: {
@@ -90,7 +101,7 @@ const LineChart = ({ data, parsing }: LineChartProps) => {
                 color: palette.text.disabled,
                 count: 4,
                 callback: (value, index) => {
-                  if (index === 0) return;
+                  if (index === 0 || !data) return;
                   return formatNumber(value);
                 },
                 // padding: 10,

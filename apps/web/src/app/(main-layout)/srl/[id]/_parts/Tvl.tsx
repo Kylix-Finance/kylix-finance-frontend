@@ -35,6 +35,7 @@ const Tvl = () => {
             {
               data: tvlMockData,
               borderColor: palette.primary.main,
+              backgroundColor: palette.primary.main,
               tension: 0.5,
               parsing: {
                 xAxisKey: "x",
@@ -44,6 +45,7 @@ const Tvl = () => {
             {
               data: tvlMockData,
               borderColor: palette.secondary.main,
+              backgroundColor: palette.secondary.main,
               tension: 0.5,
               parsing: {
                 xAxisKey: "x",

@@ -2,7 +2,7 @@ import { Card } from "~/components";
 import TransactionForm from "./_parts/TransactionForm";
 import PoolDetails from "./_parts/PoolDetails";
 import { Box } from "@mui/material";
-import VaultChart from "./_parts/VaultChart";
+import TotalChart from "./_parts/TotalChart";
 import ApyChart from "./_parts/ApyChart";
 import styles from "./ styles.module.css";
 
@@ -16,7 +16,7 @@ export default function page() {
         <Box className={styles.apy_chart}>
           <ApyChart />
         </Box>
-        {/* <VaultChart /> */}
+        <TotalChart />
         <Box className={styles.form}>
           <TransactionForm />
         </Box>
