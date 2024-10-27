@@ -1,12 +1,46 @@
+/* eslint-disable react/prop-types */
 "use client";
 
 import { Box, Typography } from "@mui/material";
+import { Skeleton } from "@repo/ui";
+import { isUndefined } from "lodash";
 import Image from "next/image";
 import { Icons } from "~/assets/svgs";
 
-const ProgressBar = () => {
+export interface Props {
+  data: Partial<{ current: number; sale: number; target: number }> | undefined;
+  isLoading: boolean;
+}
+
+const ProgressBar: React.FC<Props> = ({ data = {}, isLoading }) => {
+  const { current, sale, target } = data;
+
+  if (
+    isUndefined(current) ||
+    isUndefined(sale) ||
+    isUndefined(target) ||
+    isLoading
+  ) {
+    return (
+      <Skeleton height="95px" isLoading={isLoading}>
+        <Box className="flex justify-center items-center h-[95px]">
+          Not Available
+        </Box>
+      </Skeleton>
+    );
+  }
+
+  const fn = (val: number) => {
+    const n = 100 - val;
+    if (n === 0) return val - 1;
+    return val;
+  };
+
+  const fixedSale = fn(sale);
+  const fixedTarget = fn(target);
+
   return (
-    <Box className="flex flex-col gap-4">
+    <Box className="flex flex-col gap-4 h-[95px]">
       <Box className="h-[14px] gap-[22px] flex justify-end items-center">
         {[
           {
@@ -44,43 +78,62 @@ const ProgressBar = () => {
       </Box>
 
       <Box className="relative w-full">
-        <Box className="relative h-4 w-full bg-[#ECF6F4] rounded-[4px] overflow-hidden">
+        <Box
+          style={{
+            width: "100%",
+          }}
+          className="relative h-4 bg-[#ECF6F4] rounded-[4px] overflow-hidden"
+        >
           <Box
             className="h-full"
             style={{
-              width: "42.1%",
+              width: `${current}%`,
               backgroundImage:
                 "repeating-linear-gradient(-45deg, rgba(90, 195, 181,1), rgba(90, 195, 181,1) 2px, #45A996 2px, #45A996 6px)",
             }}
           />
-          <Box className="absolute top-0 left-[63.6%] h-full w-[5px] bg-orange-400 rounded" />
-          <Box className="absolute top-0 left-[72.01%] h-full w-[5px] bg-red-400 rounded" />
+          <Box
+            style={{ left: `${fixedSale}%` }}
+            className={`absolute top-0 h-full w-[5px] bg-orange-400 rounded`}
+          />
+          <Box
+            style={{ left: `${fixedTarget}%` }}
+            className={`absolute top-0 h-full w-[5px] bg-red-400 rounded`}
+          />
         </Box>
 
         <Box className="pb-6">
-          <Box className="absolute left-[42.1%] -translate-x-1/3  ">
+          <Box
+            style={{ left: `${current}%` }}
+            className="absolute -translate-x-1/3 w-[35px]"
+          >
             <Icons.ArrowUp />
-
             <Box className="-mt-2">
-              <Percent value={42.1} />
+              <Percent value={current} />
             </Box>
           </Box>
 
-          <Box className="absolute left-[63.6%] -translate-x-1/3">
+          <Box
+            style={{ left: `${fixedSale}%` }}
+            className="absolute -translate-x-1/3 w-[35px]"
+          >
             <Box className="invisible">
               <Icons.ArrowUp />
             </Box>
             <Box className="-mt-2">
-              <Percent value={63.6} />
+              <Percent value={sale} />
             </Box>
           </Box>
 
-          <Box className="absolute left-[72.01%] -translate-x-1/3">
+          <Box
+            style={{ left: `${fixedTarget}%` }}
+            className="absolute -translate-x-1/3 w-[35px]"
+          >
             <Box className="invisible">
               <Icons.ArrowUp />
             </Box>
             <Box className="-mt-2">
-              <Percent value={72.01} />
+              <Percent value={target} />
             </Box>
           </Box>
         </Box>

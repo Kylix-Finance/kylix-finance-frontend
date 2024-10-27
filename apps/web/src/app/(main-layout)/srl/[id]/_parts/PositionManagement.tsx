@@ -1,4 +1,5 @@
 "use client";
+
 import { Box, List, Card as MCard, Typography } from "@mui/material";
 import PositionManagementDetail from "./PositionManagementDetail";
 import { Card } from "~/components";
@@ -9,7 +10,7 @@ import { SelectOption } from "~/types";
 import PositionManagementForm from "./PositionManagementForm";
 
 const PositionManagement = () => {
-  const { pools } = usePools();
+  const { pools, isLoading } = usePools();
   const options: SelectOption[] =
     pools?.map((pool) => ({
       value: pool.assetId.toString(),
@@ -22,7 +23,7 @@ const PositionManagement = () => {
         <Box className="flex flex-col w-full flex-[0.5]">
           <PositionManagementForm />
           <MCard variant="outlined" className="mt-2">
-            <ProgressBar />
+            <ProgressBar isLoading={isLoading} data={{}} />
           </MCard>
         </Box>
         <PositionManagementDetail />
