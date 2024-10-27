@@ -25,8 +25,9 @@ const Hero = () => {
             </h2>
             <p className="font-light text-xs md:text-sm lg:text-base leading-6 text-secondary-100 text-center ">
               <b>
-                Borrow, lend and earn seamlessly across multiple networks <br />
-                with Kylix Finance, the new multi-chain lending platform.
+                Borrow, lend and earn seamlessly across multiple ecosystems.{" "}
+                <br />
+                Kylix Finance, the bridgeless multi-chain lending platform.
               </b>
               <br />
               <br />

@@ -107,7 +107,7 @@ const Hero3D = () => {
               <br />
             </p>
             <div className="flex gap-4 z-50">
-              <Button color="secondary">Get started</Button>
+              <Button color="secondary">Coming soon</Button>
               <Button color="white" variant="outline">
                 Learn more
               </Button>
@@ -126,13 +126,15 @@ const Hero3D = () => {
             className="absolute top-[35%] flex flex-col gap-2 justify-center items-center z-40"
           >
             <h2 className="flex flex-col sm:flex-row justify-center items-center gap-2.5 font-bold font-heading w-full h-full text-4xl md:text-5xl lg:text-6xl">
-              <span className="text-primary-500">Multi-chain&nbsp;</span>
+              <span className="text-primary-500">Bridge-LESS&nbsp;</span>
               <span className="text-white"> Lending</span>
             </h2>
             <p className="font-light text-xs md:text-sm lg:text-base leading-6 text-secondary-100 text-center ">
               <b>
-                Operate across all the biggest Web3 ecosystems with ease. <br />
-                Built on Substrate, secured by Polkadot, open to the world.
+                Kylix enables cross-chain lending between Solana, Ethereum,
+                Polkadot and more. <br />
+                Operate across all the biggest Web3 ecosystems, beyond any
+                chains.
               </b>
               <br />
               <br />

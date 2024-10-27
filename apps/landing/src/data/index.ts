@@ -30,15 +30,16 @@ export const smartLendingData: Section<SmartLending> = {
   header: "Multi-Chain lending",
   heading: {
     left: "One Platform.",
-    right: "Multi-Chain.",
+    right: "Natively Multi-Chain.",
   },
-  description: "Multi-Chain Lending for Web3 in one platform.",
+  description:
+    "Experience the future of cross-chain Lending with our new Hub&Spoke Technology, designed specifically to offer native multi-chain lending.",
   items: [
     {
       to: "/",
       heading: "LIQUIDITY HUB",
       description:
-        "Kylix is a multi-chain liquidity hub. With our innovative hub-and-spoke architecture, the protocol provides efficient and user-friendly access to liquidity across multiple blockchains.",
+        "Kylix Finance is a decentralized, trustless intermediary protocol that allows users to easily lend, borrow and earn across multiple networks and blockchains without losing custody of their assets. The Kylix protocol allows users to lend and borrow assets between major blockchains without wrapped tokens, traditional bridging and at extremely competitive rates using a new architectural technology. ",
     },
     {
       to: "/",
@@ -80,26 +81,26 @@ export const howItsWorksData: Section<HowItsWork> = {
     right: "Kylix Finance?",
   },
   description:
-    " A new-generation DeFi Lending Platform with self-repaying loans and an on-chain marketplace for collateral liquidation.",
+    " A new-generation multi-chain DeFi Lending Platform with self-repaying loans and an on-chain marketplace for collateral liquidation.",
   id: "how-it's-works",
   items: [
     {
       id: "deposit",
-      heading: "Deposit",
+      heading: "DEPOSIT",
       description:
-        "Lorem ipsum dolor sit amet consectetur. Duis viverra at eu sapien venenatis sed ut. Quis ullamcorper enim posuere dui est euismod blandit nunc. ",
+        "Deposit, lend and earn an intererst from your assets from any chain. Make your assets work for you.",
     },
     {
       id: "convert",
-      heading: "Convert",
+      heading: "Borrow",
       description:
-        "Convert your deposit into a interest bearing token directly on our LST partner Acala through an integrated seamless process",
+        "Borrow, collateralise and repay on any chain, even if you have deposited from a different one!",
     },
     {
       id: "borrow",
-      heading: "Borrow",
+      heading: "EARN",
       description:
-        "Borrow token and enjoy your loan with negative interest rates , getting repaid through time.",
+        "Earn interest on your deposits and loans. Earn rewards for providing liquidity. </br> Earn assets below market prices by participating in the collateral marketplace.",
       image: BorrowImage,
     },
   ],
@@ -108,27 +109,27 @@ export const securityAndAuditsData: Section<Security> = {
   header: "Security",
   heading: {
     left: "Security",
-    right: "and Audits",
+    right: "at the Forefront",
   },
-  description: "The new cross-chain Lending Platform, secured by Polkadot. 1",
+  description: "New Lending technology to benefit the DeFi ecosystem.",
   id: "security-and-audits",
   items: [
     {
-      heading: "Security Measures",
+      heading: "Collateral Scoring",
       description:
-        "Explanation of platform security protocols (e.g., smart contract audits, multi-signature wallets).",
+        "Collateral Scoring, a new feature that evaluates the risk of a collateral asset and the most suitable credit allowance for an user in order to minimise liquidation risks.",
       icon: Shield,
     },
     {
-      heading: "Risk Mitigation",
+      heading: "Obsessed With Protocol Security",
       description:
-        "How the platform protects users’ assets, with details on insurance funds, collateral liquidation processes, and audit reports.",
+        "We are obsessed with protocol security to avoid faulty protocol state, including always ensuring the liquidity of your assets, preventing liquidation spirals and slashing faulty oracles.",
       icon: Focus,
     },
     {
-      heading: "Audit Partners",
+      heading: "Audited by the Bests",
       description:
-        "Names of third-party auditors or security firms that have reviewed the platform’s smart contracts.",
+        "Comprehensive and extensive security audits by industry leading auditers.",
       icon: Check,
     },
   ],
@@ -141,7 +142,7 @@ export const marketTrendsData: Section<MarketTrend> = {
     right: "Features",
   },
   description:
-    "Unique and advanced lending products and services for the DeFi ecosystem.",
+    "Unique and advanced lending products and services to benefit the DeFi ecosystem.",
   id: "markets-trends",
   items: [
     {
@@ -150,19 +151,20 @@ export const marketTrendsData: Section<MarketTrend> = {
       image: "/assets/images/market-trends/0.png",
       items: [
         {
-          title: "Lending and Borrowing",
+          title: "Forget About Bridges and Wrapped Assets",
           description:
-            "An on-chain & multi-chain asset lending platform built on Substrate.",
+            "Kylix Finance protocol design removes the need for bridges and wrapped tokens, for EVM and non-EVM chains.",
         },
         {
-          title: "Automated Treasury",
+          title:
+            "Power up DeFi Lending with composability and the latest technology.",
           description:
-            "An automated Treasury that distributes rewards to incentivise lenders to provide liquidity.",
+            "Self-Repaying Loans, A marketplace for collateral liquidation, collateral scoring and a new generation of lending pool powered by new polynomial interest rates formulas.",
         },
         {
-          title: "Self-Repaying Loans",
+          title: "Automatic Rewards and an Elaborated Tokenomics",
           description:
-            "Debt positions can be automatically repaid from the income generated by selected collaterals.",
+            "An automated treasury that distributes rewards to incentivize lenders to provide liquidity and automatically burns the native token to apply deflationary pressure to the network as borrowing volume increases.",
         },
       ],
       actions: {
@@ -180,78 +182,6 @@ export const marketTrendsData: Section<MarketTrend> = {
         },
       },
     },
-    {
-      id: 1,
-      label: "Treasury Process",
-      image: "/assets/images/market-trends/0.png",
-      items: [
-        {
-          title: "New Interest Rates",
-          description:
-            "A new-generation of lending pool powered by polynomial interest rates, to enforce optimal usage of idle liquidity",
-        },
-        {
-          title: "Collateral Scoring",
-          description:
-            "Debt Position determined by the quality of the collateral, introducing collateral scoring.",
-        },
-        {
-          title: "Rewards Distribution",
-          description:
-            "Liquidity from the Treasury distributed to Borrowers and Liquid staking partners as rewards.",
-        },
-      ],
-      actions: {
-        primary: {
-          label: "Explore DEX",
-          action: () => {
-            console.log("DEX: Explore clicked");
-          },
-        },
-        secondary: {
-          label: "Start Trading",
-          action: () => {
-            console.log("DEX: Start Trading clicked");
-          },
-        },
-      },
-    },
-    {
-      id: 2,
-      label: "Collateral Marketplace",
-      image: "/assets/images/market-trends/0.png",
-      items: [
-        {
-          title: "Collateral Marketplace",
-          description:
-            "An marketplace that allows users to bid on liquidated collateral.",
-        },
-        {
-          title: "Arbitrage Opportunities",
-          description:
-            "It offers an arbitrage opportunity for users, to bid and acquire assets at a discount to the market price.",
-        },
-        {
-          title: "Self Repaying Loans",
-          description:
-            "Debt positions can be automatically repaid from the income generated by selected collateral",
-        },
-      ],
-      actions: {
-        primary: {
-          label: "Explore NFTs",
-          action: () => {
-            console.log("NFT: Explore clicked");
-          },
-        },
-        secondary: {
-          label: "Mint Now",
-          action: () => {
-            console.log("NFT: Mint Now clicked");
-          },
-        },
-      },
-    },
   ],
 };
 export const featuredPartnersData: Section<FeaturedPartners> = {
@@ -264,22 +194,22 @@ export const featuredPartnersData: Section<FeaturedPartners> = {
     {
       link: "/",
       name: "Decentralised Future",
-      icon: InstaDapp,
+      icon: StakeHouse,
     },
     {
       link: "/",
       name: "Equito Network",
-      icon: IdleFinance,
+      icon: StakeHouse,
     },
     {
       link: "/",
       name: "Hercle Financial",
-      icon: Lido,
+      icon: StakeHouse,
     },
     {
       link: "/",
       name: "Harbour Industrial Capital",
-      icon: DefiSaver,
+      icon: StakeHouse,
     },
     {
       link: "/",
@@ -342,64 +272,61 @@ export const footerData: Footer = {
       link: "https://discord.gg/UkRcWaTh5p",
       icon: Discord,
     },
+    {
+      name: "Telegram",
+      link: "https://t.me/kylix_finance_parachain",
+      icon: StakeHouse,
+    },
   ],
   right: [
     {
-      title: "Products",
+      title: "About",
       items: [
         {
-          label: "Lending",
-          link: "lending",
+          label: "Vision",
+          link: "todo",
         },
         {
-          label: "Borrowing",
-          link: "borrowing",
+          label: "Roadmap",
+          link: "todo",
         },
         {
-          label: "Markets",
-          link: "markets",
+          label: "Legal Notice",
+          link: "todo",
         },
       ],
     },
     {
-      title: "Tools",
+      title: "Resources",
       items: [
         {
-          label: "Tokens",
-          link: "tokens",
+          label: "Token",
+          link: "todo",
         },
         {
-          label: "Convert",
-          link: "convert",
+          label: "FAQ",
+          link: "todo",
         },
         {
-          label: "Explore Traders",
-          link: "exploreTraders",
-        },
-        {
-          label: "Pricing",
-          link: "pricing",
+          label: "Whitepaper",
+          link: "https://docsend.com/view/f7xa65w29ckkpz2j",
         },
       ],
     },
     {
-      title: "Support",
+      title: "Socials",
       items: [
         {
-          label: "Beginners Guide",
-          link: "beginnersGuide",
+          label: "Twitter",
+          link: "https://x.com/kylixfinance",
         },
         {
-          label: "Help Center",
-          link: "helpCenter",
+          label: "Discord",
+          link: "https://discord.gg/UkRcWaTh5p",
         },
         {
-          label: "Feedbacks",
-          link: "feedbacks",
-        },
-        {
-          label: "API Doc",
-          link: "apiDoc",
+          label: "Telegram",
+          link: "https://t.me/kylix_finance_parachain",
         },
       ],
     },
