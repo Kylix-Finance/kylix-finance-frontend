@@ -10,18 +10,13 @@ export function cn(...args: ClassValue[]) {
 
 export const formatNumber = (input: number | string) => {
   const num = Number(input);
-
   if (isNaN(num)) return input;
 
-  if (num < 1000) return Math.round(num).toString();
-
+  if (num < 1000) return num.toString();
   const suffix = num < 1000000 ? "k" : "m";
   const divisor = num < 1000000 ? 1000 : 1000000;
-
-  const roundedValue = Math.round(num / divisor).toString();
-  return `${roundedValue}${suffix}`;
+  return (num / divisor).toFixed(num % divisor === 0 ? 0 : 1) + suffix;
 };
-
 export const numToLocalString = (num: number) => num.toLocaleString();
 
 export const getDecimalRegex = (decimals: number) => {
