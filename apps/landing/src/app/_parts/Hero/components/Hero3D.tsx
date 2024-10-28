@@ -9,7 +9,9 @@ import { logoImg } from "~/assets/images";
 import Button from "~/components/Button";
 import { calculateBottom } from "~/utils";
 import Scene from "./Scene";
+import { useRouter } from "next/navigation";
 const Hero3D = () => {
+  const router = useRouter();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const { scrollY } = useScroll({ axis: "y" });
@@ -107,8 +109,16 @@ const Hero3D = () => {
               <br />
             </p>
             <div className="flex gap-4 z-50">
-              <Button color="secondary">Coming soon</Button>
-              <Button color="white" variant="outline">
+              <Button color="secondary" disabled>
+                Coming soon
+              </Button>
+              <Button
+                color="white"
+                variant="outline"
+                onClick={() => {
+                  router.push("#how-it-works");
+                }}
+              >
                 Learn more
               </Button>
             </div>
@@ -140,7 +150,9 @@ const Hero3D = () => {
               <br />
             </p>
             <div className="flex gap-4 z-50">
-              <Button color="secondary">Get started</Button>
+              <Button color="secondary" disabled>
+                Launch App
+              </Button>
             </div>
           </motion.div>
           {/* SECOND Text END */}
