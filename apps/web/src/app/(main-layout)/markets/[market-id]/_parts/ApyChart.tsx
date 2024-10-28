@@ -54,6 +54,7 @@ const ApyChart = () => {
       </Box>
 
       <MultiLineChart
+        scale="1d"
         datasets={[
           {
             data: data,

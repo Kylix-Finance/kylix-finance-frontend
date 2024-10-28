@@ -31,6 +31,7 @@ const Tvl = () => {
           {/* <div>LEGEND</div> */}
         </Box>
         <MultiLineChart
+          scale="1d"
           datasets={[
             {
               data: tvlMockData,

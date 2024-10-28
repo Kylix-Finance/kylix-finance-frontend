@@ -1,15 +1,14 @@
 "use client";
 import { Line } from "react-chartjs-2";
 import { palette } from "~/config/palette";
-import { kylixPriceData } from "~/mock/chart";
 import { formatNumber } from "~/utils";
 import "chartjs-adapter-date-fns";
 import { Box } from "@mui/material";
-import { ComponentProps } from "react";
-
-type LineProps = ComponentProps<typeof Line>;
+import { ChartScale } from "~/types";
+import { getTimeUnit } from "~/utils/date";
 
 type LineChartProps = {
+  scale: ChartScale;
   data?: Record<string, string | number>[];
   parsing: {
     xAxisKey: string;
@@ -17,7 +16,9 @@ type LineChartProps = {
   };
 };
 
-const LineChart = ({ data, parsing }: LineChartProps) => {
+const LineChart = ({ data, parsing, scale }: LineChartProps) => {
+  const unit = getTimeUnit(scale);
+
   return (
     <Box height={180} width="100%">
       <Line
@@ -69,7 +70,7 @@ const LineChart = ({ data, parsing }: LineChartProps) => {
             x: {
               type: "time",
               time: {
-                unit: "day",
+                unit,
                 tooltipFormat: "MMM dd",
                 displayFormats: {
                   month: "MMM dd",
@@ -84,7 +85,9 @@ const LineChart = ({ data, parsing }: LineChartProps) => {
               },
               ticks: {
                 color: palette.text.disabled,
+                autoSkip: true,
                 align: "inner",
+                maxTicksLimit: 11,
               },
             },
             y: {

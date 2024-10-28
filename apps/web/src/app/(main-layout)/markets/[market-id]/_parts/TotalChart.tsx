@@ -41,6 +41,7 @@ const TotalChart = () => {
       </Box>
 
       <MultiLineChart
+        scale="1d"
         datasets={[
           {
             data,

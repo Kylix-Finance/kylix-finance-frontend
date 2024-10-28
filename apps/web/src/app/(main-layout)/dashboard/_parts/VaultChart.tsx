@@ -54,6 +54,7 @@ const VaultChart = () => {
       </Box>
 
       <MultiLineChart
+        scale="1d"
         datasets={[
           {
             data,
