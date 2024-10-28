@@ -14,9 +14,10 @@ type LineChartProps = {
     xAxisKey: string;
     yAxisKey: string;
   };
+  round?: boolean;
 };
 
-const LineChart = ({ data, parsing, scale }: LineChartProps) => {
+const LineChart = ({ data, parsing, scale, round = false }: LineChartProps) => {
   const unit = getTimeUnit(scale);
 
   return (
@@ -105,7 +106,8 @@ const LineChart = ({ data, parsing, scale }: LineChartProps) => {
                 count: 4,
                 callback: (value, index) => {
                   if (index === 0 || !data) return;
-                  return formatNumber(value);
+                  const formattedNumber = formatNumber(value);
+                  return round ? Math.round(+formattedNumber) : formattedNumber;
                 },
                 // padding: 10,
               },
