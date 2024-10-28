@@ -10,12 +10,7 @@ export const TableActions = ({ assetId }: Props) => {
     <Box className="flex justify-end gap-1">
       <Link href={`/markets/${assetId}`}>
         <Button variant="contained">
-          <Typography
-            className="!text-[#FFF]"
-            variant="body3"
-            fontWeight={600}
-            fontFamily={"Poppins"}
-          >
+          <Typography className="!text-[#FFF]" variant="body3" fontWeight={600}>
             Supply
           </Typography>
         </Button>
@@ -36,7 +31,7 @@ export const TableActions = ({ assetId }: Props) => {
           },
         }}
       >
-        <Typography variant="body3" fontWeight={600} fontFamily={"Poppins"}>
+        <Typography variant="body3" fontWeight={600}>
           Borrow
         </Typography>
       </Button>

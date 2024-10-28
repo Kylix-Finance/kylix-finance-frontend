@@ -4,65 +4,48 @@ import { Form } from "./Form";
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { usePool } from "~/hooks/chain/usePool";
-import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
+import {
+  formatBigNumbers,
+  formatUnit,
+  parseUnit,
+  useBalance,
+  useMetadata,
+} from "@repo/onchain-utils";
 import { useRepay } from "~/hooks/chain/useRepay";
-import { BASE_ASSET_ID } from "@repo/shared";
-
-const items: Array<ListItem> = [
-  {
-    label: "Available to repay",
-    value: "$100",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Borrow Apy",
-    value: "6.4 %",
-    kylixValue: "%4",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Borrowed",
-    value: "$64",
-    valueClassName: "!text-[#4E5B72]",
-  },
-  {
-    label: "Interest",
-    value: "$ 24",
-    kylixValue: "12",
-    tooltipTitle: "Interest tooltip title.",
-    action: {
-      title: "Claim",
-      onClick: () => {},
-    },
-    valueClassName: "!text-primary-500",
-  },
-];
+import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
+const BASE_ASSET_ID = 1;
 
 export const Repay = () => {
   const params = useParams();
-  const lendTokenId = params["market-id"] as string;
-  const { pool } = usePool({ assetId: lendTokenId });
+  const collateralTokenId = params["market-id"] as string;
+  const { pool } = usePool({ assetId: collateralTokenId });
   const [value, setValue] = useState("");
-  const { assetMetaData } = useMetadata(lendTokenId);
+  const { assetMetaData } = useMetadata(collateralTokenId);
+  const { assetMetaData: baseAssetMetadata } = useMetadata(BASE_ASSET_ID);
+
   const { mutate, isPending } = useRepay();
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
-    assetId: lendTokenId,
+    assetId: collateralTokenId,
   });
-  const {
-    formattedBalance: formattedKTokenBalance,
-    isLoading: isFormattedKTokenBalanceLoading,
-  } = useBalance({
-    assetId: pool?.id,
-    customDecimals: assetMetaData?.decimals,
-    enabled: !!assetMetaData && !!pool,
+
+  const { formattedBalance: formattedBaseAssetBalance } = useBalance({
+    assetId: BASE_ASSET_ID,
+    customDecimals: baseAssetMetadata?.decimals,
+    enabled: !!baseAssetMetadata,
   });
-  const { assetMetaData: baseAssetMetadata } = useMetadata(BASE_ASSET_ID);
+
+  const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
+    { poolId: BASE_ASSET_ID, collateralId: Number(collateralTokenId) }
+  );
+  const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
+
   const onclick = () => {
+    if (!baseAssetMetadata) return;
     mutate(
       {
         asset: BASE_ASSET_ID,
-        balance: parseUnit(value, Number(baseAssetMetadata?.decimals)),
-        collateralAsset: lendTokenId,
+        balance: parseUnit(value, baseAssetMetadata.decimals),
+        collateralAsset: collateralTokenId,
       },
       {
         onSuccess: ({ blockNumber }) => {
@@ -76,9 +59,48 @@ export const Repay = () => {
       }
     );
   };
+
+  const borrowed = formatUnit(
+    borrowAssetData?.borrowed || "0",
+    baseAssetMetadata?.decimals
+  );
+  const max = (
+    Math.min(Number(borrowed || 0), Number(formattedBaseAssetBalance || 0)) *
+    1.1
+  ).toFixed(4);
+
+  const items: Array<ListItem> = [
+    {
+      label: "Available to repay",
+      value: "$" + max,
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Borrow Apy",
+      value: `${Number(formatUnit(borrowAssetData?.apy || "0", 18)).toFixed(2)} %`,
+      kylixValue: "%4",
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Borrowed",
+      value: `$${formatBigNumbers(borrowed, 4)}`,
+      valueClassName: "!text-[#4E5B72]",
+    },
+    {
+      label: "Interest",
+      value: "$ 24",
+      kylixValue: "12",
+      tooltipTitle: "Interest tooltip title.",
+      action: {
+        title: "Claim",
+        onClick: () => {},
+      },
+      valueClassName: "!text-primary-500",
+    },
+  ];
   return (
     <Form
-      assetId={lendTokenId}
+      assetId={collateralTokenId}
       items={items}
       decimals={assetMetaData?.decimals}
       setValue={setValue}
@@ -89,7 +111,9 @@ export const Repay = () => {
       }}
       isSubmitting={isPending}
       isMaxLoading={isBalanceLoading}
-      onMaxClick={() => {}}
+      onMaxClick={() => {
+        setValue(max);
+      }}
       balance={formattedBalance}
       symbol={assetMetaData?.symbol}
     />

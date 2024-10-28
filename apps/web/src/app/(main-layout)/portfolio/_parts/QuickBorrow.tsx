@@ -1,12 +1,18 @@
 "use client";
 
 import { Box, Button, Card as MuiCard, Typography } from "@mui/material";
-import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
-import { useState } from "react";
+import {
+  formatBigNumbers,
+  parseUnit,
+  useBalance,
+  useMetadata,
+} from "@repo/onchain-utils";
+import { useEffect, useState } from "react";
 import { Icons } from "~/assets/svgs";
 import { Card, List } from "~/components";
 import { InputWithSelect } from "~/components/InputWithSelect";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
+import { useGetEstimateCollateralAmount } from "~/hooks/chain/useGetEstimateCollateralAmount";
 import { usePools } from "~/hooks/chain/usePools";
 import { useQuickBorrow } from "~/hooks/chain/useQuickBorrow";
 import { SelectOption } from "~/types";
@@ -25,25 +31,57 @@ const QuickBorrow = () => {
   const [borrowPool, setBorrowPool] = useState<SelectOption>();
   const [borrowValue, setBorrowValue] = useState<string>("");
 
-  const { assetPrice: supplyAssetPrice } = useAssetPrice({
+  const { formattedPrice: supplyAssetPrice } = useAssetPrice({
     assetId: supplyPool?.value || 0,
   });
   const { formattedBalance: supplyAssetBalance } = useBalance({
     assetId: supplyPool?.value,
   });
-  const supplyValueInUSD =
-    Number(supplyValue || 0) * Number(supplyAssetPrice || 0);
-  const { assetMetaData: supplyAssetMetadata } = useMetadata(supplyPool?.value);
+  const supplyValueInUSD = formatBigNumbers(
+    (Number(supplyValue || 0) * Number(supplyAssetPrice || 0)).toString(),
+    2
+  );
 
-  const { assetPrice: borrowAssetPrice } = useAssetPrice({
+  const { formattedPrice: borrowAssetPrice } = useAssetPrice({
     assetId: borrowPool?.value || 0,
   });
   const { formattedBalance: borrowAssetBalance } = useBalance({
-    assetId: supplyPool?.value,
+    assetId: borrowPool?.value,
   });
-  const borrowValueInUSD =
-    Number(borrowValue || 0) * Number(borrowAssetPrice || 0);
+  const borrowValueInUSD = formatBigNumbers(
+    (Number(borrowValue || 0) * Number(borrowAssetPrice || 0)).toString(),
+    2
+  );
+  const { assetMetaData: supplyAssetMetadata } = useMetadata(supplyPool?.value);
   const { assetMetaData: borrowAssetMetadata } = useMetadata(borrowPool?.value);
+
+  const { formattedEstimateCollateral: estimateCollateral } =
+    useGetEstimateCollateralAmount({
+      borrowAsset: borrowPool?.value,
+      borrowAssetAmount: parseUnit(
+        borrowValue,
+        borrowAssetMetadata?.decimals
+      ).toString(),
+      collateralAsset: supplyPool?.value,
+      collateralDecimals: supplyAssetMetadata?.decimals,
+    });
+
+  const { formattedEstimateCollateral: minCollateralRatio } =
+    useGetEstimateCollateralAmount({
+      borrowAsset: borrowPool?.value,
+      borrowAssetAmount: parseUnit(1, supplyAssetMetadata?.decimals).toString(),
+      collateralAsset: supplyPool?.value,
+      collateralDecimals: supplyAssetMetadata?.decimals,
+    });
+
+  const max = (
+    Number(supplyAssetBalance || 1) / Number(minCollateralRatio || 1)
+  ).toString();
+
+  useEffect(() => {
+    if (!estimateCollateral) return;
+    setSupplyValue(estimateCollateral.toString());
+  }, [estimateCollateral]);
 
   const borrowHandler = () => {
     mutate({
@@ -53,10 +91,6 @@ const QuickBorrow = () => {
         borrowAssetMetadata?.decimals || 6
       ).toString(),
       supplyPoolId: supplyPool?.value || "0",
-      supplyValue: parseUnit(
-        supplyValue,
-        supplyAssetMetadata?.decimals || 6
-      ).toString(),
     });
   };
 
@@ -86,7 +120,10 @@ const QuickBorrow = () => {
                     className="text-secondary-800"
                     variant="subtitle1"
                   >
-                    {supplyAssetBalance}
+                    {formatBigNumbers(
+                      (supplyPool && supplyAssetBalance) || "0",
+                      2
+                    )}
                   </Typography>
                   <Typography className="text-primary-300" variant="subtitle2">
                     {supplyPool?.label}
@@ -98,6 +135,9 @@ const QuickBorrow = () => {
                 pool={supplyPool}
                 setPool={setSupplyPool}
                 setValue={setSupplyValue}
+                maxValue={"0"}
+                textField="readonly"
+                value={supplyValue}
               />
               <List
                 items={[{ label: "Total Value", value: supplyValueInUSD }]}
@@ -137,7 +177,10 @@ const QuickBorrow = () => {
                     className="text-secondary-800"
                     variant="subtitle1"
                   >
-                    {borrowAssetBalance}
+                    {formatBigNumbers(
+                      (borrowPool && borrowAssetBalance) || "0",
+                      2
+                    )}
                   </Typography>
                   <Typography className="text-primary-300" variant="subtitle2">
                     {borrowPool?.label}
@@ -149,6 +192,8 @@ const QuickBorrow = () => {
                 pool={borrowPool}
                 setPool={setBorrowPool}
                 setValue={setBorrowValue}
+                maxValue={max.toString() || "0"}
+                disabledMax={!minCollateralRatio || !supplyPool || !borrowPool}
               />
               <List
                 items={[{ label: "Total Value", value: borrowValueInUSD }]}

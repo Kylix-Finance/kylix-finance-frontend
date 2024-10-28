@@ -13,6 +13,12 @@ interface Pools {
   activeAccount: string | undefined;
 }
 
+interface EstimateCollateral {
+  borrowAsset: string | undefined;
+  borrowAssetAmount: string | undefined;
+  collateralAsset: string | undefined;
+}
+
 const keys = {
   BALANCE: "BALANCE",
   ACCOUNTS: "ACCOUNTS",
@@ -38,6 +44,12 @@ const keys = {
   ASSET_PRICE: "ASSET_PRICE",
   KYLIX_PRICE: "KYLIX_PRICE",
   TOTAL_SUPPLY: "TOTAL_SUPPLY",
+  POOLS_DATA: "POOLS_DATA",
+  ASSET_WISE_BORROW_COLLATERAL: "ASSET_WISE_BORROW_COLLATERAL",
+  ASSET_WISE_SUPPLIES: "ASSET_WISE_SUPPLIES",
+  GET_ASSET_PRICE: "GET_ASSET_PRICE",
+  GET_USER_LTV: "GET_USER_LTV",
+  ESTIMATE_COLLATERAL: "ESTIMATE_COLLATERAL",
 };
 
 type ChartScale = "1m" | "5m" | "15m" | "1h" | "12h" | "1d";
@@ -71,5 +83,37 @@ export const queryKeys = {
   pools: ({ activeAccount }: Pools) => [baseKey, keys.POOLS, activeAccount],
   kylixPrice: (scale: ChartScale) => [baseKey, keys.KYLIX_PRICE, scale],
   totalSupply: (scale: ChartScale) => [baseKey, keys.TOTAL_SUPPLY, scale],
+  poolsData: (assetId: string) => [baseKey, keys.POOLS_DATA, assetId],
+  assetWiseBorrowsCollaterals: (
+    account: string | undefined,
+    poolId: string | number | undefined
+  ) => [baseKey, keys.ASSET_WISE_BORROW_COLLATERAL, account, poolId],
+  assetWiseSupplies: (account: string | undefined) => [
+    baseKey,
+    keys.ASSET_WISE_SUPPLIES,
+    account,
+  ],
+  estimateCollateral: ({
+    borrowAsset,
+    borrowAssetAmount,
+    collateralAsset,
+  }: EstimateCollateral) => [
+    baseKey,
+    keys.ESTIMATE_COLLATERAL,
+    borrowAsset,
+    borrowAssetAmount,
+    collateralAsset,
+  ],
+  getAssetPrice: (asset: number, base_asset?: number) => [
+    baseKey,
+    keys.GET_ASSET_PRICE,
+    asset,
+    base_asset,
+  ],
   repay: [baseKey, keys.REPAY],
+  userLtv: (account: string | undefined) => [
+    baseKey,
+    keys.GET_USER_LTV,
+    account,
+  ],
 };

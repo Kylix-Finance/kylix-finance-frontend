@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import { useAccountStore } from "@repo/shared";
 import { getWalletExtension } from "@repo/shared";

@@ -14,10 +14,10 @@ export const useAssetPrice = ({ assetId }: Props) => {
   const { api } = useProvider();
   const { assetMetaData: baseAssetMetadata, isLoading } =
     useMetadata(PRICE_BASE_ASSET_ID);
-  const disabled = !!api && isLoading;
+  const enabled = !!api && !isLoading;
   const { data, ...rest } = useQuery({
     queryKey: queryKeys.assetPrice({ assetId }),
-    queryFn: disabled
+    queryFn: enabled
       ? async () => {
           const assetPrice = await api?.query.lending?.assetPrices?.([
             assetId,

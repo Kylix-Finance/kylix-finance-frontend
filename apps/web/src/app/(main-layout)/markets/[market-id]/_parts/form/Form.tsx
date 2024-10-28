@@ -80,11 +80,19 @@ export const Form = ({
           size="small"
           fullWidth
           placeholder="0"
-          className="!rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
+          className="!font-number !text-base !text-primary-800"
           error={!!error}
           helperText={error}
           inputMode="numeric"
           autoComplete="off"
+          sx={{
+            fontWeight: "bold",
+            borderRadius: "6px",
+            lineHeight: "20px",
+          }}
+          inputProps={{
+            className: "!font-number",
+          }}
           FormHelperTextProps={{
             sx: {
               fontWeight: "bold",
@@ -96,6 +104,7 @@ export const Form = ({
               paddingY: "8px",
               paddingX: "16px",
             },
+            className: "!font-number",
             startAdornment: (
               <InputAdornment position="start" className="">
                 <TokenIcon symbol={symbol} width={24} height={24} />

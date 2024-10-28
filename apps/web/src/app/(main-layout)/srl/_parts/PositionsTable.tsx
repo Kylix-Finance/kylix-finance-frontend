@@ -52,14 +52,17 @@ export const PositionsTable = () => {
   return (
     <Table<TableDataItem, "actions">
       headers={{
+        actions: "Actions",
         assetName: "Asset",
-        liquidated: "kyl.USDT Liquidated",
-        usdtPaid: "USDT paid",
         averagePrice: "Average Price",
         averagePrice2: "Average Price",
         averagePrice3: "Average Price",
-        actions: "Actions",
+        liquidated: "kyl.USDT Liquidated",
+        usdtPaid: "USDT paid",
       }}
+      isFetched={true}
+      isLoading={false}
+      placeholderLength={3}
       hiddenTHeads={["actions"]}
       tableName="loanPositions"
       data={tableData}

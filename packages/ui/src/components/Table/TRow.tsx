@@ -18,7 +18,7 @@ interface Props<Schema, ExtraFields extends string = string> extends TRowProps {
   headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   isLoading?: boolean;
   numeric?: Numeric<Schema>;
-  row: Schema;
+  row: Schema | null;
   tCellClassnames?: string;
   tCellProps?: TableCellProps;
 }
@@ -70,9 +70,10 @@ function TRow<Schema, ExtraFields extends string = string>({
                 : {}),
             }}
           >
-            <Skeleton height={40} isLoading={isLoading}>
-              {/* TODO: Convert to component - ValueComponent */}
-              <>{ValueComponent ? ValueComponent(row) : row[name as Key]}</>
+            <Skeleton key={index} height={40} isLoading={isLoading}>
+              {row && (
+                <>{ValueComponent ? ValueComponent(row) : row[name as Key]}</>
+              )}
             </Skeleton>
           </TCell>
         );

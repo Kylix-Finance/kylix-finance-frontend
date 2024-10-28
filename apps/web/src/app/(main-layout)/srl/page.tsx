@@ -43,7 +43,7 @@ export default function Page() {
           <Heading />
 
           <Box>
-            <ProgressBar />
+            <ProgressBar isLoading={false} data={{}} />
           </Box>
         </Box>
       </Card>

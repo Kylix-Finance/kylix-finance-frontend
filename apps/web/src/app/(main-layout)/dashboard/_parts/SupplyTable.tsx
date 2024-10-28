@@ -7,6 +7,9 @@ import { Asset } from "~/components";
 export const SupplyTable = () => {
   return (
     <Table<TableData[number]>
+      isFetched={true}
+      isLoading={false}
+      placeholderLength={3}
       tCellClassnames={"!p-3"}
       rowSpacing="10px"
       hasPagination={false}
@@ -36,7 +39,6 @@ export const SupplyTable = () => {
                 className="!text-primary-500"
                 variant="subtitle1"
                 fontWeight={600}
-                fontFamily={"Poppins"}
               >
                 Supply
               </Typography>

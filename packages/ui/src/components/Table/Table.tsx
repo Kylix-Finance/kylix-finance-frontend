@@ -1,14 +1,13 @@
 "use client";
 
-import { Table as TableBase, TableContainer, TableRow } from "@mui/material";
-import React, { ReactNode } from "react";
+import { Table as TableBase, TableContainer } from "@mui/material";
+import React from "react";
 
 import TBody from "./TBody";
 import THead, { Headers } from "./THead";
 import TablePagination from "./TablePagination";
 
 import {
-  OnTRowClick,
   Order,
   TableData,
   TBaseProps,
@@ -29,10 +28,13 @@ interface Props<Schema, ExtraFields extends string> {
   hasPagination?: boolean;
   headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   hiddenTHeads?: Array<keyof Schema | ExtraFields>;
-  isLoading?: boolean;
+  isFetched: boolean;
+  isLoading: boolean;
   numeric?: Array<keyof Schema>;
   // UNUSED
   // onTRowClick?: OnTRowClick<Schema>;
+  middleComponent?: React.FC;
+  placeholderLength: number;
   rowSpacing?: string;
   tableName: TableStore.TableName;
   tBaseProps?: TBaseProps;
@@ -41,7 +43,6 @@ interface Props<Schema, ExtraFields extends string> {
   tContainerProps?: TContainerProps;
   tHeadProps?: THeadProps;
   tRowProps?: TRowProps;
-  middleComponent?: React.FC;
 }
 
 export function Table<Schema, ExtraFields extends string = string>({
@@ -51,9 +52,11 @@ export function Table<Schema, ExtraFields extends string = string>({
   hasPagination = false,
   headers,
   hiddenTHeads,
+  isFetched,
   isLoading,
   middleComponent,
   numeric,
+  placeholderLength,
   rowSpacing,
   tableName,
   tBaseProps,
@@ -104,10 +107,12 @@ export function Table<Schema, ExtraFields extends string = string>({
         />
 
         <TBody
+          placeholderLength={placeholderLength}
           components={components}
           data={sortedData}
           headers={headers}
           isLoading={isLoading}
+          isFetched={isFetched}
           middleComponent={middleComponent}
           numeric={numeric}
           rowSpacing={rowSpacing}

@@ -1,23 +1,25 @@
 "use client";
 import { Line } from "react-chartjs-2";
 import { palette } from "~/config/palette";
-import { kylixPriceData } from "~/mock/chart";
 import { formatNumber } from "~/utils";
 import "chartjs-adapter-date-fns";
 import { Box } from "@mui/material";
-import { ComponentProps } from "react";
-
-type LineProps = ComponentProps<typeof Line>;
+import { ChartScale } from "~/types";
+import { getTimeUnit } from "~/utils/date";
 
 type LineChartProps = {
+  scale: ChartScale;
   data?: Record<string, string | number>[];
   parsing: {
     xAxisKey: string;
     yAxisKey: string;
   };
+  round?: boolean;
 };
 
-const LineChart = ({ data, parsing }: LineChartProps) => {
+const LineChart = ({ data, parsing, scale, round = false }: LineChartProps) => {
+  const unit = getTimeUnit(scale);
+
   return (
     <Box height={180} width="100%">
       <Line
@@ -27,7 +29,8 @@ const LineChart = ({ data, parsing }: LineChartProps) => {
               data,
               parsing,
               fill: "origin",
-              borderColor: palette.primary.light,
+              borderColor: palette.primary.main,
+              hoverBackgroundColor: palette.primary.main,
               backgroundColor: (context) => {
                 if (!context.chart.chartArea) return;
                 const {
@@ -52,13 +55,23 @@ const LineChart = ({ data, parsing }: LineChartProps) => {
             tooltip: {
               mode: "index",
               intersect: false,
+              callbacks: {
+                labelColor: function (context) {
+                  return {
+                    borderColor: palette.primary.main,
+                    backgroundColor: palette.primary.main,
+                    borderWidth: 1,
+                    borderRadius: 0,
+                  };
+                },
+              },
             },
           },
           scales: {
             x: {
               type: "time",
               time: {
-                unit: "day",
+                unit,
                 tooltipFormat: "MMM dd",
                 displayFormats: {
                   month: "MMM dd",
@@ -73,7 +86,9 @@ const LineChart = ({ data, parsing }: LineChartProps) => {
               },
               ticks: {
                 color: palette.text.disabled,
+                autoSkip: true,
                 align: "inner",
+                maxTicksLimit: 11,
               },
             },
             y: {
@@ -90,8 +105,9 @@ const LineChart = ({ data, parsing }: LineChartProps) => {
                 color: palette.text.disabled,
                 count: 4,
                 callback: (value, index) => {
-                  if (index === 0) return;
-                  return formatNumber(value);
+                  if (index === 0 || !data) return;
+                  const formattedNumber = formatNumber(value);
+                  return round ? Math.round(+formattedNumber) : formattedNumber;
                 },
                 // padding: 10,
               },

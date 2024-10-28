@@ -6,6 +6,7 @@
   "ignoreWords": [
     "Acala",
     "CLEANME",
+    "Showable",
     "Skel",
     "chartjs",
     "clsx",
@@ -27,11 +28,14 @@
     "Aave",
     "Ankr",
     "Cacheable",
+    "env",
     "imbursed",
     "nextjs",
     "noimageindex",
     "polkadot",
+    "process",
     "tanstack",
-    "ts-nocheck"
+    "ts-nocheck",
+    "WAITLIST_KEY"
   ]
 }

@@ -1,10 +1,15 @@
+"use client";
+
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import MultiLineChart from "~/components/Charts/MultiLineChart";
 import { palette } from "~/config/palette";
 import { vaultData } from "~/mock/chart";
 import { MoreHoriz, CalendarMonth } from "@mui/icons-material";
+import { useTotalSupply } from "~/hooks/api/useTotalSupply";
 
 const VaultChart = () => {
+  const { data } = useTotalSupply("1d");
+
   return (
     <Box>
       <Box className="flex justify-between">
@@ -22,7 +27,7 @@ const VaultChart = () => {
             <Typography variant="h5">$ 120M</Typography>
           </Box>
         </Box>
-        <Box className="flex flex-col items-end gap-3">
+        <Box className="flex flex-col items-end gap-3 justify-center">
           <Box className="flex gap-6">
             <Box className="flex gap-2 items-center">
               <Box className="w-6 border-2 border-primary-500 rounded-md"></Box>
@@ -33,7 +38,7 @@ const VaultChart = () => {
               <Typography variant="body2">Total Supply</Typography>
             </Box>
           </Box>
-          <Box className="flex gap-3 mb-3">
+          {/* <Box className="flex gap-3 mb-3">
             <Button
               variant="outlined"
               color="secondary"
@@ -44,28 +49,31 @@ const VaultChart = () => {
             <IconButton>
               <MoreHoriz />
             </IconButton>
-          </Box>
+          </Box> */}
         </Box>
       </Box>
 
       <MultiLineChart
+        scale="1d"
         datasets={[
           {
-            data: vaultData.supply,
+            data,
             borderColor: palette.primary.main,
+            backgroundColor: palette.primary.main,
             tension: 0.5,
             parsing: {
-              xAxisKey: "timestamp",
-              yAxisKey: "price",
+              xAxisKey: "time",
+              yAxisKey: "borrow",
             },
           },
           {
-            data: vaultData.borrow,
+            data,
             borderColor: palette.secondary.main,
+            backgroundColor: palette.secondary.main,
             tension: 0.5,
             parsing: {
-              xAxisKey: "timestamp",
-              yAxisKey: "price",
+              xAxisKey: "time",
+              yAxisKey: "supply",
             },
           },
         ]}

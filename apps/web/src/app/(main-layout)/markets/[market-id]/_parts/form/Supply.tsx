@@ -14,6 +14,7 @@ import { useParams } from "next/navigation";
 import { usePool } from "~/hooks/chain/usePool";
 import { Box, Typography } from "@mui/material";
 import ValueItemWrapper from "./ValueItemWrapper";
+import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetAssetWiseSupplies";
 
 export const Supply = () => {
   const params = useParams();
@@ -33,7 +34,10 @@ export const Supply = () => {
     customDecimals: assetMetaData?.decimals,
     enabled: !!assetMetaData && !!pool,
   });
-
+  const { data: AssetWiseData } = useGetAssetWiseSupplies({
+    poolId: lendTokenId,
+  });
+  console.log("_____PPPPP", AssetWiseData);
   const handleClick = () => {
     mutate(
       {

@@ -1,4 +1,5 @@
 import { TextFieldProps } from "@mui/material";
+import { formatUnit } from "@repo/onchain-utils";
 import { clsx, type ClassValue } from "clsx";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { twMerge } from "tailwind-merge";
@@ -16,7 +17,6 @@ export const formatNumber = (input: number | string) => {
   const divisor = num < 1000000 ? 1000 : 1000000;
   return (num / divisor).toFixed(num % divisor === 0 ? 0 : 1) + suffix;
 };
-
 export const numToLocalString = (num: number) => num.toLocaleString();
 
 export const getDecimalRegex = (decimals: number) => {
@@ -43,3 +43,8 @@ export const handleInputChange = (
     setValue(value);
   }
 };
+
+export const formatPercentage = (value: number | string, decimals: number) =>
+  isNaN(Number(formatUnit(value, decimals)))
+    ? "-"
+    : `${Number(formatUnit(value, decimals)).toFixed(2)}%`;

@@ -119,6 +119,9 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
 
   return (
     <Table
+      isFetched={true}
+      isLoading={false}
+      placeholderLength={6}
       hiddenTHeads={["actions"]}
       headers={{
         health: "Health",
@@ -131,7 +134,6 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
 
         actions: "Actions",
       }}
-      isLoading={!mockedData}
       rowSpacing="11px"
       components={{
         health: (item) => {
@@ -180,7 +182,6 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
                 className="text-[#FFF]"
                 variant="body3"
                 fontWeight={600}
-                fontFamily={"Poppins"}
               >
                 View Market
               </Typography>
@@ -188,7 +189,7 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
           </Link>
         ),
       }}
-      data={transformedData || placeholderData}
+      data={transformedData}
       defaultSortKey="health"
       tableName="liquidations"
       hasPagination={false}

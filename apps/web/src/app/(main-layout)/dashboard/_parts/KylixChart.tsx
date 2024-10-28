@@ -37,6 +37,8 @@ const KylixChart = () => {
         />
       </Box>
       <LineChart
+        round
+        scale={selectedPeriod}
         data={data}
         parsing={{
           xAxisKey: "time",

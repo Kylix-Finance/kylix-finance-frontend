@@ -1,14 +1,13 @@
 "use client";
 
 import { Box, Switch, Typography } from "@mui/material";
-import { Asset, Card, KylixChip } from "~/components";
-import Search from "./Search";
+import { Asset, KylixChip } from "~/components";
 import { TableActions } from "../TableActions";
-import { Suspense, useMemo } from "react";
+import { useMemo } from "react";
 import { Table } from "@repo/ui";
-import { usePools } from "~/hooks/chain/usePools";
-import { QUERY_SEARCH_MARKETS } from "~/constants";
-import { useQueryState } from "nuqs";
+import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
+import { formatUnit } from "@repo/onchain-utils";
+import { formatPercentage } from "~/utils";
 
 const placeholderData = Array.from({ length: 5 }).map(() => ({
   asset: "",
@@ -28,33 +27,34 @@ type MarketsTableUIProps = {
 };
 
 const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
-  // const { lendingPool } = useGetLendingPools();
-
-  const { pools } = usePools();
+  const { data, isLoading, isFetched } = useGetLendingPools();
 
   const transformedData = useMemo(() => {
-    return pools
-      ?.filter((pool) => {
-        if (!searchQuery) return pool;
-        const poolName = pool.assetName?.toLowerCase() || "";
-        return poolName.includes(searchQuery);
+    if (!data?.assets) return [];
+
+    return data.assets
+      .filter((pool) => {
+        if (!searchQuery) return true;
+        return pool.asset?.toLowerCase().includes(searchQuery);
       })
-      .map((item) => {
-        return {
-          asset: item.assetName,
-          collateralQ: `%${item.collateralQ}`,
-          collateral: item.collateral,
-          utilization: `%${item.utilization}`,
-          borrowRate: `%${item.borrowApy}`,
-          supplyRate: `%${item.supplyApy}`,
-          walletBalance: item.balance,
-          id: item.assetId,
-        };
-      });
-  }, [pools, searchQuery]);
+      .map((item) => ({
+        asset: item.asset,
+        collateralQ: `%${item.collateral_q}`,
+        collateral: false,
+        utilization: formatPercentage(item.utilization, item.asset_decimals),
+        borrowRate: formatPercentage(item.borrow_apy, item.asset_decimals),
+        supplyRate: `${Number(formatUnit(item.supply_apy, item.asset_decimals)).toFixed(2)}%`,
+        walletBalance: formatUnit(
+          item.user_asset_balance.toString(),
+          item.asset_decimals
+        ),
+        id: item.id,
+      }));
+  }, [data, searchQuery]);
 
   return (
     <Table<TableData[number]>
+      placeholderLength={5}
       hiddenTHeads={["actions"]}
       headers={{
         asset: "Asset",
@@ -66,7 +66,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         walletBalance: "Wallet Balance",
         actions: "",
       }}
-      isLoading={!pools}
+      isLoading={isLoading}
       rowSpacing="11px"
       components={{
         asset: (item) => (
@@ -106,9 +106,10 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         ),
         actions: (item) => <TableActions assetId={item.id} />,
       }}
-      data={transformedData || placeholderData}
+      data={transformedData}
       defaultSortKey="asset"
       tableName="markets"
+      isFetched={isFetched}
       hasPagination={false}
     />
   );

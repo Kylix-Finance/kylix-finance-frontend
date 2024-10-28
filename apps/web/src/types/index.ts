@@ -50,6 +50,7 @@ export interface SelectOption {
 
 export type kylixPriceSchema = [number, number];
 export type TotalSupplySchema = [number, number, number];
+export type PoolDataSchema = [number, number, string, string, number, number];
 
 export interface SupplyChartDataset {
   time: Date;

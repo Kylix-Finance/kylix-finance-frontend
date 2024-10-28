@@ -1,14 +1,74 @@
 "use client";
 
 import { Box, Button, Typography } from "@mui/material";
+import {
+  formatBigNumbers,
+  formatUnit,
+  MetadataResult,
+  useMetadata,
+  useProvider,
+} from "@repo/onchain-utils";
 import { Table } from "@repo/ui";
-import Image from "next/image";
-import { Icons } from "~/assets/svgs";
+import { useEffect, useState } from "react";
 import { Asset } from "~/components";
+import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
+import { formatPercentage } from "~/utils";
+import { TableActions } from "../../markets/_parts/TableActions";
 
 const Borrowed = () => {
+  const {
+    data: AssetWiseBorrowsCollaterals,
+    isLoading,
+    isFetched,
+  } = useGetAssetWiseBorrowsCollaterals();
+  const { api } = useProvider();
+  const [borrowedWithMetadata, setBorrowedWithMetadata] = useState<TableData>();
+
+  useEffect(() => {
+    if (
+      !AssetWiseBorrowsCollaterals ||
+      !AssetWiseBorrowsCollaterals.borrowedAssets ||
+      !api
+    )
+      return;
+
+    const fetchMetadata = async () => {
+      const promises = AssetWiseBorrowsCollaterals?.borrowedAssets?.map?.(
+        async (item) => {
+          const metadata = await api?.query?.assets?.metadata?.(
+            item.collateralAssets?.[0]
+          );
+          const humanMetadata = metadata?.toHuman() as MetadataResult;
+
+          return {
+            id: item.collateralAssets?.[0] || 0,
+            apy: formatPercentage(item.apy?.toString() || 0, item.decimals),
+            asset: humanMetadata.symbol,
+            balance: formatBigNumbers(
+              formatUnit(item.balance, item.decimals),
+              4
+            ),
+            borrowed: formatBigNumbers(
+              formatUnit(item.borrowed || 0, item.decimals),
+              4
+            ),
+          };
+        }
+      );
+
+      const borrowedAssets = await Promise.all(promises || []);
+
+      setBorrowedWithMetadata(borrowedAssets);
+    };
+
+    fetchMetadata();
+  }, [AssetWiseBorrowsCollaterals, api]);
+
   return (
     <Table<TableData[number]>
+      isFetched={isFetched}
+      placeholderLength={3}
+      isLoading={isLoading || !borrowedWithMetadata}
       tCellClassnames={"!p-3"}
       rowSpacing="10px"
       hasPagination={false}
@@ -26,45 +86,24 @@ const Borrowed = () => {
         asset: (item) => <Asset label={item.asset} helperText="" />,
         apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,
         balance: (item) => (
+          <Typography variant="subtitle1">{item.balance}</Typography>
+        ),
+        borrowed: (item) => (
           <Typography variant="subtitle1">{item.borrowed}</Typography>
         ),
-        supplied: (item) => (
-          <Typography variant="subtitle1">{item.supplied}</Typography>
-        ),
-        actions: () => (
-          <Box className="flex justify-end gap-1 items-center">
-            <Button variant="contained">
-              <Typography
-                variant="subtitle1"
-                fontWeight={600}
-                fontFamily={"Poppins"}
-              >
-                Repay
-              </Typography>
-            </Button>
-            <Button variant="outlined">
-              <Typography
-                className="!text-primary-500"
-                variant="subtitle1"
-                fontWeight={600}
-                fontFamily={"Poppins"}
-              >
-                Borrow
-              </Typography>
-            </Button>
-          </Box>
-        ),
+        actions: (item) => <TableActions assetId={item.id} />,
       }}
-      data={tableData}
+      data={borrowedWithMetadata || []}
     />
   );
 };
 
 export default Borrowed;
-const tableData = [
-  { asset: "Dot", apy: "5%", borrowed: "0.202", supplied: "100" },
-  { asset: "KYL", apy: "2%", borrowed: "210.2", supplied: "150" },
-  { asset: "USDT", apy: "1%", borrowed: "1200", supplied: "212" },
-];
 
-type TableData = typeof tableData;
+type TableData = {
+  asset: string;
+  apy: string;
+  borrowed: string;
+  balance: string;
+  id: number;
+}[];
