@@ -11,7 +11,7 @@ import { useParams } from "next/navigation";
 const TotalChart = () => {
   const { "market-id": marketId } = useParams<{ "market-id": string }>();
 
-  const { data } = usePoolsData(marketId);
+  const { data } = usePoolsData("101");
 
   return (
     <Card variant="outlined">
