@@ -82,7 +82,7 @@ export const howItsWorksData: Section<HowItsWork> = {
   },
   description:
     " A new-generation multi-chain DeFi Lending Platform with self-repaying loans and an on-chain marketplace for collateral liquidation.",
-  id: "how-it's-works",
+  id: "how-it-works",
   items: [
     {
       id: "deposit",
