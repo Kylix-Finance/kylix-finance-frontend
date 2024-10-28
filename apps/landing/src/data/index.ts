@@ -275,7 +275,7 @@ export const footerData: Footer = {
     {
       name: "Telegram",
       link: "https://t.me/kylix_finance_parachain",
-      icon: StakeHouse,
+      icon: Discord,
     },
   ],
   right: [
