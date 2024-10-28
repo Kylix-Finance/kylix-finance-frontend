@@ -7,6 +7,8 @@ import { Asset } from "~/components";
 export const SupplyTable = () => {
   return (
     <Table<TableData[number]>
+      isFetched={true}
+      isLoading={false}
       placeholderLength={3}
       tCellClassnames={"!p-3"}
       rowSpacing="10px"

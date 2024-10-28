@@ -30,14 +30,15 @@ const userLtv = async (
   provider: WsProvider,
   { account }: UseGetUserLtvParams
 ) => {
-  const result = await provider.send("getUserLtv", [account]);
-  const currentLtv = BigInt(result.current_ltv) * 1000n;
-  const saleLtv = BigInt(result.sale_ltv) * 1000n;
-  const liquidationLtv = BigInt(result.liquidation_ltv);
+  const result = await provider.send<UserLtvResult>("getUserLtv", [account]);
+  const saleLtv = Number(result.sale_ltv);
+  const base = saleLtv * (13 / 10);
+  const currentLtv = Number(result.current_ltv);
+  const liquidationLtv = Number(result.liquidation_ltv);
 
   return {
-    currentLtv: Number((currentLtv * 100n) / liquidationLtv) / 1000,
-    saleLtv: Number((saleLtv * 100n) / liquidationLtv) / 1000,
-    liquidationLtv: 100,
+    currentLtv: ((currentLtv * 100) / base).toFixed(2),
+    saleLtv: ((saleLtv * 100) / base).toFixed(2),
+    liquidationLtv: ((liquidationLtv * 100) / base).toFixed(2),
   };
 };

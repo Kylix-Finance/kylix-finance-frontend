@@ -13,6 +13,7 @@ interface Asset {
   apy?: bigint;
   borrowed?: bigint;
   usdtBalance: bigint;
+  collateralAssets?: number[];
 }
 
 type RawAsset = {
@@ -25,6 +26,7 @@ type RawAsset = {
   apy?: bigint;
   borrowed?: bigint;
   usdt_balance: bigint;
+  collateral_assets: number[];
 };
 
 type AssetWiseBorrowsCollateralsResponse = {
@@ -36,8 +38,10 @@ type AssetWiseBorrowsCollateralsResponse = {
 
 export const useGetAssetWiseBorrowsCollaterals = ({
   poolId,
+  collateralId,
 }: {
   poolId?: string | number;
+  collateralId?: number;
 } = {}) => {
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
@@ -61,7 +65,11 @@ export const useGetAssetWiseBorrowsCollaterals = ({
         totalBorrowed: data?.totalBorrowed,
         totalCollateral: data?.totalCollateral,
         borrowedAssets: {
-          ...data?.borrowedAssets.filter((item) => item.assetId == poolId),
+          ...data?.borrowedAssets.filter(
+            (item) =>
+              item.assetId == poolId &&
+              item.collateralAssets?.includes?.(collateralId || 0)
+          ),
         },
         collateralAssets: {
           ...data?.collateralAssets.filter((item) => item.assetId == poolId),
@@ -95,6 +103,7 @@ export const getAssetWiseBorrowsCollaterals = async ({
       assetId: item.asset_id,
       decimals: item.decimals,
       usdtBalance: item.usdt_balance,
+      collateralAssets: item.collateral_assets,
     })),
     collateralAssets: response[1]?.map((item) => ({
       assetIcon: decodeArrayToString(item.asset_icon),

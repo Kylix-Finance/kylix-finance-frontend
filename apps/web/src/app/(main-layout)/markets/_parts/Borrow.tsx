@@ -1,6 +1,6 @@
 "use client";
 import { Typography } from "@mui/material";
-import { formatBigNumbers } from "@repo/onchain-utils";
+import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
 import { Skeleton } from "@repo/ui";
 import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
@@ -18,7 +18,8 @@ const Borrow = () => {
         <Typography variant="h5" className="text-primary-800">
           <Skeleton isLoading={isLoading} minWidth={80}>
             {data?.summary
-              ? formatBigNumbers(data.summary.total_borrow.toString(), 2) + "$"
+              ? formatBigNumbers(formatUnit(data.summary.total_borrow, 18), 2) +
+                "$"
               : "Unavailable"}
           </Skeleton>
         </Typography>

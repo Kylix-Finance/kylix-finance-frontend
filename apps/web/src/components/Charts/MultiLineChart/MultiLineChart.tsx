@@ -7,6 +7,8 @@ import { palette } from "~/config/palette";
 import { formatNumber } from "~/utils";
 import "chartjs-adapter-date-fns";
 import "chart.js/auto";
+import { ChartScale } from "~/types";
+import { getTimeUnit } from "~/utils/date";
 
 type LineProps = ComponentProps<typeof Line>;
 
@@ -16,6 +18,7 @@ type MultiLineChartProps = {
   yLabel?: string;
   xGrid?: boolean;
   yGrid?: boolean;
+  scale: ChartScale;
 };
 
 export const MultiLineChart = ({
@@ -24,7 +27,10 @@ export const MultiLineChart = ({
   yLabel,
   xGrid = false,
   yGrid = true,
+  scale,
 }: MultiLineChartProps) => {
+  const unit = getTimeUnit(scale);
+
   return (
     <Box height={280} width="100%">
       <Line
@@ -46,7 +52,7 @@ export const MultiLineChart = ({
             x: {
               type: "time",
               time: {
-                unit: "day",
+                unit,
                 tooltipFormat: "MMM dd",
                 displayFormats: {
                   month: "MMM dd",
@@ -62,6 +68,8 @@ export const MultiLineChart = ({
               ticks: {
                 color: palette.text.disabled,
                 align: "inner",
+                autoSkip: true,
+                maxTicksLimit: 11,
               },
               title: {
                 display: true,

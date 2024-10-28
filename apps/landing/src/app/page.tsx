@@ -33,13 +33,13 @@ export default function page() {
       <BackGround />
       <Header />
       <Hero />
-      <WaitingList />
       <FeaturedPartners />
       <SmartLending />
       <MarketTrends />
       <SupportedAssetsAndAPY />
       <HowItWorks />
       <SecurityAndAudits />
+      <WaitingList />
       <Footer />
     </div>
   );

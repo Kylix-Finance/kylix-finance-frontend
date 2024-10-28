@@ -7,6 +7,7 @@ import { Skeleton } from "@repo/ui";
 import { usePools } from "~/hooks/chain/usePools";
 import {
   formatBigNumbers,
+  formatUnit,
   useAccounts,
   useActiveAccount,
   useProvider,
@@ -24,7 +25,8 @@ const Supply = () => {
         <Typography variant="h5" className="text-primary-800">
           <Skeleton minWidth={80} isLoading={isLoading}>
             {data?.summary
-              ? formatBigNumbers(data.summary.total_supply.toString(), 2) + "$"
+              ? formatBigNumbers(formatUnit(data.summary.total_supply, 18), 2) +
+                "$"
               : "Unavailable"}
           </Skeleton>
         </Typography>

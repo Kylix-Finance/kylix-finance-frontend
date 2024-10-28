@@ -7,32 +7,35 @@ import { vaultData } from "~/mock/chart";
 import { ChangeEvent, useRef, useState } from "react";
 import { Info } from "@mui/icons-material";
 import TransactionForm from "./TransactionForm";
-import { useTotalSupply } from "~/hooks/api/useTotalSupply";
 import { subWeeks } from "date-fns";
+import { usePoolsData } from "~/hooks/api/usePoolsData";
+import { useParams } from "next/navigation";
 
 const ApyChart = () => {
-  const [checked, setChecked] = useState(false);
+  // const [checked, setChecked] = useState(false);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
-  };
+  // const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setChecked(event.target.checked);
+  // };
 
-  const { data } = useTotalSupply("1d");
+  const { "market-id": marketId } = useParams<{ "market-id": string }>();
+
+  const { data } = usePoolsData("101");
 
   return (
     <Card variant="outlined">
       <Box className="flex justify-between items-center mb-3">
-        <Box className="flex gap-6">
+        <Box className="flex gap-6 mt-3">
           <Box className="flex gap-2 items-center">
             <Box className="w-6 border-2 border-primary-500 rounded-md"></Box>
-            <Typography variant="body2">Total Borrowings</Typography>
+            <Typography variant="body2">Borrow APY</Typography>
           </Box>
           <Box className="flex gap-2 items-center">
             <Box className="w-6 border-2  border-secondary-500 rounded-md"></Box>
-            <Typography variant="body2">Total Supply</Typography>
+            <Typography variant="body2">Supply APY</Typography>
           </Box>
         </Box>
-        <Box className="flex gap-3">
+        {/* <Box className="flex gap-3">
           <Button
             onClick={() => setChecked((prev) => !prev)}
             variant="outlined"
@@ -47,14 +50,16 @@ const ApyChart = () => {
             Include Mining APY
             <Info className="ml-2 mr-1" />
           </Button>
-        </Box>
+        </Box> */}
       </Box>
 
       <MultiLineChart
+        scale="1d"
         datasets={[
           {
             data: data,
             borderColor: palette.primary.main,
+            backgroundColor: palette.primary.main,
             tension: 0.5,
             parsing: {
               xAxisKey: "time",
@@ -64,6 +69,7 @@ const ApyChart = () => {
           {
             data: data,
             borderColor: palette.secondary.main,
+            backgroundColor: palette.secondary.main,
             tension: 0.5,
             parsing: {
               xAxisKey: "time",

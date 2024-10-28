@@ -17,7 +17,6 @@ export const formatNumber = (input: number | string) => {
   const divisor = num < 1000000 ? 1000 : 1000000;
   return (num / divisor).toFixed(num % divisor === 0 ? 0 : 1) + suffix;
 };
-
 export const numToLocalString = (num: number) => num.toLocaleString();
 
 export const getDecimalRegex = (decimals: number) => {
