@@ -49,12 +49,13 @@ const Header = () => {
           <nav className="hidden lg:flex space-x-8 text-sm font-medium items-center">
             {renderedNavItems}
           </nav>
-          <Link
+          {/* <Link
             href=""
             className="hidden lg:block get-start-btn font-medium leading-5 text-sm"
           >
             Launch App
-          </Link>
+          </Link> */}
+          <div></div>
         </div>
       </header>
 

@@ -57,7 +57,7 @@ const Footer = () => {
         </div>
 
         <p className="text-primaryText text-xs lg:text-sm font-light leading-5 text-center">
-          &copy; KYLIX 2023. ALL RIGHTS RESERVED
+          &copy; KYLIX 2024-2025. ALL RIGHTS RESERVED
         </p>
       </div>
     </div>
