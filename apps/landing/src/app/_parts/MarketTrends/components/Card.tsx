@@ -40,20 +40,24 @@ const Card = ({ id }: Props) => {
           ))}
         </div>
         <div className="flex items-center gap-2.5">
-          <Button
-            onClick={currentSlide.actions.primary.action}
-            variant="primary"
-            color="secondary"
-          >
-            {currentSlide.actions.primary.label}
-          </Button>
-          <Button
-            onClick={currentSlide.actions.secondary.action}
-            variant="outline"
-            color="white"
-          >
-            {currentSlide.actions.secondary.label}
-          </Button>
+          {currentSlide?.actions?.primary && (
+            <Button
+              onClick={currentSlide.actions.primary.action}
+              variant="primary"
+              color="secondary"
+            >
+              {currentSlide.actions.primary.label}
+            </Button>
+          )}
+          {currentSlide.actions?.secondary && (
+            <Button
+              onClick={currentSlide.actions.secondary.action}
+              variant="outline"
+              color="white"
+            >
+              {currentSlide.actions.secondary.label}
+            </Button>
+          )}
         </div>
       </div>
       <div className="relative w-full order-1">

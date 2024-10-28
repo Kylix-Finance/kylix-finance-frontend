@@ -167,20 +167,20 @@ export const marketTrendsData: Section<MarketTrend> = {
             "An automated treasury that distributes rewards to incentivize lenders to provide liquidity and automatically burns the native token to apply deflationary pressure to the network as borrowing volume increases.",
         },
       ],
-      actions: {
-        primary: {
-          label: "Learn More",
-          action: () => {
-            console.log("Lending: Learn More clicked");
-          },
-        },
-        secondary: {
-          label: "Get Started",
-          action: () => {
-            console.log("Lending: Get Started clicked");
-          },
-        },
-      },
+      // actions: {
+      //   primary: {
+      //     label: "Learn More",
+      //     action: () => {
+      //       console.log("Lending: Learn More clicked");
+      //     },
+      //   },
+      //   secondary: {
+      //     label: "Get Started",
+      //     action: () => {
+      //       console.log("Lending: Get Started clicked");
+      //     },
+      //   },
+      // },
     },
   ],
 };

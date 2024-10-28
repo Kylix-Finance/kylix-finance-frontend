@@ -39,12 +39,12 @@ export type MarketTrend = {
   label: string;
   image: string;
   items: MarketTrendItem[];
-  actions: {
-    primary: {
+  actions?: {
+    primary?: {
       label: string;
       action: VoidFunction;
     };
-    secondary: {
+    secondary?: {
       label: string;
       action: VoidFunction;
     };
