@@ -24,6 +24,12 @@ import {
   Twitter,
   IdleFinance,
   Telegram,
+  DecentralizedFutures,
+  EquitoNetwork,
+  HarbourIndustrialCapital,
+  HercleFinancial,
+  Pendulum,
+  Polimec,
 } from "~/assets/svgs";
 
 export const smartLendingData: Section<SmartLending> = {
@@ -195,38 +201,38 @@ export const featuredPartnersData: Section<FeaturedPartners> = {
     {
       link: "/",
       name: "Decentralised Future",
-      icon: StakeHouse,
+      icon: DecentralizedFutures,
     },
     {
       link: "/",
       name: "Equito Network",
-      icon: StakeHouse,
+      icon: EquitoNetwork,
     },
     {
       link: "/",
       name: "Hercle Financial",
-      icon: StakeHouse,
+      icon: HercleFinancial,
     },
     {
       link: "/",
       name: "Harbour Industrial Capital",
-      icon: StakeHouse,
+      icon: HarbourIndustrialCapital,
     },
     {
       link: "/",
       name: "Pendulum",
-      icon: StakeHouse,
+      icon: Pendulum,
     },
     {
       link: "/",
       name: "Polimec",
-      icon: StakeHouse,
+      icon: Polimec,
     },
-    {
-      link: "/",
-      name: "BlockDeep",
-      icon: StakeHouse,
-    },
+    // {
+    //   link: "/",
+    //   name: "BlockDeep",
+    //   icon: StakeHouse,
+    // },
   ],
 };
 export const navItems: NavItem[] = [
