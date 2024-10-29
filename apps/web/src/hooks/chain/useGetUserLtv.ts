@@ -1,5 +1,5 @@
 import { WsProvider } from "@polkadot/api";
-import { useActiveAccount, useProvider } from "@repo/onchain-utils";
+import { formatUnit, useActiveAccount, useProvider } from "@repo/onchain-utils";
 import { queryKeys } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
 
@@ -31,14 +31,13 @@ const userLtv = async (
   { account }: UseGetUserLtvParams
 ) => {
   const result = await provider.send<UserLtvResult>("getUserLtv", [account]);
-  const saleLtv = Number(result.sale_ltv);
-  const base = saleLtv * (13 / 10);
-  const currentLtv = Number(result.current_ltv);
-  const liquidationLtv = Number(result.liquidation_ltv);
+  const saleLtv = Number(formatUnit(result.sale_ltv)).toFixed(2);
+  const currentLtv = Number(formatUnit(result.current_ltv)).toFixed(2);
+  const liquidationLtv = Number(formatUnit(result.liquidation_ltv)).toFixed(2);
 
   return {
-    currentLtv: ((currentLtv * 100) / base).toFixed(2),
-    saleLtv: ((saleLtv * 100) / base).toFixed(2),
-    liquidationLtv: ((liquidationLtv * 100) / base).toFixed(2),
+    currentLtv: currentLtv,
+    saleLtv: saleLtv,
+    liquidationLtv: liquidationLtv,
   };
 };

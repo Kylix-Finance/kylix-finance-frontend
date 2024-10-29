@@ -23,6 +23,13 @@ import {
   StakeHouse,
   Twitter,
   IdleFinance,
+  Telegram,
+  DecentralizedFutures,
+  EquitoNetwork,
+  HarbourIndustrialCapital,
+  HercleFinancial,
+  Pendulum,
+  Polimec,
 } from "~/assets/svgs";
 
 export const smartLendingData: Section<SmartLending> = {
@@ -57,19 +64,19 @@ export const supportedAssetsData: Section<Asset> = {
   id: "supported-assets-and-apy",
   items: [
     {
-      src: "/assets/images/assets/avalaunch.png",
+      src: "/assets/images/assets/polkdot.png",
       alt: "Polkadot",
     },
     {
-      src: "/assets/images/assets/btc.png",
+      src: "/assets/images/assets/solana.png",
       alt: "Solana",
     },
     {
-      src: "/assets/images/assets/eth.png",
-      alt: "Ethereum",
+      src: "/assets/images/assets/sei.png",
+      alt: "Sei",
     },
     {
-      src: "/assets/images/assets/usdc.png",
+      src: "/assets/images/assets/mintlayer.png",
       alt: "MintLayer",
     },
   ],
@@ -82,7 +89,7 @@ export const howItsWorksData: Section<HowItsWork> = {
   },
   description:
     " A new-generation multi-chain DeFi Lending Platform with self-repaying loans and an on-chain marketplace for collateral liquidation.",
-  id: "how-it's-works",
+  id: "how-it-works",
   items: [
     {
       id: "deposit",
@@ -167,20 +174,20 @@ export const marketTrendsData: Section<MarketTrend> = {
             "An automated treasury that distributes rewards to incentivize lenders to provide liquidity and automatically burns the native token to apply deflationary pressure to the network as borrowing volume increases.",
         },
       ],
-      actions: {
-        primary: {
-          label: "Learn More",
-          action: () => {
-            console.log("Lending: Learn More clicked");
-          },
-        },
-        secondary: {
-          label: "Get Started",
-          action: () => {
-            console.log("Lending: Get Started clicked");
-          },
-        },
-      },
+      // actions: {
+      //   primary: {
+      //     label: "Learn More",
+      //     action: () => {
+      //       console.log("Lending: Learn More clicked");
+      //     },
+      //   },
+      //   secondary: {
+      //     label: "Get Started",
+      //     action: () => {
+      //       console.log("Lending: Get Started clicked");
+      //     },
+      //   },
+      // },
     },
   ],
 };
@@ -194,38 +201,38 @@ export const featuredPartnersData: Section<FeaturedPartners> = {
     {
       link: "/",
       name: "Decentralised Future",
-      icon: StakeHouse,
+      icon: DecentralizedFutures,
     },
     {
       link: "/",
       name: "Equito Network",
-      icon: StakeHouse,
+      icon: EquitoNetwork,
     },
     {
       link: "/",
       name: "Hercle Financial",
-      icon: StakeHouse,
+      icon: HercleFinancial,
     },
     {
       link: "/",
       name: "Harbour Industrial Capital",
-      icon: StakeHouse,
+      icon: HarbourIndustrialCapital,
     },
     {
       link: "/",
       name: "Pendulum",
-      icon: StakeHouse,
+      icon: Pendulum,
     },
     {
       link: "/",
       name: "Polimec",
-      icon: StakeHouse,
+      icon: Polimec,
     },
-    {
-      link: "/",
-      name: "BlockDeep",
-      icon: StakeHouse,
-    },
+    // {
+    //   link: "/",
+    //   name: "BlockDeep",
+    //   icon: StakeHouse,
+    // },
   ],
 };
 export const navItems: NavItem[] = [
@@ -275,7 +282,7 @@ export const footerData: Footer = {
     {
       name: "Telegram",
       link: "https://t.me/kylix_finance_parachain",
-      icon: StakeHouse,
+      icon: Telegram,
     },
   ],
   right: [
