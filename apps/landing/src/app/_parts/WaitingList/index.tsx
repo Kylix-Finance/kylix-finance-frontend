@@ -54,13 +54,11 @@ const WaitingList = () => {
       <Section
         heading={{
           left: "Join",
-          right: "to waiting list",
+          right: "our waiting list",
         }}
         contentClassName="py-9 md:py-9 lg:py-9  gap-5  backdrop-blur-md border border-primary-900 rounded-2xl"
         className="mb-44"
-        description={
-          " A visual breakdown of the lending and borrowing process, typically simplified into steps like:"
-        }
+        description={"Stay tuned with the latest updates."}
         id="#waiting-list"
       >
         <form className="flex flex-col" onSubmit={onSubmit}>
@@ -87,7 +85,8 @@ const WaitingList = () => {
             </span>
           )}
           <p className="font-normal text-white/40 text-xs leading-5 text-center tracking-wider mt-6">
-            By submitting your email address, you agree to join Kylix waitlist{" "}
+            By submitting your email address, you agree to join Kylix waitlist
+            and newsletter{" "}
           </p>
         </form>
       </Section>
