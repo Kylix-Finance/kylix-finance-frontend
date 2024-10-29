@@ -23,6 +23,7 @@ import {
   StakeHouse,
   Twitter,
   IdleFinance,
+  Telegram,
 } from "~/assets/svgs";
 
 export const smartLendingData: Section<SmartLending> = {
@@ -275,7 +276,7 @@ export const footerData: Footer = {
     {
       name: "Telegram",
       link: "https://t.me/kylix_finance_parachain",
-      icon: Discord,
+      icon: Telegram,
     },
   ],
   right: [

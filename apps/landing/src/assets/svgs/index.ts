@@ -17,6 +17,7 @@ import IdleFinance from "./idle-finance.svg";
 import InstaDapp from "./instadapp.svg";
 import Lido from "./lido.svg";
 import StakeHouse from "./stakehouse.svg";
+import Telegram from "./telegram.svg";
 export {
   ArrowRight,
   BorrowImage,
@@ -37,4 +38,5 @@ export {
   InstaDapp,
   Lido,
   StakeHouse,
+  Telegram,
 };
