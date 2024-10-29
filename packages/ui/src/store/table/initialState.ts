@@ -8,6 +8,7 @@ const defaultPaginationState = {
 
 export const initialState: State = {
   pagination: {
+    borrow: defaultPaginationState,
     latestLiquidation: defaultPaginationState,
     liquidations: defaultPaginationState,
     loanPositions: defaultPaginationState,

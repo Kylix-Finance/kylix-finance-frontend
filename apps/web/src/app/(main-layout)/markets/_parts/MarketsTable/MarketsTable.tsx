@@ -9,18 +9,16 @@ import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
 import { formatUnit } from "@repo/onchain-utils";
 import { formatPercentage } from "~/utils";
 
-const placeholderData = Array.from({ length: 5 }).map(() => ({
-  asset: "",
-  borrowRate: "",
-  collateral: false,
-  collateralQ: "",
-  id: 0,
-  supplyRate: "",
-  utilization: "",
-  walletBalance: "0",
-}));
-
-type TableData = typeof placeholderData;
+type TableData = Array<{
+  asset: string;
+  borrowRate: string;
+  collateral: false;
+  collateralQ: string;
+  id: number;
+  supplyRate: string;
+  utilization: string;
+  walletBalance: string;
+}>;
 
 type MarketsTableUIProps = {
   searchQuery?: string;
@@ -29,7 +27,7 @@ type MarketsTableUIProps = {
 const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
   const { data, isLoading, isFetched } = useGetLendingPools();
 
-  const transformedData = useMemo(() => {
+  const transformedData = useMemo((): TableData => {
     if (!data?.assets) return [];
 
     return data.assets

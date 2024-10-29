@@ -1,15 +1,13 @@
 import { Box } from "@mui/material";
-import styles from "./_parts/styles.module.css";
 import { Card } from "~/components";
 import { Icons } from "~/assets/svgs";
-import TotalValue from "./_parts/TotalValue";
-import CollateralValue from "./_parts/CollateralValue";
-import BorrowValue from "./_parts/BorrowValue";
-import ProgressBar from "~/components/ProgressBar";
-import Supplied from "./_parts/Supplied";
 import Borrowed from "./_parts/Borrowed";
-import QuickBorrow from "./_parts/QuickBorrow";
+import BorrowValue from "./_parts/BorrowValue";
+import CollateralValue from "./_parts/CollateralValue";
 import Ltv from "./_parts/Ltv";
+import styles from "./_parts/styles.module.css";
+import Supplied from "./_parts/Supplied";
+import TotalValue from "./_parts/TotalValue";
 
 export default function Page() {
   return (

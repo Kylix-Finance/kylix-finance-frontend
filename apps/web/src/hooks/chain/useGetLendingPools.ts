@@ -56,9 +56,12 @@ interface Params {
 export const useGetLendingPools = ({ account, asset }: Params = {}) => {
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
-  return useQuery({
+
+  const isEnabled = !!provider;
+
+  const query = useQuery({
     queryKey: queryKeys.lendingPools,
-    queryFn: provider
+    queryFn: isEnabled
       ? () =>
           getLendingPool({
             provider,
@@ -67,6 +70,8 @@ export const useGetLendingPools = ({ account, asset }: Params = {}) => {
           })
       : skipToken,
   });
+
+  return query;
 };
 
 export const getLendingPool = async ({

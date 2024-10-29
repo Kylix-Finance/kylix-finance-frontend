@@ -38,16 +38,17 @@ export const useGetAssetWiseSupplies = ({
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
 
-  return useQuery({
+  const isEnabled = provider && !!activeAccount?.address;
+
+  const query = useQuery({
     queryKey: queryKeys.assetWiseSupplies(activeAccount?.address),
-    queryFn:
-      provider && activeAccount?.address
-        ? () =>
-            getAssetWiseSupplies({
-              provider,
-              account: activeAccount.address,
-            })
-        : skipToken,
+    queryFn: isEnabled
+      ? () =>
+          getAssetWiseSupplies({
+            provider,
+            account: activeAccount.address,
+          })
+      : skipToken,
     select: (data) => {
       if (!poolId) return data;
       return {
@@ -58,6 +59,11 @@ export const useGetAssetWiseSupplies = ({
       };
     },
   });
+
+  return {
+    ...query,
+    isFetched: isEnabled === false ? true : query.isFetched,
+  };
 };
 
 export const getAssetWiseSupplies = async ({

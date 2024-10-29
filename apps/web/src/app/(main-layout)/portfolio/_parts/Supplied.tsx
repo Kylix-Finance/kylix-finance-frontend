@@ -3,8 +3,6 @@
 import { Box, Button, Switch, Typography } from "@mui/material";
 import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
 import { Table } from "@repo/ui";
-import Image from "next/image";
-import { Icons } from "~/assets/svgs";
 import { Asset } from "~/components";
 import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetAssetWiseSupplies";
 
