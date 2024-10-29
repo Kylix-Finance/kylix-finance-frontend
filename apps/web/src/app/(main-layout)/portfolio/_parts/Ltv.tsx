@@ -9,9 +9,9 @@ const Ltv = () => {
     <ProgressBar
       isLoading={false}
       data={{
-        current: Number(data?.currentLtv),
-        sale: Number(data?.saleLtv),
-        target: Number(data?.liquidationLtv),
+        current: Number(data?.currentLtv || 0),
+        sale: Number(data?.saleLtv || 50),
+        target: Number(data?.liquidationLtv || 100),
       }}
     />
   );
