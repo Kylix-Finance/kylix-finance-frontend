@@ -58,19 +58,19 @@ export const supportedAssetsData: Section<Asset> = {
   id: "supported-assets-and-apy",
   items: [
     {
-      src: "/assets/images/assets/avalaunch.png",
+      src: "/assets/images/assets/polkdot.png",
       alt: "Polkadot",
     },
     {
-      src: "/assets/images/assets/btc.png",
+      src: "/assets/images/assets/solana.png",
       alt: "Solana",
     },
     {
-      src: "/assets/images/assets/eth.png",
-      alt: "Ethereum",
+      src: "/assets/images/assets/sei.png",
+      alt: "Sei",
     },
     {
-      src: "/assets/images/assets/usdc.png",
+      src: "/assets/images/assets/mintlayer.png",
       alt: "MintLayer",
     },
   ],
