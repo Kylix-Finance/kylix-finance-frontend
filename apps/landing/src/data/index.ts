@@ -66,18 +66,22 @@ export const supportedAssetsData: Section<Asset> = {
     {
       src: "/assets/images/assets/polkdot.png",
       alt: "Polkadot",
+      isLaunched: true,
     },
     {
       src: "/assets/images/assets/solana.png",
       alt: "Solana",
+      isLaunched: true,
     },
     {
       src: "/assets/images/assets/sei.png",
       alt: "Sei",
+      isLaunched: false,
     },
     {
       src: "/assets/images/assets/mintlayer.png",
       alt: "MintLayer",
+      isLaunched: false,
     },
   ],
 };

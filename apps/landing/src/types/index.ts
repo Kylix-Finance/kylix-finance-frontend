@@ -54,6 +54,7 @@ export type MarketTrend = {
 export type Asset = {
   src: string;
   alt: string;
+  isLaunched: boolean;
 };
 
 export type SocialMedia = {
