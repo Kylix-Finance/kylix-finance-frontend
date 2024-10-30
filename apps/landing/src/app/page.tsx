@@ -29,9 +29,7 @@ export const metadata: Metadata = mergeMetadata(
 
 export default function page() {
   return (
-    <div className="relative w-full h-full">
-      <BackGround />
-      <Header />
+    <div>
       <Hero />
       <FeaturedPartners />
       <SmartLending />

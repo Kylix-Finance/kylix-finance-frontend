@@ -2,6 +2,9 @@ import { fonts } from "~/assets/fonts";
 import "./globals.css";
 import { mergeMetadata } from "@repo/shared";
 import { Metadata } from "next";
+import Footer from "~/components/Footer";
+import BackGround from "~/components/BackGround";
+import Header from "~/components/Header";
 export const metadata: Metadata = mergeMetadata(
   {
     title: {
@@ -23,7 +26,12 @@ export default function RootLayout({
       lang="en"
       className={`${fonts.migha.variable} ${fonts.poppins.variable}`}
     >
-      <body className="font-body bg-secondary-500">{children}</body>
+      <body className="font-body bg-secondary-500 relative w-full h-full">
+        <BackGround />
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -80,3 +80,7 @@ export type NavItem = {
   label: string;
   link: string;
 };
+export interface Footer {
+  left: SocialMedia[];
+  right: FooterItem[];
+}
