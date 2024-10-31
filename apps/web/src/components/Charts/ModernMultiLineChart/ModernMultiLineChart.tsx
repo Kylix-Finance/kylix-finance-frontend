@@ -9,6 +9,24 @@ import "chartjs-adapter-date-fns";
 import "chart.js/auto";
 import { ChartScale } from "~/types";
 import { getTimeUnit } from "~/utils/date";
+import Crosshair from "chartjs-plugin-crosshair";
+import { Tooltip } from "chart.js";
+
+//@ts-expect-error: react-chartjs-2
+Tooltip.positioners.xAxis = function (elements) {
+  if (elements.length === 0) {
+    return false;
+  }
+
+  const chart = elements[0].element.$context.chart;
+  const meta = chart.getDatasetMeta(elements[0].datasetIndex);
+  const dataPoint = meta.data[elements[0].index];
+
+  const x = dataPoint.getCenterPoint().x;
+  const y = chart.scales.y.bottom;
+
+  return { x, y: y + 21 };
+};
 
 type LineProps = ComponentProps<typeof Line>;
 
@@ -49,6 +67,35 @@ export const ModernMultiLineChart = ({
             tooltip: {
               mode: "index",
               intersect: false,
+              //@ts-expect-error: react-chartjs-2
+              position: "xAxis",
+              callbacks: {
+                title: (tooltipItem) => {
+                  const value = tooltipItem[0]?.label;
+                  return `Utilization ${value}%`;
+                },
+                label: () => {
+                  return "";
+                },
+              },
+              displayColors: false,
+              backgroundColor: "transparent", // Removes the background color
+              borderWidth: 0, // Sets border width to 0
+              caretSize: 0,
+              titleColor: "#000",
+              titleFont: { size: 12 },
+            },
+            crosshair: {
+              line: {
+                color: "rgba(0, 0, 0, 1)",
+                width: 2,
+              },
+              sync: {
+                enabled: false,
+              },
+              zoom: {
+                enabled: false,
+              },
             },
           },
           scales: {
@@ -112,63 +159,12 @@ export const ModernMultiLineChart = ({
           },
           maintainAspectRatio: false,
         }}
-        // plugins={[
-        //   {
-        //     id: "hoverPlugin",
-        //     beforeDatasetDraw(chart, args, options) {
-        //       const { ctx, chartArea, scales } = chart;
-        //       const dataset = chart.data.datasets[0];
-        //       const meta = chart.getDatasetMeta(0);
-        //       const points = meta.data;
-
-        //       // Check if there is an active point (hovered)
-        //       const activePoint = chart.tooltip?.dataPoints?.[0]?.element;
-
-        //       if (activePoint && points.length > 1) {
-        //         const hoverIndex = activePoint.index;
-
-        //         // Create gradient for the line
-        //         const gradient = ctx.createLinearGradient(
-        //           chartArea.left,
-        //           0,
-        //           chartArea.right,
-        //           0
-        //         );
-
-        //         // Calculate the color stop position safely
-        //         const colorStopPosition = hoverIndex / (points.length - 1);
-
-        //         // Ensure colorStopPosition is within the range of 0 to 1
-        //         if (
-        //           isFinite(colorStopPosition) &&
-        //           colorStopPosition >= 0 &&
-        //           colorStopPosition <= 1
-        //         ) {
-        //           console.log("we are in the if condition brother");
-        //           // Set color stops: left of the hover index is colored, right is gray
-        //           gradient.addColorStop(0, "rgba(0, 255, 0, 1)"); // Colored
-        //           gradient.addColorStop(
-        //             colorStopPosition,
-        //             "rgba(0, 255, 0, 1)"
-        //           );
-        //           gradient.addColorStop(
-        //             colorStopPosition,
-        //             "rgba(128, 128, 128, 1)"
-        //           ); // Gray
-        //           gradient.addColorStop(1, "rgba(128, 128, 128, 1)");
-
-        //           // Apply gradient to the border color
-        //           dataset.borderColor = gradient;
-        //           chart.update();
-        //         }
-        //       } else {
-        //         // Reset to the original color if not hovering or if insufficient points
-        //         dataset.borderColor = "rgba(0, 255, 0, 1)";
-        //         chart.update();
-        //       }
-        //     },
-        //   },
-        // ]}
+        plugins={[
+          {
+            id: "crosshair",
+            ...Crosshair,
+          },
+        ]}
       />
     </Box>
   );

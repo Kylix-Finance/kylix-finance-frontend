@@ -16,8 +16,8 @@ export const getPoolData = async (assetId: string) => {
 
   const transformedData = data.map((dataset) => ({
     time: dataset[1] * 1000,
-    totalBorrow: dataset[2] * 100,
-    totalSupply: dataset[3] * 100,
+    totalBorrow: dataset[2],
+    totalSupply: dataset[3],
   }));
 
   return transformedData;
