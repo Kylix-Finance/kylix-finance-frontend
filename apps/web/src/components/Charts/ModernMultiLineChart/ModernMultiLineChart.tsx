@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Typography } from "@mui/material";
-import { ComponentProps, useState } from "react";
+import { ComponentProps, useState, startTransition, useCallback } from "react";
 import { Line } from "react-chartjs-2";
 import { palette } from "~/config/palette";
 import { formatNumber } from "~/utils";
@@ -11,6 +11,7 @@ import { ChartScale } from "~/types";
 import { getTimeUnit } from "~/utils/date";
 import Crosshair from "chartjs-plugin-crosshair";
 import { Tooltip } from "chart.js";
+import { throttle } from "lodash";
 
 //@ts-expect-error: react-chartjs-2
 Tooltip.positioners.xAxis = function (elements) {
@@ -47,6 +48,13 @@ export const ModernMultiLineChart = ({
 }: ModernMultiLineChartProps) => {
   const [activePoint, setActivePoint] = useState<number[]>([]);
 
+  const throttledSetState = useCallback(
+    throttle((newValue) => {
+      setActivePoint(newValue);
+    }, 50),
+    []
+  );
+
   return (
     <Box height={280} width="100%" className="flex items-center">
       <Box className="w-[120px] -mr-20">
@@ -78,7 +86,11 @@ export const ModernMultiLineChart = ({
             const points = elements.map((element) => element.element.y);
 
             if (borrow && earn) {
-              setActivePoint(points);
+              // startTransition(() => {
+              //   setActivePoint(points);
+              // });
+
+              throttledSetState(points);
             }
           },
           plugins: {
