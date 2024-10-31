@@ -1,7 +1,7 @@
 "use client";
 
-import { Box } from "@mui/material";
-import { ComponentProps } from "react";
+import { Box, Typography } from "@mui/material";
+import { ComponentProps, useState } from "react";
 import { Line } from "react-chartjs-2";
 import { palette } from "~/config/palette";
 import { formatNumber } from "~/utils";
@@ -45,21 +45,42 @@ export const ModernMultiLineChart = ({
   xGrid = false,
   yGrid = true,
 }: ModernMultiLineChartProps) => {
-  return (
-    <Box height={280} width="100%">
-      {/* <Box>
-        {datasets.map((dataset) => (
-          <Box key={dataset.label}>
+  const [activePoint, setActivePoint] = useState<number[]>([]);
 
+  return (
+    <Box height={280} width="100%" className="flex items-center">
+      <Box className="w-[120px] -mr-20">
+        {datasets.map((dataset, index) => (
+          <Box key={dataset.label} className="mb-4">
+            <Typography variant="body1" className="mb-2">
+              {dataset.label}
+            </Typography>
+            <Typography variant="body2">
+              {activePoint[index]?.toFixed(2)}%
+            </Typography>
           </Box>
         ))}
-      </Box> */}
+      </Box>
       <Line
         data={{
           datasets,
         }}
         options={{
           responsive: true,
+          hover: {
+            mode: "index",
+            intersect: false,
+          },
+          onHover: (_, elements) => {
+            const borrow = elements[0]?.element.y;
+            const earn = elements[1]?.element.y;
+
+            const points = elements.map((element) => element.element.y);
+
+            if (borrow && earn) {
+              setActivePoint(points);
+            }
+          },
           plugins: {
             legend: {
               display: false,
