@@ -74,7 +74,7 @@ export const getLendingPool = async ({
   account,
   asset,
 }: { provider: WsProvider } & Params) => {
-  const result = await provider.send<RawAssetData>("getLendingPools", [
+  const result = await provider.send<RawAssetData>("lending_getLendingPools", [
     asset,
     account,
   ]);
