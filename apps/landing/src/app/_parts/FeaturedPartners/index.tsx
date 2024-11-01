@@ -16,10 +16,10 @@ const FeaturedPartners = () => {
           <Link
             href={link}
             key={link}
-            className="w-28 lg:w-24 h-20 lg:h-28 flex flex-col items-center justify-center lg:gap-9"
+            className="w-32 lg:w-24 h-20 lg:h-28 flex flex-col items-center justify-center lg:gap-9"
           >
             <Icon />
-            <p className="text-sm lg:text-lg font-medium text-white text-nowrap leading-loose lg:leading-3 -mt-1">
+            <p className="text-sm lg:text-lg font-medium text-white text-nowrap leading-loose lg:leading-3 -mt-1 text-center text-wrap">
               {name}
             </p>
           </Link>
