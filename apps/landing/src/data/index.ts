@@ -72,6 +72,16 @@ export const supportedAssetsData: Section<Asset> = {
       alt: "MintLayer",
       isLaunched: false,
     },
+    {
+      src: "/assets/images/assets/eth.png",
+      alt: "ETH",
+      isLaunched: false,
+    },
+    {
+      src: "/assets/images/assets/sui.png",
+      alt: "Sui",
+      isLaunched: false,
+    },
   ],
 };
 export const howItsWorksData: Section<HowItsWork> = {
@@ -231,26 +241,26 @@ export const featuredPartnersData: Section<FeaturedPartners> = {
 export const navItems: NavItem[] = [
   smartLendingData.header && {
     label: smartLendingData.header,
-    link: `#${smartLendingData.id}`,
+    link: `/#${smartLendingData.id}`,
   },
   marketTrendsData.header && {
     label: marketTrendsData.header,
-    link: `#${marketTrendsData.id}`,
+    link: `/#${marketTrendsData.id}`,
   },
   supportedAssetsData.header && {
     label: supportedAssetsData.header,
-    link: `#${supportedAssetsData.id}`,
+    link: `/#${supportedAssetsData.id}`,
   },
   howItsWorksData.header && {
     label: howItsWorksData.header,
-    link: `#${howItsWorksData.id}`,
+    link: `/#${howItsWorksData.id}`,
   },
   securityAndAuditsData.header && {
     label: securityAndAuditsData.header,
-    link: `#${securityAndAuditsData.id}`,
+    link: `/#${securityAndAuditsData.id}`,
   },
   featuredPartnersData.header && {
     label: featuredPartnersData.header,
-    link: `#${featuredPartnersData.id}`,
+    link: `/#${featuredPartnersData.id}`,
   },
 ].filter((item): item is NavItem => !!item);
