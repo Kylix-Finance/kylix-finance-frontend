@@ -33,7 +33,7 @@ const Header = () => {
               <Kylix />
             </span>
           </Link>
-          <div className="lg:hidden">
+          <div className="lg:hidden w-full flex justify-end">
             <button
               className="text-white focus:outline-none"
               onClick={toggleMenu}

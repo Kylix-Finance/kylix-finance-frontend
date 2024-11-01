@@ -54,6 +54,7 @@ export type MarketTrend = {
 export type Asset = {
   src: string;
   alt: string;
+  isLaunched: boolean;
 };
 
 export type SocialMedia = {
@@ -79,3 +80,7 @@ export type NavItem = {
   label: string;
   link: string;
 };
+export interface Footer {
+  left: SocialMedia[];
+  right: FooterItem[];
+}

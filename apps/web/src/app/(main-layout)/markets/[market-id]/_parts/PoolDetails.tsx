@@ -30,7 +30,6 @@ const PoolDetails = () => {
       BigInt(pool?.reserveBalance || 0) * BigInt(assetPrice || 0),
       assetMetaData.decimals + baseAssetMetadata.decimals
     );
-
   const totalBorrow =
     assetMetaData &&
     assetPrice &&
