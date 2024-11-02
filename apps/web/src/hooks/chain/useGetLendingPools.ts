@@ -17,7 +17,7 @@ interface RawAsset {
   asset_decimals: number;
   asset_icon: number[];
   asset_symbol: number[];
-  collateral_q: number;
+  collateral_q: string;
   utilization: string;
   borrow_apy: string;
   borrow_apy_s: string;
@@ -32,7 +32,7 @@ interface Asset {
   asset_decimals: number;
   asset_symbol: string;
   asset_icon: string;
-  collateral_q: number;
+  collateral_q: string;
   utilization: string;
   borrow_apy: string;
   borrow_apy_s: string;
@@ -79,7 +79,7 @@ export const getLendingPool = async ({
   account,
   asset,
 }: { provider: WsProvider } & Params) => {
-  const result = await provider.send<RawAssetData>("getLendingPools", [
+  const result = await provider.send<RawAssetData>("lending_getLendingPools", [
     asset,
     account,
   ]);
@@ -99,6 +99,7 @@ export const getLendingPool = async ({
     supply_apy_s: asset.supply_apy_s,
     utilization: asset.utilization,
   }));
+  console.log("__________________________toAssetsJson", toAssetsJson);
 
   const summary = {
     total_borrow: BigInt(result[1].total_borrow),

@@ -30,10 +30,14 @@ const userLtv = async (
   provider: WsProvider,
   { account }: UseGetUserLtvParams
 ) => {
-  const result = await provider.send<UserLtvResult>("getUserLtv", [account]);
-  const saleLtv = Number(formatUnit(result.sale_ltv)).toFixed(2);
-  const currentLtv = Number(formatUnit(result.current_ltv)).toFixed(2);
-  const liquidationLtv = Number(formatUnit(result.liquidation_ltv)).toFixed(2);
+  const result = await provider.send<UserLtvResult>("lending_getUserLtv", [
+    account,
+  ]);
+  const saleLtv = Number(formatUnit(result.sale_ltv, 16)).toFixed(2);
+  const currentLtv = Number(formatUnit(result.current_ltv, 16)).toFixed(2);
+  const liquidationLtv = Number(formatUnit(result.liquidation_ltv, 16)).toFixed(
+    2
+  );
 
   return {
     currentLtv: currentLtv,

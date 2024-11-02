@@ -12,12 +12,13 @@ import { formatPercentage } from "~/utils";
 type TableData = Array<{
   asset: string;
   borrowRate: string;
-  collateral: false;
+  collateral: boolean;
   collateralQ: string;
   id: number;
   supplyRate: string;
   utilization: string;
   walletBalance: string;
+  "Collateral Factor": string;
 }>;
 
 type MarketsTableUIProps = {
@@ -37,11 +38,12 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       })
       .map((item) => ({
         asset: item.asset,
-        collateralQ: `%${item.collateral_q}`,
-        collateral: false,
+        "Collateral Factor": item.collateral_q,
+        collateral: true,
+        collateralQ: item.collateral_q,
         utilization: formatPercentage(item.utilization, item.asset_decimals),
         borrowRate: formatPercentage(item.borrow_apy, item.asset_decimals),
-        supplyRate: `${Number(formatUnit(item.supply_apy, item.asset_decimals)).toFixed(2)}%`,
+        supplyRate: item.supply_apy,
         walletBalance: formatUnit(
           item.user_asset_balance.toString(),
           item.asset_decimals
@@ -56,7 +58,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       hiddenTHeads={["actions"]}
       headers={{
         asset: "Asset",
-        collateralQ: "Collateral Q",
+        "Collateral Factor": "Collateral Factor",
         utilization: "Utilization",
         borrowRate: "Borrow Rate",
         supplyRate: "Supply Rate",
@@ -70,9 +72,9 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         asset: (item) => (
           <Asset helperText={item.asset} label={item.asset.toString()} />
         ),
-        collateralQ: (item) => (
+        "Collateral Factor": (item) => (
           <Typography variant="subtitle1" className="pl-4">
-            {item.collateralQ}
+            {item["Collateral Factor"]}
           </Typography>
         ),
         utilization: (item) => (
@@ -83,13 +85,13 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         borrowRate: (item) => (
           <Box className="flex flex-col pl-4">
             <Typography variant="subtitle1">{item.borrowRate}</Typography>
-            <KylixChip />
+            <KylixChip value="0%" />
           </Box>
         ),
         supplyRate: (item) => (
           <Box className="flex flex-col pl-4">
             <Typography variant="subtitle1">{item.supplyRate}</Typography>
-            <KylixChip />
+            <KylixChip value="0%" />
           </Box>
         ),
         collateral: (item) => (

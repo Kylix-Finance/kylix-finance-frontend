@@ -76,7 +76,7 @@ export const getAssetWiseSupplies = async ({
   if (!account) return;
 
   const response = await provider.send<[RawAsset[], bigint]>(
-    "getAssetWiseSupplies",
+    "lending_getAssetWiseSupplies",
     [account]
   );
 

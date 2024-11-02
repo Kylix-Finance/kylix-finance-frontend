@@ -27,13 +27,13 @@ const Header = () => {
   return (
     <>
       <header className="fixed w-full top-0 z-20 text-white py-4">
-        <div className="mx-6 py-4 px-8 flex justify-between items-center rounded-2xl border border-primary-900 bg-gradient-to-r from-[#11121439] to-[#0C0D0F45] backdrop-blur-md">
+        <div className="mx-6 py-4 px-8 flex justify-between items-center rounded-2xl border border-primary-900 bg-gradient-to-r from-[#11121439] to-[#0C0D0F45] backdrop-blur-3xl">
           <Link href="/" className="font-bold text-lg">
             <span className="tracking-wide">
               <Kylix />
             </span>
           </Link>
-          <div className="lg:hidden">
+          <div className="lg:hidden w-full flex justify-end">
             <button
               className="text-white focus:outline-none"
               onClick={toggleMenu}

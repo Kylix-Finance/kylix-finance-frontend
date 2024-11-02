@@ -20,7 +20,10 @@ const Section = ({
   ...rest
 }: Props) => {
   return (
-    <div className={cn("relative w-full h-full", rest.className)} {...rest}>
+    <div
+      className={cn("relative w-full h-full lg:max-w-[1900px]", rest.className)}
+      {...rest}
+    >
       <div
         className={cn(
           "relative z-[1] flex flex-col gap-24 w-full h-full justify-center items-center px-8 py-10 md:px-16 md:py-20 lg:px-32 lg:py-44",

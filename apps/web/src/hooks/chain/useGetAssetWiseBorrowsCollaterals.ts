@@ -97,7 +97,7 @@ export const getAssetWiseBorrowsCollaterals = async ({
 
   const response = await provider.send<
     [RawAsset[], RawAsset[], number, number]
-  >("getAssetWiseBorrowsCollaterals", [account]);
+  >("lending_getAssetWiseBorrowsCollaterals", [account]);
 
   return {
     borrowedAssets: response[0]?.map((item) => ({

@@ -1,12 +1,6 @@
 import Link from "next/link";
-import {
-  Discord,
-  Instagram,
-  KylixCircle,
-  LinkedIn,
-  Twitter,
-} from "~/assets/svgs";
-import { footerData } from "~/data";
+import { KylixCircle } from "~/assets/svgs";
+import { footerData } from "~/data/footer";
 
 const Footer = () => {
   return (

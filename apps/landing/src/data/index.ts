@@ -1,29 +1,18 @@
 import {
   Asset,
   FeaturedPartners,
-  FooterItem,
   HowItsWork,
-  Icon,
   MarketTrend,
   NavItem,
   Security,
-  SocialMedia,
   SmartLending,
   Section,
 } from "~/types";
 import {
   BorrowImage,
   Check,
-  DefiSaver,
-  Discord,
   Focus,
-  InstaDapp,
-  Lido,
   Shield,
-  StakeHouse,
-  Twitter,
-  IdleFinance,
-  Telegram,
   DecentralizedFutures,
   EquitoNetwork,
   HarbourIndustrialCapital,
@@ -66,18 +55,32 @@ export const supportedAssetsData: Section<Asset> = {
     {
       src: "/assets/images/assets/polkdot.png",
       alt: "Polkadot",
+      isLaunched: true,
     },
     {
       src: "/assets/images/assets/solana.png",
       alt: "Solana",
+      isLaunched: true,
     },
     {
       src: "/assets/images/assets/sei.png",
       alt: "Sei",
+      isLaunched: false,
     },
     {
       src: "/assets/images/assets/mintlayer.png",
       alt: "MintLayer",
+      isLaunched: false,
+    },
+    {
+      src: "/assets/images/assets/eth.png",
+      alt: "ETH",
+      isLaunched: false,
+    },
+    {
+      src: "/assets/images/assets/sui.png",
+      alt: "Sui",
+      isLaunched: false,
     },
   ],
 };
@@ -238,104 +241,26 @@ export const featuredPartnersData: Section<FeaturedPartners> = {
 export const navItems: NavItem[] = [
   smartLendingData.header && {
     label: smartLendingData.header,
-    link: `#${smartLendingData.id}`,
+    link: `/#${smartLendingData.id}`,
   },
   marketTrendsData.header && {
     label: marketTrendsData.header,
-    link: `#${marketTrendsData.id}`,
+    link: `/#${marketTrendsData.id}`,
   },
   supportedAssetsData.header && {
     label: supportedAssetsData.header,
-    link: `#${supportedAssetsData.id}`,
+    link: `/#${supportedAssetsData.id}`,
   },
   howItsWorksData.header && {
     label: howItsWorksData.header,
-    link: `#${howItsWorksData.id}`,
+    link: `/#${howItsWorksData.id}`,
   },
   securityAndAuditsData.header && {
     label: securityAndAuditsData.header,
-    link: `#${securityAndAuditsData.id}`,
+    link: `/#${securityAndAuditsData.id}`,
   },
   featuredPartnersData.header && {
     label: featuredPartnersData.header,
-    link: `#${featuredPartnersData.id}`,
+    link: `/#${featuredPartnersData.id}`,
   },
 ].filter((item): item is NavItem => !!item);
-
-interface Footer {
-  left: SocialMedia[];
-  right: FooterItem[];
-}
-
-export const footerData: Footer = {
-  left: [
-    {
-      name: "X",
-      link: "https://x.com/kylixfinance",
-      icon: Twitter,
-    },
-    {
-      name: "Discord",
-      link: "https://discord.gg/UkRcWaTh5p",
-      icon: Discord,
-    },
-    {
-      name: "Telegram",
-      link: "https://t.me/kylix_finance_parachain",
-      icon: Telegram,
-    },
-  ],
-  right: [
-    {
-      title: "About",
-      items: [
-        {
-          label: "Vision",
-          link: "todo",
-        },
-        {
-          label: "Roadmap",
-          link: "todo",
-        },
-        {
-          label: "Legal Notice",
-          link: "todo",
-        },
-      ],
-    },
-    {
-      title: "Resources",
-      items: [
-        {
-          label: "Token",
-          link: "todo",
-        },
-        {
-          label: "FAQ",
-          link: "todo",
-        },
-        {
-          label: "Whitepaper",
-          link: "https://docsend.com/view/f7xa65w29ckkpz2j",
-        },
-      ],
-    },
-    {
-      title: "Socials",
-      items: [
-        {
-          label: "Twitter",
-          link: "https://x.com/kylixfinance",
-        },
-        {
-          label: "Discord",
-          link: "https://discord.gg/UkRcWaTh5p",
-        },
-        {
-          label: "Telegram",
-          link: "https://t.me/kylix_finance_parachain",
-        },
-      ],
-    },
-  ],
-};

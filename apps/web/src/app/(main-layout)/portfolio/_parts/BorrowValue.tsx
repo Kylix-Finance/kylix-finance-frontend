@@ -7,6 +7,7 @@ import {
 } from "@repo/onchain-utils";
 import { LineBreak } from "~/components";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
+import { useGetUserLtv } from "~/hooks/chain/useGetUserLtv";
 
 const BorrowValue = () => {
   const { data: assetWiseBorrowCollateral } =
@@ -16,6 +17,7 @@ const BorrowValue = () => {
     assetWiseBorrowCollateral?.totalBorrowed || 0,
     18
   );
+  const { data: ltv } = useGetUserLtv();
 
   return (
     <Box className="flex flex-col h-full gap-4">
@@ -60,7 +62,7 @@ const BorrowValue = () => {
               lineHeight="22px"
               className="font-number"
             >
-              $4,100,200
+              $0
             </Typography>
             <Typography variant="body3" lineHeight="17px">
               USD
@@ -86,7 +88,7 @@ const BorrowValue = () => {
               lineHeight={"22px"}
               className="text-primary-500 font-number"
             >
-              %18.2
+              %0
             </Typography>
           </Box>
 
@@ -105,7 +107,7 @@ const BorrowValue = () => {
               lineHeight={"22px"}
               className="text-primary-500 font-number"
             >
-              %42.6
+              %{ltv?.currentLtv}
             </Typography>
           </Box>
         </Box>

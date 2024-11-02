@@ -55,11 +55,10 @@ export const getEstimateCollateralAmount = async ({
 }: {
   provider: WsProvider;
 } & EstimateCollateral): Promise<number | undefined> => {
-  const response = await provider.send<number>("getEstimateCollateralAmount", [
-    Number(borrowAsset),
-    Number(borrowAssetAmount),
-    Number(collateralAsset),
-  ]);
+  const response = await provider.send<number>(
+    "lending_getEstimateCollateralAmount",
+    [Number(borrowAsset), Number(borrowAssetAmount), Number(collateralAsset)]
+  );
 
   return response;
 };
