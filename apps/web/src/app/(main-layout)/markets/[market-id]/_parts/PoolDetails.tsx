@@ -62,17 +62,17 @@ const PoolDetails = () => {
         />
       ),
     },
-    {
-      label: "Liquidation:",
-      value: (
-        <ValueItemWrapper
-          value={formatBigNumbers(pool?.liquidationThreshold || "0", 2)}
-          iconName={assetMetaData?.symbol}
-          iconWidth={20}
-          iconHeight={20}
-        />
-      ),
-    },
+    // {
+    //   label: "Liquidation:",
+    //   value: (
+    //     <ValueItemWrapper
+    //       value={formatBigNumbers(pool?.liquidationThreshold || "0", 2)}
+    //       iconName={assetMetaData?.symbol}
+    //       iconWidth={20}
+    //       iconHeight={20}
+    //     />
+    //   ),
+    // },
   ];
 
   const items2: Array<ListItem> = [
