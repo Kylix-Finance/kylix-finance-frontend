@@ -78,7 +78,7 @@ export const Repay = () => {
     {
       label: "Borrow Apy",
       value: `${Number(formatUnit(borrowAssetData?.apy || "0", 18)).toFixed(2)} %`,
-      kylixValue: "%4",
+      kylixValue: "%0",
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -89,7 +89,7 @@ export const Repay = () => {
     {
       label: "Interest",
       value: "$ 24",
-      kylixValue: "12",
+      kylixValue: "0",
       tooltipTitle: "Interest tooltip title.",
       action: {
         title: "Claim",

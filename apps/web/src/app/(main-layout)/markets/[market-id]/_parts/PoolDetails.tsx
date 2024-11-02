@@ -79,12 +79,12 @@ const PoolDetails = () => {
     {
       label: "Supply APY:",
       value: "%1.2",
-      kylixValue: "%4",
+      kylixValue: "%0",
     },
     {
       label: "Borrow APY:",
       value: "%1.6",
-      kylixValue: "%4",
+      kylixValue: "%0",
     },
   ];
   return (
