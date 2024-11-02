@@ -11,6 +11,7 @@ export type ListItem = {
   action?: {
     title: string;
     onClick: React.MouseEventHandler<HTMLButtonElement>;
+    disabled?: boolean;
   };
 };
 interface Props {

@@ -16,12 +16,14 @@ const PoolDetails = () => {
   const params = useParams();
   const lendTokenId = params["market-id"] as string;
   const { pool } = usePool({ assetId: lendTokenId });
-
+  console.log("____pool", pool);
   const { assetMetaData } = useMetadata(lendTokenId);
   const { assetMetaData: baseAssetMetadata } = useMetadata(PRICE_BASE_ASSET_ID);
   const { assetPrice, formattedPrice } = useAssetPrice({
     assetId: lendTokenId,
   });
+  const borrowRate = formatUnit(pool?.borrowRate || 0, 4);
+  const supplyRate = formatUnit(pool?.supplyRate || 0, 4);
   const totalSupply =
     assetMetaData &&
     assetPrice &&
@@ -30,7 +32,6 @@ const PoolDetails = () => {
       BigInt(pool?.reserveBalance || 0) * BigInt(assetPrice || 0),
       assetMetaData.decimals + baseAssetMetadata.decimals
     );
-
   const totalBorrow =
     assetMetaData &&
     assetPrice &&
@@ -63,29 +64,29 @@ const PoolDetails = () => {
         />
       ),
     },
-    {
-      label: "Liquidation:",
-      value: (
-        <ValueItemWrapper
-          value={formatBigNumbers(pool?.liquidationThreshold || "0", 2)}
-          iconName={assetMetaData?.symbol}
-          iconWidth={20}
-          iconHeight={20}
-        />
-      ),
-    },
+    // {
+    //   label: "Liquidation:",
+    //   value: (
+    //     <ValueItemWrapper
+    //       value={formatBigNumbers(pool?.liquidationThreshold || "0", 2)}
+    //       iconName={assetMetaData?.symbol}
+    //       iconWidth={20}
+    //       iconHeight={20}
+    //     />
+    //   ),
+    // },
   ];
 
   const items2: Array<ListItem> = [
     {
       label: "Supply APY:",
-      value: "%1.2",
-      kylixValue: "%4",
+      value: "%" + supplyRate,
+      kylixValue: "%0",
     },
     {
       label: "Borrow APY:",
-      value: "%1.6",
-      kylixValue: "%4",
+      value: "%" + borrowRate,
+      kylixValue: "%0",
     },
   ];
   return (

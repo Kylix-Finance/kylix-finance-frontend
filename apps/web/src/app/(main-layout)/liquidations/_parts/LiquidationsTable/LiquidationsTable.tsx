@@ -80,17 +80,6 @@ const mockedData = [
   },
 ];
 
-const placeholderData = Array.from({ length: 5 }).map(() => ({
-  health: "",
-  collateral: "",
-  bidDenom: "",
-  tvl: "",
-  poolSize: "",
-  maxDiscount: "",
-  myBid: "",
-  id: "",
-}));
-
 type MarketsTableUIProps = {
   searchQuery?: string;
 };

@@ -11,18 +11,20 @@ import {
 import { Fragment } from "react";
 import { Headers } from "./THead";
 import TCell from "./TCell";
+import { TableStore } from "../../store";
 
 interface Props<Schema, ExtraFields extends string = string> {
   components?: Partial<CellValueComponents<Schema, ExtraFields>>;
   data: TableData<Schema>;
   headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
-  isLoading: boolean;
   isFetched: boolean;
+  isLoading: boolean;
   middleComponent?: React.FC;
   numeric?: Numeric<Schema>;
   onTRowClick?: OnTRowClick<Schema>;
   placeholderLength: number;
   rowSpacing?: string;
+  tableName: TableStore.TableName;
   tBody?: TBodyProps;
   tCellClassnames?: string;
   tRowProps?: TRowProps;
@@ -52,12 +54,17 @@ function TBody<Schema, ExtraFields extends string = string>({
 
   const finalData = data.length ? data : placeholderArr;
 
-  console.log(isFetched, isLoading);
-
   const shouldShowMainRows =
     (!isLoading && !isFetched) ||
     (isLoading && !isFetched) ||
     (isFetched && !!data.length);
+
+  console.log(
+    "hey:",
+    !isLoading && !isFetched,
+    isLoading && !isFetched,
+    isFetched && !!data.length
+  );
 
   const shouldShowNoDataRow = !isLoading && isFetched && !data.length;
 

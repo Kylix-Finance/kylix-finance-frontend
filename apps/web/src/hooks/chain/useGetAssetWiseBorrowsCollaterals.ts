@@ -46,19 +46,20 @@ export const useGetAssetWiseBorrowsCollaterals = ({
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
 
-  return useQuery({
+  const isEnabled = provider && !!activeAccount?.address;
+
+  const query = useQuery({
     queryKey: queryKeys.assetWiseBorrowsCollaterals(
       activeAccount?.address,
       poolId
     ),
-    queryFn:
-      provider && activeAccount?.address
-        ? () =>
-            getAssetWiseBorrowsCollaterals({
-              provider,
-              account: activeAccount.address,
-            })
-        : skipToken,
+    queryFn: isEnabled
+      ? () =>
+          getAssetWiseBorrowsCollaterals({
+            provider,
+            account: activeAccount.address,
+          })
+      : skipToken,
     select: (data) => {
       if (!poolId) return data;
       return {
@@ -77,6 +78,12 @@ export const useGetAssetWiseBorrowsCollaterals = ({
       };
     },
   });
+
+  return {
+    ...query,
+    isFetched: isEnabled === false ? true : query.isFetched,
+    isLoading: query.isLoading,
+  };
 };
 
 export const getAssetWiseBorrowsCollaterals = async ({
@@ -90,7 +97,7 @@ export const getAssetWiseBorrowsCollaterals = async ({
 
   const response = await provider.send<
     [RawAsset[], RawAsset[], number, number]
-  >("getAssetWiseBorrowsCollaterals", [account]);
+  >("lending_getAssetWiseBorrowsCollaterals", [account]);
 
   return {
     borrowedAssets: response[0]?.map((item) => ({

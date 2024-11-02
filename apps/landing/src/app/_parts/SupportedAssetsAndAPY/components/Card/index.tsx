@@ -7,7 +7,7 @@ const Card = ({ alt, isLaunched, src }: Asset) => {
       <div className="flex items-center flex-col justify-center p-9 rounded-md backdrop-blur-3xl bg-gradient-to-tl from-white/5 to-transparent aspect-square relative">
         <Image src={src} alt={alt} width={140} height={140} draggable="false" />
         {!isLaunched && (
-          <p className="text-white absolute bottom-9 md:bottom-[45px]">
+          <p className="text-white absolute bottom-9 md:bottom-[30px] text-xs">
             (Coming soon)
           </p>
         )}

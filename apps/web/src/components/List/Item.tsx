@@ -66,6 +66,7 @@ const Item = ({
             variant="outlined"
             disableElevation
             onClick={action.onClick}
+            disabled={action.disabled}
           >
             {action.title}
           </Button>

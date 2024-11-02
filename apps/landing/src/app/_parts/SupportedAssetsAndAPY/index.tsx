@@ -11,7 +11,7 @@ const SupportedAssetsAndAPY = () => {
       id={supportedAssetsData.id}
     >
       <div>
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-3 md:grid-rows-2">
           {supportedAssetsData.items.map((asset, index) => (
             <Card
               alt={asset.alt}

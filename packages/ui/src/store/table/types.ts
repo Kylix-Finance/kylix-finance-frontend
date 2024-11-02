@@ -7,6 +7,7 @@ export interface PaginationDefaultProps {
 }
 
 export type TableName =
+  | "borrow"
   | "latestLiquidation"
   | "liquidations"
   | "loanPositions"
