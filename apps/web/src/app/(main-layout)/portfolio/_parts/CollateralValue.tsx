@@ -94,7 +94,7 @@ const CollateralValue = () => {
             </Typography>
           </Box>
           <div>
-            <Button size="small" variant="outlined" disableElevation>
+            <Button size="small" variant="outlined" disableElevation disabled>
               <Typography
                 variant="caption"
                 fontWeight={600}
