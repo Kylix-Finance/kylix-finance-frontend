@@ -19,6 +19,8 @@ export const Repay = () => {
   const params = useParams();
   const collateralTokenId = params["market-id"] as string;
   const { pool } = usePool({ assetId: collateralTokenId });
+  const borrowRate = formatUnit(pool?.borrowRate || 0, 4);
+
   const [value, setValue] = useState("");
   const { assetMetaData } = useMetadata(collateralTokenId);
   const { assetMetaData: baseAssetMetadata } = useMetadata(BASE_ASSET_ID);
@@ -77,7 +79,7 @@ export const Repay = () => {
     },
     {
       label: "Borrow Apy",
-      value: `${Number(formatUnit(borrowAssetData?.apy || "0", 18)).toFixed(2)} %`,
+      value: "%" + borrowRate,
       kylixValue: "%0",
       valueClassName: "!text-[#4E5B72]",
     },

@@ -26,6 +26,9 @@ export const Supply = () => {
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
     assetId: lendTokenId,
   });
+
+  const supplyRate = formatUnit(pool?.supplyRate || 0, 4);
+
   const {
     formattedBalance: formattedKTokenBalance,
     isLoading: isFormattedKTokenBalanceLoading,
@@ -72,7 +75,7 @@ export const Supply = () => {
     },
     {
       label: "Supply APY",
-      value: "6.4 %",
+      value: "%" + supplyRate,
       kylixValue: "%0",
       valueClassName: "!text-[#4E5B72]",
     },
