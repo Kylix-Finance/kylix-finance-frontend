@@ -13,7 +13,7 @@ const placeholderData = Array.from({ length: 5 }).map(() => ({
   asset: "",
   borrowRate: "",
   collateral: false,
-  collateralQ: "",
+  "Collateral Factor": "",
   id: 0,
   supplyRate: "",
   utilization: "",
@@ -39,11 +39,11 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       })
       .map((item) => ({
         asset: item.asset,
-        collateralQ: `%${item.collateral_q}`,
-        collateral: false,
+        collateralQ: item.collateral_q,
+        collateral: true,
         utilization: formatPercentage(item.utilization, item.asset_decimals),
         borrowRate: formatPercentage(item.borrow_apy, item.asset_decimals),
-        supplyRate: `${Number(formatUnit(item.supply_apy, item.asset_decimals)).toFixed(2)}%`,
+        supplyRate: item.supply_apy,
         walletBalance: formatUnit(
           item.user_asset_balance.toString(),
           item.asset_decimals
@@ -51,6 +51,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         id: item.id,
       }));
   }, [data, searchQuery]);
+  console.log("_______________________________________________data", data);
 
   return (
     <Table<TableData[number]>
@@ -58,7 +59,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       hiddenTHeads={["actions"]}
       headers={{
         asset: "Asset",
-        collateralQ: "Collateral Q",
+        collateralQ: "Collateral Factor",
         utilization: "Utilization",
         borrowRate: "Borrow Rate",
         supplyRate: "Supply Rate",
@@ -85,13 +86,13 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         borrowRate: (item) => (
           <Box className="flex flex-col pl-4">
             <Typography variant="subtitle1">{item.borrowRate}</Typography>
-            <KylixChip />
+            <KylixChip value="0%" />
           </Box>
         ),
         supplyRate: (item) => (
           <Box className="flex flex-col pl-4">
             <Typography variant="subtitle1">{item.supplyRate}</Typography>
-            <KylixChip />
+            <KylixChip value="0%" />
           </Box>
         ),
         collateral: (item) => (
