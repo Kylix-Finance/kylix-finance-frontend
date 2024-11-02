@@ -50,7 +50,7 @@ const WaitingList = () => {
   };
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center  lg:max-w-[1900px]">
       <Section
         heading={{
           left: "Join",

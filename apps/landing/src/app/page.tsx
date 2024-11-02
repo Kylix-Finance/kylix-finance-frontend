@@ -29,7 +29,7 @@ export const metadata: Metadata = mergeMetadata(
 
 export default function page() {
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <Hero />
       <FeaturedPartners />
       <SmartLending />
@@ -38,7 +38,6 @@ export default function page() {
       <HowItWorks />
       <SecurityAndAudits />
       <WaitingList />
-      <Footer />
     </div>
   );
 }
