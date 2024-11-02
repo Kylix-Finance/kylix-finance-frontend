@@ -71,7 +71,7 @@ const CollateralValue = () => {
             variant="body1"
             lineHeight="20px"
           >
-            $ 0.25
+            $ 0
           </Typography>
         </Box>
         <Box className="flex  w-full py-3 px-4 border border-primary-800/10 rounded-md justify-between items-end">
@@ -90,8 +90,7 @@ const CollateralValue = () => {
               variant="body1"
               lineHeight="20px"
             >
-              258
-              <Typography variant="caption">KLX</Typography>
+              0<Typography variant="caption">KLX</Typography>
             </Typography>
           </Box>
           <div>

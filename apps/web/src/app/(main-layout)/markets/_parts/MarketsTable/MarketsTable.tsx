@@ -12,7 +12,7 @@ import { formatPercentage } from "~/utils";
 const placeholderData = Array.from({ length: 5 }).map(() => ({
   asset: "",
   borrowRate: "",
-  collateral: false,
+  collateral: true,
   "Collateral Factor": "",
   id: 0,
   supplyRate: "",
@@ -39,7 +39,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       })
       .map((item) => ({
         asset: item.asset,
-        collateralQ: item.collateral_q,
+        "Collateral Factor": item.collateral_q,
         collateral: true,
         utilization: formatPercentage(item.utilization, item.asset_decimals),
         borrowRate: formatPercentage(item.borrow_apy, item.asset_decimals),
@@ -51,7 +51,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         id: item.id,
       }));
   }, [data, searchQuery]);
-  console.log("_______________________________________________data", data);
+  console.log("___________________________data", data);
 
   return (
     <Table<TableData[number]>
@@ -59,7 +59,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       hiddenTHeads={["actions"]}
       headers={{
         asset: "Asset",
-        collateralQ: "Collateral Factor",
+        "Collateral Factor": "Collateral Factor",
         utilization: "Utilization",
         borrowRate: "Borrow Rate",
         supplyRate: "Supply Rate",
@@ -73,9 +73,9 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         asset: (item) => (
           <Asset helperText={item.asset} label={item.asset.toString()} />
         ),
-        collateralQ: (item) => (
+        "Collateral Factor": (item) => (
           <Typography variant="subtitle1" className="pl-4">
-            {item.collateralQ}
+            {item["Collateral Factor"]}
           </Typography>
         ),
         utilization: (item) => (

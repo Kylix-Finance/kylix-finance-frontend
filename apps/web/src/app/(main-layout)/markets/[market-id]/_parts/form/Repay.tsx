@@ -88,12 +88,13 @@ export const Repay = () => {
     },
     {
       label: "Interest",
-      value: "$ 24",
+      value: "$0",
       kylixValue: "0",
       tooltipTitle: "Interest tooltip title.",
       action: {
         title: "Claim",
         onClick: () => {},
+        disabled: true,
       },
       valueClassName: "!text-primary-500",
     },

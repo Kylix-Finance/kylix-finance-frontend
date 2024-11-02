@@ -8,11 +8,11 @@ import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetAssetWiseSupplies";
 import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
 
 const chartData = [
-  { label: "Deposit", color: "#45A996", value: 25 },
-  { label: "Borrowing", color: "#A67B97", value: 15 },
-  { label: "Governance", color: "#C9E0DE", value: 25 },
-  { label: "Stake", color: "#C8D2AE", value: 10 },
-  { label: "Pool", color: "#AEAED2", value: 20 },
+  { label: "Deposit", color: "#45A996", value: 0 },
+  { label: "Borrowing", color: "#A67B97", value: 0 },
+  { label: "Governance", color: "#C9E0DE", value: 0 },
+  { label: "Stake", color: "#C8D2AE", value: 0 },
+  { label: "Pool", color: "#AEAED2", value: 0 },
 ];
 
 const TotalValue = () => {
@@ -55,17 +55,13 @@ const TotalValue = () => {
         />
 
         <Box className="grid grid-cols-2 gap-4">
-          {finalSummaryData.map((item, index) => {
+          {finalSummaryData.map((item) => {
             return (
               <div key={item.label}>
                 <FinanceSummary
                   key={item.label}
                   label={item.label}
-                  value={
-                    index >= 2
-                      ? Math.floor(index * Math.random() * 1000)
-                      : item.value
-                  }
+                  value={item.value}
                   color={item.color}
                 />
               </div>
