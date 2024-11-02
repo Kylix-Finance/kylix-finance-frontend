@@ -62,29 +62,29 @@ const PoolDetails = () => {
         />
       ),
     },
-    {
-      label: "Liquidation:",
-      value: (
-        <ValueItemWrapper
-          value={formatBigNumbers(pool?.liquidationThreshold || "0", 2)}
-          iconName={assetMetaData?.symbol}
-          iconWidth={20}
-          iconHeight={20}
-        />
-      ),
-    },
+    // {
+    //   label: "Liquidation:",
+    //   value: (
+    //     <ValueItemWrapper
+    //       value={formatBigNumbers(pool?.liquidationThreshold || "0", 2)}
+    //       iconName={assetMetaData?.symbol}
+    //       iconWidth={20}
+    //       iconHeight={20}
+    //     />
+    //   ),
+    // },
   ];
 
   const items2: Array<ListItem> = [
     {
       label: "Supply APY:",
       value: "%1.2",
-      kylixValue: "%4",
+      kylixValue: "%0",
     },
     {
       label: "Borrow APY:",
       value: "%1.6",
-      kylixValue: "%4",
+      kylixValue: "%0",
     },
   ];
   return (

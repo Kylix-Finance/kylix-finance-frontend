@@ -59,7 +59,7 @@ export const Withdraw = () => {
     {
       label: "Supply APY",
       value: "6.4 %",
-      kylixValue: "%4",
+      kylixValue: "%0",
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -77,7 +77,7 @@ export const Withdraw = () => {
     {
       label: "Interest",
       value: "$ 24",
-      kylixValue: "12",
+      kylixValue: "0",
       tooltipTitle: "Interest tooltip title.",
       action: {
         title: "Claim",
