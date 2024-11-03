@@ -109,14 +109,19 @@ const Hero3D = () => {
               <br />
             </p>
             <div className="flex gap-4 z-50">
-              <Button color="secondary" disabled>
+              <Button
+                color="secondary"
+                onClick={() => {
+                  router.push("#smart-lending");
+                }}
+              >
                 Coming soon
               </Button>
               <Button
                 color="white"
                 variant="outline"
                 onClick={() => {
-                  router.push("#how-it-works");
+                  router.push("#markets-trends");
                 }}
               >
                 Learn more
@@ -150,7 +155,12 @@ const Hero3D = () => {
               <br />
             </p>
             <div className="flex gap-4 z-50">
-              <Button color="secondary" disabled>
+              <Button
+                color="secondary"
+                onClick={() => {
+                  router.push("#markets-trends");
+                }}
+              >
                 Learn more
               </Button>
             </div>
