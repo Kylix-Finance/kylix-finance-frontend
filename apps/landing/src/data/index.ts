@@ -127,7 +127,7 @@ export const securityAndAuditsData: Section<Security> = {
     {
       heading: "Work in progress...",
       description:
-        "Building and Testing. We are obsessed with protocol security to avoid faulty protocol state, including always ensuring the liquidity of your assets, preventing liquidation spirals and slashing faulty oracles.",
+        "Building and Testing. We are committed to protocol security to avoid faulty protocol states, including always ensuring the liquidity of your assets, preventing liquidation spirals and slashing faulty oracles.",
       icon: Shield,
     },
     {
