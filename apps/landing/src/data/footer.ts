@@ -26,10 +26,13 @@ export const footerData: Footer = {
       title: "About",
       items:
         data &&
-        data.slice(0, 3).map((item) => ({
-          label: item?.title || "",
-          link: item?.slug || "",
-        })),
+        data
+          .reverse()
+          .slice(0, 3)
+          .map((item) => ({
+            label: item?.title || "",
+            link: item?.slug || "",
+          })),
     },
     {
       title: "Resources",
@@ -38,10 +41,10 @@ export const footerData: Footer = {
         //  label: "Documentation",
         //  link: "todo",
         //},
-        {
-          label: "FAQ",
-          link: "todo",
-        },
+        //{
+        //  label: "FAQ",
+        //  link: "faq",
+        //},
         {
           label: "Whitepaper",
           link: "https://docsend.com/view/f7xa65w29ckkpz2j",
