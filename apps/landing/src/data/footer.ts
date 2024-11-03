@@ -26,7 +26,7 @@ export const footerData: Footer = {
       title: "About",
       items:
         data &&
-        data.slice(0, 3).map((item) => ({
+        data.map((item) => ({
           label: item?.title || "",
           link: item?.slug || "",
         })),
