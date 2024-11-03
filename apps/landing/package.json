@@ -23,6 +23,7 @@
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.0.2",
     "gray-matter": "^4.0.3",
+    "mdx": "^0.3.1",
     "next-mdx-remote": "^5.0.0",
     "pnpm": "^9.12.1",
     "rehype-autolink-headings": "^7.1.0",

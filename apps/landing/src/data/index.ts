@@ -29,13 +29,13 @@ export const smartLendingData: Section<SmartLending> = {
     right: "Natively Multi-Chain.",
   },
   description:
-    "Experience the future of cross-chain Lending with our new Hub&Spoke Technology, designed specifically to offer native multi-chain lending.",
+    "Experience real cross-chain Lending with our new Hub&Spoke Technology, designed specifically to offer native multi-chain lending.",
   items: [
     {
       to: "/",
       heading: "LIQUIDITY HUB",
       description:
-        "Kylix Finance is a decentralized, trustless intermediary protocol that allows users to easily lend, borrow and earn across multiple networks and blockchains without losing custody of their assets. The Kylix protocol allows users to lend and borrow assets between major blockchains without wrapped tokens, traditional bridging and at extremely competitive rates using a new architectural technology. ",
+        "Kylix Finance is a decentralized, trustless intermediary protocol that allows users to lend, borrow and earn across multiple networks and blockchains. The Kylix protocol allows users to lend and borrow assets between major blockchains without wrapped tokens or traditional bridging and at extremely competitive rates using an innovative architectural tech solution. ",
     },
     {
       to: "/",
@@ -90,27 +90,26 @@ export const howItsWorksData: Section<HowItsWork> = {
     left: "Why",
     right: "Kylix Finance?",
   },
-  description:
-    " A new-generation multi-chain DeFi Lending Platform with self-repaying loans and an on-chain marketplace for collateral liquidation.",
+  description: "",
   id: "how-it-works",
   items: [
     {
       id: "deposit",
-      heading: "DEPOSIT",
+      heading: "HUB & SPOKE TECHNOLOGY",
       description:
-        "Deposit, lend and earn an intererst from your assets from any chain. Make your assets work for you.",
+        "Deposit, lend and earn an intererst from your native assets from any chain. Make your assets work for you  — no bridging required!",
     },
     {
       id: "convert",
-      heading: "Borrow",
+      heading: "DEPOSIT AND BORROW ",
       description:
         "Borrow, collateralise and repay on any chain, even if you have deposited from a different one!",
     },
     {
       id: "borrow",
-      heading: "EARN",
+      heading: "LIQUIDATE AND EARN",
       description:
-        "Earn interest on your deposits and loans. Earn rewards for providing liquidity. </br> Earn assets below market prices by participating in the collateral marketplace.",
+        "Earn interest on your deposits and loans. Earn rewards for providing liquidity. Earn assets below market prices by participating in the collateral marketplace.",
       image: BorrowImage,
     },
   ],
@@ -118,28 +117,29 @@ export const howItsWorksData: Section<HowItsWork> = {
 export const securityAndAuditsData: Section<Security> = {
   header: "Security",
   heading: {
-    left: "Security",
-    right: "at the Forefront",
+    left: "COMING",
+    right: "SOON",
   },
-  description: "New Lending technology to benefit the DeFi ecosystem.",
+  description:
+    "Working hard to bring you the best features together with the best security.",
   id: "security-and-audits",
   items: [
     {
-      heading: "Collateral Scoring",
+      heading: "Work in progress...",
       description:
-        "Collateral Scoring, a new feature that evaluates the risk of a collateral asset and the most suitable credit allowance for an user in order to minimise liquidation risks.",
+        "Building and Testing. We are obsessed with protocol security to avoid faulty protocol state, including always ensuring the liquidity of your assets, preventing liquidation spirals and slashing faulty oracles.",
       icon: Shield,
     },
     {
-      heading: "Obsessed With Protocol Security",
+      heading: "Testnet Ready Q1 2025",
       description:
-        "We are obsessed with protocol security to avoid faulty protocol state, including always ensuring the liquidity of your assets, preventing liquidation spirals and slashing faulty oracles.",
+        "We will annount the Testnet launch date soon. Stay tuned and sign up for our newsletter to be the first to partecipate our private beta-testing.",
       icon: Focus,
     },
     {
-      heading: "Audited by the Bests",
+      heading: "Live in Q2 2025",
       description:
-        "Comprehensive and extensive security audits by industry leading auditers.",
+        "We are seeing to be live on March 2025. Looking forward to see you on board and meanwhile please follow us on our social media channels to stay updated.",
       icon: Check,
     },
   ],
@@ -161,18 +161,17 @@ export const marketTrendsData: Section<MarketTrend> = {
       image: "/assets/images/market-trends/0.png",
       items: [
         {
-          title: "Forget About Bridges and Wrapped Assets",
+          title: "Forget Bridges and Wrapped Assets",
           description:
             "Kylix Finance protocol design removes the need for bridges and wrapped tokens, for EVM and non-EVM chains.",
         },
         {
-          title:
-            "Power up DeFi Lending with composability and the latest technology.",
+          title: "Power up next-generation Lending",
           description:
-            "Self-Repaying Loans, A marketplace for collateral liquidation, collateral scoring and a new generation of lending pool powered by new polynomial interest rates formulas.",
+            "Become a liquidator with our Collateral Liquidation Marketplace, lend without risk with Self-Repaying Loans, enjoy Collateral Scoring and new Lending Pools powered by new generation interest rate formulas.",
         },
         {
-          title: "Automatic Rewards and an Elaborated Tokenomics",
+          title: "Enjoy Automatic Rewards and a deflationary Tokenomics",
           description:
             "An automated treasury that distributes rewards to incentivize lenders to provide liquidity and automatically burns the native token to apply deflationary pressure to the network as borrowing volume increases.",
         },

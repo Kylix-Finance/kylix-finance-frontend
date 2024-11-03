@@ -151,7 +151,7 @@ const Hero3D = () => {
             </p>
             <div className="flex gap-4 z-50">
               <Button color="secondary" disabled>
-                Launch App
+                Learn more
               </Button>
             </div>
           </motion.div>
