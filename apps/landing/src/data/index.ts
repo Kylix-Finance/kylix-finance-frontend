@@ -115,7 +115,7 @@ export const howItsWorksData: Section<HowItsWork> = {
   ],
 };
 export const securityAndAuditsData: Section<Security> = {
-  header: "Security",
+  header: "Roadmap",
   heading: {
     left: "COMING",
     right: "SOON",
@@ -133,13 +133,13 @@ export const securityAndAuditsData: Section<Security> = {
     {
       heading: "Testnet Ready Q1 2025",
       description:
-        "We will annount the Testnet launch date soon. Stay tuned and sign up for our newsletter to be the first to partecipate our private beta-testing.",
+        "We will be announcing the Testnet launch date soon. Stay tuned and sign up for our newsletter to be the first to participate in our private beta testing.",
       icon: Focus,
     },
     {
       heading: "Live in Q2 2025",
       description:
-        "We are seeing to be live on March 2025. Looking forward to see you on board and meanwhile please follow us on our social media channels to stay updated.",
+        "We will go live in March 2025. We look forward to seeing you on board, and in the meantime, please follow us on our social media channels to keep up to date.",
       icon: Check,
     },
   ],
