@@ -20,9 +20,9 @@ const KylixChip = ({
     width: 10,
   },
 }: Props) => {
-  const finalValue = useMemo(() => {
-    return `${(1 + Math.random() * 10).toFixed()}%`;
-  }, []);
+  // const finalValue = useMemo(() => {
+  //   return `${(1 + Math.random() * 10).toFixed()}%`;
+  // }, []);
   return (
     <Box
       sx={{
@@ -44,7 +44,7 @@ const KylixChip = ({
         className
       )}
     >
-      <Typography variant="caption">{value || finalValue}</Typography>
+      <Typography variant="caption">{value}</Typography>
       <Image
         draggable="false"
         src="/kylix-chip.svg"

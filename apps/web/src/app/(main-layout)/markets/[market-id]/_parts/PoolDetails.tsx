@@ -16,12 +16,14 @@ const PoolDetails = () => {
   const params = useParams();
   const lendTokenId = params["market-id"] as string;
   const { pool } = usePool({ assetId: lendTokenId });
-
+  console.log("____pool", pool);
   const { assetMetaData } = useMetadata(lendTokenId);
   const { assetMetaData: baseAssetMetadata } = useMetadata(PRICE_BASE_ASSET_ID);
   const { assetPrice, formattedPrice } = useAssetPrice({
     assetId: lendTokenId,
   });
+  const borrowRate = formatUnit(pool?.borrowRate || 0, 4);
+  const supplyRate = formatUnit(pool?.supplyRate || 0, 4);
   const totalSupply =
     assetMetaData &&
     assetPrice &&
@@ -78,12 +80,12 @@ const PoolDetails = () => {
   const items2: Array<ListItem> = [
     {
       label: "Supply APY:",
-      value: "%1.2",
+      value: "%" + supplyRate,
       kylixValue: "%0",
     },
     {
       label: "Borrow APY:",
-      value: "%1.6",
+      value: "%" + borrowRate,
       kylixValue: "%0",
     },
   ];

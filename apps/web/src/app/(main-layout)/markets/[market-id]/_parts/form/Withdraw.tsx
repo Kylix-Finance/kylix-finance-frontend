@@ -3,7 +3,12 @@ import { ListItem, notify, TokenIcon } from "~/components";
 import { Form } from "./Form";
 import { useState } from "react";
 import { useParams } from "next/navigation";
-import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
+import {
+  formatUnit,
+  parseUnit,
+  useBalance,
+  useMetadata,
+} from "@repo/onchain-utils";
 import { useWithdraw } from "~/hooks/chain/useWithdraw";
 import { usePool } from "~/hooks/chain/usePool";
 import { Box, Typography } from "@mui/material";
@@ -23,6 +28,8 @@ export const Withdraw = () => {
     customDecimals: assetMetaData?.decimals,
     enabled: !!assetMetaData && !!pool,
   });
+  const supplyRate = formatUnit(pool?.supplyRate || 0, 4);
+
   const handleClick = () => {
     mutate(
       {
@@ -58,7 +65,7 @@ export const Withdraw = () => {
     },
     {
       label: "Supply APY",
-      value: "6.4 %",
+      value: "%" + supplyRate,
       kylixValue: "%0",
       valueClassName: "!text-[#4E5B72]",
     },
@@ -76,12 +83,13 @@ export const Withdraw = () => {
     },
     {
       label: "Interest",
-      value: "$ 24",
+      value: "$0",
       kylixValue: "0",
       tooltipTitle: "Interest tooltip title.",
       action: {
         title: "Claim",
         onClick: () => {},
+        disabled: true,
       },
       valueClassName: "!text-primary-500",
     },

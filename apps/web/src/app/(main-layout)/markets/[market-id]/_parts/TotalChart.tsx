@@ -7,6 +7,7 @@ import { vaultData } from "~/mock/chart";
 import { MoreHoriz, CalendarMonth } from "@mui/icons-material";
 import { usePoolsData } from "~/hooks/api/usePoolsData";
 import { useParams } from "next/navigation";
+import ModernMultiLineChart from "~/components/Charts/ModernMultiLineChart";
 
 const TotalChart = () => {
   const { "market-id": marketId } = useParams<{ "market-id": string }>();

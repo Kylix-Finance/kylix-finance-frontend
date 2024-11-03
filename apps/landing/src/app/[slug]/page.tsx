@@ -28,7 +28,7 @@ export default async function page({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <article className="py-8 px-4 text-white mt-16 backdrop-blur-3xl bg-gradient-to-tl from-white/5 to-transparent flex flex-col items-center sm:py-12 md:py-16 lg:py-20">
+    <article className="py-8 px-4 text-white mt-16 flex flex-col items-center sm:py-12 md:py-16 lg:py-20 relative">
       <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold mb-4 text-primary-500 text-center">
         {post.title}
       </h1>

@@ -34,6 +34,8 @@ export const Borrow = () => {
   });
 
   const { pool } = usePool({ assetId: supplyTokenId });
+  const borrowRate = formatUnit(pool?.borrowRate || 0, 4);
+
   const maxTotalSupply = formatUnit(
     BigInt(pool?.reserveBalance || 0),
     supplyAssetMetaData?.decimals
@@ -42,7 +44,6 @@ export const Borrow = () => {
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
     { poolId: BASE_ASSET_ID, collateralId: Number(supplyTokenId) }
   );
-  console.log("______assetWiseBorrowCollateral", assetWiseBorrowCollateral);
 
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 
@@ -85,7 +86,7 @@ export const Borrow = () => {
     },
     {
       label: "Borrow Apy",
-      value: `${Number(formatUnit(borrowAssetData?.apy || "0", 18)).toFixed(2)} %`,
+      value: "%" + borrowRate,
       kylixValue: "%0",
       valueClassName: "!text-[#4E5B72]",
     },
@@ -96,12 +97,13 @@ export const Borrow = () => {
     },
     {
       label: "Interest",
-      value: "$ 24",
+      value: "$0",
       kylixValue: "0",
       tooltipTitle: "Interest tooltip title.",
       action: {
         title: "Claim",
         onClick: () => {},
+        disabled: true,
       },
       valueClassName: "!text-primary-500",
     },

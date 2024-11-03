@@ -68,7 +68,7 @@ const Borrowed = () => {
     <Table<TableData[number]>
       isFetched={isFetched}
       placeholderLength={3}
-      isLoading={isLoading || !borrowedWithMetadata}
+      isLoading={isLoading}
       tCellClassnames={"!p-3"}
       rowSpacing="10px"
       hasPagination={false}
@@ -81,7 +81,7 @@ const Borrowed = () => {
         actions: "Action",
       }}
       hiddenTHeads={["actions"]}
-      tableName="supply"
+      tableName="borrow"
       components={{
         asset: (item) => <Asset label={item.asset} helperText="" />,
         apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,

@@ -114,6 +114,7 @@ export function Table<Schema, ExtraFields extends string = string>({
           isLoading={isLoading}
           isFetched={isFetched}
           middleComponent={middleComponent}
+          tableName={tableName}
           numeric={numeric}
           rowSpacing={rowSpacing}
           tBody={tBodyProps}
