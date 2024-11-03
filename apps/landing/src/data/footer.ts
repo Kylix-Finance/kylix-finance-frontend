@@ -34,10 +34,10 @@ export const footerData: Footer = {
     {
       title: "Resources",
       items: [
-        {
-          label: "Token",
-          link: "todo",
-        },
+        //{
+        //  label: "Documentation",
+        //  link: "todo",
+        //},
         {
           label: "FAQ",
           link: "todo",
