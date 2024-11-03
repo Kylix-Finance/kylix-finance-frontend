@@ -5,9 +5,11 @@
 @layer base {
   html {
     scroll-behavior: smooth !important;
+    height: 100%;
   }
   body {
     position: relative;
+    height: 100%;
   }
 }
 

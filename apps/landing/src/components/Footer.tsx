@@ -4,7 +4,7 @@ import { footerData } from "~/data/footer";
 
 const Footer = () => {
   return (
-    <div className="absolute w-full text-white flex flex-col justify-center">
+    <div className="w-full text-white flex flex-col justify-center">
       <div className="footer-top-border" />
       <div className="w-full h-full py-12 px-5 lg:px-36 footer-bg">
         <div className="flex flex-col lg:flex-row w-full justify-between mb-10">
