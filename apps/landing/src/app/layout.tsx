@@ -26,6 +26,7 @@ export default function RootLayout({
       lang="en"
       className={`${fonts.migha.variable} ${fonts.poppins.variable}`}
     >
+      
       <body className="font-body bg-secondary-500 relative w-full h-full flex flex-col">
         <BackGround />
         <Header />
