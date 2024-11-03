@@ -50,6 +50,7 @@ const keys = {
   GET_ASSET_PRICE: "GET_ASSET_PRICE",
   GET_USER_LTV: "GET_USER_LTV",
   ESTIMATE_COLLATERAL: "ESTIMATE_COLLATERAL",
+  INTEREST_RATE: "INTEREST_RATE",
 };
 
 type ChartScale = "1m" | "5m" | "15m" | "1h" | "12h" | "1d";
@@ -116,4 +117,5 @@ export const queryKeys = {
     keys.GET_USER_LTV,
     account,
   ],
+  interestRate: () => [baseKey, keys.INTEREST_RATE],
 };

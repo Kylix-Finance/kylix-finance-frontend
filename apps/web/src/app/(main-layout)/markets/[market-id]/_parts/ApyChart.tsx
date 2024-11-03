@@ -10,6 +10,8 @@ import TransactionForm from "./TransactionForm";
 import { subWeeks } from "date-fns";
 import { usePoolsData } from "~/hooks/api/usePoolsData";
 import { useParams } from "next/navigation";
+import { useInterestRate } from "~/hooks/api/useInterestRate";
+import ModernMultiLineChart from "~/components/Charts/ModernMultiLineChart";
 
 const ApyChart = () => {
   // const [checked, setChecked] = useState(false);
@@ -20,12 +22,12 @@ const ApyChart = () => {
 
   const { "market-id": marketId } = useParams<{ "market-id": string }>();
 
-  const { data } = usePoolsData("101");
+  const { data } = useInterestRate();
 
   return (
     <Card variant="outlined">
       <Box className="flex justify-between items-center mb-3">
-        <Box className="flex gap-6 mt-3">
+        {/* <Box className="flex gap-6 mt-3">
           <Box className="flex gap-2 items-center">
             <Box className="w-6 border-2 border-primary-500 rounded-md"></Box>
             <Typography variant="body2">Borrow APY</Typography>
@@ -34,7 +36,7 @@ const ApyChart = () => {
             <Box className="w-6 border-2  border-secondary-500 rounded-md"></Box>
             <Typography variant="body2">Supply APY</Typography>
           </Box>
-        </Box>
+        </Box> */}
         {/* <Box className="flex gap-3">
           <Button
             onClick={() => setChecked((prev) => !prev)}
@@ -53,27 +55,28 @@ const ApyChart = () => {
         </Box> */}
       </Box>
 
-      <MultiLineChart
-        scale="1d"
+      <ModernMultiLineChart
         datasets={[
           {
+            label: "Borrow APR",
             data: data,
             borderColor: palette.primary.main,
             backgroundColor: palette.primary.main,
-            tension: 0.5,
+            tension: 0,
             parsing: {
-              xAxisKey: "time",
-              yAxisKey: "borrow",
+              xAxisKey: "utilization_rate",
+              yAxisKey: "borrow_apy",
             },
           },
           {
+            label: "Earn APR",
             data: data,
             borderColor: palette.secondary.main,
             backgroundColor: palette.secondary.main,
-            tension: 0.5,
+            tension: 0,
             parsing: {
-              xAxisKey: "time",
-              yAxisKey: "supply",
+              xAxisKey: "utilization_rate",
+              yAxisKey: "supply_apy",
             },
           },
         ]}
