@@ -212,7 +212,7 @@ export const featuredPartnersData: Section<FeaturedPartners> = {
     },
     {
       link: "/",
-      name: "Hercle Financial",
+      name: "Hercle",
       icon: HercleFinancial,
     },
     {
