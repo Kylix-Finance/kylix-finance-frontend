@@ -26,7 +26,7 @@ export const footerData: Footer = {
       title: "About",
       items:
         data &&
-        data.map((item) => ({
+        data.reverse().map((item) => ({
           label: item?.title || "",
           link: item?.slug || "",
         })),
@@ -38,10 +38,10 @@ export const footerData: Footer = {
         //  label: "Documentation",
         //  link: "todo",
         //},
-        {
-          label: "FAQ",
-          link: "todo",
-        },
+        //{
+        //  label: "FAQ",
+        //  link: "faq",
+        //},
         {
           label: "Whitepaper",
           link: "https://docsend.com/view/f7xa65w29ckkpz2j",

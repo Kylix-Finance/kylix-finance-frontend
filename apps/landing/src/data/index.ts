@@ -103,7 +103,7 @@ export const howItsWorksData: Section<HowItsWork> = {
       id: "convert",
       heading: "DEPOSIT AND BORROW ",
       description:
-        "Borrow, collateralise and repay on any chain, even if you have deposited from a different one!",
+        "Borrow, secure with collateral, and settle debts across any chain, regardless of which One your deposit comes from.",
     },
     {
       id: "borrow",
@@ -121,7 +121,7 @@ export const securityAndAuditsData: Section<Security> = {
     right: "SOON",
   },
   description:
-    "Working hard to bring you the best features together with the best security.",
+    "Working hard to bring you the best features, paired with top-notch security.",
   id: "security-and-audits",
   items: [
     {
@@ -171,7 +171,7 @@ export const marketTrendsData: Section<MarketTrend> = {
             "Become a liquidator with our Collateral Liquidation Marketplace, lend without risk with Self-Repaying Loans, enjoy Collateral Scoring and new Lending Pools powered by new generation interest rate formulas.",
         },
         {
-          title: "Enjoy Automatic Rewards and a deflationary Tokenomics",
+          title: "Autonomous Rewards and a Deflationary Tokenomic.",
           description:
             "An automated treasury that distributes rewards to incentivize lenders to provide liquidity and automatically burns the native token to apply deflationary pressure to the network as borrowing volume increases.",
         },
