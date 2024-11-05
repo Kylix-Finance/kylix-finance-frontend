@@ -18,8 +18,8 @@ const FeaturedPartners = () => {
             key={link}
             className="w-32 lg:w-28 h-20 lg:h-32 flex flex-col items-center justify-center lg:gap-9"
           >
-            <Icon />
-            <p className="text-sm lg:text-lg font-medium text-white leading-loose lg:leading-3 -mt-1 text-center">
+            <Icon className="h-44" />
+            <p className="w-44 text-sm lg:text-lg font-medium text-white leading-loose lg:leading-5 -mt-1 text-center">
               {name}
             </p>
           </Link>
