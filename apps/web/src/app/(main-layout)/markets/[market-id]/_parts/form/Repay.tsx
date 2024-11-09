@@ -11,8 +11,8 @@ import {
   useBalance,
   useMetadata,
 } from "@repo/onchain-utils";
-import { useRepay } from "~/hooks/chain/useRepay";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
+import { useSimpleRepay } from "~/hooks/chain/useSimpleRepay";
 
 export const Repay = () => {
   const params = useParams();
@@ -23,7 +23,7 @@ export const Repay = () => {
   const [value, setValue] = useState("");
   const { assetMetaData } = useMetadata(tokenId);
 
-  const { mutate, isPending } = useRepay();
+  const { mutate, isPending } = useSimpleRepay();
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
     assetId: tokenId,
   });
@@ -45,7 +45,6 @@ export const Repay = () => {
       {
         asset: tokenId,
         balance: parseUnit(value, assetMetaData.decimals),
-        collateralAsset: tokenId,
       },
       {
         onSuccess: ({ blockNumber }) => {
