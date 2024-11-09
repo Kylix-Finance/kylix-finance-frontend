@@ -1,6 +1,6 @@
 "use client";
 
-import { ListItem, notify, TokenIcon } from "~/components";
+import { ListItem, notify } from "~/components";
 import { Form } from "./Form";
 import { useState } from "react";
 import {
@@ -12,39 +12,30 @@ import {
 import { useSupply } from "~/hooks/chain/useSupply";
 import { useParams } from "next/navigation";
 import { usePool } from "~/hooks/chain/usePool";
-import { Box, Typography } from "@mui/material";
 import ValueItemWrapper from "./ValueItemWrapper";
-import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetAssetWiseSupplies";
 
 export const Supply = () => {
   const params = useParams();
-  const lendTokenId = params["market-id"] as string;
-  const { pool } = usePool({ assetId: lendTokenId });
+  const tokenId = params["market-id"] as string;
+  const { pool } = usePool({ assetId: tokenId });
   const [value, setValue] = useState("");
-  const { assetMetaData } = useMetadata(lendTokenId);
+  const { assetMetaData } = useMetadata(tokenId);
   const { mutate, isPending } = useSupply();
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
-    assetId: lendTokenId,
+    assetId: tokenId,
   });
 
   const supplyRate = formatUnit(pool?.supplyRate || 0, 4);
 
-  const {
-    formattedBalance: formattedKTokenBalance,
-    isLoading: isFormattedKTokenBalanceLoading,
-  } = useBalance({
+  const { formattedBalance: formattedKTokenBalance } = useBalance({
     assetId: pool?.id,
     customDecimals: assetMetaData?.decimals,
     enabled: !!assetMetaData && !!pool,
   });
-  const { data: AssetWiseData } = useGetAssetWiseSupplies({
-    poolId: lendTokenId,
-  });
-  console.log("_____PPPPP", AssetWiseData);
   const handleClick = () => {
     mutate(
       {
-        asset: lendTokenId,
+        asset: tokenId,
         balance: parseUnit(value, Number(assetMetaData?.decimals)),
       },
       {
@@ -107,7 +98,7 @@ export const Supply = () => {
 
   return (
     <Form
-      assetId={lendTokenId}
+      assetId={tokenId}
       items={items}
       decimals={assetMetaData?.decimals}
       setValue={setValue}

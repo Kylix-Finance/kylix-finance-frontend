@@ -28,18 +28,12 @@ const PoolDetails = () => {
     assetMetaData &&
     assetPrice &&
     baseAssetMetadata &&
-    formatUnit(
-      BigInt(pool?.reserveBalance || 0) * BigInt(assetPrice || 0),
-      assetMetaData.decimals + baseAssetMetadata.decimals
-    );
+    formatUnit(BigInt(pool?.reserveBalance || 0), assetMetaData.decimals);
   const totalBorrow =
     assetMetaData &&
     assetPrice &&
     baseAssetMetadata &&
-    formatUnit(
-      BigInt(pool?.borrowedBalance || 0) * BigInt(assetPrice || 0),
-      assetMetaData.decimals + baseAssetMetadata.decimals
-    );
+    formatUnit(BigInt(pool?.borrowedBalance || 0), assetMetaData.decimals);
 
   const items: Array<ListItem> = [
     {
