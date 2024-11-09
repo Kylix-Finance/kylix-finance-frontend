@@ -12,11 +12,12 @@ const Supplied = () => {
     isLoading,
     isFetched,
   } = useGetAssetWiseSupplies();
+
   const supplies:
     | TableData
     | { asset: string; apy: string; balance: string; supplied: string }[]
     | undefined = assetWiseSupplies?.suppliedAssets.map?.((item) => ({
-    apy: formatUnit(item.apy, 18),
+    apy: item.apy,
     asset: item.assetSymbol,
     balance: formatBigNumbers(formatUnit(item.balance, item.decimals), 4),
     supplied: formatBigNumbers(formatUnit(item.supplied, item.decimals), 4),
@@ -42,11 +43,7 @@ const Supplied = () => {
       tableName="supply"
       components={{
         asset: (item) => <Asset label={item.asset} helperText="" />,
-        apy: (item) => (
-          <Typography variant="subtitle1">
-            {Number(item.apy).toFixed(2)}%
-          </Typography>
-        ),
+        apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,
         balance: (item) => (
           <Typography variant="subtitle1">{item.balance}</Typography>
         ),

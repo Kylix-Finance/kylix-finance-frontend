@@ -19,14 +19,18 @@ const TotalValue = () => {
   const { data: assetWiseBorrowCollateral } =
     useGetAssetWiseBorrowsCollaterals();
   const { data: assetWiseSupplies } = useGetAssetWiseSupplies();
-  const totalSupplied = formatBigNumbers(
-    formatUnit(assetWiseSupplies?.totalSupplied || 0, 18),
-    2
+  const rawTotalSupplied = formatUnit(
+    assetWiseSupplies?.totalSupplied || 0,
+    18
   );
-  const totalBorrowed = formatBigNumbers(
-    formatUnit(assetWiseBorrowCollateral?.totalBorrowed || 0, 18),
-    2
+  const totalSupplied = formatBigNumbers(rawTotalSupplied, 2);
+
+  const rawTotalBorrowed = formatUnit(
+    assetWiseBorrowCollateral?.totalBorrowed || 0,
+    18
   );
+
+  const totalBorrowed = formatBigNumbers(rawTotalBorrowed, 2);
   const summaryData = [
     {
       label: "Deposit",
@@ -44,7 +48,9 @@ const TotalValue = () => {
   return (
     <Box className="flex flex-col h-full">
       <Typography variant="h4" marginBottom="36px">
-        {numToLocalString(Number(totalSupplied) + Number(totalBorrowed))}{" "}
+        {numToLocalString(
+          Number(rawTotalBorrowed || 0) + Number(rawTotalSupplied || 0)
+        )}{" "}
         <Typography variant="body3">USD</Typography>
       </Typography>
       <Box className="flex mb-auto gap-6">

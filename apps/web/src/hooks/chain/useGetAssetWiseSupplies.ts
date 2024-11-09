@@ -10,7 +10,7 @@ interface Asset {
   decimals: number;
   assetIcon: string;
   balance: bigint;
-  apy: bigint;
+  apy: string;
   supplied: bigint;
 }
 
@@ -21,7 +21,7 @@ type RawAsset = {
   decimals: number;
   asset_icon: number[];
   balance: bigint;
-  apy: bigint;
+  apy: string;
   supplied: bigint;
 };
 
@@ -88,7 +88,7 @@ export const getAssetWiseSupplies = async ({
       decimals: item.decimals,
       assetIcon: decodeArrayToString(item.asset_icon),
       balance: BigInt(item.balance),
-      apy: BigInt(item.apy),
+      apy: item.apy,
       supplied: BigInt(item.supplied),
     })),
     totalSupplied: BigInt(response?.[1] || 0),
