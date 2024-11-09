@@ -88,7 +88,7 @@ export const getAssetWiseSupplies = async ({
       decimals: item.decimals,
       assetIcon: decodeArrayToString(item.asset_icon),
       balance: BigInt(item.balance),
-      apy: BigInt(item.apy),
+      apy: item.apy,
       supplied: BigInt(item.supplied),
     })),
     totalSupplied: BigInt(response?.[1] || 0),

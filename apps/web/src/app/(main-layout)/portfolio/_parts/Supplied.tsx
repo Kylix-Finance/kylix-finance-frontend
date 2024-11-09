@@ -12,6 +12,7 @@ const Supplied = () => {
     isLoading,
     isFetched,
   } = useGetAssetWiseSupplies();
+
   const supplies:
     | TableData
     | { asset: string; apy: string; balance: string; supplied: string }[]
