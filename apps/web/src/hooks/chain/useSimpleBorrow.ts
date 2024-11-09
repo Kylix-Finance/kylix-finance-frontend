@@ -39,6 +39,12 @@ export const useSimpleBorrow = () => {
           assetId: borrowPoolId,
         }),
       });
+      queryClient.refetchQueries({
+        queryKey: queryKeys.balance({
+          address: activeAccount?.address,
+          assetId: borrowPoolId,
+        }),
+      });
     },
   });
 };
