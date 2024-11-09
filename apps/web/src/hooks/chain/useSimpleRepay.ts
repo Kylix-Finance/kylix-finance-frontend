@@ -40,6 +40,9 @@ export const useSimpleRepay = () => {
     },
     onSuccess: (_, { asset }) => {
       queryClient.refetchQueries({
+        queryKey: queryKeys.poolData(asset),
+      });
+      queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,
           assetId: asset,

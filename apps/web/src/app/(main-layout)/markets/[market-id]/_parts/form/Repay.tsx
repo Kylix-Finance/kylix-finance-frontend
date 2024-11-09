@@ -35,7 +35,7 @@ export const Repay = () => {
   });
 
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
-    { poolId: tokenId, collateralId: Number(tokenId) }
+    { poolId: tokenId }
   );
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 

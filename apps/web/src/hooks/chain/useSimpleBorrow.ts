@@ -31,10 +31,7 @@ export const useSimpleBorrow = () => {
       }),
     onSuccess: (_, { borrowPoolId }) => {
       queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: borrowPoolId,
-        }),
+        queryKey: queryKeys.poolData(borrowPoolId),
       });
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
