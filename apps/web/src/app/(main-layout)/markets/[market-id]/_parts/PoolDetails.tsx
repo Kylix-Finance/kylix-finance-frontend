@@ -1,6 +1,5 @@
 "use client";
 import { Box, Card, Typography } from "@mui/material";
-import Image from "next/image";
 import Link from "next/link";
 import { Icons } from "~/assets/svgs";
 import { List, ListItem, TokenIcon } from "~/components";
@@ -9,30 +8,23 @@ import { usePool } from "~/hooks/chain/usePool";
 import { formatBigNumbers, formatUnit, useMetadata } from "@repo/onchain-utils";
 import { Skeleton } from "@repo/ui";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
-import { PRICE_BASE_ASSET_ID } from "@repo/shared";
 import ValueItemWrapper from "./form/ValueItemWrapper";
 
 const PoolDetails = () => {
   const params = useParams();
   const lendTokenId = params["market-id"] as string;
   const { pool } = usePool({ assetId: lendTokenId });
-  console.log("____pool", pool);
   const { assetMetaData } = useMetadata(lendTokenId);
-  const { assetMetaData: baseAssetMetadata } = useMetadata(PRICE_BASE_ASSET_ID);
-  const { assetPrice, formattedPrice } = useAssetPrice({
+  const { formattedPrice } = useAssetPrice({
     assetId: lendTokenId,
   });
   const borrowRate = formatUnit(pool?.borrowRate || 0, 4);
   const supplyRate = formatUnit(pool?.supplyRate || 0, 4);
   const totalSupply =
     assetMetaData &&
-    assetPrice &&
-    baseAssetMetadata &&
     formatUnit(BigInt(pool?.reserveBalance || 0), assetMetaData.decimals);
   const totalBorrow =
     assetMetaData &&
-    assetPrice &&
-    baseAssetMetadata &&
     formatUnit(BigInt(pool?.borrowedBalance || 0), assetMetaData.decimals);
 
   const items: Array<ListItem> = [
