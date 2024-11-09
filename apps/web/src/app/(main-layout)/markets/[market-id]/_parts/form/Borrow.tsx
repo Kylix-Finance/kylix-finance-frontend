@@ -2,7 +2,6 @@
 import { ListItem, notify } from "~/components";
 import { Form } from "./Form";
 import { useState } from "react";
-import { useBorrow } from "~/hooks/chain/useBorrow";
 import { useParams } from "next/navigation";
 import {
   formatBigNumbers,
@@ -11,54 +10,43 @@ import {
   useBalance,
   useMetadata,
 } from "@repo/onchain-utils";
-import { useQuickBorrow } from "~/hooks/chain/useQuickBorrow";
-import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
-import { useGetEstimateCollateralAmount } from "~/hooks/chain/useGetEstimateCollateralAmount";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
-import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
 import { usePool } from "~/hooks/chain/usePool";
-const BASE_ASSET_ID = "1";
+import { useSimpleBorrow } from "~/hooks/chain/useSimpleBorrow";
 
 export const Borrow = () => {
   const [value, setValue] = useState("");
   const params = useParams();
-  const supplyTokenId = params["market-id"] as string;
-  const { mutate, isPending } = useQuickBorrow();
-  const { assetMetaData: borrowAssetMetaData } = useMetadata(BASE_ASSET_ID);
-  const { assetMetaData: supplyAssetMetaData } = useMetadata(supplyTokenId);
-  const { formattedBalance: supplyAssetBalance } = useBalance({
-    assetId: BASE_ASSET_ID,
-  });
+  const tokenId = params["market-id"] as string;
+  const { mutate, isPending } = useSimpleBorrow();
+  const { assetMetaData } = useMetadata(tokenId);
+
   const { balance: borrowAssetBalance } = useBalance({
-    assetId: supplyTokenId,
+    assetId: tokenId,
   });
 
-  const { pool } = usePool({ assetId: supplyTokenId });
+  const { pool } = usePool({ assetId: tokenId });
   const borrowRate = formatUnit(pool?.borrowRate || 0, 4);
 
   const maxTotalSupply = formatUnit(
     BigInt(pool?.reserveBalance || 0),
-    supplyAssetMetaData?.decimals
+    assetMetaData?.decimals
   );
 
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
-    { poolId: BASE_ASSET_ID, collateralId: Number(supplyTokenId) }
+    { poolId: tokenId, collateralId: Number(tokenId) }
   );
 
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 
   const onclick = () => {
-    if (!value || !borrowAssetMetaData?.decimals || !borrowAssetBalance) return;
-    const borrowValue = parseUnit(
-      value,
-      borrowAssetMetaData?.decimals
-    ).toString();
+    if (!value || !assetMetaData?.decimals || !borrowAssetBalance) return;
+    const borrowValue = parseUnit(value, assetMetaData?.decimals).toString();
 
     mutate(
       {
-        borrowPoolId: BASE_ASSET_ID.toString(),
+        borrowPoolId: tokenId,
         borrowValue,
-        supplyPoolId: supplyTokenId,
       },
       {
         onSuccess: ({ blockNumber }) => {
@@ -79,9 +67,7 @@ export const Borrow = () => {
       label: "Available to borrow",
       value:
         "$" +
-        (!supplyAssetMetaData || !pool
-          ? "0"
-          : formatBigNumbers(maxTotalSupply, 4)),
+        (!assetMetaData || !pool ? "0" : formatBigNumbers(maxTotalSupply, 4)),
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -92,7 +78,7 @@ export const Borrow = () => {
     },
     {
       label: "Borrowed",
-      value: `$${formatBigNumbers(formatUnit(borrowAssetData?.borrowed || "0", borrowAssetMetaData?.decimals), 4)}`,
+      value: `$${formatBigNumbers(formatUnit(borrowAssetData?.borrowed || "0", assetMetaData?.decimals), 4)}`,
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -110,9 +96,9 @@ export const Borrow = () => {
   ];
   return (
     <Form
-      assetId={BASE_ASSET_ID}
+      assetId={tokenId}
       items={items}
-      decimals={borrowAssetMetaData?.decimals}
+      decimals={assetMetaData?.decimals}
       setValue={setValue}
       value={value}
       submitButton={{
@@ -121,7 +107,7 @@ export const Borrow = () => {
       }}
       isSubmitting={isPending}
       balance={borrowAssetBalance?.toString()}
-      symbol={borrowAssetMetaData?.symbol}
+      symbol={assetMetaData?.symbol}
       onMaxClick={() => {
         setValue(maxTotalSupply);
       }}

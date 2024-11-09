@@ -6,8 +6,10 @@ import { TableActions } from "../TableActions";
 import { useMemo } from "react";
 import { Table } from "@repo/ui";
 import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
-import { formatUnit } from "@repo/onchain-utils";
+import { formatUnit, useBalance } from "@repo/onchain-utils";
 import { formatPercentage } from "~/utils";
+import { useEnableAsCollateral } from "~/hooks/chain/useEnableAsCollateral";
+import { useDisableAsCollateral } from "~/hooks/chain/useDisableAsCollateral";
 
 type TableData = Array<{
   asset: string;
@@ -27,10 +29,11 @@ type MarketsTableUIProps = {
 
 const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
   const { data, isLoading, isFetched } = useGetLendingPools();
-
+  const { mutate: enableAsCollateralMutate } = useEnableAsCollateral();
+  const { mutate: disableAsCollateralMutate } = useDisableAsCollateral();
+  const { balance } = useBalance();
   const transformedData = useMemo((): TableData => {
     if (!data?.assets) return [];
-
     return data.assets
       .filter((pool) => {
         if (!searchQuery) return true;
@@ -39,7 +42,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       .map((item) => ({
         asset: item.asset,
         "Collateral Factor": item.collateral_q,
-        collateral: true,
+        collateral: false, // collateral value
         collateralQ: item.collateral_q,
         utilization: formatPercentage(item.utilization, item.asset_decimals),
         borrowRate: formatPercentage(item.borrow_apy, item.asset_decimals),
@@ -51,7 +54,17 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         id: item.id,
       }));
   }, [data, searchQuery]);
-
+  const handleCollateralClick = (state: boolean, assetId: string | number) => {
+    if (state) {
+      disableAsCollateralMutate({
+        assetId,
+      });
+    } else {
+      enableAsCollateralMutate({
+        assetId,
+      });
+    }
+  };
   return (
     <Table<TableData[number]>
       placeholderLength={5}
@@ -95,7 +108,11 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
           </Box>
         ),
         collateral: (item) => (
-          <Switch className="pl-4" checked={item.collateral} />
+          <Switch
+            className="pl-4"
+            checked={item.collateral}
+            onChange={() => handleCollateralClick(item.collateral, item.id)}
+          />
         ),
         walletBalance: (item) => (
           <Typography variant="subtitle1" className="pl-4">

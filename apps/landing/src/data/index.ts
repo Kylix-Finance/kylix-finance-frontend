@@ -35,7 +35,7 @@ export const smartLendingData: Section<SmartLending> = {
       to: "/",
       heading: "LIQUIDITY HUB",
       description:
-        "Kylix Finance is a decentralized, trustless intermediary protocol that allows users to lend, borrow and earn across multiple networks and blockchains. The Kylix protocol allows users to lend and borrow assets between major blockchains without wrapped tokens or traditional bridging and at extremely competitive rates using an innovative architectural tech solution. ",
+        "Kylix Finance is a decentralized protocol for lending, borrowing, and earning across networks. It enables asset transfers between major blockchains without wrapped tokens or bridging, offering competitive rates with an innovative tech solution. ",
     },
     {
       to: "/",
@@ -212,7 +212,7 @@ export const featuredPartnersData: Section<FeaturedPartners> = {
     },
     {
       link: "/",
-      name: "Hercle Financial",
+      name: "Hercle",
       icon: HercleFinancial,
     },
     {

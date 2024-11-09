@@ -12,7 +12,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 interface RepayMutationProps {
   asset: number | string;
   balance: string | bigint;
-  collateralAsset: number | string;
 }
 
 export const useSimpleRepay = () => {
@@ -39,7 +38,10 @@ export const useSimpleRepay = () => {
         }),
       });
     },
-    onSuccess: (_, { asset, collateralAsset }) => {
+    onSuccess: (_, { asset }) => {
+      queryClient.refetchQueries({
+        queryKey: queryKeys.poolData(asset),
+      });
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,
@@ -49,7 +51,7 @@ export const useSimpleRepay = () => {
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,
-          assetId: collateralAsset,
+          assetId: asset,
         }),
       });
       queryClient.refetchQueries({
@@ -63,7 +65,7 @@ export const useSimpleRepay = () => {
 };
 
 export const repayTransaction = async (
-  { asset, balance, collateralAsset }: RepayMutationProps,
+  { asset, balance }: RepayMutationProps,
   {
     api,
     activeAccount,
@@ -93,7 +95,7 @@ export const repayTransaction = async (
   }
 
   api.setSigner(signer);
-  const extrinsic = api?.tx?.lending?.repaySimple?.(asset, balance);
+  const extrinsic = api?.tx?.lending?.repay?.(asset, balance);
   const estimatedGas = (
     await extrinsic?.paymentInfo?.(activeAccount)
   )?.partialFee.toBigInt();

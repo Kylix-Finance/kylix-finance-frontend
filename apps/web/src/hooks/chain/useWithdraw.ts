@@ -6,8 +6,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "@repo/shared";
 import { ApiPromise } from "@polkadot/api";
 import { Signer, SubmittableResultValue } from "@polkadot/api/types";
-
-export const useWithdraw = () => {
+interface Props {
+  asset: string | number;
+  poolId: string | number | undefined;
+}
+export const useWithdraw = ({ asset, poolId }: Props) => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
@@ -35,20 +38,27 @@ export const useWithdraw = () => {
         exact: true,
       });
     },
-    onSuccess: (_, { asset }) => {
+    onSuccess: () => {
+      queryClient.refetchQueries({
+        queryKey: queryKeys.poolData(asset),
+      });
+      queryClient.refetchQueries({
+        queryKey: queryKeys.balance({
+          address: activeAccount?.address,
+          assetId: poolId,
+        }),
+      });
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,
           assetId: asset,
         }),
-        exact: true,
       });
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,
           assetId: undefined,
         }),
-        exact: true,
       });
     },
   });

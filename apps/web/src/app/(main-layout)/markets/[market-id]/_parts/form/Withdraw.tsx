@@ -16,12 +16,15 @@ import ValueItemWrapper from "./ValueItemWrapper";
 
 export const Withdraw = () => {
   const params = useParams();
-  const lendTokenId = params["market-id"] as string;
+  const tokenId = params["market-id"] as string;
   const [value, setValue] = useState("");
-  const { assetMetaData } = useMetadata(lendTokenId);
-  const { mutate, isPending } = useWithdraw();
+  const { assetMetaData } = useMetadata(tokenId);
   const { pool } = usePool({
-    assetId: lendTokenId,
+    assetId: tokenId,
+  });
+  const { mutate, isPending } = useWithdraw({
+    asset: tokenId,
+    poolId: pool?.id,
   });
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
     assetId: pool?.id,
@@ -33,7 +36,7 @@ export const Withdraw = () => {
   const handleClick = () => {
     mutate(
       {
-        asset: lendTokenId,
+        asset: tokenId,
         balance: parseUnit(value, Number(assetMetaData?.decimals) || 18),
       },
       {
@@ -96,7 +99,7 @@ export const Withdraw = () => {
   ];
   return (
     <Form
-      assetId={lendTokenId}
+      assetId={tokenId}
       items={items}
       decimals={Number(assetMetaData?.decimals) || 18}
       setValue={setValue}

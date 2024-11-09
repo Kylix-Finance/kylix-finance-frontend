@@ -46,14 +46,17 @@ interface RawSummary {
   total_borrow: number;
 }
 
-type RawAssetData = [RawAsset[], RawSummary];
+export type PoolsRawAssetData = [RawAsset[], RawSummary];
 
-interface Params {
+export interface UseGetLendingPoolsParams {
   asset?: number;
   account?: string;
 }
 
-export const useGetLendingPools = ({ account, asset }: Params = {}) => {
+export const useGetLendingPools = ({
+  account,
+  asset,
+}: UseGetLendingPoolsParams = {}) => {
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
 
@@ -78,11 +81,11 @@ export const getLendingPool = async ({
   provider,
   account,
   asset,
-}: { provider: WsProvider } & Params) => {
-  const result = await provider.send<RawAssetData>("lending_getLendingPools", [
-    asset,
-    account,
-  ]);
+}: { provider: WsProvider } & UseGetLendingPoolsParams) => {
+  const result = await provider.send<PoolsRawAssetData>(
+    "lending_getLendingPools",
+    [asset, account]
+  );
 
   const toAssetsJson: Asset[] = result[0].map((asset) => ({
     asset: String.fromCharCode(...asset.asset),
@@ -99,7 +102,6 @@ export const getLendingPool = async ({
     supply_apy_s: asset.supply_apy_s,
     utilization: asset.utilization,
   }));
-  console.log("__________________________toAssetsJson", toAssetsJson);
 
   const summary = {
     total_borrow: BigInt(result[1].total_borrow),

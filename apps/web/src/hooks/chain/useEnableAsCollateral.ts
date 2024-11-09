@@ -1,5 +1,6 @@
 import { ApiPromise } from "@polkadot/api";
-import { Signer, SubmittableResultValue } from "@polkadot/api/types";
+import { SubmittableResultValue } from "@polkadot/api-base/types";
+import { Signer } from "@polkadot/types/types";
 import {
   useActiveAccount,
   useBalance,
@@ -8,33 +9,28 @@ import {
 } from "@repo/onchain-utils";
 import { queryKeys } from "@repo/shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
-interface Props {
-  asset: string | number;
-  poolId: string | number | undefined;
+interface EnableAsCollateral {
+  assetId: string | number;
+  account?: string;
 }
-interface MutationFnProps {
-  balance: string | bigint;
+interface EnableAsCollateralMetadata {
+  api: ApiPromise | undefined;
+  activeAccount: string | undefined;
+  signer: Signer | undefined;
 }
-
-export const useSupply = ({ asset, poolId }: Props) => {
-  const { api } = useProvider();
+export const useEnableAsCollateral = () => {
   const { activeAccount } = useActiveAccount();
+  const { api } = useProvider();
   const { signer } = useSigner();
-  const { balance: getBalance } = useBalance();
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: queryKeys.supply,
-    mutationFn: (params: MutationFnProps) =>
-      supplyTransaction(
-        { asset, balance: params.balance },
-        {
-          api,
-          signer,
-          getBalance,
-          activeAccount: activeAccount?.address,
-        }
-      ),
+    mutationFn: (params: EnableAsCollateral) =>
+      enableAsCollateral(params, {
+        api,
+        signer,
+        activeAccount: activeAccount?.address,
+      }),
     onError: () => {
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
@@ -43,20 +39,11 @@ export const useSupply = ({ asset, poolId }: Props) => {
         }),
       });
     },
-    onSuccess: () => {
-      queryClient.refetchQueries({
-        queryKey: queryKeys.poolData(asset),
-      });
+    onSuccess: (_, { assetId, account }) => {
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: poolId,
-        }),
-      });
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: asset,
+          address: account,
+          assetId,
         }),
       });
       queryClient.refetchQueries({
@@ -65,32 +52,26 @@ export const useSupply = ({ asset, poolId }: Props) => {
           assetId: undefined,
         }),
       });
+      queryClient.refetchQueries({
+        queryKey: queryKeys.lendingPools,
+      });
     },
   });
 };
 
-export const supplyTransaction = async (
-  { asset, balance }: MutationFnProps & { asset: string | number },
-  {
-    api,
-    activeAccount,
-    signer,
-    getBalance,
-  }: {
-    api: ApiPromise | undefined;
-    activeAccount: string | undefined;
-    signer: Signer | undefined;
-    getBalance: bigint | undefined;
-  }
+export const enableAsCollateral = async (
+  { assetId, account }: EnableAsCollateral,
+  { activeAccount, api, signer }: EnableAsCollateralMetadata
 ) => {
+  const finalAccount = account ?? activeAccount;
+  if (!finalAccount) {
+    throw new Error(
+      "No active account detected. Please ensure your wallet is connected to the app."
+    );
+  }
   if (!api) {
     throw new Error(
       "The API could not be accessed. Please try refreshing the page."
-    );
-  }
-  if (!activeAccount) {
-    throw new Error(
-      "No active account detected. Please ensure your wallet is connected to the app."
     );
   }
   if (!signer) {
@@ -98,24 +79,12 @@ export const supplyTransaction = async (
       "Signer could not be found. Please refresh the page and try again."
     );
   }
-
   api.setSigner(signer);
-  const extrinsic = api?.tx?.lending?.supply?.(asset, balance);
-  const estimatedGas = (
-    await extrinsic?.paymentInfo?.(activeAccount)
-  )?.partialFee.toBigInt();
-
-  if (!estimatedGas) throw new Error("Unable to estimate gas fees.");
-  if (getBalance && estimatedGas > getBalance) {
-    throw new Error(
-      "You do not have enough balance to cover the transaction fees."
-    );
-  }
-
+  const extrinsic = api?.tx?.lending?.enableAsCollateral?.(assetId);
   return new Promise<{ blockNumber: string | undefined; txHash: string }>(
     (resolve, reject) => {
       extrinsic?.signAndSend(
-        activeAccount,
+        finalAccount,
         ({
           status,
           dispatchError,

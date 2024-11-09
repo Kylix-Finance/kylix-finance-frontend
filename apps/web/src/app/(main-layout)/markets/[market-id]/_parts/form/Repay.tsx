@@ -11,43 +11,40 @@ import {
   useBalance,
   useMetadata,
 } from "@repo/onchain-utils";
-import { useRepay } from "~/hooks/chain/useRepay";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
-const BASE_ASSET_ID = 1;
+import { useSimpleRepay } from "~/hooks/chain/useSimpleRepay";
 
 export const Repay = () => {
   const params = useParams();
-  const collateralTokenId = params["market-id"] as string;
-  const { pool } = usePool({ assetId: collateralTokenId });
+  const tokenId = params["market-id"] as string;
+  const { pool } = usePool({ assetId: tokenId });
   const borrowRate = formatUnit(pool?.borrowRate || 0, 4);
 
   const [value, setValue] = useState("");
-  const { assetMetaData } = useMetadata(collateralTokenId);
-  const { assetMetaData: baseAssetMetadata } = useMetadata(BASE_ASSET_ID);
+  const { assetMetaData } = useMetadata(tokenId);
 
-  const { mutate, isPending } = useRepay();
+  const { mutate, isPending } = useSimpleRepay();
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
-    assetId: collateralTokenId,
+    assetId: tokenId,
   });
 
   const { formattedBalance: formattedBaseAssetBalance } = useBalance({
-    assetId: BASE_ASSET_ID,
-    customDecimals: baseAssetMetadata?.decimals,
-    enabled: !!baseAssetMetadata,
+    assetId: tokenId,
+    customDecimals: assetMetaData?.decimals,
+    enabled: !!assetMetaData,
   });
 
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
-    { poolId: BASE_ASSET_ID, collateralId: Number(collateralTokenId) }
+    { poolId: tokenId }
   );
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 
   const onclick = () => {
-    if (!baseAssetMetadata) return;
+    if (!assetMetaData) return;
     mutate(
       {
-        asset: BASE_ASSET_ID,
-        balance: parseUnit(value, baseAssetMetadata.decimals),
-        collateralAsset: collateralTokenId,
+        asset: tokenId,
+        balance: parseUnit(value, assetMetaData.decimals),
       },
       {
         onSuccess: ({ blockNumber }) => {
@@ -64,7 +61,7 @@ export const Repay = () => {
 
   const borrowed = formatUnit(
     borrowAssetData?.borrowed || "0",
-    baseAssetMetadata?.decimals
+    assetMetaData?.decimals
   );
   const max = (
     Math.min(Number(borrowed || 0), Number(formattedBaseAssetBalance || 0)) *
@@ -103,7 +100,7 @@ export const Repay = () => {
   ];
   return (
     <Form
-      assetId={collateralTokenId}
+      assetId={tokenId}
       items={items}
       decimals={assetMetaData?.decimals}
       setValue={setValue}

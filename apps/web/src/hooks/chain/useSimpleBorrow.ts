@@ -10,14 +10,11 @@ import { queryKeys } from "@repo/shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface Props {
-  asset: string | number;
-  poolId: string | number | undefined;
-}
-interface MutationFnProps {
-  balance: string | bigint;
+  borrowPoolId: string;
+  borrowValue: string;
 }
 
-export const useSupply = ({ asset, poolId }: Props) => {
+export const useSimpleBorrow = () => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
@@ -25,52 +22,35 @@ export const useSupply = ({ asset, poolId }: Props) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: queryKeys.supply,
-    mutationFn: (params: MutationFnProps) =>
-      supplyTransaction(
-        { asset, balance: params.balance },
-        {
-          api,
-          signer,
-          getBalance,
-          activeAccount: activeAccount?.address,
-        }
-      ),
-    onError: () => {
+    mutationFn: (params: Props) =>
+      simpleBorrowTransaction(params, {
+        api,
+        signer,
+        getBalance,
+        activeAccount: activeAccount?.address,
+      }),
+    onSuccess: (_, { borrowPoolId }) => {
       queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: undefined,
-        }),
-      });
-    },
-    onSuccess: () => {
-      queryClient.refetchQueries({
-        queryKey: queryKeys.poolData(asset),
+        queryKey: queryKeys.poolData(borrowPoolId),
       });
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,
-          assetId: poolId,
+          assetId: borrowPoolId,
         }),
       });
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,
-          assetId: asset,
-        }),
-      });
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: undefined,
+          assetId: borrowPoolId,
         }),
       });
     },
   });
 };
 
-export const supplyTransaction = async (
-  { asset, balance }: MutationFnProps & { asset: string | number },
+export const simpleBorrowTransaction = async (
+  { borrowPoolId, borrowValue }: Props,
   {
     api,
     activeAccount,
@@ -100,7 +80,7 @@ export const supplyTransaction = async (
   }
 
   api.setSigner(signer);
-  const extrinsic = api?.tx?.lending?.supply?.(asset, balance);
+  const extrinsic = api?.tx?.lending?.borrow?.(borrowPoolId, borrowValue);
   const estimatedGas = (
     await extrinsic?.paymentInfo?.(activeAccount)
   )?.partialFee.toBigInt();
