@@ -9,12 +9,15 @@ import {
 import { queryKeys } from "@repo/shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+interface Props {
+  asset: string | number;
+  poolId: string | number | undefined;
+}
 interface MutationFnProps {
-  asset: number | string;
   balance: string | bigint;
 }
 
-export const useSupply = () => {
+export const useSupply = ({ asset, poolId }: Props) => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
@@ -23,12 +26,15 @@ export const useSupply = () => {
   return useMutation({
     mutationKey: queryKeys.supply,
     mutationFn: (params: MutationFnProps) =>
-      supplyTransaction(params, {
-        api,
-        signer,
-        getBalance,
-        activeAccount: activeAccount?.address,
-      }),
+      supplyTransaction(
+        { asset, balance: params.balance },
+        {
+          api,
+          signer,
+          getBalance,
+          activeAccount: activeAccount?.address,
+        }
+      ),
     onError: () => {
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
@@ -37,9 +43,15 @@ export const useSupply = () => {
         }),
       });
     },
-    onSuccess: (_, { asset }) => {
+    onSuccess: () => {
       queryClient.refetchQueries({
         queryKey: queryKeys.poolData(asset),
+      });
+      queryClient.refetchQueries({
+        queryKey: queryKeys.balance({
+          address: activeAccount?.address,
+          assetId: poolId,
+        }),
       });
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
@@ -58,7 +70,7 @@ export const useSupply = () => {
 };
 
 export const supplyTransaction = async (
-  { asset, balance }: MutationFnProps,
+  { asset, balance }: MutationFnProps & { asset: string | number },
   {
     api,
     activeAccount,
