@@ -31,14 +31,6 @@ export const useDisableAsCollateral = () => {
         signer,
         activeAccount: activeAccount?.address,
       }),
-    onError: () => {
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: undefined,
-        }),
-      });
-    },
     onSuccess: (_, { assetId, account }) => {
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
@@ -46,6 +38,7 @@ export const useDisableAsCollateral = () => {
           assetId,
         }),
       });
+
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,
@@ -80,8 +73,7 @@ export const disableAsCollateralAsCollateral = async (
     );
   }
   api.setSigner(signer);
-  const extrinsic =
-    api?.tx?.lending?.DisableAsCollateralAsCollateral?.(assetId);
+  const extrinsic = api?.tx?.lending?.disableAsCollateral?.(assetId);
   return new Promise<{ blockNumber: string | undefined; txHash: string }>(
     (resolve, reject) => {
       extrinsic?.signAndSend(

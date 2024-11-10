@@ -25,6 +25,7 @@ interface RawAsset {
   supply_apy_s: string;
   is_activated: boolean;
   user_asset_balance: number | null;
+  is_collateral: boolean | null;
 }
 interface Asset {
   id: number;
@@ -40,6 +41,7 @@ interface Asset {
   supply_apy_s: string;
   is_activated: boolean;
   user_asset_balance: bigint;
+  is_collateral: boolean;
 }
 interface RawSummary {
   total_supply: number;
@@ -101,6 +103,7 @@ export const getLendingPool = async ({
     supply_apy: asset.supply_apy,
     supply_apy_s: asset.supply_apy_s,
     utilization: asset.utilization,
+    is_collateral: Boolean(asset.is_collateral),
   }));
 
   const summary = {
