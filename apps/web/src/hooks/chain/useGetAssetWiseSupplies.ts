@@ -12,6 +12,7 @@ interface Asset {
   balance: bigint;
   apy: string;
   supplied: bigint;
+  collateral: boolean;
 }
 
 type RawAsset = {
@@ -23,6 +24,7 @@ type RawAsset = {
   balance: bigint;
   apy: string;
   supplied: bigint;
+  is_collateral: boolean | null;
 };
 
 type AssetWiseSuppliesResponse = {
@@ -90,6 +92,7 @@ export const getAssetWiseSupplies = async ({
       balance: BigInt(item.balance),
       apy: item.apy,
       supplied: BigInt(item.supplied),
+      collateral: Boolean(item.is_collateral),
     })),
     totalSupplied: BigInt(response?.[1] || 0),
   };

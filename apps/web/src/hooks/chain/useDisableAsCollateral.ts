@@ -39,7 +39,9 @@ export const useDisableAsCollateral = () => {
           assetId,
         }),
       });
-
+      queryClient.refetchQueries({
+        queryKey: queryKeys.assetWiseSupplies(activeAccount?.address),
+      });
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,

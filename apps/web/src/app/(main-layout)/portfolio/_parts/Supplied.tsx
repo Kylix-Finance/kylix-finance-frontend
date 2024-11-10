@@ -3,7 +3,9 @@
 import { Box, Button, Switch, Typography } from "@mui/material";
 import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
 import { Table } from "@repo/ui";
-import { Asset } from "~/components";
+import { Asset, notify } from "~/components";
+import { useDisableAsCollateral } from "~/hooks/chain/useDisableAsCollateral";
+import { useEnableAsCollateral } from "~/hooks/chain/useEnableAsCollateral";
 import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetAssetWiseSupplies";
 
 const Supplied = () => {
@@ -12,17 +14,77 @@ const Supplied = () => {
     isLoading,
     isFetched,
   } = useGetAssetWiseSupplies();
-
+  const { mutate: enableAsCollateralMutate, isPending: isEnableAsCollateral } =
+    useEnableAsCollateral();
+  const {
+    mutate: disableAsCollateralMutate,
+    isPending: isDisableAsCollateral,
+  } = useDisableAsCollateral();
   const supplies:
     | TableData
-    | { asset: string; apy: string; balance: string; supplied: string }[]
+    | {
+        asset: string;
+        apy: string;
+        balance: string;
+        supplied: string;
+        collateral: boolean;
+        assetId: number;
+      }[]
     | undefined = assetWiseSupplies?.suppliedAssets.map?.((item) => ({
     apy: item.apy,
     asset: item.assetSymbol,
+    assetId: item.assetId,
     balance: formatBigNumbers(formatUnit(item.balance, item.decimals), 4),
     supplied: formatBigNumbers(formatUnit(item.supplied, item.decimals), 4),
+    collateral: item.collateral,
   }));
-
+  const handleCollateralClick = (state: boolean, assetId: string | number) => {
+    if (state) {
+      disableAsCollateralMutate(
+        {
+          assetId,
+        },
+        {
+          onSuccess: ({ blockNumber }) => {
+            notify({
+              type: "success",
+              title: "Success",
+              message: "Transaction completed on block " + blockNumber,
+            });
+          },
+          onError: ({ message, name }) => {
+            notify({
+              type: "error",
+              title: name,
+              message: message,
+            });
+          },
+        }
+      );
+    } else {
+      enableAsCollateralMutate(
+        {
+          assetId,
+        },
+        {
+          onSuccess: ({ blockNumber }) => {
+            notify({
+              type: "success",
+              title: "Success",
+              message: "Transaction completed on block " + blockNumber,
+            });
+          },
+          onError: ({ message, name }) => {
+            notify({
+              type: "error",
+              title: name,
+              message: message,
+            });
+          },
+        }
+      );
+    }
+  };
   return (
     <Table<TableData[number]>
       isLoading={isLoading}
@@ -39,7 +101,7 @@ const Supplied = () => {
         supplied: "Supplied",
         actions: "Action",
       }}
-      hiddenTHeads={["actions"]}
+      hiddenTHeads={["actions", "assetId"]}
       tableName="supply"
       components={{
         asset: (item) => <Asset label={item.asset} helperText="" />,
@@ -50,9 +112,14 @@ const Supplied = () => {
         supplied: (item) => (
           <Typography variant="subtitle1">{item.supplied}</Typography>
         ),
-        actions: () => (
+        actions: (item) => (
           <Box className="flex justify-end gap-6 items-center">
-            <Switch />
+            <Switch
+              checked={item.collateral}
+              onChange={() =>
+                handleCollateralClick(item.collateral, item.assetId)
+              }
+            />
             <Box className="flex justify-end gap-1 items-center">
               <Button variant="contained">
                 <Typography variant="subtitle1" fontWeight={600}>
@@ -85,4 +152,6 @@ type TableData = {
   apy: string;
   balance: string;
   supplied: string;
+  collateral: boolean;
+  assetId: number;
 }[];

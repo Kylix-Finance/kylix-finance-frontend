@@ -54,6 +54,9 @@ export const useEnableAsCollateral = () => {
         }),
       });
       queryClient.refetchQueries({
+        queryKey: queryKeys.assetWiseSupplies(activeAccount?.address),
+      });
+      queryClient.refetchQueries({
         queryKey: queryKeys.lendingPools,
       });
     },
