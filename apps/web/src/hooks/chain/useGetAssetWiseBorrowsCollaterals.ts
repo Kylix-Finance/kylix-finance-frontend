@@ -106,11 +106,10 @@ export const getAssetWiseBorrowsCollaterals = async ({
       assetSymbol: decodeArrayToString(item.asset_symbol),
       balance: BigInt(item.balance),
       borrowed: BigInt(item.borrowed || 0),
-      apy: BigInt(item.apy || 0),
+      apy: item.apy,
       assetId: item.asset_id,
       decimals: item.decimals,
       usdtBalance: item.usdt_balance,
-      collateralAssets: item.collateral_assets,
     })),
     collateralAssets: response[1]?.map((item) => ({
       assetIcon: decodeArrayToString(item.asset_icon),

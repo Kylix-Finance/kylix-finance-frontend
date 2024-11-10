@@ -21,48 +21,19 @@ const Borrowed = () => {
     isLoading,
     isFetched,
   } = useGetAssetWiseBorrowsCollaterals();
-  const { api } = useProvider();
-  const [borrowedWithMetadata, setBorrowedWithMetadata] = useState<TableData>();
 
-  useEffect(() => {
-    if (
-      !AssetWiseBorrowsCollaterals ||
-      !AssetWiseBorrowsCollaterals.borrowedAssets ||
-      !api
-    )
-      return;
-
-    const fetchMetadata = async () => {
-      const promises = AssetWiseBorrowsCollaterals?.borrowedAssets?.map?.(
-        async (item) => {
-          const metadata = await api?.query?.assets?.metadata?.(
-            item.collateralAssets?.[0]
-          );
-          const humanMetadata = metadata?.toHuman() as MetadataResult;
-
-          return {
-            id: item.collateralAssets?.[0] || 0,
-            apy: formatPercentage(item.apy?.toString() || 0, item.decimals),
-            asset: humanMetadata.symbol,
-            balance: formatBigNumbers(
-              formatUnit(item.balance, item.decimals),
-              4
-            ),
-            borrowed: formatBigNumbers(
-              formatUnit(item.borrowed || 0, item.decimals),
-              4
-            ),
-          };
-        }
-      );
-
-      const borrowedAssets = await Promise.all(promises || []);
-
-      setBorrowedWithMetadata(borrowedAssets);
+  const data = AssetWiseBorrowsCollaterals?.borrowedAssets?.map?.((item) => {
+    return {
+      id: item.collateralAssets?.[0] || 0,
+      apy: formatPercentage(item.apy?.toString() || 0, item.decimals),
+      asset: item.assetSymbol,
+      balance: formatBigNumbers(formatUnit(item.balance, item.decimals), 4),
+      borrowed: formatBigNumbers(
+        formatUnit(item.borrowed || 0, item.decimals),
+        4
+      ),
     };
-
-    fetchMetadata();
-  }, [AssetWiseBorrowsCollaterals, api]);
+  });
 
   return (
     <Table<TableData[number]>
@@ -93,7 +64,7 @@ const Borrowed = () => {
         ),
         actions: (item) => <TableActions assetId={item.id} />,
       }}
-      data={borrowedWithMetadata || []}
+      data={data || []}
     />
   );
 };
