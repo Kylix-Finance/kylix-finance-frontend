@@ -18,14 +18,17 @@ export const Borrow = () => {
   const [value, setValue] = useState("");
   const params = useParams();
   const tokenId = params["market-id"] as string;
-  const { mutate, isPending } = useSimpleBorrow();
+  const { pool } = usePool({ assetId: tokenId });
+  const { mutate, isPending } = useSimpleBorrow({
+    asset: tokenId,
+    poolId: pool?.id,
+  });
   const { assetMetaData } = useMetadata(tokenId);
 
   const { balance: borrowAssetBalance } = useBalance({
     assetId: tokenId,
   });
 
-  const { pool } = usePool({ assetId: tokenId });
   const borrowRate = formatUnit(pool?.borrowRate || 0, 4);
 
   const maxTotalSupply = formatUnit(
@@ -34,8 +37,9 @@ export const Borrow = () => {
   );
 
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
-    { poolId: tokenId, collateralId: Number(tokenId) }
+    { poolId: tokenId }
   );
+  console.log("___________OOO", assetWiseBorrowCollateral);
 
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 
@@ -45,7 +49,6 @@ export const Borrow = () => {
 
     mutate(
       {
-        borrowPoolId: tokenId,
         borrowValue,
       },
       {

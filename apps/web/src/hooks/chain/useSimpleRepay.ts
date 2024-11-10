@@ -10,11 +10,13 @@ import { queryKeys } from "@repo/shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface RepayMutationProps {
-  asset: number | string;
   balance: string | bigint;
 }
-
-export const useSimpleRepay = () => {
+interface Props {
+  asset: string | number;
+  poolId: string | number | undefined;
+}
+export const useSimpleRepay = ({ asset, poolId }: Props) => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
@@ -24,12 +26,15 @@ export const useSimpleRepay = () => {
   return useMutation({
     mutationKey: queryKeys.repay,
     mutationFn: (params: RepayMutationProps) =>
-      repayTransaction(params, {
-        api,
-        signer,
-        getBalance,
-        activeAccount: activeAccount?.address,
-      }),
+      repayTransaction(
+        { balance: params.balance, asset },
+        {
+          api,
+          signer,
+          getBalance,
+          activeAccount: activeAccount?.address,
+        }
+      ),
     onError: () => {
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
@@ -38,7 +43,19 @@ export const useSimpleRepay = () => {
         }),
       });
     },
-    onSuccess: (_, { asset }) => {
+    onSuccess: () => {
+      queryClient.refetchQueries({
+        queryKey: queryKeys.assetWiseBorrowsCollaterals(
+          activeAccount?.address,
+          asset
+        ),
+      });
+      queryClient.refetchQueries({
+        queryKey: queryKeys.balance({
+          address: activeAccount?.address,
+          assetId: poolId,
+        }),
+      });
       queryClient.refetchQueries({
         queryKey: queryKeys.poolData(asset),
       });
@@ -65,7 +82,7 @@ export const useSimpleRepay = () => {
 };
 
 export const repayTransaction = async (
-  { asset, balance }: RepayMutationProps,
+  { asset, balance }: RepayMutationProps & { asset: string | number },
   {
     api,
     activeAccount,

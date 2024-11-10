@@ -66,11 +66,7 @@ export const useGetAssetWiseBorrowsCollaterals = ({
         totalBorrowed: data?.totalBorrowed,
         totalCollateral: data?.totalCollateral,
         borrowedAssets: {
-          ...data?.borrowedAssets.filter(
-            (item) =>
-              item.assetId == poolId &&
-              item.collateralAssets?.includes?.(collateralId || 0)
-          ),
+          ...data?.borrowedAssets.filter((item) => item.assetId == poolId),
         },
         collateralAssets: {
           ...data?.collateralAssets.filter((item) => item.assetId == poolId),
@@ -106,11 +102,10 @@ export const getAssetWiseBorrowsCollaterals = async ({
       assetSymbol: decodeArrayToString(item.asset_symbol),
       balance: BigInt(item.balance),
       borrowed: BigInt(item.borrowed || 0),
-      apy: BigInt(item.apy || 0),
+      apy: item.apy,
       assetId: item.asset_id,
       decimals: item.decimals,
       usdtBalance: item.usdt_balance,
-      collateralAssets: item.collateral_assets,
     })),
     collateralAssets: response[1]?.map((item) => ({
       assetIcon: decodeArrayToString(item.asset_icon),
@@ -121,7 +116,7 @@ export const getAssetWiseBorrowsCollaterals = async ({
       decimals: item.decimals,
       usdtBalance: item.usdt_balance,
     })),
-    totalCollateral: BigInt(response?.[2] || 0),
-    totalBorrowed: BigInt(response?.[3] || 0),
+    totalBorrowed: BigInt(response?.[2] || 0),
+    totalCollateral: BigInt(response?.[3] || 0),
   };
 };
