@@ -9,12 +9,15 @@ import {
 import { queryKeys } from "@repo/shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-interface Props {
-  borrowPoolId: string;
+interface BorrowProps {
   borrowValue: string;
 }
+interface Props {
+  asset: string | number;
+  poolId: string | number | undefined;
+}
 
-export const useSimpleBorrow = () => {
+export const useSimpleBorrow = ({ asset, poolId }: Props) => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
@@ -22,27 +25,42 @@ export const useSimpleBorrow = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: queryKeys.supply,
-    mutationFn: (params: Props) =>
-      simpleBorrowTransaction(params, {
-        api,
-        signer,
-        getBalance,
-        activeAccount: activeAccount?.address,
-      }),
-    onSuccess: (_, { borrowPoolId }) => {
+    mutationFn: (params: BorrowProps) =>
+      simpleBorrowTransaction(
+        { asset, borrowValue: params.borrowValue },
+        {
+          api,
+          signer,
+          getBalance,
+          activeAccount: activeAccount?.address,
+        }
+      ),
+    onSuccess: () => {
       queryClient.refetchQueries({
-        queryKey: queryKeys.poolData(borrowPoolId),
+        queryKey: queryKeys.assetWiseBorrowsCollaterals(
+          activeAccount?.address,
+          asset
+        ),
+      });
+      queryClient.refetchQueries({
+        queryKey: queryKeys.poolData(asset),
       });
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,
-          assetId: borrowPoolId,
+          assetId: poolId,
         }),
       });
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,
-          assetId: borrowPoolId,
+          assetId: asset,
+        }),
+      });
+      queryClient.refetchQueries({
+        queryKey: queryKeys.balance({
+          address: activeAccount?.address,
+          assetId: asset,
         }),
       });
     },
@@ -50,7 +68,7 @@ export const useSimpleBorrow = () => {
 };
 
 export const simpleBorrowTransaction = async (
-  { borrowPoolId, borrowValue }: Props,
+  { asset, borrowValue }: BorrowProps & { asset: string | number },
   {
     api,
     activeAccount,
@@ -80,7 +98,7 @@ export const simpleBorrowTransaction = async (
   }
 
   api.setSigner(signer);
-  const extrinsic = api?.tx?.lending?.borrow?.(borrowPoolId, borrowValue);
+  const extrinsic = api?.tx?.lending?.borrow?.(asset, borrowValue);
   const estimatedGas = (
     await extrinsic?.paymentInfo?.(activeAccount)
   )?.partialFee.toBigInt();

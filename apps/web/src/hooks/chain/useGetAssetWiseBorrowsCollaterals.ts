@@ -66,11 +66,7 @@ export const useGetAssetWiseBorrowsCollaterals = ({
         totalBorrowed: data?.totalBorrowed,
         totalCollateral: data?.totalCollateral,
         borrowedAssets: {
-          ...data?.borrowedAssets.filter(
-            (item) =>
-              item.assetId == poolId &&
-              item.collateralAssets?.includes?.(collateralId || 0)
-          ),
+          ...data?.borrowedAssets.filter((item) => item.assetId == poolId),
         },
         collateralAssets: {
           ...data?.collateralAssets.filter((item) => item.assetId == poolId),
@@ -120,7 +116,7 @@ export const getAssetWiseBorrowsCollaterals = async ({
       decimals: item.decimals,
       usdtBalance: item.usdt_balance,
     })),
-    totalCollateral: BigInt(response?.[2] || 0),
-    totalBorrowed: BigInt(response?.[3] || 0),
+    totalBorrowed: BigInt(response?.[2] || 0),
+    totalCollateral: BigInt(response?.[3] || 0),
   };
 };
