@@ -66,11 +66,7 @@ export const useGetAssetWiseBorrowsCollaterals = ({
         totalBorrowed: data?.totalBorrowed,
         totalCollateral: data?.totalCollateral,
         borrowedAssets: {
-          ...data?.borrowedAssets.filter(
-            (item) =>
-              item.assetId == poolId &&
-              item.collateralAssets?.includes?.(collateralId || 0)
-          ),
+          ...data?.borrowedAssets.filter((item) => item.assetId == poolId),
         },
         collateralAssets: {
           ...data?.collateralAssets.filter((item) => item.assetId == poolId),

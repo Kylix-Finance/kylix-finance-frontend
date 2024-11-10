@@ -23,7 +23,10 @@ export const Repay = () => {
   const [value, setValue] = useState("");
   const { assetMetaData } = useMetadata(tokenId);
 
-  const { mutate, isPending } = useSimpleRepay();
+  const { mutate, isPending } = useSimpleRepay({
+    asset: tokenId,
+    poolId: pool?.id,
+  });
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
     assetId: tokenId,
   });
@@ -43,7 +46,6 @@ export const Repay = () => {
     if (!assetMetaData) return;
     mutate(
       {
-        asset: tokenId,
         balance: parseUnit(value, assetMetaData.decimals),
       },
       {
@@ -65,7 +67,7 @@ export const Repay = () => {
   );
   const max = (
     Math.min(Number(borrowed || 0), Number(formattedBaseAssetBalance || 0)) *
-    1.1
+    1.02
   ).toFixed(4);
 
   const items: Array<ListItem> = [
