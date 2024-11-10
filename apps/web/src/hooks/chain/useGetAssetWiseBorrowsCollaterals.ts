@@ -120,7 +120,7 @@ export const getAssetWiseBorrowsCollaterals = async ({
       decimals: item.decimals,
       usdtBalance: item.usdt_balance,
     })),
-    totalCollateral: BigInt(response?.[2] || 0),
-    totalBorrowed: BigInt(response?.[3] || 0),
+    totalBorrowed: BigInt(response?.[2] || 0),
+    totalCollateral: BigInt(response?.[3] || 0),
   };
 };
