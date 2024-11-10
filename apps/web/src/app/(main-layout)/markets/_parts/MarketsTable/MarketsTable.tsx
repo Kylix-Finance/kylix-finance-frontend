@@ -72,6 +72,13 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
               message: "Transaction completed on block " + blockNumber,
             });
           },
+          onError: ({ message, name }) => {
+            notify({
+              type: "error",
+              title: name,
+              message: message,
+            });
+          },
         }
       );
     } else {
@@ -85,6 +92,13 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
               type: "success",
               title: "Success",
               message: "Transaction completed on block " + blockNumber,
+            });
+          },
+          onError: ({ message, name }) => {
+            notify({
+              type: "error",
+              title: name,
+              message: message,
             });
           },
         }
