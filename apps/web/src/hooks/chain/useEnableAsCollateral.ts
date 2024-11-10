@@ -11,25 +11,26 @@ import { queryKeys } from "@repo/shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 interface EnableAsCollateral {
   assetId: string | number;
-  account?: string;
 }
 interface EnableAsCollateralMetadata {
   api: ApiPromise | undefined;
   activeAccount: string | undefined;
   signer: Signer | undefined;
+  balance: bigint | undefined;
 }
 export const useEnableAsCollateral = () => {
   const { activeAccount } = useActiveAccount();
   const { api } = useProvider();
   const { signer } = useSigner();
   const queryClient = useQueryClient();
-
+  const { balance } = useBalance();
   return useMutation({
     mutationFn: (params: EnableAsCollateral) =>
       enableAsCollateral(params, {
         api,
         signer,
         activeAccount: activeAccount?.address,
+        balance: balance,
       }),
     onError: () => {
       queryClient.refetchQueries({
@@ -39,10 +40,10 @@ export const useEnableAsCollateral = () => {
         }),
       });
     },
-    onSuccess: (_, { assetId, account }) => {
+    onSuccess: (_, { assetId }) => {
       queryClient.refetchQueries({
         queryKey: queryKeys.balance({
-          address: account,
+          address: activeAccount?.address,
           assetId,
         }),
       });
@@ -53,6 +54,9 @@ export const useEnableAsCollateral = () => {
         }),
       });
       queryClient.refetchQueries({
+        queryKey: queryKeys.assetWiseSupplies(activeAccount?.address),
+      });
+      queryClient.refetchQueries({
         queryKey: queryKeys.lendingPools,
       });
     },
@@ -60,11 +64,10 @@ export const useEnableAsCollateral = () => {
 };
 
 export const enableAsCollateral = async (
-  { assetId, account }: EnableAsCollateral,
-  { activeAccount, api, signer }: EnableAsCollateralMetadata
+  { assetId }: EnableAsCollateral,
+  { activeAccount, api, signer, balance }: EnableAsCollateralMetadata
 ) => {
-  const finalAccount = account ?? activeAccount;
-  if (!finalAccount) {
+  if (!activeAccount) {
     throw new Error(
       "No active account detected. Please ensure your wallet is connected to the app."
     );
@@ -81,10 +84,20 @@ export const enableAsCollateral = async (
   }
   api.setSigner(signer);
   const extrinsic = api?.tx?.lending?.enableAsCollateral?.(assetId);
+  const estimatedGas = (
+    await extrinsic?.paymentInfo?.(activeAccount)
+  )?.partialFee.toBigInt();
+
+  if (!estimatedGas) throw new Error("Unable to estimate gas fees.");
+  if (balance && estimatedGas > balance) {
+    throw new Error(
+      "You do not have enough balance to cover the transaction fees."
+    );
+  }
   return new Promise<{ blockNumber: string | undefined; txHash: string }>(
     (resolve, reject) => {
       extrinsic?.signAndSend(
-        finalAccount,
+        activeAccount,
         ({
           status,
           dispatchError,

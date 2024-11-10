@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Switch, Typography } from "@mui/material";
-import { Asset, KylixChip } from "~/components";
+import { Asset, KylixChip, notify } from "~/components";
 import { TableActions } from "../TableActions";
 import { useMemo } from "react";
 import { Table } from "@repo/ui";
@@ -29,9 +29,13 @@ type MarketsTableUIProps = {
 
 const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
   const { data, isLoading, isFetched } = useGetLendingPools();
-  const { mutate: enableAsCollateralMutate } = useEnableAsCollateral();
-  const { mutate: disableAsCollateralMutate } = useDisableAsCollateral();
-  const { balance } = useBalance();
+  const { mutate: enableAsCollateralMutate, isPending: isEnableAsCollateral } =
+    useEnableAsCollateral();
+  const {
+    mutate: disableAsCollateralMutate,
+    isPending: isDisableAsCollateral,
+  } = useDisableAsCollateral();
+
   const transformedData = useMemo((): TableData => {
     if (!data?.assets) return [];
     return data.assets
@@ -42,7 +46,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       .map((item) => ({
         asset: item.asset,
         "Collateral Factor": item.collateral_q,
-        collateral: false, // collateral value
+        collateral: item.is_collateral,
         collateralQ: item.collateral_q,
         utilization: formatPercentage(item.utilization, item.asset_decimals),
         borrowRate: formatPercentage(item.borrow_apy, item.asset_decimals),
@@ -56,13 +60,49 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
   }, [data, searchQuery]);
   const handleCollateralClick = (state: boolean, assetId: string | number) => {
     if (state) {
-      disableAsCollateralMutate({
-        assetId,
-      });
+      disableAsCollateralMutate(
+        {
+          assetId,
+        },
+        {
+          onSuccess: ({ blockNumber }) => {
+            notify({
+              type: "success",
+              title: "Success",
+              message: "Transaction completed on block " + blockNumber,
+            });
+          },
+          onError: ({ message, name }) => {
+            notify({
+              type: "error",
+              title: name,
+              message: message,
+            });
+          },
+        }
+      );
     } else {
-      enableAsCollateralMutate({
-        assetId,
-      });
+      enableAsCollateralMutate(
+        {
+          assetId,
+        },
+        {
+          onSuccess: ({ blockNumber }) => {
+            notify({
+              type: "success",
+              title: "Success",
+              message: "Transaction completed on block " + blockNumber,
+            });
+          },
+          onError: ({ message, name }) => {
+            notify({
+              type: "error",
+              title: name,
+              message: message,
+            });
+          },
+        }
+      );
     }
   };
   return (
@@ -126,7 +166,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       data={transformedData}
       defaultSortKey="asset"
       tableName="markets"
-      isFetched={isFetched}
+      isFetched={isFetched || isEnableAsCollateral || isDisableAsCollateral}
       hasPagination={false}
     />
   );
