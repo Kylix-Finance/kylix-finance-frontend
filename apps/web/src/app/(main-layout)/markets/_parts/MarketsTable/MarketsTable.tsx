@@ -4,7 +4,7 @@ import { Box, Switch, Typography } from "@mui/material";
 import { Asset, KylixChip, notify } from "~/components";
 import { TableActions } from "../TableActions";
 import { useMemo } from "react";
-import { Table } from "@repo/ui";
+import { Skeleton, Table } from "@repo/ui";
 import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
 import { formatUnit, useBalance } from "@repo/onchain-utils";
 import { formatPercentage } from "~/utils";
@@ -58,6 +58,14 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         id: item.id,
       }));
   }, [data, searchQuery]);
+
+  console.log(
+    "isEnableAsCollateral:",
+    isEnableAsCollateral,
+    "isDisableAsCollateral:",
+    isDisableAsCollateral
+  );
+
   const handleCollateralClick = (state: boolean, assetId: string | number) => {
     if (state) {
       disableAsCollateralMutate(
@@ -148,11 +156,16 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
           </Box>
         ),
         collateral: (item) => (
-          <Switch
-            className="pl-4"
-            checked={item.collateral}
-            onChange={() => handleCollateralClick(item.collateral, item.id)}
-          />
+          <Skeleton
+            isLoading={isEnableAsCollateral || isDisableAsCollateral}
+            className="w-[25px] h-[15px]"
+          >
+            <Switch
+              className="pl-4"
+              checked={item.collateral}
+              onChange={() => handleCollateralClick(item.collateral, item.id)}
+            />
+          </Skeleton>
         ),
         walletBalance: (item) => (
           <Typography variant="subtitle1" className="pl-4">

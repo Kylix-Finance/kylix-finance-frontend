@@ -59,13 +59,6 @@ function TBody<Schema, ExtraFields extends string = string>({
     (isLoading && !isFetched) ||
     (isFetched && !!data.length);
 
-  console.log(
-    "hey:",
-    !isLoading && !isFetched,
-    isLoading && !isFetched,
-    isFetched && !!data.length
-  );
-
   const shouldShowNoDataRow = !isLoading && isFetched && !data.length;
 
   return (

@@ -46,5 +46,5 @@ export const handleInputChange = (
 
 export const formatPercentage = (value: number | string, decimals: number) =>
   isNaN(Number(formatUnit(value, decimals)))
-    ? "-"
+    ? "0%"
     : `${Number(formatUnit(value, decimals)).toFixed(2)}%`;
