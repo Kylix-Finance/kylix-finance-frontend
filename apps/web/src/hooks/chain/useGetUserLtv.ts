@@ -10,6 +10,7 @@ export interface UserLtvResult {
   current_ltv: string;
   sale_ltv: string;
   liquidation_ltv: string;
+  borrow_limit: string;
 }
 
 export const useGetUserLtv = ({ account }: UseGetUserLtvParams = {}) => {
@@ -38,10 +39,12 @@ const userLtv = async (
   const liquidationLtv = Number(formatUnit(result.liquidation_ltv, 16)).toFixed(
     2
   );
+  const borrowLimit = Number(formatUnit(result.borrow_limit, 18)).toFixed(2);
 
   return {
-    currentLtv: currentLtv,
-    saleLtv: saleLtv,
-    liquidationLtv: liquidationLtv,
+    currentLtv,
+    saleLtv,
+    liquidationLtv,
+    borrowLimit,
   };
 };

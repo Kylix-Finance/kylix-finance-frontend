@@ -24,7 +24,7 @@ const Borrowed = () => {
 
   const data = AssetWiseBorrowsCollaterals?.borrowedAssets?.map?.((item) => {
     return {
-      id: item.collateralAssets?.[0] || 0,
+      id: item.assetId || 0,
       apy: formatPercentage(item.apy?.toString() || 0, item.decimals),
       asset: item.assetSymbol,
       balance: formatBigNumbers(formatUnit(item.balance, item.decimals), 4),
@@ -62,7 +62,13 @@ const Borrowed = () => {
         borrowed: (item) => (
           <Typography variant="subtitle1">{item.borrowed}</Typography>
         ),
-        actions: (item) => <TableActions assetId={item.id} />,
+        actions: (item) => (
+          <TableActions
+            assetId={item.id}
+            firstAction="Borrow"
+            secondActionb="Repay"
+          />
+        ),
       }}
       data={data || []}
     />

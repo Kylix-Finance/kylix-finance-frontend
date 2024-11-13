@@ -48,8 +48,8 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         "Collateral Factor": item.collateral_q,
         collateral: item.is_collateral,
         collateralQ: item.collateral_q,
-        utilization: formatPercentage(item.utilization, item.asset_decimals),
-        borrowRate: formatPercentage(item.borrow_apy, item.asset_decimals),
+        utilization: item.utilization,
+        borrowRate: item.borrow_apy,
         supplyRate: item.supply_apy,
         walletBalance: formatUnit(
           item.user_asset_balance.toString(),

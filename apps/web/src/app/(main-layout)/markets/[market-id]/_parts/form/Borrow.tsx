@@ -13,6 +13,8 @@ import {
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
 import { usePool } from "~/hooks/chain/usePool";
 import { useSimpleBorrow } from "~/hooks/chain/useSimpleBorrow";
+import { useGetUserLtv } from "~/hooks/chain/useGetUserLtv";
+import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
 
 export const Borrow = () => {
   const [value, setValue] = useState("");
@@ -29,17 +31,26 @@ export const Borrow = () => {
     assetId: tokenId,
   });
 
+  const { formattedPrice } = useAssetPrice({
+    assetId: tokenId,
+  });
+
   const borrowRate = formatUnit(pool?.borrowRate || 0, 4);
 
-  const maxTotalSupply = formatUnit(
-    BigInt(pool?.reserveBalance || 0),
-    assetMetaData?.decimals
+  const { data: ltv } = useGetUserLtv();
+  const borrowLimit = ltv?.borrowLimit;
+
+  const borrowLimitAmount =
+    Number(borrowLimit || 0) / Number(formattedPrice || 1);
+
+  const poolBalance = Number(
+    formatUnit(BigInt(pool?.reserveBalance || 0), assetMetaData?.decimals) || 0
   );
+  const maxTotalSupply = Math.min(poolBalance, borrowLimitAmount);
 
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
     { poolId: tokenId }
   );
-  console.log("___________OOO", assetWiseBorrowCollateral);
 
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 
@@ -68,9 +79,7 @@ export const Borrow = () => {
   const items: Array<ListItem> = [
     {
       label: "Available to borrow",
-      value:
-        "$" +
-        (!assetMetaData || !pool ? "0" : formatBigNumbers(maxTotalSupply, 4)),
+      value: "$" + (!assetMetaData || !pool ? "0" : maxTotalSupply.toFixed(4)),
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -112,7 +121,7 @@ export const Borrow = () => {
       balance={borrowAssetBalance?.toString()}
       symbol={assetMetaData?.symbol}
       onMaxClick={() => {
-        setValue(maxTotalSupply);
+        setValue(maxTotalSupply.toFixed(4));
       }}
     />
   );

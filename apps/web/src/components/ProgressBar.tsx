@@ -150,7 +150,7 @@ const Percent = ({ value }: { value: number }) => {
       variant="body3"
       fontWeight={600}
       lineHeight={"24px"}
-      className=" !text-[#4E5B72] font-number"
+      className=" !text-[#4E5B72] font-number flex"
     >
       {value} %
     </Typography>
