@@ -31,7 +31,7 @@ const Borrowed = () => {
       id: item.assetId || 0,
       apy: formatPercentage(item.apy?.toString() || 0, item.decimals),
       asset: item.assetSymbol,
-      balance: formatBigNumbers(formatUnit(item.balance, item.decimals), 4),
+      balance: formatUnit(item.balance, item.decimals),
       borrowed: formatBigNumbers(
         formatUnit(item.borrowed || 0, item.decimals),
         4
