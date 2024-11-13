@@ -17,7 +17,7 @@ import {
   TRowProps,
 } from "./types";
 import { TableStore } from "../../store";
-import TRow, { CellValueComponents } from "./TRow";
+import { CellValueComponents } from "./TRow";
 
 // ? ExtraData is the data which is not going to render in the table
 
@@ -30,10 +30,11 @@ interface Props<Schema, ExtraFields extends string> {
   hiddenTHeads?: Array<keyof Schema | ExtraFields>;
   isFetched: boolean;
   isLoading: boolean;
+  componentBeforeBody?: React.FC;
+  noDataComponent?: React.FC;
   numeric?: Array<keyof Schema>;
   // UNUSED
   // onTRowClick?: OnTRowClick<Schema>;
-  middleComponent?: React.FC;
   placeholderLength: number;
   rowSpacing?: string;
   tableName: TableStore.TableName;
@@ -54,7 +55,7 @@ export function Table<Schema, ExtraFields extends string = string>({
   hiddenTHeads,
   isFetched,
   isLoading,
-  middleComponent,
+  componentBeforeBody,
   numeric,
   placeholderLength,
   rowSpacing,
@@ -65,6 +66,7 @@ export function Table<Schema, ExtraFields extends string = string>({
   tContainerProps,
   tHeadProps,
   tRowProps,
+  noDataComponent,
 }: Props<Schema, ExtraFields>) {
   type Key = keyof Schema;
 
@@ -107,16 +109,17 @@ export function Table<Schema, ExtraFields extends string = string>({
         />
 
         <TBody
-          placeholderLength={placeholderLength}
           components={components}
           data={sortedData}
           headers={headers}
-          isLoading={isLoading}
           isFetched={isFetched}
-          middleComponent={middleComponent}
-          tableName={tableName}
+          isLoading={isLoading}
+          componentBeforeBody={componentBeforeBody}
+          noDataComponent={noDataComponent}
           numeric={numeric}
+          placeholderLength={placeholderLength}
           rowSpacing={rowSpacing}
+          tableName={tableName}
           tBody={tBodyProps}
           tCellClassnames={tCellClassnames}
           tRowProps={tRowProps}
