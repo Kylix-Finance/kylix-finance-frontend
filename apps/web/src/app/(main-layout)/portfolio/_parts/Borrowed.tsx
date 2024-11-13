@@ -21,17 +21,13 @@ const Borrowed = () => {
     isLoading,
     isFetched,
   } = useGetAssetWiseBorrowsCollaterals();
-  console.log(
-    "____________________________________________AssetWiseBorrowsCollaterals",
-    AssetWiseBorrowsCollaterals
-  );
 
   const data = AssetWiseBorrowsCollaterals?.borrowedAssets?.map?.((item) => {
     return {
       id: item.assetId || 0,
       apy: formatPercentage(item.apy?.toString() || 0, item.decimals),
       asset: item.assetSymbol,
-      balance: formatUnit(item.balance, item.decimals),
+      balance: formatBigNumbers(formatUnit(item.balance, item.decimals), 4),
       borrowed: formatBigNumbers(
         formatUnit(item.borrowed || 0, item.decimals),
         4
@@ -67,7 +63,11 @@ const Borrowed = () => {
           <Typography variant="subtitle1">{item.borrowed}</Typography>
         ),
         actions: (item) => (
-          <TableActions assetId={item.id} secondActionb="Repay" />
+          <TableActions
+            assetId={item.id}
+            firstAction="Borrow"
+            secondActionb="Repay"
+          />
         ),
       }}
       data={data || []}

@@ -62,7 +62,7 @@ const BorrowValue = () => {
               lineHeight="22px"
               className="font-number"
             >
-              $0
+              ${ltv?.borrowLimit}
             </Typography>
             <Typography variant="body3" lineHeight="17px">
               USD

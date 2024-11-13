@@ -7,6 +7,7 @@ import { Asset, notify } from "~/components";
 import { useDisableAsCollateral } from "~/hooks/chain/useDisableAsCollateral";
 import { useEnableAsCollateral } from "~/hooks/chain/useEnableAsCollateral";
 import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetAssetWiseSupplies";
+import { TableActions } from "../../markets/_parts/TableActions";
 
 const Supplied = () => {
   const {
@@ -121,25 +122,8 @@ const Supplied = () => {
             }
           />
         ),
-        actions: () => (
-          <Box className="flex justify-end gap-6 items-center">
-            <Box className="flex justify-end gap-1 items-center">
-              <Button variant="contained">
-                <Typography variant="subtitle1" fontWeight={600}>
-                  Withdraw
-                </Typography>
-              </Button>
-              <Button variant="outlined">
-                <Typography
-                  className="!text-primary-500"
-                  variant="subtitle1"
-                  fontWeight={600}
-                >
-                  Supply
-                </Typography>
-              </Button>
-            </Box>
-          </Box>
+        actions: (item) => (
+          <TableActions assetId={item.assetId} secondActionb="Withdraw" />
         ),
       }}
       data={supplies || []}

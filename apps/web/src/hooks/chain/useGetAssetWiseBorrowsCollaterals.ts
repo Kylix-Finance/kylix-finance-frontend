@@ -105,7 +105,7 @@ export const getAssetWiseBorrowsCollaterals = async ({
       apy: item.apy,
       assetId: item.asset_id,
       decimals: item.decimals,
-      usdtBalance: item.usdt_balance,
+      usdtBalance: BigInt(item.usdt_balance),
     })),
     collateralAssets: response[1]?.map((item) => ({
       assetIcon: decodeArrayToString(item.asset_icon),
@@ -114,7 +114,7 @@ export const getAssetWiseBorrowsCollaterals = async ({
       balance: BigInt(item.balance),
       assetId: item.asset_id,
       decimals: item.decimals,
-      usdtBalance: item.usdt_balance,
+      usdtBalance: BigInt(item.usdt_balance),
     })),
     totalBorrowed: BigInt(response?.[2] || 0),
     totalCollateral: BigInt(response?.[3] || 0),
