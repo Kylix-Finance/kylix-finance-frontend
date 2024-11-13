@@ -1,4 +1,4 @@
-import { Box, TableBody, TableCell, TableRow } from "@mui/material";
+import { Box, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 
 import TRow, { CellValueComponents } from "./TRow";
 import {
@@ -8,7 +8,7 @@ import {
   TBodyProps,
   TRowProps,
 } from "./types";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { Headers } from "./THead";
 import TCell from "./TCell";
 import { TableStore } from "../../store";
@@ -19,7 +19,8 @@ interface Props<Schema, ExtraFields extends string = string> {
   headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   isFetched: boolean;
   isLoading: boolean;
-  middleComponent?: React.FC;
+  componentBeforeBody?: React.FC;
+  noDataComponent?: React.FC;
   numeric?: Numeric<Schema>;
   onTRowClick?: OnTRowClick<Schema>;
   placeholderLength: number;
@@ -36,16 +37,15 @@ function TBody<Schema, ExtraFields extends string = string>({
   headers,
   isFetched,
   isLoading,
-  middleComponent,
+  componentBeforeBody: ComponentBeforeBody,
   numeric,
   placeholderLength,
   rowSpacing,
   tBody,
   tCellClassnames,
   tRowProps,
+  noDataComponent,
 }: Props<Schema, ExtraFields>) {
-  const FixedMiddleComponent = middleComponent || (() => null);
-
   const placeholderArr = Array.from<null>({ length: placeholderLength }).fill(
     null
   );
@@ -65,7 +65,7 @@ function TBody<Schema, ExtraFields extends string = string>({
     <TableBody {...tBody}>
       <TableRow>
         <TCell style={{ padding: "0px" }} colSpan={Object.keys(headers).length}>
-          <FixedMiddleComponent />
+          {!!ComponentBeforeBody && <ComponentBeforeBody />}
         </TCell>
       </TableRow>
 
@@ -106,9 +106,11 @@ function TBody<Schema, ExtraFields extends string = string>({
             <TableRow key={index}>
               <TableCell colSpan={headersLength}>
                 <Box className="flex justify-center items-center h-[40px]">
-                  {Math.floor(placeholderLength / 2) === index
-                    ? "No Data Available"
-                    : ""}
+                  {Math.floor(placeholderLength / 2) === index ? (
+                    <NoData noDataComponent={noDataComponent} />
+                  ) : (
+                    <> </>
+                  )}
                 </Box>
               </TableCell>
             </TableRow>
@@ -119,5 +121,18 @@ function TBody<Schema, ExtraFields extends string = string>({
     </TableBody>
   );
 }
+
+const NoData: React.FC<{ noDataComponent?: React.FC }> = ({
+  noDataComponent,
+}) => {
+  const Component =
+    noDataComponent || (() => <Typography>No Data Available</Typography>);
+
+  return (
+    <>
+      <Component />
+    </>
+  );
+};
 
 export default TBody;
