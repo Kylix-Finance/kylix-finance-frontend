@@ -99,6 +99,7 @@ const Supplied = () => {
         balance: "Balance",
         apy: "APY",
         supplied: "Supplied",
+        collateral: "Collateral",
         actions: "Action",
       }}
       hiddenTHeads={["actions", "assetId"]}
@@ -112,14 +113,16 @@ const Supplied = () => {
         supplied: (item) => (
           <Typography variant="subtitle1">{item.supplied}</Typography>
         ),
-        actions: (item) => (
+        collateral: (item) => (
+          <Switch
+            checked={item.collateral}
+            onChange={() =>
+              handleCollateralClick(item.collateral, item.assetId)
+            }
+          />
+        ),
+        actions: () => (
           <Box className="flex justify-end gap-6 items-center">
-            <Switch
-              checked={item.collateral}
-              onChange={() =>
-                handleCollateralClick(item.collateral, item.assetId)
-              }
-            />
             <Box className="flex justify-end gap-1 items-center">
               <Button variant="contained">
                 <Typography variant="subtitle1" fontWeight={600}>
