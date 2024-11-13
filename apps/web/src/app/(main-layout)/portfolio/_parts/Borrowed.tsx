@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Link, Stack, Typography } from "@mui/material";
 import {
   formatBigNumbers,
   formatUnit,
@@ -41,6 +41,7 @@ const Borrowed = () => {
       placeholderLength={3}
       isLoading={isLoading}
       tCellClassnames={"!p-3"}
+      noDataComponent={NoData}
       rowSpacing="10px"
       hasPagination={false}
       defaultSortKey="asset"
@@ -72,6 +73,17 @@ const Borrowed = () => {
       }}
       data={data || []}
     />
+  );
+};
+
+const NoData = () => {
+  return (
+    <Stack gap={1} alignItems="center">
+      <Typography>No Data Available</Typography>
+      <Link href={"/markets"}>
+        <Button>Borrow</Button>
+      </Link>
+    </Stack>
   );
 };
 

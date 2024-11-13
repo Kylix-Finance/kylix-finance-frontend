@@ -105,7 +105,7 @@ export const PositionsTable = () => {
       defaultSortKey="assetName"
       rowSpacing="10px"
       tRowProps={{ className: "!rounded-[8px]" }}
-      middleComponent={() => {
+      componentBeforeBody={() => {
         return (
           <Button
             fullWidth

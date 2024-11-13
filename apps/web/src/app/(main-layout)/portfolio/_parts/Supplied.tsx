@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Switch, Typography } from "@mui/material";
+import { Box, Button, Stack, Switch, Typography } from "@mui/material";
 import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
 import { Table } from "@repo/ui";
 import { Asset, notify } from "~/components";
@@ -8,6 +8,7 @@ import { useDisableAsCollateral } from "~/hooks/chain/useDisableAsCollateral";
 import { useEnableAsCollateral } from "~/hooks/chain/useEnableAsCollateral";
 import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetAssetWiseSupplies";
 import { TableActions } from "../../markets/_parts/TableActions";
+import Link from "next/link";
 
 const Supplied = () => {
   const {
@@ -87,12 +88,13 @@ const Supplied = () => {
     }
   };
   return (
-    <Table<TableData[number]>
+    <Table<TableData[number], "actions">
       isLoading={isLoading}
       isFetched={isFetched}
       placeholderLength={3}
       tCellClassnames={"!p-3"}
       rowSpacing="10px"
+      noDataComponent={NoData}
       hasPagination={false}
       defaultSortKey="asset"
       headers={{
@@ -131,14 +133,26 @@ const Supplied = () => {
   );
 };
 
+// TODO: Refactor
+const NoData = () => {
+  return (
+    <Stack gap={1} alignItems="center">
+      <Typography>No Data Available</Typography>
+      <Link href={"/markets"}>
+        <Button>Supply</Button>
+      </Link>
+    </Stack>
+  );
+};
+
 export default Supplied;
 
 // TODO: remove any
 type TableData = {
-  asset: string;
   apy: string;
-  balance: string;
-  supplied: string;
-  collateral: boolean;
+  asset: string;
   assetId: number;
+  balance: string;
+  collateral: boolean;
+  supplied: string;
 }[];
