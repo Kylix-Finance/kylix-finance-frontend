@@ -23,7 +23,6 @@ const Supplied = () => {
     isPending: isDisableAsCollateral,
   } = useDisableAsCollateral();
   const supplies:
-    | TableData
     | {
         asset: string;
         apy: string;
@@ -88,7 +87,7 @@ const Supplied = () => {
     }
   };
   return (
-    <Table<TableData[number], "actions">
+    <Table
       isLoading={isLoading}
       isFetched={isFetched}
       placeholderLength={3}
@@ -137,8 +136,8 @@ const Supplied = () => {
 const NoData = () => {
   return (
     <Stack gap={1} alignItems="center">
-      <Typography>No Data Available</Typography>
-      <Link href={"/markets"}>
+      <Typography variant="subtitle1">No Data Available</Typography>
+      <Link href="/markets">
         <Button>Supply</Button>
       </Link>
     </Stack>
@@ -146,13 +145,3 @@ const NoData = () => {
 };
 
 export default Supplied;
-
-// TODO: remove any
-type TableData = {
-  apy: string;
-  asset: string;
-  assetId: number;
-  balance: string;
-  collateral: boolean;
-  supplied: string;
-}[];

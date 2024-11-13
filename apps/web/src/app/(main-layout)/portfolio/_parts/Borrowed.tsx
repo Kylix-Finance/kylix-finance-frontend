@@ -36,7 +36,7 @@ const Borrowed = () => {
   });
 
   return (
-    <Table<TableData[number]>
+    <Table
       isFetched={isFetched}
       placeholderLength={3}
       isLoading={isLoading}
@@ -79,8 +79,8 @@ const Borrowed = () => {
 const NoData = () => {
   return (
     <Stack gap={1} alignItems="center">
-      <Typography>No Data Available</Typography>
-      <Link href={"/markets"}>
+      <Typography variant="subtitle1">No Data Available</Typography>
+      <Link href="/markets">
         <Button>Borrow</Button>
       </Link>
     </Stack>
@@ -88,11 +88,3 @@ const NoData = () => {
 };
 
 export default Borrowed;
-
-type TableData = {
-  asset: string;
-  apy: string;
-  borrowed: string;
-  balance: string;
-  id: number;
-}[];
