@@ -56,7 +56,7 @@ export const ModernMultiLineChart = ({
   );
 
   return (
-    <Box height={280} width="100%" className="flex items-center">
+    <Box className="flex items-center">
       <Box className="w-[120px] -mr-20">
         {datasets.map((dataset, index) => (
           <Box key={dataset.label} className="mb-4">
@@ -69,139 +69,142 @@ export const ModernMultiLineChart = ({
           </Box>
         ))}
       </Box>
-      <Line
-        data={{
-          datasets,
-        }}
-        options={{
-          responsive: true,
-          hover: {
-            mode: "index",
-            intersect: false,
-          },
-          onHover: (_, elements) => {
-            const borrow = elements[0]?.element.y;
-            const earn = elements[1]?.element.y;
 
-            const points = elements.map(
-              //@ts-expect-error: type is not correct
-              (element) => element.element.$context.parsed.y * 100
-            );
-
-            if (borrow && earn) {
-              // startTransition(() => {
-              //   setActivePoint(points);
-              // });
-
-              throttledSetState(points);
-            }
-          },
-          plugins: {
-            legend: {
-              display: false,
-            },
-            tooltip: {
+      <Box height={280} width="100%">
+        <Line
+          data={{
+            datasets,
+          }}
+          options={{
+            responsive: true,
+            hover: {
               mode: "index",
               intersect: false,
-              //@ts-expect-error: react-chartjs-2
-              position: "xAxis",
-              callbacks: {
-                title: (tooltipItem) => {
-                  const value = tooltipItem[0]?.label;
-                  return `Utilization ${value}%`;
-                },
-                label: () => {
-                  return "";
-                },
-              },
-              displayColors: false,
-              backgroundColor: "transparent", // Removes the background color
-              borderWidth: 0, // Sets border width to 0
-              caretSize: 0,
-              titleColor: "#000",
-              titleFont: { size: 12 },
             },
-            crosshair: {
-              line: {
-                color: "rgba(0, 0, 0, 1)",
-                width: 2,
-              },
-              sync: {
-                enabled: false,
-              },
-              zoom: {
-                enabled: false,
-              },
+            onHover: (_, elements) => {
+              const borrow = elements[0]?.element.y;
+              const earn = elements[1]?.element.y;
+
+              const points = elements.map(
+                //@ts-expect-error: type is not correct
+                (element) => element.element.$context.parsed.y * 100
+              );
+
+              if (borrow && earn) {
+                // startTransition(() => {
+                //   setActivePoint(points);
+                // });
+
+                throttledSetState(points);
+              }
             },
-          },
-          scales: {
-            x: {
-              type: "linear",
-              display: true,
-              grid: {
-                display: xGrid,
-              },
-              border: {
+            plugins: {
+              legend: {
                 display: false,
               },
-              ticks: {
-                color: palette.text.disabled,
-                align: "inner",
-                autoSkip: true,
-                maxTicksLimit: 2,
-                callback: (value) => `${value}%`,
+              tooltip: {
+                mode: "index",
+                intersect: false,
+                //@ts-expect-error: react-chartjs-2
+                position: "xAxis",
+                callbacks: {
+                  title: (tooltipItem) => {
+                    const value = tooltipItem[0]?.label;
+                    return `Utilization ${value}%`;
+                  },
+                  label: () => {
+                    return "";
+                  },
+                },
+                displayColors: false,
+                backgroundColor: "transparent", // Removes the background color
+                borderWidth: 0, // Sets border width to 0
+                caretSize: 0,
+                titleColor: "#000",
+                titleFont: { size: 12 },
               },
-              title: {
+              crosshair: {
+                line: {
+                  color: "rgba(0, 0, 0, 1)",
+                  width: 2,
+                },
+                sync: {
+                  enabled: false,
+                },
+                zoom: {
+                  enabled: false,
+                },
+              },
+            },
+            scales: {
+              x: {
+                type: "linear",
                 display: true,
-                text: xLabel,
-                color: palette.text.primary,
-                font: {
-                  size: 14,
+                grid: {
+                  display: xGrid,
+                },
+                border: {
+                  display: false,
+                },
+                ticks: {
+                  color: palette.text.disabled,
+                  align: "inner",
+                  autoSkip: true,
+                  maxTicksLimit: 2,
+                  callback: (value) => `${value}%`,
+                },
+                title: {
+                  display: true,
+                  text: xLabel,
+                  color: palette.text.primary,
+                  font: {
+                    size: 14,
+                  },
                 },
               },
-            },
-            y: {
-              display: true,
-              beginAtZero: true,
-              border: {
-                display: false,
-              },
-              grid: {
-                display: yGrid,
-              },
-              ticks: {
-                display: false,
-                color: palette.text.disabled,
-                count: 6,
-                callback: (value) => {
-                  return formatNumber(value);
-                },
-              },
-              title: {
+              y: {
                 display: true,
-                text: yLabel,
-                color: palette.text.primary,
-                padding: 20,
-                font: {
-                  size: 14,
+                beginAtZero: true,
+                border: {
+                  display: false,
+                },
+                grid: {
+                  display: yGrid,
+                },
+                ticks: {
+                  display: false,
+                  color: palette.text.disabled,
+                  count: 6,
+                  callback: (value) => {
+                    return formatNumber(value);
+                  },
+                },
+                title: {
+                  display: true,
+                  text: yLabel,
+                  color: palette.text.primary,
+                  padding: 20,
+                  font: {
+                    size: 14,
+                  },
                 },
               },
             },
-          },
-          elements: {
-            point: {
-              radius: 1,
+            elements: {
+              point: {
+                radius: 1,
+              },
             },
-          },
-          maintainAspectRatio: false,
-        }}
-        plugins={[
-          {
-            id: "crosshair",
-            ...Crosshair,
-          },
-        ]}
-      />
+            maintainAspectRatio: false,
+          }}
+          plugins={[
+            {
+              id: "crosshair",
+              ...Crosshair,
+            },
+          ]}
+        />
+      </Box>
     </Box>
   );
 };
