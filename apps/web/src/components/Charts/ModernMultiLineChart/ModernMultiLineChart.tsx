@@ -83,7 +83,10 @@ export const ModernMultiLineChart = ({
             const borrow = elements[0]?.element.y;
             const earn = elements[1]?.element.y;
 
-            const points = elements.map((element) => element.element.y);
+            const points = elements.map(
+              //@ts-expect-error: type is not correct
+              (element) => element.element.$context.parsed.y * 100
+            );
 
             if (borrow && earn) {
               // startTransition(() => {
