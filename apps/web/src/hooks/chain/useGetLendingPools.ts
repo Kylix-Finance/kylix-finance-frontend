@@ -105,10 +105,6 @@ export const getLendingPool = async ({
     utilization: asset.utilization,
     is_collateral: Boolean(asset.is_collateral),
   }));
-  console.log(
-    "_______________________________________________________toAssetsJson",
-    toAssetsJson
-  );
 
   const summary = {
     total_borrow: BigInt(result[1].total_borrow),
