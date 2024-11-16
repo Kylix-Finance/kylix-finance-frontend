@@ -51,7 +51,7 @@ interface RawSummary {
 export type PoolsRawAssetData = [RawAsset[], RawSummary];
 
 export interface UseGetLendingPoolsParams {
-  asset?: number;
+  asset?: number | string;
   account?: string;
 }
 
@@ -86,7 +86,7 @@ export const getLendingPool = async ({
 }: { provider: WsProvider } & UseGetLendingPoolsParams) => {
   const result = await provider.send<PoolsRawAssetData>(
     "lending_getLendingPools",
-    [asset, account]
+    [Number(asset), account]
   );
 
   const toAssetsJson: Asset[] = result[0].map((asset) => ({

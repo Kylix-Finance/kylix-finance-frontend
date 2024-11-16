@@ -13,6 +13,7 @@ import { useWithdraw } from "~/hooks/chain/useWithdraw";
 import { usePool } from "~/hooks/chain/usePool";
 import { Box, Typography } from "@mui/material";
 import ValueItemWrapper from "./ValueItemWrapper";
+import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
 
 export const Withdraw = () => {
   const params = useParams();
@@ -31,7 +32,10 @@ export const Withdraw = () => {
     customDecimals: assetMetaData?.decimals,
     enabled: !!assetMetaData && !!pool,
   });
-  const supplyRate = formatUnit(pool?.supplyRate || 0, 4);
+
+  const { data: lendingPool } = useGetLendingPools({ asset: tokenId });
+  const poolDetails = lendingPool?.assets[0];
+  const supplyRate = poolDetails?.supply_apy;
 
   const handleClick = () => {
     mutate(
@@ -68,7 +72,7 @@ export const Withdraw = () => {
     },
     {
       label: "Supply APY",
-      value: "%" + supplyRate,
+      value: supplyRate,
       kylixValue: "%0",
       valueClassName: "!text-[#4E5B72]",
     },

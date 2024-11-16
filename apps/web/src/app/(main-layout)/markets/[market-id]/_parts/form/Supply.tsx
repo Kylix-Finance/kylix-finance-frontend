@@ -13,6 +13,7 @@ import { useSupply } from "~/hooks/chain/useSupply";
 import { useParams } from "next/navigation";
 import { usePool } from "~/hooks/chain/usePool";
 import ValueItemWrapper from "./ValueItemWrapper";
+import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
 
 export const Supply = () => {
   const params = useParams();
@@ -25,7 +26,9 @@ export const Supply = () => {
     assetId: tokenId,
   });
 
-  const supplyRate = formatUnit(pool?.supplyRate || 0, 4);
+  const { data: lendingPool } = useGetLendingPools({ asset: tokenId });
+  const poolDetails = lendingPool?.assets[0];
+  const supplyRate = poolDetails?.supply_apy;
 
   const { formattedBalance: formattedKTokenBalance } = useBalance({
     assetId: pool?.id,
@@ -65,7 +68,7 @@ export const Supply = () => {
     },
     {
       label: "Supply APY",
-      value: "%" + supplyRate,
+      value: supplyRate,
       kylixValue: "%0",
       valueClassName: "!text-[#4E5B72]",
     },
