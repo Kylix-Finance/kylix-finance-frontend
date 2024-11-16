@@ -164,6 +164,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
               className="pl-4"
               checked={item.collateral}
               onChange={() => handleCollateralClick(item.collateral, item.id)}
+              disabled={isEnableAsCollateral || isDisableAsCollateral}
             />
           </Skeleton>
         ),
