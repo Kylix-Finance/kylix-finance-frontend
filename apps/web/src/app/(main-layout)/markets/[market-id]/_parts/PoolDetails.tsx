@@ -9,17 +9,21 @@ import { formatBigNumbers, formatUnit, useMetadata } from "@repo/onchain-utils";
 import { Skeleton } from "@repo/ui";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
 import ValueItemWrapper from "./form/ValueItemWrapper";
+import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
 
 const PoolDetails = () => {
   const params = useParams();
   const lendTokenId = params["market-id"] as string;
   const { pool } = usePool({ assetId: lendTokenId });
+  const { data: lendingPool } = useGetLendingPools({ asset: lendTokenId });
+  const poolDetails = lendingPool?.assets[0];
+  const borrowRate = poolDetails?.borrow_apy;
+  const supplyRate = poolDetails?.supply_apy;
+
   const { assetMetaData } = useMetadata(lendTokenId);
   const { formattedPrice } = useAssetPrice({
     assetId: lendTokenId,
   });
-  const borrowRate = formatUnit(pool?.borrowRate || 0, 4);
-  const supplyRate = formatUnit(pool?.supplyRate || 0, 4);
   const totalSupply =
     assetMetaData &&
     formatUnit(BigInt(pool?.reserveBalance || 0), assetMetaData.decimals);
@@ -66,12 +70,12 @@ const PoolDetails = () => {
   const items2: Array<ListItem> = [
     {
       label: "Supply APY:",
-      value: "%" + supplyRate,
+      value: supplyRate,
       kylixValue: "%0",
     },
     {
       label: "Borrow APY:",
-      value: "%" + borrowRate,
+      value: borrowRate,
       kylixValue: "%0",
     },
   ];

@@ -29,8 +29,12 @@ type MarketsTableUIProps = {
 
 const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
   const { data, isLoading, isFetched } = useGetLendingPools();
-  const { mutate: enableAsCollateralMutate, isPending: isEnableAsCollateral } =
-    useEnableAsCollateral();
+  const {
+    mutate: enableAsCollateralMutate,
+    isPending: isEnableAsCollateral,
+    variables,
+  } = useEnableAsCollateral();
+
   const {
     mutate: disableAsCollateralMutate,
     isPending: isDisableAsCollateral,
@@ -58,13 +62,6 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         id: item.id,
       }));
   }, [data, searchQuery]);
-
-  console.log(
-    "isEnableAsCollateral:",
-    isEnableAsCollateral,
-    "isDisableAsCollateral:",
-    isDisableAsCollateral
-  );
 
   const handleCollateralClick = (state: boolean, assetId: string | number) => {
     if (state) {
@@ -157,13 +154,17 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         ),
         collateral: (item) => (
           <Skeleton
-            isLoading={isEnableAsCollateral || isDisableAsCollateral}
+            isLoading={
+              variables?.assetId == item.id &&
+              (isEnableAsCollateral || isDisableAsCollateral)
+            }
             className="w-[25px] h-[15px]"
           >
             <Switch
               className="pl-4"
               checked={item.collateral}
               onChange={() => handleCollateralClick(item.collateral, item.id)}
+              disabled={isEnableAsCollateral || isDisableAsCollateral}
             />
           </Skeleton>
         ),

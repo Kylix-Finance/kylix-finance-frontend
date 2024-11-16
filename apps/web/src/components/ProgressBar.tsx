@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 "use client";
 
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Zoom } from "@mui/material";
 import { Skeleton } from "@repo/ui";
 import { isUndefined } from "lodash";
 import Image from "next/image";
 import { Icons } from "~/assets/svgs";
+import { Tooltip } from "./Tooltip";
 
 export interface Props {
   data: Partial<{ current: number; sale: number; target: number }> | undefined;
@@ -146,13 +147,25 @@ export default ProgressBar;
 
 const Percent = ({ value }: { value: number }) => {
   return (
-    <Typography
-      variant="body3"
-      fontWeight={600}
-      lineHeight={"24px"}
-      className=" !text-[#4E5B72] font-number flex"
+    <Tooltip
+      sx={(theme) => ({
+        [`& .MuiTooltip-tooltip`]: {
+          backgroundColor: theme.palette.secondary[100],
+          color: theme.palette.secondary[900],
+        },
+      })}
+      TransitionComponent={Zoom}
+      title={value}
     >
-      {value} %
-    </Typography>
+      <Typography
+        variant="body3"
+        fontWeight={600}
+        lineHeight={"24px"}
+        style={{ width: "max-content" }}
+        className=" !text-[#4E5B72] font-number flex"
+      >
+        {value.toFixed(2)} %
+      </Typography>
+    </Tooltip>
   );
 };

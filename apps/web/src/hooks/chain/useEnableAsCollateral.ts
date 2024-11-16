@@ -96,37 +96,39 @@ export const enableAsCollateral = async (
   }
   return new Promise<{ blockNumber: string | undefined; txHash: string }>(
     (resolve, reject) => {
-      extrinsic?.signAndSend(
-        activeAccount,
-        ({
-          status,
-          dispatchError,
-          blockNumber,
-          txHash,
-        }: SubmittableResultValue) => {
-          if (dispatchError) {
-            if (dispatchError.isModule) {
-              const decoded = api.registry.findMetaError(
-                dispatchError.asModule
-              );
-              const { docs } = decoded;
-              reject(new Error(docs.join(" ")));
+      extrinsic
+        ?.signAndSend(
+          activeAccount,
+          ({
+            status,
+            dispatchError,
+            blockNumber,
+            txHash,
+          }: SubmittableResultValue) => {
+            if (dispatchError) {
+              if (dispatchError.isModule) {
+                const decoded = api.registry.findMetaError(
+                  dispatchError.asModule
+                );
+                const { docs } = decoded;
+                reject(new Error(docs.join(" ")));
+              } else {
+                reject(new Error(dispatchError.toString()));
+              }
             } else {
-              reject(new Error(dispatchError.toString()));
-            }
-          } else {
-            if (status.isFinalized) {
-              console.info("Transaction finalized:", { blockNumber, txHash });
-              resolve({
-                txHash: txHash.toString(),
-                blockNumber: blockNumber?.toString(),
-              });
-            } else {
-              console.info(`Transaction status: ${status.type}`);
+              if (status.isFinalized) {
+                console.info("Transaction finalized:", { blockNumber, txHash });
+                resolve({
+                  txHash: txHash.toString(),
+                  blockNumber: blockNumber?.toString(),
+                });
+              } else {
+                console.info(`Transaction status: ${status.type}`);
+              }
             }
           }
-        }
-      );
+        )
+        .catch(reject);
     }
   );
 };

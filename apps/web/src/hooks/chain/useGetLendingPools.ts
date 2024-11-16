@@ -51,7 +51,7 @@ interface RawSummary {
 export type PoolsRawAssetData = [RawAsset[], RawSummary];
 
 export interface UseGetLendingPoolsParams {
-  asset?: number;
+  asset?: number | string;
   account?: string;
 }
 
@@ -86,7 +86,7 @@ export const getLendingPool = async ({
 }: { provider: WsProvider } & UseGetLendingPoolsParams) => {
   const result = await provider.send<PoolsRawAssetData>(
     "lending_getLendingPools",
-    [asset, account]
+    [Number(asset), account]
   );
 
   const toAssetsJson: Asset[] = result[0].map((asset) => ({
@@ -105,10 +105,6 @@ export const getLendingPool = async ({
     utilization: asset.utilization,
     is_collateral: Boolean(asset.is_collateral),
   }));
-  console.log(
-    "_______________________________________________________toAssetsJson",
-    toAssetsJson
-  );
 
   const summary = {
     total_borrow: BigInt(result[1].total_borrow),

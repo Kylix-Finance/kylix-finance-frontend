@@ -13,12 +13,15 @@ import {
 } from "@repo/onchain-utils";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
 import { useSimpleRepay } from "~/hooks/chain/useSimpleRepay";
+import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
 
 export const Repay = () => {
   const params = useParams();
   const tokenId = params["market-id"] as string;
   const { pool } = usePool({ assetId: tokenId });
-  const borrowRate = formatUnit(pool?.borrowRate || 0, 4);
+  const { data: lendingPool } = useGetLendingPools({ asset: tokenId });
+  const poolDetails = lendingPool?.assets[0];
+  const borrowRate = poolDetails?.borrow_apy;
 
   const [value, setValue] = useState("");
   const { assetMetaData } = useMetadata(tokenId);
@@ -78,7 +81,7 @@ export const Repay = () => {
     },
     {
       label: "Borrow Apy",
-      value: "%" + borrowRate,
+      value: borrowRate,
       kylixValue: "%0",
       valueClassName: "!text-[#4E5B72]",
     },

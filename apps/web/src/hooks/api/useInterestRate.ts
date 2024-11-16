@@ -5,7 +5,7 @@ import { getInterestRate } from "~/api/getInterestRate";
 export const useInterestRate = () => {
   return useQuery({
     queryKey: queryKeys.interestRate(),
-    queryFn: () => getInterestRate(),
+    queryFn: getInterestRate,
     placeholderData: keepPreviousData,
   });
 };

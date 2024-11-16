@@ -15,6 +15,7 @@ import { usePool } from "~/hooks/chain/usePool";
 import { useSimpleBorrow } from "~/hooks/chain/useSimpleBorrow";
 import { useGetUserLtv } from "~/hooks/chain/useGetUserLtv";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
+import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
 
 export const Borrow = () => {
   const [value, setValue] = useState("");
@@ -34,8 +35,9 @@ export const Borrow = () => {
   const { formattedPrice } = useAssetPrice({
     assetId: tokenId,
   });
-
-  const borrowRate = formatUnit(pool?.borrowRate || 0, 4);
+  const { data: lendingPool } = useGetLendingPools({ asset: tokenId });
+  const poolDetails = lendingPool?.assets[0];
+  const borrowRate = poolDetails?.borrow_apy;
 
   const { data: ltv } = useGetUserLtv();
   const borrowLimit = ltv?.borrowLimit;
@@ -84,7 +86,7 @@ export const Borrow = () => {
     },
     {
       label: "Borrow Apy",
-      value: "%" + borrowRate,
+      value: borrowRate,
       kylixValue: "%0",
       valueClassName: "!text-[#4E5B72]",
     },
