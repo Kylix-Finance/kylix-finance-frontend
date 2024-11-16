@@ -80,4 +80,4 @@ export const Icons = {
   World,
   XIcon,
 };
-export { Coins };
+export { Coins, KylixLogo };
