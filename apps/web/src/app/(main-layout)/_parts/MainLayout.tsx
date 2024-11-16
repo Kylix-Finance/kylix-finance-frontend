@@ -1,7 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
 import { Sidebar, Header } from "~/components";
-import { KylixLogo } from "~/assets/svgs";
 import Image from "next/image";
 import { kylixLogoImg } from "~/assets/imgs";
 

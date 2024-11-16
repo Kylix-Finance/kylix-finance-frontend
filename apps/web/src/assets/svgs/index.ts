@@ -9,7 +9,6 @@ import Governance from "./governance.svg";
 import Info from "./info.svg";
 import InformationAlert from "./information.svg";
 import Instagram from "./instagram.svg";
-import KylixLogo from "./kylix-logo.svg";
 import LeftArrow from "./left-arrow.svg";
 import Linkedin from "./linkedin.svg";
 import Liquidations from "./liquidations.svg";
@@ -66,7 +65,6 @@ export const Icons = {
   Health,
   Info,
   Instagram,
-  KylixLogo,
   LeftArrow,
   Linkedin,
   Plus: Plus,
@@ -80,4 +78,4 @@ export const Icons = {
   World,
   XIcon,
 };
-export { Coins, KylixLogo };
+export { Coins };
