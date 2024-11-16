@@ -40,15 +40,14 @@ export const Borrow = () => {
   const borrowRate = poolDetails?.borrow_apy;
 
   const { data: ltv } = useGetUserLtv();
-  const borrowLimit = ltv?.borrowLimit;
+  const allowance = ltv?.allowance;
 
-  const borrowLimitAmount =
-    Number(borrowLimit || 0) / Number(formattedPrice || 1);
+  const allowanceAmount = Number(allowance || 0) / Number(formattedPrice || 1);
 
   const poolBalance = Number(
     formatUnit(BigInt(pool?.reserveBalance || 0), assetMetaData?.decimals) || 0
   );
-  const maxTotalSupply = Math.min(poolBalance, borrowLimitAmount);
+  const maxTotalSupply = Math.min(poolBalance, allowanceAmount);
 
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
     { poolId: tokenId }

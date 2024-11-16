@@ -57,7 +57,7 @@ export const useEnableAsCollateral = () => {
         queryKey: queryKeys.assetWiseSupplies(activeAccount?.address),
       });
       queryClient.refetchQueries({
-        queryKey: queryKeys.lendingPools,
+        queryKey: queryKeys.lendingPools(),
       });
     },
   });
