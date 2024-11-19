@@ -163,8 +163,9 @@ export const ModernMultiLineChart = ({
                 },
               },
               y: {
+                type: "logarithmic",
                 display: true,
-                beginAtZero: true,
+                // beginAtZero: true,
                 border: {
                   display: false,
                 },
@@ -174,7 +175,7 @@ export const ModernMultiLineChart = ({
                 ticks: {
                   display: false,
                   color: palette.text.disabled,
-                  count: 6,
+                  // count: 6,
                   callback: (value) => {
                     return formatNumber(value);
                   },
