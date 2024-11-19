@@ -37,6 +37,12 @@ export const useSimpleBorrow = ({ asset, poolId }: Props) => {
       ),
     onSuccess: () => {
       queryClient.refetchQueries({
+        queryKey: queryKeys.userLtv(activeAccount),
+      });
+      queryClient.refetchQueries({
+        queryKey: queryKeys.lendingPools({ asset, account: activeAccount }),
+      });
+      queryClient.refetchQueries({
         queryKey: queryKeys.assetWiseBorrowsCollaterals(
           activeAccount?.address,
           asset

@@ -64,13 +64,17 @@ export const useGetLendingPools = ({
 
   const isEnabled = !!provider;
 
+  const finalAccount = activeAccount?.address
+    ? activeAccount?.address
+    : account;
+
   const query = useQuery({
-    queryKey: queryKeys.lendingPools,
+    queryKey: queryKeys.lendingPools({ asset, account: finalAccount }),
     queryFn: isEnabled
       ? () =>
           getLendingPool({
             provider,
-            account: activeAccount?.address ? activeAccount?.address : account,
+            account: finalAccount,
             asset,
           })
       : skipToken,

@@ -40,11 +40,13 @@ const userLtv = async (
     2
   );
   const borrowLimit = Number(formatUnit(result.borrow_limit, 18)).toFixed(2);
+  const allowance = Number(formatUnit(result.borrow_limit, 18)).toFixed(2);
 
   return {
     currentLtv,
     saleLtv,
     liquidationLtv,
     borrowLimit,
+    allowance,
   };
 };

@@ -45,6 +45,12 @@ export const useSupply = ({ asset, poolId }: Props) => {
     },
     onSuccess: () => {
       queryClient.refetchQueries({
+        queryKey: queryKeys.userLtv(activeAccount),
+      });
+      queryClient.refetchQueries({
+        queryKey: queryKeys.lendingPools({ asset, account: activeAccount }),
+      });
+      queryClient.refetchQueries({
         queryKey: queryKeys.poolData(asset),
       });
       queryClient.refetchQueries({

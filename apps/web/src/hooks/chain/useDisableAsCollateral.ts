@@ -49,7 +49,7 @@ export const useDisableAsCollateral = () => {
         }),
       });
       queryClient.refetchQueries({
-        queryKey: queryKeys.lendingPools,
+        queryKey: queryKeys.lendingPools(),
       });
     },
   });
