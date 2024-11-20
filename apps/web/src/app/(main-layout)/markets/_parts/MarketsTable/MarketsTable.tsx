@@ -10,6 +10,7 @@ import { formatUnit, useBalance } from "@repo/onchain-utils";
 import { formatPercentage } from "~/utils";
 import { useEnableAsCollateral } from "~/hooks/chain/useEnableAsCollateral";
 import { useDisableAsCollateral } from "~/hooks/chain/useDisableAsCollateral";
+import CollateralSwitch from "./CollateralSwitch";
 
 type TableData = Array<{
   asset: string;
@@ -29,16 +30,6 @@ type MarketsTableUIProps = {
 
 const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
   const { data, isLoading, isFetched } = useGetLendingPools();
-  const {
-    mutate: enableAsCollateralMutate,
-    isPending: isEnableAsCollateral,
-    variables,
-  } = useEnableAsCollateral();
-
-  const {
-    mutate: disableAsCollateralMutate,
-    isPending: isDisableAsCollateral,
-  } = useDisableAsCollateral();
 
   const transformedData = useMemo((): TableData => {
     if (!data?.assets) return [];
@@ -63,53 +54,6 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       }));
   }, [data, searchQuery]);
 
-  const handleCollateralClick = (state: boolean, assetId: string | number) => {
-    if (state) {
-      disableAsCollateralMutate(
-        {
-          assetId,
-        },
-        {
-          onSuccess: ({ blockNumber }) => {
-            notify({
-              type: "success",
-              title: "Success",
-              message: "Transaction completed on block " + blockNumber,
-            });
-          },
-          onError: ({ message, name }) => {
-            notify({
-              type: "error",
-              title: name,
-              message: message,
-            });
-          },
-        }
-      );
-    } else {
-      enableAsCollateralMutate(
-        {
-          assetId,
-        },
-        {
-          onSuccess: ({ blockNumber }) => {
-            notify({
-              type: "success",
-              title: "Success",
-              message: "Transaction completed on block " + blockNumber,
-            });
-          },
-          onError: ({ message, name }) => {
-            notify({
-              type: "error",
-              title: name,
-              message: message,
-            });
-          },
-        }
-      );
-    }
-  };
   return (
     <Table<TableData[number]>
       placeholderLength={5}
@@ -153,20 +97,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
           </Box>
         ),
         collateral: (item) => (
-          <Skeleton
-            isLoading={
-              variables?.assetId == item.id &&
-              (isEnableAsCollateral || isDisableAsCollateral)
-            }
-            className="w-[25px] h-[15px]"
-          >
-            <Switch
-              className="pl-4"
-              checked={item.collateral}
-              onChange={() => handleCollateralClick(item.collateral, item.id)}
-              disabled={isEnableAsCollateral || isDisableAsCollateral}
-            />
-          </Skeleton>
+          <CollateralSwitch id={item.id} isCollateral={item.collateral} />
         ),
         walletBalance: (item) => (
           <Typography variant="subtitle1" className="pl-4">
@@ -180,7 +111,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       data={transformedData}
       defaultSortKey="asset"
       tableName="markets"
-      isFetched={isFetched || isEnableAsCollateral || isDisableAsCollateral}
+      isFetched={isFetched}
       hasPagination={false}
     />
   );

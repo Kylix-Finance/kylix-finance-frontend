@@ -76,7 +76,7 @@ export const Repay = () => {
   const items: Array<ListItem> = [
     {
       label: "Available to repay",
-      value: "$" + max,
+      value: max,
       valueClassName: "!text-[#4E5B72]",
     },
     {
