@@ -1,33 +1,14 @@
 "use client";
 
 import { Box, Typography } from "@mui/material";
-import { ComponentProps, useState, startTransition, useCallback } from "react";
+import { ComponentProps, useState, useCallback } from "react";
 import { Line } from "react-chartjs-2";
 import { palette } from "~/config/palette";
 import { formatNumber } from "~/utils";
 import "chartjs-adapter-date-fns";
 import "chart.js/auto";
-import { ChartScale } from "~/types";
-import { getTimeUnit } from "~/utils/date";
-import Crosshair from "chartjs-plugin-crosshair";
-import { Tooltip } from "chart.js";
 import { throttle } from "lodash";
-
-//@ts-expect-error: react-chartjs-2
-Tooltip.positioners.xAxis = function (elements) {
-  if (elements.length === 0) {
-    return false;
-  }
-
-  const chart = elements[0].element.$context.chart;
-  const meta = chart.getDatasetMeta(elements[0].datasetIndex);
-  const dataPoint = meta.data[elements[0].index];
-
-  const x = dataPoint.getCenterPoint().x;
-  const y = chart.scales.y.bottom;
-
-  return { x, y: y + 21 };
-};
+import { crosshairPlugin } from "~/lib/chart";
 
 type LineProps = ComponentProps<typeof Line>;
 
@@ -103,37 +84,18 @@ export const ModernMultiLineChart = ({
                 display: false,
               },
               tooltip: {
-                mode: "index",
-                intersect: false,
-                //@ts-expect-error: react-chartjs-2
-                position: "xAxis",
-                callbacks: {
-                  title: (tooltipItem) => {
-                    const value = tooltipItem[0]?.label;
-                    return `Utilization ${value}%`;
-                  },
-                  label: () => {
-                    return "";
-                  },
-                },
-                displayColors: false,
-                backgroundColor: "transparent", // Removes the background color
-                borderWidth: 0, // Sets border width to 0
-                caretSize: 0,
-                titleColor: "#000",
-                titleFont: { size: 12 },
+                enabled: false,
               },
+              //@ts-expect-error: type is not correct
               crosshair: {
-                line: {
-                  color: "rgba(0, 0, 0, 1)",
-                  width: 2,
-                },
-                sync: {
-                  enabled: false,
-                },
-                zoom: {
-                  enabled: false,
-                },
+                lineColor: "rgba(0,0,0,0.7)",
+                lineWidth: 2,
+                datasetIndex: 0,
+                dataIndex: 50,
+                // text: "March Data Point",
+                textColor: "black",
+                fontSize: 14,
+                fontFamily: "Arial",
               },
             },
             scales: {
@@ -198,12 +160,7 @@ export const ModernMultiLineChart = ({
             },
             maintainAspectRatio: false,
           }}
-          plugins={[
-            {
-              id: "crosshair",
-              ...Crosshair,
-            },
-          ]}
+          plugins={[crosshairPlugin]}
         />
       </Box>
     </Box>
