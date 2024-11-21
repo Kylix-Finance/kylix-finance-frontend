@@ -78,16 +78,15 @@ export const ModernMultiLineChart = ({
       <Box className="flex items-center">
         <Box className="w-[120px]">
           {datasets.map((dataset, index) => {
-            const value = point[index]?.toFixed(2);
+            const value = point[index];
             if (!value) return null;
+            const percentage = (100 * point[index]).toFixed(2);
             return (
               <Box key={dataset.label} className="mb-4">
                 <Typography variant="body1" className="mb-2">
                   {dataset.label}
                 </Typography>
-                <Typography variant="body2">
-                  {point[index]?.toFixed(2)}%
-                </Typography>
+                <Typography variant="body2">{percentage}%</Typography>
               </Box>
             );
           })}
@@ -119,7 +118,7 @@ export const ModernMultiLineChart = ({
 
                 const points = elements.map(
                   //@ts-expect-error: type is not correct
-                  (element) => element.element.$context.parsed.y * 100
+                  (element) => element.element.$context.parsed.y
                 );
 
                 if (borrow && earn) {
