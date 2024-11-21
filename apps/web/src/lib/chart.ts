@@ -83,6 +83,8 @@ export const crosshairPlugin: Plugin = {
     let x: number | null = null;
     let displayText: string = options.text ?? "";
 
+    let dataIndex = 0;
+
     if (pluginState && pluginState.visible) {
       // **Hover State:** Use mouse position
       x = pluginState.x;
@@ -92,14 +94,14 @@ export const crosshairPlugin: Plugin = {
       if (activeElements.length > 0) {
         const activeElement = activeElements[0];
         //@ts-expect-error: type is not correct
-        const dataIndex = activeElement.index;
+        dataIndex = activeElement.index;
 
         displayText = `Utilization ${dataIndex}%`;
       }
     } else {
       // **Non-Hover State:** Use fixed dataset and data index
       const datasetIndex = options.datasetIndex ?? 0;
-      const dataIndex = options.dataIndex ?? 0;
+      dataIndex = options.dataIndex ?? 0;
 
       const meta = chart.getDatasetMeta(datasetIndex);
       const point = meta.data[dataIndex];
@@ -128,7 +130,13 @@ export const crosshairPlugin: Plugin = {
         ctx.textAlign = "center";
         ctx.textBaseline = "top";
 
-        const textX = x;
+        let textX = x;
+        if (dataIndex < 10) {
+          textX += 45;
+        } else if (dataIndex > 90) {
+          textX -= 45;
+        }
+
         const textY = bottom + 12;
 
         const canvasHeight = height;

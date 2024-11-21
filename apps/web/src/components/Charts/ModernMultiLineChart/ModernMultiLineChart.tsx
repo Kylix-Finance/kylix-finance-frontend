@@ -53,19 +53,26 @@ export const ModernMultiLineChart = ({
 
   return (
     <Box className="flex items-center">
-      <Box className="w-[120px] -mr-20">
-        {datasets.map((dataset, index) => (
-          <Box key={dataset.label} className="mb-4">
-            <Typography variant="body1" className="mb-2">
-              {dataset.label}
-            </Typography>
-            <Typography variant="body2">{point[index]?.toFixed(2)}%</Typography>
-          </Box>
-        ))}
+      <Box className="w-[120px]">
+        {datasets.map((dataset, index) => {
+          const value = point[index]?.toFixed(2);
+          if (!value) return null;
+          return (
+            <Box key={dataset.label} className="mb-4">
+              <Typography variant="body1" className="mb-2">
+                {dataset.label}
+              </Typography>
+              <Typography variant="body2">
+                {point[index]?.toFixed(2)}%
+              </Typography>
+            </Box>
+          );
+        })}
       </Box>
 
       <Box height={280} width="100%">
         <Line
+          width="100%"
           onMouseLeave={() => setIsChartHovered(false)}
           onMouseEnter={() => setIsChartHovered(true)}
           data={{
@@ -73,9 +80,15 @@ export const ModernMultiLineChart = ({
           }}
           options={{
             responsive: true,
+
             hover: {
               mode: "index",
               intersect: false,
+            },
+            layout: {
+              padding: {
+                left: -60,
+              },
             },
             onHover: (_, elements) => {
               const borrow = elements[0]?.element.y;
@@ -142,7 +155,7 @@ export const ModernMultiLineChart = ({
               y: {
                 type: "logarithmic",
                 display: true,
-                // beginAtZero: true,
+                min: 0,
                 border: {
                   display: false,
                 },
