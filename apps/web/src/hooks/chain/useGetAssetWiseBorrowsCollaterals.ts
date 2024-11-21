@@ -10,7 +10,7 @@ interface Asset {
   decimals: number;
   assetIcon: string;
   balance: bigint;
-  apy?: bigint;
+  apy?: string;
   borrowed?: bigint;
   usdtBalance: bigint;
   collateralAssets?: number[];
@@ -23,7 +23,7 @@ type RawAsset = {
   decimals: number;
   asset_icon: number[];
   balance: bigint;
-  apy?: bigint;
+  apy?: string;
   borrowed?: bigint;
   usdt_balance: bigint;
   collateral_assets: number[];
