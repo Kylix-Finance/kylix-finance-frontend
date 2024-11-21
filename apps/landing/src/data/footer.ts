@@ -34,10 +34,10 @@ export const footerData: Footer = {
     {
       title: "Resources",
       items: [
-        //{
-        //  label: "Documentation",
-        //  link: "todo",
-        //},
+        {
+          label: "Documentation",
+          link: "https://github.com/Kylix-Finance/kylix-docs",
+        },
         //{
         //  label: "FAQ",
         //  link: "faq",
