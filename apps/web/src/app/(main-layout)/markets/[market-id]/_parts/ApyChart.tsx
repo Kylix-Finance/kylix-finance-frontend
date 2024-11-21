@@ -36,8 +36,8 @@ const ApyChart = () => {
 
   return (
     <Card variant="outlined">
-      <Box className="flex justify-between items-center mb-3">
-        {/* <Box className="flex gap-6 mt-3">
+      {/* <Box className="flex justify-between items-center mb-3">
+        <Box className="flex gap-6 mt-3">
           <Box className="flex gap-2 items-center">
             <Box className="w-6 border-2 border-primary-500 rounded-md"></Box>
             <Typography variant="body2">Borrow APY</Typography>
@@ -46,8 +46,8 @@ const ApyChart = () => {
             <Box className="w-6 border-2  border-secondary-500 rounded-md"></Box>
             <Typography variant="body2">Supply APY</Typography>
           </Box>
-        </Box> */}
-        {/* <Box className="flex gap-3">
+        </Box>
+        <Box className="flex gap-3">
           <Button
             onClick={() => setChecked((prev) => !prev)}
             variant="outlined"
@@ -62,8 +62,8 @@ const ApyChart = () => {
             Include Mining APY
             <Info className="ml-2 mr-1" />
           </Button>
-        </Box> */}
-      </Box>
+        </Box>
+      </Box> */}
 
       <ModernMultiLineChart
         activeIndex={utilization}
