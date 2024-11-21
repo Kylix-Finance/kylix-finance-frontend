@@ -79,7 +79,7 @@ export const ModernMultiLineChart = ({
         <Box className="w-[120px]">
           {datasets.map((dataset, index) => {
             const value = point[index];
-            if (!value) return null;
+            if (value === undefined) return null;
             const percentage = (100 * point[index]).toFixed(2);
             return (
               <Box key={dataset.label} className="mb-4">
