@@ -67,7 +67,7 @@ const Borrowed = () => {
           <TableActions
             assetId={item.id}
             firstAction="Borrow"
-            secondActionb="Repay"
+            secondAction="Repay"
           />
         ),
       }}
