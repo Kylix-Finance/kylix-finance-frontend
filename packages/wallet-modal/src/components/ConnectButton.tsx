@@ -63,7 +63,7 @@ export const ConnectButton: React.FC<Props> = ({ address }) => {
 
             <span className="w-[63px]">
               <ButtonText
-                text={`${address.slice(0, 3)}...${address.slice(-4, -1)}`}
+                text={`${address.slice(0, 3)}...${address.slice(-4)}`}
               />
             </span>
 

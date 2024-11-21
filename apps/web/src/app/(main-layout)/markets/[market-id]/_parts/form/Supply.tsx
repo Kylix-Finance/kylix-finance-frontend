@@ -55,7 +55,7 @@ export const Supply = () => {
   const onMaxClick = () => formattedBalance && setValue(formattedBalance);
   const items: Array<ListItem> = [
     {
-      label: "Available to supply",
+      label: "Available",
       value: (
         <ValueItemWrapper
           value={Number(formattedBalance || 0).toLocaleString()}

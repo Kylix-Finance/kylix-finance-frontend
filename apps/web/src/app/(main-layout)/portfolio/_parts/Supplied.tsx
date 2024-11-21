@@ -124,7 +124,7 @@ const Supplied = () => {
           />
         ),
         actions: (item) => (
-          <TableActions assetId={item.assetId} secondActionb="Withdraw" />
+          <TableActions assetId={item.assetId} secondAction="Withdraw" />
         ),
       }}
       data={supplies || []}

@@ -88,7 +88,7 @@ const BorrowValue = () => {
               lineHeight={"22px"}
               className="text-primary-500 font-number"
             >
-              %0
+              0%
             </Typography>
           </Box>
 
@@ -107,7 +107,7 @@ const BorrowValue = () => {
               lineHeight={"22px"}
               className="text-primary-500 font-number"
             >
-              %{ltv?.currentLtv}
+              {ltv?.currentLtv}%
             </Typography>
           </Box>
         </Box>

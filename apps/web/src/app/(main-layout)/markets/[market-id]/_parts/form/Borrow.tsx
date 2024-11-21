@@ -79,7 +79,7 @@ export const Borrow = () => {
 
   const items: Array<ListItem> = [
     {
-      label: "Available to borrow",
+      label: "Available",
       value: !assetMetaData || !pool ? "0" : max.toFixed(4),
       valueClassName: "!text-[#4E5B72]",
     },
