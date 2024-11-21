@@ -119,7 +119,7 @@ export const Borrow = () => {
         content: "Borrow",
       }}
       isSubmitting={isPending}
-      balance={borrowAssetBalance?.toString()}
+      balance={Infinity.toString()}
       symbol={assetMetaData?.symbol}
       onMaxClick={() => {
         setValue(max.toFixed(4));
