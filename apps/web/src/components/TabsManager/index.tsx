@@ -3,6 +3,7 @@ import { TabContext, TabPanel } from "@mui/lab";
 import { Tabs } from "@mui/material";
 import { ReactNode, useState } from "react";
 import Tab from "./Tab";
+import { parseAsString, useQueryState } from "nuqs";
 
 export type TabType = {
   label: string;
@@ -17,7 +18,10 @@ interface Props {
 type TabValues = Props["tabs"][number]["value"];
 
 function TabsManager({ tabs }: Props) {
-  const [value, setValue] = useState<TabValues>(tabs[0]!.value);
+  const [value, setValue] = useQueryState(
+    "tab",
+    parseAsString.withDefault(tabs[0]?.value || "")
+  );
 
   const handleChange = (_: React.SyntheticEvent, newValue: TabValues) => {
     setValue(newValue);
