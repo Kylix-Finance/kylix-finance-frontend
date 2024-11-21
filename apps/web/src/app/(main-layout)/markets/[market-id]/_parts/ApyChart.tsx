@@ -12,6 +12,8 @@ import { usePoolsData } from "~/hooks/api/usePoolsData";
 import { useParams } from "next/navigation";
 import { useInterestRate } from "~/hooks/api/useInterestRate";
 import ModernMultiLineChart from "~/components/Charts/ModernMultiLineChart";
+import { usePool } from "~/hooks/chain/usePool";
+import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
 
 const ApyChart = () => {
   // const [checked, setChecked] = useState(false);
@@ -23,6 +25,14 @@ const ApyChart = () => {
   const { "market-id": marketId } = useParams<{ "market-id": string }>();
 
   const { data } = useInterestRate();
+
+  const { data: pool } = useGetLendingPools({
+    asset: marketId,
+  });
+
+  const utilizationStr = pool?.assets[0]?.utilization || "0%";
+
+  const utilization = Math.round(+utilizationStr.replace("%", ""));
 
   return (
     <Card variant="outlined">
@@ -56,6 +66,7 @@ const ApyChart = () => {
       </Box>
 
       <ModernMultiLineChart
+        activeIndex={utilization}
         datasets={[
           {
             label: "Borrow APR",

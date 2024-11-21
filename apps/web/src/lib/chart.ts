@@ -69,10 +69,6 @@ export const crosshairPlugin: Plugin = {
       height,
     } = chart;
 
-    let xValue;
-
-    console.log("chart33", chart);
-
     if (!ctx) return;
 
     const pluginState = (chart as any).crosshair;
@@ -85,7 +81,7 @@ export const crosshairPlugin: Plugin = {
     const fontFamily = options.fontFamily ?? "Arial";
 
     let x: number | null = null;
-    let displayText: string = options.text ?? "Kir tu in zendegi" + xValue;
+    let displayText: string = options.text ?? "";
 
     if (pluginState && pluginState.visible) {
       // **Hover State:** Use mouse position
@@ -104,8 +100,6 @@ export const crosshairPlugin: Plugin = {
       // **Non-Hover State:** Use fixed dataset and data index
       const datasetIndex = options.datasetIndex ?? 0;
       const dataIndex = options.dataIndex ?? 0;
-
-      console.log("dataIndex", dataIndex);
 
       const meta = chart.getDatasetMeta(datasetIndex);
       const point = meta.data[dataIndex];

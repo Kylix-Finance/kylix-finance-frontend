@@ -9,6 +9,7 @@ import "chartjs-adapter-date-fns";
 import "chart.js/auto";
 import { throttle } from "lodash";
 import { crosshairPlugin } from "~/lib/chart";
+import { usePool } from "~/hooks/chain/usePool";
 
 type LineProps = ComponentProps<typeof Line>;
 
@@ -18,6 +19,7 @@ type ModernMultiLineChartProps = {
   yLabel?: string;
   xGrid?: boolean;
   yGrid?: boolean;
+  activeIndex: number;
 };
 
 export const ModernMultiLineChart = ({
@@ -26,8 +28,21 @@ export const ModernMultiLineChart = ({
   yLabel,
   xGrid = false,
   yGrid = true,
+  activeIndex,
 }: ModernMultiLineChartProps) => {
   const [activePoint, setActivePoint] = useState<number[]>([]);
+
+  const [isChartHovered, setIsChartHovered] = useState(false);
+
+  //@ts-expect-error: dataset type
+  const defaultDataset = datasets.map((dataset) => dataset.data?.[activeIndex]);
+
+  const defaultPoint = [
+    defaultDataset[0]?.borrow_apy,
+    defaultDataset[1]?.supply_apy,
+  ];
+
+  const point = isChartHovered ? activePoint : defaultPoint;
 
   const throttledSetState = useCallback(
     throttle((newValue) => {
@@ -44,15 +59,15 @@ export const ModernMultiLineChart = ({
             <Typography variant="body1" className="mb-2">
               {dataset.label}
             </Typography>
-            <Typography variant="body2">
-              {activePoint[index]?.toFixed(2)}%
-            </Typography>
+            <Typography variant="body2">{point[index]?.toFixed(2)}%</Typography>
           </Box>
         ))}
       </Box>
 
       <Box height={280} width="100%">
         <Line
+          onMouseLeave={() => setIsChartHovered(false)}
+          onMouseEnter={() => setIsChartHovered(true)}
           data={{
             datasets,
           }}
@@ -72,12 +87,12 @@ export const ModernMultiLineChart = ({
               );
 
               if (borrow && earn) {
-                // startTransition(() => {
-                //   setActivePoint(points);
-                // });
-
                 throttledSetState(points);
               }
+            },
+            onLeave: () => {
+              console.log("onLeave");
+              setIsChartHovered(false);
             },
             plugins: {
               legend: {
@@ -91,7 +106,7 @@ export const ModernMultiLineChart = ({
                 lineColor: "rgba(0,0,0,0.7)",
                 lineWidth: 2,
                 datasetIndex: 0,
-                dataIndex: 50,
+                dataIndex: activeIndex,
                 // text: "March Data Point",
                 textColor: "black",
                 fontSize: 14,
