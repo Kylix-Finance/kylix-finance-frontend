@@ -59,7 +59,7 @@ export const Withdraw = () => {
   const onMaxClick = () => formattedBalance && setValue(formattedBalance);
   const items: Array<ListItem> = [
     {
-      label: "Available to withdraw",
+      label: "Available",
       value: (
         <ValueItemWrapper
           value={Number(formattedBalance || 0).toLocaleString()}
