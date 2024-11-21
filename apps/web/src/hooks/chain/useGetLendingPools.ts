@@ -55,6 +55,14 @@ export interface UseGetLendingPoolsParams {
   account?: string;
 }
 
+export type LendingPoolsReturnType = {
+  assets: Asset[];
+  summary: {
+    total_borrow: bigint;
+    total_supply: bigint;
+  };
+};
+
 export const useGetLendingPools = ({
   account,
   asset,

@@ -9,6 +9,7 @@ import {
 } from "@repo/onchain-utils";
 import { queryKeys } from "@repo/shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { LendingPoolsReturnType } from "./useGetLendingPools";
 interface DisableAsCollateralAsCollateral {
   assetId: string | number;
 }
@@ -48,9 +49,18 @@ export const useDisableAsCollateral = () => {
           assetId: undefined,
         }),
       });
-      queryClient.refetchQueries({
-        queryKey: queryKeys.lendingPools(),
-      });
+
+      queryClient.setQueryData<LendingPoolsReturnType>(
+        queryKeys.lendingPools({ account: activeAccount?.address }),
+        (prev) => {
+          if (!prev) return;
+          const newAssets = prev.assets.map((item) => ({
+            ...item,
+            is_collateral: item.id === assetId ? false : item.is_collateral,
+          }));
+          return { ...prev, assets: newAssets };
+        }
+      );
     },
   });
 };

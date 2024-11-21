@@ -1,33 +1,15 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
-import { ComponentProps, useState, startTransition, useCallback } from "react";
+import { Box, Button, Checkbox, Typography } from "@mui/material";
+import { ComponentProps, useState, useCallback, ChangeEvent } from "react";
 import { Line } from "react-chartjs-2";
 import { palette } from "~/config/palette";
 import { formatNumber } from "~/utils";
 import "chartjs-adapter-date-fns";
 import "chart.js/auto";
-import { ChartScale } from "~/types";
-import { getTimeUnit } from "~/utils/date";
-import Crosshair from "chartjs-plugin-crosshair";
-import { Tooltip } from "chart.js";
 import { throttle } from "lodash";
-
-//@ts-expect-error: react-chartjs-2
-Tooltip.positioners.xAxis = function (elements) {
-  if (elements.length === 0) {
-    return false;
-  }
-
-  const chart = elements[0].element.$context.chart;
-  const meta = chart.getDatasetMeta(elements[0].datasetIndex);
-  const dataPoint = meta.data[elements[0].index];
-
-  const x = dataPoint.getCenterPoint().x;
-  const y = chart.scales.y.bottom;
-
-  return { x, y: y + 21 };
-};
+import { crosshairPlugin } from "~/lib/chart";
+import { Info } from "@mui/icons-material";
 
 type LineProps = ComponentProps<typeof Line>;
 
@@ -37,6 +19,7 @@ type ModernMultiLineChartProps = {
   yLabel?: string;
   xGrid?: boolean;
   yGrid?: boolean;
+  activeIndex: number;
 };
 
 export const ModernMultiLineChart = ({
@@ -45,8 +28,26 @@ export const ModernMultiLineChart = ({
   yLabel,
   xGrid = false,
   yGrid = true,
+  activeIndex,
 }: ModernMultiLineChartProps) => {
+  const [isLogScale, setIsLogScale] = useState(true);
   const [activePoint, setActivePoint] = useState<number[]>([]);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setIsLogScale(event.target.checked);
+  };
+
+  const [isChartHovered, setIsChartHovered] = useState(false);
+
+  //@ts-expect-error: dataset type
+  const defaultDataset = datasets.map((dataset) => dataset.data?.[activeIndex]);
+
+  const defaultPoint = [
+    defaultDataset[0]?.borrow_apy,
+    defaultDataset[1]?.supply_apy,
+  ];
+
+  const point = isChartHovered ? activePoint : defaultPoint;
 
   const throttledSetState = useCallback(
     throttle((newValue) => {
@@ -56,154 +57,162 @@ export const ModernMultiLineChart = ({
   );
 
   return (
-    <Box className="flex items-center">
-      <Box className="w-[120px] -mr-20">
-        {datasets.map((dataset, index) => (
-          <Box key={dataset.label} className="mb-4">
-            <Typography variant="body1" className="mb-2">
-              {dataset.label}
-            </Typography>
-            <Typography variant="body2">
-              {activePoint[index]?.toFixed(2)}%
-            </Typography>
-          </Box>
-        ))}
+    <Box>
+      <Box className="flex justify-end mb-3">
+        <Button
+          onClick={() => setIsLogScale((prev) => !prev)}
+          variant="outlined"
+          size="small"
+        >
+          <Checkbox
+            checked={isLogScale}
+            onChange={handleChange}
+            onClick={(event) => event.stopPropagation()}
+            size="small"
+          />
+          Logarithmic scale
+          <Info className="ml-2 mr-1" />
+        </Button>
       </Box>
 
-      <Box height={280} width="100%">
-        <Line
-          data={{
-            datasets,
-          }}
-          options={{
-            responsive: true,
-            hover: {
-              mode: "index",
-              intersect: false,
-            },
-            onHover: (_, elements) => {
-              const borrow = elements[0]?.element.y;
-              const earn = elements[1]?.element.y;
+      <Box className="flex items-center">
+        <Box className="w-[120px]">
+          {datasets.map((dataset, index) => {
+            const value = point[index];
+            if (value === undefined) return null;
+            const percentage = (100 * point[index]).toFixed(2);
+            return (
+              <Box key={dataset.label} className="mb-4">
+                <Typography variant="body1" className="mb-2">
+                  {dataset.label}
+                </Typography>
+                <Typography variant="body2">{percentage}%</Typography>
+              </Box>
+            );
+          })}
+        </Box>
 
-              const points = elements.map(
-                //@ts-expect-error: type is not correct
-                (element) => element.element.$context.parsed.y * 100
-              );
+        <Box height={280} width="100%">
+          <Line
+            width="100%"
+            onMouseLeave={() => setIsChartHovered(false)}
+            onMouseEnter={() => setIsChartHovered(true)}
+            data={{
+              datasets,
+            }}
+            options={{
+              responsive: true,
 
-              if (borrow && earn) {
-                // startTransition(() => {
-                //   setActivePoint(points);
-                // });
-
-                throttledSetState(points);
-              }
-            },
-            plugins: {
-              legend: {
-                display: false,
-              },
-              tooltip: {
+              hover: {
                 mode: "index",
                 intersect: false,
-                //@ts-expect-error: react-chartjs-2
-                position: "xAxis",
-                callbacks: {
-                  title: (tooltipItem) => {
-                    const value = tooltipItem[0]?.label;
-                    return `Utilization ${value}%`;
-                  },
-                  label: () => {
-                    return "";
-                  },
-                },
-                displayColors: false,
-                backgroundColor: "transparent", // Removes the background color
-                borderWidth: 0, // Sets border width to 0
-                caretSize: 0,
-                titleColor: "#000",
-                titleFont: { size: 12 },
               },
-              crosshair: {
-                line: {
-                  color: "rgba(0, 0, 0, 1)",
-                  width: 2,
+              layout: {
+                padding: {
+                  left: -60,
                 },
-                sync: {
+              },
+              onHover: (_, elements) => {
+                const borrow = elements[0]?.element.y;
+                const earn = elements[1]?.element.y;
+
+                const points = elements.map(
+                  //@ts-expect-error: type is not correct
+                  (element) => element.element.$context.parsed.y
+                );
+
+                if (borrow && earn) {
+                  throttledSetState(points);
+                }
+              },
+              onLeave: () => {
+                console.log("onLeave");
+                setIsChartHovered(false);
+              },
+              plugins: {
+                legend: {
+                  display: false,
+                },
+                tooltip: {
                   enabled: false,
                 },
-                zoom: {
-                  enabled: false,
+                //@ts-expect-error: type is not correct
+                crosshair: {
+                  lineColor: "rgba(0,0,0,0.7)",
+                  lineWidth: 2,
+                  datasetIndex: 0,
+                  dataIndex: activeIndex,
+                  // text: "March Data Point",
+                  textColor: "black",
+                  fontSize: 14,
+                  fontFamily: "Arial",
                 },
               },
-            },
-            scales: {
-              x: {
-                type: "linear",
-                display: true,
-                grid: {
-                  display: xGrid,
-                },
-                border: {
-                  display: false,
-                },
-                ticks: {
-                  color: palette.text.disabled,
-                  align: "inner",
-                  autoSkip: true,
-                  maxTicksLimit: 2,
-                  callback: (value) => `${value}%`,
-                },
-                title: {
+              scales: {
+                x: {
+                  type: "linear",
                   display: true,
-                  text: xLabel,
-                  color: palette.text.primary,
-                  font: {
-                    size: 14,
+                  grid: {
+                    display: xGrid,
+                  },
+                  border: {
+                    display: false,
+                  },
+                  ticks: {
+                    color: palette.text.disabled,
+                    align: "inner",
+                    autoSkip: true,
+                    maxTicksLimit: 2,
+                    callback: (value) => `${value}%`,
+                  },
+                  title: {
+                    display: true,
+                    text: xLabel,
+                    color: palette.text.primary,
+                    font: {
+                      size: 14,
+                    },
                   },
                 },
-              },
-              y: {
-                display: true,
-                beginAtZero: true,
-                border: {
-                  display: false,
-                },
-                grid: {
-                  display: yGrid,
-                },
-                ticks: {
-                  display: false,
-                  color: palette.text.disabled,
-                  count: 6,
-                  callback: (value) => {
-                    return formatNumber(value);
-                  },
-                },
-                title: {
+                y: {
+                  type: isLogScale ? "logarithmic" : "linear",
                   display: true,
-                  text: yLabel,
-                  color: palette.text.primary,
-                  padding: 20,
-                  font: {
-                    size: 14,
+                  min: 0,
+                  border: {
+                    display: false,
+                  },
+                  grid: {
+                    display: yGrid,
+                  },
+                  ticks: {
+                    display: false,
+                    color: palette.text.disabled,
+                    // count: 6,
+                    callback: (value) => {
+                      return formatNumber(value);
+                    },
+                  },
+                  title: {
+                    display: true,
+                    text: yLabel,
+                    color: palette.text.primary,
+                    padding: 20,
+                    font: {
+                      size: 14,
+                    },
                   },
                 },
               },
-            },
-            elements: {
-              point: {
-                radius: 1,
+              elements: {
+                point: {
+                  radius: 1,
+                },
               },
-            },
-            maintainAspectRatio: false,
-          }}
-          plugins={[
-            {
-              id: "crosshair",
-              ...Crosshair,
-            },
-          ]}
-        />
+              maintainAspectRatio: false,
+            }}
+            plugins={[crosshairPlugin]}
+          />
+        </Box>
       </Box>
     </Box>
   );

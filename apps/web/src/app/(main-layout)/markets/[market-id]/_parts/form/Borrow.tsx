@@ -80,7 +80,7 @@ export const Borrow = () => {
   const items: Array<ListItem> = [
     {
       label: "Available to borrow",
-      value: "$" + (!assetMetaData || !pool ? "0" : max.toFixed(4)),
+      value: !assetMetaData || !pool ? "0" : max.toFixed(4),
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -119,7 +119,7 @@ export const Borrow = () => {
         content: "Borrow",
       }}
       isSubmitting={isPending}
-      balance={borrowAssetBalance?.toString()}
+      balance={Infinity.toString()}
       symbol={assetMetaData?.symbol}
       onMaxClick={() => {
         setValue(max.toFixed(4));

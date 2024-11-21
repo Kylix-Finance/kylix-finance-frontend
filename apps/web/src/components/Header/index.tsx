@@ -5,9 +5,9 @@ import Heading from "./Heading";
 import { usePathname } from "next/navigation";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useSidebarStore } from "~/store";
-import { ConnectButton, Dropdown, UserBalance } from "@repo/wallet-modal";
+import { ConnectButton, Dropdown } from "@repo/wallet-modal";
 import { useActiveAccount } from "@repo/onchain-utils";
-
+import UserBalance from "./UserBalance";
 const Header = () => {
   const { isMobile, setSidebarOpen } = useSidebarStore();
 
@@ -38,7 +38,7 @@ const Header = () => {
           User balance
         </p> */}
 
-        <UserBalance />
+        {activeAccount && <UserBalance />}
         <ConnectButton address={activeAccount?.address} />
       </Box>
     </Box>

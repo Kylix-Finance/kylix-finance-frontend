@@ -1,5 +1,4 @@
 import { Signer } from "@polkadot/api/types";
-import { InjectedAccount } from "@polkadot/extension-inject/types";
 
 const baseKey = "kylix";
 
@@ -12,7 +11,7 @@ interface AssetPrice {
 }
 interface LendingPools {
   asset?: number | string | undefined;
-  account?: InjectedAccount | string;
+  account?: string | string;
 }
 interface Pools {
   activeAccount: string | undefined;
@@ -122,7 +121,7 @@ export const queryKeys = {
     base_asset,
   ],
   repay: [baseKey, keys.REPAY],
-  userLtv: (account: string | InjectedAccount | undefined) => [
+  userLtv: (account: string | undefined) => [
     baseKey,
     keys.GET_USER_LTV,
     account,
