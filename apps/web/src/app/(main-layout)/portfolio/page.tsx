@@ -14,7 +14,7 @@ export default function Page() {
     <Box className={styles.container}>
       <Card
         className={styles.total}
-        title="Total value"
+        title="Total Portfolio Value"
         icon={Icons.WalletFill}
         hasIconBackground
       >
@@ -22,7 +22,7 @@ export default function Page() {
       </Card>
       <Card
         className={styles.collateral}
-        title="Collateral value"
+        title="Total Collateral Value"
         icon={Icons.WalletFill}
         hasIconBackground
       >
