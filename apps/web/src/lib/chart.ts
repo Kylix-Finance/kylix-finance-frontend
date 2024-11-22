@@ -96,7 +96,7 @@ export const crosshairPlugin: Plugin = {
         //@ts-expect-error: type is not correct
         dataIndex = activeElement.index;
 
-        displayText = `Utilization ${dataIndex}%`;
+        displayText = `Utilization ${dataIndex / 10}%`;
       }
     } else {
       // **Non-Hover State:** Use fixed dataset and data index
@@ -106,7 +106,7 @@ export const crosshairPlugin: Plugin = {
       const meta = chart.getDatasetMeta(datasetIndex);
       const point = meta.data[dataIndex];
 
-      displayText = `Utilization ${dataIndex}%`;
+      displayText = `Utilization ${dataIndex / 10}%`;
 
       if (point) {
         x = point.x;
