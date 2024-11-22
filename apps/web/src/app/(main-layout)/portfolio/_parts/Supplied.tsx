@@ -1,14 +1,13 @@
 "use client";
 
-import { Box, Button, Stack, Switch, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
 import { Table } from "@repo/ui";
-import { Asset, notify } from "~/components";
-import { useDisableAsCollateral } from "~/hooks/chain/useDisableAsCollateral";
-import { useEnableAsCollateral } from "~/hooks/chain/useEnableAsCollateral";
+import { Asset } from "~/components";
 import { useGetAssetWiseSupplies } from "~/hooks/chain/useGetAssetWiseSupplies";
 import { TableActions } from "../../markets/_parts/TableActions";
 import Link from "next/link";
+import CollateralSwitch from "~/components/CollateralSwitch/CollateralSwitch";
 
 const Supplied = () => {
   const {
@@ -16,12 +15,6 @@ const Supplied = () => {
     isLoading,
     isFetched,
   } = useGetAssetWiseSupplies();
-  const { mutate: enableAsCollateralMutate, isPending: isEnableAsCollateral } =
-    useEnableAsCollateral();
-  const {
-    mutate: disableAsCollateralMutate,
-    isPending: isDisableAsCollateral,
-  } = useDisableAsCollateral();
   const supplies:
     | {
         asset: string;
@@ -39,53 +32,6 @@ const Supplied = () => {
     supplied: formatBigNumbers(formatUnit(item.supplied, item.decimals), 4),
     collateral: item.collateral,
   }));
-  const handleCollateralClick = (state: boolean, assetId: string | number) => {
-    if (state) {
-      disableAsCollateralMutate(
-        {
-          assetId,
-        },
-        {
-          onSuccess: ({ blockNumber }) => {
-            notify({
-              type: "success",
-              title: "Success",
-              message: "Transaction completed on block " + blockNumber,
-            });
-          },
-          onError: ({ message, name }) => {
-            notify({
-              type: "error",
-              title: name,
-              message: message,
-            });
-          },
-        }
-      );
-    } else {
-      enableAsCollateralMutate(
-        {
-          assetId,
-        },
-        {
-          onSuccess: ({ blockNumber }) => {
-            notify({
-              type: "success",
-              title: "Success",
-              message: "Transaction completed on block " + blockNumber,
-            });
-          },
-          onError: ({ message, name }) => {
-            notify({
-              type: "error",
-              title: name,
-              message: message,
-            });
-          },
-        }
-      );
-    }
-  };
   return (
     <Table
       isLoading={isLoading}
@@ -116,12 +62,7 @@ const Supplied = () => {
           <Typography variant="subtitle1">{item.supplied}</Typography>
         ),
         collateral: (item) => (
-          <Switch
-            checked={item.collateral}
-            onChange={() =>
-              handleCollateralClick(item.collateral, item.assetId)
-            }
-          />
+          <CollateralSwitch id={item.assetId} isCollateral={item.collateral} />
         ),
         actions: (item) => (
           <TableActions assetId={item.assetId} secondAction="Withdraw" />
