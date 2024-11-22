@@ -28,7 +28,9 @@ const CollateralValue = () => {
   return (
     <Box className="flex flex-col h-full">
       <Typography variant="h4" marginBottom="36px">
-        {formatBigNumbers(totalCollateral, 2)}
+        {!isNaN(Number(totalCollateral))
+          ? Number(totalCollateral).toLocaleString()
+          : 0}
         <Typography variant="body3">USD</Typography>
       </Typography>
       <Box className="flex mb-auto gap-6">

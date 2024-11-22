@@ -24,7 +24,7 @@ const BorrowValue = () => {
       <Box className="flex flex-col p-4 border border-primary-700/10 rounded-md">
         <Box>
           <Typography variant="subtitle2" lineHeight="21px">
-            Borrow Value
+            Total Borrowed Value
           </Typography>
         </Box>
         <Box className="flex gap-1.5 items-center">
@@ -34,7 +34,10 @@ const BorrowValue = () => {
             lineHeight="30px"
             className="font-number"
           >
-            $ {formatBigNumbers(totalBorrowed, 2)}
+            ${" "}
+            {!isNaN(+totalBorrowed)
+              ? Number(totalBorrowed).toLocaleString()
+              : 0}
           </Typography>
 
           <Typography
@@ -62,7 +65,10 @@ const BorrowValue = () => {
               lineHeight="22px"
               className="font-number"
             >
-              ${ltv?.borrowLimit}
+              $
+              {!isNaN(Number(ltv?.borrowLimit))
+                ? Number(ltv?.borrowLimit || 0).toLocaleString()
+                : 0}
             </Typography>
             <Typography variant="body3" lineHeight="17px">
               USD

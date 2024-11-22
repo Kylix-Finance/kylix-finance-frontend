@@ -39,5 +39,9 @@ export const useEvent = () => {
           });
         }
       : skipToken,
+    refetchIntervalInBackground: true,
+    refetchInterval: 30,
+    refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
   });
 };

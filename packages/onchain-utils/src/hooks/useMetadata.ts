@@ -22,6 +22,10 @@ const useMetadata = (assetId?: number | string) => {
           return metadata?.toHuman() as MetadataResult;
         }
       : skipToken,
+    refetchIntervalInBackground: true,
+    refetchInterval: 30,
+    refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
   });
 
   const assetMetaData = data
