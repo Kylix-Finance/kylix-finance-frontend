@@ -34,7 +34,7 @@ const BorrowValue = () => {
             lineHeight="30px"
             className="font-number"
           >
-            $ {formatBigNumbers(totalBorrowed, 2)}
+            $ {Number(totalBorrowed).toLocaleString()}
           </Typography>
 
           <Typography
@@ -62,7 +62,10 @@ const BorrowValue = () => {
               lineHeight="22px"
               className="font-number"
             >
-              ${ltv?.borrowLimit}
+              $
+              {isNaN(Number(ltv?.borrowLimit))
+                ? Number(ltv?.borrowLimit || 0).toLocaleString()
+                : 0}
             </Typography>
             <Typography variant="body3" lineHeight="17px">
               USD
