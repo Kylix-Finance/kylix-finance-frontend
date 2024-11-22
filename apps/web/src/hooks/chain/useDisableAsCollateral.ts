@@ -35,6 +35,9 @@ export const useDisableAsCollateral = () => {
       }),
     onSuccess: (_, { assetId }) => {
       queryClient.refetchQueries({
+        queryKey: queryKeys.assetWiseBorrowsCollaterals(activeAccount?.address),
+      });
+      queryClient.refetchQueries({
         queryKey: queryKeys.balance({
           address: activeAccount?.address,
           assetId,

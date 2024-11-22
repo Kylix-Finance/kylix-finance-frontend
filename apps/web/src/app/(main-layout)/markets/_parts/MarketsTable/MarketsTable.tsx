@@ -1,16 +1,13 @@
 "use client";
 
-import { Box, Switch, Typography } from "@mui/material";
-import { Asset, KylixChip, notify } from "~/components";
+import { Box, Typography } from "@mui/material";
+import { Asset, KylixChip } from "~/components";
 import { TableActions } from "../TableActions";
 import { useMemo } from "react";
-import { Skeleton, Table } from "@repo/ui";
+import { Table } from "@repo/ui";
 import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
 import { formatUnit, useBalance } from "@repo/onchain-utils";
-import { formatPercentage } from "~/utils";
-import { useEnableAsCollateral } from "~/hooks/chain/useEnableAsCollateral";
-import { useDisableAsCollateral } from "~/hooks/chain/useDisableAsCollateral";
-import CollateralSwitch from "./CollateralSwitch";
+import CollateralSwitch from "~/components/CollateralSwitch/CollateralSwitch";
 
 type TableData = Array<{
   asset: string;
