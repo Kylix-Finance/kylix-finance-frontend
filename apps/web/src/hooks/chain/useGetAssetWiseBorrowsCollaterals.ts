@@ -38,10 +38,8 @@ type AssetWiseBorrowsCollateralsResponse = {
 
 export const useGetAssetWiseBorrowsCollaterals = ({
   poolId,
-  collateralId,
 }: {
   poolId?: string | number;
-  collateralId?: number;
 } = {}) => {
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();

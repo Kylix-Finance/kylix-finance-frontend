@@ -96,7 +96,7 @@ export const queryKeys = {
   poolsData: (assetId: string) => [baseKey, keys.POOLS_DATA, assetId],
   assetWiseBorrowsCollaterals: (
     account: string | undefined,
-    poolId: string | number | undefined
+    poolId?: string | number | undefined
   ) => [baseKey, keys.ASSET_WISE_BORROW_COLLATERAL, account, poolId],
   assetWiseSupplies: (account: string | undefined) => [
     baseKey,
