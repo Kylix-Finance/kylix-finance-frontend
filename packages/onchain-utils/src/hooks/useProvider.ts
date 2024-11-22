@@ -22,6 +22,10 @@ const useProvider = () => {
           };
         }
       : skipToken,
+    refetchIntervalInBackground: true,
+    refetchInterval: 30,
+    refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
   });
 
   return { provider: data?.provider, api: data?.api, ...rest };

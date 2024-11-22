@@ -17,6 +17,10 @@ export const useActiveConnector = () => {
           return activeConnector;
         }
       : skipToken,
+    refetchIntervalInBackground: true,
+    refetchInterval: 30,
+    refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
   });
 
   return {

@@ -21,6 +21,10 @@ export const usePool = ({ assetId }: Props) => {
           return poolData?.toJSON() as unknown as LendingLendingPool;
         }
       : skipToken,
+    refetchIntervalInBackground: true,
+    refetchInterval: 30,
+    refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
   });
 
   return { pool: data, ...rest };

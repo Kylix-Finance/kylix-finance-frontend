@@ -27,5 +27,9 @@ export const useAsset = (assetId: number) => {
   return useQuery({
     queryKey: queryKeys.asset(assetId),
     queryFn: enabled ? () => getAsset({ api, id: assetId }) : skipToken,
+    refetchIntervalInBackground: true,
+    refetchInterval: 30,
+    refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
   });
 };

@@ -8,5 +8,9 @@ export const usePoolsData = (assetId: string) => {
     queryKey: queryKeys.poolsData(assetId),
     queryFn: () => getPoolData(assetId),
     placeholderData: keepPreviousData,
+    refetchIntervalInBackground: true,
+    refetchInterval: 30,
+    refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
   });
 };

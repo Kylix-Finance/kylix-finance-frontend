@@ -16,6 +16,10 @@ export const useGetAssetPrice = ({ asset, base_asset }: UseGetAssetPrice) => {
     queryFn: provider
       ? () => getAssetPrice(provider, { asset, base_asset })
       : skipToken,
+    refetchIntervalInBackground: true,
+    refetchInterval: 30,
+    refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
   });
 };
 

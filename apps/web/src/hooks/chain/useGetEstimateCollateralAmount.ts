@@ -23,6 +23,10 @@ export const useGetEstimateCollateralAmount = ({
       borrowAssetAmount,
       collateralAsset,
     }),
+    refetchIntervalInBackground: true,
+    refetchInterval: 30,
+    refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
     queryFn:
       provider &&
       !!borrowAsset &&
