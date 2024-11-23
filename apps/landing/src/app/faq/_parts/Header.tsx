@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Discord } from "~/assets/svgs";
 import Button from "~/components/Button";
 
@@ -15,7 +16,7 @@ const Header = () => {
           simplified into steps like:
         </p>
       </div>
-      <div className="flex items-center gap-2.5">
+      <div className="flex items-center gap-2.5 relative z-50">
         <Button
           variant="primary"
           color="secondary"
@@ -23,13 +24,15 @@ const Header = () => {
         >
           Ask a QUestion
         </Button>
-        <Button
-          variant="outline"
-          color="white"
-          className="flex items-center text-sm font-semibold gap-2"
-        >
-          <Discord /> <span>Join Our Discord </span>
-        </Button>
+        <Link href="https://discord.com/invite/UkRcWaTh5p">
+          <Button
+            variant="outline"
+            color="white"
+            className="flex items-center text-sm font-semibold gap-2"
+          >
+            <Discord /> <span>Join Our Discord </span>
+          </Button>
+        </Link>
       </div>
     </div>
   );
