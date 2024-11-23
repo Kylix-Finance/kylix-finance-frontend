@@ -36,7 +36,7 @@ export const footerData: Footer = {
       items: [
         {
           label: "Documentation",
-          link: "https://github.com/Kylix-Finance/kylix-docs",
+          link: "https://kylix-docs.vercel.app",
         },
         //{
         //  label: "FAQ",
