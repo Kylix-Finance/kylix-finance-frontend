@@ -58,10 +58,6 @@ export const useGetAssetWiseBorrowsCollaterals = ({
             account: activeAccount.address,
           })
       : skipToken,
-    refetchIntervalInBackground: true,
-    refetchInterval: 30,
-    refetchOnWindowFocus: "always",
-    refetchOnMount: "always",
     select: (data) => {
       if (!poolId) return data;
       return {

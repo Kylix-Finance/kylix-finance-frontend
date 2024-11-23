@@ -116,10 +116,6 @@ export const usePools = () => {
         totalSuppliedBalance: totalSuppliedBalance.toString(),
       } as PoolsResponse;
     },
-    refetchIntervalInBackground: true,
-    refetchInterval: 30,
-    refetchOnWindowFocus: "always",
-    refetchOnMount: "always",
   });
 
   return {

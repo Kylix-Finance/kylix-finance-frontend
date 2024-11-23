@@ -31,10 +31,6 @@ export const useAssetPrice = ({ assetId }: Props) => {
           return { price, formattedPrice };
         }
       : skipToken,
-    refetchIntervalInBackground: true,
-    refetchInterval: 30,
-    refetchOnWindowFocus: "always",
-    refetchOnMount: "always",
   });
 
   return {

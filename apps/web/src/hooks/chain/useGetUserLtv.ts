@@ -25,10 +25,6 @@ export const useGetUserLtv = ({ account }: UseGetUserLtvParams = {}) => {
         ? () =>
             userLtv(provider, { account: activeAccount?.address || account })
         : skipToken,
-    refetchIntervalInBackground: true,
-    refetchInterval: 30,
-    refetchOnWindowFocus: "always",
-    refetchOnMount: "always",
   });
 };
 
