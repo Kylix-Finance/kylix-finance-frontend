@@ -9,6 +9,7 @@ import {
 import { queryKeys } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { getAssetPrice, useGetAssetPrice } from "./useGetAssetPrice";
+import { useRefetch } from "@repo/onchain-utils/src/hooks/useRefetch";
 
 interface RawAsset {
   id: number;
@@ -70,15 +71,23 @@ export const useGetLendingPools = ({
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
 
-  const isEnabled = !!provider;
-
+  const enabled = !!provider;
   const finalAccount = activeAccount?.address
     ? activeAccount?.address
     : account;
 
+  useRefetch({
+    queries: [
+      {
+        queryKey: queryKeys.lendingPools({ asset, account: finalAccount }),
+        enabled,
+      },
+    ],
+  });
+
   const query = useQuery({
     queryKey: queryKeys.lendingPools({ asset, account: finalAccount }),
-    queryFn: isEnabled
+    queryFn: enabled
       ? () =>
           getLendingPool({
             provider,

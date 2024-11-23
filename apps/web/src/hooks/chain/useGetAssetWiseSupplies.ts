@@ -1,5 +1,6 @@
 import { WsProvider } from "@polkadot/api";
 import { useActiveAccount, useProvider } from "@repo/onchain-utils";
+import { useRefetch } from "@repo/onchain-utils/src/hooks/useRefetch";
 import { decodeArrayToString, queryKeys } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
 
@@ -40,11 +41,18 @@ export const useGetAssetWiseSupplies = ({
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
 
-  const isEnabled = provider && !!activeAccount?.address;
-
+  const enabled = provider && !!activeAccount?.address;
+  useRefetch({
+    queries: [
+      {
+        queryKey: queryKeys.assetWiseSupplies(activeAccount?.address),
+        enabled,
+      },
+    ],
+  });
   const query = useQuery({
     queryKey: queryKeys.assetWiseSupplies(activeAccount?.address),
-    queryFn: isEnabled
+    queryFn: enabled
       ? () =>
           getAssetWiseSupplies({
             provider,
@@ -64,7 +72,7 @@ export const useGetAssetWiseSupplies = ({
 
   return {
     ...query,
-    isFetched: isEnabled === false ? true : query.isFetched,
+    isFetched: enabled === false ? true : query.isFetched,
   };
 };
 

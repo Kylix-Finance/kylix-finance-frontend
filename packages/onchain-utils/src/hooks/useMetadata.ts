@@ -1,6 +1,7 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { useProvider } from "./useProvider";
 import { queryKeys } from "@repo/shared";
+import { useRefetch } from "./useRefetch";
 
 export type MetadataResult = {
   deposit: string;
@@ -13,7 +14,14 @@ export type MetadataResult = {
 const useMetadata = (assetId?: number | string) => {
   const { api } = useProvider();
   const enabled = !!api && !!assetId;
-
+  useRefetch({
+    queries: [
+      {
+        queryKey: queryKeys.metadata(assetId || -1),
+        enabled,
+      },
+    ],
+  });
   const { data, ...rest } = useQuery<MetadataResult>({
     queryKey: queryKeys.metadata(assetId || -1),
     queryFn: enabled

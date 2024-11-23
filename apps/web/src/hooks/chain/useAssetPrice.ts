@@ -5,6 +5,7 @@ import {
   queryKeys,
 } from "@repo/shared";
 import { formatUnit, useMetadata, useProvider } from "@repo/onchain-utils";
+import { useRefetch } from "@repo/onchain-utils/src/hooks/useRefetch";
 
 interface Props {
   assetId: number | string;
@@ -15,6 +16,13 @@ export const useAssetPrice = ({ assetId }: Props) => {
   const { assetMetaData: baseAssetMetadata, isLoading } =
     useMetadata(PRICE_BASE_ASSET_ID);
   const enabled = !!api && !isLoading;
+  useRefetch({
+    queries: [
+      {
+        queryKey: queryKeys.assetPrice({ assetId }),
+      },
+    ],
+  });
   const { data, ...rest } = useQuery({
     queryKey: queryKeys.assetPrice({ assetId }),
     queryFn: enabled
