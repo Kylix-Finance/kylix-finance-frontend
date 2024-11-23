@@ -1,3 +1,5 @@
+import Item from "./Item";
+
 interface Props {
   heading: string;
   data: any[];
@@ -12,11 +14,16 @@ const Section = ({ heading }: Props) => {
           background: `radial-gradient(circle at top left, #56DDB490 0%, rgba(17, 23, 61, 0) 20%)`,
         }}
       />
-      <div className="flex flex-col gap-20 bg-secondary-500 p-7  rounded-xl lg:rounded-3xl">
+      <div className="flex flex-col gap-10 bg-secondary-500 p-7  rounded-xl lg:rounded-3xl">
         <h3 className="font-heading font-bold text-2xl lg:text-4xl leading-5 text-white relative z-10">
           {heading}
         </h3>
-        <div className="flex flex-col gap-2.5"></div>
+        <div className="flex flex-col gap-2.5">
+          <Item
+            title="What is Kylix Finance, and how does it work"
+            description="Clear explanations of how users can lend and borrow assets, with a focus on ease of use. Clear explanations of how users can lend and borrow assets, with a focus on ease of use.Clear explanations of how users can lend and borrow assets, with a focus on ease of use.Clear explanations of how users can lend and borrow assets, with a focus on ease of use.Clear explanations of how users can lend and borrow assets, with a focus on ease of use."
+          />
+        </div>
       </div>
     </div>
   );

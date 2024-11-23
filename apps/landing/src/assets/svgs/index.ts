@@ -24,6 +24,7 @@ import HarbourIndustrialCapital from "./harbour-industrial-capital.svg";
 import HercleFinancial from "./hercle-financial.svg";
 import Pendulum from "./pendulum.svg";
 import Polimec from "./polimec.svg";
+import Plus from "./plus.svg";
 export {
   ArrowRight,
   BorrowImage,
@@ -51,4 +52,5 @@ export {
   HarbourIndustrialCapital,
   Pendulum,
   Polimec,
+  Plus,
 };
