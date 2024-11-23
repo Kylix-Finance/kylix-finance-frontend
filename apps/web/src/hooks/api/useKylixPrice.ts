@@ -8,9 +8,5 @@ export const useKylixPrice = (scale: ChartScale) => {
     queryKey: queryKeys.kylixPrice(scale),
     queryFn: () => getKylixPrice(scale),
     placeholderData: keepPreviousData,
-    refetchIntervalInBackground: true,
-    refetchInterval: 30,
-    refetchOnWindowFocus: "always",
-    refetchOnMount: "always",
   });
 };

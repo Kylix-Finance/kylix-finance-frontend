@@ -7,9 +7,5 @@ export const useTotalSupply = (scale: ChartScale) => {
   return useQuery({
     queryKey: queryKeys.totalSupply(scale),
     queryFn: () => getTotalSupply(scale),
-    refetchIntervalInBackground: true,
-    refetchInterval: 30,
-    refetchOnWindowFocus: "always",
-    refetchOnMount: "always",
   });
 };

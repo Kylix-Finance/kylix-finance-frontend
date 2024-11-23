@@ -1,5 +1,6 @@
 import { WsProvider } from "@polkadot/api";
 import { formatUnit, useActiveAccount, useProvider } from "@repo/onchain-utils";
+import { useRefetch } from "@repo/onchain-utils/src/hooks/useRefetch";
 import { queryKeys } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
 
@@ -17,18 +18,20 @@ export interface UserLtvResult {
 export const useGetUserLtv = ({ account }: UseGetUserLtvParams = {}) => {
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
-
+  const enabled = !!provider && !!(account || activeAccount);
+  useRefetch({
+    queries: [
+      {
+        queryKey: queryKeys.userLtv(account),
+        enabled,
+      },
+    ],
+  });
   return useQuery({
     queryKey: queryKeys.userLtv(account),
-    queryFn:
-      !!provider && !!(account || activeAccount)
-        ? () =>
-            userLtv(provider, { account: activeAccount?.address || account })
-        : skipToken,
-    refetchIntervalInBackground: true,
-    refetchInterval: 30,
-    refetchOnWindowFocus: "always",
-    refetchOnMount: "always",
+    queryFn: enabled
+      ? () => userLtv(provider, { account: activeAccount?.address || account })
+      : skipToken,
   });
 };
 

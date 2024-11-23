@@ -5,11 +5,19 @@ import { ApiPromise, WsProvider } from "@polkadot/api";
 import { Options, queryKeys } from "@repo/shared";
 import { useEffect, useState } from "react";
 import { useConfig } from "./useConfig";
+import { useRefetch } from "./useRefetch";
 
 const useProvider = () => {
   const { config } = useConfig();
   const rpc = config?.rpc;
-
+  // useRefetch({
+  //   queries: [
+  //     {
+  //       queryKey: queryKeys.provider,
+  //       enabled: !!rpc
+  //     }
+  //   ]
+  // })
   const { data, ...rest } = useQuery({
     queryKey: queryKeys.provider,
     queryFn: rpc
@@ -22,10 +30,6 @@ const useProvider = () => {
           };
         }
       : skipToken,
-    refetchIntervalInBackground: true,
-    refetchInterval: 30,
-    refetchOnWindowFocus: "always",
-    refetchOnMount: "always",
   });
 
   return { provider: data?.provider, api: data?.api, ...rest };
