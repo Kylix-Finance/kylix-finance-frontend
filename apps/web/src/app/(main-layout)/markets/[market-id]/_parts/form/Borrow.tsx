@@ -47,7 +47,7 @@ export const Borrow = () => {
   const poolBalance = Number(
     formatUnit(BigInt(pool?.reserveBalance || 0), assetMetaData?.decimals) || 0
   );
-  const max = Math.min(poolBalance, allowanceAmount);
+  const max = Math.min(poolBalance, allowanceAmount).toFixed(4);
 
   const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
     { poolId: tokenId }
@@ -80,7 +80,7 @@ export const Borrow = () => {
   const items: Array<ListItem> = [
     {
       label: "Available",
-      value: !assetMetaData || !pool ? "0" : max.toFixed(4),
+      value: !assetMetaData || !pool ? "0" : Number(max).toLocaleString(),
       valueClassName: "!text-[#4E5B72]",
     },
     {
@@ -122,7 +122,7 @@ export const Borrow = () => {
       balance={Infinity.toString()}
       symbol={assetMetaData?.symbol}
       onMaxClick={() => {
-        setValue(max.toFixed(4));
+        setValue(max);
       }}
     />
   );
