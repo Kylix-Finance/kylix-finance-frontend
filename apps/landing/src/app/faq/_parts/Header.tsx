@@ -26,7 +26,7 @@ const Header = () => {
         <Button
           variant="outline"
           color="white"
-          className="flex items-center text-sm font-semibold"
+          className="flex items-center text-sm font-semibold gap-2"
         >
           <Discord /> <span>Join Our Discord </span>
         </Button>
