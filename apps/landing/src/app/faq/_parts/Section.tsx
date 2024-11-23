@@ -1,11 +1,10 @@
-import Item from "./Item";
-
-interface Props {
+import Item, { FAQItemProps } from "./FAQItem";
+export interface FAQSectionProps {
   heading: string;
-  data: any[];
+  data: FAQItemProps[];
 }
 
-const Section = ({ heading }: Props) => {
+const Section = ({ heading, data }: FAQSectionProps) => {
   return (
     <div className="min-w-0 w-full relative rounded-xl lg:rounded-3xl bg-gradient-to-br from-white/20 via-transparent border border-primary-500/30">
       <div
@@ -19,10 +18,13 @@ const Section = ({ heading }: Props) => {
           {heading}
         </h3>
         <div className="flex flex-col gap-2.5">
-          <Item
-            title="What is Kylix Finance, and how does it work"
-            description="Clear explanations of how users can lend and borrow assets, with a focus on ease of use. Clear explanations of how users can lend and borrow assets, with a focus on ease of use.Clear explanations of how users can lend and borrow assets, with a focus on ease of use.Clear explanations of how users can lend and borrow assets, with a focus on ease of use.Clear explanations of how users can lend and borrow assets, with a focus on ease of use."
-          />
+          {data.map((item, index) => (
+            <Item
+              key={index}
+              title={item.title}
+              description={item.description}
+            />
+          ))}
         </div>
       </div>
     </div>

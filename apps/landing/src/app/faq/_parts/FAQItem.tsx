@@ -3,17 +3,20 @@ import { useState } from "react";
 import { Plus } from "~/assets/svgs";
 import { motion, AnimatePresence } from "framer-motion";
 
-interface Props {
+export interface FAQItemProps {
   title: string;
   description: string;
 }
 
-const Item = ({ description, title }: Props) => {
+const FAQItem = ({ description, title }: FAQItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="flex flex-col gap-6 p-4 backdrop-blur-md bg-[#A6CEC20F] rounded-lg">
-      <div className="flex items-center w-full justify-between">
+      <div
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center w-full justify-between cursor-pointer"
+      >
         <p
           className={`transition-all duration-300 text-xl ${
             isOpen
@@ -24,7 +27,6 @@ const Item = ({ description, title }: Props) => {
           {title}
         </p>
         <button
-          onClick={() => setIsOpen(!isOpen)}
           className={`transition-transform duration-300 ${
             isOpen ? "text-primary-500 rotate-45" : "text-primary-100"
           }`}
@@ -51,4 +53,4 @@ const Item = ({ description, title }: Props) => {
   );
 };
 
-export default Item;
+export default FAQItem;
