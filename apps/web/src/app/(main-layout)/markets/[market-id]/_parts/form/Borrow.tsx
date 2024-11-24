@@ -28,10 +28,6 @@ export const Borrow = () => {
   });
   const { assetMetaData } = useMetadata(tokenId);
 
-  const { balance: borrowAssetBalance } = useBalance({
-    assetId: tokenId,
-  });
-
   const { formattedPrice } = useAssetPrice({
     assetId: tokenId,
   });
@@ -56,7 +52,7 @@ export const Borrow = () => {
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 
   const onclick = () => {
-    if (!value || !assetMetaData?.decimals || !borrowAssetBalance) return;
+    if (!value || !assetMetaData?.decimals) return;
     const borrowValue = parseUnit(value, assetMetaData?.decimals).toString();
 
     mutate(
