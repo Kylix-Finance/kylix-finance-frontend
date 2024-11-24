@@ -20,7 +20,6 @@ export const useQuickBorrow = () => {
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
   const { balance: getBalance } = useBalance();
-  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: queryKeys.supply,
     mutationFn: (params: Props) =>
@@ -30,20 +29,6 @@ export const useQuickBorrow = () => {
         getBalance,
         activeAccount: activeAccount?.address,
       }),
-    onSuccess: (_, { supplyPoolId, borrowPoolId }) => {
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: supplyPoolId,
-        }),
-      });
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: borrowPoolId,
-        }),
-      });
-    },
   });
 };
 

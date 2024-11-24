@@ -6,7 +6,6 @@ import {
   useMetadata,
   useProvider,
 } from "@repo/onchain-utils";
-import { useRefetch } from "@repo/onchain-utils/src/hooks/useRefetch";
 import {
   LendingLendingPool,
   PRICE_BASE_ASSET_ID,
@@ -36,14 +35,6 @@ interface PoolsResponse {
 export const usePools = () => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
-  useRefetch({
-    queries: [
-      {
-        queryKey: queryKeys.pools({ activeAccount: activeAccount?.address }),
-        enabled: !!api,
-      },
-    ],
-  });
   const { data, ...rest } = useQuery({
     queryKey: queryKeys.pools({ activeAccount: activeAccount?.address }),
     enabled: !!api,

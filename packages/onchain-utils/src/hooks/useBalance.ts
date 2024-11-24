@@ -6,7 +6,6 @@ import { formatUnit } from "../utils";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { DEFAULT_TOKEN_DECIMALS, queryKeys } from "@repo/shared";
 import { useActiveAccount } from "./useActiveAccount";
-import { useRefetch } from "./useRefetch";
 interface Props {
   accountAddress?: string;
   assetId?: number | string;
@@ -26,13 +25,7 @@ const useBalance = ({
   const address = accountAddress ?? activeAccount?.address;
   const { assetMetaData } = useMetadata(assetId);
   const finalEnabled = !!api && !!address && enabled;
-  useRefetch({
-    queries: [
-      {
-        queryKey: queryKeys.balance({ address, assetId }),
-      },
-    ],
-  });
+
   const { data, ...rest } = useQuery({
     queryKey: queryKeys.balance({ address, assetId }),
     queryFn: finalEnabled
