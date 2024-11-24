@@ -7,5 +7,9 @@ export const useInterestRate = () => {
     queryKey: queryKeys.interestRate(),
     queryFn: getInterestRate,
     placeholderData: keepPreviousData,
+    refetchOnMount: true,
+    meta: {
+      excludeFromGlobalInvalidation: true,
+    },
   });
 };
