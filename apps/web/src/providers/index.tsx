@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import ReactQueryProvider from "./ReactQueryProvider";
 import { Providers as WalletProvider } from "@repo/wallet-modal";
 import { PortalContainer } from "./Portal";
+import BlockProvider from "./BlockProvider";
 interface Props {
   children: React.ReactNode;
 }
@@ -25,6 +26,7 @@ const Providers: FC<Props> = ({ children }) => {
             },
           }}
         >
+          <BlockProvider />
           <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </WalletProvider>
         <PortalContainer />

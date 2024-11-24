@@ -30,6 +30,9 @@ const useProvider = () => {
           };
         }
       : skipToken,
+    meta: {
+      excludeFromGlobalInvalidation: true,
+    },
   });
 
   return { provider: data?.provider, api: data?.api, ...rest };
