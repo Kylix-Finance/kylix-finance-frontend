@@ -21,7 +21,7 @@ export const Supply = () => {
   const { pool } = usePool({ assetId: tokenId });
   const [value, setValue] = useState("");
   const { assetMetaData } = useMetadata(tokenId);
-  const { mutate, isPending } = useSupply({ asset: tokenId, poolId: pool?.id });
+  const { mutate, isPending } = useSupply({ asset: tokenId });
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
     assetId: tokenId,
   });
@@ -39,10 +39,12 @@ export const Supply = () => {
     mutate(
       {
         balance: parseUnit(value, Number(assetMetaData?.decimals)),
+        onConfirm: () => {
+          setValue("");
+        },
       },
       {
         onSuccess: ({ blockNumber }) => {
-          setValue("");
           notify({
             type: "success",
             title: "Success",

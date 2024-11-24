@@ -11,13 +11,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface Props {
   asset: string | number;
-  poolId: string | number | undefined;
 }
 interface MutationFnProps {
   balance: string | bigint;
+  onConfirm?: VoidFunction;
 }
 
-export const useSupply = ({ asset, poolId }: Props) => {
+export const useSupply = ({ asset }: Props) => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
@@ -26,7 +26,7 @@ export const useSupply = ({ asset, poolId }: Props) => {
     mutationKey: queryKeys.supply,
     mutationFn: (params: MutationFnProps) =>
       supplyTransaction(
-        { asset, balance: params.balance },
+        { asset, ...params },
         {
           api,
           signer,
@@ -38,7 +38,7 @@ export const useSupply = ({ asset, poolId }: Props) => {
 };
 
 export const supplyTransaction = async (
-  { asset, balance }: MutationFnProps & { asset: string | number },
+  { asset, balance, onConfirm }: MutationFnProps & { asset: string | number },
   {
     api,
     activeAccount,
@@ -102,8 +102,11 @@ export const supplyTransaction = async (
                 reject(new Error(dispatchError.toString()));
               }
             } else {
-              if (status.isFinalized) {
-                console.info("Transaction finalized:", { blockNumber, txHash });
+              if (status.isReady) {
+                onConfirm?.();
+              }
+              if (status.isInBlock) {
+                console.info("Transaction inBlock:", { blockNumber, txHash });
                 resolve({
                   txHash: txHash.toString(),
                   blockNumber: blockNumber?.toString(),

@@ -32,7 +32,7 @@ const ApyChart = () => {
 
   const utilizationStr = pool?.assets[0]?.utilization || "0%";
 
-  const utilization = +utilizationStr.replace("%", "") * 10;
+  const utilization = Math.round(+utilizationStr.replace("%", "") * 10);
 
   return (
     <Card variant="outlined">

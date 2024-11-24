@@ -103,8 +103,8 @@ export const disableAsCollateralAsCollateral = async (
                 reject(new Error(dispatchError.toString()));
               }
             } else {
-              if (status.isFinalized) {
-                console.info("Transaction finalized:", { blockNumber, txHash });
+              if (status.isInBlock) {
+                console.info("Transaction inBlock:", { blockNumber, txHash });
                 resolve({
                   txHash: txHash.toString(),
                   blockNumber: blockNumber?.toString(),
