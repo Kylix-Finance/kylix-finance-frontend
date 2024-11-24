@@ -17,12 +17,13 @@ export interface UserLtvResult {
 export const useGetUserLtv = ({ account }: UseGetUserLtvParams = {}) => {
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
-  const enabled = !!provider && !!(account || activeAccount);
+  const finalAccount = account || activeAccount?.address;
+  const enabled = !!provider && !!finalAccount;
 
   return useQuery({
-    queryKey: queryKeys.userLtv(account),
+    queryKey: queryKeys.userLtv(finalAccount),
     queryFn: enabled
-      ? () => userLtv(provider, { account: activeAccount?.address || account })
+      ? () => userLtv(provider, { account: finalAccount })
       : skipToken,
   });
 };
