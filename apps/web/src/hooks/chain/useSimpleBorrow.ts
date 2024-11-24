@@ -11,13 +11,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface BorrowProps {
   borrowValue: string;
+  onConfirm?: VoidFunction;
 }
 interface Props {
   asset: string | number;
-  poolId: string | number | undefined;
 }
 
-export const useSimpleBorrow = ({ asset, poolId }: Props) => {
+export const useSimpleBorrow = ({ asset }: Props) => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
@@ -26,7 +26,7 @@ export const useSimpleBorrow = ({ asset, poolId }: Props) => {
     mutationKey: queryKeys.supply,
     mutationFn: (params: BorrowProps) =>
       simpleBorrowTransaction(
-        { asset, borrowValue: params.borrowValue },
+        { asset, borrowValue: params.borrowValue, onConfirm: params.onConfirm },
         {
           api,
           signer,
@@ -38,7 +38,7 @@ export const useSimpleBorrow = ({ asset, poolId }: Props) => {
 };
 
 export const simpleBorrowTransaction = async (
-  { asset, borrowValue }: BorrowProps & { asset: string | number },
+  { asset, borrowValue, onConfirm }: BorrowProps & { asset: string | number },
   {
     api,
     activeAccount,
@@ -102,6 +102,9 @@ export const simpleBorrowTransaction = async (
                 reject(new Error(dispatchError.toString()));
               }
             } else {
+              if (status.isReady) {
+                onConfirm?.();
+              }
               if (status.isFinalized) {
                 console.info("Transaction finalized:", { blockNumber, txHash });
                 resolve({

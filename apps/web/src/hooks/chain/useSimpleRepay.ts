@@ -11,6 +11,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface RepayMutationProps {
   balance: string | bigint;
+  onConfirm?: VoidFunction;
 }
 interface Props {
   asset: string | number;
@@ -26,7 +27,7 @@ export const useSimpleRepay = ({ asset, poolId }: Props) => {
     mutationKey: queryKeys.repay,
     mutationFn: (params: RepayMutationProps) =>
       repayTransaction(
-        { balance: params.balance, asset },
+        { ...params, asset },
         {
           api,
           signer,
@@ -38,7 +39,11 @@ export const useSimpleRepay = ({ asset, poolId }: Props) => {
 };
 
 export const repayTransaction = async (
-  { asset, balance }: RepayMutationProps & { asset: string | number },
+  {
+    asset,
+    balance,
+    onConfirm,
+  }: RepayMutationProps & { asset: string | number },
   {
     api,
     activeAccount,
@@ -102,6 +107,9 @@ export const repayTransaction = async (
                 reject(new Error(dispatchError.toString()));
               }
             } else {
+              if (status.isReady) {
+                onConfirm?.();
+              }
               if (status.isFinalized) {
                 console.info("Transaction finalized:", { blockNumber, txHash });
                 resolve({

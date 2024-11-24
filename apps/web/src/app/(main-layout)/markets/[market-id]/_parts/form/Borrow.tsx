@@ -24,7 +24,6 @@ export const Borrow = () => {
   const { pool } = usePool({ assetId: tokenId });
   const { mutate, isPending } = useSimpleBorrow({
     asset: tokenId,
-    poolId: pool?.id,
   });
   const { assetMetaData } = useMetadata(tokenId);
 
@@ -58,11 +57,12 @@ export const Borrow = () => {
     mutate(
       {
         borrowValue,
+        onConfirm: () => {
+          setValue("");
+        },
       },
       {
         onSuccess: ({ blockNumber }) => {
-          setValue("");
-
           notify({
             type: "success",
             title: "Borrow Successful",

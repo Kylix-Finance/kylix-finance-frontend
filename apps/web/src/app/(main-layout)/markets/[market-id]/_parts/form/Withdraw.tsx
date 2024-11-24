@@ -25,7 +25,6 @@ export const Withdraw = () => {
   });
   const { mutate, isPending } = useWithdraw({
     asset: tokenId,
-    poolId: pool?.id,
   });
   const { formattedBalance, isLoading: isBalanceLoading } = useBalance({
     assetId: pool?.id,
@@ -40,12 +39,13 @@ export const Withdraw = () => {
   const handleClick = () => {
     mutate(
       {
-        asset: tokenId,
         balance: parseUnit(value, Number(assetMetaData?.decimals) || 18),
+        onConfirm: () => {
+          setValue("");
+        },
       },
       {
         onSuccess: ({ blockNumber }) => {
-          setValue("");
           notify({
             type: "success",
             title: "Success",

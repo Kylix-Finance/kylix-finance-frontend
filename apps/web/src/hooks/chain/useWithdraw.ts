@@ -8,9 +8,12 @@ import { ApiPromise } from "@polkadot/api";
 import { Signer, SubmittableResultValue } from "@polkadot/api/types";
 interface Props {
   asset: string | number;
-  poolId: string | number | undefined;
 }
-export const useWithdraw = ({ asset, poolId }: Props) => {
+interface MutationFnProps {
+  balance: string | bigint;
+  onConfirm?: VoidFunction;
+}
+export const useWithdraw = ({ asset }: Props) => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
@@ -18,21 +21,21 @@ export const useWithdraw = ({ asset, poolId }: Props) => {
 
   return useMutation({
     mutationKey: queryKeys.withdraw,
-    mutationFn: (params: {
-      asset: number | string;
-      balance: string | bigint;
-    }) =>
-      withdrawTransaction(params, {
-        api,
-        signer,
-        getBalance,
-        activeAccount: activeAccount?.address,
-      }),
+    mutationFn: (params: MutationFnProps) =>
+      withdrawTransaction(
+        { asset, ...params },
+        {
+          api,
+          signer,
+          getBalance,
+          activeAccount: activeAccount?.address,
+        }
+      ),
   });
 };
 
 export const withdrawTransaction = async (
-  { asset, balance }: { asset: number | string; balance: string | bigint },
+  { asset, balance, onConfirm }: MutationFnProps & { asset: number | string },
   {
     api,
     activeAccount,
@@ -96,6 +99,9 @@ export const withdrawTransaction = async (
                 reject(new Error(dispatchError.toString()));
               }
             } else {
+              if (status.isReady) {
+                onConfirm?.();
+              }
               if (status.isFinalized) {
                 console.info("Transaction finalized:", { blockNumber, txHash });
                 resolve({

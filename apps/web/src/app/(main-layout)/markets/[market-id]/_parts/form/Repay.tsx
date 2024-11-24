@@ -50,10 +50,12 @@ export const Repay = () => {
     mutate(
       {
         balance: parseUnit(value, assetMetaData.decimals),
+        onConfirm: () => {
+          setValue("");
+        },
       },
       {
         onSuccess: ({ blockNumber }) => {
-          setValue("");
           notify({
             type: "success",
             title: "Success",
