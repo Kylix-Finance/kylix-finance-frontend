@@ -1,6 +1,5 @@
 import { WsProvider } from "@polkadot/api";
 import { formatUnit, useActiveAccount, useProvider } from "@repo/onchain-utils";
-import { useRefetch } from "@repo/onchain-utils/src/hooks/useRefetch";
 import { queryKeys } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
 
@@ -19,14 +18,7 @@ export const useGetUserLtv = ({ account }: UseGetUserLtvParams = {}) => {
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
   const enabled = !!provider && !!(account || activeAccount);
-  useRefetch({
-    queries: [
-      {
-        queryKey: queryKeys.userLtv(account),
-        enabled,
-      },
-    ],
-  });
+
   return useQuery({
     queryKey: queryKeys.userLtv(account),
     queryFn: enabled
@@ -42,7 +34,6 @@ const userLtv = async (
   const result = await provider.send<UserLtvResult>("lending_getUserLtv", [
     account,
   ]);
-  console.log("_______result", result);
   const saleLtv = Number(formatUnit(result.sale_ltv, 16)).toFixed(2);
   const currentLtv = Number(formatUnit(result.current_ltv, 16)).toFixed(2);
   const liquidationLtv = Number(formatUnit(result.liquidation_ltv, 16)).toFixed(

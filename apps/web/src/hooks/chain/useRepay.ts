@@ -20,7 +20,6 @@ export const useRepay = () => {
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
   const { balance: getBalance } = useBalance();
-  const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: queryKeys.repay,
@@ -31,34 +30,6 @@ export const useRepay = () => {
         getBalance,
         activeAccount: activeAccount?.address,
       }),
-    onError: () => {
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: undefined,
-        }),
-      });
-    },
-    onSuccess: (_, { asset, collateralAsset }) => {
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: asset,
-        }),
-      });
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: collateralAsset,
-        }),
-      });
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: undefined,
-        }),
-      });
-    },
   });
 };
 

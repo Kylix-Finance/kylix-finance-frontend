@@ -5,19 +5,10 @@ import { ApiPromise, WsProvider } from "@polkadot/api";
 import { Options, queryKeys } from "@repo/shared";
 import { useEffect, useState } from "react";
 import { useConfig } from "./useConfig";
-import { useRefetch } from "./useRefetch";
 
 const useProvider = () => {
   const { config } = useConfig();
   const rpc = config?.rpc;
-  // useRefetch({
-  //   queries: [
-  //     {
-  //       queryKey: queryKeys.provider,
-  //       enabled: !!rpc
-  //     }
-  //   ]
-  // })
   const { data, ...rest } = useQuery({
     queryKey: queryKeys.provider,
     queryFn: rpc
@@ -30,6 +21,9 @@ const useProvider = () => {
           };
         }
       : skipToken,
+    meta: {
+      excludeFromGlobalInvalidation: true,
+    },
   });
 
   return { provider: data?.provider, api: data?.api, ...rest };

@@ -22,7 +22,6 @@ export const useSupply = ({ asset, poolId }: Props) => {
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();
   const { balance: getBalance } = useBalance();
-  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: queryKeys.supply,
     mutationFn: (params: MutationFnProps) =>
@@ -35,46 +34,6 @@ export const useSupply = ({ asset, poolId }: Props) => {
           activeAccount: activeAccount?.address,
         }
       ),
-    onError: () => {
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: undefined,
-        }),
-      });
-    },
-    onSuccess: () => {
-      queryClient.refetchQueries({
-        queryKey: queryKeys.userLtv(activeAccount?.address),
-      });
-      queryClient.refetchQueries({
-        queryKey: queryKeys.lendingPools({
-          asset,
-          account: activeAccount?.address,
-        }),
-      });
-      queryClient.refetchQueries({
-        queryKey: queryKeys.poolData(asset),
-      });
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: poolId,
-        }),
-      });
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: asset,
-        }),
-      });
-      queryClient.refetchQueries({
-        queryKey: queryKeys.balance({
-          address: activeAccount?.address,
-          assetId: undefined,
-        }),
-      });
-    },
   });
 };
 

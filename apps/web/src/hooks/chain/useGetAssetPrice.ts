@@ -1,6 +1,5 @@
 import { WsProvider } from "@polkadot/api";
 import { useProvider } from "@repo/onchain-utils";
-import { useRefetch } from "@repo/onchain-utils/src/hooks/useRefetch";
 import { queryKeys } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
 
@@ -11,13 +10,7 @@ interface UseGetAssetPrice {
 
 export const useGetAssetPrice = ({ asset, base_asset }: UseGetAssetPrice) => {
   const { provider } = useProvider();
-  useRefetch({
-    queries: [
-      {
-        queryKey: queryKeys.getAssetPrice(asset, base_asset),
-      },
-    ],
-  });
+
   return useQuery({
     queryKey: queryKeys.getAssetPrice(asset, base_asset),
     queryFn: provider
