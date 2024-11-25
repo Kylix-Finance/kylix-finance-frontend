@@ -14,8 +14,30 @@ export interface Props {
 }
 
 const ProgressBar: React.FC<Props> = ({ data = {}, isLoading }) => {
-  const { current, sale, target } = data;
+  const { current = 0, sale = 0, target = 0 } = data;
+  const palette = {
+    current: " #45A996",
+    sale: "#EA8E3A",
+    target: "#F07979",
+  };
+  const gradients = {
+    current: " rgba(90, 195, 181,1)",
+    sale: "rgba(242, 179, 102, 1)",
+    target: "rgba(255, 186, 186, 1)",
+  };
+  const progressBarColor =
+    current < sale
+      ? palette.current
+      : current > target
+        ? palette.target
+        : palette.sale;
 
+  const gradientColor =
+    current < sale
+      ? gradients.current
+      : current > target
+        ? gradients.target
+        : gradients.sale;
   if (
     isUndefined(current) ||
     isUndefined(sale) ||
@@ -58,11 +80,19 @@ const ProgressBar: React.FC<Props> = ({ data = {}, isLoading }) => {
             label: "Current LTV",
           },
           {
-            badge: <Box className="size-[14px] bg-[#EA8E3A] rounded-[2px]" />,
+            badge: (
+              <Box
+                className={`size-[14px] bg-[${palette.sale}] rounded-[2px]`}
+              />
+            ),
             label: "Sale LTV",
           },
           {
-            badge: <Box className="size-[14px] bg-[#F07979] rounded-[2px]" />,
+            badge: (
+              <Box
+                className={`size-[14px] bg-[${palette.target}] rounded-[2px]`}
+              />
+            ),
             label: "Liquidation LTV",
           },
         ].map((item) => {
@@ -89,8 +119,7 @@ const ProgressBar: React.FC<Props> = ({ data = {}, isLoading }) => {
             className="h-full"
             style={{
               width: `${current}%`,
-              backgroundImage:
-                "repeating-linear-gradient(-45deg, rgba(90, 195, 181,1), rgba(90, 195, 181,1) 2px, #45A996 2px, #45A996 6px)",
+              backgroundImage: `repeating-linear-gradient(-45deg, ${gradientColor}, ${gradientColor} 2px, ${progressBarColor} 2px, ${progressBarColor} 6px)`,
             }}
           />
           <Box
@@ -108,7 +137,7 @@ const ProgressBar: React.FC<Props> = ({ data = {}, isLoading }) => {
             style={{ left: `${current}%` }}
             className="absolute -translate-x-1/3 w-[35px]"
           >
-            <Icons.ArrowUp />
+            <Icons.ArrowUp style={{ color: progressBarColor }} />
             <Box className="-mt-2">
               <Percent value={current} />
             </Box>
