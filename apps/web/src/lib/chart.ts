@@ -1,35 +1,60 @@
-// customVerticalCrosshairPlugin.ts
-import { Chart, Plugin } from "chart.js";
+import { Chart, Plugin, ChartArea, Point, BubbleDataPoint } from "chart.js";
 
-type CrosshairPluginOptions = {
+interface CrosshairPluginOptions {
   lineColor?: string;
   lineWidth?: number;
   datasetIndex?: number;
   dataIndex?: number;
-  text?: string; // New optional property for the text
-  textColor?: string; // Optional property for text color
-  fontSize?: number; // Optional property for font size
-  fontFamily?: string; // Optional property for font family
-};
+  text?: string;
+  textColor?: string;
+  fontSize?: number;
+  fontFamily?: string;
+}
 
-export const crosshairPlugin: Plugin = {
+interface DataPoint {
+  utilization_rate: number;
+  [key: string]: any;
+}
+
+interface PluginState {
+  x: number | null;
+  y: number | null;
+  visible: boolean;
+  onMouseMove: ((event: MouseEvent) => void) | null;
+  onMouseOut: (() => void) | null;
+}
+
+interface ChartWithCrosshair extends Chart {
+  crosshair?: PluginState;
+}
+
+type ChartDataPoint =
+  | number
+  | Point
+  | [number, number]
+  | BubbleDataPoint
+  | DataPoint;
+
+export const crosshairPlugin: Plugin<"line", CrosshairPluginOptions> = {
   id: "crosshair",
-  // Plugin state to store mouse coordinates and visibility
-  afterInit: (chart: Chart, args, options: CrosshairPluginOptions) => {
-    const canvas = chart.canvas as HTMLCanvasElement;
-    const pluginState = ((chart as any).crosshair = {
+
+  afterInit(chart: ChartWithCrosshair, args, options: CrosshairPluginOptions) {
+    const canvas = chart.canvas;
+    if (!canvas) return;
+
+    const pluginState: PluginState = {
       x: null,
       y: null,
       visible: false,
       onMouseMove: null,
       onMouseOut: null,
-    });
+    };
+
+    chart.crosshair = pluginState;
 
     const onMouseMove = (event: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      //@ts-expect-error: type is not correct
       pluginState.x = event.clientX - rect.left;
-      //@ts-expect-error: type is not correct
       pluginState.y = event.clientY - rect.top;
       pluginState.visible = true;
       chart.draw();
@@ -43,37 +68,32 @@ export const crosshairPlugin: Plugin = {
     canvas.addEventListener("mousemove", onMouseMove);
     canvas.addEventListener("mouseout", onMouseOut);
 
-    // Store the handlers to remove them later
-    //@ts-expect-error: type is not correct
-
     pluginState.onMouseMove = onMouseMove;
-    //@ts-expect-error: type is not correct
-
     pluginState.onMouseOut = onMouseOut;
   },
 
-  beforeDestroy: (chart: Chart) => {
-    const canvas = chart.canvas as HTMLCanvasElement;
-    const pluginState = (chart as any).crosshair;
-    if (pluginState) {
+  beforeDestroy(chart: ChartWithCrosshair) {
+    const canvas = chart.canvas;
+    if (!canvas) return;
+
+    const pluginState = chart.crosshair;
+    if (pluginState?.onMouseMove && pluginState?.onMouseOut) {
       canvas.removeEventListener("mousemove", pluginState.onMouseMove);
       canvas.removeEventListener("mouseout", pluginState.onMouseOut);
-      delete (chart as any).crosshair;
+      delete chart.crosshair;
     }
   },
 
-  afterDraw: (chart: Chart, args, options: CrosshairPluginOptions) => {
-    const {
-      ctx,
-      chartArea: { top, bottom },
-      height,
-    } = chart;
-
+  afterDraw(chart: ChartWithCrosshair, args, options: CrosshairPluginOptions) {
+    const ctx = chart.ctx;
     if (!ctx) return;
 
-    const pluginState = (chart as any).crosshair;
+    const chartArea: ChartArea = chart.chartArea;
+    const { top, bottom } = chartArea;
+    const { height } = chart;
 
-    // Retrieve customization options with defaults
+    const pluginState = chart.crosshair;
+
     const lineColor = options.lineColor ?? "rgba(0,0,0,0.5)";
     const lineWidth = options.lineWidth ?? 1;
     const textColor = options.textColor ?? "black";
@@ -82,38 +102,55 @@ export const crosshairPlugin: Plugin = {
 
     let x: number | null = null;
     let displayText: string = options.text ?? "";
-
+    let datasetIndex = options.datasetIndex ?? 0;
     let dataIndex = 0;
+    let value: number | null = null;
 
-    if (pluginState && pluginState.visible) {
-      // **Hover State:** Use mouse position
+    if (pluginState?.visible) {
+      // Hover State: Use mouse position
       x = pluginState.x;
 
       const activeElements = chart.getActiveElements();
-
       if (activeElements.length > 0) {
         const activeElement = activeElements[0];
-        //@ts-expect-error: type is not correct
-        dataIndex = activeElement.index;
+        datasetIndex = activeElement?.datasetIndex ?? datasetIndex;
+        dataIndex = activeElement?.index ?? dataIndex;
 
-        displayText = `Utilization ${dataIndex / 10}%`;
+        // Get the actual value from the dataset
+        const dataset = chart.data.datasets[datasetIndex];
+        const dataPoint = dataset?.data[dataIndex] as ChartDataPoint;
+        if (
+          typeof dataPoint === "object" &&
+          dataPoint !== null &&
+          "utilization_rate" in dataPoint
+        ) {
+          value = dataPoint.utilization_rate;
+        }
       }
     } else {
-      // **Non-Hover State:** Use fixed dataset and data index
-      const datasetIndex = options.datasetIndex ?? 0;
+      // Non-Hover State: Use fixed dataset and data index
       dataIndex = options.dataIndex ?? 0;
+
+      // Get the actual value from the dataset
+      const dataset = chart.data.datasets[datasetIndex];
+      const dataPoint = dataset?.data[dataIndex] as ChartDataPoint;
+      if (
+        typeof dataPoint === "object" &&
+        dataPoint !== null &&
+        "utilization_rate" in dataPoint
+      ) {
+        value = dataPoint.utilization_rate;
+      }
 
       const meta = chart.getDatasetMeta(datasetIndex);
       const point = meta.data[dataIndex];
-
-      displayText = `Utilization ${dataIndex / 10}%`;
 
       if (point) {
         x = point.x;
       }
     }
 
-    if (x !== null) {
+    if (x !== null && value !== null) {
       ctx.save();
 
       // Draw vertical line
@@ -124,26 +161,26 @@ export const crosshairPlugin: Plugin = {
       ctx.lineWidth = lineWidth;
       ctx.stroke();
 
-      if (displayText) {
-        ctx.fillStyle = textColor;
-        ctx.font = `${fontSize}px ${fontFamily}`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "top";
+      // Display the actual value with percentage
+      displayText = `Utilization ${value.toFixed(2)}%`;
 
-        let textX = x;
-        if (dataIndex < 10) {
-          textX += 45;
-        } else if (dataIndex > 90) {
-          textX -= 45;
-        }
+      ctx.fillStyle = textColor;
+      ctx.font = `${fontSize}px ${fontFamily}`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
 
-        const textY = bottom + 12;
-
-        const canvasHeight = height;
-        const adjustedTextY = Math.min(textY, canvasHeight - fontSize - 5);
-
-        ctx.fillText(displayText, textX, adjustedTextY);
+      let textX = x;
+      // Adjust text position based on value instead of dataIndex
+      if (value < 10) {
+        textX += 45;
+      } else if (value > 90) {
+        textX -= 45;
       }
+
+      const textY = bottom + 12;
+      const adjustedTextY = Math.min(textY, height - fontSize - 5);
+
+      ctx.fillText(displayText, textX, adjustedTextY);
 
       ctx.restore();
     }
