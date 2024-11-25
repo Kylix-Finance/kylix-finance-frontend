@@ -1,6 +1,6 @@
 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g id="iconamoon:arrow-down-2-bold">
-    <path id="Vector" d="M14.6665 11.916L10.4998 7.74935L6.33317 11.916" stroke="#45A996" stroke-width="2.34863"
+    <path id="Vector" d="M14.6665 11.916L10.4998 7.74935L6.33317 11.916" stroke="currentColor" stroke-width="2.34863"
       stroke-linecap="round" stroke-linejoin="round" />
   </g>
 </svg>
