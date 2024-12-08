@@ -9,7 +9,7 @@ const ItemIcon = ({ Icon, isCurrentPath }: ItemIconProps) => {
   return (
     <Icon
       className={cn("w-5 h-5 text-primary-500", {
-        "text-white": isCurrentPath,
+        "text-white dark:text-black-500": isCurrentPath,
       })}
     />
   );
