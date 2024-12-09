@@ -6,6 +6,7 @@ import {
   SVGProps,
   ReactNode,
 } from "react";
+import { cn } from "~/utils";
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -23,6 +24,7 @@ interface IconProps {
 
 interface TitleProps {
   title: string;
+  hasIcon: boolean;
 }
 
 interface Props extends PropsWithChildren, Header {
@@ -30,7 +32,7 @@ interface Props extends PropsWithChildren, Header {
 }
 
 const IconWithBackground = ({ icon: Icon, iconColor }: IconProps) => (
-  <Box className="p-2 bg-[#F4FAF9] rounded-lg">
+  <Box className="p-2 bg-[#F4FAF9] dark:bg-transparent rounded-lg">
     <Icon
       width="16px"
       height="16px"
@@ -39,8 +41,14 @@ const IconWithBackground = ({ icon: Icon, iconColor }: IconProps) => (
   </Box>
 );
 
-const Title = ({ title }: TitleProps) => (
-  <Typography variant="h6"> {title}</Typography>
+const Title = ({ title, hasIcon }: TitleProps) => (
+  <Typography
+    variant="h6"
+    className={cn("dark:text-black-100", { ["dark:text-[#5C6965]"]: hasIcon })}
+  >
+    {" "}
+    {title}
+  </Typography>
 );
 
 const Card = ({
@@ -53,13 +61,13 @@ const Card = ({
 }: Props) => {
   return (
     <Box
-      className={`shadow-box rounded-lg p-6 bg-white w-full h-full flex flex-col ${className}`}
+      className={`shadow-box rounded-lg p-6 bg-white dark:bg-black-500 w-full h-full flex flex-col ${className}`}
     >
       <Box className="flex justify-between items-center w-full mb-2">
         {(Icon || title) && (
           <Box className={`flex items-center gap-2`}>
             {Icon && <IconWithBackground icon={Icon} iconColor={iconColor} />}
-            {title && <Title title={title} />}
+            {title && <Title title={title} hasIcon={Boolean(Icon)} />}
           </Box>
         )}
         {RightComponent}

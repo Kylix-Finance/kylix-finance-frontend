@@ -20,27 +20,16 @@ const SearchUI = ({ value = "", onChange }: SearchUIProps) => {
     <TextField
       value={value}
       onChange={onChangeHandler}
-      style={{
-        fontSize: "10px",
-        borderRadius: "4px",
-        border: "#C7C7C7 1px solid",
-        width: "100%",
-      }}
+      className="text-xs  rounded border border-[#C7C7C7] w-full font-body"
       placeholder="Search by market"
       size="small"
       inputProps={{
-        style: {
-          fontWeight: "normal",
-        },
+        className: "font-normal",
       }}
       InputProps={{
-        style: {
-          backgroundImage: "none",
-          color: "#C7C7C7",
-          fontSize: "14px",
-        },
+        className: "bg-none text-[#C7C7C7] text-[14px]  font-body",
         startAdornment: (
-          <Box className="pr-2">
+          <Box className="pr-2 ">
             <Icons.Search />
           </Box>
         ),

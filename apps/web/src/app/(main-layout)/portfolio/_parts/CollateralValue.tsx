@@ -27,7 +27,11 @@ const CollateralValue = () => {
 
   return (
     <Box className="flex flex-col h-full">
-      <Typography variant="h4" marginBottom="36px">
+      <Typography
+        variant="h4"
+        marginBottom="36px"
+        className="dark:text-black-100"
+      >
         {!isNaN(Number(totalCollateral))
           ? Number(totalCollateral).toLocaleString()
           : 0}

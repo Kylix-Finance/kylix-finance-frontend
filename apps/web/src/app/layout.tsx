@@ -22,7 +22,7 @@ export default function RootLayout({
       lang="en"
       className={`${fonts.inter.variable} ${fonts.poppins.variable}`}
     >
-      <body className="font-body !bg-[#F4FAF9]">
+      <body className="font-body bg-[#F4FAF9] dark:bg-[#0D0D0D]">
         <Providers>{children}</Providers>
       </body>
     </html>

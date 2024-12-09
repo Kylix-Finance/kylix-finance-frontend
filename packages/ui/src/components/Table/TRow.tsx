@@ -54,7 +54,7 @@ function TRow<Schema, ExtraFields extends string = string>({
         return (
           <TCell
             align={numeric?.some((item) => item === name) ? "right" : "left"}
-            className={`${tCellClassnames}`}
+            className={`${tCellClassnames} bg-[rgb(244, 250, 249)] dark:bg-[#0D0D0D] !dark:border-transparent`}
             {...tCellProps}
             key={`${name}+${index}`}
             style={{
@@ -62,7 +62,6 @@ function TRow<Schema, ExtraFields extends string = string>({
               ...(name === "actions"
                 ? {
                     position: "sticky",
-                    backgroundColor: "rgb(244, 250, 249)",
                     right: 0,
                     zIndex: "9999",
                     boxShadow: "-4px 0px 4px -4px rgba(0,0,0,0.2)",

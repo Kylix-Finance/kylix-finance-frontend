@@ -72,24 +72,28 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
           <Asset helperText={item.asset} label={item.asset.toString()} />
         ),
         "Collateral Factor": (item) => (
-          <Typography variant="subtitle1" className="pl-4">
+          <Typography variant="subtitle1" className="pl-4 dark:text-black-100">
             {item["Collateral Factor"]}
           </Typography>
         ),
         utilization: (item) => (
-          <Typography variant="subtitle1" className="pl-4">
+          <Typography variant="subtitle1" className="pl-4 dark:text-black-100">
             {item.utilization}
           </Typography>
         ),
         borrowRate: (item) => (
           <Box className="flex flex-col pl-4">
-            <Typography variant="subtitle1">{item.borrowRate}</Typography>
+            <Typography variant="subtitle1" className="dark:text-black-100">
+              {item.borrowRate}
+            </Typography>
             <KylixChip value="0%" />
           </Box>
         ),
         supplyRate: (item) => (
           <Box className="flex flex-col pl-4">
-            <Typography variant="subtitle1">{item.supplyRate}</Typography>
+            <Typography variant="subtitle1" className="dark:text-black-100">
+              {item.supplyRate}
+            </Typography>
             <KylixChip value="0%" />
           </Box>
         ),
@@ -97,7 +101,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
           <CollateralSwitch id={item.id} isCollateral={item.collateral} />
         ),
         walletBalance: (item) => (
-          <Typography variant="subtitle1" className="pl-4">
+          <Typography variant="subtitle1" className="pl-4 dark:text-black-100">
             {item.walletBalance === "-"
               ? "-"
               : Number(item.walletBalance).toLocaleString()}
