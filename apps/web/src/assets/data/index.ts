@@ -44,11 +44,6 @@ const sidebar: Array<Sidebar> = [
         items: [],
       },
       {
-        name: "Cross Swap",
-        href: "/cross-swap",
-        icon: sidebarIcons.CrossSwap,
-      },
-      {
         name: "Pools",
         href: "/pools",
         icon: sidebarIcons.Pool,
