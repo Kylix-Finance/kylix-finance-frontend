@@ -85,17 +85,23 @@ const PoolDetails = () => {
       <Box className="flex items-center justify-between">
         <Box className="flex items-center">
           <Link href="/markets">
-            <Icons.LeftArrow className="text-black" />
+            <Icons.LeftArrow className="text-black dark:text-primary-100" />
           </Link>
           <Box className="p-1.5 flex gap-2 items-center">
             <TokenIcon symbol={assetMetaData?.symbol} />{" "}
             <Box className="flex flex-col">
-              <Typography variant="subtitle2" className="text-primary-800">
+              <Typography
+                variant="subtitle2"
+                className="text-primary-800 dark:text-primary-100"
+              >
                 <Skeleton minWidth={20} isLoading={!assetMetaData}>
                   {assetMetaData?.name}
                 </Skeleton>
               </Typography>
-              <Typography variant="caption" className="text-primary-800/50">
+              <Typography
+                variant="caption"
+                className="text-primary-800/50 dark:text-primary-200"
+              >
                 <Skeleton minWidth={20} isLoading={!assetMetaData}>
                   {assetMetaData?.symbol}
                 </Skeleton>
@@ -103,9 +109,13 @@ const PoolDetails = () => {
             </Box>
           </Box>
         </Box>
-        <Box className="flex items-center text-primary-800 gap-2.5">
-          <Typography variant="subtitle2">Price:</Typography>
-          <Typography variant="body1">$ {formattedPrice}</Typography>
+        <Box className="flex items-center text-primary-800 gap-2.5 ">
+          <Typography variant="subtitle2" className="dark:text-primary-100">
+            Price:
+          </Typography>
+          <Typography variant="body1" className="dark:text-primary-100">
+            $ {formattedPrice}
+          </Typography>
         </Box>
       </Box>
       {/* Pool status */}

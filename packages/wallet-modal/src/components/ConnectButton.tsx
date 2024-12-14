@@ -54,7 +54,7 @@ export const ConnectButton: React.FC<Props> = ({ address }) => {
       isEnabled={!!address}
     >
       <button
-        className="select-none cursor-pointer transition transform hover:shadow-lg active:shadow-md active:translate-y-0 flex justify-between items-center gap-2 p-2 rounded-sm bg-[#FFF] text-[#5C5E64] w-[143px] h-[40px]"
+        className="select-none cursor-pointer transition transform hover:shadow-lg active:shadow-md active:translate-y-0 flex justify-between items-center gap-2 p-2 rounded-sm bg-[#FFF] dark:bg-black-500 dark:bg- text-[#5C5E64] dark:text-primary-100 w-[143px] h-[40px]"
         onClick={onConnectClick}
       >
         {address ? (
@@ -83,7 +83,7 @@ const ButtonText: React.FC<{ text: string }> = ({ text }) => {
 
 const SettingsIcon = () => {
   return (
-    <span className="size-[24px] bg-[#45A996] flex justify-center items-center gap-[10px] rounded-sm">
+    <span className="size-[24px] bg-[#45A996] dark:bg-primary-500/40 flex justify-center items-center gap-[10px] rounded-sm">
       <Settings />
     </span>
   );
@@ -91,7 +91,7 @@ const SettingsIcon = () => {
 
 const UserFillIcon = () => {
   return (
-    <span className="size-[24px] bg-[#F4FAF9] flex justify-center items-center gap-[10px] rounded-sm">
+    <span className="size-[24px] bg-[#F4FAF9] dark:bg-primary-500/40 flex justify-center items-center rounded-sm">
       <UserFill />
     </span>
   );

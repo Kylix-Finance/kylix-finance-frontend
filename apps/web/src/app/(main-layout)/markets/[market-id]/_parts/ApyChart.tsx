@@ -38,7 +38,7 @@ const ApyChart = () => {
   }, [data, utilization, RoundedUtilization]);
 
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" className="">
       <ModernMultiLineChart
         activeIndex={RoundedUtilization}
         datasets={[
