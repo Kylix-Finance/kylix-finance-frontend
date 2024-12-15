@@ -113,7 +113,7 @@ const ProgressBar: React.FC<Props> = ({ data = {}, isLoading }) => {
           style={{
             width: "100%",
           }}
-          className="relative h-4 bg-[#ECF6F4] rounded-[4px] overflow-hidden"
+          className="relative h-4 bg-[#ECF6F4] dark:bg-black-600 rounded-[4px] overflow-hidden"
         >
           <Box
             className="h-full"
@@ -191,7 +191,7 @@ const Percent = ({ value }: { value: number }) => {
         fontWeight={600}
         lineHeight={"24px"}
         style={{ width: "max-content" }}
-        className=" !text-[#4E5B72] font-number flex"
+        className=" text-[#4E5B72] dark:text-primary-100 font-number flex"
       >
         {value.toFixed(2)} %
       </Typography>

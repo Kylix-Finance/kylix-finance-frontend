@@ -66,13 +66,13 @@ const CollateralValue = () => {
             variant="caption"
             fontWeight={700}
             lineHeight={"15px"}
-            className="text-primary-800"
+            className="text-primary-800 dark:text-primary-300"
           >
             KLX Price
           </Typography>
 
           <Typography
-            className="text-primary-500"
+            className="text-primary-500 dark:text-primary-100"
             variant="body1"
             lineHeight="20px"
           >
@@ -85,13 +85,13 @@ const CollateralValue = () => {
               variant="caption"
               fontWeight={700}
               lineHeight={"15px"}
-              className="text-primary-800"
+              className="text-primary-800 dark:text-primary-300"
             >
               Rewards
             </Typography>
 
             <Typography
-              className="text-primary-500"
+              className="text-primary-500 dark:text-primary-100"
               variant="body1"
               lineHeight="20px"
             >
@@ -99,7 +99,13 @@ const CollateralValue = () => {
             </Typography>
           </Box>
           <div>
-            <Button size="small" variant="outlined" disableElevation disabled>
+            <Button
+              size="small"
+              variant="outlined"
+              className="!capitalize !text-xs !font-semibold !leading-[13px] !text-center !rounded !py-1 !px-2 !min-h-0 dark:disabled:border-black-400 dark:disabled:text-black-400"
+              disableElevation
+              disabled
+            >
               <Typography
                 variant="caption"
                 fontWeight={600}

@@ -8,7 +8,7 @@ import styles from "./ styles.module.css";
 
 export default function page() {
   return (
-    <Card className="">
+    <Card className="dark:bg-transparent">
       <Box className={styles.container}>
         <Box className={styles.details}>
           <PoolDetails />

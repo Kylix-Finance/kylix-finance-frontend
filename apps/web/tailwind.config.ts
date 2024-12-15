@@ -1,7 +1,7 @@
 import { Config } from "tailwindcss";
 import { PluginAPI } from "tailwindcss/types/config";
 const config: Config = {
-  darkMode: "class",
+  darkMode: ["class", '[data-theme="dark"]'],
   content: [
     "./src/**/**/*.{js,ts,jsx,tsx,mdx}",
     "../../packages/wallet-modal/src/**/*.{js,ts,jsx,tsx}",

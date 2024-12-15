@@ -77,18 +77,18 @@ export const Borrow = () => {
     {
       label: "Available",
       value: !assetMetaData || !pool ? "0" : Number(max).toLocaleString(),
-      valueClassName: "!text-[#4E5B72]",
+      valueClassName: "text-[#4E5B72] dark:text-primary-100",
     },
     {
       label: "Borrow Apy",
       value: borrowRate,
       kylixValue: "%0",
-      valueClassName: "!text-[#4E5B72]",
+      valueClassName: "text-[#4E5B72] dark:text-primary-100",
     },
     {
       label: "Borrowed",
       value: `$${formatBigNumbers(formatUnit(borrowAssetData?.borrowed || "0", assetMetaData?.decimals), 4)}`,
-      valueClassName: "!text-[#4E5B72]",
+      valueClassName: "text-[#4E5B72] dark:text-primary-100",
     },
     {
       label: "Interest",
@@ -100,7 +100,7 @@ export const Borrow = () => {
         onClick: () => {},
         disabled: true,
       },
-      valueClassName: "!text-primary-500",
+      valueClassName: "text-primary-500",
     },
   ];
   return (

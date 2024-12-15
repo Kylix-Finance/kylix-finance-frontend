@@ -83,10 +83,15 @@ export const ModernMultiLineChart = ({
             const percentage = (100 * point[index]).toFixed(2);
             return (
               <Box key={dataset.label} className="mb-4">
-                <Typography variant="body1" className="mb-2">
+                <Typography
+                  variant="body1"
+                  className="mb-2 dark:text-primary-100"
+                >
                   {dataset.label}
                 </Typography>
-                <Typography variant="body2">{percentage}%</Typography>
+                <Typography variant="body2" className="dark:text-black-300">
+                  {percentage}%
+                </Typography>
               </Box>
             );
           })}

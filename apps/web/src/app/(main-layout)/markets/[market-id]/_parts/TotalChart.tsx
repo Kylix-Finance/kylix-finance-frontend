@@ -15,7 +15,7 @@ const TotalChart = () => {
   const { data } = usePoolsData("101");
 
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" className="dark:bg-black-500">
       <Box className="flex justify-between items-center mb-3">
         <Box className="flex gap-6 mt-3">
           <Box className="flex gap-2 items-center">

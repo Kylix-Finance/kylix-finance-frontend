@@ -8,6 +8,7 @@ import { useSidebarStore } from "~/store";
 import { ConnectButton, Dropdown } from "@repo/wallet-modal";
 import { useActiveAccount } from "@repo/onchain-utils";
 import UserBalance from "./UserBalance";
+import Mode from "./Mode";
 const Header = () => {
   const { isMobile, setSidebarOpen } = useSidebarStore();
 
@@ -29,6 +30,7 @@ const Header = () => {
           </IconButton>
         )}
         <Box className="flex flex-col items-center  gap-3">
+          <Mode />
           <Breadcrumbs pathnames={pathnames} />
           <Heading heading={pathnames[0] ?? ""} />
         </Box>

@@ -17,19 +17,25 @@ const LatestLiquidation = () => {
             const date = item.time.split("-")[0];
             const time = item.time.split("-")[1];
             return (
-              <Box className="flex items-center  text-primary-800 ">
+              <Box className="flex items-center  text-primary-800 dark:text-primary-100">
                 <Typography variant="subtitle2">{date}- </Typography>
                 <Typography>{time}</Typography>
               </Box>
             );
           },
           liquidated: (item) => (
-            <Typography variant="body1" className=" text-primary-800">
+            <Typography
+              variant="body1"
+              className=" text-primary-800 dark:text-primary-100"
+            >
               {item.liquidated}
             </Typography>
           ),
           paid: (item) => (
-            <Typography variant="body1" className=" text-primary-500">
+            <Typography
+              variant="body1"
+              className=" text-primary-500 dark:text-primary-100"
+            >
               {item.paid}
             </Typography>
           ),
@@ -38,11 +44,13 @@ const LatestLiquidation = () => {
               <Typography
                 variant="subtitle2"
                 fontWeight="regular"
-                className="py-0.5 p-0.5 bg-primary-500/10 text-primary-500 rounded"
+                className="py-0.5 p-0.5 bg-primary-500/10 text-primary-500 rounded dark:text-primary-400"
               >
                 +75.8%
               </Typography>
-              <Typography variant="subtitle1">{item.price}</Typography>
+              <Typography variant="subtitle1" className="dark:text-primary-100">
+                {item.price}
+              </Typography>
             </Box>
           ),
         }}

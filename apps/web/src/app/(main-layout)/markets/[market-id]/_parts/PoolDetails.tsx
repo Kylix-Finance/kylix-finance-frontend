@@ -82,7 +82,7 @@ const PoolDetails = () => {
   return (
     <Box className="flex flex-col gap-4">
       {/* Heading */}
-      <Box className="flex items-center justify-between">
+      <Box className="flex items-center justify-between dark:bg-black-500  rounded-lg px-6 py-3">
         <Box className="flex items-center">
           <Link href="/markets">
             <Icons.LeftArrow className="text-black dark:text-primary-100" />
@@ -122,7 +122,7 @@ const PoolDetails = () => {
       <Card
         elevation={0}
         variant="outlined"
-        className="flex flex-col lg:flex-row justify-between"
+        className="flex flex-col lg:flex-row justify-between dark:bg-black-500"
       >
         <List items={items} />
         <List items={items2} />

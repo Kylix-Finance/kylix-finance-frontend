@@ -62,8 +62,12 @@ export default function Page() {
           <div className="flex gap-6 items-center">
             <Icons.Alpha />
             <div className="flex flex-col gap-2">
-              <h3 className="text-2xl font-bold">Borrow with no rate!</h3>
-              <p className="text-lg font-light">How self repaying loan works</p>
+              <h3 className="text-2xl font-bold dark:text-primary-100">
+                Borrow with no rate!
+              </h3>
+              <p className="text-lg font-light text-primary-100">
+                How self repaying loan works
+              </p>
             </div>
           </div>
           <Box className="flex flex-row justify-center">

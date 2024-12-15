@@ -28,13 +28,13 @@ const TEXT_COLORS = {
   success: "text-notification-success",
   error: "text-notification-error",
   warning: "text-notification-warning",
-  message: "text-[#383E42]",
+  message: "text-[#383E42] dark:text-primary-100",
 };
 
 const Container: React.FC<NotificationProps> = ({ type, message, title }) => {
   return (
     <Box
-      className={`flex flex-col items-start gap-2 p-3 border rounded-lg bg-white ${BOX_SHADOWS[type]}`}
+      className={`flex flex-col items-start gap-2 p-3 border rounded-lg bg-white dark:bg-black-600 ${BOX_SHADOWS[type]}`}
     >
       <Box className="flex items-center justify-between w-full">
         <Box className="flex gap-1.5 font-bold text-sm leading-5">
@@ -48,11 +48,14 @@ const Container: React.FC<NotificationProps> = ({ type, message, title }) => {
           </Typography>
         </Box>
         <Icons.XIcon
-          className="text-gray-500 cursor-pointer"
+          className="text-gray-500 dark:text-primary-100 cursor-pointer"
           onClick={() => toast.dismiss()}
         />
       </Box>
-      <Typography variant="body3" className="text-[#82908D]">
+      <Typography
+        variant="body3"
+        className="text-[#82908D] dark:text-primary-100"
+      >
         {message}
       </Typography>
     </Box>

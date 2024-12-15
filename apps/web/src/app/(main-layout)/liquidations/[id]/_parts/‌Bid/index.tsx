@@ -19,12 +19,16 @@ const Bid = () => {
   const [amount, setAmount] = useState("");
 
   return (
-    <Box className="w-full p-4 border rounded-md lg:w-[360px]">
+    <Box className="w-full p-4 border rounded-md lg:w-[360px] dark:bg-black-500 dark:border-transparent">
       <Box className="mb-6">
-        <Typography variant="body1">Place a Bid</Typography>
+        <Typography variant="body1" className="text-primary-100">
+          Place a Bid
+        </Typography>
       </Box>
       <Box className="mb-2">
-        <Typography variant="body2">Premium (discount)</Typography>
+        <Typography variant="body2" className="text-primary-100">
+          Premium (discount)
+        </Typography>
       </Box>
       <TextField
         value={discount}
@@ -41,11 +45,11 @@ const Bid = () => {
             paddingY: "8px",
             paddingX: "16px",
           },
+          className: "!font-number dark:text-primary-100",
           startAdornment: <InputAdornment position="start">%</InputAdornment>,
         }}
       />
-
-      <Box className="mb-2 flex justify-between items-center mt-6">
+      <Box className="mb-2 flex justify-between items-center mt-6 dark:text-primary-100">
         <Typography variant="body2">Bid amount</Typography>
         <Typography variant="subtitle1">
           {MOCK_AMOUNT} <span className="text-primary-400">USDT</span>{" "}
@@ -57,7 +61,7 @@ const Bid = () => {
         size="small"
         fullWidth
         placeholder="0"
-        className="!rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
+        className="!rounded-md !font-number !font-bold !text-base !leading-5"
         inputMode="numeric"
         autoComplete="off"
         InputProps={{
@@ -66,6 +70,7 @@ const Bid = () => {
             paddingY: "8px",
             paddingX: "16px",
           },
+          className: "!font-number dark:text-primary-100",
           startAdornment: (
             <InputAdornment position="start">
               <TokenIcon symbol="USDT" width={24} height={24} />
