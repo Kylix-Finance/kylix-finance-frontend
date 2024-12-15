@@ -23,10 +23,16 @@ module.exports = {
   },
   transpilePackages: [],
   webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/i,
-      use: ["@svgr/webpack"],
-    });
+    config.module.rules.push(
+      {
+        test: /\.svg$/i,
+        use: ["@svgr/webpack"],
+      },
+      {
+        test: /\/index.ts$/,
+        sideEffects: false,
+      }
+    );
 
     return config;
   },

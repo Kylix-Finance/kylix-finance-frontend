@@ -63,6 +63,7 @@ const config: Config = {
       },
     },
   },
+  important: true,
   plugins: [
     function ({ addUtilities }: PluginAPI) {
       const hideScrollbar = {

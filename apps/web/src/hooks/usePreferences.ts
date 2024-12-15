@@ -3,6 +3,7 @@ import useLocalStorage from "./useLocalStorage";
 
 type Mode = "light" | "dark";
 
+// UNUSED
 const usePreferences = (initMode: Mode = "light") => {
   const { value, setValue } = useLocalStorage<Mode>({
     key: "theme-mode",
@@ -22,6 +23,7 @@ const usePreferences = (initMode: Mode = "light") => {
   useEffect(() => {
     if (typeof window === "undefined") return;
     setValue(mode);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
 
   useEffect(() => {
