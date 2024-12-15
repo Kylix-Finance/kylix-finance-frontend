@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import useLocalStorage from "./useLocalStorage";
 
-type Mode = "light" | "dark";
+export type ThemeMode = "light" | "dark";
 
-// UNUSED
-const usePreferences = (initMode: Mode = "light") => {
-  const { value, setValue } = useLocalStorage<Mode>({
+const usePreferences = (initMode: ThemeMode = "light") => {
+  const { value, setValue } = useLocalStorage<ThemeMode>({
     key: "theme-mode",
   });
 
-  const getInitialMode = (): Mode => {
+  const getInitialMode = (): ThemeMode => {
     if (typeof window === "undefined") return initMode;
     if (value) return value;
     const isDarkMode = window.matchMedia(
@@ -18,7 +17,7 @@ const usePreferences = (initMode: Mode = "light") => {
     return isDarkMode ? "dark" : "light";
   };
 
-  const [mode, setMode] = useState<Mode>(getInitialMode);
+  const [mode, setMode] = useState<ThemeMode>(getInitialMode);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
