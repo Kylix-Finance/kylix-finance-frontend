@@ -1,9 +1,8 @@
 "use client";
 import { styled } from "@mui/material/styles";
 import { Switch } from "@mui/material";
-
-import { ThemeMode } from "~/hooks/usePreferences";
 import useLocalStorage from "~/hooks/useLocalStorage";
+import { ThemeMode } from "~/hooks/usePreferences";
 
 export const ThemeSwitch = styled(Switch)(({ theme }) => {
   const { value: mode } = useLocalStorage<ThemeMode>({
