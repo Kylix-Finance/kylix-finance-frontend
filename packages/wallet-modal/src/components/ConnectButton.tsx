@@ -83,7 +83,7 @@ const ButtonText: React.FC<{ text: string }> = ({ text }) => {
 
 const SettingsIcon = () => {
   return (
-    <span className="size-[24px] bg-[#45A996] dark:bg-primary-500/40 flex justify-center items-center gap-[10px] rounded-sm">
+    <span className="size-[24px] bg-[#45A996] text-white dark:bg-primary-500/40 flex justify-center items-center gap-[10px] rounded-sm">
       <Settings />
     </span>
   );
