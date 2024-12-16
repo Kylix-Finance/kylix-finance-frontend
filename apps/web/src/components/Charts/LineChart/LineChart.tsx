@@ -6,6 +6,7 @@ import "chartjs-adapter-date-fns";
 import { Box } from "@mui/material";
 import { ChartScale } from "~/types";
 import { getTimeUnit } from "~/utils/date";
+import { useLocalStorage } from "usehooks-ts";
 
 type LineChartProps = {
   scale: ChartScale;
@@ -19,7 +20,6 @@ type LineChartProps = {
 
 const LineChart = ({ data, parsing, scale, round = false }: LineChartProps) => {
   const unit = getTimeUnit(scale);
-
   return (
     <Box height={180} width="100%">
       <Line
@@ -80,6 +80,7 @@ const LineChart = ({ data, parsing, scale, round = false }: LineChartProps) => {
               display: true,
               grid: {
                 display: false,
+                color: "#daeeea70",
               },
               border: {
                 display: false,
@@ -96,6 +97,7 @@ const LineChart = ({ data, parsing, scale, round = false }: LineChartProps) => {
               beginAtZero: false,
               grid: {
                 drawTicks: false,
+                color: "#daeeea70",
               },
               border: {
                 display: false,

@@ -1,7 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { ComponentProps } from "react";
+import { ComponentProps, useEffect, useRef } from "react";
 import { Line } from "react-chartjs-2";
 import { palette } from "~/config/palette";
 import { formatNumber } from "~/utils";
@@ -9,6 +9,8 @@ import "chartjs-adapter-date-fns";
 import "chart.js/auto";
 import { ChartScale } from "~/types";
 import { getTimeUnit } from "~/utils/date";
+import { useLocalStorage } from "usehooks-ts";
+import usePreferences, { ThemeMode } from "~/hooks/usePreferences";
 
 type LineProps = ComponentProps<typeof Line>;
 
@@ -88,6 +90,7 @@ export const MultiLineChart = ({
               },
               grid: {
                 display: yGrid,
+                color: "#daeeea70",
               },
               ticks: {
                 color: palette.text.disabled,
