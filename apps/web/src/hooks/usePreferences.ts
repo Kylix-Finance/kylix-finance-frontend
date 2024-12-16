@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import useLocalStorage from "./useLocalStorage";
+import { useLocalStorage } from "usehooks-ts";
 
 export type ThemeMode = "light" | "dark";
 
 const usePreferences = (initMode: ThemeMode = "light") => {
-  const { value, setValue } = useLocalStorage<ThemeMode>({
-    key: "theme-mode",
-  });
+  const [value, setValue] = useLocalStorage<ThemeMode>("theme-mode", initMode);
 
   const getInitialMode = (): ThemeMode => {
     if (typeof window === "undefined") return initMode;
