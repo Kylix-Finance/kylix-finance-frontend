@@ -10,6 +10,7 @@ import "chart.js/auto";
 import { throttle } from "lodash";
 import { crosshairPlugin } from "~/lib/chart";
 import { Info } from "@mui/icons-material";
+import { useLocalStorage } from "usehooks-ts";
 
 type LineProps = ComponentProps<typeof Line>;
 
@@ -32,7 +33,9 @@ export const ModernMultiLineChart = ({
 }: ModernMultiLineChartProps) => {
   const [isLogScale, setIsLogScale] = useState(true);
   const [activePoint, setActivePoint] = useState<number[]>([]);
+  const [value] = useLocalStorage("theme-mode", "light");
 
+  const color = value === "dark" ? "#daeeea" : "#151515";
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsLogScale(event.target.checked);
   };
@@ -83,10 +86,15 @@ export const ModernMultiLineChart = ({
             const percentage = (100 * point[index]).toFixed(2);
             return (
               <Box key={dataset.label} className="mb-4">
-                <Typography variant="body1" className="mb-2">
+                <Typography
+                  variant="body1"
+                  className="mb-2 dark:text-primary-100"
+                >
                   {dataset.label}
                 </Typography>
-                <Typography variant="body2">{percentage}%</Typography>
+                <Typography variant="body2" className="dark:text-black-300">
+                  {percentage}%
+                </Typography>
               </Box>
             );
           })}
@@ -138,12 +146,12 @@ export const ModernMultiLineChart = ({
                 },
                 //@ts-expect-error: type is not correct
                 crosshair: {
-                  lineColor: "rgba(0,0,0,0.7)",
+                  lineColor: color,
                   lineWidth: 2,
                   datasetIndex: 0,
                   dataIndex: activeIndex,
                   // text: "March Data Point",
-                  textColor: "black",
+                  textColor: color,
                   fontSize: 14,
                   fontFamily: "Arial",
                 },
@@ -183,6 +191,7 @@ export const ModernMultiLineChart = ({
                   },
                   grid: {
                     display: yGrid,
+                    color: "#daeeea60",
                   },
                   ticks: {
                     display: false,

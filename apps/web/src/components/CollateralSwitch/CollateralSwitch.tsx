@@ -1,9 +1,9 @@
 "use client";
 import { Skeleton } from "@repo/ui";
-import { Switch } from "@mui/material";
 import { useEnableAsCollateral } from "~/hooks/chain/useEnableAsCollateral";
 import { useDisableAsCollateral } from "~/hooks/chain/useDisableAsCollateral";
 import { notify } from "~/components";
+import { Switch } from "../Switch";
 
 interface Props {
   id: string | number;
@@ -73,7 +73,6 @@ const CollateralSwitch = ({ id, isCollateral }: Props) => {
       className="w-[25px] h-[15px]"
     >
       <Switch
-        className="pl-4"
         checked={isCollateral}
         onChange={() => handleCollateralClick(isCollateral, id)}
         disabled={isEnableAsCollateral || isDisableAsCollateral}

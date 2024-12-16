@@ -56,10 +56,14 @@ const Supplied = () => {
         asset: (item) => <Asset label={item.asset} helperText="" />,
         apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,
         balance: (item) => (
-          <Typography variant="subtitle1">{item.balance}</Typography>
+          <Typography variant="subtitle1" className="dark:text-black-100">
+            {item.balance}
+          </Typography>
         ),
         supplied: (item) => (
-          <Typography variant="subtitle1">{item.supplied}</Typography>
+          <Typography variant="subtitle1" className="dark:text-black-100">
+            {item.supplied}
+          </Typography>
         ),
         collateral: (item) => (
           <CollateralSwitch id={item.assetId} isCollateral={item.collateral} />

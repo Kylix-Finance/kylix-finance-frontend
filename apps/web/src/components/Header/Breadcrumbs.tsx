@@ -15,7 +15,10 @@ const Breadcrumbs = ({ pathnames }: Props) => {
         const to = `/${pathnames.slice(0, index + 1).join("/")}`;
         return (
           <Link key={to} href={to}>
-            <Typography variant="caption" className="text-[#2D3748]">
+            <Typography
+              variant="caption"
+              className="text-[#2D3748] dark:text-primary-100/50"
+            >
               {value.charAt(0).toUpperCase() + value.slice(1)}
             </Typography>
           </Link>

@@ -15,7 +15,7 @@ const Borrow = () => {
       title="Total Borrow"
       icon={Icons.WalletFill}
       rightComponent={
-        <Typography variant="h5" className="text-primary-800">
+        <Typography variant="h5" className="text-primary-800 dark:text-white">
           <Skeleton isLoading={isLoading} minWidth={80}>
             {data?.summary
               ? formatBigNumbers(formatUnit(data.summary.total_borrow, 18), 2) +

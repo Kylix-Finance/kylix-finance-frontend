@@ -1,6 +1,7 @@
 import { Config } from "tailwindcss";
 import { PluginAPI } from "tailwindcss/types/config";
 const config: Config = {
+  darkMode: ["class", '[data-theme="dark"]'],
   content: [
     "./src/**/**/*.{js,ts,jsx,tsx,mdx}",
     "../../packages/wallet-modal/src/**/*.{js,ts,jsx,tsx}",
@@ -18,6 +19,17 @@ const config: Config = {
           700: "#29655a",
           800: "#1c443c",
           900: "#0e221e",
+        },
+        black: {
+          100: "#d0d0d0",
+          200: "#a1a1a1",
+          300: "#737373",
+          400: "#444444",
+          500: "#151515",
+          600: "#111111",
+          700: "#0d0d0d",
+          800: "#080808",
+          900: "#040404",
         },
         secondary: {
           100: "#ede5ea",
@@ -51,6 +63,7 @@ const config: Config = {
       },
     },
   },
+  important: true,
   plugins: [
     function ({ addUtilities }: PluginAPI) {
       const hideScrollbar = {

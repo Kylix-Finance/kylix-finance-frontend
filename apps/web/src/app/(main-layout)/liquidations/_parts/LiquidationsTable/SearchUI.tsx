@@ -19,19 +19,22 @@ const SearchUI = ({ value = "", onChange }: SearchUIProps) => {
   return (
     <TextField
       value={value}
+      fullWidth
       onChange={onChangeHandler}
       style={{
         fontSize: "10px",
         borderRadius: "4px",
         border: "#C7C7C7 1px solid",
-        width: "100%",
       }}
+      className="dark:bg-[#0D0D0D] font-body"
       placeholder="Search by market"
       size="small"
       inputProps={{
         style: {
           fontWeight: "normal",
         },
+        className:
+          "dark:placeholder:text-neutral-200 !font-body dark:border-neutral-200 dark:text-primary-100",
       }}
       InputProps={{
         style: {

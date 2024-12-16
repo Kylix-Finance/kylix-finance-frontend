@@ -25,10 +25,10 @@ const KylixChart = () => {
       <Box className="flex justify-between items-start mb-3">
         <Box>
           <Box className="flex mb-2 items-center">
-            <p className="mr-3">Kylix Price</p>
+            <p className="mr-3 dark:text-white">Kylix Price</p>
             <Chip label="2.25%" color="primary" />
           </Box>
-          <p>{price} USD</p>
+          <p className="dark:text-white">{price} USD</p>
         </Box>
         <PeriodSelector
           periods={periods}

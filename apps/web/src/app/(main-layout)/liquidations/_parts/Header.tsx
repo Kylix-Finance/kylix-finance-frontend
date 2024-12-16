@@ -32,7 +32,7 @@ const Header = () => {
           variant="outlined"
           size="large"
           sx={buttonStyle}
-          className="load-more-ripple"
+          className="load-more-ripple dark:border-primary-100 px-10 dark:text-primary-100"
         >
           Filter By Collateral
         </Button>
@@ -40,7 +40,7 @@ const Header = () => {
           variant="outlined"
           size="large"
           sx={buttonStyle}
-          className="load-more-ripple"
+          className="load-more-ripple dark:border-primary-100 px-10 dark:text-primary-100"
         >
           Filter by Bid
         </Button>

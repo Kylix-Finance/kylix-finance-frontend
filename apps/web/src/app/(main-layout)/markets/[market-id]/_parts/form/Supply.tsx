@@ -66,13 +66,13 @@ export const Supply = () => {
           iconWidth={20}
         />
       ),
-      valueClassName: "!text-[#4E5B72]",
+      valueClassName: "text-[#4E5B72] dark:text-primary-100",
     },
     {
       label: "Supply APY",
       value: supplyRate,
       kylixValue: "%0",
-      valueClassName: "!text-[#4E5B72]",
+      valueClassName: "text-[#4E5B72] dark:text-primary-100",
     },
     {
       label: "Supplied",
@@ -84,7 +84,7 @@ export const Supply = () => {
           iconWidth={20}
         />
       ),
-      valueClassName: "!text-[#4E5B72]",
+      valueClassName: "text-[#4E5B72] dark:text-primary-100",
     },
     {
       label: "Interest",
@@ -96,7 +96,7 @@ export const Supply = () => {
         onClick: () => {},
         disabled: true,
       },
-      valueClassName: "!text-primary-500",
+      valueClassName: "text-primary-500",
     },
   ];
 

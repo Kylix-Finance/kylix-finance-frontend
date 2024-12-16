@@ -23,11 +23,15 @@ const BorrowValue = () => {
     <Box className="flex flex-col h-full gap-4">
       <Box className="flex flex-col p-4 border border-primary-700/10 rounded-md">
         <Box>
-          <Typography variant="subtitle2" lineHeight="21px">
+          <Typography
+            variant="subtitle2"
+            lineHeight="21px"
+            className="dark:text-[#5C6965]"
+          >
             Total Borrowed Value
           </Typography>
         </Box>
-        <Box className="flex gap-1.5 items-center">
+        <Box className="flex gap-1.5 items-center dark:text-black-100">
           <Typography
             variant="h5"
             fontStyle="bold"
@@ -54,12 +58,12 @@ const BorrowValue = () => {
       <Box className="flex flex-col h-full gap-4 p-4 border border-primary-700/10 rounded-md">
         <Box className="flex flex-col gap-1.5">
           <Box>
-            <Typography className="!text-[12px] !font-[500] text-[#1A433B80] !leading-[18px]">
+            <Typography className="!text-[12px] !font-[500] text-[#1A433B80] dark:text-[#5C6965] !leading-[18px]">
               Borrow limit
             </Typography>
           </Box>
 
-          <Box className="flex gap-[6px] items-center">
+          <Box className="flex gap-[6px] items-center dark:text-black-100">
             <Typography
               variant="subtitle1"
               lineHeight="22px"
@@ -84,7 +88,7 @@ const BorrowValue = () => {
               variant="body3"
               fontWeight={500}
               lineHeight="18px"
-              className="text-primary-800/50"
+              className="text-primary-800/50 dark:text-[#5C6965]"
             >
               Net Earn APR
             </Typography>
@@ -103,7 +107,7 @@ const BorrowValue = () => {
               variant="body3"
               fontWeight={500}
               lineHeight="18px"
-              className="text-primary-800/50"
+              className="text-primary-800/50 dark:text-[#5C6965]"
             >
               LTV
             </Typography>
@@ -113,7 +117,7 @@ const BorrowValue = () => {
               lineHeight={"22px"}
               className="text-primary-500 font-number"
             >
-              {ltv?.currentLtv}%
+              {ltv?.currentLtv || 0} %
             </Typography>
           </Box>
         </Box>

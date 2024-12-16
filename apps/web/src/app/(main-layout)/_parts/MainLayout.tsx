@@ -20,7 +20,7 @@ const MainLayout = ({ children }: Props) => {
           </Box>
         </Box>
       </Box>
-      <Box className="flex flex-col lg:hidden w-screen h-screen justify-center items-center text-xl font-light p-12 text-center bg-primary-600 text-white">
+      <Box className="flex flex-col lg:hidden w-screen h-screen justify-center items-center text-xl font-light p-12 text-center bg-primary-600 dark:bg-black-500 text-white">
         <Image
           src={kylixLogoImg}
           alt=""

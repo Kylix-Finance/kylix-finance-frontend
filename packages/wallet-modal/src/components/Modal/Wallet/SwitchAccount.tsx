@@ -23,17 +23,17 @@ const SwitchAccount = () => {
           <button
             key={item.address}
             disabled={item.address === activeAccount?.address}
-            className={`flex justify-between gap-4 bg-primary-100/50 hover:bg-primary-500/30 rounded-lg p-4 border-2 transition-colors duration-75 disabled:bg-primary-300/70 disabled:cursor-not-allowed ${
+            className={`flex justify-between gap-4 bg-primary-100/50 dark:bg-black-600 hover:bg-primary-500/30 dark:hover:pg-black-600/70 rounded-lg p-4 border-2 transition-colors duration-75 disabled:bg-primary-300/70 disabled:cursor-not-allowed ${
               item.address === activeAccount?.address
                 ? "border-primary-300/70"
-                : "border-[#F7F7F7]"
+                : "border-[#F7F7F7] dark:border-primary-900"
             }`}
             onClick={() => handleSelectAccount(item)}
           >
-            <p className="text-[#383E42] font-bold text-sm leading-5 line-clamp-1 w-24">
+            <p className="text-[#383E42] dark:text-primary-100 font-bold text-sm leading-5 line-clamp-1 w-24">
               {item.name}
             </p>
-            <p className="text-[#383E42] font-bold text-sm leading-5 line-clamp-1">
+            <p className="text-[#383E42] dark:text-primary-100 font-bold text-sm leading-5 line-clamp-1">
               {item.address.slice(0, 5)}...{item.address.slice(-5)}
             </p>
           </button>

@@ -79,18 +79,18 @@ export const Repay = () => {
     {
       label: "Available",
       value: Number(max).toLocaleString(),
-      valueClassName: "!text-[#4E5B72]",
+      valueClassName: "text-[#4E5B72] dark:text-primary-100",
     },
     {
       label: "Borrow Apy",
       value: borrowRate,
       kylixValue: "%0",
-      valueClassName: "!text-[#4E5B72]",
+      valueClassName: "text-[#4E5B72] dark:text-primary-100",
     },
     {
       label: "Borrowed",
       value: `$${formatBigNumbers(borrowed, 4)}`,
-      valueClassName: "!text-[#4E5B72]",
+      valueClassName: "text-[#4E5B72] dark:text-primary-100",
     },
     {
       label: "Interest",

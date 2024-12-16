@@ -23,10 +23,10 @@ const WalletsList = () => {
           <button
             key={wallet.id}
             disabled={!wallet.isInstalled}
-            className={`bg-primary-100/50 hover:bg-primary-500/30 disabled:grayscale-[50] rounded-lg p-4 border-2 transition-colors duration-75 ${
+            className={`bg-primary-100/50 dark:bg-black-600 hover:bg-primary-500/30 dark:hover:pg-black-600/70 disabled:grayscale-[50] rounded-lg p-4 border-2 transition-colors duration-75 ${
               wallet.id === connectData?.connector.id
                 ? "border-primary-500 bg-primary-200"
-                : "border-[#F7F7F7]"
+                : "border-[#F7F7F7] dark:border-primary-900"
             } ${!wallet.isInstalled && "bg-gray-300/75"}`}
             onClick={() => handleConnect(wallet)}
           >
@@ -37,7 +37,7 @@ const WalletsList = () => {
                   alt={wallet.name}
                   className="inline-block h-8 w-8 bg-white p-2 rounded"
                 />
-                <p className="text-[#383E42] font-bold text-sm leading-5">
+                <p className="text-[#383E42] dark:text-primary-100 font-bold text-sm leading-5">
                   {wallet.name}
                 </p>
               </div>
@@ -48,7 +48,7 @@ const WalletsList = () => {
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
-                    stroke="#222222"
+                    className="stroke-[#222222] dark:stroke-primary-100"
                     width="20px"
                     height="20px"
                   >

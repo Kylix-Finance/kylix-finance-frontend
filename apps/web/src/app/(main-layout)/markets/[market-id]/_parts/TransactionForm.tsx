@@ -33,7 +33,7 @@ const TransactionForm = () => {
   return (
     <Card
       elevation={0}
-      className="!bg-white border !border-primary-800/20 !p-4 !rounded-lg"
+      className="bg-white border dark:bg-black-500 !border-primary-800/20 !p-4 !rounded-lg"
     >
       <TabsManager tabs={tabItems} />
     </Card>

@@ -59,10 +59,13 @@ function THead<Schema, ExtraFields extends string = string>({
         {headersList.map(([name, value], index) => (
           <TCell
             align={numeric?.some((item) => item === name) ? "right" : "left"}
-            className="!bg-[#FFF]"
+            // className="!bg-red-500  dark:bg-blue-500"
             key={`${name}+${index}`}
             padding={disablePadding ? "none" : "normal"}
             sortDirection={orderBy === name ? order : false}
+            style={{
+              backgroundColor: "transparent",
+            }}
           >
             {isHeaderHidden(name) ? (
               ""

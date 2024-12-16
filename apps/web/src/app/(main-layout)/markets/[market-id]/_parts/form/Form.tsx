@@ -62,7 +62,9 @@ export const Form = ({
           justifyContent="space-between"
           className="!w-full"
         >
-          <p className="text-primary-800 font-bold text-sm leading-5">Amount</p>
+          <p className="text-primary-800 dark:text-[#707F7A] font-bold text-sm leading-5">
+            Amount
+          </p>
           <Button
             disabled={isMaxLoading}
             className="!text-primary-500 !capitalize"
@@ -91,7 +93,7 @@ export const Form = ({
             lineHeight: "20px",
           }}
           inputProps={{
-            className: "!font-number",
+            className: "!font-number dark:text-primary-100",
           }}
           FormHelperTextProps={{
             sx: {
@@ -121,12 +123,17 @@ export const Form = ({
         onClick={submitButton.onclick}
         disabled={isInputEmpty || isInsufficientBalance}
         loading={isSubmitting}
+        className="text-white dark:disabled:bg-primary-500/50 dark:disabled:text-primary-200/60"
       >
         {submitButton.content}
       </LoadingButton>
       <AlertContainer>
         {isInsufficientBalance && (
-          <FormAlert severity="error" message="Insufficient Balance!" />
+          <FormAlert
+            severity="error"
+            message="Insufficient Balance!"
+            className=""
+          />
         )}
       </AlertContainer>
     </Box>

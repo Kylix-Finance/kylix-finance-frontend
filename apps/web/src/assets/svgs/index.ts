@@ -1,4 +1,5 @@
 import { Coins } from "./coins";
+import Alpha from "./alpha.svg";
 import ArrowRight from "./arrow-right.svg";
 import ArrowUp from "./arrow-up.svg";
 import CrossSwap from "./cross-swap.svg";
@@ -6,6 +7,7 @@ import Dashboard from "./dashboard.svg";
 import Discord from "./discord.svg";
 import ErrorAlert from "./error.svg";
 import Governance from "./governance.svg";
+import Health from "./health.svg";
 import Info from "./info.svg";
 import InformationAlert from "./information.svg";
 import Instagram from "./instagram.svg";
@@ -15,6 +17,7 @@ import Liquidations from "./liquidations.svg";
 import Market from "./market.svg";
 import MessageAlert from "./message.svg";
 import Notification from "./notification.svg";
+import Plus from "./plus.svg";
 import Pool from "./pool.svg";
 import Search from "./search.svg";
 import Settings from "./settings.svg";
@@ -28,12 +31,6 @@ import WalletFill from "./wallet-fill.svg";
 import WarningAlert from "./warning.svg";
 import World from "./world.svg";
 import XIcon from "./x.svg";
-import Health from "./health.svg";
-import Plus from "./plus.svg";
-import Alpha from "./alpha.svg";
-import Staking1 from "./staking-1.svg";
-import Staking2 from "./staking-2.svg";
-import Staking3 from "./staking-3.svg";
 
 export const sidebarIcons = {
   CrossSwap,
@@ -70,9 +67,6 @@ export const Icons = {
   Plus: Plus,
   Search,
   Sort,
-  Staking1,
-  Staking2,
-  Staking3,
   Twitter,
   WalletFill,
   World,
