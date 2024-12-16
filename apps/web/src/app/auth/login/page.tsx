@@ -1,6 +1,4 @@
 "use client";
-
-import React, { useState } from "react";
 import {
   Box,
   Card,
@@ -11,6 +9,8 @@ import {
   CardActions,
   useTheme,
 } from "@mui/material";
+import React, { useState } from "react";
+
 import { useRouter } from "next/navigation";
 import usePreferences from "~/hooks/usePreferences";
 
