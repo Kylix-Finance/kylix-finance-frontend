@@ -12,10 +12,13 @@ import {
   useTheme,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
+import usePreferences from "~/hooks/usePreferences";
 
 export default function Page() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  usePreferences();
 
   const theme = useTheme();
 
@@ -40,12 +43,13 @@ export default function Page() {
   };
   return (
     <Box
-      className="w-screen h-screen flex flex-col justify-center items-center bg-[#F0F4F8] dark:bg-black-500"
+      className="w-screen h-screen flex flex-col justify-center items-center bg-[#F0F4F8] dark:bg-[#0D0D0D]"
       sx={{
         padding: 2,
       }}
     >
       <Card
+        className="dark:bg-black-500"
         sx={{
           width: "100%",
           maxWidth: 400,
@@ -57,6 +61,7 @@ export default function Page() {
         <CardContent>
           <Typography
             variant="h5"
+            className="dark:text-primary-100"
             component="h2"
             sx={{
               marginBottom: 3,
@@ -70,23 +75,24 @@ export default function Page() {
             <TextField
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              size="small"
-              fullWidth
-              placeholder="Enter your password"
-              className="rounded-md font-number font-bold text-base bg-[#F5F5F5] dark:bg-black-500 text-primary-800 dark:text-primary-100 leading-5"
-              autoComplete="off"
-              type="password"
-              FormHelperTextProps={{
-                sx: {
-                  fontWeight: "bold",
-                },
+              style={{
+                fontSize: "10px",
+                borderRadius: "4px",
               }}
-              sx={{
-                backgroundColor: "",
-                borderRadius: 2,
-                "& .MuiInputBase-root": {
-                  paddingY: "10px",
-                  paddingX: "16px",
+              className="bg-neutral-100 dark:bg-[#0D0D0D] font-body"
+              placeholder="Password"
+              inputProps={{
+                style: {
+                  fontWeight: "normal",
+                },
+                className:
+                  "dark:placeholder:text-neutral-200 !font-body dark:text-primary-100",
+              }}
+              InputProps={{
+                style: {
+                  backgroundImage: "none",
+                  color: "#C7C7C7",
+                  fontSize: "14px",
                 },
               }}
             />
