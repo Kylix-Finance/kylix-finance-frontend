@@ -40,9 +40,8 @@ export default function Page() {
   };
   return (
     <Box
-      className="w-screen h-screen flex flex-col justify-center items-center"
+      className="w-screen h-screen flex flex-col justify-center items-center bg-[#F0F4F8] dark:bg-black-500"
       sx={{
-        backgroundColor: "#F0F4F8",
         padding: 2,
       }}
     >
@@ -74,7 +73,7 @@ export default function Page() {
               size="small"
               fullWidth
               placeholder="Enter your password"
-              className="!rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
+              className="rounded-md font-number font-bold text-base bg-[#F5F5F5] dark:bg-black-500 text-primary-800 dark:text-primary-100 leading-5"
               autoComplete="off"
               type="password"
               FormHelperTextProps={{
@@ -83,7 +82,7 @@ export default function Page() {
                 },
               }}
               sx={{
-                backgroundColor: "#F5F5F5",
+                backgroundColor: "",
                 borderRadius: 2,
                 "& .MuiInputBase-root": {
                   paddingY: "10px",
