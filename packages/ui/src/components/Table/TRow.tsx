@@ -39,7 +39,7 @@ function TRow<Schema, ExtraFields extends string = string>({
   const headersList = Object.entries(headers);
 
   return (
-    <TableRow className={`bg-light ${className}`} {...rest}>
+    <TableRow className={`bg-light dark:bg-[#0D0D0D] ${className}`} {...rest}>
       {headersList.map(([name], index) => {
         // TODO: Remove assertion
         const ValueComponent = components?.[name as Key] as
@@ -70,9 +70,10 @@ function TRow<Schema, ExtraFields extends string = string>({
             }}
           >
             <Skeleton key={index} height={40} isLoading={isLoading}>
-              {row && (
-                <>{ValueComponent ? ValueComponent(row) : row[name as Key]}</>
-              )}
+              {row &&
+                (ValueComponent
+                  ? ValueComponent(row)
+                  : (row[name as Key] as any))}
             </Skeleton>
           </TCell>
         );
