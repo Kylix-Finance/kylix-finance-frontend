@@ -24,13 +24,19 @@ const PersonalBids = () => {
         components={{
           asset: (item) => <Asset label={item.asset} helperText="" />,
           amount: (item) => (
-            <Typography variant="subtitle1">{item.amount}</Typography>
+            <Typography variant="subtitle1" className="dark:text-primary-100">
+              {item.amount}
+            </Typography>
           ),
           discount: (item) => (
-            <Typography variant="subtitle1">{item.discount}</Typography>
+            <Typography variant="subtitle1" className="dark:text-primary-100">
+              {item.discount}
+            </Typography>
           ),
           filled: (item) => (
-            <Typography variant="subtitle1">{item.filled}</Typography>
+            <Typography variant="subtitle1" className="dark:text-primary-100">
+              {item.filled}
+            </Typography>
           ),
         }}
         data={tableData}

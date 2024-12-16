@@ -27,7 +27,7 @@ const AccountList = () => {
             className={`flex justify-between gap-4 bg-primary-100/50 hover:bg-primary-500/30 rounded-lg p-4 border-2 transition-colors duration-75 disabled:bg-primary-300/70 disabled:cursor-not-allowed ${
               item.address === activeAccount?.address
                 ? "border-primary-300/70"
-                : "border-[#F7F7F7]"
+                : "border-[#F7F7F7] dark:border-primary-900"
             }`}
             onClick={() => handleSelectAccount(item)}
           >

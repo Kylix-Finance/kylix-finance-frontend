@@ -13,7 +13,7 @@ const FinanceSummary = ({ label, value, color }: FinanceSummaryProps) => {
       <Box className="flex items-center">
         <Box className="w-3 h-3 rounded-sm mr-1" bgcolor={color}></Box>
 
-        <Typography className="text-primary-800/40 !text-[10px] !font-[500] !leading-[15px]">
+        <Typography className="text-primary-800/40 dark:text-primary-100 !text-[10px] !font-[500] !leading-[15px]">
           {label}
         </Typography>
       </Box>
@@ -22,7 +22,7 @@ const FinanceSummary = ({ label, value, color }: FinanceSummaryProps) => {
         variant="body3"
         fontWeight={500}
         lineHeight={"17px"}
-        className="text-primary-800 font-number"
+        className="text-primary-800 dark:text-primary-100/80 font-number"
       >
         $ {value}
       </Typography>

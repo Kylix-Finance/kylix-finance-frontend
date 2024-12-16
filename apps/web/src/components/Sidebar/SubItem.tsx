@@ -13,7 +13,9 @@ const SubItem = ({ subItem, isCurrentPath, linkBaseStyles }: SubItemProps) => (
     href={subItem.href || ""}
     className={cn(
       linkBaseStyles,
-      isCurrentPath ? "bg-primary-500" : "hover:bg-primary-500/30"
+      isCurrentPath
+        ? "bg-primary-500 dark:text-black-500"
+        : "hover:bg-primary-500/30 dark:bg-primary-500/80"
     )}
   >
     <ListItemButton className="w-full">
@@ -25,7 +27,9 @@ const SubItem = ({ subItem, isCurrentPath, linkBaseStyles }: SubItemProps) => (
         }}
         className={cn(
           "duration-300",
-          isCurrentPath ? "text-white" : "text-primaryText"
+          isCurrentPath
+            ? "text-white dark:text-black-500"
+            : "text-primaryText dark:text-black-500"
         )}
       />
     </ListItemButton>

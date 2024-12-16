@@ -25,12 +25,20 @@ export const SupplyTable = () => {
       tableName="supply"
       components={{
         asset: (item) => <Asset label={item.asset} helperText="" />,
-        apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,
+        apy: (item) => (
+          <Typography variant="subtitle1" className="dark:text-black-100">
+            {item.apy}
+          </Typography>
+        ),
         balance: (item) => (
-          <Typography variant="subtitle1">{item.balance}</Typography>
+          <Typography variant="subtitle1" className="dark:text-black-100">
+            {item.balance}
+          </Typography>
         ),
         status: (item) => (
-          <Typography variant="subtitle1">{item.status}</Typography>
+          <Typography variant="subtitle1" className="dark:text-black-100">
+            {item.status}
+          </Typography>
         ),
         actions: () => (
           <Box className="flex justify-end gap-1">

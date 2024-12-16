@@ -7,7 +7,7 @@ import PoolValueChart from "./_parts/PoolValueChart";
 export default function page() {
   return (
     <Box display="flex" flexDirection="column" gap="16px">
-      <Box className="flex flex-col bg-white p-3 gap-4 items-start lg:flex-row">
+      <Box className="flex flex-col bg-white dark:bg-transparent p-3 gap-4 items-start lg:flex-row">
         <PoolValueChart />
         <Bid />
       </Box>

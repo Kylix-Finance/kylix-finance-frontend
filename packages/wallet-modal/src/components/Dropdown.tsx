@@ -54,7 +54,7 @@ export const Dropdown: React.FC<Props> = ({
           />
 
           <div
-            className={`opacity-100 scale-100 origin-top-right absolute z-[9999] right-0 mt-2 w-56 rounded-sm shadow-lg bg-white transition-all duration-150 ease-out`}
+            className={`opacity-100 scale-100 origin-top-right absolute z-[9999] right-0 mt-2 w-56 rounded-sm shadow-lg bg-white dark:bg-black-500 transition-all duration-150 ease-out`}
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="menu-button"
@@ -63,7 +63,7 @@ export const Dropdown: React.FC<Props> = ({
               {options.map((option) => (
                 <button
                   key={option.name}
-                  className="flex gap-2 items-center text-gray-700 w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                  className="flex gap-2 items-center text-gray-700 dark:text-primary-100 w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-black-400/70"
                   role="menuitem"
                   onClick={() => handleMenuItemClick(option.name)}
                 >
@@ -73,7 +73,7 @@ export const Dropdown: React.FC<Props> = ({
                     option.Icon
                   )}
 
-                  <span className="font-[500] text-[12px] text-[#5C5E64]">
+                  <span className="font-[500] text-[12px] text-[#5C5E64] dark:text-primary-100">
                     {option.label}
                   </span>
                 </button>

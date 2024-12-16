@@ -70,33 +70,33 @@ export const PositionsTable = () => {
         assetName: (item) => (
           <Box className="flex flex-row gap-[8px]">
             <TokenIcon width={24} height={24} symbol={item.assetName} />
-            <Typography className="!text-[14px] !text-[#1A433B] !font-[700] !leading-[20px] !tracking-[-0.02em]">
+            <Typography className="!text-[14px] text-[#1A433B] dark:text-primary-100 !font-[700] !leading-[20px] !tracking-[-0.02em]">
               {item.label}
             </Typography>
           </Box>
         ),
         liquidated: (item) => (
-          <Typography className="!text-[14px] !font-[500] !leading-[20px] !tracking-[-0.02em]">
+          <Typography className="!text-[14px] !font-[500] dark:text-primary-100 !leading-[20px] !tracking-[-0.02em]">
             {item.liquidated} {item.label}
           </Typography>
         ),
         usdtPaid: (item) => (
-          <Typography className="!text-[14px] !font-[500] !leading-[20px] !tracking-[-0.02em]">
+          <Typography className="!text-[14px] !font-[500] dark:text-primary-100 !leading-[20px] !tracking-[-0.02em]">
             {item.usdtPaid} {item.label}
           </Typography>
         ),
         averagePrice: (item) => (
-          <Typography className="!text-[14px] !font-[500] !leading-[20px] !tracking-[-0.02em]">
+          <Typography className="!text-[14px] !font-[500] dark:text-primary-100 !leading-[20px] !tracking-[-0.02em]">
             {item.averagePrice}
           </Typography>
         ),
         averagePrice2: (item) => (
-          <Typography className="!text-[14px] !font-[500] !leading-[20px] !tracking-[-0.02em]">
+          <Typography className="!text-[14px] !font-[500] dark:text-primary-100 !leading-[20px] !tracking-[-0.02em]">
             {item.averagePrice2}
           </Typography>
         ),
         averagePrice3: (item) => (
-          <Typography className="!text-[14px] !font-[500] !leading-[20px] !tracking-[-0.02em]">
+          <Typography className="!text-[14px] !font-[500] dark:text-primary-100 !leading-[20px] !tracking-[-0.02em]">
             {item.averagePrice3}
           </Typography>
         ),

@@ -1,5 +1,5 @@
 "use client";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "~/config";
 import { FC } from "react";
@@ -9,11 +9,17 @@ import ReactQueryProvider from "./ReactQueryProvider";
 import { Providers as WalletProvider } from "@repo/wallet-modal";
 import { PortalContainer } from "./Portal";
 import BlockProvider from "./BlockProvider";
+import { useMediaQuery } from "@mui/material";
 interface Props {
   children: React.ReactNode;
 }
 
 const Providers: FC<Props> = ({ children }) => {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const prefersLightMode = useMediaQuery("(prefers-color-scheme: light)");
+  if (prefersDarkMode !== !prefersLightMode) return null;
+
   return (
     <AppRouterCacheProvider>
       <ReactQueryProvider>

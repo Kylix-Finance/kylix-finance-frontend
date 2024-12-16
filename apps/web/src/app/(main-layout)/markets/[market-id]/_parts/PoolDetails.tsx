@@ -82,20 +82,26 @@ const PoolDetails = () => {
   return (
     <Box className="flex flex-col gap-4">
       {/* Heading */}
-      <Box className="flex items-center justify-between">
+      <Box className="flex items-center justify-between dark:bg-black-500  rounded-lg px-6 py-3">
         <Box className="flex items-center">
           <Link href="/markets">
-            <Icons.LeftArrow className="text-black" />
+            <Icons.LeftArrow className="text-black dark:text-primary-100" />
           </Link>
           <Box className="p-1.5 flex gap-2 items-center">
             <TokenIcon symbol={assetMetaData?.symbol} />{" "}
             <Box className="flex flex-col">
-              <Typography variant="subtitle2" className="text-primary-800">
+              <Typography
+                variant="subtitle2"
+                className="text-primary-800 dark:text-primary-100"
+              >
                 <Skeleton minWidth={20} isLoading={!assetMetaData}>
                   {assetMetaData?.name}
                 </Skeleton>
               </Typography>
-              <Typography variant="caption" className="text-primary-800/50">
+              <Typography
+                variant="caption"
+                className="text-primary-800/50 dark:text-primary-200"
+              >
                 <Skeleton minWidth={20} isLoading={!assetMetaData}>
                   {assetMetaData?.symbol}
                 </Skeleton>
@@ -103,16 +109,20 @@ const PoolDetails = () => {
             </Box>
           </Box>
         </Box>
-        <Box className="flex items-center text-primary-800 gap-2.5">
-          <Typography variant="subtitle2">Price:</Typography>
-          <Typography variant="body1">$ {formattedPrice}</Typography>
+        <Box className="flex items-center text-primary-800 gap-2.5 ">
+          <Typography variant="subtitle2" className="dark:text-primary-100">
+            Price:
+          </Typography>
+          <Typography variant="body1" className="dark:text-primary-100">
+            $ {formattedPrice}
+          </Typography>
         </Box>
       </Box>
       {/* Pool status */}
       <Card
         elevation={0}
         variant="outlined"
-        className="flex flex-col lg:flex-row justify-between"
+        className="flex flex-col lg:flex-row justify-between dark:bg-black-500"
       >
         <List items={items} />
         <List items={items2} />

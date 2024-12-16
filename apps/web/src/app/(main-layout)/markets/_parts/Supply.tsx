@@ -22,7 +22,7 @@ const Supply = () => {
       title="Total Supply"
       icon={Icons.WalletFill}
       rightComponent={
-        <Typography variant="h5" className="text-primary-800">
+        <Typography variant="h5" className="text-primary-800 dark:text-white">
           <Skeleton minWidth={80} isLoading={isLoading}>
             {data?.summary
               ? formatBigNumbers(formatUnit(data.summary.total_supply, 18), 2) +

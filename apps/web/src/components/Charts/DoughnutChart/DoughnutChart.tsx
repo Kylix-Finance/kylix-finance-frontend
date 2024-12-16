@@ -25,6 +25,7 @@ const DoughnutChart: React.FC<Props> = ({
           datasets: [
             {
               backgroundColor,
+              borderColor: "transparent",
               borderRadius: 1000,
               data,
               spacing: 2,

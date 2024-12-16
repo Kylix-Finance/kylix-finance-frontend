@@ -46,7 +46,9 @@ export const Item = ({
         onClick={clickHandler}
         className={cn(
           linkBaseStyles,
-          isCurrentPath ? "bg-primary-500" : "hover:bg-primary-500/30"
+          isCurrentPath
+            ? "bg-primary-500"
+            : "hover:bg-primary-500/30 dark:hover:bg-primary-500/15"
         )}
         href={data.href || ""}
       >
@@ -58,7 +60,9 @@ export const Item = ({
             primary={data.name}
             className={cn(
               "duration-300 text-sm font-medium",
-              isCurrentPath ? "text-white" : "text-primaryText"
+              isCurrentPath
+                ? "text-white dark:text-black-500"
+                : "text-primaryText dark:text-primary-400/50"
             )}
             primaryTypographyProps={{
               fontSize: "14px",
@@ -81,7 +85,11 @@ export const Item = ({
           className="w-[80%] self-end"
         >
           <Box className="flex gap-3.5 h-full">
-            <Box height="100%" width="2px" bgcolor="#EAF6F4" />
+            <Box
+              height="100%"
+              width="2px"
+              bgcolor="#EAF6F4 dark:bg-black-500"
+            />
             <List
               component="div"
               disablePadding

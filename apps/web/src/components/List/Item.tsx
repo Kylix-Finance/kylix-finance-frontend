@@ -26,7 +26,9 @@ const Item = ({
   return (
     <MUIItemList className="!flex gap-5 !p-0 !m-0 !justify-between">
       <Box display="flex" alignItems="center" gap="5px">
-        <ListItemText className={cn("text-[#767F7D]", labelClassName)}>
+        <ListItemText
+          className={cn("text-[#767F7D] dark:text-primary-100", labelClassName)}
+        >
           <Typography variant="body1">{label}</Typography>
         </ListItemText>
         {tooltipTitle && (
@@ -38,7 +40,10 @@ const Item = ({
       <Box display="flex" gap="10px" alignItems="center">
         {typeof value === "string" ? (
           <Typography
-            className={cn("text-primary-800 font-number", valueClassName)}
+            className={cn(
+              "text-primary-800 dark:text-primary-100 font-number",
+              valueClassName
+            )}
             variant="subtitle2"
             fontWeight="600"
           >
@@ -61,7 +66,7 @@ const Item = ({
         )}
         {action && (
           <Button
-            className="!capitalize !text-xs !font-semibold !leading-[13px] !text-center !rounded !py-1 !px-2 !min-h-0"
+            className="!capitalize !text-xs !font-semibold !leading-[13px] !text-center !rounded !py-1 !px-2 !min-h-0 dark:disabled:border-black-400 dark:disabled:text-black-400"
             size="large"
             variant="outlined"
             disableElevation

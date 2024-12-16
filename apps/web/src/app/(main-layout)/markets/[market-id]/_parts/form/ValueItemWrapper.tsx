@@ -18,7 +18,7 @@ const ValueItemWrapper = ({
   return (
     <Box display="flex" alignItems="center" gap="8px">
       <Typography
-        className={"text-primary-800 font-number"}
+        className={"text-primary-800 dark:text-white  font-number"}
         variant="subtitle2"
         fontWeight="600"
       >

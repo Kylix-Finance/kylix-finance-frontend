@@ -14,7 +14,7 @@ const Burned = () => {
           KYL
         </Typography>
       </Typography>
-      <Typography variant="h5" fontWeight="500">
+      <Typography variant="h5" fontWeight="500" className="dark:text-white">
         {numToLocalString(514100)}{" "}
         <Typography
           component="span"
