@@ -10,7 +10,7 @@ const UserBalance = () => {
 
   return (
     <Skeleton isLoading={isPending} height={60} width={100}>
-      <div className="flex gap-2 p-2 items-center justify-between bg-[#FFFFFF] dark:bg-black-500 min-w-[110px] h-[40px] ">
+      <div className="flex gap-2 p-2 items-center justify-between bg-[#FFFFFF] dark:bg-[#0D0D0D] min-w-[110px] h-[40px] ">
         <div className="font-medium text-[12px] leading-[14px] text-[#5C5E64] dark:text-primary-100 w-full text-right">
           {fixPrecision(Number(formattedBalance), 2)}
         </div>
