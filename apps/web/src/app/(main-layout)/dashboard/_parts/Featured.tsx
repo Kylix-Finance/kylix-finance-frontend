@@ -1,5 +1,6 @@
-import { Box, Button, Switch, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import FeaturedCard from "./FeaturedCard";
+import { Switch } from "~/components/Switch";
 
 const Featured = () => {
   return (
