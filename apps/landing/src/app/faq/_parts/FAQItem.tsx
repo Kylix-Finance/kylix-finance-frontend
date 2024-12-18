@@ -15,7 +15,7 @@ const FAQItem = ({ description, title }: FAQItemProps) => {
     <div className="flex flex-col gap-6 p-4 backdrop-blur-md bg-[#A6CEC20F] rounded-lg">
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center w-full justify-between cursor-pointer"
+        className="flex items-center w-full justify-between cursor-pointer select-none relative z-50"
       >
         <p
           className={`transition-all duration-300 text-xl ${
