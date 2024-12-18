@@ -17,7 +17,7 @@ const Section = ({ heading, data }: FAQSectionProps) => {
         <h3 className="font-heading font-bold text-2xl lg:text-4xl leading-5 text-white relative z-10">
           {heading}
         </h3>
-        <div className="flex flex-col gap-2.5">
+        <div className="flex flex-col gap-2.5  relative z-50">
           {data.map((item, index) => (
             <Item
               key={index}
