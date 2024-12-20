@@ -32,7 +32,8 @@ export const MultiLineChart = ({
   scale,
 }: MultiLineChartProps) => {
   const unit = getTimeUnit(scale);
-
+  const [mode] = useLocalStorage("theme-mode", "light");
+  const color = mode === "dark" ? "#daeeea10" : "#daeeea70";
   return (
     <Box height={280} width="100%">
       <Line
@@ -90,7 +91,7 @@ export const MultiLineChart = ({
               },
               grid: {
                 display: yGrid,
-                color: "#daeeea70",
+                color,
               },
               ticks: {
                 color: palette.text.disabled,
