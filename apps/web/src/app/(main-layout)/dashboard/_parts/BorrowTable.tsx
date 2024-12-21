@@ -25,7 +25,7 @@ export const BorrowTable = () => {
           <Box className="flex justify-end gap-1">
             <Button variant="outlined">
               <Typography
-                className="!text-primary-500"
+                className="text-[##45A996] dark:text-[#56DDB4]"
                 variant="subtitle1"
                 fontWeight={600}
               >

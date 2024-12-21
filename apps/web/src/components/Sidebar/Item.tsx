@@ -16,7 +16,7 @@ import SubItem from "./SubItem";
 import ItemIcon from "./ItemIcon";
 
 const linkBaseStyles =
-  "duration-300 flex items-center h-10 w-full rounded-lg overflow-hidden";
+  "duration-300 flex items-center h-10 w-full rounded-lg overflow-hidden  dark:text-[#707F7A]";
 
 interface ItemProps {
   data: SidebarItem;
@@ -47,7 +47,7 @@ export const Item = ({
         className={cn(
           linkBaseStyles,
           isCurrentPath
-            ? "bg-primary-500"
+            ? "bg-[#45A996] dark:bg-[#56DDB4]"
             : "hover:bg-primary-500/30 dark:hover:bg-primary-500/15"
         )}
         href={data.href || ""}
@@ -61,8 +61,8 @@ export const Item = ({
             className={cn(
               "duration-300 text-sm font-medium",
               isCurrentPath
-                ? "text-white dark:text-black-500"
-                : "text-primaryText dark:text-primary-400/50"
+                ? "text-white dark:text-[#0D0D0D]"
+                : "text-[#5C5E64] dark:text-[#707F7A]"
             )}
             primaryTypographyProps={{
               fontSize: "14px",

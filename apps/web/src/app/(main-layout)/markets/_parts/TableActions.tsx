@@ -16,15 +16,23 @@ export const TableActions = ({
   return (
     <Box className="flex justify-end gap-1">
       <Link href={`/markets/${assetId}?tab=${firstAction.toLowerCase()}`}>
-        <Button variant="contained">
-          <Typography className="!text-[#FFF]" variant="body3" fontWeight={600}>
+        <Button className="dark:bg-[#56DDB4]" variant="contained">
+          <Typography
+            className="text-[#FFF] dark:text-[#0D0D0D]"
+            variant="body3"
+            fontWeight={600}
+          >
             {firstAction}
           </Typography>
         </Button>
       </Link>
       <Link href={`/markets/${assetId}?tab=${secondAction.toLowerCase()}`}>
         <Button variant="outlined">
-          <Typography variant="body3" fontWeight={600}>
+          <Typography
+            variant="body3"
+            className="dark:text-[#56DDB4]"
+            fontWeight={600}
+          >
             {secondAction}
           </Typography>
         </Button>

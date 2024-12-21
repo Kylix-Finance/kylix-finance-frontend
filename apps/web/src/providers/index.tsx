@@ -9,7 +9,7 @@ import ReactQueryProvider from "./ReactQueryProvider";
 import { Providers as WalletProvider } from "@repo/wallet-modal";
 import { PortalContainer } from "./Portal";
 import BlockProvider from "./BlockProvider";
-import { useMediaQuery } from "@mui/material";
+import { CssBaseline, useMediaQuery } from "@mui/material";
 interface Props {
   children: React.ReactNode;
 }
@@ -33,7 +33,10 @@ const Providers: FC<Props> = ({ children }) => {
           }}
         >
           <BlockProvider />
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <ThemeProvider theme={theme}>
+            {/* <CssBaseline enableColorScheme /> */}
+            {children}
+          </ThemeProvider>
         </WalletProvider>
         <PortalContainer />
       </ReactQueryProvider>

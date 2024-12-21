@@ -22,33 +22,33 @@ interface SubmitButton {
 }
 
 interface Props {
-  items: ListItem[];
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
-  decimals?: number;
-  submitButton: SubmitButton;
-  error?: string | null;
   assetId: number | string;
-  isSubmitting?: boolean;
-  onMaxClick: () => void;
-  isMaxLoading?: boolean;
   balance: string | undefined;
+  decimals?: number;
+  error?: string | null;
+  isMaxLoading?: boolean;
+  isSubmitting?: boolean;
+  items: ListItem[];
+  onMaxClick: () => void;
+  setValue: Dispatch<SetStateAction<string>>;
+  submitButton: SubmitButton;
   symbol: string | undefined;
+  value: string;
 }
 
 export const Form = ({
-  items,
-  setValue,
-  value,
-  decimals,
-  submitButton,
-  error,
   assetId,
-  isSubmitting = false,
-  onMaxClick,
-  isMaxLoading = false,
   balance,
+  decimals,
+  error,
+  isMaxLoading = false,
+  isSubmitting = false,
+  items,
+  onMaxClick,
+  setValue,
+  submitButton,
   symbol,
+  value,
 }: Props) => {
   const isInputEmpty = Number(value) === 0;
   const isInsufficientBalance = Number(value) > Number(balance);
@@ -59,21 +59,20 @@ export const Form = ({
         <Box
           flexDirection="row"
           display="flex"
+          alignItems="center"
           justifyContent="space-between"
           className="!w-full"
         >
-          <p className="text-primary-800 dark:text-[#707F7A] font-bold text-sm leading-5">
-            Amount
-          </p>
+          <p className="text-[#707F7A] font-bold text-sm leading-5">Amount</p>
           <Button
             disabled={isMaxLoading}
-            className="!text-primary-500 !capitalize"
+            className="text-[#45A996] lowercase font-[700] leading-6 text-[14px]"
             variant="text"
             disableElevation
             size="small"
             onClick={onMaxClick}
           >
-            Max
+            max
           </Button>
         </Box>
         <TextField
@@ -108,7 +107,7 @@ export const Form = ({
             },
             className: "!font-number",
             startAdornment: (
-              <InputAdornment position="start" className="">
+              <InputAdornment position="start">
                 <TokenIcon symbol={symbol} width={24} height={24} />
               </InputAdornment>
             ),
@@ -116,6 +115,7 @@ export const Form = ({
         />
       </Box>
       <List items={items} />
+
       <LoadingButton
         variant="contained"
         size="large"
@@ -123,7 +123,7 @@ export const Form = ({
         onClick={submitButton.onclick}
         disabled={isInputEmpty || isInsufficientBalance}
         loading={isSubmitting}
-        className="text-white dark:disabled:bg-primary-500/50 dark:disabled:text-primary-200/60"
+        className="text-white dark:text-[#0d0d0d] font-[Poppins] min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
       >
         {submitButton.content}
       </LoadingButton>

@@ -45,7 +45,7 @@ const Sidebar = () => {
     >
       <Box className="flex flex-col items-center justify-between h-[inherit] pb-6 w-full">
         <Box className="flex flex-col w-full">
-          <Box className="w-full h-full bg-primary-500 dark:bg-[#0D0D0D] flex flex-col justify-center items-center py-10 px-16 sticky top-0 z-50">
+          <Box className="w-full h-full bg-[#45A996] dark:bg-[#0D0D0D] flex flex-col justify-center items-center py-10 px-16 sticky top-0 z-50">
             <Image src={kylixLogoImg} alt="" width={320} quality={100} />
           </Box>
           <Box className="flex flex-col mt-6 gap-8">

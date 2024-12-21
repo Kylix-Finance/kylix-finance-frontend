@@ -1,7 +1,6 @@
+import { ThemeMode } from "@repo/ui";
 import { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
-
-export type ThemeMode = "light" | "dark";
 
 const usePreferences = (initMode: ThemeMode = "light") => {
   const [value, setValue] = useLocalStorage<ThemeMode>("theme-mode", initMode);
@@ -39,5 +38,7 @@ const usePreferences = (initMode: ThemeMode = "light") => {
     toggle,
   };
 };
+
+export { type ThemeMode };
 
 export default usePreferences;

@@ -44,7 +44,9 @@ const IconWithBackground = ({ icon: Icon, iconColor }: IconProps) => (
 const Title = ({ title, hasIcon }: TitleProps) => (
   <Typography
     variant="h6"
-    className={cn("dark:text-black-100", { ["dark:text-[#5C6965]"]: hasIcon })}
+    className={cn("text-[#1A433B] dark:text-[#FFFFFF]", {
+      ["text-[#1A433B] dark:text-[#FFFFFF]"]: hasIcon,
+    })}
   >
     {" "}
     {title}
@@ -65,7 +67,7 @@ const Card = ({
     >
       <Box className="flex justify-between items-center w-full mb-2">
         {(Icon || title) && (
-          <Box className={`flex items-center gap-2`}>
+          <Box className={`flex items-center gap-1`}>
             {Icon && <IconWithBackground icon={Icon} iconColor={iconColor} />}
             {title && <Title title={title} hasIcon={Boolean(Icon)} />}
           </Box>
