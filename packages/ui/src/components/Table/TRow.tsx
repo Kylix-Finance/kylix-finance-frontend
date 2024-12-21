@@ -39,14 +39,18 @@ function TRow<Schema, ExtraFields extends string = string>({
   const headersList = Object.entries(headers);
 
   return (
-    <TableRow className={`bg-light dark:bg-[#0D0D0D] ${className}`} {...rest}>
+    <TableRow
+      hover
+      className={`bg-light dark:bg-[#0D0D0D] dark:hover:bg-blue-500 hover:bg-red-500 ${className}`}
+      {...rest}
+    >
       {headersList.map(([name], index) => {
         // TODO: Remove assertion
         const ValueComponent = components?.[name as Key] as
           | CellValueComponent<Schema>
           | undefined;
 
-        const borderStyle = {
+        const borderRadius = {
           0: "8px 0px 0px 8px",
           [headersList.length - 1]: "0px 8px 8px 0px",
         };
@@ -58,7 +62,7 @@ function TRow<Schema, ExtraFields extends string = string>({
             {...tCellProps}
             key={`${name}+${index}`}
             style={{
-              borderRadius: borderStyle[index],
+              borderRadius: borderRadius[index],
               ...(name === "actions"
                 ? {
                     position: "sticky",

@@ -9,8 +9,9 @@ import {
 import { visuallyHidden } from "@mui/utils";
 
 import TCell from "./TCell";
-import { Numeric, Order, TCellProps, THeadProps, TRowProps } from "./types";
+import { Numeric, Order, THeadProps } from "./types";
 import { SortIcon } from "./SortIcon";
+import { useIsDarkMode } from "../../hooks";
 
 export type Headers<K extends string | number | symbol> = Record<
   K,
@@ -48,6 +49,8 @@ function THead<Schema, ExtraFields extends string = string>({
       onRequestSort(event, property);
     };
 
+  const isDarkMode = useIsDarkMode();
+
   const isHeaderHidden = (name: string) =>
     hiddenTHeads?.includes(name as keyof Schema);
 
@@ -59,7 +62,6 @@ function THead<Schema, ExtraFields extends string = string>({
         {headersList.map(([name, value], index) => (
           <TCell
             align={numeric?.some((item) => item === name) ? "right" : "left"}
-            // className="!bg-red-500  dark:bg-blue-500"
             key={`${name}+${index}`}
             padding={disablePadding ? "none" : "normal"}
             sortDirection={orderBy === name ? order : false}
@@ -76,7 +78,15 @@ function THead<Schema, ExtraFields extends string = string>({
                 direction={orderBy === name ? order : "asc"}
                 onClick={createSortHandler(name as keyof Schema)}
               >
-                <Typography variant="body3">{value as string}</Typography>
+                <Typography
+                  style={{
+                    color: isDarkMode ? "#BCE5DD4D" : "#1A433B80",
+                  }}
+                  variant="body3"
+                >
+                  {value as string}
+                </Typography>
+                <div style={{ width: "4px" }} />
                 {orderBy === name ? (
                   <Box component="span" sx={visuallyHidden}>
                     {order === "desc"

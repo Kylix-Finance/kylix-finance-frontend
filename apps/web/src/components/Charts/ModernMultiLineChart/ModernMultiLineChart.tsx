@@ -34,8 +34,9 @@ export const ModernMultiLineChart = ({
   const [isLogScale, setIsLogScale] = useState(true);
   const [activePoint, setActivePoint] = useState<number[]>([]);
   const [value] = useLocalStorage("theme-mode", "light");
-
-  const color = value === "dark" ? "#daeeea" : "#151515";
+  const isDarkMode = value === "dark";
+  const color = isDarkMode ? "#daeeea" : "#151515";
+  const gridColor = isDarkMode ? "#daeeea10" : "#daeeea70";
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsLogScale(event.target.checked);
   };
@@ -191,7 +192,7 @@ export const ModernMultiLineChart = ({
                   },
                   grid: {
                     display: yGrid,
-                    color: "#daeeea60",
+                    color: gridColor,
                   },
                   ticks: {
                     display: false,

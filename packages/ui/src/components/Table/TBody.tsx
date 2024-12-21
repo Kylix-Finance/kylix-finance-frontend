@@ -14,12 +14,12 @@ import TCell from "./TCell";
 import { TableStore } from "../../store";
 
 interface Props<Schema, ExtraFields extends string = string> {
+  componentBeforeBody?: React.FC;
   components?: Partial<CellValueComponents<Schema, ExtraFields>>;
   data: TableData<Schema>;
   headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   isFetched: boolean;
   isLoading: boolean;
-  componentBeforeBody?: React.FC;
   noDataComponent?: React.FC;
   numeric?: Numeric<Schema>;
   onTRowClick?: OnTRowClick<Schema>;
@@ -32,23 +32,23 @@ interface Props<Schema, ExtraFields extends string = string> {
 }
 
 function TBody<Schema, ExtraFields extends string = string>({
+  componentBeforeBody: ComponentBeforeBody,
   components,
   data,
   headers,
   isFetched,
   isLoading,
-  componentBeforeBody: ComponentBeforeBody,
+  noDataComponent,
   numeric,
   placeholderLength,
   rowSpacing,
   tBody,
   tCellClassnames,
   tRowProps,
-  noDataComponent,
 }: Props<Schema, ExtraFields>) {
-  const placeholderArr = Array.from<null>({ length: placeholderLength }).fill(
-    null
-  );
+  const placeholderArr = Array.from<null>({
+    length: placeholderLength,
+  }).fill(null);
 
   const { length: headersLength } = Object.keys(headers);
 

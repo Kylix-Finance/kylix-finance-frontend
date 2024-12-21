@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Chip } from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 import { useState } from "react";
 import LineChart from "~/components/Charts/LineChart";
 import PeriodSelector from "~/components/PeriodSelector";
@@ -25,10 +25,31 @@ const KylixChart = () => {
       <Box className="flex justify-between items-start mb-3">
         <Box>
           <Box className="flex mb-2 items-center">
-            <p className="mr-3 dark:text-white">Kylix Price</p>
-            <Chip label="2.25%" color="primary" />
+            <p className="mr-3 text-[#1A433B] dark:text-[#E3E1E5] font-[500] leading-6 text-[14px]">
+              Kylix Price
+            </p>
+            <span
+              className="text-white bg-[#45A996] p-[2px_6px] rounded-[30px] dark:bg-[#56DDB4] text-[12px] font-[700] leading-4 dark:text-[#0D0D0D]"
+              color="primary"
+            >
+              2.25%
+            </span>
           </Box>
-          <p className="dark:text-white">{price} USD</p>
+
+          <div className="flex flex-row gap-[6px] w-max items-center justify-between">
+            <Typography
+              className="text-[#1A433B] dark:text-[#E3E1E5] font-[Poppins] text-[18px] font-[700] leading-7"
+              component="span"
+            >
+              {price}
+            </Typography>
+            <Typography
+              className="text-[#1A433B] dark:text-[#E3E1E5] font-[Poppins] text-[12px] leading-[16px] "
+              component="span"
+            >
+              USD
+            </Typography>
+          </div>
         </Box>
         <PeriodSelector
           periods={periods}

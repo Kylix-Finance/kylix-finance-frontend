@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import Image from "next/image";
 import { TokenIcon } from "..";
 
 const Asset = ({
@@ -21,7 +20,10 @@ const Asset = ({
           {label}
         </Typography>
         {helperText && (
-          <Typography variant="caption" className="dark:text-black-100">
+          <Typography
+            variant="caption"
+            className="text-[#1A433B80] dark:text-[#5C6965]"
+          >
             {helperText}
           </Typography>
         )}

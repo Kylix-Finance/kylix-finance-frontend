@@ -4,6 +4,7 @@ import { Tabs } from "@mui/material";
 import { ReactNode, useState } from "react";
 import Tab from "./Tab";
 import { parseAsString, useQueryState } from "nuqs";
+import { cn } from "~/utils";
 
 export type TabType = {
   label: string;
@@ -43,6 +44,11 @@ function TabsManager({ tabs }: Props) {
       >
         {tabs.map((tab) => (
           <Tab
+            className={cn(
+              "text-[#96ABA7] dark:text-[#707F7A] text-[14px] font-[500] leading-4",
+              value === tab.value &&
+                "text-[#FFFFFF] dark:text-[#0D0D0D] bg-[#A5CAC3] dark:bg-[#A5CAC3] font-[700]"
+            )}
             key={tab.value}
             label={tab.label}
             value={tab.value}
