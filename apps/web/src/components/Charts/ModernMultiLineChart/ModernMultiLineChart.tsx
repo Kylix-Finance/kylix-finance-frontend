@@ -191,13 +191,14 @@ export const ModernMultiLineChart = ({
                     display: false,
                   },
                   grid: {
-                    display: yGrid,
+                    display: true,
                     color: gridColor,
                   },
                   ticks: {
                     display: false,
                     color: palette.text.disabled,
                     // count: 6,
+                    maxTicksLimit: 5,
                     callback: (value) => {
                       return formatNumber(value);
                     },
