@@ -10,8 +10,7 @@ import "chart.js/auto";
 import { ChartScale } from "~/types";
 import { getTimeUnit } from "~/utils/date";
 import { useLocalStorage } from "usehooks-ts";
-import usePreferences, { ThemeMode } from "~/hooks/usePreferences";
-
+import { hexToRgb } from "@repo/utils";
 type LineProps = ComponentProps<typeof Line>;
 
 type MultiLineChartProps = {
@@ -38,7 +37,24 @@ export const MultiLineChart = ({
     <Box height={280} width="100%">
       <Line
         data={{
-          datasets,
+          datasets: datasets.map((data) => ({
+            ...data,
+            fill: "start",
+            backgroundColor: (context) => {
+              if (!context.chart.chartArea) return;
+              const {
+                ctx,
+                chartArea: { top, bottom },
+              } = context.chart;
+              const gradientBg = ctx.createLinearGradient(0, top, 0, bottom);
+              const { b, g, r } = hexToRgb(
+                data.backgroundColor?.toString() || ""
+              );
+              gradientBg.addColorStop(0, `rgba(${r},${g},${b}, 0.4)`);
+              gradientBg.addColorStop(1, `rgba(${r},${g},${b}, 0)`);
+              return gradientBg;
+            },
+          })),
         }}
         options={{
           responsive: true,
