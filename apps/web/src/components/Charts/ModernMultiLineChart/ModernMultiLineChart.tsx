@@ -29,7 +29,7 @@ export const ModernMultiLineChart = ({
   yLabel,
   xGrid = false,
   yGrid = true,
-  activeIndex,
+  activeIndex = 0,
 }: ModernMultiLineChartProps) => {
   const [isLogScale, setIsLogScale] = useState(true);
   const [activePoint, setActivePoint] = useState<number[]>([]);
@@ -185,19 +185,20 @@ export const ModernMultiLineChart = ({
                 },
                 y: {
                   type: isLogScale ? "logarithmic" : "linear",
-                  display: true,
+                  display: yGrid,
                   min: 0,
                   border: {
                     display: false,
                   },
                   grid: {
-                    display: yGrid,
+                    display: true,
                     color: gridColor,
                   },
                   ticks: {
                     display: false,
                     color: palette.text.disabled,
                     // count: 6,
+                    maxTicksLimit: 5,
                     callback: (value) => {
                       return formatNumber(value);
                     },
