@@ -20,6 +20,7 @@ type MultiLineChartProps = {
   xGrid?: boolean;
   yGrid?: boolean;
   scale: ChartScale;
+  gradientIndex?: number;
 };
 
 export const MultiLineChart = ({
@@ -29,6 +30,7 @@ export const MultiLineChart = ({
   xGrid = false,
   yGrid = true,
   scale,
+  gradientIndex = 0,
 }: MultiLineChartProps) => {
   const unit = getTimeUnit(scale);
   const [mode] = useLocalStorage("theme-mode", "light");
@@ -37,9 +39,9 @@ export const MultiLineChart = ({
     <Box height={280} width="100%">
       <Line
         data={{
-          datasets: datasets.map((data) => ({
+          datasets: datasets.map((data, index) => ({
             ...data,
-            fill: "start",
+            fill: gradientIndex === index ? "start" : "",
             backgroundColor: (context) => {
               if (!context.chart.chartArea) return;
               const {
