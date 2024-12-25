@@ -44,6 +44,7 @@ interface Props<Schema, ExtraFields extends string> {
   tContainerProps?: TContainerProps;
   tHeadProps?: THeadProps;
   tRowProps?: TRowProps;
+  tRowClassName?: string;
 }
 
 export function Table<Schema, ExtraFields extends string = string>({
@@ -67,6 +68,7 @@ export function Table<Schema, ExtraFields extends string = string>({
   tHeadProps,
   tRowProps,
   noDataComponent,
+  tRowClassName,
 }: Props<Schema, ExtraFields>) {
   type Key = keyof Schema;
 
@@ -123,6 +125,7 @@ export function Table<Schema, ExtraFields extends string = string>({
           tBody={tBodyProps}
           tCellClassnames={tCellClassnames}
           tRowProps={tRowProps}
+          tRowClassName={tRowClassName}
         />
       </TableBase>
       {hasPagination && <TablePagination tableName={tableName} />}
