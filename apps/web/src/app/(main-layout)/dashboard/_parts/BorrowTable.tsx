@@ -14,7 +14,7 @@ export const BorrowTable = () => {
         actions: "Actions",
       }}
       hiddenTHeads={["actions"]}
-      tCellClassnames={"!p-3"}
+      tCellClassnames={"!p-3 bg dark:bg-black-500"}
       rowSpacing="10px"
       hasPagination={false}
       defaultSortKey="asset"

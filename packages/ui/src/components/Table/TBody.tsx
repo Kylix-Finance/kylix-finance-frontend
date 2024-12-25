@@ -29,6 +29,7 @@ interface Props<Schema, ExtraFields extends string = string> {
   tBody?: TBodyProps;
   tCellClassnames?: string;
   tRowProps?: TRowProps;
+  tRowClassName?: string;
 }
 
 function TBody<Schema, ExtraFields extends string = string>({
@@ -45,6 +46,7 @@ function TBody<Schema, ExtraFields extends string = string>({
   tBody,
   tCellClassnames,
   tRowProps,
+  tRowClassName,
 }: Props<Schema, ExtraFields>) {
   const placeholderArr = Array.from<null>({
     length: placeholderLength,
@@ -81,6 +83,7 @@ function TBody<Schema, ExtraFields extends string = string>({
         finalData.map((row, index) => (
           <Fragment key={index}>
             <TRow
+              className="!dark:bg-red-500"
               numeric={numeric}
               isLoading={!isFetched || isLoading}
               tCellClassnames={tCellClassnames}
@@ -92,8 +95,10 @@ function TBody<Schema, ExtraFields extends string = string>({
 
             {rowSpacing && index < finalData.length - 1 && (
               <TableRow
+                {...tRowProps}
                 style={{
                   height: rowSpacing,
+                  ...tRowProps?.style,
                 }}
               />
             )}
@@ -103,7 +108,7 @@ function TBody<Schema, ExtraFields extends string = string>({
       {shouldShowNoDataRow &&
         placeholderArr.map((_i, index) => {
           return (
-            <TableRow key={index}>
+            <TableRow {...tRowProps} className={tRowClassName} key={index}>
               <TableCell colSpan={headersLength}>
                 <Box className="flex justify-center items-center h-[40px]">
                   {Math.floor(placeholderLength / 2) === index ? (

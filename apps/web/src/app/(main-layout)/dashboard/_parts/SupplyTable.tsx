@@ -10,7 +10,7 @@ export const SupplyTable = () => {
       isFetched={true}
       isLoading={false}
       placeholderLength={3}
-      tCellClassnames={"!p-3"}
+      tCellClassnames={"!p-3 dark:bg-black-500"}
       rowSpacing="10px"
       hasPagination={false}
       defaultSortKey="asset"
