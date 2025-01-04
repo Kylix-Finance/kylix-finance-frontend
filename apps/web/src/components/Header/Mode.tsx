@@ -2,7 +2,7 @@
 import usePreferences from "~/hooks/usePreferences";
 
 const Mode = () => {
-  const { mode, toggle } = usePreferences();
+  const { toggle } = usePreferences();
   return (
     <div>
       <button onClick={toggle}>click</button>

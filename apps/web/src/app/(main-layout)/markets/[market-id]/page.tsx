@@ -13,11 +13,11 @@ export default function page() {
         <Box className={styles.details}>
           <PoolDetails />
         </Box>
-        <Box className={styles.apy_chart}>
+        <Box className={`${styles.apy_chart} z-[999]`}>
           <ApyChart />
         </Box>
         <TotalChart />
-        <Box className={styles.form}>
+        <Box className={`${styles.form} z-[999]`}>
           <TransactionForm />
         </Box>
       </Box>

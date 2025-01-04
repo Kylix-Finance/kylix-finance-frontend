@@ -3,8 +3,9 @@ import "./globals.css";
 import { mergeMetadata } from "@repo/shared";
 import { Metadata } from "next";
 import Footer from "~/components/Footer";
-import BackGround from "~/components/BackGround";
 import Header from "~/components/Header";
+import { BackGround } from "@repo/ui";
+
 export const metadata: Metadata = mergeMetadata(
   {
     title: {

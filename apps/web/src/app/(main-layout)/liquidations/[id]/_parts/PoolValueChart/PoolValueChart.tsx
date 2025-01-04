@@ -5,7 +5,7 @@ import { liquidatedValue, liquidatedEmptied } from "~/mock/chart";
 
 export const PoolValueChart = () => {
   return (
-    <Box className="flex-1 p-6 border rounded-md w-full dark:bg-black-500 dark:border-transparent">
+    <Box className="flex-1 p-6 border rounded-md w-full z-[999] dark:bg-black-500 dark:border-transparent">
       <Box className="flex items-center mb-10">
         <Box className="-mr-4">
           <TokenIcon symbol="sad" />

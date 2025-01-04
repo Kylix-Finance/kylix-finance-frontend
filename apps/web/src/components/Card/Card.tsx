@@ -1,11 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import {
-  FC,
-  ComponentType,
-  PropsWithChildren,
-  SVGProps,
-  ReactNode,
-} from "react";
+import { ComponentType, PropsWithChildren, SVGProps, ReactNode } from "react";
 import { cn } from "~/utils";
 
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
@@ -63,7 +57,7 @@ const Card = ({
 }: Props) => {
   return (
     <Box
-      className={`shadow-box rounded-lg p-6 bg-white dark:bg-black-500 w-full h-full flex flex-col ${className}`}
+      className={`shadow-box z-[999] rounded-lg p-6 bg-white dark:bg-black-500 w-full h-full flex flex-col ${className}`}
     >
       <Box className="flex justify-between items-center w-full mb-2">
         {(Icon || title) && (
