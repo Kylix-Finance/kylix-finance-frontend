@@ -10,7 +10,7 @@ import { queryKeys } from "@repo/shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface RepayMutationProps {
-  balance: string | bigint;
+  balance: string | bigint | -1; // -1 for repay ALL
   onConfirm?: VoidFunction;
 }
 interface Props {
@@ -73,7 +73,11 @@ export const repayTransaction = async (
   }
 
   api.setSigner(signer);
-  const extrinsic = api?.tx?.lending?.repay?.(asset, balance);
+  const extrinsic =
+    balance !== -1
+      ? api?.tx?.lending?.repay?.(asset, balance)
+      : api?.tx?.lending?.repayAll?.(asset);
+
   const estimatedGas = (
     await extrinsic?.paymentInfo?.(activeAccount)
   )?.partialFee.toBigInt();
