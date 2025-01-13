@@ -19,6 +19,7 @@ import { FormAlert } from "~/components/FormAlert";
 interface SubmitButton {
   content: string;
   onclick: MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
 }
 
 interface Props {
@@ -32,6 +33,7 @@ interface Props {
   onMaxClick: () => void;
   setValue: Dispatch<SetStateAction<string>>;
   submitButton: SubmitButton;
+  secondButton?: SubmitButton;
   symbol: string | undefined;
   value: string;
 }
@@ -49,6 +51,7 @@ export const Form = ({
   submitButton,
   symbol,
   value,
+  secondButton,
 }: Props) => {
   const isInputEmpty = Number(value) === 0;
   const isInsufficientBalance = Number(value) > Number(balance);
@@ -115,18 +118,32 @@ export const Form = ({
         />
       </Box>
       <List items={items} />
-
-      <LoadingButton
-        variant="contained"
-        size="large"
-        disableElevation
-        onClick={submitButton.onclick}
-        disabled={isInputEmpty || isInsufficientBalance}
-        loading={isSubmitting}
-        className="text-white dark:text-[#0d0d0d] font-[Poppins] min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
-      >
-        {submitButton.content}
-      </LoadingButton>
+      <div className="flex w-full gap-1">
+        <LoadingButton
+          variant="contained"
+          size="large"
+          disableElevation
+          onClick={submitButton.onclick}
+          disabled={isInputEmpty || isInsufficientBalance}
+          loading={isSubmitting}
+          className="w-full text-white dark:text-[#0d0d0d] font-[Poppins] min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
+        >
+          {submitButton.content}
+        </LoadingButton>
+        {secondButton && (
+          <LoadingButton
+            variant="contained"
+            size="large"
+            disableElevation
+            onClick={secondButton.onclick}
+            disabled={secondButton.disabled}
+            loading={isSubmitting}
+            className="w-full text-white dark:text-[#0d0d0d] font-[Poppins] min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
+          >
+            {secondButton.content}
+          </LoadingButton>
+        )}
+      </div>
       <AlertContainer>
         {isInsufficientBalance && (
           <FormAlert
