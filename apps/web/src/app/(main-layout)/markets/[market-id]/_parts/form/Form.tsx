@@ -126,7 +126,7 @@ export const Form = ({
           onClick={submitButton.onclick}
           disabled={isInputEmpty || isInsufficientBalance}
           loading={isSubmitting}
-          className="w-full text-white dark:text-[#0d0d0d] font-[Poppins] min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
+          className="w-full text-white dark:text-[#0d0d0d] min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60 font-body"
         >
           {submitButton.content}
         </LoadingButton>
@@ -138,7 +138,7 @@ export const Form = ({
             onClick={secondButton.onclick}
             disabled={secondButton.disabled}
             loading={isSubmitting}
-            className="w-full text-white dark:text-[#0d0d0d] font-[Poppins] min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
+            className="w-full text-white dark:text-[#0d0d0d] font-body min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
           >
             {secondButton.content}
           </LoadingButton>
