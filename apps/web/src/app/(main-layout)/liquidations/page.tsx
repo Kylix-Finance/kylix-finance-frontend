@@ -8,6 +8,7 @@ import { Suspense } from "react";
 export const metadata: Metadata = mergeMetadata({
   title: "Liquidations Markets",
 });
+
 //FIXME: Suspense is temporary
 const Page = () => {
   return (
