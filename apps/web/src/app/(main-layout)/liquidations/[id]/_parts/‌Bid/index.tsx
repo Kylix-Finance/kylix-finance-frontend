@@ -19,7 +19,7 @@ const Bid = () => {
   const [amount, setAmount] = useState("");
 
   return (
-    <Box className="w-full p-4 border rounded-md lg:w-[360px] dark:bg-black-500 dark:border-transparent">
+    <Box className="w-full p-4 border rounded-md z-[999] lg:w-[360px] dark:bg-black-500 dark:border-transparent">
       <Box className="mb-6">
         <Typography variant="body1" className="text-primary-100">
           Place a Bid

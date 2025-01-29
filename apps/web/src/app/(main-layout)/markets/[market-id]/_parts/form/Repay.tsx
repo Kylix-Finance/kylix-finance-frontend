@@ -45,11 +45,11 @@ export const Repay = () => {
   );
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
 
-  const onclick = () => {
+  const onclick = (isAll: boolean = false) => {
     if (!assetMetaData) return;
     mutate(
       {
-        balance: parseUnit(value, assetMetaData.decimals),
+        balance: isAll ? -1 : parseUnit(value, assetMetaData.decimals),
         onConfirm: () => {
           setValue("");
         },
@@ -105,6 +105,7 @@ export const Repay = () => {
       valueClassName: "!text-primary-500",
     },
   ];
+
   return (
     <Form
       assetId={tokenId}
@@ -113,8 +114,13 @@ export const Repay = () => {
       setValue={setValue}
       value={value}
       submitButton={{
-        onclick,
+        onclick: () => onclick(),
         content: "Repay",
+      }}
+      secondButton={{
+        onclick: () => onclick(true),
+        content: "Repay All",
+        disabled: Number(max) === 0,
       }}
       isSubmitting={isPending}
       isMaxLoading={isBalanceLoading}

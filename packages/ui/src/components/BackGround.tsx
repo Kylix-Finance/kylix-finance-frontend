@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
+import { CSSProperties } from "react";
+import { ThemeMode } from "../hooks";
+import { useLocalStorage } from "usehooks-ts";
 const objectVariant: Variants = {
   initial: { rotate: 12 },
   animate: {
@@ -14,7 +17,16 @@ const objectVariant: Variants = {
     },
   },
 };
-const BackGround = () => {
+
+interface Props {
+  imgStyle?: CSSProperties;
+}
+
+export const BackGround: React.FC<Props> = ({ imgStyle }) => {
+  const [mode] = useLocalStorage<ThemeMode>("theme-mode", "dark");
+
+  if (mode === "light") return null;
+
   return (
     <>
       <div
@@ -33,6 +45,7 @@ const BackGround = () => {
           src="/assets/images/section-bg.png"
           alt="section bg"
           fill
+          style={imgStyle}
           quality={100}
           draggable="false"
           objectFit="fill"
@@ -41,5 +54,3 @@ const BackGround = () => {
     </>
   );
 };
-
-export default BackGround;

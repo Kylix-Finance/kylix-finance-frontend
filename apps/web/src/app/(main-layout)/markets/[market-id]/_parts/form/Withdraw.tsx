@@ -36,10 +36,12 @@ export const Withdraw = () => {
   const poolDetails = lendingPool?.assets[0];
   const supplyRate = poolDetails?.supply_apy;
 
-  const handleClick = () => {
+  const handleClick = (isAll: boolean = false) => {
     mutate(
       {
-        balance: parseUnit(value, Number(assetMetaData?.decimals) || 18),
+        balance: isAll
+          ? -1
+          : parseUnit(value, Number(assetMetaData?.decimals) || 18),
         onConfirm: () => {
           setValue("");
         },
@@ -109,8 +111,13 @@ export const Withdraw = () => {
       setValue={setValue}
       value={value}
       submitButton={{
-        onclick: handleClick,
+        onclick: () => handleClick(),
         content: "Withdraw",
+      }}
+      secondButton={{
+        onclick: () => handleClick(true),
+        content: "Withdraw All",
+        disabled: Number(formattedBalance || 0) === 0,
       }}
       isSubmitting={isPending}
       isMaxLoading={isBalanceLoading}

@@ -1,21 +1,15 @@
 "use client";
 
-import { Box, Button, Card, IconButton, Typography } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import MultiLineChart from "~/components/Charts/MultiLineChart";
 import { palette } from "~/config/palette";
-import { vaultData } from "~/mock/chart";
-import { MoreHoriz, CalendarMonth } from "@mui/icons-material";
 import { usePoolsData } from "~/hooks/api/usePoolsData";
-import { useParams } from "next/navigation";
-import ModernMultiLineChart from "~/components/Charts/ModernMultiLineChart";
 
 const TotalChart = () => {
-  const { "market-id": marketId } = useParams<{ "market-id": string }>();
-
   const { data } = usePoolsData("101");
 
   return (
-    <Card variant="outlined" className="dark:bg-black-500">
+    <Card variant="outlined" className="dark:bg-black-500 z-[999]">
       <Box className="flex justify-between items-center mb-3">
         <Box className="flex gap-6 mt-3">
           <Box className="flex gap-2 items-center">
@@ -27,18 +21,6 @@ const TotalChart = () => {
             <Typography variant="body2">Total Supply</Typography>
           </Box>
         </Box>
-        {/* <Box className="flex gap-3">
-          <Button
-            variant="outlined"
-            color="secondary"
-            endIcon={<CalendarMonth />}
-          >
-            March 2024
-          </Button>
-          <IconButton>
-            <MoreHoriz />
-          </IconButton>
-        </Box> */}
       </Box>
 
       <MultiLineChart

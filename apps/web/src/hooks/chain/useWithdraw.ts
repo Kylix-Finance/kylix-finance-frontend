@@ -10,7 +10,7 @@ interface Props {
   asset: string | number;
 }
 interface MutationFnProps {
-  balance: string | bigint;
+  balance: string | bigint | -1; // -1 for withdraw ALL
   onConfirm?: VoidFunction;
 }
 export const useWithdraw = ({ asset }: Props) => {
@@ -65,7 +65,10 @@ export const withdrawTransaction = async (
   }
 
   api.setSigner(signer);
-  const extrinsic = api?.tx?.lending?.withdraw?.(asset, balance);
+  const extrinsic =
+    balance !== -1
+      ? api?.tx?.lending?.withdraw?.(asset, balance)
+      : api?.tx?.lending?.withdrawAll?.(asset);
   const estimatedGas = (
     await extrinsic?.paymentInfo?.(activeAccount)
   )?.partialFee.toBigInt();
