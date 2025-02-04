@@ -34,17 +34,16 @@ export const Dropdown: React.FC<Props> = ({
   };
 
   return (
-    <div className="relative  inline-block text-left z-[9999]">
+    <div className="relative inline-block text-left z-[9999]">
       <div onClick={isEnabled ? handleToggle : undefined}>{children}</div>
 
       {isOpen && (
         <>
           <div
-            className="w-[100vw] h-[100vh]"
+            className="z-[9998] w-[100vw] h-[100vh]"
             style={{
               position: "fixed",
               backgroundColor: "transparent",
-              zIndex: 9998,
               top: 0,
               left: 0,
               width: "100vw",
@@ -54,7 +53,7 @@ export const Dropdown: React.FC<Props> = ({
           />
 
           <div
-            className={`opacity-100 scale-100 origin-top-right absolute z-[9999] right-0 mt-2 w-56 rounded-sm shadow-lg bg-white dark:bg-black-500 transition-all duration-150 ease-out`}
+            className="opacity-100 scale-100 origin-top-right absolute z-[9999] right-0 mt-2 w-56 rounded-sm shadow-lg bg-white dark:bg-black-500 transition-all duration-150 ease-out"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="menu-button"
