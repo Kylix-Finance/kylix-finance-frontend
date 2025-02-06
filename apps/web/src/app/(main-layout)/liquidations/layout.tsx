@@ -1,8 +1,7 @@
-import { Box } from "@mui/material";
 import { Metadata } from "next";
 import { mergeMetadata } from "@repo/shared";
 
-export const metadata: Metadata = mergeMetadata({ title: "Market" });
+export const metadata: Metadata = mergeMetadata({ title: "Liquidations" });
 
 export default function Layout({
   children,
