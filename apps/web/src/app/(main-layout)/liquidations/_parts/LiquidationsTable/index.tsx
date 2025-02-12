@@ -2,7 +2,7 @@
 
 import { QUERY_SEARCH_MARKETS } from "~/constants";
 import { useQueryState } from "nuqs";
-import MarketsTableUI from "./LiquidationsTable";
+import LiquidationsTableUI from "./LiquidationsTable";
 
 const LiquidationsTable = () => {
   const [searchQuery] = useQueryState(QUERY_SEARCH_MARKETS, {
@@ -10,7 +10,7 @@ const LiquidationsTable = () => {
     defaultValue: "",
   });
 
-  return <MarketsTableUI searchQuery={searchQuery} />;
+  return <LiquidationsTableUI searchQuery={searchQuery} />;
 };
 
 export default LiquidationsTable;

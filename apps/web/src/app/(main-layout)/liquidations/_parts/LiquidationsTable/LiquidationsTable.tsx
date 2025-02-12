@@ -150,18 +150,44 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
           );
         },
         tvl: (item) => {
-          return <Typography variant="subtitle1">{item.tvl}</Typography>;
+          return (
+            <Typography
+              variant="subtitle1"
+              className="pl-4 dark:text-black-100"
+            >
+              {item.tvl}
+            </Typography>
+          );
         },
         poolSize: (item) => {
-          return <Typography variant="subtitle1">{item.poolSize}</Typography>;
+          return (
+            <Typography
+              variant="subtitle1"
+              className="pl-4 dark:text-black-100"
+            >
+              {item.poolSize}
+            </Typography>
+          );
         },
         maxDiscount: (item) => {
           return (
-            <Typography variant="subtitle1">{item.maxDiscount}</Typography>
+            <Typography
+              variant="subtitle1"
+              className="pl-4 dark:text-black-100"
+            >
+              {item.maxDiscount}
+            </Typography>
           );
         },
         myBid: (item) => {
-          return <Typography variant="subtitle1">{item.myBid}</Typography>;
+          return (
+            <Typography
+              variant="subtitle1"
+              className="pl-4 dark:text-black-100"
+            >
+              {item.myBid}
+            </Typography>
+          );
         },
 
         actions: (item) => (
