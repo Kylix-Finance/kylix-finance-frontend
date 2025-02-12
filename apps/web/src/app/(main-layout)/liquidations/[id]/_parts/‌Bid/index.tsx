@@ -19,6 +19,7 @@ import {
 // import { BASE_ASSET_ID } from "@repo/shared";
 import { useMemo, useState } from "react";
 import { toast } from "react-toastify";
+import { useLocalStorage } from "usehooks-ts";
 import { notify, TokenIcon } from "~/components";
 import { usePlaceBid } from "~/hooks/chain/usePlaceBid";
 
@@ -40,6 +41,10 @@ const BASE_ASSET_ID = 2;
 const Bid = () => {
   const [discount, setDiscount] = useState("");
   const [amount, setAmount] = useState("");
+
+  const [value] = useLocalStorage("theme-mode", "light");
+  const isDarkMode = value === "dark";
+
   const { assetMetaData, isPending: isMetadataLoading } =
     useMetadata(BASE_ASSET_ID);
   const { balance, isLoading: isBalanceLoading } = useBalance({
@@ -127,23 +132,22 @@ const Bid = () => {
           Premium (discount)
         </Typography>
       </Box>
-      <TextField
-        select
+      <Select
         value={discount}
         onChange={(e) => changeDiscount(e.target.value)}
         size="small"
         fullWidth
-        placeholder="Premium (discount)"
         className="font-number text-primary-800"
         error={!!error}
-        helperText={error}
-        FormHelperTextProps={{
-          sx: { fontWeight: "bold" },
+        sx={{
+          "& .MuiSelect-icon": {
+            color: isDarkMode ? "#daeeea" : "#1c443c",
+          },
         }}
-        InputProps={{
+        inputProps={{
           sx: {
             backgroundColor: "#45A9961A",
-            paddingY: "8px",
+            paddingY: "16px",
             paddingX: "16px",
           },
           className: "!font-number dark:text-primary-100",
@@ -153,13 +157,11 @@ const Bid = () => {
             </InputAdornment>
           ),
         }}
-        SelectProps={{
-          MenuProps: {
-            PaperProps: {
-              sx: {
-                backgroundColor: "#222222",
-                color: "#daeeea",
-              },
+        MenuProps={{
+          PaperProps: {
+            sx: {
+              backgroundColor: "#222222",
+              color: "#daeeea",
             },
           },
         }}
@@ -173,7 +175,7 @@ const Bid = () => {
             {item.label}
           </MenuItem>
         ))}
-      </TextField>
+      </Select>
       <Box className="mb-2 flex justify-between items-center mt-6 dark:text-primary-100">
         <Typography variant="body2">Bid amount</Typography>
         <Typography variant="subtitle1">
