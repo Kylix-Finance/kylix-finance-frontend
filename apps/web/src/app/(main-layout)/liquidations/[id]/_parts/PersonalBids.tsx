@@ -2,6 +2,7 @@
 import { Typography } from "@mui/material";
 import { Table } from "@repo/ui";
 import { Asset, Card } from "~/components";
+import CancelBidButton from "./CancelBidButton/CancelBidButton";
 
 const PersonalBids = () => {
   return (
@@ -14,11 +15,13 @@ const PersonalBids = () => {
         rowSpacing="10px"
         hasPagination={false}
         defaultSortKey="asset"
+        hiddenTHeads={["actions"]}
         headers={{
           asset: "Asset",
           amount: "Amount",
           discount: "Discount",
           filled: "Filled",
+          actions: "",
         }}
         tableName="personalBids"
         components={{
@@ -38,6 +41,7 @@ const PersonalBids = () => {
               {item.filled}
             </Typography>
           ),
+          actions: (item) => <CancelBidButton assetId={item.asset} />,
         }}
         data={tableData}
       />
