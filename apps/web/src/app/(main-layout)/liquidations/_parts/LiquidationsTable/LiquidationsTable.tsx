@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import { Table, TableData } from "@repo/ui";
 import Link from "next/link";
 import { Icons } from "~/assets/svgs";
+import { useGetLiquidationMarkets } from "~/hooks/chain/useGetLiquidationMarkets";
 const getHealthColors = (health: string): [string, string, string] => {
   const healthValue = parseFloat(health);
   if (healthValue >= 70) {
@@ -85,6 +86,9 @@ type MarketsTableUIProps = {
 };
 
 const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
+  const { data } = useGetLiquidationMarkets();
+  console.log("_____________________________useGetLiquidationMarkets", data);
+
   const transformedData = useMemo(() => {
     return mockedData
       ?.filter((pool) => {

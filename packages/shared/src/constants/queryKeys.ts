@@ -22,6 +22,9 @@ interface EstimateCollateral {
   borrowAssetAmount: string | undefined;
   collateralAsset: string | undefined;
 }
+interface LiquidationMarkets {
+  account?: string;
+}
 
 const keys = {
   BALANCE: "BALANCE",
@@ -35,6 +38,7 @@ const keys = {
   OPTIONS: "OPTIONS",
   PROVIDER: "PROVIDER",
   LENDING_POOLS: "LENDING_POOLS",
+  LIQUIDATION_MARKETS: "LIQUIDATION_MARKET",
   ASSET: "ASSET",
   METADATA: "METADATA",
   TOKEN: "TOKEN",
@@ -74,6 +78,11 @@ export const queryKeys = {
     baseKey,
     keys.LENDING_POOLS,
     asset,
+    account,
+  ],
+  liquidationMarkets: ({ account }: LiquidationMarkets) => [
+    baseKey,
+    keys.LIQUIDATION_MARKETS,
     account,
   ],
   asset: (assetId: number) => [baseKey, keys.ASSET, assetId],
