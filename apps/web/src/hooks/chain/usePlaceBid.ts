@@ -15,7 +15,7 @@ interface MutationFnProps {
   onConfirm?: VoidFunction;
 }
 interface Params {
-  asset: number;
+  asset: string;
 }
 export const usePlaceBid = ({ asset }: Params) => {
   const { api } = useProvider();

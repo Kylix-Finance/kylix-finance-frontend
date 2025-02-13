@@ -22,7 +22,7 @@ import { toast } from "react-toastify";
 import { useLocalStorage } from "usehooks-ts";
 import { notify, TokenIcon } from "~/components";
 import { usePlaceBid } from "~/hooks/chain/usePlaceBid";
-
+import { useParams } from "next/navigation";
 const percentages = ["25", "50", "75", "100"];
 const discountOptions = [
   { label: "10", value: "10" },
@@ -36,9 +36,10 @@ const discountOptions = [
   { label: "90", value: "90" },
   { label: "100", value: "100" },
 ];
-const MOCKED_ASSET = 20;
 const BASE_ASSET_ID = 2;
 const Bid = () => {
+  const { id } = useParams<{ id: string }>();
+
   const [discount, setDiscount] = useState("");
   const [amount, setAmount] = useState("");
 
@@ -51,7 +52,7 @@ const Bid = () => {
     assetId: BASE_ASSET_ID,
   });
   const { mutate: placeBid, isPending: isPlaceBidLoading } = usePlaceBid({
-    asset: MOCKED_ASSET,
+    asset: id,
   });
   const formattedBalance = useMemo(
     () => formatUnit(balance?.toString() || 0, assetMetaData?.decimals),

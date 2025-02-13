@@ -4,27 +4,28 @@ import { queryKeys } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
 
 interface RawMarket {
-  assetId: number;
-  assetName: string;
-  assetSymbol: string;
-  bidAsset: number;
+  asset_id: string;
+  asset_name: string;
+  asset_symbol: string;
+  bid_asset: string;
   tvl: string;
   health: number;
-  poolSize: string;
-  maxDiscount: string;
-  userBid: string | null;
+  pool_size: string;
+  max_discount: string;
+  user_bid: string | null;
 }
 
 interface Market {
-  assetId: number;
+  assetId: string;
   assetName: string;
   assetSymbol: string;
-  bidAsset: number;
+  bidAsset: string;
   tvl: bigint;
   health: number;
   poolSize: bigint;
   maxDiscount: string;
   userBid: bigint | null;
+  decimal: number;
 }
 
 type LiquidationMarketsRawData = RawMarket[];
@@ -58,21 +59,22 @@ export const getLiquidationMarkets = async ({
   Market[]
 > => {
   const result = await provider.send<LiquidationMarketsRawData>(
-    "liquidation_market_api_getLiquidationMarkets",
-    []
+    "liquidation_getLiquidationMarkets",
+    [account]
   );
   console.log("_____________________________result", result);
 
   const markets: Market[] = result.map((market) => ({
-    assetId: market.assetId,
-    assetName: market.assetName,
-    assetSymbol: market.assetSymbol,
-    bidAsset: market.bidAsset,
+    assetId: market.asset_id,
+    assetName: market.asset_name,
+    assetSymbol: market.asset_symbol,
+    bidAsset: market.bid_asset,
     tvl: BigInt(market.tvl),
     health: market.health,
-    poolSize: BigInt(market.poolSize),
-    maxDiscount: market.maxDiscount,
-    userBid: market.userBid ? BigInt(market.userBid) : null,
+    poolSize: BigInt(market.pool_size),
+    maxDiscount: market.max_discount,
+    userBid: market.user_bid ? BigInt(market.user_bid) : null,
+    decimal: 18,
   }));
   console.log("_____________________________markets", markets);
 
