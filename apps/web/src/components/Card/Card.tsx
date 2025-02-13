@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import zIndex from "@mui/material/styles/zIndex";
 import { ComponentType, PropsWithChildren, SVGProps, ReactNode } from "react";
 import { cn } from "~/utils";
 
@@ -48,16 +49,19 @@ const Title = ({ title, hasIcon }: TitleProps) => (
 );
 
 const Card = ({
-  icon: Icon,
-  title,
   children,
-  rightComponent: RightComponent,
   className,
+  icon: Icon,
   iconColor,
+  rightComponent: RightComponent,
+  title,
 }: Props) => {
   return (
     <Box
-      className={`shadow-box z-[999] rounded-lg p-6 bg-white dark:bg-black-500 w-full h-full flex flex-col ${className}`}
+      style={{
+        zIndex: "899",
+      }}
+      className={`shadow-box rounded-lg p-6 bg-white dark:bg-black-500 w-full h-full flex flex-col ${className}`}
     >
       <Box className="flex justify-between items-center w-full mb-2">
         {(Icon || title) && (

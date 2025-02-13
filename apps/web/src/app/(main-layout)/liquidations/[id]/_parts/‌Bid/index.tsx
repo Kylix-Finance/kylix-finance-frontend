@@ -1,23 +1,126 @@
 "use client";
 
+import { LoadingButton } from "@mui/lab";
 import {
   Box,
   Button,
   InputAdornment,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { Card, TokenIcon } from "~/components";
-
+import {
+  formatUnit,
+  parseUnit,
+  useBalance,
+  useMetadata,
+} from "@repo/onchain-utils";
+// import { BASE_ASSET_ID } from "@repo/shared";
+import { useMemo, useState } from "react";
+import { toast } from "react-toastify";
+import { useLocalStorage } from "usehooks-ts";
+import { notify, TokenIcon } from "~/components";
+import { usePlaceBid } from "~/hooks/chain/usePlaceBid";
+import { useParams } from "next/navigation";
 const percentages = ["25", "50", "75", "100"];
-
-const MOCK_AMOUNT = 1700;
-
+const discountOptions = [
+  { label: "10", value: "10" },
+  { label: "20", value: "20" },
+  { label: "30", value: "30" },
+  { label: "40", value: "40" },
+  { label: "50", value: "50" },
+  { label: "60", value: "60" },
+  { label: "70", value: "70" },
+  { label: "80", value: "80" },
+  { label: "90", value: "90" },
+  { label: "100", value: "100" },
+];
+const BASE_ASSET_ID = 2;
 const Bid = () => {
-  const [discount, setDiscount] = useState("10");
+  const { id } = useParams<{ id: string }>();
+
+  const [discount, setDiscount] = useState("");
   const [amount, setAmount] = useState("");
 
+  const [value] = useLocalStorage("theme-mode", "light");
+  const isDarkMode = value === "dark";
+
+  const { assetMetaData, isPending: isMetadataLoading } =
+    useMetadata(BASE_ASSET_ID);
+  const { balance, isLoading: isBalanceLoading } = useBalance({
+    assetId: BASE_ASSET_ID,
+  });
+  const { mutate: placeBid, isPending: isPlaceBidLoading } = usePlaceBid({
+    asset: id,
+  });
+  const formattedBalance = useMemo(
+    () => formatUnit(balance?.toString() || 0, assetMetaData?.decimals),
+    [assetMetaData?.decimals, balance]
+  );
+  const handlePlaceBid = () => {
+    if (!balance || !assetMetaData) return;
+    placeBid(
+      {
+        balance: parseUnit(amount, assetMetaData.decimals),
+        discount: Number(discount),
+        onConfirm: () => {
+          setDiscount("");
+          setAmount("");
+        },
+      },
+      {
+        onSuccess: ({ blockNumber }) => {
+          notify({
+            type: "success",
+            title: "Success",
+            message: "Transaction completed on block " + blockNumber,
+          });
+        },
+      }
+    );
+  };
+
+  const clickPercentage = (p: string) => {
+    if (!balance) return;
+    setAmount(((Number(p) / 100) * Number(formattedBalance)).toString());
+  };
+
+  const changeDiscount = (value: string) => {
+    if (value === "") return setDiscount("");
+
+    const test = new RegExp(`^(100|[1-9]?[0-9])$`).test(value);
+    if (test) setDiscount(value);
+    else
+      toast.error("Percentage should be a number between 0-100", {
+        toastId: "discount-percentage-error",
+      });
+  };
+
+  const changeAmount = (value: string) => {
+    if (value === "") return setAmount("");
+    if (!balance) {
+      return toast.error("Your balance is not available", {
+        toastId: "balance-not-available",
+      });
+    }
+
+    const numValue = Number(value);
+    const numBalance = Number(balance);
+    console.log(numValue, numBalance);
+
+    const regex = new RegExp(`^(0|[1-9]\\d?|${balance})$`);
+    const test = regex.test(value);
+    if (test && numValue <= numBalance) setAmount(value);
+    else
+      toast.error(`Amount should be a number between 0-${balance}`, {
+        toastId: "amount-error",
+      });
+  };
+
+  const error = "";
+  const isLoading = isPlaceBidLoading;
+  const isDisabled = isBalanceLoading || isMetadataLoading;
   return (
     <Box className="w-full p-4 border rounded-md z-[999] lg:w-[360px] dark:bg-black-500 dark:border-transparent">
       <Box className="mb-6">
@@ -30,47 +133,78 @@ const Bid = () => {
           Premium (discount)
         </Typography>
       </Box>
-      <TextField
+      <Select
         value={discount}
-        onChange={(e) => setDiscount(e.target.value)}
+        onChange={(e) => changeDiscount(e.target.value)}
         size="small"
         fullWidth
-        placeholder="0"
-        className="!rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
-        inputMode="numeric"
-        autoComplete="off"
-        InputProps={{
+        className="font-number text-primary-800"
+        error={!!error}
+        sx={{
+          "& .MuiSelect-icon": {
+            color: isDarkMode ? "#daeeea" : "#1c443c",
+          },
+        }}
+        inputProps={{
           sx: {
             backgroundColor: "#45A9961A",
-            paddingY: "8px",
+            paddingY: "16px",
             paddingX: "16px",
           },
           className: "!font-number dark:text-primary-100",
-          startAdornment: <InputAdornment position="start">%</InputAdornment>,
+          startAdornment: (
+            <InputAdornment position="start" className="font-body">
+              %
+            </InputAdornment>
+          ),
         }}
-      />
+        MenuProps={{
+          PaperProps: {
+            sx: {
+              backgroundColor: "#222222",
+              color: "#daeeea",
+            },
+          },
+        }}
+      >
+        {discountOptions.map((item, key) => (
+          <MenuItem
+            key={key}
+            value={item.value}
+            className="!font-number dark:text-primary-100"
+          >
+            {item.label}
+          </MenuItem>
+        ))}
+      </Select>
       <Box className="mb-2 flex justify-between items-center mt-6 dark:text-primary-100">
         <Typography variant="body2">Bid amount</Typography>
         <Typography variant="subtitle1">
-          {MOCK_AMOUNT} <span className="text-primary-400">USDT</span>{" "}
+          <span>{formattedBalance}</span>{" "}
+          <span className="text-primary-400">USDT</span>
         </Typography>
       </Box>
       <TextField
         value={amount}
-        onChange={(e) => setAmount(e.target.value)}
+        onChange={(e) => changeAmount(e.target.value)}
         size="small"
         fullWidth
         placeholder="0"
         className="!rounded-md !font-number !font-bold !text-base !leading-5"
         inputMode="numeric"
         autoComplete="off"
+        inputProps={{
+          backgroundColor: "#45A9961A",
+          paddingY: "8px",
+          paddingX: "16px",
+          className: "!font-number dark:text-primary-100",
+        }}
         InputProps={{
           sx: {
             backgroundColor: "#45A9961A",
             paddingY: "8px",
             paddingX: "16px",
           },
-          className: "!font-number dark:text-primary-100",
           startAdornment: (
             <InputAdornment position="start">
               <TokenIcon symbol="USDT" width={24} height={24} />
@@ -79,20 +213,26 @@ const Bid = () => {
         }}
       />
       <Box className="flex gap-1 mt-2 mb-6">
-        {percentages.map((percentage) => (
+        {percentages.map((p) => (
           <Button
-            key={percentage}
+            key={p}
             variant="outlined"
             className="flex-1"
-            onClick={() => setAmount(String((+percentage * MOCK_AMOUNT) / 100))}
+            onClick={() => clickPercentage(p)}
           >
-            {percentage}%
+            {p}%
           </Button>
         ))}
       </Box>
-      <Button className="w-full" variant="contained">
+      <LoadingButton
+        loading={isLoading}
+        className="w-full text-white dark:text-[#0d0d0d] font-body min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
+        variant="contained"
+        onClick={handlePlaceBid}
+        disabled={isDisabled}
+      >
         Place My Bid
-      </Button>
+      </LoadingButton>
     </Box>
   );
 };

@@ -4,9 +4,9 @@ export const palette = {
     paper: "#ffffff",
   },
   error: {
-    dark: "#F07979",
-    main: "#F07979",
-    light: "#F07979",
+    dark: "#E23D28",
+    main: "#E23D28",
+    light: "#E23D28",
   },
   info: {
     main: "#50A0E1",

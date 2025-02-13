@@ -22,6 +22,9 @@ interface EstimateCollateral {
   borrowAssetAmount: string | undefined;
   collateralAsset: string | undefined;
 }
+interface LiquidationMarkets {
+  account?: string;
+}
 
 const keys = {
   BALANCE: "BALANCE",
@@ -35,6 +38,7 @@ const keys = {
   OPTIONS: "OPTIONS",
   PROVIDER: "PROVIDER",
   LENDING_POOLS: "LENDING_POOLS",
+  LIQUIDATION_MARKETS: "LIQUIDATION_MARKET",
   ASSET: "ASSET",
   METADATA: "METADATA",
   TOKEN: "TOKEN",
@@ -55,6 +59,7 @@ const keys = {
   GET_USER_LTV: "GET_USER_LTV",
   ESTIMATE_COLLATERAL: "ESTIMATE_COLLATERAL",
   INTEREST_RATE: "INTEREST_RATE",
+  PLACE_BID: "PLACE_BID",
 };
 
 type ChartScale = "1m" | "5m" | "15m" | "1h" | "12h" | "1d";
@@ -75,6 +80,11 @@ export const queryKeys = {
     asset,
     account,
   ],
+  liquidationMarkets: ({ account }: LiquidationMarkets) => [
+    baseKey,
+    keys.LIQUIDATION_MARKETS,
+    account,
+  ],
   asset: (assetId: number) => [baseKey, keys.ASSET, assetId],
   metadata: (assetId: number | string) => [baseKey, keys.METADATA, assetId],
   balance: ({ address, assetId }: Balance) => [
@@ -87,6 +97,7 @@ export const queryKeys = {
   token: (symbol: string, size: string) => [baseKey, keys.TOKEN, symbol, size],
   poolData: (assetId: string | number) => [baseKey, keys.POOL_DATA, assetId],
   supply: [baseKey, keys.SUPPLY],
+  placeBid: [baseKey, keys.PLACE_BID],
   borrow: [baseKey, keys.BORROW],
   quickBorrow: [baseKey, keys.QUICK_BORROW],
   withdraw: [baseKey, keys.WITHDRAW],
