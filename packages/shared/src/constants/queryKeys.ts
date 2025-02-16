@@ -26,6 +26,10 @@ interface LiquidationMarkets {
   account?: string;
 }
 
+interface MarketBidDistribution {
+  market_asset_id: string;
+}
+
 const keys = {
   BALANCE: "BALANCE",
   ACCOUNTS: "ACCOUNTS",
@@ -39,6 +43,7 @@ const keys = {
   PROVIDER: "PROVIDER",
   LENDING_POOLS: "LENDING_POOLS",
   LIQUIDATION_MARKETS: "LIQUIDATION_MARKET",
+  MARKET_BID_DISTRIBUTION: "MARKET_BID_DISTRIBUTION",
   ASSET: "ASSET",
   METADATA: "METADATA",
   TOKEN: "TOKEN",
@@ -85,6 +90,12 @@ export const queryKeys = {
     keys.LIQUIDATION_MARKETS,
     account,
   ],
+  marketBidDistribution: ({ market_asset_id }: MarketBidDistribution) => [
+    baseKey,
+    keys.MARKET_BID_DISTRIBUTION,
+    market_asset_id,
+  ],
+
   asset: (assetId: number) => [baseKey, keys.ASSET, assetId],
   metadata: (assetId: number | string) => [baseKey, keys.METADATA, assetId],
   balance: ({ address, assetId }: Balance) => [
