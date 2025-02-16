@@ -26,7 +26,15 @@ export const getMarketBidDistribution = async ({
     [market_asset_id]
   );
 
-  return result;
+  const transformedResult = {
+    ...result,
+    distribution: result.distribution.map((item) => ({
+      ...item,
+      amount: BigInt(item.amount),
+    })),
+  };
+
+  return transformedResult;
 };
 
 export const useGetMarketBidDistribution = ({
