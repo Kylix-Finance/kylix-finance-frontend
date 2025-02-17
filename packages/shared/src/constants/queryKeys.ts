@@ -70,6 +70,7 @@ const keys = {
   INTEREST_RATE: "INTEREST_RATE",
   PLACE_BID: "PLACE_BID",
   RECENT_LIQUIDATION: "RECENT_LIQUIDATION",
+  USER_BIDS: "USER_BIDS",
 };
 
 type ChartScale = "1m" | "5m" | "15m" | "1h" | "12h" | "1d";
@@ -159,4 +160,9 @@ export const queryKeys = {
     account,
   ],
   interestRate: () => [baseKey, keys.INTEREST_RATE],
+  userBids: (activeAccount: string | undefined) => [
+    baseKey,
+    keys.USER_BIDS,
+    activeAccount,
+  ],
 };

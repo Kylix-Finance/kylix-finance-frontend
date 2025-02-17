@@ -3,8 +3,13 @@ import { Typography } from "@mui/material";
 import { Table } from "@repo/ui";
 import { Asset, Card } from "~/components";
 import CancelBidButton from "./CancelBidButton/CancelBidButton";
+import { useParams } from "next/navigation";
+import { useGetUserBids } from "~/hooks/chain/useGetUserBids";
 
 const PersonalBids = () => {
+  const { assetId } = useParams<{ assetId: string }>();
+  const { data: userBids } = useGetUserBids();
+  console.log("____userBids", userBids);
   return (
     <Card title="Your Bids" className="h-80">
       <Table<TableData[number]>
