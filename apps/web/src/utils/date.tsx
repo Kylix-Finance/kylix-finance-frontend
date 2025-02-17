@@ -5,6 +5,10 @@ export const toIsoString = (date: Date) => {
   return format(date, "yyyy-MM-dd HH:mm:ss");
 };
 
+export const formatDateWithTime = (timestamp: number) => {
+  return format(new Date(timestamp), "dd MMM, yyyy - HH:mm:ss");
+};
+
 const scaleMap = {
   "1m": "minute",
   "5m": "minute",

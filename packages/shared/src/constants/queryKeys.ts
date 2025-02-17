@@ -26,6 +26,14 @@ interface LiquidationMarkets {
   account?: string;
 }
 
+interface MarketBidDistribution {
+  assetId: string;
+}
+
+interface RecentLiquidation {
+  assetId: string;
+}
+
 const keys = {
   BALANCE: "BALANCE",
   ACCOUNTS: "ACCOUNTS",
@@ -39,6 +47,7 @@ const keys = {
   PROVIDER: "PROVIDER",
   LENDING_POOLS: "LENDING_POOLS",
   LIQUIDATION_MARKETS: "LIQUIDATION_MARKET",
+  MARKET_BID_DISTRIBUTION: "MARKET_BID_DISTRIBUTION",
   ASSET: "ASSET",
   METADATA: "METADATA",
   TOKEN: "TOKEN",
@@ -60,6 +69,8 @@ const keys = {
   ESTIMATE_COLLATERAL: "ESTIMATE_COLLATERAL",
   INTEREST_RATE: "INTEREST_RATE",
   PLACE_BID: "PLACE_BID",
+  RECENT_LIQUIDATION: "RECENT_LIQUIDATION",
+  USER_BIDS: "USER_BIDS",
 };
 
 type ChartScale = "1m" | "5m" | "15m" | "1h" | "12h" | "1d";
@@ -74,6 +85,7 @@ export const queryKeys = {
   disconnectRequest: [baseKey, keys.DISCONNECT_REQUEST],
   options: [baseKey, keys.OPTIONS],
   provider: [baseKey, keys.PROVIDER],
+
   lendingPools: ({ asset, account }: LendingPools = {}) => [
     baseKey,
     keys.LENDING_POOLS,
@@ -84,6 +96,16 @@ export const queryKeys = {
     baseKey,
     keys.LIQUIDATION_MARKETS,
     account,
+  ],
+  recentLiquidation: ({ assetId }: RecentLiquidation) => [
+    baseKey,
+    keys.RECENT_LIQUIDATION,
+    assetId,
+  ],
+  marketBidDistribution: ({ assetId }: MarketBidDistribution) => [
+    baseKey,
+    keys.MARKET_BID_DISTRIBUTION,
+    assetId,
   ],
   asset: (assetId: number) => [baseKey, keys.ASSET, assetId],
   metadata: (assetId: number | string) => [baseKey, keys.METADATA, assetId],
@@ -138,4 +160,9 @@ export const queryKeys = {
     account,
   ],
   interestRate: () => [baseKey, keys.INTEREST_RATE],
+  userBids: (activeAccount: string | undefined) => [
+    baseKey,
+    keys.USER_BIDS,
+    activeAccount,
+  ],
 };

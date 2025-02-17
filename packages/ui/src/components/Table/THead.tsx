@@ -64,9 +64,11 @@ function THead<Schema, ExtraFields extends string = string>({
             align={numeric?.some((item) => item === name) ? "right" : "left"}
             key={`${name}+${index}`}
             padding={disablePadding ? "none" : "normal"}
+            className="dark:bg-[#0D0D0D] !dark:border-transparent"
             sortDirection={orderBy === name ? order : false}
             style={{
-              backgroundColor: "transparent",
+              backgroundColor: "rgb(244, 250, 249)",
+              zIndex: 10999,
             }}
           >
             {isHeaderHidden(name) ? (
