@@ -73,6 +73,6 @@ export const getUserBids = async ({
     discount: Number(bid.discount),
     filledAmount: BigInt(bid.filled_amount),
     blockNumber: Number(bid.blocknumber),
-    index: Number(bid.index),
+    txIndex: Number(bid.index),
   }));
 };

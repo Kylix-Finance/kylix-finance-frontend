@@ -1,20 +1,27 @@
 import { Button } from "@mui/material";
-import css from "./CancelBidButton.module.scss";
 import { useCancelBid } from "~/hooks/chain/useCancelBid";
 
 interface Props {
-  assetId: string;
+  assetId: string | number;
+  txBlockNumber: number;
+  txIndex: number;
+  discount: number;
 }
 
-const CancelBidButton = ({ assetId }: Props) => {
+const CancelBidButton = ({
+  assetId,
+  txBlockNumber,
+  discount,
+  txIndex,
+}: Props) => {
   const { mutate, isPending } = useCancelBid();
 
   const cancelHandler = () => {
     mutate({
       assetId,
-      discount: 20,
-      txBlockNumber: 4450,
-      txIndex: 0,
+      discount,
+      txBlockNumber,
+      txIndex,
     });
   };
   return (
