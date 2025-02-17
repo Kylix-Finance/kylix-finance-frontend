@@ -17,7 +17,7 @@ export const getRecentLiquidation = async (assetId: string) => {
   );
 
   const transformedData = data.map((dataset) => ({
-    unixTime: dataset[0] * 1000,
+    time: dataset[0] * 1000,
     assetId: dataset[1],
     assetAmountLiquidated: dataset[2],
     usdtAmountPaid: dataset[3],

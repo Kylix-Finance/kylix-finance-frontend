@@ -1,9 +1,17 @@
 "use client";
 import { Box, Typography } from "@mui/material";
 import { Table } from "@repo/ui";
+import { useParams } from "next/navigation";
 import { Card } from "~/components";
+import { useRecentLiquidation } from "~/hooks/api/useRecentLiquidation";
+import { formatDateWithTime } from "~/utils/date";
 
 const LatestLiquidation = () => {
+  const { assetId } = useParams<{ assetId: string }>();
+  const { data } = useRecentLiquidation(assetId);
+
+  if (!data) return "loading...";
+
   return (
     <Card title="Recent liquidation" className="h-80">
       <Table
@@ -14,12 +22,12 @@ const LatestLiquidation = () => {
         rowSpacing="10px"
         components={{
           time: (item) => {
-            const date = item.time.split("-")[0];
-            const time = item.time.split("-")[1];
             return (
               <Box className="flex items-center  text-primary-800 dark:text-primary-100">
-                <Typography variant="subtitle2">{date}- </Typography>
-                <Typography>{time}</Typography>
+                <Typography variant="subtitle2">
+                  {formatDateWithTime(item.time)}
+                </Typography>
+                {/* <Typography>{time}</Typography> */}
               </Box>
             );
           },
@@ -28,7 +36,7 @@ const LatestLiquidation = () => {
               variant="body1"
               className=" text-primary-800 dark:text-primary-100"
             >
-              {item.liquidated}
+              {item.assetAmountLiquidated}
             </Typography>
           ),
           paid: (item) => (
@@ -36,7 +44,7 @@ const LatestLiquidation = () => {
               variant="body1"
               className=" text-primary-500 dark:text-primary-100"
             >
-              {item.paid}
+              {item.usdtAmountPaid}
             </Typography>
           ),
           price: (item) => (
@@ -49,7 +57,7 @@ const LatestLiquidation = () => {
                 +75.8%
               </Typography>
               <Typography variant="subtitle1" className="dark:text-primary-100">
-                {item.price}
+                {item.averagePrice}
               </Typography>
             </Box>
           ),
@@ -63,7 +71,7 @@ const LatestLiquidation = () => {
           price: "Average price",
         }}
         tableName="latestLiquidation"
-        data={tableData}
+        data={data}
       />
     </Card>
   );
