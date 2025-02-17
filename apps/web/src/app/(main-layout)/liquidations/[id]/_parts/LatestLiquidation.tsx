@@ -8,15 +8,16 @@ import { formatDateWithTime } from "~/utils/date";
 
 const LatestLiquidation = () => {
   const { assetId } = useParams<{ assetId: string }>();
-  const { data } = useRecentLiquidation(assetId);
+  const { data, isLoading } = useRecentLiquidation(assetId);
 
-  if (!data) return "loading...";
+  //temporary until fix table types
+  if (!data) return null;
 
   return (
     <Card title="Recent liquidation" className="h-80">
       <Table
         isFetched={true}
-        isLoading={false}
+        isLoading={isLoading}
         placeholderLength={3}
         tCellClassnames={"font-number"}
         rowSpacing="10px"
