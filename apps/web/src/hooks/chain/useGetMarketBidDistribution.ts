@@ -14,16 +14,16 @@ type DiscountData = {
 };
 
 type GetMarketBidDistribution = {
-  market_asset_id: string;
+  assetId: string;
 };
 
 export const getMarketBidDistribution = async ({
   provider,
-  market_asset_id,
+  assetId,
 }: { provider: WsProvider } & GetMarketBidDistribution) => {
   const result = await provider.send<DiscountData>(
     "liquidation_getLiquidationMarkets",
-    [market_asset_id]
+    [assetId]
   );
 
   const transformedResult = {
@@ -38,7 +38,7 @@ export const getMarketBidDistribution = async ({
 };
 
 export const useGetMarketBidDistribution = ({
-  market_asset_id,
+  assetId,
 }: GetMarketBidDistribution) => {
   const { provider } = useProvider();
 
@@ -46,10 +46,10 @@ export const useGetMarketBidDistribution = ({
 
   const query = useQuery({
     queryKey: queryKeys.marketBidDistribution({
-      market_asset_id,
+      assetId,
     }),
     queryFn: enabled
-      ? () => getMarketBidDistribution({ provider, market_asset_id })
+      ? () => getMarketBidDistribution({ provider, assetId })
       : skipToken,
   });
   return query;
