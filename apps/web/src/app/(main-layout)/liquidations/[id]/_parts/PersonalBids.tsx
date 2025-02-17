@@ -26,8 +26,11 @@ const PersonalBids = () => {
   );
 
   return (
-    <Card title="Your Bids" className="h-80">
+    <Card title="Your Bids" className="h-96 max-h-96">
       <Table<(typeof tableData)[number]>
+        tContainerProps={{
+          className: "overflow-y-auto",
+        }}
         tCellClassnames={"!p-3"}
         placeholderLength={3}
         isFetched={true}

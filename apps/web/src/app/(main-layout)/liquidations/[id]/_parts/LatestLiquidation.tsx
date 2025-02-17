@@ -8,17 +8,17 @@ import { formatDateWithTime } from "~/utils/date";
 
 const LatestLiquidation = () => {
   const { assetId } = useParams<{ assetId: string }>();
-  const { data, isLoading } = useRecentLiquidation(assetId);
-
-  //temporary until fix table types
-  if (!data) return null;
+  const { data, isLoading, isFetched } = useRecentLiquidation(assetId);
 
   return (
-    <Card title="Recent liquidation" className="h-80">
+    <Card title="Recent liquidation" className="h-96 max-h-96">
       <Table
-        isFetched={true}
+        isFetched={isFetched}
         isLoading={isLoading}
         placeholderLength={3}
+        tContainerProps={{
+          className: "overflow-y-auto",
+        }}
         tCellClassnames={"font-number"}
         rowSpacing="10px"
         components={{
@@ -28,7 +28,6 @@ const LatestLiquidation = () => {
                 <Typography variant="subtitle2">
                   {formatDateWithTime(item.time)}
                 </Typography>
-                {/* <Typography>{time}</Typography> */}
               </Box>
             );
           },
@@ -72,7 +71,7 @@ const LatestLiquidation = () => {
           price: "Average price",
         }}
         tableName="latestLiquidation"
-        data={data}
+        data={data || []}
       />
     </Card>
   );
