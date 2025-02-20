@@ -44,16 +44,17 @@ const Bid = () => {
 
   const { assetMetaData, isPending: isMetadataLoading } =
     useMetadata(BASE_ASSET_ID);
-  const { balance, isLoading: isBalanceLoading } = useBalance({
+  const {
+    balance,
+    formattedBalance,
+    isLoading: isBalanceLoading,
+  } = useBalance({
     assetId: BASE_ASSET_ID,
   });
   const { mutate: placeBid, isPending: isPlaceBidLoading } = usePlaceBid({
     asset: id,
   });
-  const formattedBalance = useMemo(
-    () => formatUnit(balance?.toString() || 0, assetMetaData?.decimals),
-    [assetMetaData?.decimals, balance]
-  );
+
   const handlePlaceBid = () => {
     if (!balance || !assetMetaData) return;
     placeBid(
