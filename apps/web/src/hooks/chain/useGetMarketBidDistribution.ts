@@ -7,27 +7,32 @@ type DiscountDistribution = {
   discount: number;
   amount: string;
 };
+
 type MetaData = {
   supported_discounts: number[];
-};
-type DiscountData = {
-  distribution: DiscountDistribution[];
 };
 
 type GetMarketBidDistribution = {
   assetId: string;
 };
-type MarketBidDistributionResult = [MetaData, DiscountData];
+type MarketBidDistributionResult = [MetaData, DiscountDistribution[]];
 
 export const getMarketBidDistribution = async ({
   provider,
   assetId,
 }: { provider: WsProvider } & GetMarketBidDistribution) => {
-  const response = await provider.send<MarketBidDistributionResult>(
+  const result = await provider.send<MarketBidDistributionResult>(
     "liquidation_getMarketBidDistribution",
     [+assetId]
   );
-  return response;
+
+  const [metaData, discountDistributions] = result;
+  const transformedDiscounts = discountDistributions.map((discount) => ({
+    ...discount,
+    amount: BigInt(discount.amount),
+  }));
+
+  return [metaData, transformedDiscounts] as const;
 };
 
 export const useGetMarketBidDistribution = ({
