@@ -68,7 +68,7 @@ const Bid = () => {
   if (amount === "") amountError = "";
 
   const handlePlaceBid = () => {
-    if (!balance || !assetMetaData) return;
+    if (!balance || !assetMetaData || !amount) return;
 
     placeBid(
       {
@@ -119,17 +119,24 @@ const Bid = () => {
     isMetadataLoading ||
     !balance ||
     !assetMetaData ||
-    !!amountError;
+    !!amountError ||
+    !amount;
 
   return (
     <Box className="w-full p-4 border rounded-md z-[999] lg:w-[360px] dark:bg-black-500 dark:border-transparent">
       <Box className="mb-6">
-        <Typography variant="body1" className="text-primary-100">
+        <Typography
+          variant="body1"
+          className="text-primary-800 dark:text-primary-100"
+        >
           Place a Bid
         </Typography>
       </Box>
       <Box className="mb-2">
-        <Typography variant="body2" className="text-primary-100">
+        <Typography
+          variant="body2"
+          className="text-primary-800 dark:text-primary-100"
+        >
           Premium (discount)
         </Typography>
       </Box>

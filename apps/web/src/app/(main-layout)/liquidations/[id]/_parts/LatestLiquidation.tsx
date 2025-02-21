@@ -11,7 +11,7 @@ const LatestLiquidation = () => {
   const { data, isLoading, isFetched } = useRecentLiquidation(assetId);
 
   return (
-    <Card title="Recent liquidation" className="h-96 max-h-96">
+    <Card title="Recent liquidation" className="min-h-96 max-h-96">
       <Table
         isFetched={isFetched}
         isLoading={isLoading}
