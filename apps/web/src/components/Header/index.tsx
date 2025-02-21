@@ -49,7 +49,7 @@ const Header = () => {
           <Heading heading={pathnames[0] ?? ""} />
         </Box>
       </Box>
-      <Box className="flex dark:bg-[#151515] z-[999] rounded-[4px] p-2 gap-[16px] h-[60px] items-center text-center">
+      <Box className="flex dark:bg-[#151515] z-[1999] rounded-[4px] p-2 gap-[16px] h-[60px] items-center text-center">
         {/* <p className="h-full bg-primary-500 px-2 py-1 text-white items-center text-center flex">
           User balance
         </p> */}

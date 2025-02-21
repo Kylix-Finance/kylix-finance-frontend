@@ -146,11 +146,7 @@ export const Form = ({
       </div>
       <AlertContainer>
         {isInsufficientBalance && (
-          <FormAlert
-            severity="error"
-            message="Insufficient Balance!"
-            className=""
-          />
+          <FormAlert severity="error" message="Insufficient Balance!" />
         )}
       </AlertContainer>
     </Box>
