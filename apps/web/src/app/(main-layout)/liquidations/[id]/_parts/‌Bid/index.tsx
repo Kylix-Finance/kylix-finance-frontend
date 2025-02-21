@@ -157,8 +157,8 @@ const Bid = () => {
           MenuProps={{
             PaperProps: {
               sx: {
-                backgroundColor: "#222222",
-                color: "#daeeea",
+                backgroundColor: isDarkMode ? "#222222" : undefined,
+                color: isDarkMode ? "#daeeea" : undefined,
               },
             },
           }}
