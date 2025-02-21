@@ -7,24 +7,25 @@ import {
   InputAdornment,
   MenuItem,
   Select,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import {
+  formatBigNumbers,
   formatUnit,
   parseUnit,
   useBalance,
   useMetadata,
 } from "@repo/onchain-utils";
-// import { BASE_ASSET_ID } from "@repo/shared";
-import { useMemo, useState } from "react";
-import { toast } from "react-toastify";
+import { useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { notify, TokenIcon } from "~/components";
 import { usePlaceBid } from "~/hooks/chain/usePlaceBid";
 import { useParams } from "next/navigation";
 import { useGetMarketBidDistribution } from "~/hooks/chain/useGetMarketBidDistribution";
 import { Skeleton } from "@repo/ui";
+import { FormAlert } from "~/components/FormAlert";
 const percentages = ["25", "50", "75", "100"];
 
 const BASE_ASSET_ID = 2;
@@ -37,6 +38,7 @@ const Bid = () => {
   } = useGetMarketBidDistribution({ assetId: id });
 
   const [discount, setDiscount] = useState("");
+
   const [amount, setAmount] = useState("");
 
   const [value] = useLocalStorage("theme-mode", "light");
@@ -51,12 +53,23 @@ const Bid = () => {
   } = useBalance({
     assetId: BASE_ASSET_ID,
   });
+
   const { mutate: placeBid, isPending: isPlaceBidLoading } = usePlaceBid({
     asset: id,
   });
 
+  let amountError = "";
+  const numFormattedBalance = Number(formattedBalance);
+  const numAmount = Number(amount);
+  if (numAmount > numFormattedBalance)
+    amountError = `Amount should be a number between 0-${numFormattedBalance}`;
+  if (numAmount < 10) amountError = "The minimum amount is 10";
+  if (!numFormattedBalance) amountError = "Insufficient balance";
+  if (amount === "") amountError = "";
+
   const handlePlaceBid = () => {
     if (!balance || !assetMetaData) return;
+
     placeBid(
       {
         balance: parseUnit(amount, assetMetaData.decimals),
@@ -88,36 +101,26 @@ const Bid = () => {
 
     const test = new RegExp(`^(100|[1-9]?[0-9])$`).test(value);
     if (test) setDiscount(value);
-    else
-      toast.error("Percentage should be a number between 0-100", {
-        toastId: "discount-percentage-error",
-      });
   };
 
   const changeAmount = (value: string) => {
     if (value === "") return setAmount("");
-    if (!balance) {
-      return toast.error("Your balance is not available", {
-        toastId: "balance-not-available",
-      });
-    }
 
-    const numValue = Number(value);
-    const numBalance = Number(balance);
-    console.log(numValue, numBalance);
+    const test = new RegExp(`^(0|[1-9]\\d*|${numFormattedBalance})$`).test(
+      value
+    );
 
-    const regex = new RegExp(`^(0|[1-9]\\d?|${balance})$`);
-    const test = regex.test(value);
-    if (test && numValue <= numBalance) setAmount(value);
-    else
-      toast.error(`Amount should be a number between 0-${balance}`, {
-        toastId: "amount-error",
-      });
+    if (test) setAmount(value);
   };
 
-  const error = "";
-  const isLoading = isPlaceBidLoading;
-  const isDisabled = isBalanceLoading || isMetadataLoading;
+  const isSubmitLoading = isPlaceBidLoading;
+  const isSubmitDisabled =
+    isBalanceLoading ||
+    isMetadataLoading ||
+    !balance ||
+    !assetMetaData ||
+    !!amountError;
+
   return (
     <Box className="w-full p-4 border rounded-md z-[999] lg:w-[360px] dark:bg-black-500 dark:border-transparent">
       <Box className="mb-6">
@@ -132,12 +135,11 @@ const Bid = () => {
       </Box>
       <Skeleton isLoading={isGetMarketBidDistributionLoading} height="90px">
         <Select
-          value={discount}
+          value={discount || ""}
           onChange={(e) => changeDiscount(e.target.value)}
           size="small"
           fullWidth
           className="font-number text-primary-800"
-          error={!!error}
           sx={{
             "& .MuiSelect-icon": {
               color: isDarkMode ? "#daeeea" : "#1c443c",
@@ -149,30 +151,61 @@ const Bid = () => {
               paddingY: "16px",
               paddingX: "16px",
             },
-            className: "!font-number dark:text-primary-100",
-            startAdornment: (
-              <InputAdornment position="start" className="font-body">
-                %
-              </InputAdornment>
-            ),
+            className:
+              "!font-number dark:text-primary-100 w-full flex justify-between",
           }}
           MenuProps={{
             PaperProps: {
               sx: {
-                backgroundColor: "#222222",
-                color: "#daeeea",
+                backgroundColor: isDarkMode ? "#222222" : undefined,
+                color: isDarkMode ? "#daeeea" : undefined,
               },
             },
           }}
+          displayEmpty
+          renderValue={(selected) => {
+            if (!selected) {
+              return (
+                <span className="font-thin w-full flex justify-between opacity-50">
+                  <span>10%</span>
+                  <span>100.00 k</span>
+                </span>
+              );
+            }
+
+            const selectedItem = marketBidDistribution?.[1].find(
+              (item) => item.discount === Number(selected)
+            );
+
+            if (!selectedItem) return selected;
+
+            return (
+              <span className="w-full flex justify-between font-normal">
+                <span>{selectedItem.discount} %</span>
+                <span>
+                  $ {formatBigNumbers(formatUnit(selectedItem.amount, 6), 2)}
+                </span>
+              </span>
+            );
+          }}
         >
+          <MenuItem
+            value=""
+            disabled
+            className="w-full flex justify-between font-thin"
+          >
+            <span>discount</span>
+            <span>volume</span>
+          </MenuItem>
           {marketBidDistribution &&
-            marketBidDistribution[0].supported_discounts.map((item, key) => (
+            marketBidDistribution[1].map((item, key) => (
               <MenuItem
                 key={key}
-                value={item}
-                className="!font-number dark:text-primary-100"
+                value={item.discount}
+                className="!font-number dark:text-primary-100 flex justify-between w-full"
               >
-                {item}
+                <span>{item.discount} %</span>
+                <span>$ {formatBigNumbers(formatUnit(item.amount, 6), 2)}</span>
               </MenuItem>
             ))}
         </Select>
@@ -184,35 +217,39 @@ const Bid = () => {
           <span className="text-primary-400">USDT</span>
         </Typography>
       </Box>
-      <TextField
-        value={amount}
-        onChange={(e) => changeAmount(e.target.value)}
-        size="small"
-        fullWidth
-        placeholder="0"
-        className="!rounded-md !font-number !font-bold !text-base !leading-5"
-        inputMode="numeric"
-        autoComplete="off"
-        inputProps={{
-          backgroundColor: "#45A9961A",
-          paddingY: "8px",
-          paddingX: "16px",
-          className: "!font-number dark:text-primary-100",
-        }}
-        InputProps={{
-          sx: {
+      <Stack className="gap-1">
+        <TextField
+          value={amount}
+          onChange={(e) => changeAmount(e.target.value)}
+          size="small"
+          fullWidth
+          placeholder="0"
+          className="!rounded-md !font-number !font-bold !text-base !leading-5"
+          inputMode="numeric"
+          autoComplete="off"
+          inputProps={{
             backgroundColor: "#45A9961A",
             paddingY: "8px",
             paddingX: "16px",
-          },
-          startAdornment: (
-            <InputAdornment position="start">
-              <TokenIcon symbol="USDT" width={24} height={24} />
-            </InputAdornment>
-          ),
-        }}
-      />
-      <Box className="flex gap-1 mt-2 mb-6">
+            className: "!font-number dark:text-primary-100",
+          }}
+          InputProps={{
+            sx: {
+              backgroundColor: "#45A9961A",
+              paddingY: "8px",
+              paddingX: "16px",
+            },
+            startAdornment: (
+              <InputAdornment position="start">
+                <TokenIcon symbol="USDT" width={24} height={24} />
+              </InputAdornment>
+            ),
+          }}
+        />
+        {amountError && <FormAlert message={amountError} severity="error" />}
+      </Stack>
+
+      <Box className="flex gap-1 mt-2 mb-6 ">
         {percentages.map((p) => (
           <Button
             key={p}
@@ -224,12 +261,13 @@ const Bid = () => {
           </Button>
         ))}
       </Box>
+
       <LoadingButton
-        loading={isLoading}
+        loading={isSubmitLoading}
         className="w-full text-white dark:text-[#0d0d0d] font-body min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
         variant="contained"
         onClick={handlePlaceBid}
-        disabled={isDisabled}
+        disabled={isSubmitDisabled}
       >
         Place My Bid
       </LoadingButton>

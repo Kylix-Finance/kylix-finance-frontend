@@ -24,12 +24,12 @@ type ModernMultiLineChartProps = {
 };
 
 export const ModernMultiLineChart = ({
-  datasets,
-  xLabel,
-  yLabel,
-  xGrid = false,
-  yGrid = true,
   activeIndex = 0,
+  datasets,
+  xGrid = false,
+  xLabel,
+  yGrid = true,
+  yLabel,
 }: ModernMultiLineChartProps) => {
   const [isLogScale, setIsLogScale] = useState(true);
   const [activePoint, setActivePoint] = useState<number[]>([]);
