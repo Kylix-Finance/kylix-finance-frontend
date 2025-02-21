@@ -120,7 +120,6 @@ const Bid = () => {
   const isLoading = isPlaceBidLoading;
   const isDisabled = isBalanceLoading || isMetadataLoading;
 
-  console.log("______ZZZ", marketBidDistribution?.[1]);
   return (
     <Box className="w-full p-4 border rounded-md z-[999] lg:w-[360px] dark:bg-black-500 dark:border-transparent">
       <Box className="mb-6">
@@ -135,7 +134,7 @@ const Bid = () => {
       </Box>
       <Skeleton isLoading={isGetMarketBidDistributionLoading} height="90px">
         <Select
-          value={discount}
+          value={discount || ""}
           onChange={(e) => changeDiscount(e.target.value)}
           size="small"
           fullWidth
@@ -163,7 +162,41 @@ const Bid = () => {
               },
             },
           }}
+          displayEmpty
+          renderValue={(selected) => {
+            if (!selected) {
+              return (
+                <span className="font-thin w-full flex justify-between opacity-50">
+                  <span>10%</span>
+                  <span>100.00 k</span>
+                </span>
+              );
+            }
+
+            const selectedItem = marketBidDistribution?.[1].find(
+              (item) => item.discount === Number(selected)
+            );
+
+            if (!selectedItem) return selected;
+
+            return (
+              <span className="w-full flex justify-between font-normal">
+                <span>{selectedItem.discount} %</span>
+                <span>
+                  $ {formatBigNumbers(formatUnit(selectedItem.amount, 6), 2)}
+                </span>
+              </span>
+            );
+          }}
         >
+          <MenuItem
+            value=""
+            disabled
+            className="w-full flex justify-between font-thin"
+          >
+            <span>discount</span>
+            <span>volume</span>
+          </MenuItem>
           {marketBidDistribution &&
             marketBidDistribution[1].map((item, key) => (
               <MenuItem
