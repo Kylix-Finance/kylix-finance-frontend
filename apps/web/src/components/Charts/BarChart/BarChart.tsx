@@ -9,7 +9,7 @@ type BarChartProps = {
     start: string;
     end: string;
   };
-  data: Record<string, string | number>[];
+  data?: Record<string, string | number | bigint>[];
   parsing: {
     xAxisKey: string;
     yAxisKey: string;
@@ -67,6 +67,7 @@ export const BarChart = ({
           animation: {
             duration: 10,
             onComplete: (context) => {
+              if (!data) return;
               context.chart.update();
             },
           },

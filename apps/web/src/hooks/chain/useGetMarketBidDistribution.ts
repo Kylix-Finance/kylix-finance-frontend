@@ -8,33 +8,31 @@ type DiscountDistribution = {
   amount: string;
 };
 
-type DiscountData = {
+type MetaData = {
   supported_discounts: number[];
-  distribution: DiscountDistribution[];
 };
 
 type GetMarketBidDistribution = {
   assetId: string;
 };
+type MarketBidDistributionResult = [MetaData, DiscountDistribution[]];
 
 export const getMarketBidDistribution = async ({
   provider,
   assetId,
 }: { provider: WsProvider } & GetMarketBidDistribution) => {
-  const result = await provider.send<DiscountData>(
-    "liquidation_getLiquidationMarkets",
-    [assetId]
+  const result = await provider.send<MarketBidDistributionResult>(
+    "liquidation_getMarketBidDistribution",
+    [+assetId]
   );
 
-  const transformedResult = {
-    ...result,
-    distribution: result.distribution.map((item) => ({
-      ...item,
-      amount: BigInt(item.amount),
-    })),
-  };
+  const [metaData, discountDistributions] = result;
+  const transformedDiscounts = discountDistributions.map((discount) => ({
+    ...discount,
+    amount: BigInt(discount.amount),
+  }));
 
-  return transformedResult;
+  return [metaData, transformedDiscounts] as const;
 };
 
 export const useGetMarketBidDistribution = ({
@@ -43,7 +41,6 @@ export const useGetMarketBidDistribution = ({
   const { provider } = useProvider();
 
   const enabled = !!provider;
-
   const query = useQuery({
     queryKey: queryKeys.marketBidDistribution({
       assetId,
@@ -51,6 +48,7 @@ export const useGetMarketBidDistribution = ({
     queryFn: enabled
       ? () => getMarketBidDistribution({ provider, assetId })
       : skipToken,
+    staleTime: 1000 * 60 * 10,
   });
   return query;
 };

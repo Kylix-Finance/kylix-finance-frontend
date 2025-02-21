@@ -23,22 +23,18 @@ import { useLocalStorage } from "usehooks-ts";
 import { notify, TokenIcon } from "~/components";
 import { usePlaceBid } from "~/hooks/chain/usePlaceBid";
 import { useParams } from "next/navigation";
+import { useGetMarketBidDistribution } from "~/hooks/chain/useGetMarketBidDistribution";
+import { Skeleton } from "@repo/ui";
 const percentages = ["25", "50", "75", "100"];
-const discountOptions = [
-  { label: "10", value: "10" },
-  { label: "20", value: "20" },
-  { label: "30", value: "30" },
-  { label: "40", value: "40" },
-  { label: "50", value: "50" },
-  { label: "60", value: "60" },
-  { label: "70", value: "70" },
-  { label: "80", value: "80" },
-  { label: "90", value: "90" },
-  { label: "100", value: "100" },
-];
+
 const BASE_ASSET_ID = 2;
 const Bid = () => {
   const { id } = useParams<{ id: string }>();
+
+  const {
+    data: marketBidDistribution,
+    isLoading: isGetMarketBidDistributionLoading,
+  } = useGetMarketBidDistribution({ assetId: id });
 
   const [discount, setDiscount] = useState("");
   const [amount, setAmount] = useState("");
@@ -48,16 +44,17 @@ const Bid = () => {
 
   const { assetMetaData, isPending: isMetadataLoading } =
     useMetadata(BASE_ASSET_ID);
-  const { balance, isLoading: isBalanceLoading } = useBalance({
+  const {
+    balance,
+    formattedBalance,
+    isLoading: isBalanceLoading,
+  } = useBalance({
     assetId: BASE_ASSET_ID,
   });
   const { mutate: placeBid, isPending: isPlaceBidLoading } = usePlaceBid({
     asset: id,
   });
-  const formattedBalance = useMemo(
-    () => formatUnit(balance?.toString() || 0, assetMetaData?.decimals),
-    [assetMetaData?.decimals, balance]
-  );
+
   const handlePlaceBid = () => {
     if (!balance || !assetMetaData) return;
     placeBid(
@@ -133,50 +130,53 @@ const Bid = () => {
           Premium (discount)
         </Typography>
       </Box>
-      <Select
-        value={discount}
-        onChange={(e) => changeDiscount(e.target.value)}
-        size="small"
-        fullWidth
-        className="font-number text-primary-800"
-        error={!!error}
-        sx={{
-          "& .MuiSelect-icon": {
-            color: isDarkMode ? "#daeeea" : "#1c443c",
-          },
-        }}
-        inputProps={{
-          sx: {
-            backgroundColor: "#45A9961A",
-            paddingY: "16px",
-            paddingX: "16px",
-          },
-          className: "!font-number dark:text-primary-100",
-          startAdornment: (
-            <InputAdornment position="start" className="font-body">
-              %
-            </InputAdornment>
-          ),
-        }}
-        MenuProps={{
-          PaperProps: {
-            sx: {
-              backgroundColor: "#222222",
-              color: "#daeeea",
+      <Skeleton isLoading={isGetMarketBidDistributionLoading} height="90px">
+        <Select
+          value={discount}
+          onChange={(e) => changeDiscount(e.target.value)}
+          size="small"
+          fullWidth
+          className="font-number text-primary-800"
+          error={!!error}
+          sx={{
+            "& .MuiSelect-icon": {
+              color: isDarkMode ? "#daeeea" : "#1c443c",
             },
-          },
-        }}
-      >
-        {discountOptions.map((item, key) => (
-          <MenuItem
-            key={key}
-            value={item.value}
-            className="!font-number dark:text-primary-100"
-          >
-            {item.label}
-          </MenuItem>
-        ))}
-      </Select>
+          }}
+          inputProps={{
+            sx: {
+              backgroundColor: "#45A9961A",
+              paddingY: "16px",
+              paddingX: "16px",
+            },
+            className: "!font-number dark:text-primary-100",
+            startAdornment: (
+              <InputAdornment position="start" className="font-body">
+                %
+              </InputAdornment>
+            ),
+          }}
+          MenuProps={{
+            PaperProps: {
+              sx: {
+                backgroundColor: "#222222",
+                color: "#daeeea",
+              },
+            },
+          }}
+        >
+          {marketBidDistribution &&
+            marketBidDistribution[0].supported_discounts.map((item, key) => (
+              <MenuItem
+                key={key}
+                value={item}
+                className="!font-number dark:text-primary-100"
+              >
+                {item}
+              </MenuItem>
+            ))}
+        </Select>
+      </Skeleton>
       <Box className="mb-2 flex justify-between items-center mt-6 dark:text-primary-100">
         <Typography variant="body2">Bid amount</Typography>
         <Typography variant="subtitle1">
