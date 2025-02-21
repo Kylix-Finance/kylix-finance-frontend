@@ -64,7 +64,7 @@ const Bid = () => {
   if (numAmount > numFormattedBalance)
     amountError = `Amount should be a number between 0-${numFormattedBalance}`;
   if (numAmount < 10) amountError = "The minimum amount is 10";
-  if (!numFormattedBalance) amountError = "Your balance is not available";
+  if (!numFormattedBalance) amountError = "Insufficient balance";
   if (amount === "") amountError = "";
 
   const handlePlaceBid = () => {
