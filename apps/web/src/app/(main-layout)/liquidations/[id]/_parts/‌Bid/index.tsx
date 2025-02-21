@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import {
+  formatBigNumbers,
   formatUnit,
   parseUnit,
   useBalance,
@@ -118,6 +119,8 @@ const Bid = () => {
   const error = "";
   const isLoading = isPlaceBidLoading;
   const isDisabled = isBalanceLoading || isMetadataLoading;
+
+  console.log("______ZZZ", marketBidDistribution?.[1]);
   return (
     <Box className="w-full p-4 border rounded-md z-[999] lg:w-[360px] dark:bg-black-500 dark:border-transparent">
       <Box className="mb-6">
@@ -149,7 +152,8 @@ const Bid = () => {
               paddingY: "16px",
               paddingX: "16px",
             },
-            className: "!font-number dark:text-primary-100",
+            className:
+              "!font-number dark:text-primary-100 w-full flex justify-between",
           }}
           MenuProps={{
             PaperProps: {
@@ -161,13 +165,14 @@ const Bid = () => {
           }}
         >
           {marketBidDistribution &&
-            marketBidDistribution[0].supported_discounts.map((item, key) => (
+            marketBidDistribution[1].map((item, key) => (
               <MenuItem
                 key={key}
-                value={item}
-                className="!font-number dark:text-primary-100"
+                value={item.discount}
+                className="!font-number dark:text-primary-100 flex justify-between w-full"
               >
-                {item} %
+                <span>{item.discount} %</span>
+                <span>$ {formatBigNumbers(formatUnit(item.amount, 6), 2)}</span>
               </MenuItem>
             ))}
         </Select>
