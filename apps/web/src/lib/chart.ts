@@ -162,7 +162,7 @@ export const crosshairPlugin: Plugin<"line", CrosshairPluginOptions> = {
       ctx.stroke();
 
       // Display the actual value with percentage
-      displayText = `Utilization ${value.toFixed(2)}%`;
+      displayText = `Utilization ${(value || 0).toFixed(2)}%`;
 
       ctx.fillStyle = textColor;
       ctx.font = `${fontSize}px ${fontFamily}`;
