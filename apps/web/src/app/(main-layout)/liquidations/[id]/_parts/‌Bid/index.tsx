@@ -150,11 +150,6 @@ const Bid = () => {
               paddingX: "16px",
             },
             className: "!font-number dark:text-primary-100",
-            startAdornment: (
-              <InputAdornment position="start" className="font-body">
-                %
-              </InputAdornment>
-            ),
           }}
           MenuProps={{
             PaperProps: {
@@ -172,7 +167,7 @@ const Bid = () => {
                 value={item}
                 className="!font-number dark:text-primary-100"
               >
-                {item}
+                {item} %
               </MenuItem>
             ))}
         </Select>
