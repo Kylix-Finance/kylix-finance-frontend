@@ -26,7 +26,7 @@ const PersonalBids = () => {
   );
 
   return (
-    <Card title="Your Bids" className="h-96 max-h-96">
+    <Card title="Your Bids" className="min-h-96 max-h-96">
       <Table<(typeof tableData)[number]>
         tContainerProps={{
           className: "overflow-y-auto",
