@@ -35,6 +35,7 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       .map((item) => {
         return {
           health: item.health,
+          name: item.assetName,
           tvl: formatBigNumbers(
             formatUnit(item.tvl.toString(), item.decimal),
             4
@@ -60,6 +61,7 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       hiddenTHeads={["actions"]}
       headers={{
         health: "Health",
+        name: "Name",
         tvl: "TVL",
         poolSize: "Pool Size",
         maxDiscount: "Max Discount",
@@ -76,6 +78,16 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
               <Icons.Health style={{ color: second }} />
               <Icons.Health style={{ color: first }} />
             </Box>
+          );
+        },
+        name: (item) => {
+          return (
+            <Typography
+              variant="subtitle1"
+              className="pl-4 dark:text-black-100"
+            >
+              {item.name}
+            </Typography>
           );
         },
         tvl: (item) => {
