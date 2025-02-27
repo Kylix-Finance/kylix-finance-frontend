@@ -7,8 +7,8 @@ import Usdc from "cryptocurrency-icons/svg/icon/usdc.svg";
 export const TokenIcons: Record<string, Icon> = {
   BTC: Coins.BitCoin,
   DOT: Coins.Dot,
-  Ankr: Coins.Ankr,
-  Aave: Coins.Aave,
+  ANKR: Coins.Ankr,
+  AAVE: Coins.Aave,
   WBTC: Wbtc,
   WETH: Weth,
   USDT: Coins.Usdt,
