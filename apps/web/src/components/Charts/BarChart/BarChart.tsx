@@ -132,8 +132,8 @@ export const BarChart = ({
                 axis.max += axis.max * padding;
               },
               afterFit: (axis) => {
-                axis.width = 40;
-                axis.paddingLeft = 60;
+                axis.width = 80;
+                axis.paddingLeft = 100;
               },
             },
           },
