@@ -6,7 +6,7 @@ import { Asset } from "~/components";
 
 export const SupplyTable = () => {
   return (
-    <Table<TableData[number]>
+    <Table
       isFetched={true}
       isLoading={false}
       placeholderLength={3}

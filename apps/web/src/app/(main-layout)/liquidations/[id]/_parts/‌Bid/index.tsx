@@ -26,6 +26,7 @@ import { useParams } from "next/navigation";
 import { useGetMarketBidDistribution } from "~/hooks/chain/useGetMarketBidDistribution";
 import { Skeleton } from "@repo/ui";
 import { FormAlert } from "~/components/FormAlert";
+import { getDecimalRegex } from "~/utils";
 const percentages = ["25", "50", "75", "100"];
 
 const BASE_ASSET_ID = 2;
@@ -106,11 +107,13 @@ const Bid = () => {
   const changeAmount = (value: string) => {
     if (value === "") return setAmount("");
 
-    const test = new RegExp(`^(0|[1-9]\\d*|${numFormattedBalance})$`).test(
-      value
+    const maxNumTest = new RegExp(
+      `^(0|[1-9]d*(.d+)?)|(${numFormattedBalance})$`
     );
 
-    if (test) setAmount(value);
+    const decimalTest = getDecimalRegex(6);
+
+    if (maxNumTest.test(value) && decimalTest.test(value)) setAmount(value);
   };
 
   const isSubmitLoading = isPlaceBidLoading;
@@ -243,8 +246,8 @@ const Bid = () => {
           InputProps={{
             sx: {
               backgroundColor: "#45A9961A",
-              paddingY: "8px",
               paddingX: "16px",
+              paddingY: "8px",
             },
             startAdornment: (
               <InputAdornment position="start">

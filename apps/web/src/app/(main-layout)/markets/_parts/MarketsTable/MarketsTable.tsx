@@ -52,7 +52,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
   }, [data, searchQuery]);
 
   return (
-    <Table<TableData[number]>
+    <Table
       placeholderLength={5}
       hiddenTHeads={["actions"]}
       headers={{
