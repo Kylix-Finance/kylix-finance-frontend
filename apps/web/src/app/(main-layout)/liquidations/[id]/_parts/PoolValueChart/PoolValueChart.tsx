@@ -23,11 +23,11 @@ export const PoolValueChart = () => {
   return (
     <Box className="flex-1 p-6 border rounded-md w-full z-[999] dark:bg-black-500 dark:border-transparent">
       <Box className="flex items-center mb-10">
-        <Box className="-mr-4">
-          <TokenIcon symbol="sad" />
+        <Box className="-mr-4" width={32} height={32}>
+          {assetMetaData?.name && <TokenIcon symbol={assetMetaData.name} />}
         </Box>
         <Box className="mr-2">
-          <TokenIcon symbol="asd" />
+          <TokenIcon symbol="usdt" />
         </Box>
         <Typography variant="body2" className="dark:text-primary-100 flex">
           Bid for liquidated{" "}

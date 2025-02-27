@@ -47,7 +47,7 @@ const TokenIcon = ({
       preserveAspectRatio="xMidYMid meet"
       className={className}
       style={{ flexShrink: 0 }}
-      viewBox="0 0 32 32"
+      // viewBox="0 0 32 32"
     />
   );
 };

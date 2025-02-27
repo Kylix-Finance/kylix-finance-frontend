@@ -30,6 +30,12 @@ const CancelBidButton = ({
       color="error"
       onClick={cancelHandler}
       disabled={isPending}
+      sx={{
+        ":disabled": {
+          backgroundColor: "#E23D2895",
+          color: "#E23D2885",
+        },
+      }}
     >
       Cancel
     </Button>
