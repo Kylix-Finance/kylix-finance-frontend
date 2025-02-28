@@ -37,84 +37,84 @@ const arr: Item[] = [
 ];
 
 export default function Page() {
-  return (
-    <ErrorPage
-      code={-1}
-      title="Under Development"
-      description="This page is currently under development. Please check back later!"
-    />
-  );
   // return (
-  //   <Box className="flex flex-col gap-[16px]">
-  //     <Card title="SRL Position Management">
-  //       <Box className="flex flex-col gap-[16px]">
-  //         <Box />
-
-  //         <Heading />
-
-  //         <Box>
-  //           <ProgressBar isLoading={false} data={{}} />
-  //         </Box>
-  //       </Box>
-  //     </Card>
-
-  //     <Card title="My self-repaying loan positions">
-  //       <PositionsTable />
-  //     </Card>
-
-  //     <Card
-  //     // title="Borrow with no rate!"
-  //     // subTitle="How self repaying loan works"
-  //     // icon={Icons.Alpha}
-  //     // hasIconBackground={false}
-  //     >
-  //       <div className="flex flex-col gap-7">
-  //         <div className="flex gap-6 items-center">
-  //           <Icons.Alpha />
-  //           <div className="flex flex-col gap-2">
-  //             <h3 className="text-2xl font-bold text-primary-900 dark:text-primary-100">
-  //               Borrow with no rate!
-  //             </h3>
-  //             <p className="text-lg font-light dark:text-primary-100">
-  //               How self repaying loan works
-  //             </p>
-  //           </div>
-  //         </div>
-  //         <Box className="flex flex-row justify-center">
-  //           {arr.map((item, index) => {
-  //             const indexForConnectors = [0, 1];
-
-  //             return (
-  //               <>
-  //                 <Box className="flex flex-col gap-[10px] w-[214px]">
-  //                   <Box className="flex flex-col gap-[30px]">
-  //                     <Image
-  //                       width={215}
-  //                       height={214}
-  //                       alt={item.title}
-  //                       src={item.iconName.src}
-  //                     />
-  //                     <Typography className="!text-[20px] !text-transparent text-center !bg-clip-text !bg-gradient-to-r !from-[#FFDA8C] !via-[#E6007A] !to-black/20 !font-[700] !leading-[24px] !tracking-[-0.02em]">
-  //                       {item.title}
-  //                     </Typography>
-  //                   </Box>
-
-  //                   <Typography className="!text-[14px] text-center dark:text-primary-100 !font-[400] !leading-[20px]">
-  //                     {item.description}
-  //                   </Typography>
-  //                 </Box>
-
-  //                 {indexForConnectors.includes(index) && (
-  //                   <Box className="flex flex-col justify-center h-[214px]">
-  //                     <Connector />
-  //                   </Box>
-  //                 )}
-  //               </>
-  //             );
-  //           })}
-  //         </Box>
-  //       </div>
-  //     </Card>
-  //   </Box>
+  //   <ErrorPage
+  //     code={-1}
+  //     title="Under Development"
+  //     description="This page is currently under development. Please check back later!"
+  //   />
   // );
+  return (
+    <Box className="flex flex-col gap-[16px]">
+      <Card title="SRL Position Management">
+        <Box className="flex flex-col gap-[16px]">
+          <Box />
+
+          <Heading />
+
+          <Box>
+            <ProgressBar isLoading={false} data={{}} />
+          </Box>
+        </Box>
+      </Card>
+
+      <Card title="My self-repaying loan positions">
+        <PositionsTable />
+      </Card>
+
+      <Card
+      // title="Borrow with no rate!"
+      // subTitle="How self repaying loan works"
+      // icon={Icons.StellaSwap}
+      // hasIconBackground={false}
+      >
+        <div className="flex flex-col gap-7">
+          <div className="flex gap-6 items-center">
+            <Icons.StellaSwap />
+            <div className="flex flex-col gap-2">
+              <h3 className="text-2xl font-bold text-primary-900 dark:text-primary-100">
+                Borrow with no rate!
+              </h3>
+              <p className="text-lg font-light dark:text-primary-100">
+                How self repaying loan works
+              </p>
+            </div>
+          </div>
+          <Box className="flex flex-row justify-center">
+            {arr.map((item, index) => {
+              const indexForConnectors = [0, 1];
+
+              return (
+                <>
+                  <Box className="flex flex-col gap-[10px] w-[214px]">
+                    <Box className="flex flex-col gap-[30px]">
+                      <Image
+                        width={215}
+                        height={214}
+                        alt={item.title}
+                        src={item.iconName.src}
+                      />
+                      <Typography className="!text-[20px] !text-transparent text-center !bg-clip-text !bg-gradient-to-r !from-[#FFDA8C] !via-[#E6007A] !to-black/20 !font-[700] !leading-[24px] !tracking-[-0.02em]">
+                        {item.title}
+                      </Typography>
+                    </Box>
+
+                    <Typography className="!text-[14px] text-center dark:text-primary-100 !font-[400] !leading-[20px]">
+                      {item.description}
+                    </Typography>
+                  </Box>
+
+                  {indexForConnectors.includes(index) && (
+                    <Box className="flex flex-col justify-center h-[214px]">
+                      <Connector />
+                    </Box>
+                  )}
+                </>
+              );
+            })}
+          </Box>
+        </div>
+      </Card>
+    </Box>
+  );
 }

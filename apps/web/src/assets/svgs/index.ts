@@ -31,6 +31,7 @@ import WalletFill from "./wallet-fill.svg";
 import WarningAlert from "./warning.svg";
 import World from "./world.svg";
 import XIcon from "./x.svg";
+import StellaSwap from "./stellaswap.svg";
 
 export const sidebarIcons = {
   CrossSwap,
@@ -71,5 +72,6 @@ export const Icons = {
   WalletFill,
   World,
   XIcon,
+  StellaSwap,
 };
 export { Coins };
