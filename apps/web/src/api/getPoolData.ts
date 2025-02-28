@@ -3,7 +3,7 @@ import axios from "~/lib/axios";
 import { ChartScale, PoolDataSchema } from "~/types";
 
 export const getPoolData = async (assetId: string) => {
-  const endTime = getUnixTime(new Date());
+  const endTime = Date.now();
 
   const { data } = await axios.get<PoolDataSchema[]>("/pools_data", {
     params: {
@@ -15,7 +15,7 @@ export const getPoolData = async (assetId: string) => {
   });
 
   const transformedData = data.map((dataset) => ({
-    time: dataset[1] * 1000,
+    time: dataset[1],
     totalBorrow: dataset[2],
     totalSupply: dataset[3],
   }));

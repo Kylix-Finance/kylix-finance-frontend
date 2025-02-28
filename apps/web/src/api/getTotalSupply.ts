@@ -3,7 +3,7 @@ import axios from "~/lib/axios";
 import { ChartScale, SupplyChartDataset, TotalSupplySchema } from "~/types";
 
 export const getTotalSupply = async (scale: ChartScale) => {
-  const endTime = getUnixTime(new Date());
+  const endTime = Date.now();
 
   const { data } = await axios.get<TotalSupplySchema[]>(
     "/total_supply_borrow",
@@ -17,7 +17,7 @@ export const getTotalSupply = async (scale: ChartScale) => {
   );
 
   const transformedData = data.map((dataset) => ({
-    time: dataset[0] * 1000,
+    time: dataset[0],
     supply: dataset[1],
     borrow: dataset[2],
   }));
