@@ -17,7 +17,7 @@ export const getTotalSupply = async (scale: ChartScale) => {
   );
 
   const transformedData = data.map((dataset) => ({
-    time: dataset[0],
+    time: +dataset[0],
     supply: dataset[1],
     borrow: dataset[2],
   }));
