@@ -11,6 +11,7 @@ import { ChartScale } from "~/types";
 import { getTimeUnit } from "~/utils/date";
 import { useLocalStorage } from "usehooks-ts";
 import { hexToRgb } from "@repo/utils";
+import { useIsDarkMode } from "@repo/ui";
 type LineProps = ComponentProps<typeof Line>;
 
 type MultiLineChartProps = {
@@ -33,10 +34,12 @@ export const MultiLineChart = ({
   gradientIndex = 0,
 }: MultiLineChartProps) => {
   const unit = getTimeUnit(scale);
-  const [mode] = useLocalStorage("theme-mode", "light");
-  const color = mode === "dark" ? "#daeeea10" : "#daeeea70";
+  const idDarkMode = useIsDarkMode();
+
+  const color = idDarkMode ? "#daeeea10" : "#daeeea70";
+
   return (
-    <Box height={280} width="100%">
+    <Box height={280} width="100%" className="bg-white dark:bg-black-800">
       <Line
         data={{
           datasets: datasets.map((data, index) => ({

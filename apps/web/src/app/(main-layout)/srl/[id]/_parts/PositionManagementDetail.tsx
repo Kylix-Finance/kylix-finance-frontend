@@ -20,7 +20,10 @@ const items: ListItem[] = [
 
 const PositionManagementDetail = () => {
   return (
-    <Card variant="outlined" className="flex flex-col gap-6 flex-[0.5] w-full">
+    <Card
+      variant="outlined"
+      className="flex flex-col gap-6 flex-[0.5] w-full dark:bg-black-500"
+    >
       <List items={items} />
       <Button variant="contained" size="large">
         Create SR Loan

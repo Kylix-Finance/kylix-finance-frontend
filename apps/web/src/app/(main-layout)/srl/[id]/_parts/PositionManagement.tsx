@@ -22,7 +22,7 @@ const PositionManagement = () => {
       <Box className="flex w-full gap-2 flex-col lg:flex-row">
         <Box className="flex flex-col w-full flex-[0.5]">
           <PositionManagementForm />
-          <MCard variant="outlined" className="mt-2">
+          <MCard variant="outlined" className="mt-2 dark:bg-black-500">
             <ProgressBar isLoading={isLoading} data={{}} />
           </MCard>
         </Box>
