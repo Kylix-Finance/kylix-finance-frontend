@@ -1,7 +1,7 @@
 import { WalletModal } from "@repo/wallet-modal";
 import "../globals.css";
 import MainLayout from "./_parts/MainLayout";
-import { BackGround, ThemeMode } from "@repo/ui";
+import { BackGround } from "@repo/ui";
 
 export default function RootLayout({
   children,
