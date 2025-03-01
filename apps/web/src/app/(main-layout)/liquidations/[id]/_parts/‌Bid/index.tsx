@@ -26,7 +26,7 @@ import { useParams } from "next/navigation";
 import { useGetMarketBidDistribution } from "~/hooks/chain/useGetMarketBidDistribution";
 import { Skeleton } from "@repo/ui";
 import { FormAlert } from "~/components/FormAlert";
-import { getDecimalRegex } from "~/utils";
+import { formatNumber, getDecimalRegex } from "~/utils";
 const percentages = ["25", "50", "75", "100"];
 
 const BASE_ASSET_ID = 2;
@@ -130,6 +130,7 @@ const Bid = () => {
       <Box className="mb-6">
         <Typography
           variant="body1"
+          fontWeight="bold"
           className="text-primary-800 dark:text-primary-100"
         >
           Place a Bid
@@ -223,7 +224,7 @@ const Bid = () => {
       <Box className="mb-2 flex justify-between items-center mt-6 dark:text-primary-100">
         <Typography variant="body2">Bid amount</Typography>
         <Typography variant="subtitle1">
-          <span>{formattedBalance}</span>{" "}
+          <span>{formatNumber(formattedBalance || 0)}</span>{" "}
           <span className="text-primary-400">USDT</span>
         </Typography>
       </Box>
