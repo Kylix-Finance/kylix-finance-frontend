@@ -65,11 +65,7 @@ export const BarChart = ({
         }}
         options={{
           animation: {
-            duration: 10,
-            onComplete: (context) => {
-              if (!data) return;
-              context.chart.update();
-            },
+            duration: 300,
           },
           responsive: true,
           plugins: {
