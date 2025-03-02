@@ -77,9 +77,9 @@ const Sidebar = () => {
               <Link
                 key={link}
                 href={link}
-                className="flex items-center justify-center rounded-full border border-primary-500/20"
+                className="flex items-center justify-center rounded-full border border-primary-500/20 w-8 h-8"
               >
-                <Icon className="text-primary-500" />
+                <Icon className="text-primary-500 w-7 h-7" />
               </Link>
             ))}
           </Box>

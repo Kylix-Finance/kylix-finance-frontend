@@ -19,18 +19,16 @@ const TotalValue = () => {
   const { data: assetWiseBorrowCollateral } =
     useGetAssetWiseBorrowsCollaterals();
   const { data: assetWiseSupplies } = useGetAssetWiseSupplies();
-  const rawTotalSupplied = formatUnit(
-    assetWiseSupplies?.totalSupplied || 0,
-    18
-  );
-  const totalSupplied = formatBigNumbers(rawTotalSupplied, 2);
+  const rawTotalSupplied = formatUnit(assetWiseSupplies?.totalSupplied || 0, 4);
+
+  const totalSupplied = formatBigNumbers(rawTotalSupplied, 3);
 
   const rawTotalBorrowed = formatUnit(
     assetWiseBorrowCollateral?.totalBorrowed || 0,
-    18
+    4
   );
 
-  const totalBorrowed = formatBigNumbers(rawTotalBorrowed, 2);
+  const totalBorrowed = formatBigNumbers(rawTotalBorrowed, 3);
   const summaryData = [
     {
       label: "Deposit",

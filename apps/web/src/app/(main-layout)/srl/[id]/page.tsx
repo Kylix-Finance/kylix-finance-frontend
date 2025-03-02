@@ -5,16 +5,9 @@ import PositionManagement from "./_parts/PositionManagement";
 import { ErrorPage } from "~/components/ErrorPage";
 export default function Page() {
   return (
-    <ErrorPage
-      code={-1}
-      title="Under Development"
-      description="This page is currently under development. Please check back later!"
-    />
+    <Box className="flex flex-col gap-4">
+      <Tvl />
+      <PositionManagement />
+    </Box>
   );
-  // return (
-  //   <Box className="flex flex-col gap-4">
-  //     <Tvl />
-  //     <PositionManagement />
-  //   </Box>
-  // );
 }

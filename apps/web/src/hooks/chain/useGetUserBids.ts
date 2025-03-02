@@ -62,6 +62,7 @@ export const getUserBids = async ({
       assetSymbol: bid.market_asset_info.asset_symbol,
       assetName: bid.market_asset_info.asset_name,
       decimals: Number(bid.market_asset_info.decimals),
+      symbol: bid.market_asset_info.asset_symbol,
     },
     bidAsset: {
       assetId: Number(bid.bid_asset_info.asset_id),

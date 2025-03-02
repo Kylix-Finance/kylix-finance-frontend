@@ -26,7 +26,7 @@ const PersonalBids = () => {
   );
 
   return (
-    <Card title="Your Bids" className="min-h-96 max-h-96">
+    <Card title="My Bids" className="min-h-96 max-h-96">
       <Table
         tContainerProps={{
           className: "overflow-y-auto",
@@ -48,7 +48,13 @@ const PersonalBids = () => {
         }}
         tableName="personalBids"
         components={{
-          asset: (item) => <Asset label={item.asset} helperText="" />,
+          asset: (item) => (
+            <Asset
+              label={item.asset}
+              symbol={item.bidAsset.assetSymbol}
+              helperText=""
+            />
+          ),
           amount: (item) => (
             <Typography variant="subtitle1" className="dark:text-primary-100">
               {item.amount}

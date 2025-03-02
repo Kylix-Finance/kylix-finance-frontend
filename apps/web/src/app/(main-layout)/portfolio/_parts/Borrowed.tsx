@@ -32,6 +32,7 @@ const Borrowed = () => {
         formatUnit(item.borrowed || 0, item.decimals),
         4
       ),
+      symbol: item.assetSymbol,
     };
   });
 
@@ -55,7 +56,9 @@ const Borrowed = () => {
       hiddenTHeads={["actions"]}
       tableName="borrow"
       components={{
-        asset: (item) => <Asset label={item.asset} helperText="" />,
+        asset: (item) => (
+          <Asset label={item.asset} helperText="" symbol={item.symbol} />
+        ),
         apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,
         balance: (item) => (
           <Typography variant="subtitle1">{item.balance}</Typography>

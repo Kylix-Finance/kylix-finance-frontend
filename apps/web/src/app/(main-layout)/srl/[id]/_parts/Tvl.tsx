@@ -1,5 +1,7 @@
+"use client";
+
 import { Box, Link, Card as MuiCard, Typography } from "@mui/material";
-import { Skeleton } from "@repo/ui";
+import { Skeleton, useIsDarkMode } from "@repo/ui";
 import React from "react";
 import { Icons } from "~/assets/svgs";
 import { Card, TokenIcon } from "~/components";
@@ -8,6 +10,8 @@ import MultiLineChart from "~/components/Charts/MultiLineChart";
 import { palette } from "~/config/palette";
 import { tvlMockData, vaultData } from "~/mock/chart";
 const Tvl = () => {
+  const isDarkMode = useIsDarkMode();
+
   return (
     <Card>
       <Box className="flex items-center">
@@ -23,9 +27,15 @@ const Tvl = () => {
           </Box>
         </Box>
       </Box>
-      <MuiCard variant="outlined">
+      <MuiCard
+        variant="outlined"
+        className="dark:bg-black-600 flex flex-col gap-2"
+      >
         <Box className="flex justify-between w-full">
-          <Typography variant="subtitle1" className="text-primary-800">
+          <Typography
+            variant="subtitle1"
+            className="text-primary-800 dark:text-primary-200"
+          >
             My self-repaying loan portions simulator
           </Typography>
           {/* <div>LEGEND</div> */}

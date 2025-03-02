@@ -40,7 +40,6 @@ module.exports = {
         sideEffects: false,
       }
     );
-
     return config;
   },
   async redirects() {

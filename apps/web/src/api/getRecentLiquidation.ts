@@ -23,5 +23,5 @@ export const getRecentLiquidation = async (assetId: string) => {
     averagePrice: dataset[5],
   }));
 
-  return transformedData;
+  return { data: transformedData, dataReversed: transformedData.reverse() };
 };

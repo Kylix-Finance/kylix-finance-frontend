@@ -11,7 +11,7 @@ const LatestLiquidation = () => {
   const { data, isLoading, isFetched } = useRecentLiquidation(assetId);
 
   return (
-    <Card title="Recent liquidation" className="min-h-96 max-h-96">
+    <Card title="Recent liquidations" className="min-h-96 max-h-96">
       <Table
         isFetched={isFetched}
         isLoading={isLoading}
@@ -49,13 +49,13 @@ const LatestLiquidation = () => {
           ),
           price: (item) => (
             <Box className="flex gap-2 items-center">
-              <Typography
+              {/* <Typography
                 variant="subtitle2"
                 fontWeight="regular"
                 className="py-0.5 p-0.5 bg-primary-500/10 text-primary-500 rounded dark:text-primary-400"
               >
                 +75.8%
-              </Typography>
+              </Typography> */}
               <Typography variant="subtitle1" className="dark:text-primary-100">
                 {item.averagePrice}
               </Typography>
@@ -66,36 +66,15 @@ const LatestLiquidation = () => {
         defaultSortKey="time"
         headers={{
           time: "Time",
-          liquidated: "kyl.USDT Liquidated",
-          paid: "USDT paid",
+          liquidated: "KYL-USDT Liquidated",
+          paid: "USDT",
           price: "Average price",
         }}
         tableName="latestLiquidation"
-        data={data || []}
+        data={data?.data || []}
       />
     </Card>
   );
 };
 
 export default LatestLiquidation;
-
-const tableData = [
-  {
-    time: "19 Jul, 2024 - 08:11:33",
-    liquidated: "455",
-    paid: "89.20",
-    price: "0.0124",
-  },
-  {
-    time: "20 Jul, 2024 - 10:15:12",
-    liquidated: "342",
-    paid: "76.30",
-    price: "0.0142",
-  },
-  {
-    time: "21 Jul, 2024 - 12:19:56",
-    liquidated: "522",
-    paid: "102.50",
-    price: "0.0115",
-  },
-];
