@@ -23,6 +23,8 @@ const TotalValue = () => {
     assetWiseSupplies?.totalSupplied || 0,
     18
   );
+  console.log("___________assetWiseSupplies", assetWiseSupplies?.totalSupplied);
+
   const totalSupplied = formatBigNumbers(rawTotalSupplied, 2);
 
   const rawTotalBorrowed = formatUnit(
