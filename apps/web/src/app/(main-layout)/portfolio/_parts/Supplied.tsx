@@ -53,7 +53,9 @@ const Supplied = () => {
       hiddenTHeads={["actions", "assetId"]}
       tableName="supply"
       components={{
-        asset: (item) => <Asset label={item.asset} helperText="" />,
+        asset: (item) => (
+          <Asset label={item.asset} helperText="" symbol={item.asset} />
+        ),
         apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,
         balance: (item) => (
           <Typography variant="subtitle1" className="dark:text-black-100">

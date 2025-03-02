@@ -20,7 +20,9 @@ export const BorrowTable = () => {
       defaultSortKey="asset"
       tableName="supply"
       components={{
-        asset: (item) => <Asset label={item.asset} helperText="" />,
+        asset: (item) => (
+          <Asset label={item.asset} helperText="" symbol={item.asset} />
+        ),
         actions: () => (
           <Box className="flex justify-end gap-1">
             <Button variant="outlined">

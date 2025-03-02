@@ -73,10 +73,10 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         health: (item) => {
           const [first, second, third] = getHealthColors(item.health);
           return (
-            <Box className="flex flex-col gap-0.5 w-full justify-center items-center">
-              <Icons.Health style={{ color: third }} />
-              <Icons.Health style={{ color: second }} />
-              <Icons.Health style={{ color: first }} />
+            <Box className="flex flex-col w-full justify-center items-center">
+              <Icons.Health style={{ color: third }} className="h-2" />
+              <Icons.Health style={{ color: second }} className="h-2" />
+              <Icons.Health style={{ color: first }} className="h-2" />
             </Box>
           );
         },

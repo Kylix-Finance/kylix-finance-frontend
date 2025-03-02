@@ -24,7 +24,9 @@ export const SupplyTable = () => {
       hiddenTHeads={["actions"]}
       tableName="supply"
       components={{
-        asset: (item) => <Asset label={item.asset} helperText="" />,
+        asset: (item) => (
+          <Asset label={item.asset} symbol={item.asset} helperText="" />
+        ),
         apy: (item) => (
           <Typography variant="subtitle1" className="dark:text-black-100">
             {item.apy}

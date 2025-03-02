@@ -18,6 +18,7 @@ type TableData = Array<{
   supplyRate: string;
   utilization: string;
   walletBalance: string;
+  symbol: string;
   "Collateral Factor": string;
 }>;
 
@@ -43,6 +44,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         utilization: item.utilization,
         borrowRate: item.borrow_apy,
         supplyRate: item.supply_apy,
+        symbol: item.asset_symbol,
         walletBalance: formatUnit(
           item.user_asset_balance.toString(),
           item.asset_decimals
@@ -50,6 +52,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         id: item.id,
       }));
   }, [data, searchQuery]);
+  console.log("_________________data", transformedData);
 
   return (
     <Table
@@ -69,7 +72,11 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       rowSpacing="11px"
       components={{
         asset: (item) => (
-          <Asset helperText={item.asset} label={item.asset.toString()} />
+          <Asset
+            helperText={item.asset}
+            symbol={item.symbol}
+            label={item.asset.toString()}
+          />
         ),
         "Collateral Factor": (item) => (
           <Typography variant="subtitle1" className="pl-4 dark:text-black-100">

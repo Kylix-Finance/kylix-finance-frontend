@@ -48,7 +48,13 @@ const PersonalBids = () => {
         }}
         tableName="personalBids"
         components={{
-          asset: (item) => <Asset label={item.asset} helperText="" />,
+          asset: (item) => (
+            <Asset
+              label={item.asset}
+              symbol={item.bidAsset.assetSymbol}
+              helperText=""
+            />
+          ),
           amount: (item) => (
             <Typography variant="subtitle1" className="dark:text-primary-100">
               {item.amount}

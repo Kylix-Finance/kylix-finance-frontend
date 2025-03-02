@@ -4,13 +4,15 @@ import { TokenIcon } from "..";
 const Asset = ({
   helperText: helperText,
   label,
+  symbol,
 }: {
   helperText: string;
   label: string;
+  symbol: string;
 }) => {
   return (
     <Box className="flex flex-row align-middle items-center justify-start gap-[8px]">
-      <TokenIcon symbol={label} />
+      <TokenIcon symbol={symbol} />
       <Box className="flex flex-col">
         <Typography
           variant="body3"

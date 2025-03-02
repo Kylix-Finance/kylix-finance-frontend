@@ -10,6 +10,7 @@ import { Skeleton } from "@repo/ui";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
 import ValueItemWrapper from "./form/ValueItemWrapper";
 import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
+import { formatNumber } from "~/utils";
 
 const PoolDetails = () => {
   const params = useParams();
@@ -82,7 +83,7 @@ const PoolDetails = () => {
   return (
     <Box className="flex flex-col gap-4">
       {/* Heading */}
-      <Box className="flex items-center justify-between dark:bg-black-500  rounded-lg px-6 py-3">
+      <Box className="flex items-center flex-col lg:flex-row justify-between dark:bg-black-500  rounded-lg px-6 py-3">
         <Box className="flex items-center">
           <Link href="/markets">
             <Icons.LeftArrow className="text-black dark:text-primary-100" />
@@ -109,14 +110,19 @@ const PoolDetails = () => {
             </Box>
           </Box>
         </Box>
-        <Box className="flex items-center text-primary-800 gap-2.5 ">
-          <Typography variant="subtitle2" className="dark:text-primary-100">
-            Price:
-          </Typography>
-          <Typography variant="body1" className="dark:text-primary-100">
-            $ {formattedPrice}
-          </Typography>
-        </Box>
+        {formattedPrice && (
+          <Box className="flex flex-col lg:flex-row flex-nowrap items-center text-primary-800 gap-2.5 ">
+            <Typography variant="subtitle2" className="dark:text-primary-100">
+              Price:
+            </Typography>
+            <Typography
+              variant="body1"
+              className="dark:text-primary-100 flex-nowrap"
+            >
+              $ {formatNumber(formattedPrice)}
+            </Typography>
+          </Box>
+        )}
       </Box>
       {/* Pool status */}
       <Card
