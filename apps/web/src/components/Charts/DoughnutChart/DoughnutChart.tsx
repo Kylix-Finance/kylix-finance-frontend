@@ -34,6 +34,9 @@ const DoughnutChart: React.FC<Props> = ({
           labels,
         }}
         options={{
+          animation: {
+            duration: 300,
+          },
           cutout: "78%",
           maintainAspectRatio: false,
           responsive: false,

@@ -124,7 +124,7 @@ export const crosshairPlugin: Plugin<"line", CrosshairPluginOptions> = {
           dataPoint !== null &&
           "utilization_rate" in dataPoint
         ) {
-          value = dataPoint.utilization_rate;
+          value = +dataPoint.utilization_rate;
         }
       }
     } else {
