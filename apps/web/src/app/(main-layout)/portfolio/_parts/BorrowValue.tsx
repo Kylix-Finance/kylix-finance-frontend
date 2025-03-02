@@ -15,7 +15,7 @@ const BorrowValue = () => {
 
   const totalBorrowed = formatUnit(
     assetWiseBorrowCollateral?.totalBorrowed || 0,
-    18
+    4
   );
   const { data: ltv } = useGetUserLtv();
 

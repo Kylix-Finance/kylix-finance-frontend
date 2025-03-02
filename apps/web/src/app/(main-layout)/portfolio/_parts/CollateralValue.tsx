@@ -12,16 +12,15 @@ const CollateralValue = () => {
 
   const totalCollateral = formatUnit(
     assetWiseBorrowCollateral?.totalCollateral || 0,
-    18
+    4
   );
 
   const data = assetWiseBorrowCollateral?.collateralAssets.map?.(
     (item, index) => ({
       label: item.assetSymbol,
-      value:
-        Number(formatUnit(item.usdtBalance || 0, 18)) / Number(totalCollateral),
+      value: Number(formatUnit(item.usdtBalance || 0, 4)),
       color: assetColors[index % 10] || "#ffffff",
-      balance: Number(formatUnit(item.usdtBalance, 18)).toFixed(0),
+      balance: Number(formatUnit(item.usdtBalance, 4)).toFixed(0),
     })
   ) || [{ label: "Asset", color: "#ffffff", value: 100, balance: 0 }];
 
