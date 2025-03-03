@@ -18,6 +18,7 @@ const BorrowValue = () => {
     4
   );
   const { data: ltv } = useGetUserLtv();
+  console.log("______________ltv", ltv);
 
   return (
     <Box className="flex flex-col h-full gap-4">
