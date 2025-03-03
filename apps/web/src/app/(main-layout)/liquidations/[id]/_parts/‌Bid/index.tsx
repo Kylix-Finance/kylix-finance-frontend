@@ -175,6 +175,15 @@ const Bid = () => {
           }}
           displayEmpty
           renderValue={(selected) => {
+            if (selected === "") {
+              return (
+                <span className="font-thin w-full flex justify-between opacity-50">
+                  <span>10%</span>
+                  <span>100.00 k</span>
+                </span>
+              );
+            }
+
             const selectedItem = marketBidDistribution?.[1].find(
               (item) => item.discount === Number(selected)
             );
