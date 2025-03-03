@@ -4,6 +4,7 @@ import { useGetUserLtv } from "~/hooks/chain/useGetUserLtv";
 
 const Ltv = () => {
   const { data } = useGetUserLtv();
+  console.log("______________data", data);
 
   return (
     <ProgressBar

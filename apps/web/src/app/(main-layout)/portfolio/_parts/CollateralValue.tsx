@@ -21,7 +21,7 @@ const CollateralValue = () => {
       value:
         Number(formatUnit(item.usdtBalance || 0, 4)) / Number(totalCollateral),
       color: assetColors[index % 10] || "#ffffff",
-      balance: Number(formatUnit(item.usdtBalance, 4)).toFixed(0),
+      balance: formatBigNumbers(formatUnit(item.usdtBalance, 4), 2),
     })
   ) || [{ label: "Asset", color: "#ffffff", value: 100, balance: 0 }];
 
