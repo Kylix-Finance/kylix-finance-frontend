@@ -137,6 +137,9 @@ export const MultiLineChart = ({
               radius: 1,
             },
           },
+          animation: {
+            duration: 300,
+          },
           maintainAspectRatio: false,
         }}
       />

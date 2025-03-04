@@ -6,12 +6,26 @@ import { skipToken, useQuery } from "@tanstack/react-query";
 export interface UseGetUserLtvParams {
   account?: string;
 }
-export interface UserLtvResult {
+export interface UserLtvResultRaw {
   current_ltv: string;
+  current_borrow: string;
   sale_ltv: string;
   liquidation_ltv: string;
   borrow_limit: string;
   allowance: string;
+  liquidation_value: string;
+  collateral: string;
+}
+
+export interface UserLtvResult {
+  currentLtv: string;
+  currentBorrow: string;
+  saleLtv: string;
+  liquidationLtv: string;
+  borrowLimit: string;
+  allowance: string;
+  liquidationValue: string;
+  collateral: string;
 }
 
 export const useGetUserLtv = ({ account }: UseGetUserLtvParams = {}) => {
@@ -31,23 +45,20 @@ export const useGetUserLtv = ({ account }: UseGetUserLtvParams = {}) => {
 const userLtv = async (
   provider: WsProvider,
   { account }: UseGetUserLtvParams
-) => {
-  const result = await provider.send<UserLtvResult>("lending_getUserLtv", [
+): Promise<UserLtvResult> => {
+  const result = await provider.send<UserLtvResultRaw>("lending_getUserLtv", [
     account,
   ]);
-  const saleLtv = Number(formatUnit(result.sale_ltv, 16)).toFixed(2);
-  const currentLtv = Number(formatUnit(result.current_ltv, 16)).toFixed(2);
-  const liquidationLtv = Number(formatUnit(result.liquidation_ltv, 16)).toFixed(
-    2
-  );
-  const borrowLimit = Number(formatUnit(result.borrow_limit, 18)).toFixed(2);
-  const allowance = Number(formatUnit(result.allowance, 18)).toFixed(2);
-
   return {
-    currentLtv,
-    saleLtv,
-    liquidationLtv,
-    borrowLimit,
-    allowance,
+    allowance: Number(formatUnit(result.allowance, 18)).toFixed(2),
+    borrowLimit: Number(formatUnit(result.borrow_limit, 4)).toFixed(2),
+    collateral: Number(formatUnit(result.collateral, 4)).toFixed(2),
+    currentBorrow: Number(formatUnit(result.current_borrow, 4)).toFixed(2),
+    currentLtv: Number(formatUnit(result.current_ltv, 16)).toFixed(2),
+    liquidationLtv: Number(formatUnit(result.liquidation_ltv, 16)).toFixed(2),
+    liquidationValue: Number(formatUnit(result.liquidation_value, 4)).toFixed(
+      2
+    ),
+    saleLtv: Number(formatUnit(result.sale_ltv, 16)).toFixed(2),
   };
 };

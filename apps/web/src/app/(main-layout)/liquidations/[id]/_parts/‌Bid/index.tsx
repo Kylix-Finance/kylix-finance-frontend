@@ -146,7 +146,7 @@ const Bid = () => {
       </Box>
       <Skeleton isLoading={isGetMarketBidDistributionLoading} height="90px">
         <Select
-          value={discount || ""}
+          value={discount}
           onChange={(e) => changeDiscount(e.target.value)}
           size="small"
           fullWidth
@@ -175,7 +175,7 @@ const Bid = () => {
           }}
           displayEmpty
           renderValue={(selected) => {
-            if (!selected) {
+            if (selected === "") {
               return (
                 <span className="font-thin w-full flex justify-between opacity-50">
                   <span>10%</span>

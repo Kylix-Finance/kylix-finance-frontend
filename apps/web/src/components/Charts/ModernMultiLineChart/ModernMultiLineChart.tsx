@@ -56,7 +56,7 @@ export const ModernMultiLineChart = ({
   const throttledSetState = useCallback(
     throttle((newValue) => {
       setActivePoint(newValue);
-    }, 50),
+    }, 150),
     []
   );
 
@@ -111,7 +111,9 @@ export const ModernMultiLineChart = ({
             }}
             options={{
               responsive: true,
-
+              animation: {
+                duration: 300,
+              },
               hover: {
                 mode: "index",
                 intersect: false,
@@ -122,15 +124,12 @@ export const ModernMultiLineChart = ({
                 },
               },
               onHover: (_, elements) => {
-                const borrow = elements[0]?.element.y;
-                const earn = elements[1]?.element.y;
-
                 const points = elements.map(
                   //@ts-expect-error: type is not correct
-                  (element) => element.element.$context.parsed.y
+                  (element) => element?.element?.$context?.parsed?.y
                 );
 
-                if (borrow && earn) {
+                if (points[0] && points[1]) {
                   throttledSetState(points);
                 }
               },

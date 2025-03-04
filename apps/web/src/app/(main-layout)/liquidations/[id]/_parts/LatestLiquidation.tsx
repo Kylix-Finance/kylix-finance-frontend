@@ -1,5 +1,6 @@
 "use client";
 import { Box, Typography } from "@mui/material";
+import { useMetadata } from "@repo/onchain-utils";
 import { Table } from "@repo/ui";
 import { useParams } from "next/navigation";
 import { Card } from "~/components";
@@ -7,8 +8,9 @@ import { useRecentLiquidation } from "~/hooks/api/useRecentLiquidation";
 import { formatDateWithTime } from "~/utils/date";
 
 const LatestLiquidation = () => {
-  const { assetId } = useParams<{ assetId: string }>();
-  const { data, isLoading, isFetched } = useRecentLiquidation(assetId);
+  const { id } = useParams<{ id: string }>();
+  const { data, isLoading, isFetched } = useRecentLiquidation(id);
+  const { assetMetaData } = useMetadata(id);
 
   return (
     <Card title="Recent liquidations" className="min-h-96 max-h-96">
@@ -66,7 +68,7 @@ const LatestLiquidation = () => {
         defaultSortKey="time"
         headers={{
           time: "Time",
-          liquidated: "KYL-USDT Liquidated",
+          liquidated: `${assetMetaData?.symbol}-USDT Liquidated`,
           paid: "USDT",
           price: "Average price",
         }}
