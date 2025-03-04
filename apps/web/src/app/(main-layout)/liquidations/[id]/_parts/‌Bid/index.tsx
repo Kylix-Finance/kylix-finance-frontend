@@ -27,6 +27,7 @@ import { useGetMarketBidDistribution } from "~/hooks/chain/useGetMarketBidDistri
 import { Skeleton } from "@repo/ui";
 import { FormAlert } from "~/components/FormAlert";
 import { formatNumber, getDecimalRegex } from "~/utils";
+import PrivateButton from "~/components/PrivateButton/PrivateButton";
 const percentages = ["25", "50", "75", "100"];
 
 const BASE_ASSET_ID = 2;
@@ -273,7 +274,7 @@ const Bid = () => {
         ))}
       </Box>
 
-      <LoadingButton
+      <PrivateButton
         loading={isSubmitLoading}
         className="w-full text-white dark:text-[#0d0d0d] font-body min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
         variant="contained"
@@ -281,7 +282,7 @@ const Bid = () => {
         disabled={isSubmitDisabled}
       >
         Place My Bid
-      </LoadingButton>
+      </PrivateButton>
     </Box>
   );
 };

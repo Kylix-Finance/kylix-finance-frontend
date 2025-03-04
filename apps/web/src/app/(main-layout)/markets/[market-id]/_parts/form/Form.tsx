@@ -15,6 +15,7 @@ import { getDecimalRegex, handleInputChange } from "~/utils";
 import AlertContainer from "../AlertContainer";
 import { LoadingButton } from "@mui/lab";
 import { FormAlert } from "~/components/FormAlert";
+import PrivateButton from "~/components/PrivateButton/PrivateButton";
 
 interface SubmitButton {
   content: string;
@@ -119,7 +120,7 @@ export const Form = ({
       </Box>
       <List items={items} />
       <div className="flex w-full gap-1">
-        <LoadingButton
+        <PrivateButton
           variant="contained"
           size="large"
           disableElevation
@@ -129,9 +130,9 @@ export const Form = ({
           className="w-full text-white dark:text-[#0d0d0d] min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60 font-body"
         >
           {submitButton.content}
-        </LoadingButton>
+        </PrivateButton>
         {secondButton && (
-          <LoadingButton
+          <PrivateButton
             variant="contained"
             size="large"
             disableElevation
@@ -141,7 +142,7 @@ export const Form = ({
             className="w-full text-white dark:text-[#0d0d0d] font-body min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
           >
             {secondButton.content}
-          </LoadingButton>
+          </PrivateButton>
         )}
       </div>
       <AlertContainer>
