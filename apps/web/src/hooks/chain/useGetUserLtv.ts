@@ -18,14 +18,14 @@ export interface UserLtvResultRaw {
 }
 
 export interface UserLtvResult {
-  currentLtv: number;
-  currentBorrow: number;
-  saleLtv: number;
-  liquidationLtv: number;
-  borrowLimit: number;
-  allowance: number;
-  liquidationValue: number;
-  collateral: number;
+  currentLtv: string;
+  currentBorrow: string;
+  saleLtv: string;
+  liquidationLtv: string;
+  borrowLimit: string;
+  allowance: string;
+  liquidationValue: string;
+  collateral: string;
 }
 
 export const useGetUserLtv = ({ account }: UseGetUserLtvParams = {}) => {
@@ -50,13 +50,15 @@ const userLtv = async (
     account,
   ]);
   return {
-    allowance: Number(formatUnit(result.allowance, 4)),
-    borrowLimit: Number(formatUnit(result.borrow_limit, 4)),
-    collateral: Number(formatUnit(result.collateral, 4)),
-    currentBorrow: Number(formatUnit(result.current_borrow, 4)),
-    currentLtv: Number(formatUnit(result.current_ltv, 4)),
-    liquidationLtv: Number(formatUnit(result.liquidation_ltv, 16)),
-    liquidationValue: Number(formatUnit(result.liquidation_value, 4)),
-    saleLtv: Number(formatUnit(result.sale_ltv, 16)),
+    allowance: Number(formatUnit(result.allowance, 18)).toFixed(2),
+    borrowLimit: Number(formatUnit(result.borrow_limit, 4)).toFixed(2),
+    collateral: Number(formatUnit(result.collateral, 4)).toFixed(2),
+    currentBorrow: Number(formatUnit(result.current_borrow, 4)).toFixed(2),
+    currentLtv: Number(formatUnit(result.current_ltv, 16)).toFixed(2),
+    liquidationLtv: Number(formatUnit(result.liquidation_ltv, 16)).toFixed(2),
+    liquidationValue: Number(formatUnit(result.liquidation_value, 4)).toFixed(
+      2
+    ),
+    saleLtv: Number(formatUnit(result.sale_ltv, 16)).toFixed(2),
   };
 };
