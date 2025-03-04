@@ -8,33 +8,32 @@ import { formatUnit, useMetadata, useProvider } from "@repo/onchain-utils";
 
 interface Props {
   assetId: number | string;
+  baseId?: number | string;
 }
 
-export const useAssetPrice = ({ assetId }: Props) => {
-  const { api } = useProvider();
-  const { assetMetaData: baseAssetMetadata, isLoading } =
-    useMetadata(PRICE_BASE_ASSET_ID);
-  const enabled = !!api && !isLoading;
+export const useAssetPrice = ({
+  assetId,
+  baseId = PRICE_BASE_ASSET_ID,
+}: Props) => {
+  const { api, provider } = useProvider();
+  const enabled = !!api && !!provider;
   const { data, ...rest } = useQuery({
     queryKey: queryKeys.assetPrice({ assetId }),
     queryFn: enabled
       ? async () => {
-          const assetPrice = await api?.query.lending?.assetPrices?.([
-            assetId,
-            PRICE_BASE_ASSET_ID,
-          ]);
-          const price = assetPrice?.toJSON() as number;
-          const formattedPrice = formatUnit(
-            BigInt(price),
-            baseAssetMetadata?.decimals
+          const assetPrice = await provider.send<[number, number]>(
+            "lending_getAssetPrice",
+            [baseId]
           );
+          const price = assetPrice[0];
+          const formattedPrice = formatUnit(BigInt(price), assetPrice[1]);
           return { price, formattedPrice };
         }
       : skipToken,
   });
 
   return {
-    assetPrice: data?.price,
+    // assetPrice: data?.price,
     formattedPrice: data?.formattedPrice,
     ...rest,
   };
