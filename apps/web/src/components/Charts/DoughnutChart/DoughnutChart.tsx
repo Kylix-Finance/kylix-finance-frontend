@@ -3,8 +3,8 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import { palette } from "~/config/palette";
 import "chart.js/auto";
+import { LoadingSpinner } from "~/components/Loaders";
 
-// TODO: Remove optional for `data` and `backgroundColor`
 interface Props {
   backgroundColor?: Array<string>;
   labels?: Array<string>;
@@ -17,36 +17,40 @@ const DoughnutChart: React.FC<Props> = ({
   labels = ["Total Deposit", "Total Borrow"],
 }) => {
   return (
-    <div className="w-25 h-25">
-      <Doughnut
-        width="100%"
-        height="100%"
-        data={{
-          datasets: [
-            {
-              backgroundColor,
-              borderColor: "transparent",
-              borderRadius: 1000,
-              data,
-              spacing: 2,
+    <div className="flex justify-center items-center w-25 h-25">
+      {data ? (
+        <Doughnut
+          width="100%"
+          height="100%"
+          data={{
+            datasets: [
+              {
+                backgroundColor,
+                borderColor: "transparent",
+                borderRadius: 1000,
+                data,
+                spacing: 2,
+              },
+            ],
+            labels,
+          }}
+          options={{
+            animation: {
+              duration: 300,
             },
-          ],
-          labels,
-        }}
-        options={{
-          animation: {
-            duration: 300,
-          },
-          cutout: "78%",
-          maintainAspectRatio: false,
-          responsive: false,
-          plugins: {
-            legend: {
-              display: false,
+            cutout: "78%",
+            maintainAspectRatio: false,
+            responsive: false,
+            plugins: {
+              legend: {
+                display: false,
+              },
             },
-          },
-        }}
-      />
+          }}
+        />
+      ) : (
+        <LoadingSpinner />
+      )}
     </div>
   );
 };

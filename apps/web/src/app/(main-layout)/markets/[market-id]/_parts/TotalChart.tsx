@@ -6,7 +6,7 @@ import { palette } from "~/config/palette";
 import { usePoolsData } from "~/hooks/api/usePoolsData";
 
 const TotalChart = () => {
-  const { data } = usePoolsData("101");
+  const { data, isFetched } = usePoolsData("101");
 
   return (
     <Card variant="outlined" className="dark:bg-black-500 z-[999]">
@@ -24,6 +24,7 @@ const TotalChart = () => {
       </Box>
 
       <MultiLineChart
+        isLoading={!isFetched}
         scale="1d"
         datasets={[
           {

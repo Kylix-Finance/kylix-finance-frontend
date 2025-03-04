@@ -8,7 +8,7 @@ import { MoreHoriz, CalendarMonth } from "@mui/icons-material";
 import { useTotalSupply } from "~/hooks/api/useTotalSupply";
 
 const VaultChart = () => {
-  const { data } = useTotalSupply("1d");
+  const { data, isFetched } = useTotalSupply("1d");
 
   return (
     <Box>
@@ -70,6 +70,7 @@ const VaultChart = () => {
       </Box>
 
       <MultiLineChart
+        isLoading={!isFetched}
         scale="1d"
         datasets={[
           {

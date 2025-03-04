@@ -14,11 +14,13 @@ const ApyChart = () => {
 
   const [finalData, setFinalData] = useState<InterestRateSchema[]>();
 
-  const { data } = useInterestRate();
+  const { data, isFetched: isInterestRateFetched } = useInterestRate();
 
-  const { data: pool } = useGetLendingPools({
+  const { data: pool, isFetched: isPoolFetched } = useGetLendingPools({
     asset: marketId,
   });
+
+  const isFetched = isInterestRateFetched && isPoolFetched;
 
   const utilization = Number(
     pool?.assets[0]?.utilization?.replace("%", "") || -1
@@ -41,6 +43,7 @@ const ApyChart = () => {
     <Card variant="outlined" className="dark:bg-black-500">
       <ModernMultiLineChart
         activeIndex={RoundedUtilization}
+        isLoading={!isFetched}
         datasets={[
           {
             label: "Borrow APR",
