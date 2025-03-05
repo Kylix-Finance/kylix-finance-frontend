@@ -16,8 +16,8 @@ export const PoolValueChart = () => {
   const { assetMetaData, isFetched } = useMetadata(id);
 
   const distribution = data?.[1].map((item) => ({
-    ...item,
-    amount: formatUnit(item.amount, 6),
+    discount: item.discount + "%",
+    amount: +formatUnit(item.amount, 6),
   }));
 
   return (
@@ -47,6 +47,7 @@ export const PoolValueChart = () => {
         }}
         maxBarThickness={30}
         yLabel="Pool Value"
+        type="category"
       />
 
       <BarChart

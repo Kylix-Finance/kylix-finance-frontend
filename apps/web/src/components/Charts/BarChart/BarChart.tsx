@@ -20,6 +20,7 @@ type BarChartProps = {
   reverse?: boolean;
   x?: boolean;
   yLabel?: string;
+  type?: "category" | "linear";
 };
 
 export const BarChart = ({
@@ -31,6 +32,7 @@ export const BarChart = ({
   reverse = false,
   x = true,
   yLabel,
+  type = "linear",
 }: BarChartProps) => {
   return (
     <Box
@@ -88,7 +90,7 @@ export const BarChart = ({
             },
             scales: {
               x: {
-                type: "linear",
+                type,
                 display: x,
                 grid: {
                   display: false,
@@ -99,7 +101,6 @@ export const BarChart = ({
                 ticks: {
                   color: palette.text.disabled,
                   align: "center",
-                  callback: (value) => value + "%",
                 },
               },
               y: {
