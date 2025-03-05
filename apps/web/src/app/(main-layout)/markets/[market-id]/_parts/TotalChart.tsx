@@ -1,12 +1,14 @@
 "use client";
 
 import { Box, Card, Typography } from "@mui/material";
+import { useParams } from "next/navigation";
 import MultiLineChart from "~/components/Charts/MultiLineChart";
 import { palette } from "~/config/palette";
 import { usePoolsData } from "~/hooks/api/usePoolsData";
 
 const TotalChart = () => {
-  const { data, isFetched } = usePoolsData("101");
+  const { id } = useParams<{ id: string }>();
+  const { data, isFetched } = usePoolsData(id);
 
   return (
     <Card variant="outlined" className="dark:bg-black-500 z-[999]">
