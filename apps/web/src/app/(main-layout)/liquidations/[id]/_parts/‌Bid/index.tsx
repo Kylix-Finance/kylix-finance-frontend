@@ -1,6 +1,5 @@
 "use client";
 
-import { LoadingButton } from "@mui/lab";
 import {
   Box,
   Button,
@@ -15,6 +14,7 @@ import {
   formatBigNumbers,
   formatUnit,
   parseUnit,
+  useActiveAccount,
   useBalance,
   useMetadata,
 } from "@repo/onchain-utils";
@@ -33,6 +33,9 @@ const percentages = ["25", "50", "75", "100"];
 const BASE_ASSET_ID = 2;
 const Bid = () => {
   const { id } = useParams<{ id: string }>();
+
+  const { activeAccount } = useActiveAccount();
+  const isWalletConnected = !!activeAccount?.address;
 
   const {
     data: marketBidDistribution,
@@ -118,6 +121,7 @@ const Bid = () => {
   };
 
   const isSubmitLoading = isPlaceBidLoading;
+
   const isSubmitDisabled =
     isBalanceLoading ||
     isMetadataLoading ||
@@ -258,15 +262,18 @@ const Bid = () => {
             ),
           }}
         />
-        {amountError && <FormAlert message={amountError} severity="error" />}
+        {isWalletConnected && amountError && (
+          <FormAlert message={amountError} severity="error" />
+        )}
       </Stack>
 
-      <Box className="flex gap-1 mt-2 mb-6 ">
+      <Box className="flex gap-1 mt-2 mb-6">
         {percentages.map((p) => (
           <Button
+            disabled={!isWalletConnected}
             key={p}
             variant="outlined"
-            className="flex-1"
+            className="flex-1 dark:text-primary-400 text-primary-500"
             onClick={() => clickPercentage(p)}
           >
             {p}%
@@ -279,7 +286,7 @@ const Bid = () => {
         className="w-full text-white dark:text-[#0d0d0d] font-body min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
         variant="contained"
         onClick={handlePlaceBid}
-        disabled={isSubmitDisabled}
+        disabled={isWalletConnected && isSubmitDisabled}
       >
         Place My Bid
       </PrivateButton>
