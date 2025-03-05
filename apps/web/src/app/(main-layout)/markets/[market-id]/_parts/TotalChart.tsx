@@ -7,8 +7,8 @@ import { palette } from "~/config/palette";
 import { usePoolsData } from "~/hooks/api/usePoolsData";
 
 const TotalChart = () => {
-  const { id } = useParams<{ id: string }>();
-  const { data, isFetched } = usePoolsData(id);
+  const { "market-id": marketId } = useParams<{ "market-id": string }>();
+  const { data, isFetched } = usePoolsData(marketId);
 
   return (
     <Card variant="outlined" className="dark:bg-black-500 z-[999]">
