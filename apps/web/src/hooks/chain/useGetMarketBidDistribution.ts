@@ -2,7 +2,7 @@ import { WsProvider } from "@polkadot/api";
 import { useProvider } from "@repo/onchain-utils";
 import { queryKeys } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
-
+//deploy
 type DiscountDistribution = {
   discount: number;
   amount: string;
