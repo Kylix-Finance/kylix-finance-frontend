@@ -66,6 +66,7 @@ const LatestLiquidation = () => {
         }}
         hasPagination={false}
         defaultSortKey="time"
+        defaultOrder="desc"
         headers={{
           time: "Time",
           liquidated: `${assetMetaData?.symbol}-USDT Liquidated`,
@@ -73,7 +74,7 @@ const LatestLiquidation = () => {
           price: "Average price",
         }}
         tableName="latestLiquidation"
-        data={data?.data || []}
+        data={data || []}
       />
     </Card>
   );

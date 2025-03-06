@@ -1,4 +1,3 @@
-import { getUnixTime } from "date-fns";
 import axios from "~/lib/axios";
 import { RecentLiquidation } from "~/types";
 
@@ -23,5 +22,5 @@ export const getRecentLiquidation = async (assetId: string) => {
     averagePrice: dataset[5],
   }));
 
-  return { data: transformedData, dataReversed: transformedData.reverse() };
+  return transformedData;
 };
