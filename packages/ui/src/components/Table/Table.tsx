@@ -25,6 +25,7 @@ interface Props<Schema, ExtraFields extends string> {
   components?: CellValueComponents<Schema, ExtraFields>;
   data: TableData<Schema>;
   defaultSortKey: keyof Schema;
+  defaultOrder?: Order;
   hasPagination?: boolean;
   headers: Partial<Headers<keyof Schema> | Headers<ExtraFields>>;
   hiddenTHeads?: Array<keyof Schema | ExtraFields>;
@@ -51,6 +52,7 @@ export function Table<Schema, ExtraFields extends string = string>({
   components,
   data,
   defaultSortKey,
+  defaultOrder = "asc",
   hasPagination = false,
   headers,
   hiddenTHeads,
@@ -72,7 +74,7 @@ export function Table<Schema, ExtraFields extends string = string>({
 }: Props<Schema, ExtraFields>) {
   type Key = keyof Schema;
 
-  const [order, setOrder] = React.useState<Order>("asc");
+  const [order, setOrder] = React.useState<Order>(defaultOrder);
   const [orderBy, setOrderBy] = React.useState<Key>(defaultSortKey);
 
   const handleRequestSort = (
