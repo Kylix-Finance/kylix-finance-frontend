@@ -13,4 +13,6 @@ export const TokenIcons: Record<string, Icon> = {
   WETH: Weth,
   USDT: Coins.Usdt,
   USDC: Usdc,
+  SOL: Coins.Solana,
+  SUI: Coins.Sui
 };
