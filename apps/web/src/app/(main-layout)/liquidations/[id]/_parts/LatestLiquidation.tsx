@@ -69,7 +69,9 @@ const LatestLiquidation = () => {
         defaultOrder="desc"
         headers={{
           time: "Time",
-          liquidated: `${assetMetaData?.symbol}-USDT Liquidated`,
+          liquidated: assetMetaData?.symbol
+            ? `${assetMetaData?.symbol} Liquidated`
+            : "Liquidated",
           paid: "USDT",
           price: "Average price",
         }}
