@@ -62,7 +62,7 @@ const PersonalBids = () => {
           ),
           discount: (item) => (
             <Typography variant="subtitle1" className="dark:text-primary-100">
-              {item.discount}
+              {item.discount}%
             </Typography>
           ),
           filled: (item) => (
