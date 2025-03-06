@@ -12,7 +12,7 @@ export const formatNumber = (input: number | string) => {
   if (isNaN(num)) return input;
 
   if (num < 1000) return num.toString();
-  const suffix = num < 1000000 ? "k" : "m";
+  const suffix = num < 1000000 ? "K" : "M";
   const divisor = num < 1000000 ? 1000 : 1000000;
   return (num / divisor).toFixed(num % divisor === 0 ? 0 : 1) + suffix;
 };

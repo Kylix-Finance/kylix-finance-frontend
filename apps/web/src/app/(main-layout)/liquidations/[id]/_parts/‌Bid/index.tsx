@@ -230,9 +230,7 @@ const Bid = () => {
         <Typography variant="body2">Bid amount</Typography>
         <Typography variant="subtitle1">
           <span>
-            {Number.isNaN(Number(formattedBalance))
-              ? "0.00"
-              : Number(formattedBalance).toFixed(2)}
+            <span>{formatNumber(formattedBalance || 0)}</span>{" "}
           </span>{" "}
           <span className="text-primary-400">USDT</span>
         </Typography>
