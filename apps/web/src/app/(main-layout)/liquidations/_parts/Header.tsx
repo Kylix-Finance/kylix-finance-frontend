@@ -27,7 +27,7 @@ const Header = () => {
       <Suspense fallback={<SearchUI />}>
         <Search />
       </Suspense>
-      <Box display="flex" alignItems="center" gap="10px">
+      {/* <Box display="flex" alignItems="center" gap="10px">
         <Button
           variant="outlined"
           size="large"
@@ -44,7 +44,7 @@ const Header = () => {
         >
           Filter by Bid
         </Button>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
