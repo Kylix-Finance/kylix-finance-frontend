@@ -229,7 +229,11 @@ const Bid = () => {
       <Box className="mb-2 flex justify-between items-center mt-6 dark:text-primary-100">
         <Typography variant="body2">Bid amount</Typography>
         <Typography variant="subtitle1">
-          <span>{formatNumber(formattedBalance || 0)}</span>{" "}
+          <span>
+            {Number.isNaN(Number(formattedBalance))
+              ? "0.00"
+              : Number(formattedBalance).toFixed(2)}
+          </span>{" "}
           <span className="text-primary-400">USDT</span>
         </Typography>
       </Box>
