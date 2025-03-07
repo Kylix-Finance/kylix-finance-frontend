@@ -18,7 +18,7 @@ const Borrow = () => {
         <Typography variant="h5" className="text-primary-800 dark:text-white">
           <Skeleton isLoading={isLoading} minWidth={80}>
             {data?.summary
-              ? formatBigNumbers(formatUnit(data.summary.total_borrow, 18), 2) +
+              ? formatBigNumbers(formatUnit(data.summary.total_borrow, 4), 2) +
                 "$"
               : "Unavailable"}
           </Skeleton>

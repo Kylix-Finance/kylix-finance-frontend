@@ -25,7 +25,7 @@ const Supply = () => {
         <Typography variant="h5" className="text-primary-800 dark:text-white">
           <Skeleton minWidth={80} isLoading={isLoading}>
             {data?.summary
-              ? formatBigNumbers(formatUnit(data.summary.total_supply, 18), 2) +
+              ? formatBigNumbers(formatUnit(data.summary.total_supply, 4), 2) +
                 "$"
               : "Unavailable"}
           </Skeleton>
