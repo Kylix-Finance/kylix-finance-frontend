@@ -23,7 +23,7 @@ interface UserBidsResponse {
   index: string;
 }
 interface Params {
-  assetId?: string;
+  assetId: string;
 }
 export const useGetUserBids = ({ assetId }: Params) => {
   const { provider } = useProvider();
@@ -56,29 +56,27 @@ export const getUserBids = async ({
 
   const response = await provider.send<UserBidsResponse[]>(
     "liquidation_getUserBids",
-    [account]
+    [account, +assetId]
   );
 
-  return response
-    .map((bid) => ({
-      marketAsset: {
-        assetId: Number(bid.market_asset_info.asset_id),
-        assetSymbol: bid.market_asset_info.asset_symbol,
-        assetName: bid.market_asset_info.asset_name,
-        decimals: Number(bid.market_asset_info.decimals),
-        symbol: bid.market_asset_info.asset_symbol,
-      },
-      bidAsset: {
-        assetId: Number(bid.bid_asset_info.asset_id),
-        assetSymbol: bid.bid_asset_info.asset_symbol,
-        assetName: bid.bid_asset_info.asset_name,
-        decimals: Number(bid.bid_asset_info.decimals),
-      },
-      bidAmount: BigInt(bid.bid_amount),
-      discount: Number(bid.discount),
-      filledAmount: BigInt(bid.filled_amount),
-      blockNumber: Number(bid.blocknumber),
-      txIndex: Number(bid.index),
-    }))
-    .filter((item) => (assetId ? item.marketAsset.assetId === +assetId : item));
+  return response.map((bid) => ({
+    marketAsset: {
+      assetId: Number(bid.market_asset_info.asset_id),
+      assetSymbol: bid.market_asset_info.asset_symbol,
+      assetName: bid.market_asset_info.asset_name,
+      decimals: Number(bid.market_asset_info.decimals),
+      symbol: bid.market_asset_info.asset_symbol,
+    },
+    bidAsset: {
+      assetId: Number(bid.bid_asset_info.asset_id),
+      assetSymbol: bid.bid_asset_info.asset_symbol,
+      assetName: bid.bid_asset_info.asset_name,
+      decimals: Number(bid.bid_asset_info.decimals),
+    },
+    bidAmount: BigInt(bid.bid_amount),
+    discount: Number(bid.discount),
+    filledAmount: BigInt(bid.filled_amount),
+    blockNumber: Number(bid.blocknumber),
+    txIndex: Number(bid.index),
+  }));
 };
