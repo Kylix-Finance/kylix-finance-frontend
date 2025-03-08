@@ -22,8 +22,10 @@ interface UserBidsResponse {
   blocknumber: string;
   index: string;
 }
-
-export const useGetUserBids = () => {
+interface Params {
+  assetId?: string;
+}
+export const useGetUserBids = ({ assetId }: Params) => {
   const { provider } = useProvider();
   const { activeAccount } = useActiveAccount();
 
@@ -32,7 +34,7 @@ export const useGetUserBids = () => {
   const query = useQuery({
     queryKey: queryKeys.userBids(activeAccount?.address),
     queryFn: isEnabled
-      ? () => getUserBids({ provider, account: activeAccount.address })
+      ? () => getUserBids({ provider, account: activeAccount.address, assetId })
       : skipToken,
   });
 
@@ -45,10 +47,11 @@ export const useGetUserBids = () => {
 export const getUserBids = async ({
   provider,
   account,
+  assetId,
 }: {
   provider: WsProvider;
   account: string | undefined;
-}) => {
+} & Params) => {
   if (!account) return;
 
   const response = await provider.send<UserBidsResponse[]>(
@@ -56,24 +59,26 @@ export const getUserBids = async ({
     [account]
   );
 
-  return response.map((bid) => ({
-    marketAsset: {
-      assetId: Number(bid.market_asset_info.asset_id),
-      assetSymbol: bid.market_asset_info.asset_symbol,
-      assetName: bid.market_asset_info.asset_name,
-      decimals: Number(bid.market_asset_info.decimals),
-      symbol: bid.market_asset_info.asset_symbol,
-    },
-    bidAsset: {
-      assetId: Number(bid.bid_asset_info.asset_id),
-      assetSymbol: bid.bid_asset_info.asset_symbol,
-      assetName: bid.bid_asset_info.asset_name,
-      decimals: Number(bid.bid_asset_info.decimals),
-    },
-    bidAmount: BigInt(bid.bid_amount),
-    discount: Number(bid.discount),
-    filledAmount: BigInt(bid.filled_amount),
-    blockNumber: Number(bid.blocknumber),
-    txIndex: Number(bid.index),
-  }));
+  return response
+    .map((bid) => ({
+      marketAsset: {
+        assetId: Number(bid.market_asset_info.asset_id),
+        assetSymbol: bid.market_asset_info.asset_symbol,
+        assetName: bid.market_asset_info.asset_name,
+        decimals: Number(bid.market_asset_info.decimals),
+        symbol: bid.market_asset_info.asset_symbol,
+      },
+      bidAsset: {
+        assetId: Number(bid.bid_asset_info.asset_id),
+        assetSymbol: bid.bid_asset_info.asset_symbol,
+        assetName: bid.bid_asset_info.asset_name,
+        decimals: Number(bid.bid_asset_info.decimals),
+      },
+      bidAmount: BigInt(bid.bid_amount),
+      discount: Number(bid.discount),
+      filledAmount: BigInt(bid.filled_amount),
+      blockNumber: Number(bid.blocknumber),
+      txIndex: Number(bid.index),
+    }))
+    .filter((item) => (assetId ? item.marketAsset.assetId === +assetId : item));
 };

@@ -9,7 +9,8 @@ import { useMemo } from "react";
 import { formatUnit } from "@repo/onchain-utils";
 
 const PersonalBids = () => {
-  const { data: userBids } = useGetUserBids();
+  const { id } = useParams<{ id: string }>();
+  const { data: userBids } = useGetUserBids({ assetId: id });
 
   const tableData = useMemo(
     () =>
