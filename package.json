@@ -22,7 +22,8 @@
     "start": "turbo run start:production",
     "start:dev": "turbo start:dev",
     "start:dev:web": "pnpm run dev --filter=web",
-    "start:production": "turbo start:production"
+    "start:production": "turbo start:production",
+    "generate:type": "npx polkadot-types-from-chain --endpoint wss://test-dashboard.kylix.finance --output ./packages/types/src/types"
   },
   "dependencies": {
     "@dicebear/collection": "^9.2.2",
@@ -39,6 +40,7 @@
     "@polkadot/api-base": "^12.3.1",
     "@polkadot/extension-dapp": "^0.48.2",
     "@polkadot/extension-inject": "^0.48.2",
+    "@polkadot/typegen": "^15.7.2",
     "@polkadot/types": "^12.3.1",
     "@polkadot/types-codec": "^12.3.1",
     "@polkadot/util": "^13.2.3",
