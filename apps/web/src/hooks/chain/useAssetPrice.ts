@@ -23,7 +23,7 @@ export const useAssetPrice = ({
       ? async () => {
           const assetPrice = await provider.send<[number, number]>(
             "lending_getAssetPrice",
-            [baseId]
+            [Number(assetId), baseId]
           );
           const price = assetPrice[0];
           const formattedPrice = formatUnit(BigInt(price), assetPrice[1]);

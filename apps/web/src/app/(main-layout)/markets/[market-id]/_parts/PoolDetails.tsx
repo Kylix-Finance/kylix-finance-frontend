@@ -10,7 +10,6 @@ import { Skeleton } from "@repo/ui";
 import { useAssetPrice } from "~/hooks/chain/useAssetPrice";
 import ValueItemWrapper from "./form/ValueItemWrapper";
 import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
-import { formatNumber } from "~/utils";
 
 const PoolDetails = () => {
   const params = useParams();
@@ -119,7 +118,7 @@ const PoolDetails = () => {
               variant="body1"
               className="dark:text-primary-100 flex-nowrap"
             >
-              $ {formatNumber(formattedPrice)}
+              $ {formatBigNumbers(formattedPrice, 4)}
             </Typography>
           </Box>
         )}
