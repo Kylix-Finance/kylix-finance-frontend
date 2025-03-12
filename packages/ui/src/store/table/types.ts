@@ -1,4 +1,11 @@
-import { StoreSetFn } from "@repo/types";
+export type StoreSetFn<StoreType> = (
+  partial:
+    | StoreType
+    | Partial<StoreType>
+    | ((state: StoreType) => StoreType | Partial<StoreType>),
+  // FIXME: below type was boolean | undefined but in V5 I changed it in the below way
+  replace?: false | undefined
+) => void;
 
 export interface PaginationDefaultProps {
   page: number;
