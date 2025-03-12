@@ -1,4 +1,7 @@
-import { InjectedWindowProvider } from "@polkadot/extension-inject/types";
+import {
+  Injected,
+  InjectedWindowProvider,
+} from "@polkadot/extension-inject/types";
 import { useEffect, useState } from "react";
 
 export const useAvailableWallets = () => {
@@ -9,7 +12,9 @@ export const useAvailableWallets = () => {
 
   useEffect(() => {
     if (window.injectedWeb3) {
-      setExtensions(window.injectedWeb3);
+      setExtensions(
+        window.injectedWeb3 as Record<string, InjectedWindowProvider>
+      );
     }
   }, []);
 
