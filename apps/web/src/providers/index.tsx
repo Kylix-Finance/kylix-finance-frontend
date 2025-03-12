@@ -9,7 +9,7 @@ import ReactQueryProvider from "./ReactQueryProvider";
 import { Providers as WalletProvider } from "@repo/wallet-modal";
 import { PortalContainer } from "./Portal";
 import BlockProvider from "./BlockProvider";
-import { CssBaseline, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 interface Props {
   children: React.ReactNode;
 }
@@ -20,6 +20,10 @@ const Providers: FC<Props> = ({ children }) => {
   const prefersLightMode = useMediaQuery("(prefers-color-scheme: light)");
   if (prefersDarkMode !== !prefersLightMode) return null;
 
+  const rpcUrl = process.env.NEXT_PUBLIC_RPC_ENDPOINT;
+
+  if (!rpcUrl) return null;
+
   return (
     <AppRouterCacheProvider>
       <ReactQueryProvider>
@@ -28,7 +32,7 @@ const Providers: FC<Props> = ({ children }) => {
             dappName: "Kylix",
             rpc: {
               name: "Kylix",
-              url: "wss://test-dashboard.kylix.finance",
+              url: rpcUrl,
             },
           }}
         >

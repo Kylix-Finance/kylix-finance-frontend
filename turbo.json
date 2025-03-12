@@ -1,6 +1,10 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": ["NEXT_PUBLIC_FRONTEND_URL", "WAITLIST_KEY"],
+  "globalEnv": [
+    "NEXT_PUBLIC_FRONTEND_URL",
+    "NEXT_PUBLIC_RPC_ENDPOINT",
+    "WAITLIST_KEY"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
