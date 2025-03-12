@@ -1,7 +1,13 @@
 import { dialogNames } from "./initialState";
 
-import { StoreSetFn, VoidNoArgs } from "@repo/types";
-
+export type StoreSetFn<StoreType> = (
+  partial:
+    | StoreType
+    | Partial<StoreType>
+    | ((state: StoreType) => StoreType | Partial<StoreType>),
+  // FIXME: below type was boolean | undefined but in V5 I changed it in the below way
+  replace?: false | undefined
+) => void;
 export type DialogName = (typeof dialogNames)[number];
 
 export type DialogProps = {
@@ -19,7 +25,7 @@ export interface DialogState {
 }
 
 export interface DialogTemplateData extends DialogState {
-  close: VoidNoArgs;
+  close: () => void;
   isOpen: boolean;
   name: DialogName;
   open: (props?: OnOpenDialogProps) => void;
@@ -43,8 +49,8 @@ export interface State {
 }
 
 export interface Handlers {
-  setCloseAllDialog: VoidNoArgs;
-  setDialogClose: VoidNoArgs;
+  setCloseAllDialog: () => void;
+  setDialogClose: () => void;
   setOpenDialog: (dialogName: DialogName, props?: OnOpenDialogProps) => void;
   updatePagination: (arg: {
     name: TableName;

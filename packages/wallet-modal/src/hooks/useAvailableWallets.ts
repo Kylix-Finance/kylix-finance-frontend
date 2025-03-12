@@ -9,7 +9,9 @@ export const useAvailableWallets = () => {
 
   useEffect(() => {
     if (window.injectedWeb3) {
-      setExtensions(window.injectedWeb3);
+      setExtensions(
+        window.injectedWeb3 as Record<string, InjectedWindowProvider>
+      );
     }
   }, []);
 
