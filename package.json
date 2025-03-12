@@ -15,15 +15,15 @@
     "cleanup:modules": "node ./scripts/utils/nodeModulesRemover.js",
     "cleanup:ts-cache": "node ./scripts/utils/tsCacheRemover.js",
     "cleanup:turbo-cache": "node ./scripts/utils/turboCacheRemover.js",
-    "update:packageManager": "node ./scripts/utils/updatePackageManager.js pnpm",
     "dev": "pnpm run start:dev",
+    "generate:type": "npx polkadot-types-from-chain --endpoint wss://test-dashboard.kylix.finance --output ./packages/types/src/types",
     "postinstall": "pnpm run setup:app",
     "setup:app": "npx husky install",
     "start": "turbo run start:production",
     "start:dev": "turbo start:dev",
     "start:dev:web": "pnpm run dev --filter=web",
     "start:production": "turbo start:production",
-    "generate:type": "npx polkadot-types-from-chain --endpoint wss://test-dashboard.kylix.finance --output ./packages/types/src/types"
+    "update:packageManager": "node ./scripts/utils/updatePackageManager.js pnpm"
   },
   "dependencies": {
     "@dicebear/collection": "^9.2.2",
