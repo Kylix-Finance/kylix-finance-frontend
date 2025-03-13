@@ -52,7 +52,6 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         id: item.id,
       }));
   }, [data, searchQuery]);
-  console.log("_________________data", transformedData);
 
   return (
     <Table
@@ -75,7 +74,7 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
           <Asset
             helperText={item.asset}
             symbol={item.symbol}
-            label={item.asset.toString()}
+            label={item.symbol.toString()}
           />
         ),
         "Collateral Factor": (item) => (
