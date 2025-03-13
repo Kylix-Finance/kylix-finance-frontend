@@ -36,6 +36,7 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         return {
           health: item.health,
           name: item.assetName,
+          symbol: item.assetSymbol,
           tvl: formatBigNumbers(
             formatUnit(item.tvl.toString(), item.decimal),
             4
@@ -86,7 +87,7 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
               variant="subtitle1"
               className="pl-4 dark:text-black-100"
             >
-              {item.name}
+              {item.symbol}
             </Typography>
           );
         },
