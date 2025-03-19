@@ -38,16 +38,16 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
           name: item.assetName,
           symbol: item.assetSymbol,
           tvl: formatBigNumbers(
-            formatUnit(item.tvl.toString(), item.decimal),
+            formatUnit(item.tvl.toString(), item.assetDecimals),
             4
           ),
           poolSize: formatBigNumbers(
-            formatUnit(item.poolSize.toString(), item.decimal),
+            formatUnit(item.poolSize.toString(), item.assetDecimals),
             4
           ),
           maxDiscount: item.maxDiscount,
           myBid: item.userBid
-            ? formatUnit(item.userBid?.toString(), item.decimal)
+            ? formatUnit(item.userBid?.toString(), item.bidDecimal)
             : "-",
           id: item.assetId,
         };

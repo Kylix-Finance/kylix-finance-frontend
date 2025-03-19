@@ -14,6 +14,7 @@ interface RawMarket {
   max_discount: string;
   user_bid: string | null;
   bid_asset_decimals: bigint;
+  asset_decimals: bigint;
 }
 
 interface Market {
@@ -26,7 +27,8 @@ interface Market {
   poolSize: bigint;
   maxDiscount: string;
   userBid: bigint | null;
-  decimal: number;
+  bidDecimal: number;
+  assetDecimals: number;
 }
 
 type LiquidationMarketsRawData = RawMarket[];
@@ -75,7 +77,8 @@ export const getLiquidationMarkets = async ({
     poolSize: BigInt(market.pool_size),
     maxDiscount: market.max_discount,
     userBid: market.user_bid ? BigInt(market.user_bid) : null,
-    decimal: Number(market.bid_asset_decimals),
+    bidDecimal: Number(market.bid_asset_decimals),
+    assetDecimals: Number(market.asset_decimals),
   }));
   console.log("_____________________________markets", markets);
 
