@@ -18,7 +18,7 @@ import {
   useBalance,
   useMetadata,
 } from "@repo/onchain-utils";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { notify, TokenIcon } from "~/components";
 import { usePlaceBid } from "~/hooks/chain/usePlaceBid";
@@ -37,10 +37,9 @@ const Bid = () => {
   const { activeAccount } = useActiveAccount();
   const isWalletConnected = !!activeAccount?.address;
 
-  const {
-    data: marketBidDistribution,
-    isLoading: isGetMarketBidDistributionLoading,
-  } = useGetMarketBidDistribution({ assetId: id });
+  const { data: marketBidDistribution } = useGetMarketBidDistribution({
+    assetId: id,
+  });
 
   const [discount, setDiscount] = useState("");
 
@@ -108,6 +107,19 @@ const Bid = () => {
     if (test) setDiscount(value);
   };
 
+  const onceRef = useRef(false);
+
+  useEffect(() => {
+    if (!marketBidDistribution || onceRef.current) return;
+    onceRef.current = true;
+
+    const middleDiscount =
+      marketBidDistribution[0].supported_discounts[
+        Math.floor(marketBidDistribution[0].supported_discounts.length / 2)
+      ];
+    changeDiscount(`${middleDiscount || ""}`);
+  }, [marketBidDistribution]);
+
   const changeAmount = (value: string) => {
     if (value === "") return setAmount("");
 
@@ -149,7 +161,7 @@ const Bid = () => {
           Premium (discount)
         </Typography>
       </Box>
-      <Skeleton isLoading={isGetMarketBidDistributionLoading} height="90px">
+      <Skeleton isLoading={!marketBidDistribution} height="90px">
         <Select
           value={discount}
           onChange={(e) => changeDiscount(e.target.value)}
@@ -179,31 +191,31 @@ const Bid = () => {
             },
           }}
           displayEmpty
-          renderValue={(selected) => {
-            if (selected === "") {
-              return (
-                <span className="font-thin w-full flex justify-between opacity-50">
-                  <span>10%</span>
-                  <span>100.00 k</span>
-                </span>
-              );
-            }
+          // renderValue={(selected) => {
+          //   if (selected === "") {
+          //     return (
+          //       <span className="font-thin w-full flex justify-between opacity-50">
+          //         <span></span>
+          //         <span></span>
+          //       </span>
+          //     );
+          //   }
 
-            const selectedItem = marketBidDistribution?.[1].find(
-              (item) => item.discount === Number(selected)
-            );
+          //   const selectedItem = marketBidDistribution?.[1].find(
+          //     (item) => item.discount === Number(selected)
+          //   );
 
-            if (!selectedItem) return selected;
+          //   if (!selectedItem) return selected;
 
-            return (
-              <span className="w-full flex justify-between font-normal">
-                <span>{selectedItem.discount} %</span>
-                <span>
-                  $ {formatBigNumbers(formatUnit(selectedItem.amount, 6), 2)}
-                </span>
-              </span>
-            );
-          }}
+          //   return (
+          //     <span className="w-full flex justify-between font-normal">
+          //       <span>{selectedItem.discount} %</span>
+          //       <span>
+          //         $ {formatBigNumbers(formatUnit(selectedItem.amount, 6), 2)}
+          //       </span>
+          //     </span>
+          //   );
+          // }}
         >
           <MenuItem
             value=""

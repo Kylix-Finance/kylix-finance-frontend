@@ -48,7 +48,7 @@ export const useGetMarketBidDistribution = ({
     queryFn: enabled
       ? () => getMarketBidDistribution({ provider, assetId })
       : skipToken,
-    staleTime: 1000 * 60 * 10,
+    // staleTime: 1000 * 60 * 10,
   });
   return query;
 };
