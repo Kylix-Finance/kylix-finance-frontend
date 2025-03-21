@@ -79,7 +79,7 @@ const Bid = () => {
         balance: parseUnit(amount, assetMetaData.decimals),
         discount: Number(discount),
         onConfirm: () => {
-          setDiscount("");
+          // setDiscount("");
           setAmount("");
         },
       },
