@@ -11,6 +11,7 @@ import { isAccountExists } from "src/utils/validators/isAccountExists";
 import { isApiExists } from "src/utils/validators/isApiExists";
 import { isSignerExists } from "src/utils/validators/isSignerExists";
 import { transactionStatus } from "src/utils/transactionStatus";
+import { validateEstimatedGas } from "src/utils/validateTransactionFees";
 interface SupplyParams {
   assetId: string;
 }
@@ -60,17 +61,7 @@ export const supplyTransaction = async (
 ) => {
   api.setSigner(signer);
   const extrinsic = api.tx.lending.supply(assetId, balance);
-  const estimatedGas = (
-    await extrinsic.paymentInfo(activeAccount)
-  ).partialFee.toBigInt();
-
-  if (!estimatedGas) throw new Error("Unable to estimate gas fees.");
-  if (getBalance && estimatedGas > getBalance) {
-    throw new Error(
-      "You do not have enough balance to cover the transaction fees."
-    );
-  }
-
+  await validateEstimatedGas(extrinsic, activeAccount, getBalance)
   return new Promise((resolve, reject) => {
     extrinsic
       .signAndSend(
