@@ -12,7 +12,7 @@ import { useMutation } from "@tanstack/react-query";
 interface MutationFnProps {
   balance: string | bigint;
   discount: number;
-  onConfirm?: VoidFunction;
+  onConfirm?: globalThis.VoidFunction;
 }
 interface Params {
   asset: string;

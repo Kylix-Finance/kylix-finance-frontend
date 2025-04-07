@@ -46,9 +46,9 @@ const TotalValue = () => {
   return (
     <Box className="flex flex-col h-full">
       <Typography
-        variant="h4"
-        marginBottom="36px"
         className="dark:text-black-100"
+        marginBottom="36px"
+        variant="h4"
       >
         {numToLocalString(
           Number(rawTotalBorrowed || 0) + Number(rawTotalSupplied || 0)
@@ -68,9 +68,9 @@ const TotalValue = () => {
               <div key={item.label}>
                 <FinanceSummary
                   key={item.label}
+                  color={item.color}
                   label={item.label}
                   value={item.value}
-                  color={item.color}
                 />
               </div>
             );

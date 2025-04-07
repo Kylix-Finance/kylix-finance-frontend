@@ -26,9 +26,7 @@ const CancelBidButton = ({
   };
   return (
     <Button
-      variant="contained"
       color="error"
-      onClick={cancelHandler}
       disabled={isPending}
       sx={{
         ":disabled": {
@@ -36,6 +34,8 @@ const CancelBidButton = ({
           color: "#E23D2885",
         },
       }}
+      variant="contained"
+      onClick={cancelHandler}
     >
       Cancel
     </Button>

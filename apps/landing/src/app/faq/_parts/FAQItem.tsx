@@ -14,8 +14,8 @@ const FAQItem = ({ description, title }: FAQItemProps) => {
   return (
     <div className="flex flex-col gap-6 p-4 backdrop-blur-md bg-[#A6CEC20F] rounded-lg">
       <div
-        onClick={() => setIsOpen(!isOpen)}
         className="flex items-center w-full justify-between cursor-pointer select-none relative z-50"
+        onClick={() => setIsOpen(!isOpen)}
       >
         <p
           className={`transition-all duration-300 text-xl ${
@@ -37,11 +37,11 @@ const FAQItem = ({ description, title }: FAQItemProps) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
+            exit={{ height: 0, opacity: 0 }}
+            initial={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
           >
             <p className="text-sm lg:text-lg font-normal text-secondary-100">
               {description}

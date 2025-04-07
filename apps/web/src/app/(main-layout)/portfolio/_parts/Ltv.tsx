@@ -8,12 +8,12 @@ const Ltv = () => {
 
   return (
     <ProgressBar
-      isLoading={false}
       data={{
         current: Number(data?.currentLtv || 0),
         sale: Number(data?.saleLtv || 50),
         target: Number(data?.liquidationLtv || 100),
       }}
+      isLoading={false}
     />
   );
 };

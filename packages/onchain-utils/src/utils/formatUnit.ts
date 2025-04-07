@@ -14,8 +14,8 @@ export function formatUnit(
     valueStr = valueStr.padStart(decimals + 1, "0");
   }
 
-  let wholePart: string = valueStr.slice(0, valueStr.length - decimals);
-  let fractionalPart: string = valueStr
+  const wholePart: string = valueStr.slice(0, valueStr.length - decimals);
+  const fractionalPart: string = valueStr
     .slice(valueStr.length - decimals)
     .replace(/0+$/, "");
   if (fractionalPart === "") {

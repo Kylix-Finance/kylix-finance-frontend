@@ -74,7 +74,7 @@ function TRow<Schema, ExtraFields extends string = string>({
                 : {}),
             }}
           >
-            <Skeleton key={index} height={40} isLoading={isLoading}>
+            <Skeleton height={40} isLoading={isLoading}>
               {row &&
                 (ValueComponent
                   ? ValueComponent(row)

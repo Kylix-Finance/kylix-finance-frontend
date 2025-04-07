@@ -20,8 +20,6 @@ const DoughnutChart: React.FC<Props> = ({
     <div className="flex justify-center items-center w-25 h-25">
       {data ? (
         <Doughnut
-          width="100%"
-          height="100%"
           data={{
             datasets: [
               {
@@ -34,6 +32,7 @@ const DoughnutChart: React.FC<Props> = ({
             ],
             labels,
           }}
+          height="100%"
           options={{
             animation: {
               duration: 300,
@@ -47,6 +46,7 @@ const DoughnutChart: React.FC<Props> = ({
               },
             },
           }}
+          width="100%"
         />
       ) : (
         <LoadingSpinner />

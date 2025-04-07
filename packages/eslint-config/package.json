@@ -2,7 +2,11 @@
   "name": "@repo/eslint-config",
   "version": "0.0.0",
   "private": true,
-  "main": "./src/index.js",
+  "files": [
+    "./base.cjs",
+    "./react-internal.cjs",
+    "./nextjs.cjs"
+  ],
   "scripts": {
     "check:format": "prettier --write  --list-different ./",
     "check:lint": "eslint ./",

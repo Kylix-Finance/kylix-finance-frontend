@@ -32,8 +32,8 @@ const tabItems: Array<TabType> = [
 const TransactionForm = () => {
   return (
     <Card
-      elevation={0}
       className="bg-white border dark:bg-black-500 !border-primary-800/20 !p-4 !rounded-lg"
+      elevation={0}
     >
       <TabsManager tabs={tabItems} />
     </Card>

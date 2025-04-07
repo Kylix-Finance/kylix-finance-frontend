@@ -68,9 +68,9 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <Dialog
-      open={isOpen}
       fullWidth
       fullScreen={isFullScreenOnSmallScreen}
+      open={isOpen}
       onClose={isClosable ? handleClose : undefined}
       {...rest}
       PaperProps={{
@@ -86,15 +86,15 @@ const Modal: React.FC<ModalProps> = ({
         <DialogTitle
           {...titleProps}
           align="center"
+          className="!p-0 !m-0"
           display="flex"
           flexDirection="column"
-          className="!p-0 !m-0"
         >
           <Box className="flex justify-end">
             <IconButton
+              className="justify-end"
               size="small"
               onClick={handleClose}
-              className="justify-end"
             >
               <Icons.XIcon />
             </IconButton>
@@ -112,20 +112,20 @@ const Modal: React.FC<ModalProps> = ({
         <DialogActions {...actionProps} className="!w-full  !p-0">
           {cancelButton && (
             <Button
-              onClick={cancelButton.onClick}
-              variant="outlined"
-              size="small"
               className="!w-full !rounded-md !border !border-primary-500/15 !text-[#4C5452] !capitalize"
+              size="small"
+              variant="outlined"
+              onClick={cancelButton.onClick}
             >
               {cancelButton.title}
             </Button>
           )}
           {acceptButton && (
             <Button
-              onClick={acceptButton.onClick}
-              variant="contained"
-              size="small"
               className="!w-full !rounded-md !border !border-primary-500/15 !text-white !capitalize !font-semibold"
+              size="small"
+              variant="contained"
+              onClick={acceptButton.onClick}
             >
               {acceptButton.title}
             </Button>

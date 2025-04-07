@@ -1,7 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { ComponentProps, useEffect, useRef } from "react";
+import { ComponentProps } from "react";
 import { Line } from "react-chartjs-2";
 import { palette } from "~/config/palette";
 import { formatNumber } from "~/utils";
@@ -9,7 +9,6 @@ import "chartjs-adapter-date-fns";
 import "chart.js/auto";
 import { ChartScale } from "~/types";
 import { getTimeUnit } from "~/utils/date";
-import { useLocalStorage } from "usehooks-ts";
 import { hexToRgb } from "@repo/utils";
 import { useIsDarkMode } from "@repo/ui";
 import { LoadingSpinner } from "~/components/Loaders";
@@ -43,9 +42,9 @@ export const MultiLineChart = ({
 
   return (
     <Box
+      className="flex items-center justify-center bg-white dark:bg-black-800"
       height={280}
       width="100%"
-      className="flex items-center justify-center bg-white dark:bg-black-800"
     >
       {isLoading ? (
         <LoadingSpinner />

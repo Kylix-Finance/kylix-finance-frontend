@@ -106,19 +106,19 @@ export function Table<Schema, ExtraFields extends string = string>({
           headers={headers}
           hiddenTHeads={hiddenTHeads}
           numeric={numeric}
-          onRequestSort={handleRequestSort}
           order={order}
           orderBy={orderBy}
+          onRequestSort={handleRequestSort}
           {...tHeadProps}
         />
 
         <TBody
+          componentBeforeBody={componentBeforeBody}
           components={components}
           data={sortedData}
           headers={headers}
           isFetched={isFetched}
           isLoading={isLoading}
-          componentBeforeBody={componentBeforeBody}
           noDataComponent={noDataComponent}
           numeric={numeric}
           placeholderLength={placeholderLength}
@@ -126,8 +126,8 @@ export function Table<Schema, ExtraFields extends string = string>({
           tableName={tableName}
           tBody={tBodyProps}
           tCellClassnames={tCellClassnames}
-          tRowProps={tRowProps}
           tRowClassName={tRowClassName}
+          tRowProps={tRowProps}
         />
       </TableBase>
       {hasPagination && <TablePagination tableName={tableName} />}

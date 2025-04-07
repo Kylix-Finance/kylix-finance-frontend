@@ -1,9 +1,7 @@
 import {
-  fixPrecision,
   formatUnit,
   MetadataResult,
   useActiveAccount,
-  useMetadata,
   useProvider,
 } from "@repo/onchain-utils";
 import {

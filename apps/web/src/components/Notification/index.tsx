@@ -33,7 +33,7 @@ export const notify = (
   };
 
   toast(
-    <Container type={type} message={message} title={title} />,
+    <Container message={message} title={title} type={type} />,
     toastOptions
   );
 };

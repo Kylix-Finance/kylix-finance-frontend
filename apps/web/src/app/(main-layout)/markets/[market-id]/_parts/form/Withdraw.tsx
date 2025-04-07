@@ -1,17 +1,11 @@
 "use client";
-import { ListItem, notify, TokenIcon } from "~/components";
+import { ListItem, notify } from "~/components";
 import { Form } from "./Form";
 import { useState } from "react";
 import { useParams } from "next/navigation";
-import {
-  formatUnit,
-  parseUnit,
-  useBalance,
-  useMetadata,
-} from "@repo/onchain-utils";
+import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
 import { useWithdraw } from "~/hooks/chain/useWithdraw";
 import { usePool } from "~/hooks/chain/usePool";
-import { Box, Typography } from "@mui/material";
 import ValueItemWrapper from "./ValueItemWrapper";
 import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
 
@@ -64,10 +58,10 @@ export const Withdraw = () => {
       label: "Available",
       value: (
         <ValueItemWrapper
-          value={Number(formattedBalance || 0).toLocaleString()}
-          iconName={assetMetaData?.symbol}
           iconHeight={20}
+          iconName={assetMetaData?.symbol}
           iconWidth={20}
+          value={Number(formattedBalance || 0).toLocaleString()}
         />
       ),
       valueClassName: "text-[#4E5B72] dark:text-primary-100",
@@ -82,10 +76,10 @@ export const Withdraw = () => {
       label: "Supplied",
       value: (
         <ValueItemWrapper
-          value={Number(formattedBalance || 0).toLocaleString()}
-          iconName={assetMetaData?.symbol}
           iconHeight={20}
+          iconName={assetMetaData?.symbol}
           iconWidth={20}
+          value={Number(formattedBalance || 0).toLocaleString()}
         />
       ),
       valueClassName: "text-[#4E5B72] dark:text-primary-100",
@@ -106,24 +100,24 @@ export const Withdraw = () => {
   return (
     <Form
       assetId={tokenId}
-      items={items}
+      balance={formattedBalance}
       decimals={Number(assetMetaData?.decimals) || 18}
-      setValue={setValue}
-      value={value}
-      submitButton={{
-        onclick: () => handleClick(),
-        content: "Withdraw",
-      }}
+      isMaxLoading={isBalanceLoading}
+      isSubmitting={isPending}
+      items={items}
       secondButton={{
         onclick: () => handleClick(true),
         content: "Withdraw All",
         disabled: Number(formattedBalance || 0) === 0,
       }}
-      isSubmitting={isPending}
-      isMaxLoading={isBalanceLoading}
-      onMaxClick={onMaxClick}
-      balance={formattedBalance}
+      setValue={setValue}
+      submitButton={{
+        onclick: () => handleClick(),
+        content: "Withdraw",
+      }}
       symbol={assetMetaData?.symbol}
+      value={value}
+      onMaxClick={onMaxClick}
     />
   );
 };

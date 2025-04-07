@@ -20,9 +20,9 @@ const Section = ({ heading, data }: FAQSectionProps) => {
         <div className="flex flex-col gap-2.5  relative z-50">
           {data.map((item, index) => (
             <Item
-              key={index}
-              title={item.title}
+              key={item.title + index}
               description={item.description}
+              title={item.title}
             />
           ))}
         </div>

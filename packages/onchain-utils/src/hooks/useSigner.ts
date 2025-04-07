@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useAccountStore } from "@repo/shared";
 import { getWalletExtension } from "@repo/shared";
 import { Signer } from "@polkadot/api/types";
-import { useActiveConnector } from "./useActiveConnector";
 
 interface UseSignerResult {
   signer: Signer | undefined;

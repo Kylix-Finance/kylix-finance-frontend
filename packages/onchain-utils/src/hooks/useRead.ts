@@ -2,7 +2,6 @@
 import { WsProvider } from "@polkadot/api";
 import { IOCollection, SubscriptionHandler } from "../types";
 import { useProvider } from "./useProvider";
-import { useEffect, useRef, useState } from "react";
 import { skipToken, useQuery } from "@tanstack/react-query";
 
 async function read<T extends keyof IOCollection>(

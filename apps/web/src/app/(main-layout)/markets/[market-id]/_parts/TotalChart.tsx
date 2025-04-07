@@ -11,7 +11,7 @@ const TotalChart = () => {
   const { data, isFetched } = usePoolsData(marketId);
 
   return (
-    <Card variant="outlined" className="dark:bg-black-500 z-[999]">
+    <Card className="dark:bg-black-500 z-[999]" variant="outlined">
       <Box className="flex justify-between items-center mb-3">
         <Box className="flex gap-6 mt-3">
           <Box className="flex gap-2 items-center">
@@ -26,8 +26,6 @@ const TotalChart = () => {
       </Box>
 
       <MultiLineChart
-        isLoading={!isFetched}
-        scale="1d"
         datasets={[
           {
             data,
@@ -50,6 +48,8 @@ const TotalChart = () => {
             },
           },
         ]}
+        isLoading={!isFetched}
+        scale="1d"
       />
     </Card>
   );

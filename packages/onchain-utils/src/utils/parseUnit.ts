@@ -10,8 +10,10 @@ export function parseUnit(
   decimals: number = 18
 ): bigint {
   const valueStr: string = value.toString();
-  let [wholePart, fractionalPart = ""] = valueStr.split(".");
-  fractionalPart = fractionalPart.padEnd(decimals, "0").slice(0, decimals);
-  let combined = `${wholePart}${fractionalPart}`.replace(/^0+/, "");
+  const [wholePart, fractionalPart = ""] = valueStr.split(".");
+  const slicedFractionalPart = fractionalPart
+    .padEnd(decimals, "0")
+    .slice(0, decimals);
+  const combined = `${wholePart}${slicedFractionalPart}`.replace(/^0+/, "");
   return combined === "" ? BigInt("0") : BigInt(combined);
 }

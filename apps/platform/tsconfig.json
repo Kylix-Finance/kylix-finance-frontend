@@ -1,0 +1,20 @@
+{
+  "extends": "@repo/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["testSrc/*"],
+      "#/*": ["public/*"],
+      "~/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src",
+    "next-env.d.ts",
+    "./react-app-env.d.ts",
+    "../../theme.d.ts",
+    ".next/types/**/*.ts",
+    "../../global.d.ts"
+  ],
+  "exclude": ["node_modules"]
+}

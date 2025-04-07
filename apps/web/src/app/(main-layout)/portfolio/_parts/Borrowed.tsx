@@ -1,18 +1,10 @@
 "use client";
 
-import { Box, Button, Link, Stack, Typography } from "@mui/material";
-import {
-  formatBigNumbers,
-  formatUnit,
-  MetadataResult,
-  useMetadata,
-  useProvider,
-} from "@repo/onchain-utils";
+import { Button, Link, Stack, Typography } from "@mui/material";
+import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
 import { Table } from "@repo/ui";
-import { useEffect, useState } from "react";
 import { Asset } from "~/components";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
-import { formatPercentage } from "~/utils";
 import { TableActions } from "../../markets/_parts/TableActions";
 
 const Borrowed = () => {
@@ -38,26 +30,9 @@ const Borrowed = () => {
 
   return (
     <Table
-      isFetched={isFetched}
-      placeholderLength={3}
-      isLoading={isLoading}
-      tCellClassnames={"!p-3"}
-      noDataComponent={NoData}
-      rowSpacing="10px"
-      hasPagination={false}
-      defaultSortKey="asset"
-      headers={{
-        asset: "Asset",
-        balance: "Balance",
-        apy: "APY",
-        borrowed: "Borrowed",
-        actions: "Action",
-      }}
-      hiddenTHeads={["actions"]}
-      tableName="borrow"
       components={{
         asset: (item) => (
-          <Asset label={item.asset} helperText="" symbol={item.symbol} />
+          <Asset helperText="" label={item.asset} symbol={item.symbol} />
         ),
         apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,
         balance: (item) => (
@@ -75,13 +50,30 @@ const Borrowed = () => {
         ),
       }}
       data={data || []}
+      defaultSortKey="asset"
+      hasPagination={false}
+      headers={{
+        asset: "Asset",
+        balance: "Balance",
+        apy: "APY",
+        borrowed: "Borrowed",
+        actions: "Action",
+      }}
+      hiddenTHeads={["actions"]}
+      isFetched={isFetched}
+      isLoading={isLoading}
+      noDataComponent={NoData}
+      placeholderLength={3}
+      rowSpacing="10px"
+      tableName="borrow"
+      tCellClassnames="!p-3"
     />
   );
 };
 
 const NoData = () => {
   return (
-    <Stack gap={1} alignItems="center">
+    <Stack alignItems="center" gap={1}>
       <Typography variant="subtitle1">No Data Available</Typography>
       <Link href="/markets">
         <Button>Borrow</Button>

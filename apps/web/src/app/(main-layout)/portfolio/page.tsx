@@ -13,22 +13,22 @@ export default function Page() {
   return (
     <Box className={styles.container}>
       <Card
-        className={styles.total}
-        title="Total Portfolio Value"
-        icon={Icons.WalletFill}
         hasIconBackground
+        className={styles.total}
+        icon={Icons.WalletFill}
+        title="Total Portfolio Value"
       >
         <TotalValue />
       </Card>
       <Card
-        className={styles.collateral}
-        title="Total Collateral Value"
-        icon={Icons.WalletFill}
         hasIconBackground
+        className={styles.collateral}
+        icon={Icons.WalletFill}
+        title="Total Collateral Value"
       >
         <CollateralValue />
       </Card>
-      <Card className={styles.borrow} hasIconBackground>
+      <Card hasIconBackground className={styles.borrow}>
         <BorrowValue />
       </Card>
       <Card className={styles.progress_bar}>

@@ -1,7 +1,4 @@
-import {
-  Injected,
-  InjectedWindowProvider,
-} from "@polkadot/extension-inject/types";
+import { InjectedWindowProvider } from "@polkadot/extension-inject/types";
 import { useEffect, useState } from "react";
 
 export const useAvailableWallets = () => {

@@ -36,9 +36,9 @@ export const BarChart = ({
 }: BarChartProps) => {
   return (
     <Box
+      className="flex justify-center items-center"
       height={height}
       width="100%"
-      className="flex justify-center items-center"
     >
       {data ? (
         <Bar

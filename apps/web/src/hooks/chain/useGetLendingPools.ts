@@ -1,14 +1,7 @@
 import { WsProvider } from "@polkadot/api";
-import {
-  formatUnit,
-  LendingPool,
-  LendingPoolsResponse,
-  useActiveAccount,
-  useProvider,
-} from "@repo/onchain-utils";
+import { useActiveAccount, useProvider } from "@repo/onchain-utils";
 import { queryKeys } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { getAssetPrice, useGetAssetPrice } from "./useGetAssetPrice";
 
 interface RawAsset {
   id: number;

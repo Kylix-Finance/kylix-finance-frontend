@@ -10,14 +10,14 @@ export const TableActions = ({ assetId }: Props) => {
     <Box className="flex justify-end gap-1">
       <Link href={`/srl/${assetId}`}>
         <Button variant="contained">
-          <Typography className="!text-[#FFF]" variant="body3" fontWeight={600}>
+          <Typography className="!text-[#FFF]" fontWeight={600} variant="body3">
             Repay
           </Typography>
         </Button>
       </Link>
 
       <Button variant="outlined">
-        <Typography variant="body3" fontWeight={600}>
+        <Typography fontWeight={600} variant="body3">
           Details
         </Typography>
       </Button>

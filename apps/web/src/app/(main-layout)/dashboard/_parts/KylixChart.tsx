@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Chip, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 import LineChart from "~/components/Charts/LineChart";
 import PeriodSelector from "~/components/PeriodSelector";
@@ -59,12 +59,12 @@ const KylixChart = () => {
       </Box>
       <LineChart
         round
-        scale={selectedPeriod}
         data={data}
         parsing={{
           xAxisKey: "time",
           yAxisKey: "price",
         }}
+        scale={selectedPeriod}
       />
     </Box>
   );

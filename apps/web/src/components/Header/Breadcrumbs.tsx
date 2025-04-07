@@ -7,8 +7,8 @@ interface Props {
 
 const Breadcrumbs = ({ pathnames }: Props) => {
   return (
-    <BaseBreadcrumbs separator="/" className="!font-normal !text-xs !leading-4">
-      <Typography variant="caption" className="text-[#A0AEC0]">
+    <BaseBreadcrumbs className="!font-normal !text-xs !leading-4" separator="/">
+      <Typography className="text-[#A0AEC0]" variant="caption">
         Pages
       </Typography>
       {pathnames.map((value, index) => {
@@ -16,8 +16,8 @@ const Breadcrumbs = ({ pathnames }: Props) => {
         return (
           <Link key={to} href={to}>
             <Typography
-              variant="caption"
               className="text-[#2D3748] dark:text-primary-100/50"
+              variant="caption"
             >
               {value.charAt(0).toUpperCase() + value.slice(1)}
             </Typography>

@@ -1,10 +1,7 @@
+import { PropsWithChildren } from "react";
 import { useIsMounted } from "~/hooks/useIsMounted";
 
-type ClientOnly = {
-  children: React.ReactNode;
-};
-
-const ClientOnly = ({ children }: ClientOnly) => {
+const ClientOnly = ({ children }: PropsWithChildren) => {
   const isMounted = useIsMounted();
 
   if (!isMounted) {

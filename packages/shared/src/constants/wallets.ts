@@ -35,7 +35,9 @@ export const wallets: Wallet[] = [
   },
 
   {
+    // eslint-disable-next-line @cspell/spellchecker
     name: "Enkrypt",
+    // eslint-disable-next-line @cspell/spellchecker
     id: "enkrypt",
     image:
       "https://lh3.googleusercontent.com/vnBK5cIqGFfMnjjbFhLqPwDGvamvCSe79hjvXy3FEsR8z0thgdhpx6ouMdgBJYScMVurWgmGMkbsw28DIHIfXDFs=s120",

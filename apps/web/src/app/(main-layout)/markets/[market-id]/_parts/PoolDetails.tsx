@@ -36,10 +36,10 @@ const PoolDetails = () => {
       label: "Total Supply:",
       value: (
         <ValueItemWrapper
-          value={formatBigNumbers(totalSupply || "0", 2)}
+          iconHeight={20}
           iconName={assetMetaData?.symbol}
           iconWidth={20}
-          iconHeight={20}
+          value={formatBigNumbers(totalSupply || "0", 2)}
         />
       ),
     },
@@ -47,10 +47,10 @@ const PoolDetails = () => {
       label: "Total Borrow:",
       value: (
         <ValueItemWrapper
-          value={formatBigNumbers(totalBorrow || "0", 2)}
+          iconHeight={20}
           iconName={assetMetaData?.symbol}
           iconWidth={20}
-          iconHeight={20}
+          value={formatBigNumbers(totalBorrow || "0", 2)}
         />
       ),
     },
@@ -91,18 +91,18 @@ const PoolDetails = () => {
             <TokenIcon symbol={assetMetaData?.symbol} />{" "}
             <Box className="flex flex-col">
               <Typography
-                variant="subtitle2"
                 className="text-primary-800 dark:text-primary-100"
+                variant="subtitle2"
               >
-                <Skeleton minWidth={20} isLoading={!assetMetaData}>
+                <Skeleton isLoading={!assetMetaData} minWidth={20}>
                   {assetMetaData?.name}
                 </Skeleton>
               </Typography>
               <Typography
-                variant="caption"
                 className="text-primary-800/50 dark:text-primary-200"
+                variant="caption"
               >
-                <Skeleton minWidth={20} isLoading={!assetMetaData}>
+                <Skeleton isLoading={!assetMetaData} minWidth={20}>
                   {assetMetaData?.symbol}
                 </Skeleton>
               </Typography>
@@ -111,12 +111,12 @@ const PoolDetails = () => {
         </Box>
         {formattedPrice && (
           <Box className="flex flex-col lg:flex-row flex-nowrap items-center text-primary-800 gap-2.5 ">
-            <Typography variant="subtitle2" className="dark:text-primary-100">
+            <Typography className="dark:text-primary-100" variant="subtitle2">
               Price:
             </Typography>
             <Typography
-              variant="body1"
               className="dark:text-primary-100 flex-nowrap"
+              variant="body1"
             >
               $ {formatBigNumbers(formattedPrice, 4)}
             </Typography>
@@ -125,9 +125,9 @@ const PoolDetails = () => {
       </Box>
       {/* Pool status */}
       <Card
+        className="flex flex-col lg:flex-row justify-between dark:bg-black-500"
         elevation={0}
         variant="outlined"
-        className="flex flex-col lg:flex-row justify-between dark:bg-black-500"
       >
         <List items={items} />
         <List items={items2} />

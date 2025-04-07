@@ -7,7 +7,7 @@ import {
   useSigner,
 } from "@repo/onchain-utils";
 import { queryKeys } from "@repo/shared";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 interface MutationFnProps {
   asset: number | string;
@@ -103,16 +103,14 @@ export const borrowTransaction = async (
               } else {
                 reject(new Error(dispatchError.toString()));
               }
+            } else if (status.isInBlock) {
+              console.info("Transaction inBlock:", { blockNumber, txHash });
+              resolve({
+                txHash: txHash.toString(),
+                blockNumber: blockNumber?.toString(),
+              });
             } else {
-              if (status.isInBlock) {
-                console.info("Transaction inBlock:", { blockNumber, txHash });
-                resolve({
-                  txHash: txHash.toString(),
-                  blockNumber: blockNumber?.toString(),
-                });
-              } else {
-                console.info(`Transaction status: ${status.type}`);
-              }
+              console.info(`Transaction status: ${status.type}`);
             }
           }
         )

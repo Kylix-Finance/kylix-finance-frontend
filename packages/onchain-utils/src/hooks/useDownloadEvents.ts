@@ -15,7 +15,7 @@ export const useDownloadEvents = () => {
           //   lastHeader?.hash || ""
           // );
 
-          // console.log("eventseventseventsevents", events?.toHuman());
+          // console.log("event:", events?.toHuman());
           // await api?.disconnect();
 
           // return events;

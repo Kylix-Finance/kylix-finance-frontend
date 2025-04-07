@@ -31,7 +31,7 @@ export const useEnableAsCollateral = () => {
         api,
         signer,
         activeAccount: activeAccount?.address,
-        balance: balance,
+        balance,
       }),
     onSuccess: (_, { assetId }) => {
       queryClient.setQueryData<LendingPoolsReturnType>(
@@ -101,16 +101,14 @@ export const enableAsCollateral = async (
               } else {
                 reject(new Error(dispatchError.toString()));
               }
+            } else if (status.isInBlock) {
+              console.info("Transaction inBlock:", { blockNumber, txHash });
+              resolve({
+                txHash: txHash.toString(),
+                blockNumber: blockNumber?.toString(),
+              });
             } else {
-              if (status.isInBlock) {
-                console.info("Transaction inBlock:", { blockNumber, txHash });
-                resolve({
-                  txHash: txHash.toString(),
-                  blockNumber: blockNumber?.toString(),
-                });
-              } else {
-                console.info(`Transaction status: ${status.type}`);
-              }
+              console.info(`Transaction status: ${status.type}`);
             }
           }
         )

@@ -3,12 +3,7 @@
 import { ListItem, notify } from "~/components";
 import { Form } from "./Form";
 import { useState } from "react";
-import {
-  formatUnit,
-  parseUnit,
-  useBalance,
-  useMetadata,
-} from "@repo/onchain-utils";
+import { parseUnit, useBalance, useMetadata } from "@repo/onchain-utils";
 import { useSupply } from "~/hooks/chain/useSupply";
 import { useParams } from "next/navigation";
 import { usePool } from "~/hooks/chain/usePool";
@@ -60,10 +55,10 @@ export const Supply = () => {
       label: "Available",
       value: (
         <ValueItemWrapper
-          value={Number(formattedBalance || 0).toLocaleString()}
-          iconName={assetMetaData?.symbol}
           iconHeight={20}
+          iconName={assetMetaData?.symbol}
           iconWidth={20}
+          value={Number(formattedBalance || 0).toLocaleString()}
         />
       ),
       valueClassName: "text-[#4E5B72] dark:text-primary-100",
@@ -78,10 +73,10 @@ export const Supply = () => {
       label: "Supplied",
       value: (
         <ValueItemWrapper
-          value={Number(formattedKTokenBalance || 0).toLocaleString()}
-          iconName={assetMetaData?.symbol}
           iconHeight={20}
+          iconName={assetMetaData?.symbol}
           iconWidth={20}
+          value={Number(formattedKTokenBalance || 0).toLocaleString()}
         />
       ),
       valueClassName: "text-[#4E5B72] dark:text-primary-100",
@@ -103,19 +98,19 @@ export const Supply = () => {
   return (
     <Form
       assetId={tokenId}
-      items={items}
+      balance={formattedBalance}
       decimals={assetMetaData?.decimals}
+      isMaxLoading={isBalanceLoading}
+      isSubmitting={isPending}
+      items={items}
       setValue={setValue}
-      value={value}
       submitButton={{
         onclick: handleClick,
         content: "Supply",
       }}
-      isSubmitting={isPending}
-      isMaxLoading={isBalanceLoading}
-      onMaxClick={onMaxClick}
-      balance={formattedBalance}
       symbol={assetMetaData?.symbol}
+      value={value}
+      onMaxClick={onMaxClick}
     />
   );
 };

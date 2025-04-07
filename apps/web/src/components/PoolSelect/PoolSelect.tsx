@@ -1,6 +1,5 @@
 import {
   Autocomplete,
-  Icon,
   InputAdornment,
   TextField,
   useTheme,
@@ -26,21 +25,13 @@ export const PoolSelect = ({ setValue, value, options, className }: Props) => {
 
   return (
     <Autocomplete
+      disableClearable
       className={cn(className)}
-      sx={(theme) => ({
-        backgroundColor: "#45A9961A",
-        borderTopLeftRadius: "4px",
-        borderBottomLeftRadius: "4px",
-      })}
+      getOptionLabel={(option: SelectOption) => option.label}
       isOptionEqualToValue={(option: SelectOption, value: SelectOption) =>
         option.value === value.value
       }
-      value={value}
-      onChange={handleChange}
       options={options}
-      disableClearable
-      getOptionLabel={(option: SelectOption) => option.label}
-      renderOption={SelectRenderOption}
       popupIcon={<ExpandMoreIcon />}
       renderInput={(params) => (
         <TextField
@@ -51,12 +42,20 @@ export const PoolSelect = ({ setValue, value, options, className }: Props) => {
             ...params.InputProps,
             startAdornment: (
               <InputAdornment position="start">
-                <TokenIcon width={28} height={28} symbol={value?.label} />
+                <TokenIcon height={28} symbol={value?.label} width={28} />
               </InputAdornment>
             ),
           }}
         />
       )}
+      renderOption={SelectRenderOption}
+      sx={() => ({
+        backgroundColor: "#45A9961A",
+        borderTopLeftRadius: "4px",
+        borderBottomLeftRadius: "4px",
+      })}
+      value={value}
+      onChange={handleChange}
     />
   );
 };

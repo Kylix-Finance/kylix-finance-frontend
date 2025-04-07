@@ -1,13 +1,7 @@
-import {
-  Button,
-  InputAdornment,
-  TextField,
-  TextFieldProps,
-} from "@mui/material";
+import { Button, InputAdornment, TextField } from "@mui/material";
 import { PoolSelect } from "../PoolSelect";
-import { cn, getDecimalRegex, handleInputChange } from "~/utils";
-import { useCallback, useMemo, useState } from "react";
-import { usePools } from "~/hooks/chain/usePools";
+import { cn, handleInputChange } from "~/utils";
+import { useMemo, useState } from "react";
 import { SelectOption } from "~/types";
 import { useMetadata } from "@repo/onchain-utils";
 import { debounce } from "lodash-es";
@@ -56,25 +50,19 @@ export const InputWithSelect = ({
         <span className="w-0.5 h-[22px] bg-[#1A433B33]" />
       </div>
       <TextField
-        value={isReadOnly ? value : localValue}
-        onChange={(e) => {
-          handleInputChange(e, setLocalValue, assetMetaData?.decimals || 6);
-          debouncedSetValue(e.target.value);
-        }}
         fullWidth
-        placeholder="0"
-        className={cn(
-          "!w-1/2 !rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
-        )}
-        // error={!!error}
-        // helperText={error}
-        inputMode="numeric"
         autoComplete="off"
         FormHelperTextProps={{
           sx: {
             fontWeight: "bold",
           },
         }}
+        inputMode="numeric"
+        className={cn(
+          "!w-1/2 !rounded-md !font-number !font-bold !text-base !text-primary-800 !leading-5"
+        )}
+        // error={!!error}
+        // helperText={error}
         inputProps={{
           style: { cursor: isReadOnly ? "not-allowed" : "text" },
           className: "!font-number",
@@ -110,6 +98,12 @@ export const InputWithSelect = ({
               </Button>
             </InputAdornment>
           ),
+        }}
+        placeholder="0"
+        value={isReadOnly ? value : localValue}
+        onChange={(e) => {
+          handleInputChange(e, setLocalValue, assetMetaData?.decimals || 6);
+          debouncedSetValue(e.target.value);
         }}
       />
     </div>

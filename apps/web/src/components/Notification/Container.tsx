@@ -40,9 +40,9 @@ const Container: React.FC<NotificationProps> = ({ type, message, title }) => {
         <Box className="flex gap-1.5 font-bold text-sm leading-5">
           {ICONS[type]}
           <Typography
-            variant="subtitle2"
-            textTransform="capitalize"
             className={`${TEXT_COLORS[type]}`}
+            textTransform="capitalize"
+            variant="subtitle2"
           >
             {title}
           </Typography>
@@ -53,8 +53,8 @@ const Container: React.FC<NotificationProps> = ({ type, message, title }) => {
         />
       </Box>
       <Typography
-        variant="body3"
         className="text-[#82908D] dark:text-primary-100"
+        variant="body3"
       >
         {message}
       </Typography>

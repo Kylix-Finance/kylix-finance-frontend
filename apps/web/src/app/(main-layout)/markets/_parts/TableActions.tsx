@@ -19,8 +19,8 @@ export const TableActions = ({
         <Button className="dark:bg-[#56DDB4]" variant="contained">
           <Typography
             className="text-[#FFF] dark:text-[#0D0D0D]"
-            variant="body3"
             fontWeight={600}
+            variant="body3"
           >
             {firstAction}
           </Typography>
@@ -29,9 +29,9 @@ export const TableActions = ({
       <Link href={`/markets/${assetId}?tab=${secondAction.toLowerCase()}`}>
         <Button variant="outlined">
           <Typography
-            variant="body3"
             className="dark:text-[#56DDB4]"
             fontWeight={600}
+            variant="body3"
           >
             {secondAction}
           </Typography>

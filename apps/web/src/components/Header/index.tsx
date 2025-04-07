@@ -36,10 +36,10 @@ const Header = () => {
       <Box className="flex">
         {isMobile && (
           <IconButton
-            edge="start"
-            color="inherit"
-            onClick={() => setSidebarOpen(true)}
             className="self-start"
+            color="inherit"
+            edge="start"
+            onClick={() => setSidebarOpen(true)}
           >
             <MenuIcon />
           </IconButton>
@@ -56,8 +56,8 @@ const Header = () => {
 
         <ThemeSwitch
           checked={mode === "dark"}
-          icon={SwitchIcon}
           checkedIcon={SwitchIcon}
+          icon={SwitchIcon}
           onChange={() => toggle()}
         />
         {activeAccount && <UserBalance />}

@@ -15,18 +15,18 @@ const MainLayout = ({ children }: Props) => {
         <Sidebar />
         <Box className="w-full min-h-full flex flex-col p-6">
           <Header />
-          <Box component="main" className="w-full h-full flex flex-col">
+          <Box className="w-full h-full flex flex-col" component="main">
             {children}
           </Box>
         </Box>
       </Box>
       <Box className="flex flex-col lg:hidden w-screen h-screen justify-center items-center text-xl font-light p-12 text-center bg-primary-600 dark:bg-black-500 text-white">
         <Image
-          src={kylixLogoImg}
           alt=""
-          width={320}
-          quality={100}
           className="pb-16"
+          quality={100}
+          src={kylixLogoImg}
+          width={320}
         />
         The Kylix App works best on desktop right now, but We are working hard
         to bring you a mobile version soon.

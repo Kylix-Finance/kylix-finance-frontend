@@ -18,16 +18,7 @@ const SearchUI = ({ value = "", onChange }: SearchUIProps) => {
 
   return (
     <TextField
-      value={value}
-      onChange={onChangeHandler}
-      style={{
-        fontSize: "10px",
-        borderRadius: "4px",
-        border: "#C7C7C7 1px solid",
-      }}
       className="dark:bg-[#0D0D0D] border-solid border-[#0000001A] dark:border-none font-body"
-      placeholder="Search by market"
-      size="small"
       inputProps={{
         style: {
           fontWeight: "normal",
@@ -47,6 +38,15 @@ const SearchUI = ({ value = "", onChange }: SearchUIProps) => {
           </Box>
         ),
       }}
+      placeholder="Search by market"
+      size="small"
+      style={{
+        fontSize: "10px",
+        borderRadius: "4px",
+        border: "#C7C7C7 1px solid",
+      }}
+      value={value}
+      onChange={onChangeHandler}
     />
   );
 };

@@ -41,7 +41,7 @@ const useBlockNumber = (): UseBlockNumberResult => {
   return {
     blockNumber,
     isLoading: isLoading || loading,
-    error: error,
+    error,
   };
 };
 

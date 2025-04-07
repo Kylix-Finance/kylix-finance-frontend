@@ -5,8 +5,8 @@ import { SmartLending } from "~/types";
 const Card = ({ to, description, heading }: SmartLending) => {
   return (
     <Link
-      href={to}
       className=" p-0.5 w-full h-72 lg:h-[411px] rounded-3xl bg-gradient-to-br from-white/20 via-transparent"
+      href={to}
     >
       <div className="relative w-full h-full rounded-3xl p-7 overflow-hidden bg-secondary-500">
         <div

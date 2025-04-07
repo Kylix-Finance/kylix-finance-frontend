@@ -61,10 +61,10 @@ function THead<Schema, ExtraFields extends string = string>({
       <TableRow {...tRowProps}>
         {headersList.map(([name, value], index) => (
           <TCell
-            align={numeric?.some((item) => item === name) ? "right" : "left"}
             key={`${name}+${index}`}
-            padding={disablePadding ? "none" : "normal"}
+            align={numeric?.some((item) => item === name) ? "right" : "left"}
             className="dark:bg-[#0D0D0D] !dark:border-transparent"
+            padding={disablePadding ? "none" : "normal"}
             sortDirection={orderBy === name ? order : false}
             style={{
               backgroundColor: "rgb(244, 250, 249)",
@@ -75,9 +75,9 @@ function THead<Schema, ExtraFields extends string = string>({
               ""
             ) : (
               <TableSortLabel
-                IconComponent={SortIcon}
                 active={orderBy === name}
                 direction={orderBy === name ? order : "asc"}
+                IconComponent={SortIcon}
                 onClick={createSortHandler(name as keyof Schema)}
               >
                 <Typography

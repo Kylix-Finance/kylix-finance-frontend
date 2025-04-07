@@ -1,10 +1,8 @@
 "use client";
 
-import { Box, Button, IconButton, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import MultiLineChart from "~/components/Charts/MultiLineChart";
 import { palette } from "~/config/palette";
-import { vaultData } from "~/mock/chart";
-import { MoreHoriz, CalendarMonth } from "@mui/icons-material";
 import { useTotalSupply } from "~/hooks/api/useTotalSupply";
 
 const VaultChart = () => {
@@ -15,26 +13,26 @@ const VaultChart = () => {
       <Box className="flex justify-between">
         <Box className="flex gap-12">
           <Box>
-            <Typography variant="body1" className="dark:text-primary-300/40">
+            <Typography className="dark:text-primary-300/40" variant="body1">
               Supplied TVL
             </Typography>
-            <Typography variant="h5" className="dark:text-white">
+            <Typography className="dark:text-white" variant="h5">
               $ 800M
             </Typography>
           </Box>
           <Box>
-            <Typography variant="body1" className="dark:text-primary-300/40">
+            <Typography className="dark:text-primary-300/40" variant="body1">
               Borrowed TVL
             </Typography>
-            <Typography variant="h5" className="dark:text-white">
+            <Typography className="dark:text-white" variant="h5">
               $ 600M
             </Typography>
           </Box>
           <Box>
-            <Typography variant="body1" className="dark:text-primary-300/40">
+            <Typography className="dark:text-primary-300/40" variant="body1">
               Available Borrow
             </Typography>
-            <Typography variant="h5" className="dark:text-white">
+            <Typography className="dark:text-white" variant="h5">
               $ 120M
             </Typography>
           </Box>
@@ -43,13 +41,13 @@ const VaultChart = () => {
           <Box className="flex gap-6">
             <Box className="flex gap-2 items-center">
               <Box className="w-6 border-2 border-primary-500 rounded-md"></Box>
-              <Typography variant="body2" className="dark:text-white">
+              <Typography className="dark:text-white" variant="body2">
                 Total Borrowings
               </Typography>
             </Box>
             <Box className="flex gap-2 items-center">
               <Box className="w-6 border-2  border-secondary-500 rounded-md"></Box>
-              <Typography variant="body2" className="dark:text-white">
+              <Typography className="dark:text-white" variant="body2">
                 Total Supply
               </Typography>
             </Box>
@@ -70,8 +68,6 @@ const VaultChart = () => {
       </Box>
 
       <MultiLineChart
-        isLoading={!isFetched}
-        scale="1d"
         datasets={[
           {
             data,
@@ -94,6 +90,8 @@ const VaultChart = () => {
             },
           },
         ]}
+        isLoading={!isFetched}
+        scale="1d"
       />
     </Box>
   );

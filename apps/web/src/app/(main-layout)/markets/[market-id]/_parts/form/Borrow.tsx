@@ -7,7 +7,6 @@ import {
   formatBigNumbers,
   formatUnit,
   parseUnit,
-  useBalance,
   useMetadata,
 } from "@repo/onchain-utils";
 import { useGetAssetWiseBorrowsCollaterals } from "~/hooks/chain/useGetAssetWiseBorrowsCollaterals";
@@ -106,17 +105,17 @@ export const Borrow = () => {
   return (
     <Form
       assetId={tokenId}
-      items={items}
+      balance={Infinity.toString()}
       decimals={assetMetaData?.decimals}
+      isSubmitting={isPending}
+      items={items}
       setValue={setValue}
-      value={value}
       submitButton={{
         onclick,
         content: "Borrow",
       }}
-      isSubmitting={isPending}
-      balance={Infinity.toString()}
       symbol={assetMetaData?.symbol}
+      value={value}
       onMaxClick={() => {
         setValue(max);
       }}

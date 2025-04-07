@@ -146,33 +146,25 @@ const Bid = () => {
     <Box className="w-full p-4 border rounded-md z-[999] lg:w-[360px] dark:bg-black-500 dark:border-transparent">
       <Box className="mb-6">
         <Typography
-          variant="body1"
-          fontWeight="bold"
           className="text-primary-800 dark:text-primary-100"
+          fontWeight="bold"
+          variant="body1"
         >
           Place a Bid
         </Typography>
       </Box>
       <Box className="mb-2">
         <Typography
-          variant="body2"
           className="text-primary-800 dark:text-primary-100"
+          variant="body2"
         >
           Premium (discount)
         </Typography>
       </Box>
-      <Skeleton isLoading={!marketBidDistribution} height="90px">
+      <Skeleton height="90px" isLoading={!marketBidDistribution}>
         <Select
-          value={discount}
-          onChange={(e) => changeDiscount(e.target.value)}
-          size="small"
           fullWidth
           className="font-number text-primary-800"
-          sx={{
-            "& .MuiSelect-icon": {
-              color: isDarkMode ? "#daeeea" : "#1c443c",
-            },
-          }}
           inputProps={{
             sx: {
               backgroundColor: "#45A9961A",
@@ -190,6 +182,14 @@ const Bid = () => {
               },
             },
           }}
+          size="small"
+          sx={{
+            "& .MuiSelect-icon": {
+              color: isDarkMode ? "#daeeea" : "#1c443c",
+            },
+          }}
+          value={discount}
+          onChange={(e) => changeDiscount(e.target.value)}
           displayEmpty
           // renderValue={(selected) => {
           //   if (selected === "") {
@@ -218,9 +218,9 @@ const Bid = () => {
           // }}
         >
           <MenuItem
-            value=""
             disabled
             className="w-full flex justify-between font-thin"
+            value=""
           >
             <span>discount</span>
             <span>volume</span>
@@ -229,8 +229,8 @@ const Bid = () => {
             marketBidDistribution[1].map((item, key) => (
               <MenuItem
                 key={key}
-                value={item.discount}
                 className="!font-number dark:text-primary-100 flex justify-between w-full"
+                value={item.discount}
               >
                 <span>{item.discount} %</span>
                 <span>$ {formatBigNumbers(formatUnit(item.amount, 6), 2)}</span>
@@ -249,14 +249,10 @@ const Bid = () => {
       </Box>
       <Stack className="gap-1">
         <TextField
-          value={amount}
-          onChange={(e) => changeAmount(e.target.value)}
-          size="small"
           fullWidth
-          placeholder="0"
+          autoComplete="off"
           className="!rounded-md !font-number !font-bold !text-base !leading-5"
           inputMode="numeric"
-          autoComplete="off"
           inputProps={{
             backgroundColor: "#45A9961A",
             paddingY: "8px",
@@ -271,10 +267,14 @@ const Bid = () => {
             },
             startAdornment: (
               <InputAdornment position="start">
-                <TokenIcon symbol="USDT" width={24} height={24} />
+                <TokenIcon height={24} symbol="USDT" width={24} />
               </InputAdornment>
             ),
           }}
+          placeholder="0"
+          size="small"
+          value={amount}
+          onChange={(e) => changeAmount(e.target.value)}
         />
         {isWalletConnected && amountError && (
           <FormAlert message={amountError} severity="error" />
@@ -284,10 +284,10 @@ const Bid = () => {
       <Box className="flex gap-1 mt-2 mb-6">
         {percentages.map((p) => (
           <Button
-            disabled={!isWalletConnected}
             key={p}
-            variant="outlined"
             className="flex-1 dark:text-primary-400 text-primary-500"
+            disabled={!isWalletConnected}
+            variant="outlined"
             onClick={() => clickPercentage(p)}
           >
             {p}%
@@ -296,11 +296,11 @@ const Bid = () => {
       </Box>
 
       <PrivateButton
-        loading={isSubmitLoading}
         className="w-full text-white dark:text-[#0d0d0d] font-body min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
+        disabled={isWalletConnected && isSubmitDisabled}
+        loading={isSubmitLoading}
         variant="contained"
         onClick={handlePlaceBid}
-        disabled={isWalletConnected && isSubmitDisabled}
       >
         Place My Bid
       </PrivateButton>

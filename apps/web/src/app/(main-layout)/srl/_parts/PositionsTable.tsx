@@ -51,25 +51,33 @@ const tableData: Array<TableDataItem> = [
 export const PositionsTable = () => {
   return (
     <Table<TableDataItem, "actions">
-      headers={{
-        actions: "Actions",
-        assetName: "Asset",
-        averagePrice: "Average Price",
-        averagePrice2: "Average Price",
-        averagePrice3: "Average Price",
-        liquidated: "kyl.USDT Liquidated",
-        usdtPaid: "USDT paid",
+      componentBeforeBody={() => {
+        return (
+          <Button
+            fullWidth
+            className="!border-[2px] !border-dashed !border-teal-400 !rounded-[8px]"
+            style={{
+              padding: "14px 12px",
+              borderRadius: "8px",
+            }}
+          >
+            <Box className="flex w-full items-center flex-row gap-[8px]">
+              <Icons.Plus />
+
+              <Typography
+                className="!text-[14px] !text-[#1A433B] !font-[700] !leading-[20px] !tracking-[-0.02em]"
+                textTransform="none"
+              >
+                Create New self repaying loan
+              </Typography>
+            </Box>
+          </Button>
+        );
       }}
-      isFetched={true}
-      isLoading={false}
-      placeholderLength={3}
-      hiddenTHeads={["actions"]}
-      tableName="loanPositions"
-      data={tableData}
       components={{
         assetName: (item) => (
           <Box className="flex flex-row gap-[8px]">
-            <TokenIcon width={24} height={24} symbol={item.assetName} />
+            <TokenIcon height={24} symbol={item.assetName} width={24} />
             <Typography className="!text-[14px] text-[#1A433B] dark:text-primary-100 !font-[700] !leading-[20px] !tracking-[-0.02em]">
               {item.label}
             </Typography>
@@ -102,32 +110,24 @@ export const PositionsTable = () => {
         ),
         actions: (item) => <TableActions assetId={item.assetName} />,
       }}
+      data={tableData}
       defaultSortKey="assetName"
-      rowSpacing="10px"
-      tRowProps={{ className: "!rounded-[8px]" }}
-      componentBeforeBody={() => {
-        return (
-          <Button
-            fullWidth
-            className="!border-[2px] !border-dashed !border-teal-400 !rounded-[8px]"
-            style={{
-              padding: "14px 12px",
-              borderRadius: "8px",
-            }}
-          >
-            <Box className="flex w-full items-center flex-row gap-[8px]">
-              <Icons.Plus />
-
-              <Typography
-                textTransform={"none"}
-                className="!text-[14px] !text-[#1A433B] !font-[700] !leading-[20px] !tracking-[-0.02em]"
-              >
-                Create New self repaying loan
-              </Typography>
-            </Box>
-          </Button>
-        );
+      headers={{
+        actions: "Actions",
+        assetName: "Asset",
+        averagePrice: "Average Price",
+        averagePrice2: "Average Price",
+        averagePrice3: "Average Price",
+        liquidated: "kyl.USDT Liquidated",
+        usdtPaid: "USDT paid",
       }}
+      hiddenTHeads={["actions"]}
+      isFetched={true}
+      isLoading={false}
+      placeholderLength={3}
+      rowSpacing="10px"
+      tableName="loanPositions"
+      tRowProps={{ className: "!rounded-[8px]" }}
     />
   );
 };

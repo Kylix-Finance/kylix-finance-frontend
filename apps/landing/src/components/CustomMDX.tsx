@@ -9,6 +9,7 @@ export const CustomMDX = (props: MDXRemoteProps) => (
         ...(props.components || {}),
         img: (props) => (
           <img
+            alt="MDXRemote"
             {...props}
             className="max-w-full h-auto rounded-lg shadow-lg sm:max-w-lg"
           />
@@ -26,7 +27,7 @@ export const CustomMDX = (props: MDXRemoteProps) => (
             {...props}
             className="text-2xl sm:text-3xl font-heading font-bold mb-3 text-primary-300 scroll-mt-[8rem]"
           >
-            <a href={`#${props.id}`} className="hover:text-primary-200 ">
+            <a className="hover:text-primary-200 " href={`#${props.id}`}>
               {props.children}
             </a>
           </h2>
@@ -36,7 +37,7 @@ export const CustomMDX = (props: MDXRemoteProps) => (
             {...props}
             className="text-xl sm:text-2xl font-heading font-bold mb-2 text-primary-200 scroll-mt-[8rem]"
           >
-            <a href={`#${props.id}`} className="hover:text-primary-100">
+            <a className="hover:text-primary-100" href={`#${props.id}`}>
               {props.children}
             </a>
           </h3>
@@ -46,7 +47,7 @@ export const CustomMDX = (props: MDXRemoteProps) => (
             {...props}
             className="text-lg sm:text-xl font-heading font-bold mb-2 text-primary-100 scroll-mt-[8rem]"
           >
-            <a href={`#${props.id}`} className="hover:text-primary-50">
+            <a className="hover:text-primary-50" href={`#${props.id}`}>
               {props.children}
             </a>
           </h4>
@@ -56,7 +57,7 @@ export const CustomMDX = (props: MDXRemoteProps) => (
             {...props}
             className="text-base sm:text-lg font-heading font-bold mb-1 text-primary-50  scroll-mt-[8rem]"
           >
-            <a href={`#${props.id}`} className="hover:text-primary-100">
+            <a className="hover:text-primary-100" href={`#${props.id}`}>
               {props.children}
             </a>
           </h5>
@@ -66,7 +67,7 @@ export const CustomMDX = (props: MDXRemoteProps) => (
             {...props}
             className="text-sm sm:text-base font-heading font-bold mb-1 text-primary-100  scroll-mt-[8rem]"
           >
-            <a href={`#${props.id}`} className="hover:text-primary-200">
+            <a className="hover:text-primary-200" href={`#${props.id}`}>
               {props.children}
             </a>
           </h6>

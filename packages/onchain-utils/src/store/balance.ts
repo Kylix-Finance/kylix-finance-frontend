@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { ConnectionStatus } from "../types";
 
 interface BalanceStore {
   balance: string | null;

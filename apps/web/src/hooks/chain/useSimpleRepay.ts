@@ -7,17 +7,17 @@ import {
   useSigner,
 } from "@repo/onchain-utils";
 import { queryKeys } from "@repo/shared";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 interface RepayMutationProps {
   balance: string | bigint | -1; // -1 for repay ALL
-  onConfirm?: VoidFunction;
+  onConfirm?: globalThis.VoidFunction;
 }
 interface Props {
   asset: string | number;
   poolId: string | number | undefined;
 }
-export const useSimpleRepay = ({ asset, poolId }: Props) => {
+export const useSimpleRepay = ({ asset }: Props) => {
   const { api } = useProvider();
   const { activeAccount } = useActiveAccount();
   const { signer } = useSigner();

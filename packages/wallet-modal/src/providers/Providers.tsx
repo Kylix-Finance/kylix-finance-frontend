@@ -1,4 +1,4 @@
-import { QueryClient, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { Config } from "../types";
 import { queryKeys } from "@repo/shared";
@@ -17,5 +17,5 @@ export const Providers = ({ children, config }: Props) => {
     }
     queryClient.setQueryData(queryKeys.config, config);
   }, [config]);
-  return <>{children}</>;
+  return children;
 };

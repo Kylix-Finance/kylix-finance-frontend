@@ -109,26 +109,26 @@ export const Repay = () => {
   return (
     <Form
       assetId={tokenId}
-      items={items}
+      balance={formattedBalance}
       decimals={assetMetaData?.decimals}
-      setValue={setValue}
-      value={value}
-      submitButton={{
-        onclick: () => onclick(),
-        content: "Repay",
-      }}
+      isMaxLoading={isBalanceLoading}
+      isSubmitting={isPending}
+      items={items}
       secondButton={{
         onclick: () => onclick(true),
         content: "Repay All",
         disabled: Number(max) === 0,
       }}
-      isSubmitting={isPending}
-      isMaxLoading={isBalanceLoading}
+      setValue={setValue}
+      submitButton={{
+        onclick: () => onclick(),
+        content: "Repay",
+      }}
+      symbol={assetMetaData?.symbol}
+      value={value}
       onMaxClick={() => {
         setValue(max);
       }}
-      balance={formattedBalance}
-      symbol={assetMetaData?.symbol}
     />
   );
 };

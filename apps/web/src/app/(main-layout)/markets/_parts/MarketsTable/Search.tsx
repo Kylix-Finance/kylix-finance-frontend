@@ -1,7 +1,5 @@
 "use client";
-import { Box, TextField } from "@mui/material";
 import { useQueryState } from "nuqs";
-import { Icons } from "~/assets/svgs";
 import { QUERY_SEARCH_MARKETS } from "~/constants";
 import SearchUI from "./SearchUI";
 

@@ -5,7 +5,42 @@ import { Asset } from "~/components";
 export const BorrowTable = () => {
   return (
     <Table<TableData[number], "actions">
-      placeholderLength={3}
+      components={{
+        asset: (item) => (
+          <Asset helperText="" label={item.asset} symbol={item.asset} />
+        ),
+        actions: () => (
+          <Box className="flex justify-end gap-1">
+            <Button variant="outlined">
+              <Typography
+                className="text-[##45A996] dark:text-[#56DDB4]"
+                fontWeight={600}
+                variant="subtitle1"
+              >
+                Borrow
+              </Typography>
+            </Button>
+          </Box>
+        ),
+        apy: (item) => (
+          <Typography className="dark:text-black-100" variant="subtitle1">
+            {item.apy}
+          </Typography>
+        ),
+        status: (item) => (
+          <Typography className="dark:text-black-100" variant="subtitle1">
+            {item.status}
+          </Typography>
+        ),
+        balance: (item) => (
+          <Typography className="dark:text-black-100" variant="subtitle1">
+            {item.balance}
+          </Typography>
+        ),
+      }}
+      data={tableData}
+      defaultSortKey="asset"
+      hasPagination={false}
       headers={{
         asset: "Asset",
         apy: "APY",
@@ -14,47 +49,12 @@ export const BorrowTable = () => {
         actions: "Actions",
       }}
       hiddenTHeads={["actions"]}
-      tCellClassnames={"!p-3 bg dark:bg-black-500"}
-      rowSpacing="10px"
-      hasPagination={false}
-      defaultSortKey="asset"
-      tableName="supply"
-      components={{
-        asset: (item) => (
-          <Asset label={item.asset} helperText="" symbol={item.asset} />
-        ),
-        actions: () => (
-          <Box className="flex justify-end gap-1">
-            <Button variant="outlined">
-              <Typography
-                className="text-[##45A996] dark:text-[#56DDB4]"
-                variant="subtitle1"
-                fontWeight={600}
-              >
-                Borrow
-              </Typography>
-            </Button>
-          </Box>
-        ),
-        apy: (item) => (
-          <Typography variant="subtitle1" className="dark:text-black-100">
-            {item.apy}
-          </Typography>
-        ),
-        status: (item) => (
-          <Typography variant="subtitle1" className="dark:text-black-100">
-            {item.status}
-          </Typography>
-        ),
-        balance: (item) => (
-          <Typography variant="subtitle1" className="dark:text-black-100">
-            {item.balance}
-          </Typography>
-        ),
-      }}
       isFetched={true}
       isLoading={false}
-      data={tableData}
+      placeholderLength={3}
+      rowSpacing="10px"
+      tableName="supply"
+      tCellClassnames="!p-3 bg dark:bg-black-500"
     />
   );
 };

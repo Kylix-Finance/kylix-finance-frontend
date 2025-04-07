@@ -21,24 +21,24 @@ const Page = () => {
     <div className={styles.container}>
       <div className={styles.top}>
         <Card
-          className={styles.total}
-          title="Total value locked"
-          icon={Icons.WalletFill}
           hasIconBackground
+          className={styles.total}
+          icon={Icons.WalletFill}
+          title="Total value locked"
         >
           <TotalLocked />
         </Card>
         <Card
           className={styles.reward}
-          title="Reward imbursed to lenders"
           icon={Icons.WalletFill}
+          title="Reward imbursed to lenders"
         >
           <Reward />
         </Card>
         <Card
           className={styles.burned}
-          title=" Kylix Burned"
           icon={Icons.WalletFill}
+          title=" Kylix Burned"
         >
           <Burned />
         </Card>

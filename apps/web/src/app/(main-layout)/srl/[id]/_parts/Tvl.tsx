@@ -1,17 +1,14 @@
 "use client";
 
 import { Box, Link, Card as MuiCard, Typography } from "@mui/material";
-import { Skeleton, useIsDarkMode } from "@repo/ui";
+import { Skeleton } from "@repo/ui";
 import React from "react";
 import { Icons } from "~/assets/svgs";
 import { Card, TokenIcon } from "~/components";
-import LineChart from "~/components/Charts/LineChart";
 import MultiLineChart from "~/components/Charts/MultiLineChart";
 import { palette } from "~/config/palette";
-import { tvlMockData, vaultData } from "~/mock/chart";
+import { tvlMockData } from "~/mock/chart";
 const Tvl = () => {
-  const isDarkMode = useIsDarkMode();
-
   return (
     <Card>
       <Box className="flex items-center">
@@ -19,29 +16,29 @@ const Tvl = () => {
           <Icons.LeftArrow className="text-black" />
         </Link>
         <Box className="p-1.5 flex gap-2 items-center">
-          <TokenIcon symbol={"USDT"} />{" "}
+          <TokenIcon symbol="USDT" />{" "}
           <Box className="flex flex-col">
-            <Typography variant="subtitle2" className="text-primary-800">
+            <Typography className="text-primary-800" variant="subtitle2">
               <Skeleton minWidth={20}>USDT</Skeleton>
             </Typography>
           </Box>
         </Box>
       </Box>
       <MuiCard
-        variant="outlined"
         className="dark:bg-black-600 flex flex-col gap-2"
+        variant="outlined"
       >
         <Box className="flex justify-between w-full">
           <Typography
-            variant="subtitle1"
             className="text-primary-800 dark:text-primary-200"
+            variant="subtitle1"
           >
             My self-repaying loan portions simulator
           </Typography>
           {/* <div>LEGEND</div> */}
         </Box>
         <MultiLineChart
-          scale="1d"
+          xGrid
           datasets={[
             {
               data: tvlMockData,
@@ -64,9 +61,9 @@ const Tvl = () => {
               },
             },
           ]}
+          scale="1d"
           xLabel="Interest rate over time"
           yLabel="Lending and borrowing TVL"
-          xGrid
         />
       </MuiCard>
     </Card>

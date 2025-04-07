@@ -1,10 +1,6 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
-import {
-  LendingLendingPool,
-  PRICE_BASE_ASSET_ID,
-  queryKeys,
-} from "@repo/shared";
-import { formatUnit, useMetadata, useProvider } from "@repo/onchain-utils";
+import { PRICE_BASE_ASSET_ID, queryKeys } from "@repo/shared";
+import { formatUnit, useProvider } from "@repo/onchain-utils";
 
 interface Props {
   assetId: number | string;

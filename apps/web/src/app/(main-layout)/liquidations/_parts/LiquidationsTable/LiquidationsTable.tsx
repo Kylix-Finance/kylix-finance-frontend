@@ -1,13 +1,12 @@
 "use client";
 
 import { Box, Button, Typography } from "@mui/material";
-import { Asset, KylixChip } from "~/components";
 import { useMemo } from "react";
-import { Table, TableData } from "@repo/ui";
+import { Table } from "@repo/ui";
 import Link from "next/link";
 import { Icons } from "~/assets/svgs";
 import { useGetLiquidationMarkets } from "~/hooks/chain/useGetLiquidationMarkets";
-import { formatBigNumbers, formatUnit, parseUnit } from "@repo/onchain-utils";
+import { formatBigNumbers, formatUnit } from "@repo/onchain-utils";
 const getHealthColors = (health: number): [string, string, string] => {
   if (health >= 70) {
     return ["#45A996", "#45A996", "#45A996"];
@@ -56,36 +55,22 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
 
   return (
     <Table
-      isFetched={isFetched}
-      isLoading={isLoading}
-      placeholderLength={6}
-      hiddenTHeads={["actions"]}
-      headers={{
-        health: "Health",
-        name: "Name",
-        tvl: "TVL",
-        poolSize: "Pool Size",
-        maxDiscount: "Max Discount",
-        myBid: "My Bid",
-        actions: "Actions",
-      }}
-      rowSpacing="11px"
       components={{
         health: (item) => {
           const [first, second, third] = getHealthColors(item.health);
           return (
             <Box className="flex flex-col w-full justify-center items-center">
-              <Icons.Health style={{ color: third }} className="h-2" />
-              <Icons.Health style={{ color: second }} className="h-2" />
-              <Icons.Health style={{ color: first }} className="h-2" />
+              <Icons.Health className="h-2" style={{ color: third }} />
+              <Icons.Health className="h-2" style={{ color: second }} />
+              <Icons.Health className="h-2" style={{ color: first }} />
             </Box>
           );
         },
         name: (item) => {
           return (
             <Typography
-              variant="subtitle1"
               className="pl-4 dark:text-black-100"
+              variant="subtitle1"
             >
               {item.symbol}
             </Typography>
@@ -94,8 +79,8 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         tvl: (item) => {
           return (
             <Typography
-              variant="subtitle1"
               className="pl-4 dark:text-black-100"
+              variant="subtitle1"
             >
               {item.tvl}
             </Typography>
@@ -104,8 +89,8 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         poolSize: (item) => {
           return (
             <Typography
-              variant="subtitle1"
               className="pl-4 dark:text-black-100"
+              variant="subtitle1"
             >
               {item.poolSize}
             </Typography>
@@ -114,8 +99,8 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         maxDiscount: (item) => {
           return (
             <Typography
-              variant="subtitle1"
               className="pl-4 dark:text-black-100"
+              variant="subtitle1"
             >
               {item.maxDiscount}
             </Typography>
@@ -124,8 +109,8 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         myBid: (item) => {
           return (
             <Typography
-              variant="subtitle1"
               className="pl-4 dark:text-black-100"
+              variant="subtitle1"
             >
               {item.myBid}
             </Typography>
@@ -137,8 +122,8 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
             <Button variant="contained">
               <Typography
                 className="text-[#FFF]"
-                variant="body3"
                 fontWeight={600}
+                variant="body3"
               >
                 View Market
               </Typography>
@@ -148,8 +133,22 @@ const LiquidationsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
       }}
       data={transformedData || []}
       defaultSortKey="health"
-      tableName="liquidations"
       hasPagination={false}
+      headers={{
+        health: "Health",
+        name: "Name",
+        tvl: "TVL",
+        poolSize: "Pool Size",
+        maxDiscount: "Max Discount",
+        myBid: "My Bid",
+        actions: "Actions",
+      }}
+      hiddenTHeads={["actions"]}
+      isFetched={isFetched}
+      isLoading={isLoading}
+      placeholderLength={6}
+      rowSpacing="11px"
+      tableName="liquidations"
     />
   );
 };
