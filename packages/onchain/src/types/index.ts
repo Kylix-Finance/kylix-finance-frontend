@@ -1,4 +1,6 @@
-// Auto-generated via `yarn polkadot-types-from-defs`, do not edit
-/* eslint-disable */
+import { Provider } from "@repo/shared";
 
-export * from "./types.js";
+export type Config = {
+  dappName: string;
+  rpc: string;
+};

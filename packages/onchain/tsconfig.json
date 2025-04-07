@@ -4,7 +4,7 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@polkadot/types/lookup": ["./src/types/types-lookup.ts"]
+      "@polkadot/types/lookup": ["./src/types/chain/types-lookup.ts"]
     }
   },
   "include": ["src", "../../global.d.ts"],
