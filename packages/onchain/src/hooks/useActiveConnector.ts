@@ -1,5 +1,3 @@
-"use client";
-
 import { queryKeys, useAccountStore, wallets } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
 
