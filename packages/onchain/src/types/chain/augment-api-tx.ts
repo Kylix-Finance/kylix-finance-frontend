@@ -21,18 +21,20 @@ import type {
   u64,
   u8,
 } from "@polkadot/types-codec";
+import type { AnyNumber, IMethod, ITuple } from "@polkadot/types-codec/types";
+import type {
+  AccountId32,
+  Call,
+  MultiAddress,
+} from "@polkadot/types/interfaces/runtime";
+
+export type __AugmentedSubmittable = AugmentedSubmittable<() => unknown>;
+export type __SubmittableExtrinsic<ApiType extends ApiTypes> =
+  SubmittableExtrinsic<ApiType>;
+export type __SubmittableExtrinsicFunction<ApiType extends ApiTypes> =
+  SubmittableExtrinsicFunction<ApiType>;
 import {
-  PalletAssetsAssetAccount,
-  PalletAssetsAssetDetails,
-  PalletAssetsAssetMetadata,
-  PalletBalancesAccountData,
-  PalletBalancesBalanceLock,
-  PalletBalancesIdAmount,
-  PalletBalancesReserveData,
-  PalletGrandpaStoredPendingChange,
-  PalletGrandpaStoredState,
-  SpConsensusAuraSr25519AppSr25519Public,
-  LendingBorrowRepayUserBorrow,
+  FrameSupportPalletId,
   FinalityGrandpaEquivocationPrecommit,
   FinalityGrandpaEquivocationPrevote,
   FinalityGrandpaPrecommit,
@@ -43,7 +45,6 @@ import {
   FrameSupportDispatchPerDispatchClassU32,
   FrameSupportDispatchPerDispatchClassWeight,
   FrameSupportDispatchPerDispatchClassWeightsPerClass,
-  FrameSupportPalletId,
   FrameSupportTokensMiscBalanceStatus,
   FrameSystemAccountInfo,
   FrameSystemCall,
@@ -62,6 +63,7 @@ import {
   FrameSystemLimitsWeightsPerClass,
   FrameSystemPhase,
   KylixRuntimeRuntime,
+  LendingBorrowRepayUserBorrow,
   LendingCall,
   LendingCollateralLiquidationBid,
   LendingCollateralLiquidationBidStatus,
@@ -74,18 +76,27 @@ import {
   LendingLendingPool,
   PalletAssetsAccountStatus,
   PalletAssetsApproval,
+  PalletAssetsAssetAccount,
+  PalletAssetsAssetDetails,
+  PalletAssetsAssetMetadata,
   PalletAssetsAssetStatus,
   PalletAssetsCall,
   PalletAssetsError,
   PalletAssetsEvent,
   PalletAssetsExistenceReason,
+  PalletBalancesAccountData,
+  PalletBalancesBalanceLock,
   PalletBalancesCall,
   PalletBalancesError,
   PalletBalancesEvent,
+  PalletBalancesIdAmount,
   PalletBalancesReasons,
+  PalletBalancesReserveData,
   PalletGrandpaCall,
   PalletGrandpaError,
   PalletGrandpaEvent,
+  PalletGrandpaStoredPendingChange,
+  PalletGrandpaStoredState,
   PalletSudoCall,
   PalletSudoError,
   PalletSudoEvent,
@@ -94,6 +105,7 @@ import {
   PalletTransactionPaymentEvent,
   PalletTransactionPaymentReleases,
   SpArithmeticArithmeticError,
+  SpConsensusAuraSr25519AppSr25519Public,
   SpConsensusGrandpaAppPublic,
   SpConsensusGrandpaAppSignature,
   SpConsensusGrandpaEquivocation,
@@ -115,20 +127,6 @@ import {
   SpWeightsRuntimeDbWeight,
   SpWeightsWeightV2Weight,
 } from "@polkadot/types/lookup";
-
-import type { AnyNumber, IMethod, ITuple } from "@polkadot/types-codec/types";
-import type {
-  AccountId32,
-  Call,
-  MultiAddress,
-} from "@polkadot/types/interfaces/runtime";
-
-export type __AugmentedSubmittable = AugmentedSubmittable<() => unknown>;
-export type __SubmittableExtrinsic<ApiType extends ApiTypes> =
-  SubmittableExtrinsic<ApiType>;
-export type __SubmittableExtrinsicFunction<ApiType extends ApiTypes> =
-  SubmittableExtrinsicFunction<ApiType>;
-
 declare module "@polkadot/api-base/types/submittable" {
   interface AugmentedSubmittables<ApiType extends ApiTypes> {
     assets: {

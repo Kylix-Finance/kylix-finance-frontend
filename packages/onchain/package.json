@@ -11,8 +11,8 @@
     "check:style": "pnpm run check:format && pnpm run check:lint:fix && pnpm run check:types",
     "check:types": "npx tsc --noEmit",
     "check:types:watch": "pnpm run check:types --watch",
-    "generate:types": "polkadot-types-from-defs --endpoint wss://test-dashboard.kylix.finance --input src/types --package ./packages/onchain",
-    "generate:chain": "polkadot-types-from-chain --endpoint wss://test-dashboard.kylix.finance --output src/types --package  ./packages/onchain"
+    "generate:types": "polkadot-types-from-defs --endpoint wss://test-dashboard.kylix.finance --input src/types/chain --package ./packages/onchain",
+    "generate:chain": "polkadot-types-from-chain --endpoint wss://test-dashboard.kylix.finance --output src/types/chain --package  ./packages/onchain"
   },
   "devDependencies": {
     "@polkadot/typegen": "^15.9.1",
