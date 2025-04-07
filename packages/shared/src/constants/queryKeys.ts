@@ -1,5 +1,3 @@
-import { Signer } from "@polkadot/api/types";
-
 const baseKey = "kylix";
 
 interface Balance {
@@ -33,7 +31,10 @@ interface MarketBidDistribution {
 interface RecentLiquidation {
   assetId: string;
 }
-
+interface Signer {
+  connectorId: string | null;
+  account: string | null;
+}
 const keys = {
   BALANCE: "BALANCE",
   ACCOUNTS: "ACCOUNTS",
@@ -71,6 +72,7 @@ const keys = {
   PLACE_BID: "PLACE_BID",
   RECENT_LIQUIDATION: "RECENT_LIQUIDATION",
   USER_BIDS: "USER_BIDS",
+  SIGNER: "SIGNER",
 };
 
 type ChartScale = "1m" | "5m" | "15m" | "1h" | "12h" | "1d";
@@ -85,7 +87,12 @@ export const queryKeys = {
   disconnectRequest: [baseKey, keys.DISCONNECT_REQUEST],
   options: [baseKey, keys.OPTIONS],
   provider: [baseKey, keys.PROVIDER],
-
+  signer: ({ account, connectorId }: Signer) => [
+    baseKey,
+    keys.SIGNER,
+    account,
+    connectorId,
+  ],
   lendingPools: ({ asset, account }: LendingPools = {}) => [
     baseKey,
     keys.LENDING_POOLS,
