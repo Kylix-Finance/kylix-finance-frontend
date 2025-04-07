@@ -8,7 +8,6 @@ import { Card } from "~/components";
 import { Connector } from "./_parts/Connector";
 import { Staking1, Staking2, Staking3 } from "~/assets/imgs";
 import Image, { StaticImageData } from "next/image";
-import { ErrorPage } from "~/components/ErrorPage";
 type Item = {
   iconName: StaticImageData;
   title: string;
@@ -53,7 +52,7 @@ export default function Page() {
           <Heading />
 
           <Box>
-            <ProgressBar isLoading={false} data={{}} />
+            <ProgressBar data={{}} isLoading={false} />
           </Box>
         </Box>
       </Card>
@@ -89,10 +88,10 @@ export default function Page() {
                   <Box className="flex flex-col gap-[10px] w-[214px]">
                     <Box className="flex flex-col gap-[30px]">
                       <Image
-                        width={215}
-                        height={214}
                         alt={item.title}
+                        height={214}
                         src={item.iconName.src}
+                        width={215}
                       />
                       <Typography className="!text-[20px] !text-transparent text-center !bg-clip-text !bg-gradient-to-r !from-[#FFDA8C] !via-[#E6007A] !to-black/20 !font-[700] !leading-[24px] !tracking-[-0.02em]">
                         {item.title}

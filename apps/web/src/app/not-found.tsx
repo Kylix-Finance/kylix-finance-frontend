@@ -5,8 +5,8 @@ export default function NotFound() {
     <div className="w-screen h-screen">
       <ErrorPage
         code={404}
-        title="Page Not Found"
         description="Sorry, we couldn’t find the page you’re looking for."
+        title="Page Not Found"
       />
     </div>
   );

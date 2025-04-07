@@ -53,12 +53,15 @@ export const supportedAssetsData: Section<Asset> = {
   id: "supported-assets-and-apy",
   items: [
     {
+      // eslint-disable-next-line @cspell/spellchecker
       src: "/assets/images/assets/polkdot.png",
       alt: "Polkadot",
       isLaunched: true,
     },
     {
+      // eslint-disable-next-line @cspell/spellchecker
       src: "/assets/images/assets/solana.png",
+      // eslint-disable-next-line @cspell/spellchecker
       alt: "Solana",
       isLaunched: true,
     },
@@ -68,6 +71,7 @@ export const supportedAssetsData: Section<Asset> = {
       isLaunched: false,
     },
     {
+      // eslint-disable-next-line @cspell/spellchecker
       src: "/assets/images/assets/mintlayer.png",
       alt: "MintLayer",
       isLaunched: false,
@@ -97,6 +101,7 @@ export const howItsWorksData: Section<HowItsWork> = {
       id: "deposit",
       heading: "HUB & SPOKE TECHNOLOGY",
       description:
+        // eslint-disable-next-line @cspell/spellchecker
         "Deposit, lend and earn an intererst from your native assets from any chain. Make your assets work for you  — no bridging required!",
     },
     {
@@ -171,6 +176,7 @@ export const marketTrendsData: Section<MarketTrend> = {
             "Become a liquidator with our Collateral Liquidation Marketplace, lend without risk with Self-Repaying Loans, enjoy Collateral Scoring and new Lending Pools powered by new generation interest rate formulas.",
         },
         {
+          // eslint-disable-next-line @cspell/spellchecker
           title: "Autonomous Rewards and a Deflationary Tokenomic.",
           description:
             "An automated treasury that distributes rewards to incentivize lenders to provide liquidity and automatically burns the native token to apply deflationary pressure to the network as borrowing volume increases.",
@@ -202,16 +208,19 @@ export const featuredPartnersData: Section<FeaturedPartners> = {
   items: [
     {
       link: "/",
+      // eslint-disable-next-line @cspell/spellchecker
       name: "Decentralised Future",
       icon: DecentralizedFutures,
     },
     {
       link: "/",
+      // eslint-disable-next-line @cspell/spellchecker
       name: "Equito Network",
       icon: EquitoNetwork,
     },
     {
       link: "/",
+      // eslint-disable-next-line @cspell/spellchecker
       name: "Hercle",
       icon: HercleFinancial,
     },
@@ -227,6 +236,7 @@ export const featuredPartnersData: Section<FeaturedPartners> = {
     },
     {
       link: "/",
+      // eslint-disable-next-line @cspell/spellchecker
       name: "Polimec",
       icon: Polimec,
     },

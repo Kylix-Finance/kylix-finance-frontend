@@ -4,24 +4,24 @@ import { numToLocalString } from "~/utils";
 const Reward = () => {
   return (
     <Box className="flex gap-5">
-      <Typography variant="h5" fontWeight="500" className="text-primary-500">
+      <Typography className="text-primary-500" fontWeight="500" variant="h5">
         {numToLocalString(20400)}{" "}
         <Typography
-          component="span"
-          variant="body3"
-          marginLeft="8px"
           className="text-neutral-400"
+          component="span"
+          marginLeft="8px"
+          variant="body3"
         >
           KYL
         </Typography>
       </Typography>
-      <Typography variant="h5" fontWeight="500" className="dark:text-white">
+      <Typography className="dark:text-white" fontWeight="500" variant="h5">
         {numToLocalString(82100)}{" "}
         <Typography
-          component="span"
-          variant="body3"
-          marginLeft="8px"
           className="text-neutral-400"
+          component="span"
+          marginLeft="8px"
+          variant="body3"
         >
           USD
         </Typography>

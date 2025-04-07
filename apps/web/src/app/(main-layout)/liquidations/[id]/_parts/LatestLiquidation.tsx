@@ -13,16 +13,8 @@ const LatestLiquidation = () => {
   const { assetMetaData } = useMetadata(id);
 
   return (
-    <Card title="Recent liquidations" className="min-h-96 max-h-96">
+    <Card className="min-h-96 max-h-96" title="Recent liquidations">
       <Table
-        isFetched={isFetched}
-        isLoading={isLoading}
-        placeholderLength={3}
-        tContainerProps={{
-          className: "overflow-y-auto",
-        }}
-        tCellClassnames={"font-number"}
-        rowSpacing="10px"
         components={{
           time: (item) => {
             return (
@@ -35,16 +27,16 @@ const LatestLiquidation = () => {
           },
           liquidated: (item) => (
             <Typography
-              variant="body1"
               className=" text-primary-800 dark:text-primary-100"
+              variant="body1"
             >
               {item.assetAmountLiquidated}
             </Typography>
           ),
           paid: (item) => (
             <Typography
-              variant="body1"
               className=" text-primary-500 dark:text-primary-100"
+              variant="body1"
             >
               {item.usdtAmountPaid}
             </Typography>
@@ -58,15 +50,16 @@ const LatestLiquidation = () => {
               >
                 +75.8%
               </Typography> */}
-              <Typography variant="subtitle1" className="dark:text-primary-100">
+              <Typography className="dark:text-primary-100" variant="subtitle1">
                 {item.averagePrice}
               </Typography>
             </Box>
           ),
         }}
-        hasPagination={false}
-        defaultSortKey="time"
+        data={data || []}
         defaultOrder="desc"
+        defaultSortKey="time"
+        hasPagination={false}
         headers={{
           time: "Time",
           liquidated: assetMetaData?.symbol
@@ -75,8 +68,15 @@ const LatestLiquidation = () => {
           paid: "USDT",
           price: "Average price",
         }}
+        isFetched={isFetched}
+        isLoading={isLoading}
+        placeholderLength={3}
+        rowSpacing="10px"
         tableName="latestLiquidation"
-        data={data || []}
+        tCellClassnames="font-number"
+        tContainerProps={{
+          className: "overflow-y-auto",
+        }}
       />
     </Card>
   );

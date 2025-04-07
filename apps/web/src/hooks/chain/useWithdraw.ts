@@ -2,7 +2,7 @@ import { useProvider } from "@repo/onchain-utils/src/hooks/useProvider";
 import { useActiveAccount } from "@repo/onchain-utils/src/hooks/useActiveAccount";
 import { useSigner } from "@repo/onchain-utils/src/hooks/useSigner";
 import { useBalance } from "@repo/onchain-utils/src/hooks/useBalance";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { queryKeys } from "@repo/shared";
 import { ApiPromise } from "@polkadot/api";
 import { Signer, SubmittableResultValue } from "@polkadot/api/types";
@@ -11,7 +11,7 @@ interface Props {
 }
 interface MutationFnProps {
   balance: string | bigint | -1; // -1 for withdraw ALL
-  onConfirm?: VoidFunction;
+  onConfirm?: globalThis.VoidFunction;
 }
 export const useWithdraw = ({ asset }: Props) => {
   const { api } = useProvider();

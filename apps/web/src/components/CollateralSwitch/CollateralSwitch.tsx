@@ -37,7 +37,7 @@ const CollateralSwitch = ({ id, isCollateral }: Props) => {
             notify({
               type: "error",
               title: name,
-              message: message,
+              message,
             });
           },
         }
@@ -59,7 +59,7 @@ const CollateralSwitch = ({ id, isCollateral }: Props) => {
             notify({
               type: "error",
               title: name,
-              message: message,
+              message,
             });
           },
         }
@@ -69,13 +69,13 @@ const CollateralSwitch = ({ id, isCollateral }: Props) => {
 
   return (
     <Skeleton
-      isLoading={isEnableAsCollateral || isDisableAsCollateral}
       className="w-[25px] h-[15px]"
+      isLoading={isEnableAsCollateral || isDisableAsCollateral}
     >
       <Switch
         checked={isCollateral}
-        onChange={() => handleCollateralClick(isCollateral, id)}
         disabled={isEnableAsCollateral || isDisableAsCollateral}
+        onChange={() => handleCollateralClick(isCollateral, id)}
       />
     </Skeleton>
   );

@@ -34,36 +34,18 @@ const Supplied = () => {
   }));
   return (
     <Table
-      isLoading={isLoading}
-      isFetched={isFetched}
-      placeholderLength={3}
-      tCellClassnames={"!p-3"}
-      rowSpacing="10px"
-      noDataComponent={NoData}
-      hasPagination={false}
-      defaultSortKey="asset"
-      headers={{
-        asset: "Asset",
-        balance: "Balance",
-        apy: "APY",
-        supplied: "Supplied",
-        collateral: "Collateral",
-        actions: "Action",
-      }}
-      hiddenTHeads={["actions", "assetId"]}
-      tableName="supply"
       components={{
         asset: (item) => (
-          <Asset label={item.asset} helperText="" symbol={item.asset} />
+          <Asset helperText="" label={item.asset} symbol={item.asset} />
         ),
         apy: (item) => <Typography variant="subtitle1">{item.apy}</Typography>,
         balance: (item) => (
-          <Typography variant="subtitle1" className="dark:text-black-100">
+          <Typography className="dark:text-black-100" variant="subtitle1">
             {item.balance}
           </Typography>
         ),
         supplied: (item) => (
-          <Typography variant="subtitle1" className="dark:text-black-100">
+          <Typography className="dark:text-black-100" variant="subtitle1">
             {item.supplied}
           </Typography>
         ),
@@ -75,6 +57,24 @@ const Supplied = () => {
         ),
       }}
       data={supplies || []}
+      defaultSortKey="asset"
+      hasPagination={false}
+      headers={{
+        asset: "Asset",
+        balance: "Balance",
+        apy: "APY",
+        supplied: "Supplied",
+        collateral: "Collateral",
+        actions: "Action",
+      }}
+      hiddenTHeads={["actions", "assetId"]}
+      isFetched={isFetched}
+      isLoading={isLoading}
+      noDataComponent={NoData}
+      placeholderLength={3}
+      rowSpacing="10px"
+      tableName="supply"
+      tCellClassnames="!p-3"
     />
   );
 };
@@ -82,7 +82,7 @@ const Supplied = () => {
 // TODO: Refactor
 const NoData = () => {
   return (
-    <Stack gap={1} alignItems="center">
+    <Stack alignItems="center" gap={1}>
       <Typography variant="subtitle1">No Data Available</Typography>
       <Link href="/markets">
         <Button>Supply</Button>

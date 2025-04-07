@@ -7,8 +7,8 @@ export default function NotFound() {
     <div className="w-screen h-screen">
       <ErrorPage
         code={500}
-        title="Internal Server Error"
         description="An unexpected error occurred on our server. Please try again later."
+        title="Internal Server Error"
       />
     </div>
   );

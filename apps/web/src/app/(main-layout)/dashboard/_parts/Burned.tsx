@@ -4,24 +4,24 @@ import { numToLocalString } from "~/utils";
 const Burned = () => {
   return (
     <Box className="flex gap-5">
-      <Typography variant="h5" fontWeight="500" className="text-secondary-500">
+      <Typography className="text-secondary-500" fontWeight="500" variant="h5">
         {numToLocalString(302200)}{" "}
         <Typography
+          className="ml-2 text-neutral-400"
           component="span"
           variant="body3"
-          className="ml-2 text-neutral-400"
         >
           KYL
         </Typography>
       </Typography>
-      <Typography variant="h5" fontWeight="500" className="dark:text-white">
+      <Typography className="dark:text-white" fontWeight="500" variant="h5">
         {numToLocalString(514100)}{" "}
         <Typography
+          className="text-neutral-400"
           component="span"
-          variant="body3"
           fontWeight="500"
           marginLeft="8px"
-          className="text-neutral-400"
+          variant="body3"
         >
           USD
         </Typography>

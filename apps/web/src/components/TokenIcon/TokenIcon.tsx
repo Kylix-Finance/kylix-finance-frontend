@@ -30,23 +30,23 @@ const TokenIcon = ({
 
     return (
       <Image
-        src={avatar}
         alt="Avatar"
-        height={height}
-        width={width}
         draggable="false"
+        height={height}
+        src={avatar}
         style={{ flexShrink: 0 }}
+        width={width}
       />
     );
   }
 
   return (
     <IconComponent
-      height={height}
-      width={width}
-      preserveAspectRatio="xMidYMid meet"
       className={className}
+      height={height}
+      preserveAspectRatio="xMidYMid meet"
       style={{ flexShrink: 0 }}
+      width={width}
       // viewBox="0 0 32 32"
     />
   );

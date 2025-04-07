@@ -7,8 +7,8 @@ interface Props {
 const Heading = ({ heading }: Props) => {
   return (
     <Typography
-      variant="h6"
       className="text-[#1A433B] capitalize dark:text-primary-100"
+      variant="h6"
     >
       {heading}
     </Typography>

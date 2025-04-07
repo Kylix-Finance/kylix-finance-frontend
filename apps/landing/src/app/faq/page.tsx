@@ -8,7 +8,11 @@ const Page = () => {
       <Header />
       <div className="p-5 lg:p-28 flex-col flex gap-4 lg:gap-10">
         {faqData.map((item, index) => (
-          <Section heading={item.heading} data={item.data} key={index} />
+          <Section
+            key={item.heading + index}
+            data={item.data}
+            heading={item.heading}
+          />
         ))}
       </div>
     </div>

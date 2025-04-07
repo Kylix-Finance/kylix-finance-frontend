@@ -23,8 +23,7 @@
     "@repo/shared": "workspace:*",
     "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",
-    "@repo/wallet-modal": "workspace:*",
-    "axios": "^1.7.7"
+    "@repo/wallet-modal": "workspace:*"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

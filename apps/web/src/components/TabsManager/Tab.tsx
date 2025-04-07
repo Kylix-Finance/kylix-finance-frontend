@@ -6,6 +6,7 @@ const Tab = ({ ...rest }: Props) => {
   const theme = useTheme();
   return (
     <MUITab
+      disableRipple
       sx={{
         "&.Mui-selected": {
           backgroundColor: theme.palette.primary.main,
@@ -31,7 +32,6 @@ const Tab = ({ ...rest }: Props) => {
         fontWeight: "500",
         lineHeight: "12px",
       }}
-      disableRipple
       {...rest}
     />
   );

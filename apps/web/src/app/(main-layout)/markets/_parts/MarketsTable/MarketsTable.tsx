@@ -6,7 +6,7 @@ import { TableActions } from "../TableActions";
 import { useMemo } from "react";
 import { Table } from "@repo/ui";
 import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
-import { formatUnit, useBalance } from "@repo/onchain-utils";
+import { formatUnit } from "@repo/onchain-utils";
 import CollateralSwitch from "~/components/CollateralSwitch/CollateralSwitch";
 
 type TableData = Array<{
@@ -55,8 +55,55 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
 
   return (
     <Table
-      placeholderLength={5}
-      hiddenTHeads={["actions"]}
+      components={{
+        asset: (item) => (
+          <Asset
+            helperText={item.asset}
+            label={item.symbol.toString()}
+            symbol={item.symbol}
+          />
+        ),
+        "Collateral Factor": (item) => (
+          <Typography className="pl-4 dark:text-black-100" variant="subtitle1">
+            {item["Collateral Factor"]}
+          </Typography>
+        ),
+        utilization: (item) => (
+          <Typography className="pl-4 dark:text-black-100" variant="subtitle1">
+            {item.utilization}
+          </Typography>
+        ),
+        borrowRate: (item) => (
+          <Box className="flex flex-col pl-4">
+            <Typography className="dark:text-black-100" variant="subtitle1">
+              {item.borrowRate}
+            </Typography>
+            <KylixChip value="0%" />
+          </Box>
+        ),
+        supplyRate: (item) => (
+          <Box className="flex flex-col pl-4">
+            <Typography className="dark:text-black-100" variant="subtitle1">
+              {item.supplyRate}
+            </Typography>
+            <KylixChip value="0%" />
+          </Box>
+        ),
+        collateral: (item) => (
+          <CollateralSwitch id={item.id} isCollateral={item.collateral} />
+        ),
+        walletBalance: (item) => (
+          <Typography className="pl-4 dark:text-black-100" variant="subtitle1">
+            {item.walletBalance === "-"
+              ? "-"
+              : Number(item.walletBalance).toLocaleString()}
+          </Typography>
+        ),
+        actions: (item) => <TableActions assetId={item.id} />,
+      }}
+      data={transformedData}
+      defaultSortKey="asset"
+      hasPagination={false}
       headers={{
         asset: "Asset",
         "Collateral Factor": "Collateral Factor",
@@ -67,59 +114,12 @@ const MarketsTableUI = ({ searchQuery = "" }: MarketsTableUIProps) => {
         walletBalance: "Wallet Balance",
         actions: "",
       }}
-      isLoading={isLoading}
-      rowSpacing="11px"
-      components={{
-        asset: (item) => (
-          <Asset
-            helperText={item.asset}
-            symbol={item.symbol}
-            label={item.symbol.toString()}
-          />
-        ),
-        "Collateral Factor": (item) => (
-          <Typography variant="subtitle1" className="pl-4 dark:text-black-100">
-            {item["Collateral Factor"]}
-          </Typography>
-        ),
-        utilization: (item) => (
-          <Typography variant="subtitle1" className="pl-4 dark:text-black-100">
-            {item.utilization}
-          </Typography>
-        ),
-        borrowRate: (item) => (
-          <Box className="flex flex-col pl-4">
-            <Typography variant="subtitle1" className="dark:text-black-100">
-              {item.borrowRate}
-            </Typography>
-            <KylixChip value="0%" />
-          </Box>
-        ),
-        supplyRate: (item) => (
-          <Box className="flex flex-col pl-4">
-            <Typography variant="subtitle1" className="dark:text-black-100">
-              {item.supplyRate}
-            </Typography>
-            <KylixChip value="0%" />
-          </Box>
-        ),
-        collateral: (item) => (
-          <CollateralSwitch id={item.id} isCollateral={item.collateral} />
-        ),
-        walletBalance: (item) => (
-          <Typography variant="subtitle1" className="pl-4 dark:text-black-100">
-            {item.walletBalance === "-"
-              ? "-"
-              : Number(item.walletBalance).toLocaleString()}
-          </Typography>
-        ),
-        actions: (item) => <TableActions assetId={item.id} />,
-      }}
-      data={transformedData}
-      defaultSortKey="asset"
-      tableName="markets"
+      hiddenTHeads={["actions"]}
       isFetched={isFetched}
-      hasPagination={false}
+      isLoading={isLoading}
+      placeholderLength={5}
+      rowSpacing="11px"
+      tableName="markets"
     />
   );
 };

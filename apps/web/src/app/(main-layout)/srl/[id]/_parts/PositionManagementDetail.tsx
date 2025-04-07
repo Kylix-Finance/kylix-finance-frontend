@@ -1,4 +1,4 @@
-import { Box, Button, Card } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import { List, ListItem } from "~/components";
 
 const items: ListItem[] = [
@@ -21,11 +21,11 @@ const items: ListItem[] = [
 const PositionManagementDetail = () => {
   return (
     <Card
-      variant="outlined"
       className="flex flex-col gap-6 flex-[0.5] w-full dark:bg-black-500"
+      variant="outlined"
     >
       <List items={items} />
-      <Button variant="contained" size="large">
+      <Button size="large" variant="contained">
         Create SR Loan
       </Button>
     </Card>

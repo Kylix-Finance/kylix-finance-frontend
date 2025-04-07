@@ -60,7 +60,6 @@ export default function Page() {
       >
         <CardContent>
           <Typography
-            variant="h5"
             className="dark:text-primary-100"
             component="h2"
             sx={{
@@ -68,19 +67,13 @@ export default function Page() {
               textAlign: "center",
               fontWeight: 600,
             }}
+            variant="h5"
           >
             Login
           </Typography>
           <Box className="flex flex-col gap-2">
             <TextField
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={{
-                fontSize: "10px",
-                borderRadius: "4px",
-              }}
               className="bg-neutral-100 dark:bg-[#0D0D0D] font-body"
-              placeholder="Password"
               inputProps={{
                 style: {
                   fontWeight: "normal",
@@ -95,10 +88,17 @@ export default function Page() {
                   fontSize: "14px",
                 },
               }}
+              placeholder="Password"
+              style={{
+                fontSize: "10px",
+                borderRadius: "4px",
+              }}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Typography
               color={theme.palette.error.main}
-              fontWeight={"bold"}
+              fontWeight="bold"
               variant="caption"
             >
               {error}
@@ -107,11 +107,9 @@ export default function Page() {
         </CardContent>
         <CardActions sx={{ justifyContent: "center" }}>
           <Button
-            variant="contained"
-            size="large"
             disableElevation
-            onClick={handleSubmit}
             fullWidth
+            size="large"
             sx={{
               color: "#FFFFFF",
               fontWeight: "bold",
@@ -119,6 +117,8 @@ export default function Page() {
               borderRadius: 2,
               textTransform: "none",
             }}
+            variant="contained"
+            onClick={handleSubmit}
           >
             Login
           </Button>

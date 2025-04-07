@@ -1,4 +1,4 @@
-import { Box, Skeleton } from "@mui/material";
+import { Box } from "@mui/material";
 import Borrow from "./_parts/Borrow";
 import Supply from "./_parts/Supply";
 import MarketsTable from "./_parts/MarketsTable";
@@ -16,12 +16,12 @@ export default function Page() {
         <Borrow />
       </Box>
       <Card
-        title="Markets"
         rightComponent={
           <Suspense fallback={<SearchUI />}>
             <Search />
           </Suspense>
         }
+        title="Markets"
       >
         <Suspense fallback={<MarketsTableUI />}>
           <MarketsTable />

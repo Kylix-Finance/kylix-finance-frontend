@@ -7,14 +7,14 @@ import {
   useSigner,
 } from "@repo/onchain-utils";
 import { queryKeys } from "@repo/shared";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 interface Props {
   asset: string | number;
 }
 interface MutationFnProps {
   balance: string | bigint;
-  onConfirm?: VoidFunction;
+  onConfirm?: globalThis.VoidFunction;
 }
 
 export const useSupply = ({ asset }: Props) => {

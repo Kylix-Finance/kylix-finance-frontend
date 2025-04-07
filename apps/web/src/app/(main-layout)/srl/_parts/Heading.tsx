@@ -6,9 +6,9 @@ export const Heading = () => {
     <Box className="flex flex-row gap-[50px]">
       <Box className="flex flex-row gap-2 justify-between items-center">
         <Typography
-          variant="body1"
-          lineHeight="24px"
           className="text-[#767F7D] dark:text-primary-100"
+          lineHeight="24px"
+          variant="body1"
         >
           Borrow Balance:
         </Typography>
@@ -20,9 +20,9 @@ export const Heading = () => {
 
       <Box className="flex flex-row gap-2 justify-between items-center">
         <Typography
-          variant="body1"
-          lineHeight="24px"
           className="text-[#767F7D] dark:text-primary-100"
+          lineHeight="24px"
+          variant="body1"
         >
           Collateral Balance:
         </Typography>
@@ -34,8 +34,8 @@ export const Heading = () => {
 
       <Box className="flex flex-row gap-2 justify-between items-center">
         <Typography
-          lineHeight="24px"
           className="text-[#767F7D] dark:text-primary-100"
+          lineHeight="24px"
         >
           Loan Status
         </Typography>

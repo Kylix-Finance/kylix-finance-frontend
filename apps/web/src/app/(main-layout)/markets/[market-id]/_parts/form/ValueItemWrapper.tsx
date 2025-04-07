@@ -16,15 +16,15 @@ const ValueItemWrapper = ({
   value,
 }: Props) => {
   return (
-    <Box display="flex" alignItems="center" gap="8px">
+    <Box alignItems="center" display="flex" gap="8px">
       <Typography
-        className={"text-primary-800 dark:text-white  font-number"}
-        variant="subtitle2"
+        className="text-primary-800 dark:text-white  font-number"
         fontWeight="600"
+        variant="subtitle2"
       >
         {value}
       </Typography>
-      <TokenIcon symbol={iconName} width={iconWidth} height={iconHeight} />
+      <TokenIcon height={iconHeight} symbol={iconName} width={iconWidth} />
     </Box>
   );
 };

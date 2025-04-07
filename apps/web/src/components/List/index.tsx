@@ -22,7 +22,7 @@ const List = ({ items }: Props) => {
   return (
     <MUIList className="!flex !flex-col !gap-3">
       {items.map((item, index) => (
-        <Item {...item} key={index} />
+        <Item {...item} key={item.label + index} />
       ))}
     </MUIList>
   );

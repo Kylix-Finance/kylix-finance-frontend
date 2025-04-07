@@ -12,8 +12,8 @@ const FormAlert = (
   return (
     <Alert
       {...props}
-      ref={ref}
       className="dark:bg-black-600 dark:text-red-400"
+      ref={ref}
       sx={{
         paddingBlock: 0,
         paddingInline: 1,

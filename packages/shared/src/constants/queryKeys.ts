@@ -1,15 +1,17 @@
 const baseKey = "kylix";
 
+type ID = number | string | undefined;
+
 interface Balance {
   address: string | undefined;
-  assetId: number | string | undefined;
+  assetId: ID;
 }
 interface AssetPrice {
-  assetId: number | string | undefined;
+  assetId: ID;
 }
 interface LendingPools {
-  asset?: number | string | undefined;
-  account?: string | string;
+  asset?: ID;
+  account?: string;
 }
 interface Pools {
   activeAccount: string | undefined;

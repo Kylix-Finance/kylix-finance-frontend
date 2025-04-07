@@ -27,19 +27,43 @@ const PersonalBids = () => {
   );
 
   return (
-    <Card title="My Bids" className="min-h-96 max-h-96">
+    <Card className="min-h-96 max-h-96" title="My Bids">
       <Table
-        tContainerProps={{
-          className: "overflow-y-auto",
+        components={{
+          asset: (item) => (
+            <Asset
+              helperText=""
+              label={item.asset}
+              symbol={item.bidAsset.assetSymbol}
+            />
+          ),
+          amount: (item) => (
+            <Typography className="dark:text-primary-100" variant="subtitle1">
+              {item.amount}
+            </Typography>
+          ),
+          discount: (item) => (
+            <Typography className="dark:text-primary-100" variant="subtitle1">
+              {item.discount}%
+            </Typography>
+          ),
+          filled: (item) => (
+            <Typography className="dark:text-primary-100" variant="subtitle1">
+              {item.filled}
+            </Typography>
+          ),
+          actions: (item) => (
+            <CancelBidButton
+              assetId={item.marketAsset.assetId}
+              discount={item.discount}
+              txBlockNumber={item.blockNumber}
+              txIndex={item.txIndex}
+            />
+          ),
         }}
-        tCellClassnames={"!p-3"}
-        placeholderLength={3}
-        isFetched={true}
-        isLoading={false}
-        rowSpacing="10px"
-        hasPagination={false}
+        data={tableData}
         defaultSortKey="asset"
-        hiddenTHeads={["actions"]}
+        hasPagination={false}
         headers={{
           asset: "Asset",
           amount: "Amount",
@@ -47,40 +71,16 @@ const PersonalBids = () => {
           filled: "Filled",
           actions: "",
         }}
+        hiddenTHeads={["actions"]}
+        isFetched={true}
+        isLoading={false}
+        placeholderLength={3}
+        rowSpacing="10px"
         tableName="personalBids"
-        components={{
-          asset: (item) => (
-            <Asset
-              label={item.asset}
-              symbol={item.bidAsset.assetSymbol}
-              helperText=""
-            />
-          ),
-          amount: (item) => (
-            <Typography variant="subtitle1" className="dark:text-primary-100">
-              {item.amount}
-            </Typography>
-          ),
-          discount: (item) => (
-            <Typography variant="subtitle1" className="dark:text-primary-100">
-              {item.discount}%
-            </Typography>
-          ),
-          filled: (item) => (
-            <Typography variant="subtitle1" className="dark:text-primary-100">
-              {item.filled}
-            </Typography>
-          ),
-          actions: (item) => (
-            <CancelBidButton
-              assetId={item.marketAsset.assetId}
-              txBlockNumber={item.blockNumber}
-              discount={item.discount}
-              txIndex={item.txIndex}
-            />
-          ),
+        tCellClassnames="!p-3"
+        tContainerProps={{
+          className: "overflow-y-auto",
         }}
-        data={tableData}
       />
     </Card>
   );

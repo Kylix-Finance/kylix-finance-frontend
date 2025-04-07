@@ -9,7 +9,7 @@ import ReactQueryProvider from "./ReactQueryProvider";
 import { Providers as WalletProvider } from "@repo/wallet-modal";
 import { PortalContainer } from "./Portal";
 import BlockProvider from "./BlockProvider";
-import { CssBaseline, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 interface Props {
   children: React.ReactNode;
 }

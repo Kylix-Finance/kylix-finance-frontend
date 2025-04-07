@@ -6,7 +6,7 @@ import "chartjs-adapter-date-fns";
 import { Box } from "@mui/material";
 import { ChartScale } from "~/types";
 import { getTimeUnit } from "~/utils/date";
-import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
+import { useLocalStorage } from "usehooks-ts";
 import { LoadingSpinner } from "~/components/Loaders";
 
 type LineChartProps = {
@@ -24,7 +24,7 @@ const LineChart = ({ data, parsing, scale, round = false }: LineChartProps) => {
   const [mode] = useLocalStorage("theme-mode", "light");
   const color = mode === "dark" ? "#daeeea10" : "#daeeea70";
   return (
-    <Box height={180} width="100%" className="flex justify-center items-center">
+    <Box className="flex justify-center items-center" height={180} width="100%">
       {data ? (
         <Line
           data={{
@@ -65,7 +65,7 @@ const LineChart = ({ data, parsing, scale, round = false }: LineChartProps) => {
                 mode: "index",
                 intersect: false,
                 callbacks: {
-                  labelColor: function (context) {
+                  labelColor() {
                     return {
                       borderColor: palette.primary.main,
                       backgroundColor: palette.primary.main,

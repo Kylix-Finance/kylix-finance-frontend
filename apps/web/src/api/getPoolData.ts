@@ -1,6 +1,5 @@
-import { getUnixTime } from "date-fns";
 import axios from "~/lib/axios";
-import { ChartScale, PoolDataSchema } from "~/types";
+import { PoolDataSchema } from "~/types";
 
 export const getPoolData = async (assetId: string) => {
   const endTime = Date.now();

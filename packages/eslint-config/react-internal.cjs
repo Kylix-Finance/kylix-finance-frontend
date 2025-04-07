@@ -1,7 +1,7 @@
 const { resolve } = require("node:path");
 const merge = require("lodash/merge");
 const project = resolve(process.cwd(), "tsconfig.json");
-const base = require("./base");
+const base = require("./base.cjs");
 /** @type {import("eslint").Linter.Config} */
 
 const configs = {

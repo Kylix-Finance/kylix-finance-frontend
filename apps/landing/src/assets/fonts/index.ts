@@ -1,3 +1,4 @@
+/* eslint-disable @cspell/spellchecker */
 import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
 

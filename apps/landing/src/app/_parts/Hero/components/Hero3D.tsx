@@ -73,6 +73,7 @@ const Hero3D = () => {
           <Scene key={`${width}-${height}`} scrollYProgress={scrollYProgress} />
           {imgBottom !== -1 && (
             <motion.div
+              className="absolute left-1/2 "
               style={{
                 opacity: imageOpacity,
                 scale: imageOpacity,
@@ -80,18 +81,17 @@ const Hero3D = () => {
                 translateX: "-160px",
                 bottom: imgBottom,
               }}
-              className="absolute left-1/2 "
             >
-              <Image src={logoImg} alt="kylix" height={320} />
+              <Image alt="kylix" height={320} src={logoImg} />
             </motion.div>
           )}
           {/* FIRST Text START */}
           <motion.div
+            className="absolute top-[20%] flex flex-col gap-2 justify-center items-center z-50"
             style={{
               opacity: firstTextOpacity,
               translateY: firstTextTranslateY,
             }}
-            className="absolute top-[20%] flex flex-col gap-2 justify-center items-center z-50"
           >
             <h2 className="flex flex-col sm:flex-row justify-center items-center gap-2.5 font-bold font-heading w-full h-full text-4xl md:text-5xl lg:text-6xl">
               <span className="text-primary-500">
@@ -134,11 +134,11 @@ const Hero3D = () => {
 
           {/* SECOND Text START */}
           <motion.div
+            className="absolute top-[35%] flex flex-col gap-2 justify-center items-center z-40"
             style={{
               opacity: secondTextOpacity,
               translateY: sSecondTextTranslateY,
             }}
-            className="absolute top-[35%] flex flex-col gap-2 justify-center items-center z-40"
           >
             <h2 className="flex flex-col sm:flex-row justify-center items-center gap-2.5 font-bold font-heading w-full h-full text-4xl md:text-5xl lg:text-6xl">
               <span className="text-primary-500">Bridge-LESS&nbsp;</span>

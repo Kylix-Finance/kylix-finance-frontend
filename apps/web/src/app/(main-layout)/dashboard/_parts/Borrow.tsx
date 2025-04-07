@@ -1,7 +1,7 @@
+/* eslint-disable @cspell/spellchecker */
 "use client";
 
 import { Box } from "@mui/material";
-import { Modal } from "~/components";
 import { BorrowTable } from "./BorrowTable";
 import { useGetAssetPrice } from "~/hooks/chain/useGetAssetPrice";
 

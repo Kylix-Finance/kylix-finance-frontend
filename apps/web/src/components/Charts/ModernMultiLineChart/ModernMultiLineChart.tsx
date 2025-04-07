@@ -56,6 +56,7 @@ export const ModernMultiLineChart = ({
 
   const point = isChartHovered ? activePoint : defaultPoint;
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const throttledSetState = useCallback(
     throttle((newValue) => {
       setActivePoint(newValue);
@@ -67,15 +68,15 @@ export const ModernMultiLineChart = ({
     <Box>
       <Box className="flex justify-end mb-3">
         <Button
-          onClick={() => setIsLogScale((prev) => !prev)}
-          variant="outlined"
           size="small"
+          variant="outlined"
+          onClick={() => setIsLogScale((prev) => !prev)}
         >
           <Checkbox
             checked={isLogScale}
+            size="small"
             onChange={handleChange}
             onClick={(event) => event.stopPropagation()}
-            size="small"
           />
           Logarithmic scale
           <Info className="ml-2 mr-1" />
@@ -96,12 +97,12 @@ export const ModernMultiLineChart = ({
               return (
                 <Box key={dataset.label} className="mb-4">
                   <Typography
-                    variant="body1"
                     className="mb-2 dark:text-primary-100"
+                    variant="body1"
                   >
                     {dataset.label}
                   </Typography>
-                  <Typography variant="body2" className="dark:text-black-300">
+                  <Typography className="dark:text-black-300" variant="body2">
                     {percentage}%
                   </Typography>
                 </Box>
@@ -110,14 +111,11 @@ export const ModernMultiLineChart = ({
           </Box>
 
           <Box
+            className="flex justify-center items-center"
             height={280}
             width="100%"
-            className="flex justify-center items-center"
           >
             <Line
-              width="100%"
-              onMouseLeave={() => setIsChartHovered(false)}
-              onMouseEnter={() => setIsChartHovered(true)}
               data={{
                 datasets,
               }}
@@ -233,6 +231,9 @@ export const ModernMultiLineChart = ({
                 maintainAspectRatio: false,
               }}
               plugins={[crosshairPlugin]}
+              width="100%"
+              onMouseEnter={() => setIsChartHovered(true)}
+              onMouseLeave={() => setIsChartHovered(false)}
             />
           </Box>
         </Box>

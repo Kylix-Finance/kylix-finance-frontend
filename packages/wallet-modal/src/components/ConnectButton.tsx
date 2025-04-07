@@ -19,7 +19,7 @@ export const ConnectButton: React.FC<Props> = ({ address }) => {
   const handleOpenWalletModal = () => modalState.setIsOpen(true);
 
   const handleDropdownItemClick = (name: DropdownOption["name"]) => {
-    const handlers: Record<DropdownOption["name"], VoidFunction> = {
+    const handlers: Record<DropdownOption["name"], globalThis.VoidFunction> = {
       disconnect,
       switchAccount: handleChangeToSwitchStage,
     };

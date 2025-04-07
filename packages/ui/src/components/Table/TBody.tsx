@@ -66,7 +66,7 @@ function TBody<Schema, ExtraFields extends string = string>({
   return (
     <TableBody {...tBody}>
       <TableRow>
-        <TCell style={{ padding: "0px" }} colSpan={Object.keys(headers).length}>
+        <TCell colSpan={Object.keys(headers).length} style={{ padding: "0px" }}>
           {!!ComponentBeforeBody && <ComponentBeforeBody />}
         </TCell>
       </TableRow>
@@ -81,15 +81,15 @@ function TBody<Schema, ExtraFields extends string = string>({
 
       {shouldShowMainRows &&
         finalData.map((row, index) => (
-          <Fragment key={index}>
+          <Fragment key={index + index}>
             <TRow
               className="!dark:bg-red-500"
-              numeric={numeric}
-              isLoading={!isFetched || isLoading}
-              tCellClassnames={tCellClassnames}
-              headers={headers}
-              row={row}
               components={components}
+              headers={headers}
+              isLoading={!isFetched || isLoading}
+              numeric={numeric}
+              row={row}
+              tCellClassnames={tCellClassnames}
               {...tRowProps}
             />
 
@@ -108,7 +108,11 @@ function TBody<Schema, ExtraFields extends string = string>({
       {shouldShowNoDataRow &&
         placeholderArr.map((_i, index) => {
           return (
-            <TableRow {...tRowProps} className={tRowClassName} key={index}>
+            <TableRow
+              {...tRowProps}
+              key={index + index}
+              className={tRowClassName}
+            >
               <TableCell colSpan={headersLength}>
                 <Box className="flex justify-center items-center h-[40px]">
                   {Math.floor(placeholderLength / 2) === index ? (
@@ -133,11 +137,7 @@ const NoData: React.FC<{ noDataComponent?: React.FC }> = ({
   const Component =
     noDataComponent || (() => <Typography>No Data Available</Typography>);
 
-  return (
-    <>
-      <Component />
-    </>
-  );
+  return <Component />;
 };
 
 export default TBody;

@@ -65,7 +65,7 @@ export const Icons = {
   Instagram,
   LeftArrow,
   Linkedin,
-  Plus: Plus,
+  Plus,
   Search,
   Sort,
   Twitter,

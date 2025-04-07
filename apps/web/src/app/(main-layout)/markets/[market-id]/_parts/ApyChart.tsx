@@ -40,10 +40,9 @@ const ApyChart = () => {
   }, [data, utilization, RoundedUtilization]);
 
   return (
-    <Card variant="outlined" className="dark:bg-black-500">
+    <Card className="dark:bg-black-500" variant="outlined">
       <ModernMultiLineChart
         activeIndex={RoundedUtilization}
-        isLoading={!isFetched}
         datasets={[
           {
             label: "Borrow APR",
@@ -68,6 +67,7 @@ const ApyChart = () => {
             },
           },
         ]}
+        isLoading={!isFetched}
       />
     </Card>
   );

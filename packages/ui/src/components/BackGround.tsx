@@ -36,19 +36,19 @@ export const BackGround: React.FC<Props> = ({ imgStyle }) => {
         }}
       />
       <motion.div
+        animate="animate"
         className="fixed w-full h-screen opacity-15"
         initial="initial"
-        animate="animate"
         variants={objectVariant}
       >
         <Image
-          src="/assets/images/section-bg.png"
-          alt="section bg"
           fill
-          style={imgStyle}
-          quality={100}
+          alt="section bg"
           draggable="false"
           objectFit="fill"
+          quality={100}
+          src="/assets/images/section-bg.png"
+          style={imgStyle}
         />
       </motion.div>
     </>

@@ -15,16 +15,16 @@ const Asset = ({
       <TokenIcon symbol={symbol} />
       <Box className="flex flex-col">
         <Typography
-          variant="body3"
           className="dark:text-black-100"
-          fontWeight={"bold"}
+          fontWeight="bold"
+          variant="body3"
         >
           {label}
         </Typography>
         {helperText && (
           <Typography
-            variant="caption"
             className="text-[#1A433B80] dark:text-[#5C6965]"
+            variant="caption"
           >
             {helperText}
           </Typography>

@@ -22,7 +22,7 @@ const Camera = () => {
     }
   }, [viewport]);
   return (
-    <OrthographicCamera ref={cameraRef} makeDefault position={[0, 0, -10]} />
+    <OrthographicCamera makeDefault position={[0, 0, -10]} ref={cameraRef} />
   );
 };
 

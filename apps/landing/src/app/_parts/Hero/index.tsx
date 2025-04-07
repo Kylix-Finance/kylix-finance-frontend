@@ -2,7 +2,6 @@
 import { useWindowSize } from "usehooks-ts";
 import Hero3D from "./components/Hero3D";
 import Button from "~/components/Button";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { logoImg } from "~/assets/images";
 
@@ -27,7 +26,7 @@ const Hero = () => {
               <b>
                 Borrow, lend and earn seamlessly across multiple ecosystems.{" "}
                 <br />
-                Kylix Finance, the bridgeless multi-chain lending platform.
+                Kylix Finance, the bridge less multi-chain lending platform.
               </b>
               <br />
               <br />
@@ -39,7 +38,7 @@ const Hero = () => {
               </Button>
             </div>
           </div>
-          <Image src={logoImg} alt="kylix" height={400} />
+          <Image alt="kylix" height={400} src={logoImg} />
         </div>
       )}
     </div>

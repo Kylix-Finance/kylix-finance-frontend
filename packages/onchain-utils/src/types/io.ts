@@ -1,5 +1,4 @@
 import { LendingPoolsResponse } from "./apiOutput";
-import { MethodsName } from "./methods";
 interface IO<P, O> {
   params: P;
   output: O;

@@ -1,19 +1,9 @@
 "use client";
-import {
-  Alert,
-  Box,
-  Button,
-  InputAdornment,
-  TextField,
-  TextFieldProps,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import { Dispatch, MouseEventHandler, SetStateAction, useState } from "react";
+import { Box, Button, InputAdornment, TextField } from "@mui/material";
+import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 import { List, ListItem, TokenIcon } from "~/components";
-import { getDecimalRegex, handleInputChange } from "~/utils";
+import { handleInputChange } from "~/utils";
 import AlertContainer from "../AlertContainer";
-import { LoadingButton } from "@mui/lab";
 import { FormAlert } from "~/components/FormAlert";
 import PrivateButton from "~/components/PrivateButton/PrivateButton";
 
@@ -40,7 +30,6 @@ interface Props {
 }
 
 export const Form = ({
-  assetId,
   balance,
   decimals,
   error,
@@ -59,49 +48,40 @@ export const Form = ({
 
   return (
     <Box display="flex" flexDirection="column" gap="24px">
-      <Box flexDirection="column" gap="6px" alignItems="center" display="flex">
+      <Box alignItems="center" display="flex" flexDirection="column" gap="6px">
         <Box
-          flexDirection="row"
-          display="flex"
           alignItems="center"
-          justifyContent="space-between"
           className="!w-full"
+          display="flex"
+          flexDirection="row"
+          justifyContent="space-between"
         >
           <p className="text-[#707F7A] font-bold text-sm leading-5">Amount</p>
           <Button
-            disabled={isMaxLoading}
-            className="text-[#45A996] lowercase font-[700] leading-6 text-[14px]"
-            variant="text"
             disableElevation
+            className="text-[#45A996] lowercase font-[700] leading-6 text-[14px]"
+            disabled={isMaxLoading}
             size="small"
+            variant="text"
             onClick={onMaxClick}
           >
             max
           </Button>
         </Box>
         <TextField
-          value={value}
-          onChange={(e) => handleInputChange(e, setValue, decimals || 6)}
-          size="small"
           fullWidth
-          placeholder="0"
+          autoComplete="off"
           className="!font-number !text-base !text-primary-800"
           error={!!error}
-          helperText={error}
-          inputMode="numeric"
-          autoComplete="off"
-          sx={{
-            fontWeight: "bold",
-            borderRadius: "6px",
-            lineHeight: "20px",
-          }}
-          inputProps={{
-            className: "!font-number dark:text-primary-100",
-          }}
           FormHelperTextProps={{
             sx: {
               fontWeight: "bold",
             },
+          }}
+          helperText={error}
+          inputMode="numeric"
+          inputProps={{
+            className: "!font-number dark:text-primary-100",
           }}
           InputProps={{
             sx: {
@@ -112,34 +92,43 @@ export const Form = ({
             className: "!font-number",
             startAdornment: (
               <InputAdornment position="start">
-                <TokenIcon symbol={symbol} width={24} height={24} />
+                <TokenIcon height={24} symbol={symbol} width={24} />
               </InputAdornment>
             ),
           }}
+          placeholder="0"
+          size="small"
+          sx={{
+            fontWeight: "bold",
+            borderRadius: "6px",
+            lineHeight: "20px",
+          }}
+          value={value}
+          onChange={(e) => handleInputChange(e, setValue, decimals || 6)}
         />
       </Box>
       <List items={items} />
       <div className="flex w-full gap-1">
         <PrivateButton
-          variant="contained"
-          size="large"
           disableElevation
-          onClick={submitButton.onclick}
+          className="w-full text-white dark:text-[#0d0d0d] min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60 font-body"
           disabled={isInputEmpty || isInsufficientBalance}
           loading={isSubmitting}
-          className="w-full text-white dark:text-[#0d0d0d] min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60 font-body"
+          size="large"
+          variant="contained"
+          onClick={submitButton.onclick}
         >
           {submitButton.content}
         </PrivateButton>
         {secondButton && (
           <PrivateButton
-            variant="contained"
-            size="large"
             disableElevation
-            onClick={secondButton.onclick}
+            className="w-full text-white dark:text-[#0d0d0d] font-body min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
             disabled={secondButton.disabled}
             loading={isSubmitting}
-            className="w-full text-white dark:text-[#0d0d0d] font-body min-h-[36px] text-[14px] font-[700] leading-[19px] dark:disabled:bg-[#45A996]/50 dark:disabled:text-[#0d0d0d]/60"
+            size="large"
+            variant="contained"
+            onClick={secondButton.onclick}
           >
             {secondButton.content}
           </PrivateButton>
@@ -147,7 +136,7 @@ export const Form = ({
       </div>
       <AlertContainer>
         {isInsufficientBalance && (
-          <FormAlert severity="error" message="Insufficient Balance!" />
+          <FormAlert message="Insufficient Balance!" severity="error" />
         )}
       </AlertContainer>
     </Box>

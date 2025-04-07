@@ -5,17 +5,15 @@ import { Skeleton } from "@repo/ui";
 import { Icons } from "~/assets/svgs";
 import { Card } from "~/components";
 import { useGetLendingPools } from "~/hooks/chain/useGetLendingPools";
-import { usePools } from "~/hooks/chain/usePools";
 
 const Borrow = () => {
   const { data, isLoading } = useGetLendingPools();
 
   return (
     <Card
-      title="Total Borrow"
       icon={Icons.WalletFill}
       rightComponent={
-        <Typography variant="h5" className="text-primary-800 dark:text-white">
+        <Typography className="text-primary-800 dark:text-white" variant="h5">
           <Skeleton isLoading={isLoading} minWidth={80}>
             {data?.summary
               ? formatBigNumbers(formatUnit(data.summary.total_borrow, 4), 2) +
@@ -24,6 +22,7 @@ const Borrow = () => {
           </Skeleton>
         </Typography>
       }
+      title="Total Borrow"
     >
       {/* <Typography
         variant="body3"

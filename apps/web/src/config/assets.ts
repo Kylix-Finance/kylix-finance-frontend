@@ -577,6 +577,7 @@ export const assets: Record<string, Asset> = {
     supplyApy: "2.1",
   },
   "72": {
+    // eslint-disable-next-line @cspell/spellchecker
     _symbol: "TFUEL",
     precision: 6,
     collateralQ: "37",
@@ -649,6 +650,7 @@ export const assets: Record<string, Asset> = {
     supplyApy: "2.7",
   },
   "81": {
+    // eslint-disable-next-line @cspell/spellchecker
     _symbol: "CENNZ",
     precision: 6,
     collateralQ: "51",
@@ -657,6 +659,7 @@ export const assets: Record<string, Asset> = {
     supplyApy: "2.1",
   },
   "82": {
+    // eslint-disable-next-line @cspell/spellchecker
     _symbol: "BTCV",
     precision: 6,
     collateralQ: "40",
@@ -681,6 +684,7 @@ export const assets: Record<string, Asset> = {
     supplyApy: "1.9",
   },
   "85": {
+    // eslint-disable-next-line @cspell/spellchecker
     _symbol: "SCRT",
     precision: 6,
     collateralQ: "39",
@@ -713,6 +717,7 @@ export const assets: Record<string, Asset> = {
     supplyApy: "2.3",
   },
   "89": {
+    // eslint-disable-next-line @cspell/spellchecker
     _symbol: "STEEM",
     precision: 6,
     collateralQ: "43",

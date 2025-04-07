@@ -1,6 +1,5 @@
-import { getUnixTime } from "date-fns";
 import axios from "~/lib/axios";
-import { ChartScale, SupplyChartDataset, TotalSupplySchema } from "~/types";
+import { ChartScale, TotalSupplySchema } from "~/types";
 
 export const getTotalSupply = async (scale: ChartScale) => {
   const endTime = Date.now();

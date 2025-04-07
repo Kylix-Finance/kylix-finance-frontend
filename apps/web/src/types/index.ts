@@ -1,4 +1,4 @@
-import { ComponentType, ReactNode, SVGProps } from "react";
+import { ComponentType, SVGProps } from "react";
 import { CHART_SCALES } from "~/constants";
 export type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 export type SocialMedia = {

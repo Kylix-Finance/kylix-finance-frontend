@@ -6,7 +6,7 @@ const baseMetadata = (siteName = "Kylix"): Metadata => {
     metadataBase: new URL(process.env.NEXT_PUBLIC_FRONTEND_URL!),
     openGraph: {
       url: "./",
-      siteName: siteName,
+      siteName,
       images: {
         url: "/cover.png",
       },
@@ -27,8 +27,6 @@ const baseMetadata = (siteName = "Kylix"): Metadata => {
     },
   };
 };
-
-const k = (w = "Hi") => {};
 
 export const mergeMetadata = (
   metadata: Metadata = {},

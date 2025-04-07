@@ -10,7 +10,7 @@ export const TableActions = ({ assetId }: Props) => {
     <Box className="flex justify-end gap-1">
       <Link href={`/markets/${assetId}`}>
         <Button variant="contained">
-          <Typography className="!text-[#FFF]" variant="body3" fontWeight={600}>
+          <Typography className="!text-[#FFF]" fontWeight={600} variant="body3">
             Supply
           </Typography>
         </Button>
@@ -18,7 +18,6 @@ export const TableActions = ({ assetId }: Props) => {
 
       {/*FIXME: remove styles for milestone 2 */}
       <Button
-        variant="outlined"
         disabled
         sx={{
           color: "#48484820",
@@ -30,8 +29,9 @@ export const TableActions = ({ assetId }: Props) => {
             color: "#48484820",
           },
         }}
+        variant="outlined"
       >
-        <Typography variant="body3" fontWeight={600}>
+        <Typography fontWeight={600} variant="body3">
           Borrow
         </Typography>
       </Button>

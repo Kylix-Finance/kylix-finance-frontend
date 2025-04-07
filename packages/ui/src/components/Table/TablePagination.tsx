@@ -67,9 +67,9 @@ const TablePagination: React.FC<Props> = ({ tableName }) => {
       }}
     >
       <Box
-        component={"div"}
-        display={"flex"}
         className="w-full h-full flex justify-between align-middle"
+        component="div"
+        display="flex"
       >
         <Select value={pagination.perPage} onChange={handleChangeRowsPerPage}>
           {paginationAmount.map(({ label, value }) => (

@@ -70,10 +70,10 @@ const ProgressBar: React.FC<Props> = ({ data = {}, isLoading }) => {
             badge: (
               <Box className="size-[14px]">
                 <Image
-                  src="/progress.png"
                   alt="progress"
-                  width={14}
                   height={14}
+                  src="/progress.png"
+                  width={14}
                 />
               </Box>
             ),
@@ -110,10 +110,10 @@ const ProgressBar: React.FC<Props> = ({ data = {}, isLoading }) => {
 
       <Box className="relative w-full">
         <Box
+          className="relative h-4 bg-[#ECF6F4] dark:bg-black-600 rounded-[4px] overflow-hidden"
           style={{
             width: "100%",
           }}
-          className="relative h-4 bg-[#ECF6F4] dark:bg-black-600 rounded-[4px] overflow-hidden"
         >
           <Box
             className="h-full"
@@ -123,19 +123,19 @@ const ProgressBar: React.FC<Props> = ({ data = {}, isLoading }) => {
             }}
           />
           <Box
+            className="absolute top-0 h-full w-[5px] bg-orange-400 rounded"
             style={{ left: `${fixedSale}%` }}
-            className={`absolute top-0 h-full w-[5px] bg-orange-400 rounded`}
           />
           <Box
+            className="absolute top-0 h-full w-[5px] bg-red-400 rounded"
             style={{ left: `${fixedTarget}%` }}
-            className={`absolute top-0 h-full w-[5px] bg-red-400 rounded`}
           />
         </Box>
 
         <Box className="pb-6">
           <Box
-            style={{ left: `${current}%` }}
             className="absolute -translate-x-1/3 w-[35px]"
+            style={{ left: `${current}%` }}
           >
             <Icons.ArrowUp style={{ color: progressBarColor }} />
             <Box className="-mt-2">
@@ -144,8 +144,8 @@ const ProgressBar: React.FC<Props> = ({ data = {}, isLoading }) => {
           </Box>
 
           <Box
-            style={{ left: `${fixedSale}%` }}
             className="absolute -translate-x-1/3 w-[35px]"
+            style={{ left: `${fixedSale}%` }}
           >
             <Box className="invisible">
               <Icons.ArrowUp />
@@ -156,8 +156,8 @@ const ProgressBar: React.FC<Props> = ({ data = {}, isLoading }) => {
           </Box>
 
           <Box
-            style={{ left: `${fixedTarget}%` }}
             className="absolute -translate-x-1/3 w-[35px]"
+            style={{ left: `${fixedTarget}%` }}
           >
             <Box className="invisible">
               <Icons.ArrowUp />
@@ -183,15 +183,15 @@ const Percent = ({ value }: { value: number }) => {
           color: theme.palette.secondary[900],
         },
       })}
-      TransitionComponent={Zoom}
       title={value}
+      TransitionComponent={Zoom}
     >
       <Typography
-        variant="body3"
-        fontWeight={600}
-        lineHeight={"24px"}
-        style={{ width: "max-content" }}
         className=" text-[#4E5B72] dark:text-primary-100 font-number flex"
+        fontWeight={600}
+        lineHeight="24px"
+        style={{ width: "max-content" }}
+        variant="body3"
       >
         {value.toFixed(2)} %
       </Typography>

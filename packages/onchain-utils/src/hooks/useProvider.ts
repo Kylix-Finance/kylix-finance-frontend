@@ -1,9 +1,8 @@
 "use client";
 
-import { skipToken, useQuery, useQueryClient } from "@tanstack/react-query";
+import { skipToken, useQuery } from "@tanstack/react-query";
 import { ApiPromise, WsProvider } from "@polkadot/api";
-import { Options, queryKeys } from "@repo/shared";
-import { useEffect, useState } from "react";
+import { queryKeys } from "@repo/shared";
 import { useConfig } from "./useConfig";
 
 const useProvider = () => {

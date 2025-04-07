@@ -95,23 +95,23 @@ const QuickBorrow = () => {
   };
 
   return (
-    <Card title="Quick Market" className="w-full justify-between items-end">
+    <Card className="w-full justify-between items-end" title="Quick Market">
       <Box className="flex justify-between w-full gap-5">
         <Box className="flex flex-col  gap-3 w-full">
           <MuiCard
             square
-            variant="outlined"
             className="flex flex-col  gap-3 w-full"
+            variant="outlined"
           >
-            <Typography variant="subtitle1" fontSize={"1rem"}>
+            <Typography fontSize="1rem" variant="subtitle1">
               Deposit
             </Typography>
             <Box className="flex flex-col gap-1.5">
               <Box className="flex justify-between w-full items-center">
                 <Typography
                   className="text-secondary-800"
+                  fontSize=".875rem"
                   variant="subtitle1"
-                  fontSize={".875rem"}
                 >
                   Amount
                 </Typography>
@@ -131,11 +131,11 @@ const QuickBorrow = () => {
                 </Box>
               </Box>
               <InputWithSelect
+                maxValue="0"
                 options={options}
                 pool={supplyPool}
                 setPool={setSupplyPool}
                 setValue={setSupplyValue}
-                maxValue={"0"}
                 textField="readonly"
                 value={supplyValue}
               />
@@ -157,18 +157,18 @@ const QuickBorrow = () => {
         <Box className="flex flex-col  gap-3  w-full">
           <MuiCard
             square
-            variant="outlined"
             className="flex flex-col  gap-3  w-full"
+            variant="outlined"
           >
-            <Typography variant="subtitle1" fontSize={"1rem"}>
+            <Typography fontSize="1rem" variant="subtitle1">
               Borrow
             </Typography>
             <Box className="flex flex-col gap-1.5">
               <Box className="flex justify-between w-full items-center">
                 <Typography
                   className="text-secondary-800"
+                  fontSize=".875rem"
                   variant="subtitle1"
-                  fontSize={".875rem"}
                 >
                   Amount
                 </Typography>
@@ -188,12 +188,12 @@ const QuickBorrow = () => {
                 </Box>
               </Box>
               <InputWithSelect
+                disabledMax={!minCollateralRatio || !supplyPool || !borrowPool}
+                maxValue={max.toString() || "0"}
                 options={options}
                 pool={borrowPool}
                 setPool={setBorrowPool}
                 setValue={setBorrowValue}
-                maxValue={max.toString() || "0"}
-                disabledMax={!minCollateralRatio || !supplyPool || !borrowPool}
               />
               <List
                 items={[{ label: "Total Value", value: borrowValueInUSD }]}
@@ -208,7 +208,7 @@ const QuickBorrow = () => {
           />
         </Box>
       </Box>
-      <Button variant="contained" size="large" onClick={borrowHandler}>
+      <Button size="large" variant="contained" onClick={borrowHandler}>
         Quick Barrow
       </Button>
     </Card>

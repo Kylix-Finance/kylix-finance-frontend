@@ -1,6 +1,5 @@
-import { Box, Chip, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import { useMemo } from "react";
 import { cn } from "~/utils";
 
 interface Props {
@@ -25,6 +24,10 @@ const KylixChip = ({
   // }, []);
   return (
     <Box
+      className={cn(
+        "bg-primary-400/10 font-number text-primary-800",
+        className
+      )}
       sx={{
         display: "flex",
         gap: "4px",
@@ -39,20 +42,16 @@ const KylixChip = ({
         paddingX: "6px",
         paddingY: "1px",
       }}
-      className={cn(
-        "bg-primary-400/10 font-number text-primary-800",
-        className
-      )}
     >
-      <Typography variant="caption" className="dark:text-primary-100">
+      <Typography className="dark:text-primary-100" variant="caption">
         {value}
       </Typography>
       <Image
-        draggable="false"
-        src="/kylix-chip.svg"
         alt="Kylix badge"
-        width={iconDimension.width}
+        draggable="false"
         height={iconDimension.height}
+        src="/kylix-chip.svg"
+        width={iconDimension.width}
       />
     </Box>
   );
