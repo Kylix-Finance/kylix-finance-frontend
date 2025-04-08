@@ -1,11 +1,20 @@
 import { createStore } from "@repo/utils";
-import { handlers } from "./handlers";
 import { initialState } from "./initialState";
 import * as TableStore from "./types";
 
 export const useTableStore = createStore<TableStore.Store>((set) => ({
   ...initialState,
-  ...handlers(set),
+  updatePagination({ name, props }) {
+    set((state) => ({
+      pagination: {
+        ...state.pagination,
+        [name]: {
+          ...state.pagination[name],
+          ...props,
+        },
+      },
+    }));
+  },
 }));
 
 export { initialState as tableStoreInitialState } from "./initialState";

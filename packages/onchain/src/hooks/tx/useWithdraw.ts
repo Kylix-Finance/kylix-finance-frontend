@@ -1,4 +1,4 @@
-import { skipToken, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { queryKeys } from "@repo/shared";
 import { ApiPromise } from "@polkadot/api";
 import { Signer } from "@polkadot/api/types";
@@ -37,22 +37,23 @@ export const useWithdraw = ({ assetId }: WithdrawParams) => {
   return useMutation({
     mutationKey: queryKeys.withdraw,
     mutationFn: async (params: MutationFnParams) => {
-      if (!isAccountExists(activeAccount?.address) || !isApiExists(provider?.api) || !isSignerExists(signer)) return
+      if (
+        !isAccountExists(activeAccount?.address) ||
+        !isApiExists(provider?.api) ||
+        !isSignerExists(signer)
+      )
+        return;
 
       if (!balance) {
         throw new Error("Balance information is not available");
       }
 
-      return withdrawTransaction(
-        assetId,
-        params,
-        {
-          api: provider.api,
-          signer,
-          getBalance: balance.realBalance,
-          activeAccount: activeAccount.address,
-        }
-      );
+      return withdrawTransaction(assetId, params, {
+        api: provider.api,
+        signer,
+        getBalance: balance.realBalance,
+        activeAccount: activeAccount.address,
+      });
     },
   });
 };
@@ -66,7 +67,7 @@ export const withdrawTransaction = async (
 
   const extrinsic = api.tx.lending.withdraw(assetId, balance);
 
-  await validateEstimatedGas(extrinsic, activeAccount, getBalance)
+  await validateEstimatedGas(extrinsic, activeAccount, getBalance);
 
   return new Promise((resolve, reject) => {
     extrinsic
@@ -76,10 +77,9 @@ export const withdrawTransaction = async (
           api,
           onConfirm,
           resolve,
-          reject
+          reject,
         })
       )
       .catch(reject);
   });
 };
-

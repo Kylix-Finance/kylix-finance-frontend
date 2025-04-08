@@ -8,4 +8,3 @@ import "./augment-api-query.ts";
 import "./augment-api-tx.ts";
 import "./augment-api-rpc.ts";
 import "./augment-api-runtime.ts";
-

@@ -7,11 +7,11 @@ import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { MotionCanvas } from "framer-motion-3d";
 import { MotionValue } from "framer-motion";
 
-import * as THREE from "three";
-import { extend } from "@react-three/fiber";
+// import * as THREE from "three";
+// import { extend } from "@react-three/fiber";
 import Camera from "./Camera";
 
-extend(THREE);
+// extend(THREE);
 
 interface Props {
   scrollYProgress: MotionValue<number>;

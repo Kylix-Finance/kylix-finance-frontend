@@ -1,4 +1,4 @@
-import * as types from "../types/chain/augment-api"
+import * as types from "../types/chain/augment-api";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { ApiPromise, WsProvider } from "@polkadot/api";
 import { queryKeys } from "@repo/shared";
@@ -11,18 +11,16 @@ export const useProvider = () => {
     queryKey: queryKeys.provider,
     queryFn: rpc
       ? async () => {
-        const provider = new WsProvider(rpc);
-        const api = await ApiPromise.create({ provider, types });
-        return {
-          api,
-          provider,
-        };
-      }
+          const provider = new WsProvider(rpc);
+          const api = await ApiPromise.create({ provider, types });
+          return {
+            api,
+            provider,
+          };
+        }
       : skipToken,
     meta: {
       excludeFromGlobalInvalidation: true,
     },
   });
-
 };
-

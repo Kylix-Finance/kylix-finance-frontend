@@ -14,5 +14,5 @@ export const TokenIcons: Record<string, Icon> = {
   USDT: Coins.Usdt,
   USDC: Usdc,
   SOL: Coins.Solana,
-  SUI: Coins.Sui
+  SUI: Coins.Sui,
 };

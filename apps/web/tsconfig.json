@@ -3,15 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "testSrc/*"
-      ],
-      "#/*": [
-        "public/*"
-      ],
-      "~/*": [
-        "src/*"
-      ]
+      "@/*": ["testSrc/*"],
+      "#/*": ["public/*"],
+      "~/*": ["src/*"]
     },
     "noEmit": true
   },
@@ -23,8 +17,5 @@
     ".next/types/**/*.ts",
     "../../global.d.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "src/types/_generated"
-  ]
+  "exclude": ["node_modules", "src/types/_generated"]
 }

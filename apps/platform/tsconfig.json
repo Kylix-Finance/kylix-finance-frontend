@@ -6,7 +6,8 @@
       "@/*": ["testSrc/*"],
       "#/*": ["public/*"],
       "~/*": ["src/*"]
-    }
+    },
+    "noEmit": true
   },
   "include": [
     "src",

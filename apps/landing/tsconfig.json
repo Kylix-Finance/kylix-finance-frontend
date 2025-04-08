@@ -5,7 +5,8 @@
     "paths": {
       "#/*": ["public/*"],
       "~/*": ["src/*"]
-    }
+    },
+    "noEmit": true
   },
   "include": [
     "./react-app-env.d.ts",

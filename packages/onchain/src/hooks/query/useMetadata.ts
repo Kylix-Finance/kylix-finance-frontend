@@ -16,10 +16,10 @@ export const useMetadata = (assetId?: number | string) => {
     queryKey: queryKeys.metadata(assetId || -1),
     queryFn: enabled
       ? async () => {
-        const { api } = data
-        const metadata = await api.query.assets.metadata(assetId);
-        return metadata.toHuman() as MetadataResult
-      }
+          const { api } = data;
+          const metadata = await api.query.assets.metadata(assetId);
+          return metadata.toHuman() as MetadataResult;
+        }
       : skipToken,
   });
 };

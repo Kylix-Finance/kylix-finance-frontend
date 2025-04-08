@@ -4,7 +4,7 @@ import Ankr from "./ankr.svg";
 import Aave from "./aave.svg";
 import Usdt from "./usdt.svg";
 import Solana from "./solana.svg";
-import Sui from "./sui.svg"
+import Sui from "./sui.svg";
 export const Coins = {
   BitCoin,
   Dot,
@@ -12,5 +12,5 @@ export const Coins = {
   Aave,
   Usdt,
   Solana,
-  Sui
+  Sui,
 };

@@ -1,5 +1,4 @@
 import { WalletModal } from "@repo/wallet-modal";
-import "../globals.css";
 import MainLayout from "./_parts/MainLayout";
 import { BackGround } from "@repo/ui";
 

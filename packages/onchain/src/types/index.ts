@@ -1,5 +1,4 @@
-
 export type Config = {
-    dappName: string;
-    rpc: string;
+  dappName: string;
+  rpc: string;
 };

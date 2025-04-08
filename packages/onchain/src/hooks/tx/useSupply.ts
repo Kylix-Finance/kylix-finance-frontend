@@ -36,21 +36,22 @@ export const useSupply = ({ assetId }: SupplyParams) => {
   return useMutation({
     mutationKey: queryKeys.supply,
     mutationFn: async (params: MutationFnParams) => {
-      if (!isAccountExists(activeAccount?.address) || !isApiExists(provider?.api) || !isSignerExists(signer)) return
+      if (
+        !isAccountExists(activeAccount?.address) ||
+        !isApiExists(provider?.api) ||
+        !isSignerExists(signer)
+      )
+        return;
       if (!balance) {
         throw new Error("Balance information is not available");
       }
-      return supplyTransaction(
-        assetId,
-        params,
-        {
-          api: provider.api,
-          signer,
-          getBalance: balance.realBalance,
-          activeAccount: activeAccount.address,
-        }
-      );
-    }
+      return supplyTransaction(assetId, params, {
+        api: provider.api,
+        signer,
+        getBalance: balance.realBalance,
+        activeAccount: activeAccount.address,
+      });
+    },
   });
 };
 
@@ -61,7 +62,7 @@ export const supplyTransaction = async (
 ) => {
   api.setSigner(signer);
   const extrinsic = api.tx.lending.supply(assetId, balance);
-  await validateEstimatedGas(extrinsic, activeAccount, getBalance)
+  await validateEstimatedGas(extrinsic, activeAccount, getBalance);
   return new Promise((resolve, reject) => {
     extrinsic
       .signAndSend(
@@ -70,7 +71,7 @@ export const supplyTransaction = async (
           api,
           onConfirm,
           resolve,
-          reject
+          reject,
         })
       )
       .catch(reject);

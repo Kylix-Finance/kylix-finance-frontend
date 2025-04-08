@@ -1,7 +1,7 @@
-import { TypographyOptions } from "@mui/material/styles/createTypography";
+import { TypographyVariantsOptions } from "@mui/material";
 import { fonts } from "~/assets/fonts";
 
-export const typography: TypographyOptions = {
+export const typography: TypographyVariantsOptions = {
   fontFamily: fonts.inter.style.fontFamily,
   h1: {
     fontWeight: 700,

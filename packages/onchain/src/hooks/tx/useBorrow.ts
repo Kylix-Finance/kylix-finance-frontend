@@ -29,7 +29,6 @@ interface BorrowDependencies {
   getBalance: bigint;
 }
 
-
 interface MutationFnParams {
   balance: string | bigint;
   onConfirm?: () => void;
@@ -44,7 +43,12 @@ export const useBorrow = ({ assetId }: BorrowParams) => {
   return useMutation({
     mutationKey: queryKeys.borrow,
     mutationFn: async (params: MutationFnParams) => {
-      if (!isAccountExists(activeAccount?.address) || !isApiExists(provider?.api) || !isSignerExists(signer)) return
+      if (
+        !isAccountExists(activeAccount?.address) ||
+        !isApiExists(provider?.api) ||
+        !isSignerExists(signer)
+      )
+        return;
       if (!balance) {
         throw new Error("Balance information is not available");
       }
@@ -54,26 +58,18 @@ export const useBorrow = ({ assetId }: BorrowParams) => {
         getBalance: balance.realBalance,
         activeAccount: activeAccount?.address,
       });
-    }
+    },
   });
 };
 
 export const borrowTransaction = async (
   assetId: string,
   { balance, onConfirm }: MutationFnParams,
-  {
-    api,
-    activeAccount,
-    signer,
-    getBalance,
-  }: BorrowDependencies
+  { api, activeAccount, signer, getBalance }: BorrowDependencies
 ) => {
   api.setSigner(signer);
-  const extrinsic = api.tx.lending.borrow(
-    assetId,
-    balance
-  );
-  await validateEstimatedGas(extrinsic, activeAccount, getBalance)
+  const extrinsic = api.tx.lending.borrow(assetId, balance);
+  await validateEstimatedGas(extrinsic, activeAccount, getBalance);
 
   return new Promise((resolve, reject) => {
     extrinsic
@@ -83,7 +79,7 @@ export const borrowTransaction = async (
           api,
           onConfirm,
           resolve,
-          reject
+          reject,
         })
       )
       .catch(reject);
