@@ -5,7 +5,7 @@ import { skipToken, useQuery } from "@tanstack/react-query";
 import { DEFAULT_TOKEN_DECIMALS, queryKeys } from "@repo/shared";
 import { useProvider } from "../useProvider";
 import { useActiveAccount } from "../useActiveAccount";
-import { formatUnit } from "src/utils";
+import { formatUnit } from "../../utils/formatUnit";
 interface Props {
   accountAddress?: string;
   assetId?: number | string;

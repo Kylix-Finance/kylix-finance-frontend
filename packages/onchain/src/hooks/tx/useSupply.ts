@@ -7,11 +7,11 @@ import { useProvider } from "../useProvider";
 import { useActiveAccount } from "../useActiveAccount";
 import { useSigner } from "../useSigner";
 import { useBalance } from "../query/useBalance";
-import { isAccountExists } from "src/utils/validators/isAccountExists";
-import { isApiExists } from "src/utils/validators/isApiExists";
-import { isSignerExists } from "src/utils/validators/isSignerExists";
-import { transactionStatus } from "src/utils/transactionStatus";
-import { validateEstimatedGas } from "src/utils/validateTransactionFees";
+import { isAccountExists } from "../../utils/validators/isAccountExists";
+import { isApiExists } from "../../utils/validators/isApiExists";
+import { isSignerExists } from "../../utils/validators/isSignerExists";
+import { transactionStatus } from "../../utils/transactionStatus";
+import { validateEstimatedGas } from "../../utils/validateTransactionFees";
 interface SupplyParams {
   assetId: string;
 }

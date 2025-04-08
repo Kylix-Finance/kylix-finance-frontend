@@ -330,6 +330,9 @@ importers:
 
   apps/platform:
     dependencies:
+      '@repo/onchain':
+        specifier: workspace:*
+        version: link:../../packages/onchain
       '@repo/onchain-utils':
         specifier: workspace:*
         version: link:../../packages/onchain-utils
