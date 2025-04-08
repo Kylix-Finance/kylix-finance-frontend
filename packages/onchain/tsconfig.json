@@ -4,8 +4,11 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@polkadot/types/lookup": ["./src/types/chain/types-lookup.ts"]
-    }
+      "@polkadot/api/augment": ["src/types/chain/augment-api.ts"],
+      "@polkadot/types/augment": ["src/types/chain/augment-types.ts"],
+      "@polkadot/types/lookup": ["src/types/chain/types-lookup.ts"]
+    },
+    "allowJs": true
   },
   "include": ["src", "../../global.d.ts"],
   "exclude": ["node_modules", "dist"]

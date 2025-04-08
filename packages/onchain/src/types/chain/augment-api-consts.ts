@@ -9,7 +9,7 @@ import type { ApiTypes, AugmentedConst } from "@polkadot/api-base/types";
 import type { u128, u16, u32, u64, u8 } from "@polkadot/types-codec";
 import type { Codec } from "@polkadot/types-codec/types";
 import {
-  FrameSupportPalletId,
+  PalletAssetsAssetMetadata,
   FinalityGrandpaEquivocationPrecommit,
   FinalityGrandpaEquivocationPrevote,
   FinalityGrandpaPrecommit,
@@ -20,6 +20,7 @@ import {
   FrameSupportDispatchPerDispatchClassU32,
   FrameSupportDispatchPerDispatchClassWeight,
   FrameSupportDispatchPerDispatchClassWeightsPerClass,
+  FrameSupportPalletId,
   FrameSupportTokensMiscBalanceStatus,
   FrameSystemAccountInfo,
   FrameSystemCall,
@@ -53,7 +54,6 @@ import {
   PalletAssetsApproval,
   PalletAssetsAssetAccount,
   PalletAssetsAssetDetails,
-  PalletAssetsAssetMetadata,
   PalletAssetsAssetStatus,
   PalletAssetsCall,
   PalletAssetsError,
@@ -102,7 +102,6 @@ import {
   SpWeightsRuntimeDbWeight,
   SpWeightsWeightV2Weight,
 } from "@polkadot/types/lookup";
-
 export type __AugmentedConst<ApiType extends ApiTypes> =
   AugmentedConst<ApiType>;
 

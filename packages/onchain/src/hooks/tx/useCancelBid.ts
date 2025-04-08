@@ -1,41 +1,39 @@
-import { useMutation } from "@tanstack/react-query";
-import { queryKeys } from "@repo/shared";
 import { ApiPromise } from "@polkadot/api";
-import { Signer } from "@polkadot/api/types";
-import { useProvider } from "../useProvider";
+import { Signer } from "@polkadot/types/types";
+import { useMutation } from "@tanstack/react-query";
 import { useActiveAccount } from "../useActiveAccount";
+import { useProvider } from "../useProvider";
 import { useSigner } from "../useSigner";
 import { useBalance } from "../query/useBalance";
-import { isApiExists } from "../../utils/validators/isApiExists";
-import { isSignerExists } from "../../utils/validators/isSignerExists";
-import { isAccountExists } from "../../utils/validators/isAccountExists";
-import { transactionStatus } from "../../utils/transactionStatus";
-import { validateEstimatedGas } from "../../utils/validateTransactionFees";
+import { isAccountExists } from "src/utils/validators/isAccountExists";
+import { isApiExists } from "src/utils/validators/isApiExists";
+import { isSignerExists } from "src/utils/validators/isSignerExists";
+import { validateEstimatedGas } from "src/utils/validateTransactionFees";
+import { transactionStatus } from "src/utils/transactionStatus";
 
-interface WithdrawParams {
+interface CancelBidParams {
   assetId: string;
 }
 
-interface MutationFnParams {
-  balance: string | bigint;
-  onConfirm?: () => void;
-}
-
-interface WithdrawDependencies {
+interface PlaceBidDependencies {
   api: ApiPromise;
   activeAccount: string;
   signer: Signer;
   getBalance: bigint;
 }
 
-export const useWithdraw = ({ assetId }: WithdrawParams) => {
-  const { data: provider } = useProvider();
+interface MutationFnParams {
+  discount: number;
+  onConfirm?: () => void;
+  txIndex: number;
+  txBlockNumber: number;
+}
+export const useCancelBid = ({ assetId }: CancelBidParams) => {
   const { activeAccount } = useActiveAccount();
+  const { data: provider } = useProvider();
   const { data: signer } = useSigner();
   const { data: balance } = useBalance();
-
   return useMutation({
-    mutationKey: queryKeys.withdraw,
     mutationFn: async (params: MutationFnParams) => {
       if (
         !isAccountExists(activeAccount?.address) ||
@@ -43,32 +41,32 @@ export const useWithdraw = ({ assetId }: WithdrawParams) => {
         !isSignerExists(signer)
       )
         return;
-
       if (!balance) {
         throw new Error("Balance information is not available");
       }
-
-      return withdrawTransaction(assetId, params, {
+      return cancelBid(assetId, params, {
         api: provider.api,
         signer,
-        getBalance: balance.realBalance,
         activeAccount: activeAccount.address,
+        getBalance: balance.realBalance,
       });
     },
   });
 };
 
-export const withdrawTransaction = async (
+export const cancelBid = async (
   assetId: string,
-  { balance, onConfirm }: MutationFnParams,
-  { api, activeAccount, signer, getBalance }: WithdrawDependencies
+  { discount, txBlockNumber, txIndex, onConfirm }: MutationFnParams,
+  { activeAccount, api, signer, getBalance }: PlaceBidDependencies
 ) => {
   api.setSigner(signer);
-
-  const extrinsic = api.tx.lending.withdraw(assetId, balance);
-
+  const extrinsic = api.tx.lending.cancelBid(
+    assetId,
+    discount,
+    txIndex,
+    txBlockNumber
+  );
   await validateEstimatedGas(extrinsic, activeAccount, getBalance);
-
   return new Promise((resolve, reject) => {
     extrinsic
       .signAndSend(

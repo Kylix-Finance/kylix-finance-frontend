@@ -183,6 +183,9 @@ importers:
       '@next/eslint-plugin-next':
         specifier: ^14.2.3
         version: 14.2.26
+      '@polkadot/rpc-augment':
+        specifier: ^15.9.1
+        version: 15.9.1
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:packages/eslint-config
@@ -336,6 +339,9 @@ importers:
 
   apps/platform:
     dependencies:
+      '@repo/onchain':
+        specifier: workspace:*
+        version: link:../../packages/onchain
       '@repo/onchain-utils':
         specifier: workspace:*
         version: link:../../packages/onchain-utils
