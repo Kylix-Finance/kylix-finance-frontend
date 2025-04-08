@@ -26,7 +26,7 @@ import type { AnyNumber, ITuple } from "@polkadot/types-codec/types";
 import type { AccountId32, H256 } from "@polkadot/types/interfaces/runtime";
 import type { Observable } from "@polkadot/types/types";
 import {
-  FrameSupportPalletId,
+  PalletAssetsAssetMetadata,
   FinalityGrandpaEquivocationPrecommit,
   FinalityGrandpaEquivocationPrevote,
   FinalityGrandpaPrecommit,
@@ -37,6 +37,7 @@ import {
   FrameSupportDispatchPerDispatchClassU32,
   FrameSupportDispatchPerDispatchClassWeight,
   FrameSupportDispatchPerDispatchClassWeightsPerClass,
+  FrameSupportPalletId,
   FrameSupportTokensMiscBalanceStatus,
   FrameSystemAccountInfo,
   FrameSystemCall,
@@ -70,7 +71,6 @@ import {
   PalletAssetsApproval,
   PalletAssetsAssetAccount,
   PalletAssetsAssetDetails,
-  PalletAssetsAssetMetadata,
   PalletAssetsAssetStatus,
   PalletAssetsCall,
   PalletAssetsError,
@@ -119,6 +119,7 @@ import {
   SpWeightsRuntimeDbWeight,
   SpWeightsWeightV2Weight,
 } from "@polkadot/types/lookup";
+
 export type __AugmentedQuery<ApiType extends ApiTypes> = AugmentedQuery<
   ApiType,
   () => unknown

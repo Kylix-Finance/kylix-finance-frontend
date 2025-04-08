@@ -21,7 +21,7 @@ import type {
 import type { ITuple } from "@polkadot/types-codec/types";
 import type { AccountId32, H256 } from "@polkadot/types/interfaces/runtime";
 import {
-  FrameSupportPalletId,
+  PalletAssetsAssetMetadata,
   FinalityGrandpaEquivocationPrecommit,
   FinalityGrandpaEquivocationPrevote,
   FinalityGrandpaPrecommit,
@@ -32,6 +32,7 @@ import {
   FrameSupportDispatchPerDispatchClassU32,
   FrameSupportDispatchPerDispatchClassWeight,
   FrameSupportDispatchPerDispatchClassWeightsPerClass,
+  FrameSupportPalletId,
   FrameSupportTokensMiscBalanceStatus,
   FrameSystemAccountInfo,
   FrameSystemCall,
@@ -65,7 +66,6 @@ import {
   PalletAssetsApproval,
   PalletAssetsAssetAccount,
   PalletAssetsAssetDetails,
-  PalletAssetsAssetMetadata,
   PalletAssetsAssetStatus,
   PalletAssetsCall,
   PalletAssetsError,

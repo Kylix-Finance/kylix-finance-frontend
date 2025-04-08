@@ -82,6 +82,7 @@
     "@cspell/eslint-plugin": "^8.16.1",
     "@next/eslint-plugin-next": "^14.2.3",
     "@polkadot/extension-inject": "^0.58.7",
+    "@polkadot/rpc-augment": "^15.9.1",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@rushstack/eslint-patch": "^1.10.4",
