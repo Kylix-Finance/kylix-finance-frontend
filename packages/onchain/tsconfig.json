@@ -10,6 +10,6 @@
     },
     "allowJs": true
   },
-  "include": ["src", "../../global.d.ts"],
+  "include": ["src", "../../global.d.ts", "./augment-rpc.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,8 +1,8 @@
 "use client";
-import { useGetLiquidationMarkets } from "@repo/onchain";
+import { useAssetPrice } from "@repo/onchain";
 
 const Temp = () => {
-  const { data } = useGetLiquidationMarkets();
+  const { data } = useAssetPrice();
   console.log("__________data", data);
 
   return <div>index</div>;
