@@ -14,7 +14,7 @@ export default function Layout({ children }: PropsWithChildren) {
     <html lang="en">
       <body>
         <NextIntlClientProvider>
-            <ReactQueryProvider>{children}</ReactQueryProvider>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
         </NextIntlClientProvider>
       </body>
     </html>
