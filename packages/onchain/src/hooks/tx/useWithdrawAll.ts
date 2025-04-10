@@ -1,20 +1,20 @@
 import { useMutation } from "@tanstack/react-query";
 import { useTransaction } from "../useTransaction";
 
-interface BorrowParams {
+interface WithdrawAllParams {
   assetId: string;
 }
+
 interface MutationFnParams {
-  balance: string | bigint;
   onConfirm?: () => void;
 }
 
-export const useBorrow = ({ assetId }: BorrowParams) => {
-  const { execute } = useTransaction("lending", "borrow")
+export const useWithdrawAll = ({ assetId }: WithdrawAllParams) => {
+  const { execute } = useTransaction("lending", "withdrawAll")
   return useMutation({
     mutationFn: async (params: MutationFnParams) => {
-      const { balance: amount, onConfirm } = params
-      return execute(onConfirm, assetId, amount)
+      const { onConfirm } = params;
+      return execute(onConfirm, assetId)
     },
   });
 };

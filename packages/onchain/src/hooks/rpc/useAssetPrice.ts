@@ -1,7 +1,7 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { PRICE_BASE_ASSET_ID, queryKeys } from "@repo/shared";
 import { useProvider } from "../useProvider";
-import { formatUnit } from "src/utils";
+import { formatUnit } from "../../utils/formatUnit";
 
 // interface Props {
 //   assetId: number | string;
@@ -19,10 +19,10 @@ export const useAssetPrice = () => {
         //   "lending_getAssetPrice",
         //   [Number(assetId), baseId]
         // );
-        const { api } = provider
-        const response = await api.rpc
-        const price = response[0]
-        const formattedPrice = formatUnit(BigInt(price), assetPrice[1]);
+        // const { api } = provider
+        // const response = await api.rpc
+        // const price = response[0]
+        // const formattedPrice = formatUnit(BigInt(price), assetPrice[1]);
         return {}
       }
       : skipToken,
