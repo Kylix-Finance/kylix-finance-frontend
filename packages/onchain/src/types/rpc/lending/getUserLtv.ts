@@ -1,17 +1,15 @@
-import { Definition } from "../definitions";
+import { Definition, RPCMethod } from "../definitions";
 
 type Params = [asset: number, base_asset: number];
 type Response = {
+  allowance: bigint;
+  borrowLimit: bigint;
+  collateral: bigint;
   currentBorrow: bigint;
   currentLtv: bigint;
-  borrowLimit: bigint;
-  saleLtv: bigint;
-  liquidationValue: bigint;
   liquidationLtv: bigint;
-  allowance: bigint;
-  collateral: bigint;
+  liquidationValue: bigint;
+  saleLtv: bigint;
 };
 export type UserLtvSchema = Definition<Params, Response>;
-export type GetUserLtv = (
-  x: UserLtvSchema["params"]
-) => Promise<UserLtvSchema["response"]>;
+export type GetUserLtv = RPCMethod<UserLtvSchema>;

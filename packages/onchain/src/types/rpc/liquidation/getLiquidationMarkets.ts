@@ -1,4 +1,4 @@
-import { Definition } from "../definitions";
+import { Definition, RPCMethod } from "../definitions";
 
 type Params = [account?: number]
 
@@ -19,4 +19,5 @@ type LendingPoolAsset = {
 
 type Response = LendingPoolAsset[]
 
-export type GetLiquidationMarkets = Definition<Params, Response>
+export type LiquidationMarketsSchema = Definition<Params, Response>
+export type GetLiquidationMarkets = RPCMethod<LiquidationMarketsSchema>

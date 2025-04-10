@@ -1,4 +1,4 @@
-import { Definition } from "../definitions";
+import { Definition, RPCMethod } from "../definitions";
 
 type Params = [account: number]
 type AssetInfo = {
@@ -23,4 +23,5 @@ type Response = [
     number
 ];
 
-export type GetAssetWiseSupplies = Definition<Params, Response>
+export type AssetWiseSuppliesSchema = Definition<Params, Response>
+export type GetAssetWiseSupplies = RPCMethod<AssetWiseSuppliesSchema>

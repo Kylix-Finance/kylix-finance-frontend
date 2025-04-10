@@ -1,4 +1,4 @@
-import { Definition } from "../definitions";
+import { Definition, RPCMethod } from "../definitions";
 
 type Params = [market_asset_id?: number]
 
@@ -14,4 +14,5 @@ type MetaData = {
 
 type Response = [MetaData, DiscountDistribution]
 
-export type GetMarketBidDistribution = Definition<Params, Response>
+export type MarketBidDistributionSchema = Definition<Params, Response>
+export type GetMarketBidDistribution = RPCMethod<MarketBidDistributionSchema>

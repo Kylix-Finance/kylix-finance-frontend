@@ -1,15 +1,23 @@
 import { RPC } from "src/types/rpc";
 import { useProvider } from "./useProvider";
 
-export const useRpc = <T extends keyof RPC, U extends keyof RPC[T]>(
+type Modules = keyof RPC;
+type Methods<T extends Modules> = keyof RPC[T];
+
+export const useRpc = <T extends Modules, U extends Methods<T>>(
   module: T,
   method: U
 ) => {
   const { data: provider } = useProvider();
 
-  const execute = provider?.api.rpc.lending.getUserLtv;
+  const methods = provider?.api.rpc[module];
 
-  return {
-    execute,
-  };
+  if (methods && method in methods) {
+    return {
+      // Dummy ts, can't understand nested [T][U]
+      execute: methods[method] as RPC[T][U],
+    };
+  }
+
+  throw new Error("method not exist!");
 };

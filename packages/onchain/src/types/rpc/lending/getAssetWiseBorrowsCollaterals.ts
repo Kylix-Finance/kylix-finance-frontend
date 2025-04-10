@@ -1,4 +1,4 @@
-import { Definition } from "../definitions";
+import { Definition, RPCMethod } from "../definitions";
 
 type Params = [account: number]
 
@@ -25,4 +25,5 @@ type Response = [
     bigint
 ];
 
-export type GetAssetWiseBorrowsCollaterals = Definition<Params, Response>
+export type AssetWiseBorrowsCollateralsSchema = Definition<Params, Response>
+export type GetAssetWiseBorrowsCollaterals = RPCMethod<AssetWiseBorrowsCollateralsSchema>
