@@ -1,7 +1,5 @@
-import { LiquidationMethod } from "../liquidation"
-
 export type Liquidation = {
-    getLiquidationMarkets: {}
-    getMarketBidDistribution: {}
-    getUserBids: {};
-}
+  getLiquidationMarkets: object;
+  getMarketBidDistribution: object;
+  getUserBids: object;
+};

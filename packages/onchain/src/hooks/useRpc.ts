@@ -1,14 +1,15 @@
-import { useProvider } from "./useProvider"
-type Mammad = "fml" | "fu"
-type X = [Mammad, string]
+import { RPC } from "src/types/rpc";
+import { useProvider } from "./useProvider";
 
-export const useRpc = (module: "lending", method: "getAssetPrice") => {
+export const useRpc = <T extends keyof RPC, U extends keyof RPC[T]>(
+  module: T,
+  method: U
+) => {
+  const { data: provider } = useProvider();
 
-    const { data: provider } = useProvider()
-    const execute = async (...args: X) => {
-        provider.api.rpc[module][method](...args)
-    }
-    return {
-        execute
-    }
-}
+  const execute = provider?.api.rpc[module][method];
+
+  return {
+    execute,
+  };
+};
