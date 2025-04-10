@@ -1,7 +1,8 @@
-import { LendingRpc } from "src/types/lending"
+// import { LendingRpc } from "../src/types/lending"
 
-declare module '@polkadot/rpc-core/types/jsonrpc' {
-    interface RpcInterface {
-        lending: LendingRpc,
-    }
-}
+// declare module '@polkadot/rpc-core/types/jsonrpc' {
+//     interface RpcInterface {
+//         lending: LendingRpc,
+//         liquidation: Object
+//     }
+// }

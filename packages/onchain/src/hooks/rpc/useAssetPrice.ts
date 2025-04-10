@@ -19,10 +19,9 @@ export const useAssetPrice = () => {
         //   "lending_getAssetPrice",
         //   [Number(assetId), baseId]
         // );
-        // const { api } = provider
-        // const response = await api.rpc
-        // const price = response[0]
-        // const formattedPrice = formatUnit(BigInt(price), assetPrice[1]);
+        const { api } = provider
+        const response = await api.rpc.lending
+        console.log("_______________response", response)
         return {}
       }
       : skipToken,
