@@ -4,7 +4,6 @@ import { ApiPromise, WsProvider } from "@polkadot/api";
 import { queryKeys } from "@repo/shared";
 import { useConfig } from "./useConfig";
 import '@polkadot/api/types';
-import { RPC } from "../types/rpc"
 export const useProvider = () => {
   const { data: config } = useConfig();
   const rpc = config?.rpc;
@@ -17,8 +16,7 @@ export const useProvider = () => {
         const api = await ApiPromise.create({
           provider,
           types
-        });
-        (api.rpc.lending as RPC["lending"]).getUserLtv()
+        })
         return {
           api,
           provider,

@@ -1,8 +1,6 @@
 import { Definition } from "../definitions";
 
-type Params = {
-    account: number
-}
+type Params = [account: number]
 type AssetInfo = {
     assetId: number;
     assetSymbol: string;

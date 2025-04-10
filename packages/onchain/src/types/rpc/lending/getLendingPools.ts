@@ -1,9 +1,7 @@
 import { Definition } from "../definitions";
 
-type Params = {
-    asset?: number;
-    account?: number;
-}
+type Params = [asset?: number, account?: number];
+
 interface PoolTotals {
     totalSupply: bigint;
     totalBorrow: bigint;

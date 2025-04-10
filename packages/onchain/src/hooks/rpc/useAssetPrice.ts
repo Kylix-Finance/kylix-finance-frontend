@@ -20,7 +20,8 @@ export const useAssetPrice = () => {
         //   [Number(assetId), baseId]
         // );
         const { api } = provider
-        const response = await api.rpc.lending
+        const response = fc()
+        
         console.log("_______________response", response)
         return {}
       }
