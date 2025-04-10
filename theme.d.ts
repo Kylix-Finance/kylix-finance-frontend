@@ -1,10 +1,15 @@
 /* eslint-disable unused-imports/no-unused-imports */
 import {
+  ButtonProps,
   ButtonPropsVariantOverrides,
+  IconButtonProps,
+  IconButtonPropsVariantOverrides,
+  PaletteColor,
+  TabOwnProps,
+  TabProps,
+  TabPropsVariantOverrides,
   TypographyPropsVariantOverrides,
 } from "@mui/material";
-import { TypographyVariantsOptions } from "@mui/material/styles";
-import { PaletteColor } from "@mui/material/styles/createPalette";
 
 declare module "@mui/material/styles" {
   interface PaletteColor {
@@ -21,16 +26,51 @@ declare module "@mui/material/styles" {
   }
 
   interface TypographyVariants {
-    body3: React.CSSProperties;
+    display: React.CSSProperties;
+    body: React.CSSProperties;
+    bodyCompact: React.CSSProperties;
+    bodySmall: React.CSSProperties;
+    BTN: React.CSSProperties;
   }
 
   interface TypographyVariantsOptions {
-    body3?: React.CSSProperties;
+    display?: React.CSSProperties;
+    body?: React.CSSProperties;
+    bodyCompact?: React.CSSProperties;
+    bodySmall?: React.CSSProperties;
+    BTN?: React.CSSProperties;
+  }
+}
+
+declare module "@mui/material/Button" {
+  interface ButtonPropsVariantOverrides {}
+}
+
+declare module "@mui/material/IconButton" {
+  interface IconButtonOwnProps {
+    variant?: ButtonProps["variant"];
+  }
+}
+declare module "@mui/material/Tab" {
+  interface TabOwnProps {
+    variant?: "contained" | "outlined" | "text";
   }
 }
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
-    body3: true;
+    display: true;
+    body: true;
+    bodyCompact: true;
+    bodySmall: true;
+    BTN: true;
+  }
+}
+
+declare module "@mui/material/Tab" {
+  interface TabPropsVariantOverrides {
+    contained: true;
+    outlined: true;
+    text: true;
   }
 }

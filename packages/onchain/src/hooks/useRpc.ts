@@ -7,7 +7,7 @@ export const useRpc = <T extends keyof RPC, U extends keyof RPC[T]>(
 ) => {
   const { data: provider } = useProvider();
 
-  const execute = provider?.api.rpc[module][method];
+  const execute = provider?.api.rpc.lending.getUserLtv;
 
   return {
     execute,
