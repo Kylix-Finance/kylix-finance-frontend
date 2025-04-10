@@ -9,9 +9,9 @@ export type MetadataResult = {
   decimals: number;
   isFrozen: boolean;
 };
-export const useMetadata = (assetId?: number | string) => {
+export const useMetadata = (assetId:  string) => {
   const { data } = useProvider();
-  const enabled = !!data?.api && !!assetId;
+  const enabled = !!data?.api;
   return useQuery({
     queryKey: queryKeys.metadata(assetId || -1),
     queryFn: enabled
