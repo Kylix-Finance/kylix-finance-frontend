@@ -1,5 +1,13 @@
-/** @type {import('next').NextConfig} */
-module.exports = {
+import createNextIntlPlugin from 'next-intl/plugin';
+import type { NextConfig } from 'next';
+const withNextIntl = createNextIntlPlugin({
+  experimental: {
+    createMessagesDeclaration: "./src/i18n/locales/en.json"
+  }
+});
+
+
+const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   images: {
     remotePatterns: [
@@ -52,3 +60,6 @@ module.exports = {
     ];
   },
 };
+
+const config = withNextIntl(nextConfig)
+export default config

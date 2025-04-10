@@ -19,12 +19,13 @@
     "start:production": "next start"
   },
   "dependencies": {
+    "@repo/onchain": "workspace:*",
     "@repo/onchain-utils": "workspace:*",
     "@repo/shared": "workspace:*",
     "@repo/ui": "workspace:*",
     "@repo/utils": "workspace:*",
     "@repo/wallet-modal": "workspace:*",
-    "@repo/onchain": "workspace:*"
+    "next-intl": "^4.0.2"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

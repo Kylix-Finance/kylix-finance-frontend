@@ -1,7 +1,7 @@
 import { RootLayout } from "@repo/ui";
 
 import { PropsWithChildren } from "react";
-
+import { NextIntlClientProvider } from "next-intl";
 import ReactQueryProvider from "~/providers/ReactQueryProvider";
 
 export const metadata = {
@@ -13,9 +13,9 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body>
-        <RootLayout>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
-        </RootLayout>
+        <NextIntlClientProvider>
+            <ReactQueryProvider>{children}</ReactQueryProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
