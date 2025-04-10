@@ -14,4 +14,4 @@ type MetaData = {
 
 type Response = [MetaData, DiscountDistribution]
 
-export type GetLiquidationMarkets = Definition<Params, Response>
+export type GetMarketBidDistribution = Definition<Params, Response>

@@ -23,4 +23,4 @@ type UserBid = {
 
 type Response = UserBid[];
 
-export type GetLiquidationMarkets = Definition<Params, Response>
+export type GetUserBids = Definition<Params, Response>
