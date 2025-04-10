@@ -1,8 +1,7 @@
 import { Definition } from "../definitions";
 
-type Params = {
-    asset: number
-}
+
+type Params = [asset: number]
 type Response = {
     currentBorrow: number;
     currentLtv: number;

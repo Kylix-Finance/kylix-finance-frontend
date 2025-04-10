@@ -6,7 +6,7 @@ export const useRpc = (module: "lending", method: "getAssetPrice") => {
 
     const { data: provider } = useProvider()
     const execute = async (...args: X) => {
-        provider.api.rpc[module][method](...args)
+       return provider.api.rpc[module][method] as floan 
     }
     return {
         execute
