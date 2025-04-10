@@ -1,5 +1,8 @@
+import { getMarketBidDistribution } from "./getMarketBidDistribution"
+import { getLiquidationMarkets } from "./getLiquidationMarkets"
+import { getUserBids } from "./getUserBids"
 export type Liquidation = {
-  getLiquidationMarkets: object;
-  getMarketBidDistribution: object;
-  getUserBids: object;
+  getLiquidationMarkets: getLiquidationMarkets;
+  getMarketBidDistribution: getMarketBidDistribution;
+  getUserBids: getUserBids;
 };

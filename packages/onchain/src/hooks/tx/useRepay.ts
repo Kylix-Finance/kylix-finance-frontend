@@ -12,7 +12,7 @@ interface MutationFnParams {
   onConfirm?: () => void;
 }
 export const useRepay = ({ assetId }: RepayParams) => {
-  const { execute } = useTransaction("lending", "borrow")
+  const { execute } = useTransaction("lending", "repay")
 
   return useMutation({
     mutationFn: async (params: MutationFnParams) => {

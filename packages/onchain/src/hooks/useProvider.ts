@@ -15,7 +15,8 @@ export const useProvider = () => {
 
         const api = await ApiPromise.create({
           provider,
-          types
+          types,
+          noInitWarn: true
         })
         return {
           api,
