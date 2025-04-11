@@ -1,27 +1,25 @@
-import { Definition, RPCMethod } from "../definitions";
+import { Definition } from "../definitions";
 
-type Params = [account: number]
+type Params = [account: string]
 type AssetInfo = {
-    assetId: number;
-    assetSymbol: string;
-    assetName: string;
+    asset_id: number;
+    asset_symbol: number[];
+    asset_name: number[];
     decimals: number;
-    assetIcon: string;
+    asset_icon: number[];
     balance: string;
-    usdtBalance: number;
+    usdt_balance: number;
 };
 
 type SuppliedAssetEntry = {
-    assetInfo: AssetInfo;
     apy: string;
     supplied: string;
-    isCollateral: boolean;
-};
+    is_collateral: boolean;
+} & AssetInfo;
 
 type Response = [
     SuppliedAssetEntry[],
     number
 ];
 
-export type AssetWiseSuppliesSchema = Definition<Params, Response>
-export type GetAssetWiseSupplies = RPCMethod<AssetWiseSuppliesSchema>
+export type GetAssetWiseSupplies = Definition<Params, Response>

@@ -1,30 +1,19 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { PRICE_BASE_ASSET_ID, queryKeys } from "@repo/shared";
-import { useProvider } from "../useProvider";
-import { formatUnit } from "../../utils/formatUnit";
+import { useRpc } from "../useRpc";
 
-// interface Props {
-//   assetId: number | string;
-//   baseId?: number | string;
-// }
+interface Params {
+  assetId: number;
+  base_asset?: number;
+}
 
-export const useAssetPrice = () => {
-  const { data: provider } = useProvider();
-  const enabled = !!provider?.api;
+export const useAssetPrice = ({ assetId, base_asset = PRICE_BASE_ASSET_ID }: Params) => {
+  const { execute, isApiAvailable } = useRpc("lending", "getAssetPrice")
+
+  const enabled = isApiAvailable
   return useQuery({
-    queryKey: queryKeys.assetPrice({ assetId: 1 }),
-    queryFn: enabled
-      ? async () => {
-        // const assetPrice = await provider.send<[number, number]>(
-        //   "lending_getAssetPrice",
-        //   [Number(assetId), baseId]
-        // );
-        const { api } = provider
-        const response = fc()
-        
-        console.log("_______________response", response)
-        return {}
-      }
-      : skipToken,
+    queryKey: queryKeys.assetPrice({ assetId }),
+    queryFn: enabled ? () => execute(assetId, base_asset) : skipToken,
+
   });
 };

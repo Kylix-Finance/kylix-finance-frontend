@@ -1,29 +1,25 @@
-import { Definition, RPCMethod } from "../definitions";
+import { Definition } from "../definitions";
 
-type Params = [account: number]
+type Params = [account: string]
 
 type AssetInfo = {
-    assetId: number;
-    assetSymbol: string;
-    assetName: string;
+    asset_id: number;
+    asset_symbol: number[];
+    asset_name: number[];
     decimals: number;
-    assetIcon: string;
+    asset_icon: number[];
     balance: string;
-    usdtBalance: number;
-};
-
-type ExpandedAssetInfo = {
-    assetInfo: AssetInfo;
+    usdt_balance: number;
     apy: string;
     borrowed: number;
 };
 
+
 type Response = [
     AssetInfo[],
-    ExpandedAssetInfo[],
+    AssetInfo[],
     bigint,
     bigint
 ];
 
-export type AssetWiseBorrowsCollateralsSchema = Definition<Params, Response>
-export type GetAssetWiseBorrowsCollaterals = RPCMethod<AssetWiseBorrowsCollateralsSchema>
+export type GetAssetWiseBorrowsCollaterals = Definition<Params, Response>

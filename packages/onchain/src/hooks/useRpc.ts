@@ -1,23 +1,23 @@
 import { RPC } from "src/types/rpc";
 import { useProvider } from "./useProvider";
-
+import { isApiExists } from "../utils/validators/isApiExists"
 type Modules = keyof RPC;
-type Methods<T extends Modules> = keyof RPC[T];
+type MethodsKeys<T extends Modules> = keyof RPC[T];
+type Methods<T extends Modules> = RPC[T];
 
-export const useRpc = <T extends Modules, U extends Methods<T>>(
+export const useRpc = <T extends Modules, U extends MethodsKeys<T>>(
   module: T,
   method: U
 ) => {
-  const { data: provider } = useProvider();
-
-  const methods = provider?.api.rpc[module];
-
-  if (methods && method in methods) {
-    return {
-      // Dummy ts, can't understand nested [T][U]
-      execute: methods[method] as RPC[T][U],
-    };
+  const { data: provider } = useProvider()
+  //@ts-expect-error hii
+  const execute = async (...args: Methods<T>[U]["params"]) => {
+    if (!isApiExists(provider?.api)) return
+    //@ts-expect-error hii
+    return provider.api.rpc(`${module}_${String(method)}`, ...args) as  Methods<T>[U]["response"]
   }
-
-  throw new Error("method not exist!");
+  return {
+    execute,
+    isApiAvailable: !!provider?.api
+  }
 };

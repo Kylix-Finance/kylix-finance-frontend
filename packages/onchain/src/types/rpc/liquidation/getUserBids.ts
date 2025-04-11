@@ -1,4 +1,4 @@
-import { Definition, RPCMethod } from "../definitions";
+import { Definition } from "../definitions";
 
 type Params = [account: number, asset: number]
 
@@ -23,5 +23,4 @@ type UserBid = {
 
 type Response = UserBid[];
 
-export type UserBidsSchema = Definition<Params, Response>
-export type GetUserBids = RPCMethod<UserBidsSchema>
+export type GetUserBids = Definition<Params, Response>

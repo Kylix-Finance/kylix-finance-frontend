@@ -53,10 +53,10 @@ export const useGetAssetWiseBorrowsCollaterals = ({
     ),
     queryFn: isEnabled
       ? () =>
-          getAssetWiseBorrowsCollaterals({
-            provider,
-            account: activeAccount.address,
-          })
+        getAssetWiseBorrowsCollaterals({
+          provider,
+          account: activeAccount.address,
+        })
       : skipToken,
     select: (data) => {
       if (!poolId) return data;

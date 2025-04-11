@@ -1,7 +1,7 @@
-import { Definition, RPCMethod } from "../definitions";
+import { Definition } from "../definitions";
 
 
-type Params = [asset: number]
+type Params = [asset: number, base_asset?: number]
 type Response = {
     currentBorrow: number;
     currentLtv: number;
@@ -12,5 +12,4 @@ type Response = {
     allowance: number;
     collateral: number;
 }
-export type AssetPriceSchema = Definition<Params, Response>
-export type GetAssetPrice = RPCMethod<AssetPriceSchema>
+export type GetAssetPrice = Definition<Params, Response>

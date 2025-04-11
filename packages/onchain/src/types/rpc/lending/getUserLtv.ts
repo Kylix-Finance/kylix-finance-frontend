@@ -1,4 +1,4 @@
-import { Definition, RPCMethod } from "../definitions";
+import { Definition } from "../definitions";
 
 type Params = [asset: number, base_asset: number];
 type Response = {
@@ -11,5 +11,4 @@ type Response = {
   liquidationValue: bigint;
   saleLtv: bigint;
 };
-export type UserLtvSchema = Definition<Params, Response>;
-export type GetUserLtv = RPCMethod<UserLtvSchema>;
+export type GetUserLtv = Definition<Params, Response>;

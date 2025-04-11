@@ -1,4 +1,4 @@
-import { Definition, RPCMethod } from "../definitions";
+import { Definition } from "../definitions";
 
 type Params = [asset?: number, account?: number];
 
@@ -28,5 +28,4 @@ interface Pool {
 }
 
 type Response = [Pool[], PoolTotals]
-export type LendingPoolsSchema = Definition<Params, Response>
-export type GetLendingPools = RPCMethod<LendingPoolsSchema>
+export type GetLendingPools = Definition<Params, Response>
