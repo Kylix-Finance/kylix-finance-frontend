@@ -1,6 +1,6 @@
 import { Definition } from "../definitions";
 
-type Params = [market_asset_id?: number]
+type Params = [market_asset_id: string]
 
 type DiscountDistribution = {
     discount: number;
@@ -12,6 +12,6 @@ type MetaData = {
 };
 
 
-type Response = [MetaData, DiscountDistribution]
+type Response = [MetaData, DiscountDistribution[]]
 
 export type GetMarketBidDistribution = Definition<Params, Response>

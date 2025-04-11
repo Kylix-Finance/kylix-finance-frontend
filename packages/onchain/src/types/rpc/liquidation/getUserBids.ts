@@ -1,20 +1,20 @@
 import { Definition } from "../definitions";
 
-type Params = [account: number, asset: number]
+type Params = [account: string, asset?: number]
 
 type AssetInfo = {
-    assetId: number;
-    assetSymbol: string;
-    assetName: string;
+    asset_id: number;
+    asset_symbol: string;
+    asset_name: string;
     decimals: number;
 };
 
 type UserBid = {
-    marketAssetInfo: AssetInfo;
-    bidAssetInfo: AssetInfo;
-    bidAmount: bigint;
+    market_assetInfo: AssetInfo;
+    bid_asset_info: AssetInfo;
+    bid_amount: bigint;
     discount: number;
-    filledAmount: number;
+    filled_amount: number;
     blocknumber: number;
     index: number;
 };

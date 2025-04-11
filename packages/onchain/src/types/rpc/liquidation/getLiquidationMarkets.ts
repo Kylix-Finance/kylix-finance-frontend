@@ -1,22 +1,22 @@
 import { Definition } from "../definitions";
 
-type Params = [account?: number]
+type Params = [account?: string]
 
-type LendingPoolAsset = {
-    assetId: number;
-    assetName: string;
-    assetSymbol: string;
-    assetDecimals: number;
-    bidAsset: number;
-    bidAssetDecimals: number;
+type LiquidationMarket = {
+    asset_id: number;
+    asset_name: string;
+    asset_symbol: string;
+    asset_decimals: number;
+    bid_asset: number;
+    bid_asset_decimals: number;
     tvl: bigint;
     health: number;
-    poolSize: bigint;
-    maxDiscount: string;
-    userBid: null | bigint;
+    pool_size: bigint;
+    max_discount: string;
+    user_bid: null | bigint;
 };
 
 
-type Response = LendingPoolAsset[]
+type Response = LiquidationMarket[]
 
 export type GetLiquidationMarkets = Definition<Params, Response>

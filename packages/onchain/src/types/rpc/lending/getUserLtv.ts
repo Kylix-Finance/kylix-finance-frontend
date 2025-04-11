@@ -1,6 +1,6 @@
 import { Definition } from "../definitions";
 
-type Params = [asset: number, base_asset: number];
+type Params = [account: string];
 type Response = {
   allowance: bigint;
   borrowLimit: bigint;
