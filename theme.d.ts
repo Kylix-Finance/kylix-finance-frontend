@@ -4,7 +4,7 @@ import {
   ButtonPropsVariantOverrides,
   IconButtonProps,
   IconButtonPropsVariantOverrides,
-  PaletteColor,
+  PaletteColor as MuiPaletteColor,
   TabOwnProps,
   TabProps,
   TabPropsVariantOverrides,
@@ -12,33 +12,37 @@ import {
 } from "@mui/material";
 
 declare module "@mui/material/styles" {
-  interface PaletteColor {
-    "50": string;
-    "100": string;
-    "200": string;
-    "300": string;
-    "400": string;
-    "500": string;
-    "600": string;
-    "700": string;
-    "800": string;
-    "900": string;
-  }
+  // interface PrimaryColor {
+  //   "50": string;
+  //   "100": string;
+  //   "200": string;
+  //   "300": string;
+  //   "400": string;
+  //   "500": string;
+  //   "600": string;
+  //   "700": string;
+  //   "800": string;
+  //   "900": string;
+  // }
 
   interface TypographyVariants {
     display: React.CSSProperties;
     body: React.CSSProperties;
+    body3: React.CSSProperties;
     bodyCompact: React.CSSProperties;
+    bodyCompactBold: React.CSSProperties;
     bodySmall: React.CSSProperties;
-    BTN: React.CSSProperties;
+    btn: React.CSSProperties;
   }
 
   interface TypographyVariantsOptions {
     display?: React.CSSProperties;
     body?: React.CSSProperties;
+    body3?: React.CSSProperties;
     bodyCompact?: React.CSSProperties;
+    bodyCompactBold?: React.CSSProperties;
     bodySmall?: React.CSSProperties;
-    BTN?: React.CSSProperties;
+    btn?: React.CSSProperties;
   }
 }
 
@@ -61,9 +65,11 @@ declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     display: true;
     body: true;
+    body3: true;
     bodyCompact: true;
+    bodyCompactBold: true;
     bodySmall: true;
-    BTN: true;
+    btn: true;
   }
 }
 
