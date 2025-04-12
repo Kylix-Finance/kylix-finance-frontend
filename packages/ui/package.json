@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "main": "./src/index.ts",
+  "exports": {
+    "./Alert": "./src/components/alert/index.ts",
+    "./theme": "./src/styles/theme/theme.tsx",
+    "./UILayout": "./src/layouts/UILayout.tsx"
+  },
   "scripts": {
     "check:format": "prettier --write  --list-different ./",
     "check:lint": "eslint ./",
@@ -13,7 +18,8 @@
     "check:types:watch": "pnpm run check:types --watch"
   },
   "dependencies": {
-    "@repo/utils": "workspace:*"
+    "@repo/utils": "workspace:*",
+    "@repo/icons": "workspace:*"
   },
   "devDependencies": {
     "@repo/types": "workspace:*"
