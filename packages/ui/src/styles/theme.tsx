@@ -1,76 +1,53 @@
-import { fonts } from "../assets/fonts";
+import { createTheme, ThemeOptions } from "@mui/material";
+import { typography } from "./typography";
+import { palette } from "./colors";
 
-const grey = {
-  50: "#F5F7FA",
-  100: "#E9EBEE",
-  200: "#D1D5DB",
-  400: "#697586",
-  600: "#465362",
-  800: "#333333",
+const shadowsObj = {
+  modal: "0px 0px 10px 0px rgba(0, 0, 0, 0.15)",
+  linePurple:
+    "0px 9px 18px 0px rgba(86, 221, 180, 0.40), 0px 6px 9px 0px rgba(86, 221, 180, 0.40), 0px 3px 3px 0px rgba(86, 221, 180, 0.40)",
+  linePink:
+    "0px 9px 18px 0px rgba(255, 98, 200, 0.40), 0px 6px 9px 0px rgba(255, 98, 200, 0.40), 0px 3px 3px 0px rgba(255, 98, 200, 0.40)",
+  lineBlue:
+    "0px 9px 18px 0px rgba(96, 165, 250, 0.40), 0px 6px 9px 0px rgba(96, 165, 250, 0.40), 0px 3px 3px 0px rgba(96, 165, 250, 0.40)",
+  lineGreen:
+    "0px 9px 18px 0px rgba(92, 197, 43, 0.40), 0px 6px 9px 0px rgba(92, 197, 43, 0.40), 0px 3px 3px 0px rgba(92, 197, 43, 0.40)",
+  success: "0px 0px 10px 0px rgba(0, 255, 17, 0.23)",
+  warning: "0px 0px 10px 0px rgba(245, 158, 11, 0.25)",
+  risk: "0px 0px 10px 0px rgba(225, 29, 72, 0.25)",
+  blur: "backdrop-filter: blur(7.5px)",
 };
 
-const baseTypography = {
-  letterSpacing: "-.3px",
-  color: grey,
-  fontFamily: fonts.inter.style.fontFamily,
-};
+const shadows: ThemeOptions["shadows"] = [
+  "none",
+  shadowsObj.modal,
+  shadowsObj.linePurple,
+  shadowsObj.linePink,
+  shadowsObj.lineBlue,
+  shadowsObj.lineGreen,
+  shadowsObj.success,
+  shadowsObj.warning,
+  shadowsObj.risk,
+  shadowsObj.blur,
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+  "none",
+];
 
-// const typography: TypographyVariantsOptions = {
-//   allVariants: baseTypography,
-//   h1: {
-//     fontSize: "40px",
-//     lineHeight: "48px",
-//   },
-//   h2: {
-//     fontSize: "32px",
-//     lineHeight: "40px",
-//   },
-//   h3: {
-//     fontSize: "28px",
-//     lineHeight: "36px",
-//   },
-//   h4: {
-//     fontSize: "24px",
-//     lineHeight: "32px",
-//   },
-//   h5: {
-//     fontSize: "20px",
-//     lineHeight: "28px",
-//   },
-//   h6: {
-//     fontSize: "12px",
-//     lineHeight: "20px",
-//   },
-//   display: {
-//     ...baseTypography,
-//     fontSize: "20px",
-//     lineHeight: "28px",
-//     letterSpacing: "-2%",
-//   },
-//   body: {
-//     ...baseTypography,
-//     fontSize: "18px",
-//     lineHeight: "24px",
-//     letterSpacing: "-2%",
-//   },
-//   bodyCompact: {
-//     ...baseTypography,
-//     fontSize: "16px",
-//     lineHeight: "22px",
-//     letterSpacing: "-2%",
-//   },
-//   bodySmall: {
-//     ...baseTypography,
-//     fontSize: "14px",
-//     lineHeight: "20px",
-//     letterSpacing: "-2%",
-//   },
-//   BTN: {
-//     ...baseTypography,
-//     fontSize: "12px",
-//     lineHeight: "16px",
-//     letterSpacing: "1%",
-//   },
-// };
-
-// const theme = createTheme({ typography });
+export const theme = createTheme({
+  typography,
+  palette,
+  shadows,
+});
