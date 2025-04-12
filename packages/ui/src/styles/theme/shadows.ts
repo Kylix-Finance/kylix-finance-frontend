@@ -1,6 +1,6 @@
 import { ThemeOptions } from "@mui/material";
 
-const shadowsObj = {
+export const shadowsObj = {
   modal: "0px 0px 10px 0px rgba(0, 0, 0, 0.15)",
   linePurple:
     "0px 9px 18px 0px rgba(86, 221, 180, 0.40), 0px 6px 9px 0px rgba(86, 221, 180, 0.40), 0px 3px 3px 0px rgba(86, 221, 180, 0.40)",
@@ -14,6 +14,7 @@ const shadowsObj = {
   warning: "0px 0px 10px 0px rgba(245, 158, 11, 0.25)",
   risk: "0px 0px 10px 0px rgba(225, 29, 72, 0.25)",
   blur: "backdrop-filter: blur(7.5px)",
+  default: "0px 0px 25px 0px rgba(18, 18, 18, 0.06)",
 };
 
 export const shadows: ThemeOptions["shadows"] = [

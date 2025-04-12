@@ -1,3 +1,5 @@
+"use client";
+
 import { createTheme } from "@mui/material";
 import { typography } from "./typography";
 import { palette } from "./colors";

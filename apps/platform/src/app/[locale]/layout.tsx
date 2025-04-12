@@ -1,8 +1,13 @@
-import { RootLayout } from "@repo/ui";
-
 import { PropsWithChildren } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import ReactQueryProvider from "~/providers/ReactQueryProvider";
+import { UILayout } from "@repo/ui/UILayout";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+
+import { theme } from "@repo/ui/theme";
 
 export const metadata = {
   title: "Next.js",
@@ -13,9 +18,17 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body>
-        <NextIntlClientProvider>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
-        </NextIntlClientProvider>
+        <ReactQueryProvider>
+          <NextIntlClientProvider>
+            <InitColorSchemeScript attribute="class" />
+            <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+              <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <UILayout>{children}</UILayout>
+              </ThemeProvider>
+            </AppRouterCacheProvider>
+          </NextIntlClientProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

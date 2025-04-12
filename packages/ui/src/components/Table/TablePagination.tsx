@@ -1,11 +1,4 @@
-import {
-  Box,
-  MenuItem,
-  Pagination,
-  Select,
-  SelectProps,
-  useTheme,
-} from "@mui/material";
+import { Box, MenuItem, Pagination, Select, SelectProps } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import * as React from "react";
 import { useTablePagination } from "../../hooks/useTablePagination";
@@ -38,7 +31,6 @@ const paginationAmount: Array<PaginationAmount> = [
 ];
 const TablePagination: React.FC<Props> = ({ tableName }) => {
   const { pagination, updatePagination } = useTablePagination(tableName);
-  const { palette } = useTheme();
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     updatePagination({
@@ -59,7 +51,7 @@ const TablePagination: React.FC<Props> = ({ tableName }) => {
       sx={{
         width: "100%",
         padding: "10px",
-        backgroundColor: palette.secondary[900],
+        // backgroundColor: palette.secondary[900],
         position: "sticky",
         left: 0,
         right: 0,
