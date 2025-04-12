@@ -1,4 +1,4 @@
-import { SpacingKey } from "../../../../theme";
+import { SpacingKey } from "../../../../../theme";
 
 export const spacing: Record<SpacingKey, string> = {
   0: "0px",

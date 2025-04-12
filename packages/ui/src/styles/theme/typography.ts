@@ -1,6 +1,6 @@
 import { createTheme, TypographyVariantsOptions } from "@mui/material";
 import { grey } from "./colors";
-import { fonts } from "../assets/fonts";
+import { fonts } from "../../assets/fonts";
 
 const { breakpoints } = createTheme({
   breakpoints: {
