@@ -10,63 +10,70 @@ import { bisector } from "d3-array";
 import { Box, Paper, Typography, useTheme } from "@mui/material";
 import { framerProps, fadeInOutAnimation } from "~/animations/variants";
 import { getShortMonth } from "~/utils/date";
+
 interface DataPoint {
   date: Date;
   usdt: number;
   dot: number;
 }
+
+interface Dataset {
+  data: DataPoint[];
+  color: string;
+}
+
 const getDate = (d: DataPoint) => d.date;
 const getValue = (d: DataPoint) => d.usdt;
-const bisectDate = bisector<DataPoint, Date>((d) => d.date).left;
+const bisectDateForData = bisector<DataPoint, Date>((d) => d.date).left;
 
-const generateData = (): DataPoint[] => {
-  const data: DataPoint[] = [];
-  const now = new Date();
-
-  for (let i = 90; i >= 0; i--) {
-    const date = new Date(now);
-    date.setDate(now.getDate() - i);
-
-    const usdt = 10 + Math.random() * 40 + Math.sin(i / 5) * 10;
-    const dot = 50 + Math.random() * 40 + Math.sin(i / 5) * 10;
-
-    data.push({ date, usdt, dot });
-  }
-
-  return data;
-};
 interface Props {
   width?: number;
   height?: number;
+  dataset: Dataset[];
 }
-const AreaChart = ({ height = 400, width = 800 }: Props) => {
-  const data = useMemo(() => generateData(), []);
+
+const AreaChart = ({ height = 400, width = 800, dataset }: Props) => {
   const { spacing, palette } = useTheme();
   const margin = { top: 40, right: 40, bottom: 40, left: 40 };
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
-  const xScale = useMemo(
-    () =>
-      scaleTime({
-        range: [0, innerWidth],
-        domain: [
-          new Date(Math.min(...data.map((d) => getDate(d).getTime()))),
-          new Date(Math.max(...data.map((d) => getDate(d).getTime()))),
-        ],
-      }),
-    [innerWidth, data]
-  );
+  const allDataPoints = dataset.flatMap((d) => d.data || []);
 
-  const yScale = useMemo(
-    () =>
-      scaleLinear({
-        range: [innerHeight, 0],
-        domain: [0, Math.max(...data.map(getValue)) * 1.1],
-        nice: true,
-      }),
-    [innerHeight, data]
-  );
+  const xScale = useMemo(() => {
+    const allDates = allDataPoints
+      .map(getDate)
+      .filter((date) => date instanceof Date && !isNaN(date.getTime()));
+
+    if (allDates.length === 0) {
+      return scaleTime({
+        range: [0, innerWidth],
+        domain: [new Date(), new Date()],
+      });
+    }
+
+    const minDate = new Date(Math.min(...allDates.map((d) => d.getTime())));
+    const maxDate = new Date(Math.max(...allDates.map((d) => d.getTime())));
+
+    return scaleTime({
+      range: [0, innerWidth],
+      domain: [minDate, maxDate],
+    });
+  }, [innerWidth, allDataPoints]);
+
+  const yScale = useMemo(() => {
+    const allValues = allDataPoints
+      .map(getValue)
+      .filter((value) => typeof value === "number" && !isNaN(value));
+
+    const maxValue = allValues.length > 0 ? Math.max(...allValues) * 1.1 : 1;
+
+    return scaleLinear({
+      range: [innerHeight, 0],
+      domain: [0, maxValue],
+      nice: true,
+    });
+  }, [innerHeight, allDataPoints]);
 
   const {
     tooltipData,
@@ -76,16 +83,23 @@ const AreaChart = ({ height = 400, width = 800 }: Props) => {
     hideTooltip,
   } = useTooltip<DataPoint>();
 
+  const mainData = dataset.length > 0 ? dataset[0].data || [] : [];
+
   const handleTooltip = (
     event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>
   ) => {
     const { x } = localPoint(event) || { x: 0 };
     const x0 = xScale.invert(x - margin.left);
-    const index = bisectDate(data, x0, 1);
-    const d0 = data[index - 1];
-    const d1 = data[index];
+    const index = bisectDateForData(mainData, x0, 1);
+    const d0 = mainData[index - 1];
+    const d1 = mainData[index];
+
     if (!d0 || !d1) return;
-    const d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+    const d =
+      x0.getTime() - d0.date.getTime() > d1.date.getTime() - x0.getTime()
+        ? d1
+        : d0;
+
     showTooltip({
       tooltipData: d,
       tooltipLeft: xScale(d.date),
@@ -94,7 +108,7 @@ const AreaChart = ({ height = 400, width = 800 }: Props) => {
   };
 
   const uniqueMonths = useMemo(() => {
-    const months = data.map((d) => ({
+    const months = allDataPoints.map((d) => ({
       year: d.date.getFullYear(),
       month: d.date.getMonth(),
     }));
@@ -107,18 +121,22 @@ const AreaChart = ({ height = 400, width = 800 }: Props) => {
       const [year, month] = key.split("-").map(Number);
       return new Date(year, month, 1);
     });
-  }, [data]);
+  }, [allDataPoints]);
 
   return (
     <div>
       <svg width={width} height={height}>
         <defs>
-          <LinearGradient
-            id="area-gradient"
-            from={palette.primary.light}
-            to={palette.primary.light}
-            toOpacity={0.1}
-          />
+          {dataset.map((item, index) => (
+            <LinearGradient
+              key={`gradient-${index}`}
+              id={`area-gradient-${index}`}
+              from={item.color}
+              to={item.color}
+              fromOpacity={1}
+              toOpacity={0}
+            />
+          ))}
           {tooltipData && (
             <clipPath id="clip-whitish">
               <rect
@@ -131,16 +149,19 @@ const AreaChart = ({ height = 400, width = 800 }: Props) => {
           )}
         </defs>
         <g transform={`translate(${margin.left},${margin.top})`}>
-          <AreaClosed
-            data={data}
-            x={(d) => xScale(getDate(d))}
-            y={(d) => yScale(getValue(d))}
-            yScale={yScale}
-            curve={curveMonotoneX}
-            fill="url(#area-gradient)"
-            stroke={palette.primary.light}
-            strokeWidth={1}
-          />
+          {dataset.map((item, index) => (
+            <AreaClosed
+              key={index}
+              data={item.data}
+              x={(d: DataPoint) => xScale(getDate(d))}
+              y={(d: DataPoint) => yScale(getValue(d))}
+              yScale={yScale}
+              curve={curveMonotoneX}
+              fill={`url(#area-gradient-${index})`}
+              stroke={item.color}
+              strokeWidth={1}
+            />
+          ))}
 
           {tooltipData && (
             <g clipPath="url(#clip-whitish)">
@@ -245,16 +266,10 @@ const AreaChart = ({ height = 400, width = 800 }: Props) => {
               { label: "USDT", value: tooltipData.usdt },
               { label: "DOT", value: tooltipData.dot },
             ].map((item, index) => (
-              <Box
-                key={index}
-                className="flex items-center"
-                sx={{
-                  gap: spacing("1"),
-                }}
-              >
+              <Box key={index} sx={{ display: "flex", gap: spacing(1) }}>
                 <Typography variant="bodySmall" color="textSecondary">
                   {item.label}
-                </Typography>{" "}
+                </Typography>
                 <Typography variant="bodySmall">
                   {item.value.toFixed(2)}
                 </Typography>
