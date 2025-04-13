@@ -7,6 +7,7 @@ import {
   useGetLiquidationMarkets,
   useGetUserBids,
 } from "@repo/onchain";
+import AreaChart from "~/components/charts/AreaChart";
 import { useTranslations } from "next-intl";
 const Temp = () => {
   // const { data } = useAssetPrice({ assetId: 20 });
@@ -20,13 +21,17 @@ const Temp = () => {
   // const { data } = useGetLiquidationMarkets({
   //   account: "5GW47HUptFYtiMKN3M7Su5WgCAM4UwLiWVYoBMPx3zYqZE8j",
   // });
-  const { data } = useGetUserBids({
-    account: "5GW47HUptFYtiMKN3M7Su5WgCAM4UwLiWVYoBMPx3zYqZE8j",
-    assetId: 21,
-  });
-  console.log("__________data", data);
+  // const { data } = useGetUserBids({
+  //   account: "5GW47HUptFYtiMKN3M7Su5WgCAM4UwLiWVYoBMPx3zYqZE8j",
+  //   assetId: 21,
+  // });
+  // console.log("__________data", data);
 
-  return <div>{t("test")}</div>;
+  return (
+    <div>
+      <AreaChart />
+    </div>
+  );
 };
 
 export default Temp;
