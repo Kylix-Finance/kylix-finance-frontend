@@ -10,7 +10,7 @@ import { bisector } from "d3-array";
 import { Box, Paper, Typography, useTheme } from "@mui/material";
 import { getShortMonth } from "~/utils/date";
 
-interface DataPoint {
+export interface DataPoint {
   date: Date;
   usdt: number;
   dot: number;
