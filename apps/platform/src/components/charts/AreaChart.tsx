@@ -8,7 +8,6 @@ import { useTooltip, TooltipWithBounds, defaultStyles } from "@visx/tooltip";
 import { localPoint } from "@visx/event";
 import { bisector } from "d3-array";
 import { Box, Paper, Typography, useTheme } from "@mui/material";
-import { framerProps, fadeInOutAnimation } from "~/animations/variants";
 import { getShortMonth } from "~/utils/date";
 
 interface DataPoint {
@@ -249,8 +248,6 @@ const AreaChart = ({ height = 400, width = 800, dataset }: Props) => {
       </svg>
       {tooltipData && (
         <TooltipWithBounds
-          {...framerProps}
-          variants={fadeInOutAnimation}
           top={tooltipTop - 12 + margin.top}
           left={tooltipLeft + 12 + margin.left}
           style={{
@@ -266,7 +263,7 @@ const AreaChart = ({ height = 400, width = 800, dataset }: Props) => {
               { label: "USDT", value: tooltipData.usdt },
               { label: "DOT", value: tooltipData.dot },
             ].map((item, index) => (
-              <Box key={index} sx={{ display: "flex", gap: spacing(1) }}>
+              <Box key={index} sx={{ display: "flex", gap: spacing("1") }}>
                 <Typography variant="bodySmall" color="textSecondary">
                   {item.label}
                 </Typography>
