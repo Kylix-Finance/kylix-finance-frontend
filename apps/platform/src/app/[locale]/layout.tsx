@@ -6,7 +6,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-
+import styles from "./layout.module.css";
 import { theme } from "@repo/ui/theme";
 
 export const metadata = {
@@ -17,7 +17,7 @@ export const metadata = {
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body>
+      <body className={styles.container}>
         <ReactQueryProvider>
           <NextIntlClientProvider>
             <InitColorSchemeScript attribute="class" />
