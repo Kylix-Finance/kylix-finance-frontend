@@ -10,7 +10,7 @@ interface Props {
 const SidebarLayout = ({ children }: Props) => {
   return (
     <Box sx={{ position: "relative" }}>
-        <Background />
+        {/* <Background /> */}
 
       <Box sx={{ position: "relative", zIndex: 10 }}>{children}</Box>
       {/* Sidebar can also be positioned accordingly if needed */}
