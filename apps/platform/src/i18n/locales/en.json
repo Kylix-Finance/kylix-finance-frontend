@@ -1,5 +1,8 @@
 {
   "Dashboard": {
     "test": "Hi"
+  },
+  "Auth": {
+    "inValidPassword": "Invalid password"
   }
 }

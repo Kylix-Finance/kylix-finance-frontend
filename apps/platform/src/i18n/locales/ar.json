@@ -1,5 +1,8 @@
 {
   "Dashboard": {
     "test": "مرحبًا"
+  },
+  "Auth": {
+    "inValidPassword": "كلمة المرور غير صحيحة"
   }
 }

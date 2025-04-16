@@ -4,6 +4,9 @@
 declare const messages: {
   "Dashboard": {
     "test": "Hi"
+  },
+  "Auth": {
+    "inValidPassword": "Invalid password"
   }
 };
 export default messages;
