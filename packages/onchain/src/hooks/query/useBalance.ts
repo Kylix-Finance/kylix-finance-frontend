@@ -8,7 +8,7 @@ import { useActiveAccount } from "../useActiveAccount";
 import { formatUnit } from "../../utils/formatUnit";
 interface Props {
   accountAddress?: string;
-  assetId?: number | string;
+  assetId?: number;
   customDecimals?: number;
   enabled?: boolean;
 }

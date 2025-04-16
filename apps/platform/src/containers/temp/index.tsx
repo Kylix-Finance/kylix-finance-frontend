@@ -10,6 +10,7 @@ import {
 import AreaChart, { DataPoint } from "~/components/charts/AreaChart";
 import { useTranslations } from "next-intl";
 import StackedBarChart from "~/components/charts/StackedBarChart";
+import Icon from "~/components/icon/Icon";
 // const generateData = (): DataPoint[] => {
 //   const data: DataPoint[] = [];
 //   const now = new Date();
@@ -88,6 +89,9 @@ const Temp = () => {
         ]}
       /> */}
       <StackedBarChart width={800} height={400} dataset={mockData} />
+      <Icon icon="arrow-down" />
+      <Icon icon="bank" />
+      <Icon icon="chevron-down" />
     </div>
   );
 };
