@@ -10,11 +10,11 @@ interface MutationFnParams {
 }
 
 export const useWithdrawAll = ({ assetId }: WithdrawAllParams) => {
-  const { execute } = useTransaction("lending", "withdrawAll")
+  const { execute } = useTransaction("lending", "withdrawAll");
   return useMutation({
     mutationFn: async (params: MutationFnParams) => {
       const { onConfirm } = params;
-      return execute(onConfirm, assetId)
+      return execute(onConfirm, assetId);
     },
   });
 };

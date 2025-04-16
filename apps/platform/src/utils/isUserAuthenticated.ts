@@ -1,9 +1,9 @@
-import { PASSWORD_PROTECTION_COOKIE_NAME } from '~/constants';
-import { jwtVerify } from 'jose';
-import { NextRequest } from 'next/server';
-import { ENV } from "~/config/env"
+import { PASSWORD_PROTECTION_COOKIE_NAME } from "~/constants";
+import { jwtVerify } from "jose";
+import { NextRequest } from "next/server";
+import { ENV } from "~/config/env";
 export const isUserAuthenticated = async (
-  request: NextRequest,
+  request: NextRequest
 ): Promise<boolean> => {
   const token = request.cookies.get(PASSWORD_PROTECTION_COOKIE_NAME);
 

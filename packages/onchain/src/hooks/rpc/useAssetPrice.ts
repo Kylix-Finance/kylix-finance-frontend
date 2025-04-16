@@ -7,13 +7,15 @@ interface Params {
   base_asset?: number;
 }
 
-export const useAssetPrice = ({ assetId, base_asset = PRICE_BASE_ASSET_ID }: Params) => {
-  const { execute, isApiAvailable } = useRpc("lending", "getAssetPrice")
+export const useAssetPrice = ({
+  assetId,
+  base_asset = PRICE_BASE_ASSET_ID,
+}: Params) => {
+  const { execute, isApiAvailable } = useRpc("lending", "getAssetPrice");
 
-  const enabled = isApiAvailable
+  const enabled = isApiAvailable;
   return useQuery({
     queryKey: queryKeys.assetPrice({ assetId }),
     queryFn: enabled ? () => execute(assetId, base_asset) : skipToken,
-
   });
 };

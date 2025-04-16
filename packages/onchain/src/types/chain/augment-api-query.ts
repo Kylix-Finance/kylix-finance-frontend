@@ -26,11 +26,98 @@ import type { AnyNumber, ITuple } from "@polkadot/types-codec/types";
 import type { AccountId32, H256 } from "@polkadot/types/interfaces/runtime";
 import type { Observable } from "@polkadot/types/types";
 import {
-  PalletAssetsAssetAccount, FinalityGrandpaEquivocationPrecommit, FinalityGrandpaEquivocationPrevote, FinalityGrandpaPrecommit, FinalityGrandpaPrevote, FrameSupportDispatchDispatchClass, FrameSupportDispatchDispatchInfo, FrameSupportDispatchPays, FrameSupportDispatchPerDispatchClassU32, FrameSupportDispatchPerDispatchClassWeight, FrameSupportDispatchPerDispatchClassWeightsPerClass, FrameSupportPalletId, FrameSupportTokensMiscBalanceStatus, FrameSystemAccountInfo, FrameSystemCall, FrameSystemError, FrameSystemEvent, FrameSystemEventRecord, FrameSystemExtensionsCheckGenesis, FrameSystemExtensionsCheckNonZeroSender, FrameSystemExtensionsCheckNonce, FrameSystemExtensionsCheckSpecVersion, FrameSystemExtensionsCheckTxVersion, FrameSystemExtensionsCheckWeight, FrameSystemLastRuntimeUpgradeInfo, FrameSystemLimitsBlockLength, FrameSystemLimitsBlockWeights, FrameSystemLimitsWeightsPerClass,
-  FrameSystemPhase, KylixRuntimeRuntime, LendingBorrowRepayUserBorrow, LendingCall, LendingCollateralLiquidationBid, LendingCollateralLiquidationBidStatus, LendingCollateralLiquidationLiquidation, LendingCollateralLiquidationLiquidationMarketConfig, LendingDepositsDepositPosition, LendingError, LendingEvent, LendingInterestRateInterestRateModel, LendingLendingPool, PalletAssetsAccountStatus, PalletAssetsApproval, PalletAssetsAssetDetails, PalletAssetsAssetMetadata, PalletAssetsAssetStatus, PalletAssetsCall, PalletAssetsError, PalletAssetsEvent, PalletAssetsExistenceReason,
-  PalletBalancesAccountData, PalletBalancesBalanceLock, PalletBalancesCall, PalletBalancesError, PalletBalancesEvent, PalletBalancesIdAmount, PalletBalancesReasons, PalletBalancesReserveData, PalletGrandpaCall, PalletGrandpaError, PalletGrandpaEvent, PalletGrandpaStoredPendingChange, PalletGrandpaStoredState, PalletSudoCall, PalletSudoError, PalletSudoEvent, PalletTimestampCall, PalletTransactionPaymentChargeTransactionPayment, PalletTransactionPaymentEvent, PalletTransactionPaymentReleases, SpArithmeticArithmeticError, SpConsensusAuraSr25519AppSr25519Public, SpConsensusGrandpaAppPublic, SpConsensusGrandpaAppSignature,
-  SpConsensusGrandpaEquivocation, SpConsensusGrandpaEquivocationProof, SpCoreEcdsaSignature, SpCoreEd25519Public, SpCoreEd25519Signature, SpCoreSr25519Public, SpCoreSr25519Signature, SpCoreVoid, SpRuntimeDigest, SpRuntimeDigestDigestItem,
-  SpRuntimeDispatchError, SpRuntimeModuleError, SpRuntimeMultiSignature, SpRuntimeTokenError, SpRuntimeTransactionalError, SpVersionRuntimeVersion, SpWeightsRuntimeDbWeight, SpWeightsWeightV2Weight
+  PalletAssetsAssetAccount,
+  FinalityGrandpaEquivocationPrecommit,
+  FinalityGrandpaEquivocationPrevote,
+  FinalityGrandpaPrecommit,
+  FinalityGrandpaPrevote,
+  FrameSupportDispatchDispatchClass,
+  FrameSupportDispatchDispatchInfo,
+  FrameSupportDispatchPays,
+  FrameSupportDispatchPerDispatchClassU32,
+  FrameSupportDispatchPerDispatchClassWeight,
+  FrameSupportDispatchPerDispatchClassWeightsPerClass,
+  FrameSupportPalletId,
+  FrameSupportTokensMiscBalanceStatus,
+  FrameSystemAccountInfo,
+  FrameSystemCall,
+  FrameSystemError,
+  FrameSystemEvent,
+  FrameSystemEventRecord,
+  FrameSystemExtensionsCheckGenesis,
+  FrameSystemExtensionsCheckNonZeroSender,
+  FrameSystemExtensionsCheckNonce,
+  FrameSystemExtensionsCheckSpecVersion,
+  FrameSystemExtensionsCheckTxVersion,
+  FrameSystemExtensionsCheckWeight,
+  FrameSystemLastRuntimeUpgradeInfo,
+  FrameSystemLimitsBlockLength,
+  FrameSystemLimitsBlockWeights,
+  FrameSystemLimitsWeightsPerClass,
+  FrameSystemPhase,
+  KylixRuntimeRuntime,
+  LendingBorrowRepayUserBorrow,
+  LendingCall,
+  LendingCollateralLiquidationBid,
+  LendingCollateralLiquidationBidStatus,
+  LendingCollateralLiquidationLiquidation,
+  LendingCollateralLiquidationLiquidationMarketConfig,
+  LendingDepositsDepositPosition,
+  LendingError,
+  LendingEvent,
+  LendingInterestRateInterestRateModel,
+  LendingLendingPool,
+  PalletAssetsAccountStatus,
+  PalletAssetsApproval,
+  PalletAssetsAssetDetails,
+  PalletAssetsAssetMetadata,
+  PalletAssetsAssetStatus,
+  PalletAssetsCall,
+  PalletAssetsError,
+  PalletAssetsEvent,
+  PalletAssetsExistenceReason,
+  PalletBalancesAccountData,
+  PalletBalancesBalanceLock,
+  PalletBalancesCall,
+  PalletBalancesError,
+  PalletBalancesEvent,
+  PalletBalancesIdAmount,
+  PalletBalancesReasons,
+  PalletBalancesReserveData,
+  PalletGrandpaCall,
+  PalletGrandpaError,
+  PalletGrandpaEvent,
+  PalletGrandpaStoredPendingChange,
+  PalletGrandpaStoredState,
+  PalletSudoCall,
+  PalletSudoError,
+  PalletSudoEvent,
+  PalletTimestampCall,
+  PalletTransactionPaymentChargeTransactionPayment,
+  PalletTransactionPaymentEvent,
+  PalletTransactionPaymentReleases,
+  SpArithmeticArithmeticError,
+  SpConsensusAuraSr25519AppSr25519Public,
+  SpConsensusGrandpaAppPublic,
+  SpConsensusGrandpaAppSignature,
+  SpConsensusGrandpaEquivocation,
+  SpConsensusGrandpaEquivocationProof,
+  SpCoreEcdsaSignature,
+  SpCoreEd25519Public,
+  SpCoreEd25519Signature,
+  SpCoreSr25519Public,
+  SpCoreSr25519Signature,
+  SpCoreVoid,
+  SpRuntimeDigest,
+  SpRuntimeDigestDigestItem,
+  SpRuntimeDispatchError,
+  SpRuntimeModuleError,
+  SpRuntimeMultiSignature,
+  SpRuntimeTokenError,
+  SpRuntimeTransactionalError,
+  SpVersionRuntimeVersion,
+  SpWeightsRuntimeDbWeight,
+  SpWeightsWeightV2Weight,
 } from "@polkadot/types/lookup";
 
 export type __AugmentedQuery<ApiType extends ApiTypes> = AugmentedQuery<
@@ -54,7 +141,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Option<PalletAssetsAssetAccount>>,
         [u32, AccountId32]
       > &
-      QueryableStorageEntry<ApiType, [u32, AccountId32]>;
+        QueryableStorageEntry<ApiType, [u32, AccountId32]>;
       /**
        * Approved balance transfers. First balance is the amount approved for transfer. Second
        * is the amount of `T::Currency` reserved for storing this.
@@ -69,7 +156,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Option<PalletAssetsApproval>>,
         [u32, AccountId32, AccountId32]
       > &
-      QueryableStorageEntry<ApiType, [u32, AccountId32, AccountId32]>;
+        QueryableStorageEntry<ApiType, [u32, AccountId32, AccountId32]>;
       /**
        * Details of an asset.
        **/
@@ -80,7 +167,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Option<PalletAssetsAssetDetails>>,
         [u32]
       > &
-      QueryableStorageEntry<ApiType, [u32]>;
+        QueryableStorageEntry<ApiType, [u32]>;
       /**
        * Metadata of an asset.
        **/
@@ -91,7 +178,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<PalletAssetsAssetMetadata>,
         [u32]
       > &
-      QueryableStorageEntry<ApiType, [u32]>;
+        QueryableStorageEntry<ApiType, [u32]>;
       /**
        * Generic query
        **/
@@ -106,14 +193,14 @@ declare module "@polkadot/api-base/types/storage" {
         () => Observable<Vec<SpConsensusAuraSr25519AppSr25519Public>>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * The current slot of this block.
        *
        * This will be set in `on_initialize`.
        **/
       currentSlot: AugmentedQuery<ApiType, () => Observable<u64>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/
@@ -153,7 +240,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<PalletBalancesAccountData>,
         [AccountId32]
       > &
-      QueryableStorageEntry<ApiType, [AccountId32]>;
+        QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * Freeze locks on account balances.
        **/
@@ -164,7 +251,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Vec<PalletBalancesIdAmount>>,
         [AccountId32]
       > &
-      QueryableStorageEntry<ApiType, [AccountId32]>;
+        QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * Holds on account balances.
        **/
@@ -175,12 +262,12 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Vec<PalletBalancesIdAmount>>,
         [AccountId32]
       > &
-      QueryableStorageEntry<ApiType, [AccountId32]>;
+        QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * The total units of outstanding deactivated balance in the system.
        **/
       inactiveIssuance: AugmentedQuery<ApiType, () => Observable<u128>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Any liquidity locks on some account balances.
        * NOTE: Should only be accessed when setting, changing and freeing a lock.
@@ -192,7 +279,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Vec<PalletBalancesBalanceLock>>,
         [AccountId32]
       > &
-      QueryableStorageEntry<ApiType, [AccountId32]>;
+        QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * Named reserves on some account balances.
        **/
@@ -203,12 +290,12 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Vec<PalletBalancesReserveData>>,
         [AccountId32]
       > &
-      QueryableStorageEntry<ApiType, [AccountId32]>;
+        QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * The total units issued in the system.
        **/
       totalIssuance: AugmentedQuery<ApiType, () => Observable<u128>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/
@@ -220,12 +307,12 @@ declare module "@polkadot/api-base/types/storage" {
        * in the "set" of Grandpa validators from genesis.
        **/
       currentSetId: AugmentedQuery<ApiType, () => Observable<u64>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * next block number where we can force a change.
        **/
       nextForced: AugmentedQuery<ApiType, () => Observable<Option<u32>>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Pending change: (signaled at, scheduled change).
        **/
@@ -234,7 +321,7 @@ declare module "@polkadot/api-base/types/storage" {
         () => Observable<Option<PalletGrandpaStoredPendingChange>>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * A mapping from grandpa set ID to the index of the *most recent* session for which its
        * members were responsible.
@@ -252,7 +339,7 @@ declare module "@polkadot/api-base/types/storage" {
         (arg: u64 | AnyNumber | Uint8Array) => Observable<Option<u32>>,
         [u64]
       > &
-      QueryableStorageEntry<ApiType, [u64]>;
+        QueryableStorageEntry<ApiType, [u64]>;
       /**
        * `true` if we are currently stalled.
        **/
@@ -261,7 +348,7 @@ declare module "@polkadot/api-base/types/storage" {
         () => Observable<Option<ITuple<[u32, u32]>>>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * State of the current authority set.
        **/
@@ -270,7 +357,7 @@ declare module "@polkadot/api-base/types/storage" {
         () => Observable<PalletGrandpaStoredState>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/
@@ -291,19 +378,19 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Option<u128>>,
         [ITuple<[u32, u32]>]
       > &
-      QueryableStorageEntry<ApiType, [ITuple<[u32, u32]>]>;
+        QueryableStorageEntry<ApiType, [ITuple<[u32, u32]>]>;
       /**
        * The base asset for value representation
        * Defaults to asset id 1
        **/
       baseAsset: AugmentedQuery<ApiType, () => Observable<u32>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * The asset which is used to bid
        * Defaults to asset id 2
        **/
       bidAsset: AugmentedQuery<ApiType, () => Observable<u32>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * The borrow positionss of accounts
        * AccountId => Vec<BorrowPosition>
@@ -315,7 +402,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Option<Vec<LendingBorrowRepayUserBorrow>>>,
         [AccountId32]
       > &
-      QueryableStorageEntry<ApiType, [AccountId32]>;
+        QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * The Deposit positionss of accounts
        * AccountId => Vec<DepositPosition>
@@ -327,7 +414,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Option<Vec<LendingDepositsDepositPosition>>>,
         [AccountId32]
       > &
-      QueryableStorageEntry<ApiType, [AccountId32]>;
+        QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * Kylix runtime storage items
        *
@@ -342,7 +429,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Option<LendingLendingPool>>,
         [u32]
       > &
-      QueryableStorageEntry<ApiType, [u32]>;
+        QueryableStorageEntry<ApiType, [u32]>;
       /**
        * Storage for configuration of collateral markets.
        * Maps asset_id to LiquidationMarketConfig.
@@ -354,7 +441,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<LendingCollateralLiquidationLiquidationMarketConfig>,
         [u32]
       > &
-      QueryableStorageEntry<ApiType, [u32]>;
+        QueryableStorageEntry<ApiType, [u32]>;
       /**
        * Maps collateral assets to their bids, ordered by (discount, block_number, index).
        * Discount: percentage
@@ -373,7 +460,7 @@ declare module "@polkadot/api-base/types/storage" {
         >,
         [u32]
       > &
-      QueryableStorageEntry<ApiType, [u32]>;
+        QueryableStorageEntry<ApiType, [u32]>;
       /**
        * The storage to hold the collatorization status of the asset for an account
        * Storage entry means not collateralized
@@ -386,7 +473,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Option<Null>>,
         [AccountId32, u32]
       > &
-      QueryableStorageEntry<ApiType, [AccountId32, u32]>;
+        QueryableStorageEntry<ApiType, [AccountId32, u32]>;
       /**
        * Generic query
        **/
@@ -397,7 +484,7 @@ declare module "@polkadot/api-base/types/storage" {
        * The `AccountId` of the sudo key.
        **/
       key: AugmentedQuery<ApiType, () => Observable<Option<AccountId32>>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/
@@ -414,7 +501,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<FrameSystemAccountInfo>,
         [AccountId32]
       > &
-      QueryableStorageEntry<ApiType, [AccountId32]>;
+        QueryableStorageEntry<ApiType, [AccountId32]>;
       /**
        * Total length (in bytes) for all extrinsics put together, for the current block.
        **/
@@ -423,7 +510,7 @@ declare module "@polkadot/api-base/types/storage" {
         () => Observable<Option<u32>>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Map of block numbers to block hashes.
        **/
@@ -432,7 +519,7 @@ declare module "@polkadot/api-base/types/storage" {
         (arg: u32 | AnyNumber | Uint8Array) => Observable<H256>,
         [u32]
       > &
-      QueryableStorageEntry<ApiType, [u32]>;
+        QueryableStorageEntry<ApiType, [u32]>;
       /**
        * The current weight for the block.
        **/
@@ -441,17 +528,17 @@ declare module "@polkadot/api-base/types/storage" {
         () => Observable<FrameSupportDispatchPerDispatchClassWeight>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Digest of the current block, also part of the block header.
        **/
       digest: AugmentedQuery<ApiType, () => Observable<SpRuntimeDigest>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * The number of events in the `Events<T>` list.
        **/
       eventCount: AugmentedQuery<ApiType, () => Observable<u32>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Events deposited for the current block.
        *
@@ -466,7 +553,7 @@ declare module "@polkadot/api-base/types/storage" {
         () => Observable<Vec<FrameSystemEventRecord>>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Mapping between a topic (represented by T::Hash) and a vector of indexes
        * of events in the `<Events<T>>` list.
@@ -486,7 +573,7 @@ declare module "@polkadot/api-base/types/storage" {
         ) => Observable<Vec<ITuple<[u32, u32]>>>,
         [H256]
       > &
-      QueryableStorageEntry<ApiType, [H256]>;
+        QueryableStorageEntry<ApiType, [H256]>;
       /**
        * The execution phase of the block.
        **/
@@ -495,7 +582,7 @@ declare module "@polkadot/api-base/types/storage" {
         () => Observable<Option<FrameSystemPhase>>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Total extrinsics count for the current block.
        **/
@@ -504,7 +591,7 @@ declare module "@polkadot/api-base/types/storage" {
         () => Observable<Option<u32>>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Extrinsics data for the current block (maps an extrinsic's index to its data).
        **/
@@ -513,7 +600,7 @@ declare module "@polkadot/api-base/types/storage" {
         (arg: u32 | AnyNumber | Uint8Array) => Observable<Bytes>,
         [u32]
       > &
-      QueryableStorageEntry<ApiType, [u32]>;
+        QueryableStorageEntry<ApiType, [u32]>;
       /**
        * Stores the `spec_version` and `spec_name` of when the last runtime upgrade happened.
        **/
@@ -522,17 +609,17 @@ declare module "@polkadot/api-base/types/storage" {
         () => Observable<Option<FrameSystemLastRuntimeUpgradeInfo>>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * The current block number being processed. Set by `execute_block`.
        **/
       number: AugmentedQuery<ApiType, () => Observable<u32>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Hash of the previous block.
        **/
       parentHash: AugmentedQuery<ApiType, () => Observable<H256>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * True if we have upgraded so that AccountInfo contains three types of `RefCount`. False
        * (default) if not.
@@ -542,7 +629,7 @@ declare module "@polkadot/api-base/types/storage" {
         () => Observable<bool>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * True if we have upgraded so that `type RefCount` is `u32`. False (default) if not.
        **/
@@ -551,7 +638,7 @@ declare module "@polkadot/api-base/types/storage" {
         () => Observable<bool>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/
@@ -562,12 +649,12 @@ declare module "@polkadot/api-base/types/storage" {
        * Did the timestamp get updated in this block?
        **/
       didUpdate: AugmentedQuery<ApiType, () => Observable<bool>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Current time for the current block.
        **/
       now: AugmentedQuery<ApiType, () => Observable<u64>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/
@@ -575,13 +662,13 @@ declare module "@polkadot/api-base/types/storage" {
     };
     transactionPayment: {
       nextFeeMultiplier: AugmentedQuery<ApiType, () => Observable<u128>, []> &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       storageVersion: AugmentedQuery<
         ApiType,
         () => Observable<PalletTransactionPaymentReleases>,
         []
       > &
-      QueryableStorageEntry<ApiType, []>;
+        QueryableStorageEntry<ApiType, []>;
       /**
        * Generic query
        **/

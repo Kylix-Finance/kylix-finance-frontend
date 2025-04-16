@@ -1,1 +1,1 @@
-export const PASSWORD_PROTECTION_COOKIE_NAME = '_kylix_jwt';
+export const PASSWORD_PROTECTION_COOKIE_NAME = "_kylix_jwt";

@@ -27,15 +27,15 @@ import StackedBarChart from "~/components/charts/StackedBarChart";
 //   return data;
 // };
 const mockData = [
-  { date: new Date(2023, 0, 1), borrow: 100, supply: 600 },  // January 1
-  { date: new Date(2023, 0, 2), borrow: 110, supply: 590 },  // January 2
-  { date: new Date(2023, 0, 3), borrow: 120, supply: 580 },  // January 3
-  { date: new Date(2023, 0, 4), borrow: 130, supply: 570 },  // January 4
-  { date: new Date(2023, 0, 5), borrow: 140, supply: 560 },  // January 5
-  { date: new Date(2023, 0, 6), borrow: 150, supply: 550 },  // January 6
-  { date: new Date(2023, 0, 7), borrow: 160, supply: 540 },  // January 7
-  { date: new Date(2023, 0, 8), borrow: 170, supply: 530 },  // January 8
-  { date: new Date(2023, 0, 9), borrow: 180, supply: 520 },  // January 9
+  { date: new Date(2023, 0, 1), borrow: 100, supply: 600 }, // January 1
+  { date: new Date(2023, 0, 2), borrow: 110, supply: 590 }, // January 2
+  { date: new Date(2023, 0, 3), borrow: 120, supply: 580 }, // January 3
+  { date: new Date(2023, 0, 4), borrow: 130, supply: 570 }, // January 4
+  { date: new Date(2023, 0, 5), borrow: 140, supply: 560 }, // January 5
+  { date: new Date(2023, 0, 6), borrow: 150, supply: 550 }, // January 6
+  { date: new Date(2023, 0, 7), borrow: 160, supply: 540 }, // January 7
+  { date: new Date(2023, 0, 8), borrow: 170, supply: 530 }, // January 8
+  { date: new Date(2023, 0, 9), borrow: 180, supply: 520 }, // January 9
   { date: new Date(2023, 0, 10), borrow: 190, supply: 510 }, // January 10
   { date: new Date(2023, 0, 11), borrow: 200, supply: 500 }, // January 11
   { date: new Date(2023, 0, 12), borrow: 210, supply: 490 }, // January 12
@@ -56,7 +56,7 @@ const mockData = [
   { date: new Date(2023, 0, 27), borrow: 360, supply: 340 }, // January 27
   { date: new Date(2023, 0, 28), borrow: 370, supply: 330 }, // January 28
   { date: new Date(2023, 0, 29), borrow: 380, supply: 320 }, // January 29
-  { date: new Date(2023, 0, 30), borrow: 390, supply: 310 }   // January 30
+  { date: new Date(2023, 0, 30), borrow: 390, supply: 310 }, // January 30
 ];
 
 const Temp = () => {

@@ -27,10 +27,7 @@
   },
   "editor.inlineSuggest.enabled": true,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": [
-    "Catmull",
-    "subkey"
-  ],
+  "cSpell.words": ["Catmull", "subkey"],
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,

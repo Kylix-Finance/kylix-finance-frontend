@@ -1,23 +1,18 @@
-
-import {
-  useActiveAccount,
-} from "../useActiveAccount";
-import { useTransaction } from "../useTransaction"
-import { queryKeys } from "@repo/shared";
+import { useActiveAccount } from "../useActiveAccount";
+import { useTransaction } from "../useTransaction";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 interface MutationFnParams {
   assetId: string;
   onConfirm?: () => void;
-
 }
 export const useDisableAsCollateral = () => {
   const { activeAccount } = useActiveAccount();
-  const { execute } = useTransaction("lending", "disableAsCollateral")
+  const { execute } = useTransaction("lending", "disableAsCollateral");
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (params: MutationFnParams) => {
       const { assetId, onConfirm } = params;
-      return execute(onConfirm, assetId)
+      return execute(onConfirm, assetId);
     },
     onSuccess: (_, { assetId }) => {
       //FIXME: should be fix after lending pools rpc

@@ -12,13 +12,12 @@ interface MutationFnParams {
   onConfirm?: () => void;
 }
 export const useRepay = ({ assetId }: RepayParams) => {
-  const { execute } = useTransaction("lending", "repay")
+  const { execute } = useTransaction("lending", "repay");
 
   return useMutation({
     mutationFn: async (params: MutationFnParams) => {
-      const { balance: amount, onConfirm } = params
-      return execute(onConfirm, assetId, amount)
+      const { balance: amount, onConfirm } = params;
+      return execute(onConfirm, assetId, amount);
     },
   });
 };
-

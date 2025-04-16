@@ -9,7 +9,7 @@ export type MetadataResult = {
   decimals: number;
   isFrozen: boolean;
 };
-export const useMetadata = (assetId:  string) => {
+export const useMetadata = (assetId: string) => {
   const { data } = useProvider();
   const enabled = !!data?.api;
   return useQuery({
