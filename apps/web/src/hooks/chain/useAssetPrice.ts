@@ -27,6 +27,11 @@ export const useAssetPrice = ({
           );
           const price = assetPrice[0];
           const formattedPrice = formatUnit(BigInt(price), assetPrice[1]);
+          console.log("______________assetPrice", {
+            assetPrice,
+            formattedPrice,
+          });
+
           return { price, formattedPrice };
         }
       : skipToken,
