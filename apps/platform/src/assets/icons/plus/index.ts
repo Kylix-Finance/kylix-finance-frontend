@@ -1,2 +1,3 @@
-import { ReactComponent as Plus } from "./plus.svg";
-export default Plus;
+import Plus from "./plus.svg";
+
+export default Plus

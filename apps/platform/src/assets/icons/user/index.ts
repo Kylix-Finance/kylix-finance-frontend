@@ -1,2 +1,3 @@
-import { ReactComponent as User } from "./user.svg";
-export default User;
+import User from "./user.svg";
+
+export default User

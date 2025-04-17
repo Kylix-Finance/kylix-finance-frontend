@@ -1,2 +1,3 @@
-import { ReactComponent as Close } from "./close.svg";
-export default Close;
+import Close from "./close.svg";
+
+export default Close

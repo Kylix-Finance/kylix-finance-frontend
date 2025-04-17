@@ -1,2 +1,3 @@
-import { ReactComponent as SwimmingPool } from "./swimming-pool.svg";
-export default SwimmingPool;
+import SwimmingPool from "./swimming-pool.svg";
+
+export default SwimmingPool

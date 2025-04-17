@@ -1,2 +1,3 @@
-import { ReactComponent as ChevronUp } from "./chevron-up.svg";
-export default ChevronUp;
+import ChevronUp from "./chevron-up.svg";
+
+export default ChevronUp

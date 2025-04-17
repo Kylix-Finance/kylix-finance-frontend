@@ -1,2 +1,2 @@
-import { ReactComponent as Duotone } from "./duotone.svg";
-export default Duotone;
+import Duotone from "./duotone.svg";
+export default Duotone

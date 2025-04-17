@@ -1,0 +1,39 @@
+@use "./theme" as *;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --color-black: #121212;
+  --color-white: #ffffff;
+
+  --color-accent-primary-component: #1e1e1e80;
+  --color-gradient-linear-bar: linear-gradient(
+    180deg,
+    rgba(170, 170, 170, 0.3) 0%,
+    rgba(170, 170, 170, 0.05) 100%
+  );
+  --color-neutral-50: #f5f7fa;
+  --color-neutral-100: #e9ebee;
+  --color-neutral-500: #999999;
+  --color-neutral-600: #333333;
+  --color-neutral-700: #444444;
+  --color-neutral-800: #121212;
+  --color-neutral-900: #1e1e1e;
+  @include theme-light();
+  &[data-theme="light"] {
+    @include theme-light();
+  }
+
+  &[data-theme="dark"] {
+    @include theme-dark();
+  }
+}

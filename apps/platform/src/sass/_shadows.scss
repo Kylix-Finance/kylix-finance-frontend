@@ -1,0 +1,19 @@
+$shadow-modal: 0px 0px 25px 0px #1212120f;
+$shadow-line-purple: 0px 3px 3px 0px #56ddb466, 0px 6px 9px 0px #56ddb466,
+  0px 9px 18px 0px #56ddb466;
+$shadow-line-pink: 0px 3px 3px 0px #ff62c866, 0px 6px 9px 0px #ff62c866,
+  0px 9px 18px 0px #60a5fa66, 0px 9px 18px 0px #ff62c866;
+$shadow-line-blue: 0px 3px 3px 0px #60a5fa66, 0px 6px 9px 0px #60a5fa66,
+  0px 9px 18px 0px #60a5fa66;
+
+$shadow-line-green: 0px 3px 3px 0px #5cc52b66, 0px 6px 9px 0px #5cc52b66,
+  0px 9px 18px 0px #5cc52b66;
+
+$shadow-success: 0px 0px 10px 0px #00ff113b;
+
+$shadow-warning: 0px 0px 10px 0px #f59e0b40;
+
+$shadow-risk: 0px 0px 10px 0px #e11d4840;
+@mixin shadow($shadow) {
+  box-shadow: $shadow;
+}

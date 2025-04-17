@@ -4,7 +4,7 @@ import { mergeMetadata } from "@repo/shared";
 import { Metadata } from "next";
 import Footer from "~/components/Footer";
 import Header from "~/components/Header";
-import { BackGround } from "@repo/ui";
+// import { BackGround } from "@repo/ui";
 
 export const metadata: Metadata = mergeMetadata(
   {
@@ -28,7 +28,7 @@ export default function RootLayout({
       lang="en"
     >
       <body className="font-body bg-secondary-500 relative w-full h-full flex flex-col">
-        <BackGround />
+        {/* <BackGround /> */}
         <Header />
         <div className="flex-1 min-h-64 pt-16 flex flex-col">{children}</div>
         <Footer />

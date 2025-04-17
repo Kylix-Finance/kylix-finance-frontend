@@ -1,9 +1,0 @@
-{
-  "extends": "@repo/typescript-config/nextjs.json",
-  "include": [
-    "src",
-    "../../theme.d.ts",
-    "../../apps/platform/src/assets/fonts/fonts.ts"
-  ],
-  "exclude": ["node_modules"]
-}

@@ -1,13 +1,8 @@
 import { PropsWithChildren } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import ReactQueryProvider from "~/providers/ReactQueryProvider";
-import { UILayout } from "@repo/ui/UILayout";
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import styles from "./layout.module.css";
-import { theme } from "@repo/ui/theme";
+import "~/sass/globals.scss";
+import ThemeProvider from "~/providers/ThemeProvider";
 
 export const metadata = {
   title: "Next.js",
@@ -16,19 +11,13 @@ export const metadata = {
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
-      <body className={styles.container}>
-        <ReactQueryProvider>
-          <NextIntlClientProvider>
-            <InitColorSchemeScript attribute="class" />
-            <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-              <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <UILayout>{children}</UILayout>
-              </ThemeProvider>
-            </AppRouterCacheProvider>
-          </NextIntlClientProvider>
-        </ReactQueryProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider>
+          <ReactQueryProvider>
+            <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          </ReactQueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

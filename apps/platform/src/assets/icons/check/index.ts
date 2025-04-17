@@ -1,2 +1,3 @@
-import { ReactComponent as Check } from "./check.svg";
-export default Check;
+import Check from "./check.svg";
+
+export default Check

@@ -1,2 +1,3 @@
-import { ReactComponent as GasPump } from "./gas-pump.svg";
-export default GasPump;
+import GasPump from "./gas-pump.svg";
+
+export default GasPump

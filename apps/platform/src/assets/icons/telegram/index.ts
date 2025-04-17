@@ -1,2 +1,3 @@
-import { ReactComponent as Telegram } from "./telegram.svg";
-export default Telegram;
+import Telegram from "./telegram.svg";
+
+export default Telegram

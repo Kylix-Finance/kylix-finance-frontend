@@ -1,2 +1,2 @@
-import { ReactComponent as Coins } from "./coins.svg";
-export default Coins;
+import Coins from "./coins.svg";
+export default Coins

@@ -1,2 +1,2 @@
-import { ReactComponent as Swap } from "./swap.svg";
-export default Swap;
+import Swap from "./swap.svg";
+export default Swap

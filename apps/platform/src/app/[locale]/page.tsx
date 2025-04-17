@@ -1,5 +1,10 @@
-import Temp from "~/containers/temp";
+import { redirect } from "~/i18n/navigation";
+import { Locale } from "~/types";
 
-export default function Home() {
-  return <Temp />;
+export default function Home({ params }: { params: { locale: Locale } }) {
+  redirect({
+    href: "/dashboard",
+    locale: "en",
+  });
+  return null;
 }

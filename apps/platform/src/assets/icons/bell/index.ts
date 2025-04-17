@@ -1,2 +1,3 @@
-import { ReactComponent as Bell } from "./bell.svg";
-export default Bell;
+import Bell from "./bell.svg";
+
+export default Bell

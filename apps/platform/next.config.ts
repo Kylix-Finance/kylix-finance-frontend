@@ -1,5 +1,10 @@
 import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const withNextIntl = createNextIntlPlugin({
   experimental: {
     createMessagesDeclaration: "./src/i18n/locales/en.json",
@@ -17,6 +22,10 @@ const nextConfig: NextConfig = {
         pathname: "**",
       },
     ],
+  },
+  sassOptions: {
+    includePaths: [join(__dirname, 'src')],
+    prependData: "@use 'src/sass' as *;",
   },
   experimental: {
     turbo: {

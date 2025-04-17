@@ -1,2 +1,3 @@
-import { ReactComponent as GearSix } from "./gear-six.svg";
-export default GearSix;
+import GearSix from "./gear-six.svg";
+
+export default GearSix

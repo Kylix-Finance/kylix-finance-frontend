@@ -1,21 +1,14 @@
 "use client";
-import { Tab, Tabs } from "@mui/material";
-import { useState } from "react";
-
+import { useThemeSwitcher } from "~/hooks/useThemeSwitcher";
+import styles from "./index.module.scss";
 const Dashboard = () => {
-  const [value, setValue] = useState(0);
+  const { theme, switchTheme } = useThemeSwitcher();
 
   return (
-    <div>
-      <Tabs
-        onChange={(_e, v) => setValue(v)}
-        value={value}
-        aria-label="basic tabs example"
-      >
-        <Tab label="Item One" />
-        <Tab label="Item Two" />
-        <Tab label="Item Three" />
-      </Tabs>
+    <div className={styles.container}>
+      <button onClick={() => switchTheme(theme === "dark" ? "light" : "dark")}>
+        change to {theme === "dark" ? "light" : "dark"} theme
+      </button>
     </div>
   );
 };

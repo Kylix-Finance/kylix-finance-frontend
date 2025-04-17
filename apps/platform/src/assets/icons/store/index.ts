@@ -1,2 +1,2 @@
-import { ReactComponent as Store } from "./store.svg";
-export default Store;
+import Store from "./store.svg";
+export default Store

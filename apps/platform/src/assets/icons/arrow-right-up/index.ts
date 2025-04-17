@@ -1,1 +1,3 @@
-export { default as ArrowRightUp } from "./arrow-right-up.svg";
+import ArrowRightUp from "./arrow-right-up.svg";
+
+export default ArrowRightUp

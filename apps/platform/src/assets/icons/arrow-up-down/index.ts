@@ -1,2 +1,2 @@
-import { ReactComponent as ArrowUpDown } from "./arrow-up-down.svg";
-export default ArrowUpDown;
+import ArrowUpDown from "./arrow-up-down.svg";
+export default ArrowUpDown

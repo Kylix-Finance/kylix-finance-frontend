@@ -1,2 +1,2 @@
-import { ReactComponent as Home } from "./home.svg";
-export default Home;
+import Home from "./home.svg";
+export default Home

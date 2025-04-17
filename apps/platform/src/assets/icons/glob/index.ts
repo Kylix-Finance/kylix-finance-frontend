@@ -1,2 +1,3 @@
-import { ReactComponent as Glob } from "./glob.svg";
-export default Glob;
+import Glob from "./glob.svg";
+
+export default Glob

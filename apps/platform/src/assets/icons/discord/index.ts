@@ -1,2 +1,3 @@
-import { ReactComponent as Discord } from "./discord.svg";
-export default Discord;
+import Discord from "./discord.svg";
+
+export default Discord
