@@ -4,7 +4,6 @@
   "type": "module",
   "private": true,
   "exports": {
-    "./add": "./src/icons/add/index.ts",
     "./imageIcon": "./src/components/ImageIcon.tsx",
     "./svgIcon": "./src/components/SVGIcon.tsx"
   },
