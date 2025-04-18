@@ -8,10 +8,7 @@
 
   @include font($font-btn);
 
-  transition:
-    color 300ms ease-out,
-    border-color 300ms ease-out,
-    background-color 300ms ease-out;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     color: $color-link-button-primary-text-hover;

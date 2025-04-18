@@ -1,15 +1,13 @@
-import { ComponentPropsWithRef } from "react";
+import { ComponentPropsWithRef, ReactNode, ElementType } from "react";
 import styles from "./index.module.scss";
 
 import clsx from "clsx";
 import Spinner from "~/components/loaders/spinner";
-import { Icon as IconType } from "~/types";
-import Sample from "~/assets/icons/swimming-pool";
 interface Props extends ComponentPropsWithRef<"button"> {
   variant?: "primary" | "secondary" | "tertiary";
   size?: "small" | "default" | "large";
   isLoading?: boolean;
-  icon?: IconType;
+  icon?: ElementType;
   containerClassName?: string;
 }
 
@@ -17,7 +15,7 @@ const Button = ({
   variant = "primary",
   size = "default",
   isLoading,
-  icon,
+  icon: Icon,
   containerClassName,
   ...rest
 }: Props) => {
@@ -38,24 +36,24 @@ const Button = ({
 
   return (
     <button className={className} {...rest} data-loading={isLoading}>
-      {icon && (
+      {Icon && (
         <span className={styles.icon}>
           {isLoading ? (
             <Spinner className={iconClassName} borderWidth={2} />
           ) : (
-            <Sample className={iconClassName} />
+            <Icon className={iconClassName} />
           )}
         </span>
       )}
       <span
         className={clsx(
-          { [styles.content_loading]: isLoading && !icon },
+          { [styles.content_loading]: isLoading && !Icon },
           rest.className
         )}
       >
         {rest.children}
       </span>
-      {!icon && isLoading && (
+      {!Icon && isLoading && (
         <span className={styles.loading_icon}>
           <Spinner width={25} height={25} borderWidth={2} />
         </span>
