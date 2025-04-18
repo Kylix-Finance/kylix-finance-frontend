@@ -1,23 +1,23 @@
 import dynamic from "next/dynamic";
-import { Icon as IconType } from "../../types";
+import { Icon as IconType } from "../../../types";
 import { ComponentPropsWithRef, ComponentType } from "react";
 import styles from "./index.module.scss";
 import clsx from "clsx";
 interface Props extends ComponentPropsWithRef<"svg"> {
-  icon: IconType;
+  name: IconType;
   disabled?: boolean;
   disableHover?: boolean;
 }
 
 export const Icon = ({
-  icon,
+  name,
   disabled,
   disableHover,
   className,
   ...rest
 }: Props) => {
   const IconComponent = dynamic(
-    () => import(`~/assets/icons/${icon}`)
+    () => import(`~/assets/icons/${name}`)
   ) as ComponentType<ComponentPropsWithRef<"svg">>;
 
   return (

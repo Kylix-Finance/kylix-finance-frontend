@@ -1,0 +1,224 @@
+@mixin variant-base($color, $background-color, $border-color) {
+  color: $color;
+  background-color: $background-color;
+  border: 1px solid $border-color;
+  backdrop-filter: blur(15px);
+}
+
+@mixin variant-hover($color, $background-color: inherit, $border-color) {
+  &:hover {
+    color: $color;
+    background-color: $background-color;
+    border-color: $border-color;
+    transition: linear 200ms;
+  }
+}
+
+@mixin variant-focus($color, $background-color, $border-color) {
+  &:focus {
+    color: $color;
+    background-color: $background-color;
+    border-color: $border-color;
+    transition: linear 200ms;
+  }
+}
+
+@mixin variant-active($color, $background-color, $border-color) {
+  &:active {
+    color: $color;
+    background-color: $background-color;
+    border-color: $border-color;
+    transition: linear 200ms;
+  }
+}
+
+@mixin disabled($color, $background-color, $border-color) {
+  &:disabled {
+    cursor: not-allowed;
+    color: $color;
+    background-color: $background-color;
+    border-color: $border-color;
+    transition-duration: 300ms;
+  }
+}
+
+@mixin loading($color, $background-color, $border-color) {
+  &[data-loading="true"] {
+    cursor: not-allowed;
+    color: $color;
+    background-color: $background-color;
+    border-color: $border-color;
+    transition-duration: 300ms;
+  }
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px;
+  cursor: pointer;
+  position: relative;
+  width: fit-content;
+  transition: opacity 300ms ease-in-out;
+}
+
+.content_loading {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+// variants
+.primary {
+  @include variant-base(
+    $color-button-primary-text,
+    $color-button-primary-bg,
+    $color-button-primary-border
+  );
+  @include variant-hover(
+    $color-button-primary-text-hover,
+    $color-button-primary-bg-hover,
+    $color-button-primary-border-hover
+  );
+  @include variant-active(
+    $color-button-primary-text-active,
+    $color-button-primary-bg-active,
+    $color-button-primary-border-active
+  );
+  @include variant-focus(
+    $color-button-primary-text-focus,
+    $color-button-primary-bg-focus,
+    $color-button-primary-border-focus
+  );
+  @include disabled(
+    $color-button-primary-disabled-text,
+    $color-button-primary-disabled-bg,
+    $color-button-primary-disabled-border
+  );
+  @include loading(
+    $color-button-primary-disabled-text,
+    $color-button-primary-disabled-bg,
+    $color-button-primary-disabled-border
+  );
+}
+
+.secondary {
+  @include variant-base(
+    $color-button-secondary-text,
+    $color-button-secondary-bg,
+    $color-button-secondary-border
+  );
+  @include variant-hover(
+    $color-button-secondary-text-hover,
+    $color-button-secondary-bg-hover,
+    $color-button-secondary-border-hover
+  );
+  @include variant-active(
+    $color-button-secondary-text-active,
+    $color-button-secondary-bg-active,
+    $color-button-secondary-border-active
+  );
+  @include variant-focus(
+    $color-button-secondary-text-focus,
+    $color-button-secondary-bg-focus,
+    $color-button-secondary-border-focus
+  );
+  @include disabled(
+    $color-button-secondary-disabled-text,
+    $color-button-secondary-disabled-bg,
+    $color-button-secondary-disabled-border
+  );
+  @include loading(
+    $color-button-secondary-disabled-text,
+    $color-button-secondary-disabled-bg,
+    $color-button-secondary-disabled-border
+  );
+}
+
+.tertiary {
+  @include variant-base(
+    $color-button-tertiary-text,
+    $color-button-tertiary-bg,
+    $color-button-tertiary-border
+  );
+  @include variant-hover(
+    $color-button-tertiary-text-hover,
+    $color-button-tertiary-bg-hover,
+    $color-button-tertiary-border-hover
+  );
+  @include variant-active(
+    $color-button-tertiary-text-active,
+    $color-button-tertiary-bg-active,
+    $color-button-tertiary-border-active
+  );
+  @include variant-focus(
+    $color-button-tertiary-text-focus,
+    $color-button-tertiary-bg-focus,
+    $color-button-tertiary-border-focus
+  );
+  @include disabled(
+    $color-button-tertiary-disabled-text,
+    $color-button-tertiary-disabled-bg,
+    $color-button-tertiary-disabled-border
+  );
+  @include loading(
+    $color-button-tertiary-disabled-text,
+    $color-button-tertiary-disabled-bg,
+    $color-button-tertiary-disabled-border
+  );
+}
+
+// size
+.default {
+  padding: $spacing-2_5 $spacing-5;
+  @include font($font-btn);
+  gap: $spacing-2;
+}
+.small {
+  padding: $spacing-1 $spacing-2_5;
+  @include font($font-body-compact);
+  gap: $spacing-1;
+}
+.large {
+  padding: $spacing-4 $spacing-11;
+  @include font($font-heading-4);
+  gap: $spacing-2;
+}
+// state
+.loading_icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+//icon
+.icon_small {
+  width: 20px;
+  height: 20px;
+}
+.icon_default {
+  width: 20px;
+  height: 20px;
+}
+.icon_large {
+  width: 24px;
+  height: 24px;
+}
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

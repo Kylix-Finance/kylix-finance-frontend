@@ -38,6 +38,7 @@
     "d3-array": "^3.2.4",
     "d3-time-format": "^4.1.0",
     "date-fns": "^4.1.0",
+    "include-media": "^2.0.0",
     "jose": "^6.0.10",
     "motion": "^12.6.5",
     "next-intl": "^4.0.2",

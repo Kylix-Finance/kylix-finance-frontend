@@ -1,0 +1,12 @@
+.container {
+  color: inherit;
+
+  &:where(
+      :hover:not([data-disabled="true"]):not([data-disable-hover="true"]),
+      :disabled,
+      :active,
+      :focus
+    ) {
+    color: inherit;
+  }
+}

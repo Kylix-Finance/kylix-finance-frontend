@@ -50,3 +50,71 @@ $color-gradient-linear-borrow: var(--color-gradient-linear-borrow);
 $color-gradient-linear-success: var(--color-gradient-linear-success);
 $color-gradient-linear-warning: var(--color-gradient-linear-warning);
 $color-gradient-linear-error: var(--color-gradient-linear-error);
+
+//buttons
+
+$color-button-primary-text: var(--color-button-primary-text);
+$color-button-primary-text-hover: var(--color-button-primary-text-hover);
+$color-button-primary-text-active: var(--color-button-primary-text-active);
+$color-button-primary-text-focus: var(--color-button-primary-text-focus);
+$color-button-primary-bg: var(--color-button-primary-bg);
+$color-button-primary-bg-hover: var(--color-button-primary-bg-hover);
+$color-button-primary-bg-active: var(--color-button-primary-bg-active);
+$color-button-primary-bg-focus: var(--color-button-primary-bg-focus);
+$color-button-primary-border: var(--color-button-primary-border);
+$color-button-primary-border-hover: var(--color-button-primary-border-hover);
+$color-button-primary-border-active: var(--color-button-primary-border-active);
+$color-button-primary-border-focus: var(--color-button-primary-border-focus);
+$color-button-primary-disabled-text: var(--color-button-primary-disabled-text);
+$color-button-primary-disabled-bg: var(--color-button-primary-disabled-bg);
+$color-button-primary-disabled-border: var(
+  --color-button-primary-disabled-border
+);
+
+$color-button-secondary-text: var(--color-button-secondary-text);
+$color-button-secondary-text-hover: var(--color-button-secondary-text-hover);
+$color-button-secondary-text-active: var(--color-button-secondary-text-active);
+$color-button-secondary-text-focus: var(--color-button-secondary-text-focus);
+$color-button-secondary-bg: var(--color-button-secondary-bg);
+$color-button-secondary-bg-hover: var(--color-button-secondary-bg-hover);
+$color-button-secondary-bg-active: var(--color-button-secondary-bg-active);
+$color-button-secondary-bg-focus: var(--color-button-secondary-bg-focus);
+$color-button-secondary-border: var(--color-button-secondary-border);
+$color-button-secondary-border-hover: var(
+  --color-button-secondary-border-hover
+);
+$color-button-secondary-border-active: var(
+  --color-button-secondary-border-active
+);
+$color-button-secondary-border-focus: var(
+  --color-button-secondary-border-focus
+);
+$color-button-secondary-disabled-text: var(
+  --color-button-secondary-disabled-text
+);
+$color-button-secondary-disabled-bg: var(--color-button-secondary-disabled-bg);
+$color-button-secondary-disabled-border: var(
+  --color-button-secondary-disabled-border
+);
+
+$color-button-tertiary-text: var(--color-button-tertiary-text);
+$color-button-tertiary-text-hover: var(--color-button-tertiary-text-hover);
+$color-button-tertiary-text-active: var(--color-button-tertiary-text-active);
+$color-button-tertiary-text-focus: var(--color-button-tertiary-text-focus);
+$color-button-tertiary-bg: var(--color-button-tertiary-bg);
+$color-button-tertiary-bg-hover: var(--color-button-tertiary-bg-hover);
+$color-button-tertiary-bg-active: var(--color-button-tertiary-bg-active);
+$color-button-tertiary-bg-focus: var(--color-button-tertiary-bg-focus);
+$color-button-tertiary-border: var(--color-button-tertiary-border);
+$color-button-tertiary-border-hover: var(--color-button-tertiary-border-hover);
+$color-button-tertiary-border-active: var(
+  --color-button-tertiary-border-active
+);
+$color-button-tertiary-border-focus: var(--color-button-tertiary-border-focus);
+$color-button-tertiary-disabled-text: var(
+  --color-button-tertiary-disabled-text
+);
+$color-button-tertiary-disabled-bg: var(--color-button-tertiary-disabled-bg);
+$color-button-tertiary-disabled-border: var(
+  --color-button-tertiary-disabled-border
+);

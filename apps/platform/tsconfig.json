@@ -14,8 +14,8 @@
     "src",
     "next-env.d.ts",
     "./i18n.d.ts",
+    "./sass.d.ts",
     "./react-app-env.d.ts",
-    "../../theme.d.ts",
     ".next/types/**/*.ts",
     "../../global.d.ts"
   ],

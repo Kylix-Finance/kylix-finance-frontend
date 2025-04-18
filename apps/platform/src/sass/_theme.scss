@@ -1,4 +1,105 @@
+@mixin buttons-light {
+  --color-button-primary-text: #0b5d56;
+  --color-button-primary-text-hover: #18938a;
+  --color-button-primary-text-active: #0b5d56;
+  --color-button-primary-text-focus: #0b5d56;
+  --color-button-primary-bg: #45a99626;
+  --color-button-primary-bg-hover: #45a99626;
+  --color-button-primary-bg-active: #dbe7e6;
+  --color-button-primary-bg-focus: #45a99626;
+  --color-button-primary-border: #0b5d56;
+  --color-button-primary-border-hover: #18938a;
+  --color-button-primary-border-active: #0b5d56;
+  --color-button-primary-border-focus: #0b5d56;
+  --color-button-primary-disabled-text: #d1d5db;
+  --color-button-primary-disabled-bg: #f0f0f0;
+  --color-button-primary-disabled-border: #f0f0f0;
+
+  --color-button-secondary-text: #697586;
+  --color-button-secondary-text-hover: #697586;
+  --color-button-secondary-text-active: #ffffff;
+  --color-button-secondary-text-focus: #333333;
+  --color-button-secondary-bg: #f0f0f0;
+  --color-button-secondary-bg-hover: #d1d5db;
+  --color-button-secondary-bg-active: #697586;
+  --color-button-secondary-bg-focus: #d1d5db;
+  --color-button-secondary-border: #d1d5db;
+  --color-button-secondary-border-hover: #d1d5db;
+  --color-button-secondary-border-active: #d1d5db;
+  --color-button-secondary-border-focus: #697586;
+  --color-button-secondary-disabled-text: #d1d5db;
+  --color-button-secondary-disabled-bg: #f0f0f0;
+  --color-button-secondary-disabled-border: #d1d5db;
+
+  --color-button-tertiary-text: #ffffff;
+  --color-button-tertiary-text-hover: #ffffff;
+  --color-button-tertiary-text-active: #ffffff;
+  --color-button-tertiary-text-focus: #ffffff;
+  --color-button-tertiary-bg: #333333;
+  --color-button-tertiary-bg-hover: #555555;
+  --color-button-tertiary-bg-active: #333333;
+  --color-button-tertiary-bg-focus: #333333;
+  --color-button-tertiary-border: #333333;
+  --color-button-tertiary-border-hover: #555555;
+  --color-button-tertiary-border-active: #555555;
+  --color-button-tertiary-border-focus: #555555;
+  --color-button-tertiary-disabled-text: #d1d5db;
+  --color-button-tertiary-disabled-bg: #f0f0f0;
+  --color-button-tertiary-disabled-border: #f0f0f0;
+}
+@mixin buttons-dark {
+  --color-button-primary-text: #ffffff;
+  --color-button-primary-text-hover: #ffffff;
+  --color-button-primary-disabled-text: #aaaaaa;
+  --color-button-primary-text-active: #4ecdc4;
+  --color-button-primary-text-focus: #4ecdc4;
+  --color-button-primary-bg: #56ddb433;
+  --color-button-primary-bg-hover: #96ffdf26;
+  --color-button-primary-bg-active: #56ddb433;
+  --color-button-primary-bg-focus: #56ddb433;
+  --color-button-primary-border: #56ddb4;
+  --color-button-primary-border-hover: #96ffdf;
+  --color-button-primary-border-active: #4ecdc4;
+  --color-button-primary-border-focus: #56ddb4;
+  --color-button-primary-disabled-bg: #2a2a2a;
+  --color-button-primary-disabled-border: #2a2a2a;
+
+  --color-button-secondary-text: #e0e0e0;
+  --color-button-secondary-text-hover: #aaaaaa;
+  --color-button-secondary-text-active: #e0e0e0;
+  --color-button-secondary-text-focus: #e0e0e0;
+  --color-button-secondary-disabled-text: #444444;
+  --color-button-secondary-bg: #2a2a2a;
+  --color-button-secondary-bg-hover: #444444;
+  --color-button-secondary-bg-active: #2a2a2a;
+  --color-button-secondary-bg-focus: #444444;
+  --color-button-secondary-border: #444444;
+  --color-button-secondary-border-hover: #444444;
+  --color-button-secondary-border-active: #444444;
+  --color-button-secondary-border-focus: #444444;
+  --color-button-secondary-disabled-bg: #2a2a2a;
+  --color-button-secondary-disabled-border: #444444;
+
+  --color-button-tertiary-text: #1e1e1e80;
+  --color-button-tertiary-text-hover: #1e1e1e80;
+  --color-button-tertiary-text-active: #1e1e1e80;
+  --color-button-tertiary-text-focus: #1e1e1e80;
+  --color-button-tertiary-disabled-text: #444444;
+
+  --color-button-tertiary-bg: #ffffff;
+  --color-button-tertiary-bg-hover: #e0e0e0;
+  --color-button-tertiary-bg-active: #ffffff;
+  --color-button-tertiary-bg-focus: #ffffff;
+
+  --color-button-tertiary-border: #ffffff;
+  --color-button-tertiary-border-hover: #e0e0e0;
+  --color-button-tertiary-border-active: #ffffff;
+  --color-button-tertiary-border-focus: #1e1e1e80;
+  --color-button-tertiary-disabled-bg: #2a2a2a;
+  --color-button-tertiary-disabled-border: #2a2a2a;
+}
 @mixin theme-light {
+  @include buttons-light;
   --color-primary: #0b5d56;
   --color-primary-light: #18938a;
   --color-primary-dark: #084540;
@@ -67,6 +168,7 @@
   );
 }
 @mixin theme-dark {
+  @include buttons-dark;
   --color-primary: #4ecdc4;
   --color-primary-light: #78d9d1;
   --color-primary-dark: #2a3a3f;
