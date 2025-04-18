@@ -121,9 +121,49 @@
   --color-link-button-primary-border-active: transparent;
   --color-link-button-primary-border-focus: #56ddb4;
 }
+
+@mixin icon-button-light {
+  --color-icon-button-primary-text: #697586;
+  --color-icon-button-primary-text-hover: #697586;
+  --color-icon-button-primary-text-active: #45a996;
+  --color-icon-button-primary-text-focus: #45a996;
+  --color-icon-button-primary-text-disabled: #d1d5db;
+
+  --color-icon-button-primary-border: #d1d5db;
+  --color-icon-button-primary-border-hover: #d1d5db;
+  --color-icon-button-primary-border-active: #45a996;
+  --color-icon-button-primary-border-disabled: #d1d5db;
+  --color-icon-button-primary-border-focus: #45a996;
+
+  --color-icon-button-primary-bg: #ffffff;
+  --color-icon-button-primary-bg-hover: #e9ebee;
+  --color-icon-button-primary-bg-active: #45a99626;
+  --color-icon-button-primary-bg-focus: #45a99626;
+  --color-icon-button-primary-bg-disabled: transparent;
+}
+@mixin icon-button-dark {
+  --color-icon-button-primary-text: #aaaaaa;
+  --color-icon-button-primary-text-hover: #aaaaaa;
+  --color-icon-button-primary-text-active: #56ddb4;
+  --color-icon-button-primary-text-focus: #56ddb4;
+  --color-icon-button-primary-text-disabled: #444444;
+
+  --color-icon-button-primary-border: #444444;
+  --color-icon-button-primary-border-hover: #aaaaaa;
+  --color-icon-button-primary-border-active: #56ddb4;
+  --color-icon-button-primary-border-disabled: #444444;
+  --color-icon-button-primary-border-focus: #56ddb4;
+
+  --color-icon-button-primary-bg: #2a2a2a;
+  --color-icon-button-primary-bg-hover: #444444;
+  --color-icon-button-primary-bg-active: #56ddb433;
+  --color-icon-button-primary-bg-focus: #56ddb433;
+  --color-icon-button-primary-bg-disabled: transparent;
+}
 @mixin theme-light {
   @include buttons-light;
   @include link-button-light;
+  @include icon-button-light;
   --color-primary: #0b5d56;
   --color-primary-light: #18938a;
   --color-primary-dark: #084540;
@@ -191,9 +231,11 @@
     #ff3028 100%
   );
 }
+
 @mixin theme-dark {
   @include buttons-dark;
   @include link-button-dark;
+  @include icon-button-dark;
 
   --color-primary: #4ecdc4;
   --color-primary-light: #78d9d1;

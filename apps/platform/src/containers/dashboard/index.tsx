@@ -1,7 +1,9 @@
 "use client";
+import IconButton from "~/components/ui/icon-button";
 import styles from "./index.module.scss";
-import LinkButton from "~/components/ui/link-button";
+import { useThemeSwitcher } from "~/hooks/useThemeSwitcher";
 const Dashboard = () => {
+  const { switchTheme } = useThemeSwitcher();
   return (
     <div
       className={styles.container}
@@ -13,9 +15,7 @@ const Dashboard = () => {
         flexWrap: "wrap",
       }}
     >
-      <LinkButton href="/" disabled>
-        Hi
-      </LinkButton>
+      <IconButton />
     </div>
   );
 };

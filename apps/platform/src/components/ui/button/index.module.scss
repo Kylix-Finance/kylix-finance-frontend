@@ -38,7 +38,7 @@
     color: $color;
     background-color: $background-color;
     border-color: $border-color;
-    transition-duration: 300ms;
+    transition-duration: 0.2s;
   }
 }
 
@@ -48,7 +48,7 @@
     color: $color;
     background-color: $background-color;
     border-color: $border-color;
-    transition-duration: 300ms;
+    transition-duration: 0.2s;
   }
 }
 
@@ -60,12 +60,13 @@
   cursor: pointer;
   position: relative;
   width: fit-content;
-  transition: opacity 300ms ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+  outline: none;
 }
 
 .content_loading {
   opacity: 0;
-  transition: opacity 300ms ease-in-out;
+  transition: opacity 0.2s ease-in-out;
 }
 
 // variants
