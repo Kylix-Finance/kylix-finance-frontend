@@ -1,3 +1,3 @@
 import DotsThree from "./dots-three.svg";
 
-export default DotsThree
+export default DotsThree;

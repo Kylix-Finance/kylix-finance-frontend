@@ -1,3 +1,3 @@
 import Wallet from "./wallet.svg";
 
-export default Wallet
+export default Wallet;

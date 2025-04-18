@@ -1,3 +1,3 @@
 import GearSix from "./gear-six.svg";
 
-export default GearSix
+export default GearSix;

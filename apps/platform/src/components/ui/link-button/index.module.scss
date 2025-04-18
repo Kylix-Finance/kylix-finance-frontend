@@ -1,0 +1,26 @@
+.container {
+  color: $color-link-button-primary-text;
+  background-color: transparent;
+  border: 1px solid $color-link-button-primary-border;
+  border-radius: 4px;
+  border: 1px solid $color-link-button-primary-border;
+  user-select: none;
+  @include font($font-btn);
+  &:hover {
+    color: $color-link-button-primary-text-hover;
+    border-color: $color-link-button-primary-border-hover;
+  }
+  &:active {
+    color: $color-link-button-primary-text-active;
+    border-color: $color-link-button-primary-border-active;
+  }
+  &:focus {
+    color: $color-link-button-primary-text-focus;
+    border-color: $color-link-button-primary-border-focus;
+  }
+}
+.disabled {
+  color: $color-link-button-primary-text-disabled;
+  cursor: not-allowed;
+  pointer-events: none;
+}

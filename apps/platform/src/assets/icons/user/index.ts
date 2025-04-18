@@ -1,3 +1,3 @@
 import User from "./user.svg";
 
-export default User
+export default User;

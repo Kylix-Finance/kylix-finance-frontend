@@ -1,3 +1,2 @@
-
 import Moon from "./moon.svg";
-export default Moon
+export default Moon;

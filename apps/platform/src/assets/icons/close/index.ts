@@ -1,3 +1,3 @@
 import Close from "./close.svg";
 
-export default Close
+export default Close;

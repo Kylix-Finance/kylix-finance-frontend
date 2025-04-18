@@ -1,2 +1,2 @@
 import Store from "./store.svg";
-export default Store
+export default Store;

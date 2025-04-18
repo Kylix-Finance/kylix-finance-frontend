@@ -1,2 +1,2 @@
 import Sun from "./sun.svg";
-export default Sun
+export default Sun;

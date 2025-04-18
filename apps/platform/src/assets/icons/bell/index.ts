@@ -1,3 +1,3 @@
 import Bell from "./bell.svg";
 
-export default Bell
+export default Bell;

@@ -1,3 +1,3 @@
 import Mail from "./mail.svg";
 
-export default Mail
+export default Mail;

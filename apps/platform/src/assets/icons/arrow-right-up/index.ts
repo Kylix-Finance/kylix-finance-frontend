@@ -1,3 +1,3 @@
 import ArrowRightUp from "./arrow-right-up.svg";
 
-export default ArrowRightUp
+export default ArrowRightUp;

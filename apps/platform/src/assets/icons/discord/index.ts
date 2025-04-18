@@ -1,3 +1,3 @@
 import Discord from "./discord.svg";
 
-export default Discord
+export default Discord;

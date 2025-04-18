@@ -1,3 +1,3 @@
 import Telegram from "./telegram.svg";
 
-export default Telegram
+export default Telegram;

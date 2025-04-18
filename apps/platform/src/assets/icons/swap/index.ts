@@ -1,2 +1,2 @@
 import Swap from "./swap.svg";
-export default Swap
+export default Swap;

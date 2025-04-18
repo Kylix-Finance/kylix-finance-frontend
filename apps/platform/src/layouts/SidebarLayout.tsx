@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import Background from "~/components/background/Background";
 
 interface Props {
   children: ReactNode;

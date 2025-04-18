@@ -98,8 +98,32 @@
   --color-button-tertiary-disabled-bg: #2a2a2a;
   --color-button-tertiary-disabled-border: #2a2a2a;
 }
+
+@mixin link-button-light {
+  --color-link-button-primary-text: #45a996;
+  --color-link-button-primary-text-hover: #129c82;
+  --color-link-button-primary-text-active: #45a996;
+  --color-link-button-primary-text-focus: #45a996;
+  --color-link-button-primary-text-disabled: #d1d5db;
+  --color-link-button-primary-border: transparent;
+  --color-link-button-primary-border-hover: transparent;
+  --color-link-button-primary-border-active: transparent;
+  --color-link-button-primary-border-focus: #45a996;
+}
+@mixin link-button-dark {
+  --color-link-button-primary-text: #56ddb4;
+  --color-link-button-primary-text-hover: #96ffdf;
+  --color-link-button-primary-text-active: #56ddb4;
+  --color-link-button-primary-text-focus: #56ddb4;
+  --color-link-button-primary-text-disabled: #444444;
+  --color-link-button-primary-border: transparent;
+  --color-link-button-primary-border-hover: transparent;
+  --color-link-button-primary-border-active: transparent;
+  --color-link-button-primary-border-focus: #56ddb4;
+}
 @mixin theme-light {
   @include buttons-light;
+  @include link-button-light;
   --color-primary: #0b5d56;
   --color-primary-light: #18938a;
   --color-primary-dark: #084540;
@@ -169,6 +193,8 @@
 }
 @mixin theme-dark {
   @include buttons-dark;
+  @include link-button-dark;
+
   --color-primary: #4ecdc4;
   --color-primary-light: #78d9d1;
   --color-primary-dark: #2a3a3f;

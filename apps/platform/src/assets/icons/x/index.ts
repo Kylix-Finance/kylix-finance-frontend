@@ -1,3 +1,3 @@
 import X from "./x.svg";
 
-export default X
+export default X;

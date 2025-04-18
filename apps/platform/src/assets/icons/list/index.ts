@@ -1,3 +1,3 @@
 import List from "./list.svg";
 
-export default List
+export default List;

@@ -1,2 +1,2 @@
 import Search from "./search.svg";
-export default Search
+export default Search;

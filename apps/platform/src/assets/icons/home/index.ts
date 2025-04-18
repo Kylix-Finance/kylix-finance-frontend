@@ -1,2 +1,2 @@
 import Home from "./home.svg";
-export default Home
+export default Home;

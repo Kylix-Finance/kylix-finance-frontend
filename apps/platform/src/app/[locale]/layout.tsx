@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import ReactQueryProvider from "~/providers/ReactQueryProvider";
 import "~/sass/globals.scss";
 import ThemeProvider from "~/providers/ThemeProvider";
+import { fonts } from "~/assets/fonts";
 
 export const metadata = {
   title: "Next.js",
@@ -12,7 +13,7 @@ export const metadata = {
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={fonts}>
         <ThemeProvider>
           <ReactQueryProvider>
             <NextIntlClientProvider>{children}</NextIntlClientProvider>

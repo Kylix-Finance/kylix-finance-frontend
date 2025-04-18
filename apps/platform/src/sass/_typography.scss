@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "sass:meta";
 @use "media-query" as *;
+$font-family-primary: var(--font-family-primary);
 
 $font-display: (
   font-size: 40px,
@@ -89,7 +90,7 @@ $font-btn: (
     font-weight: $font-weight;
     line-height: $line-height;
     letter-spacing: $letter-spacing;
-
+    font-family: $font-family-primary;
     @if ($font == $font-display) {
       @include media("<=mobile") {
         font-size: 32px;
