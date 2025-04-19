@@ -7,6 +7,7 @@ import { useThemeSwitcher } from "~/hooks/useThemeSwitcher";
 import Glob from "~/assets/icons/glob";
 import Moon from "~/assets/icons/moon";
 import Sun from "~/assets/icons/sun";
+import { Sidebar } from "~/components/sidebar/Sidebar";
 const Dashboard = () => {
   const { switchTheme, theme } = useThemeSwitcher();
 
@@ -21,6 +22,7 @@ const Dashboard = () => {
         flexWrap: "wrap",
       }}
     >
+      <Sidebar />
       <IconButton
         icon={theme === "light" ? Moon : Sun}
         onClick={() => {
