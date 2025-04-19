@@ -160,10 +160,73 @@
   --color-icon-button-primary-bg-focus: #56ddb433;
   --color-icon-button-primary-bg-disabled: transparent;
 }
+
+@mixin checkbox-light {
+  --color-checkbox-primary-bg: #ffffff;
+  --color-checkbox-primary-bg-hover: #f5f7fa;
+  --color-checkbox-primary-bg-active: #45a996;
+  --color-checkbox-primary-bg-focus: #f5f7fa;
+  --color-checkbox-primary-bg-disabled: #ffffff;
+
+  --color-checkbox-primary-border: #d1d5db;
+  --color-checkbox-primary-border-hover: #d1d5db;
+  --color-checkbox-primary-border-disabled: #f5f7fa;
+  --color-checkbox-primary-border-active: #45a996;
+  --color-checkbox-primary-border-focus: #d1d5db;
+
+  --color-checkbox-primary-outline: transparent;
+  --color-checkbox-primary-outline-hover: transparent;
+  --color-checkbox-primary-outline-active: #45a996;
+  --color-checkbox-primary-outline-focus: #45a996;
+  --color-checkbox-primary-outline-disabled: transparent;
+}
+@mixin checkbox-light {
+  --color-checkbox-primary-bg: #ffffff;
+  --color-checkbox-primary-bg-hover: #f5f7fa;
+  --color-checkbox-primary-bg-active: #45a996;
+  --color-checkbox-primary-bg-focus: #f5f7fa;
+  --color-checkbox-primary-bg-disabled: #ffffff;
+
+  --color-checkbox-primary-border: #d1d5db;
+  --color-checkbox-primary-border-hover: #d1d5db;
+  --color-checkbox-primary-border-disabled: #f5f7fa;
+  --color-checkbox-primary-border-active: #45a996;
+  --color-checkbox-primary-border-focus: #d1d5db;
+
+  --color-checkbox-primary-outline: transparent;
+  --color-checkbox-primary-outline-hover: transparent;
+  --color-checkbox-primary-outline-active: #45a996;
+  --color-checkbox-primary-outline-focus: #45a996;
+  --color-checkbox-primary-outline-disabled: transparent;
+
+  --color-checkbox-mark: #ffffff;
+}
+@mixin checkbox-dark {
+  --color-checkbox-primary-bg: #e0e0e0;
+  --color-checkbox-primary-bg-hover: #999999;
+  --color-checkbox-primary-bg-active: #45a996;
+  --color-checkbox-primary-bg-focus: #e0e0e0;
+  --color-checkbox-primary-bg-disabled: #444444;
+
+  --color-checkbox-primary-border: #444444;
+  --color-checkbox-primary-border-hover: #444444;
+  --color-checkbox-primary-border-disabled: #2a2a2a;
+  --color-checkbox-primary-border-active: #45a996;
+  --color-checkbox-primary-border-focus: #444444;
+
+  --color-checkbox-primary-outline: transparent;
+  --color-checkbox-primary-outline-hover: transparent;
+  --color-checkbox-primary-outline-active: #45a996;
+  --color-checkbox-primary-outline-focus: #45a996;
+  --color-checkbox-primary-outline-disabled: transparent;
+
+  --color-checkbox-mark: #131313;
+}
 @mixin theme-light {
   @include buttons-light;
   @include link-button-light;
   @include icon-button-light;
+  @include checkbox-light;
   --color-primary: #0b5d56;
   --color-primary-light: #18938a;
   --color-primary-dark: #084540;
@@ -236,7 +299,7 @@
   @include buttons-dark;
   @include link-button-dark;
   @include icon-button-dark;
-
+  @include checkbox-dark;
   --color-primary: #4ecdc4;
   --color-primary-light: #78d9d1;
   --color-primary-dark: #2a3a3f;

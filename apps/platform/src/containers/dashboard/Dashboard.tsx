@@ -7,6 +7,7 @@ import { useThemeSwitcher } from "~/hooks/useThemeSwitcher";
 import Glob from "~/assets/icons/glob";
 import Moon from "~/assets/icons/moon";
 import Sun from "~/assets/icons/sun";
+import { Checkbox } from "~/components/ui/checkbox";
 const Dashboard = () => {
   const { switchTheme, theme } = useThemeSwitcher();
 
@@ -21,34 +22,15 @@ const Dashboard = () => {
         flexWrap: "wrap",
       }}
     >
-      <IconButton
-        icon={theme === "light" ? Moon : Sun}
-        onClick={() => {
-          switchTheme(theme === "light" ? "dark" : "light");
+      <Checkbox
+        label="Dark mode"
+        checked={theme === "dark"}
+        defaultChecked={theme === "dark"}
+        onChange={(e) => {
+          switchTheme(e.target.checked ? "dark" : "light");
         }}
       />
-      <IconButton
-        icon={theme === "light" ? Moon : Sun}
-        mode="none"
-        onClick={() => {
-          switchTheme(theme === "light" ? "dark" : "light");
-        }}
-      />
-      <Button icon={Glob} isLoading={true}>
-        Connect
-      </Button>
-      <Button icon={Glob} disabled={true}>
-        Connect
-      </Button>
-      <Button icon={Glob} disabled={true}>
-        Connect
-      </Button>
-      <Button icon={Glob} size="small">
-        Connect
-      </Button>
-      <Button variant="secondary">Connect</Button>
-      <Button variant="tertiary">Connect</Button>
-      <LinkButton href="#">Test</LinkButton>
+      <Checkbox label="Dark mode" checked />
     </div>
   );
 };
