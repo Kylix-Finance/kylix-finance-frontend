@@ -1,14 +1,12 @@
 "use client";
-import styles from "./index.module.scss";
-import LinkButton from "~/components/ui/link-button";
-import Button from "~/components/ui/button";
-import IconButton from "~/components/ui/icon-button";
+import styles from "./Dashboard.module.scss";
+import LinkButton from "~/components/ui/link-button/LinkButton";
+import Button from "~/components/ui/button/‌Button";
+import IconButton from "~/components/ui/icon-button/IconButton";
 import { useThemeSwitcher } from "~/hooks/useThemeSwitcher";
-import DiscordIcon from "~/assets/icons/discord";
 import Glob from "~/assets/icons/glob";
 import Moon from "~/assets/icons/moon";
 import Sun from "~/assets/icons/sun";
-import { useEffect, useState } from "react";
 const Dashboard = () => {
   const { switchTheme, theme } = useThemeSwitcher();
 

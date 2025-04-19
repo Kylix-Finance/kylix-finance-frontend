@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef, ElementType } from "react";
 import DiscordIcon from "~/assets/icons/discord";
-import styles from "./index.module.scss";
+import styles from "./IconButton.module.scss";
 import clsx from "clsx";
 interface Props extends Omit<ComponentPropsWithRef<"button">, "children"> {
   mode?: "fill" | "none";

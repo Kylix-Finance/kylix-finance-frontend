@@ -1,5 +1,5 @@
 import { ComponentPropsWithRef, ReactNode, ElementType } from "react";
-import styles from "./index.module.scss";
+import styles from "./‌Button.module.scss";
 
 import clsx from "clsx";
 import Spinner from "~/components/loaders/spinner";

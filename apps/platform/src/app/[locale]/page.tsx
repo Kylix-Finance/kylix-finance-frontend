@@ -1,10 +1,16 @@
 import { redirect } from "~/i18n/navigation";
 import { Locale } from "~/types";
 
-export default function Home({ params }: { params: { locale: Locale } }) {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+
   redirect({
     href: "/dashboard",
-    locale: "en",
+    locale,
   });
   return null;
 }

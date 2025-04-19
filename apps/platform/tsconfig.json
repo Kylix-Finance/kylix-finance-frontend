@@ -18,6 +18,6 @@
     "./react-app-env.d.ts",
     ".next/types/**/*.ts",
     "../../global.d.ts"
-  ],
+, "src/containers/dashboard/.tsx"  ],
   "exclude": ["node_modules"]
 }

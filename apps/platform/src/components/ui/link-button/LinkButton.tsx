@@ -1,6 +1,6 @@
 // LinkButton.tsx
 import { ReactNode, AnchorHTMLAttributes } from "react";
-import styles from "./index.module.scss";
+import styles from "./LinkButton.module.scss";
 import { Link } from "~/i18n/navigation";
 import clsx from "clsx";
 
