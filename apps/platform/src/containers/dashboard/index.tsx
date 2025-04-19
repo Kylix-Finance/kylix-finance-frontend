@@ -29,6 +29,13 @@ const Dashboard = () => {
           switchTheme(theme === "light" ? "dark" : "light");
         }}
       />
+      <IconButton
+        icon={theme === "light" ? Moon : Sun}
+        mode="none"
+        onClick={() => {
+          switchTheme(theme === "light" ? "dark" : "light");
+        }}
+      />
       <Button icon={Glob} isLoading={true}>
         Connect
       </Button>
@@ -36,6 +43,9 @@ const Dashboard = () => {
         Connect
       </Button>
       <Button icon={Glob} disabled={true}>
+        Connect
+      </Button>
+      <Button icon={Glob} size="small">
         Connect
       </Button>
       <Button variant="secondary">Connect</Button>

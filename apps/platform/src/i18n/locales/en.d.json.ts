@@ -2,11 +2,11 @@
 // See: https://next-intl.dev/docs/workflows/typescript#messages-arguments
 
 declare const messages: {
-  Dashboard: {
-    test: "Hi";
-  };
-  Auth: {
-    inValidPassword: "Invalid password";
-  };
+  "Dashboard": {
+    "test": "Hi"
+  },
+  "Auth": {
+    "inValidPassword": "Invalid password"
+  }
 };
 export default messages;

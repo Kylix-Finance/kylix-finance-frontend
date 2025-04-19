@@ -1,6 +1,4 @@
 .container {
-  background-color: $color-icon-button-primary-bg;
-  border: 1px solid $color-icon-button-primary-border;
   border-radius: 9999px;
   color: $color-icon-button-primary-text;
   cursor: pointer;
@@ -13,25 +11,42 @@
   transition: all 0.2s ease-out;
 
   &:hover {
-    background-color: $color-icon-button-primary-bg-hover;
-    border: 1px solid $color-icon-button-primary-border-hover;
     color: $color-icon-button-primary-text-hover;
   }
   &:active {
-    background-color: $color-icon-button-primary-bg-active;
-    border: 1px solid $color-icon-button-primary-border-active;
     color: $color-icon-button-primary-text-active;
   }
   &:focus {
-    background-color: $color-icon-button-primary-bg-focus;
-    border: 1px solid $color-icon-button-primary-border-focus;
     color: $color-icon-button-primary-text-focus;
   }
   &:disabled {
-    background-color: $color-icon-button-primary-bg;
-    border: 1px solid $color-icon-button-primary-border-disabled;
     color: $color-icon-button-primary-text-disabled;
     cursor: not-allowed;
     pointer-events: none;
   }
+}
+.fill {
+  background-color: $color-icon-button-primary-bg;
+  border: 1px solid $color-icon-button-primary-border;
+
+  &:hover {
+    background-color: $color-icon-button-primary-bg-hover;
+    border: 1px solid $color-icon-button-primary-border-hover;
+  }
+  &:active {
+    background-color: $color-icon-button-primary-bg-active;
+    border: 1px solid $color-icon-button-primary-border-active;
+  }
+  &:focus {
+    background-color: $color-icon-button-primary-bg-focus;
+    border: 1px solid $color-icon-button-primary-border-focus;
+  }
+  &:disabled {
+    background-color: $color-icon-button-primary-bg;
+    border: 1px solid $color-icon-button-primary-border-disabled;
+  }
+}
+.none {
+  background-color: transparent;
+  border: 1px solid transparent;
 }
