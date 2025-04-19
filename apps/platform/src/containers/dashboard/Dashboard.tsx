@@ -1,13 +1,10 @@
 "use client";
 import styles from "./Dashboard.module.scss";
-import LinkButton from "~/components/ui/link-button/LinkButton";
-import Button from "~/components/ui/button/‌Button";
 import IconButton from "~/components/ui/icon-button/IconButton";
 import { useThemeSwitcher } from "~/hooks/useThemeSwitcher";
-import Glob from "~/assets/icons/glob";
 import Moon from "~/assets/icons/moon";
 import Sun from "~/assets/icons/sun";
-import { Checkbox } from "~/components/ui/checkbox";
+import { Sidebar } from "~/components/sidebar/Sidebar";
 const Dashboard = () => {
   const { switchTheme, theme } = useThemeSwitcher();
 
@@ -22,15 +19,13 @@ const Dashboard = () => {
         flexWrap: "wrap",
       }}
     >
-      <Checkbox
-        label="Dark mode"
-        checked={theme === "dark"}
-        defaultChecked={theme === "dark"}
-        onChange={(e) => {
-          switchTheme(e.target.checked ? "dark" : "light");
+      <Sidebar />
+      <IconButton
+        icon={theme === "light" ? Moon : Sun}
+        onClick={() => {
+          switchTheme(theme === "light" ? "dark" : "light");
         }}
       />
-      <Checkbox label="Dark mode" checked />
     </div>
   );
 };
