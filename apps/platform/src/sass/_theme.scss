@@ -257,6 +257,25 @@
   --color-tooltip-primary-bg-tail: var(--color-white);
   --color-tooltip-primary-text: var(--color-black);
 }
+
+@mixin alert-light {
+  --color-alert-bg: var(--color-white);
+  --color-alert-text: var(--color-neutral-600);
+  --color-alert-border-success: var(--color-semantic-success);
+  --color-alert-border-information: var(--color-semantic-info);
+  --color-alert-border-message: var(--color-semantic-info);
+  --color-alert-border-warning: var(--color-semantic-warning);
+  --color-alert-border-error: var(--color-semantic-error);
+}
+@mixin alert-dark {
+  --color-alert-bg: var(--color-black);
+  --color-alert-text: var(--color-neutral-200);
+    --color-alert-border-success: var(--color-semantic-success);
+  --color-alert-border-information: var(--color-semantic-info);
+  --color-alert-border-message: var(--color-semantic-info);
+  --color-alert-border-warning: var(--color-semantic-warning);
+  --color-alert-border-error: var(--color-semantic-error);
+}
 @mixin theme-light {
   @include buttons-light;
   @include link-button-light;
@@ -264,6 +283,7 @@
   @include checkbox-light;
   @include switch-light;
   @include tooltip-light;
+  @include alert-light;
   --color-black: #121212;
   --color-white: #ffffff;
 
@@ -349,6 +369,7 @@
   @include checkbox-dark;
   @include switch-dark;
   @include tooltip-dark;
+  @include alert-dark;
   --color-black: #121212;
   --color-white: #ffffff;
 

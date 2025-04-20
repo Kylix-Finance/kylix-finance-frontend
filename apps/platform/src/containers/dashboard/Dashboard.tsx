@@ -1,9 +1,32 @@
 "use client";
 
-import { Tooltip } from "~/components/ui/tooltip";
 import styles from "./Dashboard.module.scss";
+import { notify } from "~/components/ui/alert";
+import { useEffect } from "react";
 
 const Dashboard = () => {
+  useEffect(() => {
+    notify({
+      message: "Lorem ipsum dolor sit amet consectetur.",
+      title: "Information",
+      mode: "error",
+    });
+    notify({
+      message: "Lorem ipsum dolor sit amet consectetur.",
+      title: "Information",
+      mode: "message",
+    });
+    notify({
+      message: "Lorem ipsum dolor sit amet consectetur.",
+      title: "Information",
+      mode: "success",
+    });
+    notify({
+      message: "Lorem ipsum dolor sit amet consectetur.",
+      title: "Information",
+      mode: "warning",
+    });
+  }, []);
   return (
     <div
       className={styles.container}
@@ -14,11 +37,7 @@ const Dashboard = () => {
         justifyContent: "center",
         flexWrap: "wrap",
       }}
-    >
-      <Tooltip content="This is a tooltip" placement="auto" showArrow>
-        Hover me
-      </Tooltip>
-    </div>
+    ></div>
   );
 };
 export default Dashboard;
