@@ -39,19 +39,25 @@ export const Sidebar = () => {
   return (
     <div
       className={styles.container}
-      style={{ width: isExpanded ? "244px" : "78px" }}
+      style={{ width: isExpanded ? "244px" : "84px" }}
     >
-      <div className={styles.sidebar}>
-        <div className={styles.logo_wrapper}>
-          <LogoDot className={styles.logo_dot} />
-          <Logo className={styles.logo} />
-        </div>
+      <div className={styles.expand_wrapper}>
         <SquareHalf
           className={styles.expand_square}
           onClick={() => {
             setIsExpanded((o) => !o);
           }}
         />
+      </div>
+      <div className={styles.sidebar}>
+        <div className={styles.logo_wrapper}>
+          <LogoDot
+            className={styles.logo_dot}
+            style={{ opacity: isExpanded ? 1 : 0 }}
+          />
+          <Logo className={styles.logo} />
+        </div>
+
         <div className={styles.menu}>
           <ul className={styles.menu_list}>
             {menuItems.map((item, index) => (
