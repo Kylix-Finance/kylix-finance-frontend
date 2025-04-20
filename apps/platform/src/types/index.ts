@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { ReactNode } from "react";
 
 export type Middleware = (req: NextRequest) => Promise<NextResponse | void>;
 export type Locale = "en" | "se" | "ar";
@@ -20,3 +21,8 @@ export type NotificationParams = {
     message: string;
     title: string;
 };
+
+export interface ButtonGroupTab<T> {
+    content: ReactNode;
+    value: T;
+}

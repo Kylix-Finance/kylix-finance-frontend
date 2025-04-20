@@ -1,16 +1,23 @@
-import { Dispatch, ReactNode, SetStateAction, useId } from "react";
+import { useId, useState } from "react";
 import styles from "./ButtonGroup.module.scss";
 import { motion } from "motion/react";
 import clsx from "clsx";
+import { ButtonGroupTab } from "~/types";
 
-interface Props {
-  tabs: ReactNode[];
-  tab: number;
-  setTab: Dispatch<SetStateAction<number>>;
+interface Props<T> {
+  tabs: ButtonGroupTab<T>[];
   fullWidth?: boolean;
+  defaultTab?: T;
+  onItemClick?: (value: T) => void;
 }
 
-const ButtonGroup = ({ tabs, setTab, tab, fullWidth }: Props) => {
+function ButtonGroup<T>({
+  tabs,
+  defaultTab,
+  fullWidth,
+  onItemClick,
+}: Props<T>) {
+  const [activeTab, setActiveTab] = useState<T | undefined>(defaultTab);
   const id = useId();
   return (
     <div
@@ -22,13 +29,16 @@ const ButtonGroup = ({ tabs, setTab, tab, fullWidth }: Props) => {
       {tabs.map((item, index) => (
         <button
           className={clsx(styles.button, {
-            [styles.button_active]: tab === index,
+            [styles.button_active]: activeTab === item.value,
           })}
           key={index}
-          onClick={() => setTab(index)}
+          onClick={() => {
+            setActiveTab(item.value);
+            onItemClick?.(item.value);
+          }}
         >
-          {item}
-          {tab === index && (
+          {item.content}
+          {activeTab === item.value && (
             <motion.div
               layout
               layoutId={`button-group-${id}`}
@@ -39,6 +49,6 @@ const ButtonGroup = ({ tabs, setTab, tab, fullWidth }: Props) => {
       ))}
     </div>
   );
-};
+}
 
 export default ButtonGroup;
