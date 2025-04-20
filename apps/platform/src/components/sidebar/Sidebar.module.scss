@@ -33,20 +33,13 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.expand_wrapper {
-  position: absolute;
-  right: 0px;
-  top: 20px;
-  padding-top: 8px;
-  z-index: 10;
-  height: 40px;
-  width: 60px;
-}
-
 .expand_square {
+  position: absolute;
+  top: 28px;
+  right: 30px;
+  z-index: 10;
   width: 24px;
   height: 24px;
-  margin-left: 8px;
   color: var(--color-chart-primary);
   cursor: pointer;
 }

@@ -41,14 +41,13 @@ export const Sidebar = () => {
       className={styles.container}
       style={{ width: isExpanded ? "244px" : "84px" }}
     >
-      <div className={styles.expand_wrapper}>
-        <SquareHalf
-          className={styles.expand_square}
-          onClick={() => {
-            setIsExpanded((o) => !o);
-          }}
-        />
-      </div>
+      <SquareHalf
+        className={styles.expand_square}
+        onClick={() => {
+          setIsExpanded((o) => !o);
+        }}
+      />
+
       <div className={styles.sidebar}>
         <div className={styles.logo_wrapper}>
           <LogoDot
