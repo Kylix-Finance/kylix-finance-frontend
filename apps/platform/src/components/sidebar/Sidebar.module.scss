@@ -22,4 +22,26 @@
   padding: 16px 0;
   overflow-y: auto;
   flex-grow: 1;
+
+  > li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid $color-chart-primary;
+    font-family: Inter;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0%;
+    background-color: rgba(86, 221, 180, 0.2);
+    color: $color-chart-primary;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
 }

@@ -1,5 +1,6 @@
 import { Logo } from "~/assets/svgs";
 import styles from "./Sidebar.module.scss";
+import Home from "~/assets/icons/home";
 
 export const Sidebar = () => {
   return (
@@ -8,7 +9,10 @@ export const Sidebar = () => {
         <Logo className={styles.logo} />
         <div className={styles.menu}>
           <ul className={styles.menu_list}>
-            <li>Dashboard</li>
+            <li>
+              {" "}
+              <Home className={styles.icon} /> Dashboard
+            </li>
             <li>Settings</li>
             <li>Profile</li>
             <li>Notifications</li>
