@@ -289,6 +289,7 @@
 
   --color-button-group-bg-item-hover: var(--color-neutral-50);
   --color-button-group-text-item: var(--color-neutral-400);
+  --color-button-group-text-item-active: var(--color-primary);
 }
 
 @mixin button-group-dark {
@@ -305,6 +306,7 @@
 
   --color-button-group-bg-item-hover: var(--color-neutral-700);
   --color-button-group-text-item: var(--color-neutral-400);
+  --color-button-group-text-item-active: var(--color-primary);
 }
 
 @mixin theme-light {
@@ -316,7 +318,6 @@
   @include tooltip-light;
   @include alert-light;
   @include button-group-light;
-
 
   --color-black: #121212;
   --color-white: #ffffff;
@@ -412,7 +413,7 @@
   --color-primary-light: #78d9d1;
   --color-primary-dark: #2a3a3f;
 
-  --color-accent-primary-element: #56DDB433;
+  --color-accent-primary-element: #56ddb433;
   --color-accent-secondary-element: #96ffdf26;
   --color-accent-primary: #1b2e2c;
   --color-accent-primary-light: #212f2e;
