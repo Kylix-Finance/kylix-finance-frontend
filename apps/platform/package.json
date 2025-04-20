@@ -19,6 +19,7 @@
     "start:production": "next start"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.27.7",
     "@repo/onchain": "workspace:*",
     "@repo/onchain-utils": "workspace:*",
     "@repo/shared": "workspace:*",

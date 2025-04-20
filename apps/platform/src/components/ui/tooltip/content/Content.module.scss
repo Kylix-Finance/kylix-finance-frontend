@@ -1,0 +1,28 @@
+.container {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 8px;
+  background-color: $color-tooltip-primary-bg;
+  padding: $spacing-4 $spacing-3;
+  color: $color-tooltip-primary-text;
+  @include font($font-body-compact);
+}
+.tail {
+  position: absolute;
+
+  background: inherit;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.tail_content {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  background-color: inherit;
+  transform: rotate(45deg);
+  visibility: visible;
+}

@@ -15,10 +15,6 @@ body {
 }
 
 :root {
-
-
-
-
   @include theme-light();
   &[data-theme="light"] {
     @include theme-light();

@@ -247,12 +247,23 @@
   --color-switch-primary-bg-disabled: var(--color-neutral-800);
   --color-switch-primary-bg-checked: var(--color-primary);
 }
+@mixin tooltip-light {
+  --color-tooltip-primary-bg: var(--color-black);
+  --color-tooltip-primary-bg-tail: var(--color-black);
+  --color-tooltip-primary-text: var(--color-white);
+}
+@mixin tooltip-dark {
+  --color-tooltip-primary-bg: var(--color-white);
+  --color-tooltip-primary-bg-tail: var(--color-white);
+  --color-tooltip-primary-text: var(--color-black);
+}
 @mixin theme-light {
   @include buttons-light;
   @include link-button-light;
   @include icon-button-light;
   @include checkbox-light;
   @include switch-light;
+  @include tooltip-light;
   --color-black: #121212;
   --color-white: #ffffff;
 
@@ -337,7 +348,7 @@
   @include icon-button-dark;
   @include checkbox-dark;
   @include switch-dark;
-
+  @include tooltip-dark;
   --color-black: #121212;
   --color-white: #ffffff;
 
