@@ -1,5 +1,5 @@
 "use client";
-import { Logo } from "~/assets/svgs";
+import { Logo, LogoDot } from "~/assets/svgs";
 import styles from "./Sidebar.module.scss";
 import Home from "~/assets/icons/home";
 import clsx from "clsx";
@@ -11,6 +11,8 @@ import Stack from "~/assets/icons/stack";
 import { usePathname } from "next/navigation";
 import Bank from "~/assets/icons/bank";
 import Link from "next/link";
+import SquareHalf from "~/assets/icons/square-half";
+import { useState } from "react";
 
 type MenuItem = {
   path: string;
@@ -32,10 +34,24 @@ const menuItems: MenuItem[] = [
 export const Sidebar = () => {
   const pathname = usePathname();
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
-    <div className={styles.container}>
-      <div>
-        <Logo className={styles.logo} />
+    <div
+      className={styles.container}
+      style={{ width: isExpanded ? "244px" : "78px" }}
+    >
+      <div className={styles.sidebar}>
+        <div className={styles.logo_wrapper}>
+          <LogoDot className={styles.logo_dot} />
+          <Logo className={styles.logo} />
+        </div>
+        <SquareHalf
+          className={styles.expand_square}
+          onClick={() => {
+            setIsExpanded((o) => !o);
+          }}
+        />
         <div className={styles.menu}>
           <ul className={styles.menu_list}>
             {menuItems.map((item, index) => (
