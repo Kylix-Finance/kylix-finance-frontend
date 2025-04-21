@@ -17,6 +17,7 @@ import { IconButton } from "../ui/icon-button";
 import Discord from "~/assets/icons/discord";
 import Telegram from "~/assets/icons/telegram";
 import X from "~/assets/icons/x";
+import { motion } from "framer-motion";
 
 type MenuItem = {
   path: string;
@@ -86,21 +87,28 @@ export const Sidebar = () => {
           </ul>
         </div>
       </div>
-      <ul
-        className={styles.socials_container}
-        style={{ flexDirection: isExpanded ? "row-reverse" : "column-reverse" }}
-      >
-        {socialItems.map((item, index) => (
-          <Link
-            href={item.path}
-            key={index}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <IconButton icon={item.icon} />
-          </Link>
-        ))}
-      </ul>
+      <motion.ul className={styles.socials_container}>
+        {socialItems.map((item, index) => {
+          const position = index * 52; // 44px (icon size) + 8px (gap)
+          return (
+            <motion.div
+              key={index}
+              initial={false}
+              animate={{
+                x: isExpanded ? position + -1 : 0,
+                y: isExpanded ? 0 : position * -1,
+              }}
+              transition={{
+                duration: 0.3,
+              }}
+            >
+              <Link href={item.path} target="_blank" rel="noopener noreferrer">
+                <IconButton icon={item.icon} />
+              </Link>
+            </motion.div>
+          );
+        })}
+      </motion.ul>
     </div>
   );
 };
