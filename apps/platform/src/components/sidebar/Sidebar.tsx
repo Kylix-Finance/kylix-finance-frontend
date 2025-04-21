@@ -37,10 +37,10 @@ const menuItems: MenuItem[] = [
 ];
 
 const socialItems = [
-  { path: "https://instagram.com/kylix", label: "Instagram", icon: Home },
-  { path: "https://twitter.com/kylix", label: "Twitter", icon: X },
   { path: "https://discord.gg/kylix", label: "Discord", icon: Discord },
+  { path: "https://twitter.com/kylix", label: "Twitter", icon: X },
   { path: "https://t.me/kylix", label: "Telegram", icon: Telegram },
+  { path: "mailto:info@kylix.com", label: "Email", icon: X },
 ];
 
 export const Sidebar = () => {
