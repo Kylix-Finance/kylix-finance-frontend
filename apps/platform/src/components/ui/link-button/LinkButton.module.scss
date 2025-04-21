@@ -6,7 +6,7 @@
   user-select: none;
   outline: none;
 
-  @include font($font-btn);
+  @include font($font-button);
 
   transition: all 0.2s ease-in-out;
 

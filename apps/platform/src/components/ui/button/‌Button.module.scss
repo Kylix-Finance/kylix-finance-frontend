@@ -172,7 +172,7 @@
 // size
 .default {
   padding: $spacing-2_5 $spacing-5;
-  @include font($font-btn);
+  @include font($font-button);
   gap: $spacing-2;
 }
 .small {
