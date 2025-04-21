@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 export type Middleware = (req: NextRequest) => Promise<NextResponse | void>;
 export type Locale = "en" | "se" | "ar";
 export type Theme = "light" | "dark" | "system";
-
+export type VoidFunction = () => void
 export interface DataAttributes {
     [key: `data-${string}`]: string | number | boolean;
 }
@@ -25,4 +25,16 @@ export type NotificationParams = {
 export interface ButtonGroupTab<T> {
     content: ReactNode;
     value: T;
+}
+
+export interface ModalProps {
+    isOpen: boolean;
+    onClose: VoidFunction;
+    isPortal?: boolean;
+    children: ReactNode;
+    title?: string
+    hasCloseButton?: boolean;
+    closeOnClickOutside?: boolean;
+    desktopClassName?: string;
+    mobileClassName?: string;
 }

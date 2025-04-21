@@ -9,6 +9,8 @@ import { IconButton } from "~/components/ui/icon-button";
 import Swap from "~/assets/icons/swap";
 import { ButtonGroupTab, Theme } from "~/types";
 import { useThemeSwitcher } from "~/hooks/useThemeSwitcher";
+import Modal from "~/components/ui/modal/Modal";
+import { Button } from "~/components/ui/button";
 const tabs: ButtonGroupTab<Theme>[] = [
   {
     content: "Auto",
@@ -25,9 +27,11 @@ const tabs: ButtonGroupTab<Theme>[] = [
 ];
 const Dashboard = () => {
   const { theme, switchTheme } = useThemeSwitcher();
+  const [isOpen, setIsOpen] = useState(false);
   const handleItemClick = (theme: Theme) => {
     switchTheme(theme);
   };
+  const toggleModal = () => setIsOpen((prev) => !prev);
   return (
     <div
       className={styles.container}
@@ -44,7 +48,14 @@ const Dashboard = () => {
         defaultTab={theme}
         onItemClick={handleItemClick}
       />
-      <IconButton icon={Swap} />
+      <Button onClick={() => setIsOpen(true)}>Open modal</Button>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+
+      >
+        <div>Hi</div>
+      </Modal>
     </div>
   );
 };

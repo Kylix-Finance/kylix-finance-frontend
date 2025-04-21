@@ -20,6 +20,7 @@ export default function Layout({ children }: PropsWithChildren) {
             <NextIntlClientProvider>
               {children}
               <ToastContainer />
+              <div id="modal"></div>
             </NextIntlClientProvider>
           </ReactQueryProvider>
         </ThemeProvider>
