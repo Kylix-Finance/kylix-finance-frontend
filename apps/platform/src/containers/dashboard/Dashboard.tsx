@@ -11,6 +11,10 @@ import { ButtonGroupTab, Theme } from "~/types";
 import { useThemeSwitcher } from "~/hooks/useThemeSwitcher";
 import Modal from "~/components/ui/modal/Modal";
 import { Button } from "~/components/ui/button";
+import {
+  ConnectButton,
+  DisconnectButton,
+} from "~/components/modal/wallet-modal";
 const tabs: ButtonGroupTab<Theme>[] = [
   {
     content: "Auto",
@@ -31,7 +35,6 @@ const Dashboard = () => {
   const handleItemClick = (theme: Theme) => {
     switchTheme(theme);
   };
-  const toggleModal = () => setIsOpen((prev) => !prev);
   return (
     <div
       className={styles.container}
@@ -48,14 +51,8 @@ const Dashboard = () => {
         defaultTab={theme}
         onItemClick={handleItemClick}
       />
-      <Button onClick={() => setIsOpen(true)}>Open modal</Button>
-      <Modal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-
-      >
-        <div>Hi</div>
-      </Modal>
+      <DisconnectButton />
+      <ConnectButton />
     </div>
   );
 };

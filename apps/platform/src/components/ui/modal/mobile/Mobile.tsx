@@ -1,3 +1,5 @@
+"use client";
+
 import { ModalProps } from "~/types";
 import styles from "./Mobile.module.scss";
 import { Drawer } from "vaul";
@@ -6,7 +8,6 @@ const Mobile = ({
   children,
   isOpen,
   onClose,
-  closeOnClickOutside,
   title,
   mobileClassName,
 }: ModalProps) => {

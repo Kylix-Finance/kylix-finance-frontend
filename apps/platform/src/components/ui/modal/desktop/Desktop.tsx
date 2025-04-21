@@ -1,3 +1,5 @@
+"use client";
+
 import { ModalProps } from "~/types";
 import styles from "./Desktop.module.scss";
 import { useOnClickOutside } from "usehooks-ts";
@@ -34,7 +36,7 @@ const Desktop = ({
             duration: 0.12,
             ease: "easeInOut",
           }}
-          className={styles.overlay}
+          className={styles.overly}
         >
           <div ref={ref} className={clsx(styles.container, desktopClassName)}>
             {(title || hasCloseButton) && (

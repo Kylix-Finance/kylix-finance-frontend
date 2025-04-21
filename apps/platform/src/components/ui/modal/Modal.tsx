@@ -1,3 +1,4 @@
+"use client";
 import { useLockScroll } from "~/hooks/useLockScroll";
 import { ModalProps } from "~/types";
 import { useWindowSize } from "usehooks-ts";
