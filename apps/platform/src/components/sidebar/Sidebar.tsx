@@ -13,6 +13,10 @@ import Bank from "~/assets/icons/bank";
 import Link from "next/link";
 import SquareHalf from "~/assets/icons/square-half";
 import { useState } from "react";
+import { IconButton } from "../ui/icon-button";
+import Discord from "~/assets/icons/discord";
+import Telegram from "~/assets/icons/telegram";
+import X from "~/assets/icons/x";
 
 type MenuItem = {
   path: string;
@@ -29,6 +33,13 @@ const menuItems: MenuItem[] = [
   { path: "/loans", label: "Loans", icon: Coins },
   { path: "/stake", label: "Stake", icon: Stack },
   { path: "/governance", label: "Governance", icon: Bank, disabled: true },
+];
+
+const socialItems = [
+  { path: "https://instagram.com/kylix", label: "Instagram", icon: Home },
+  { path: "https://twitter.com/kylix", label: "Twitter", icon: X },
+  { path: "https://discord.gg/kylix", label: "Discord", icon: Discord },
+  { path: "https://t.me/kylix", label: "Telegram", icon: Telegram },
 ];
 
 export const Sidebar = () => {
@@ -75,6 +86,21 @@ export const Sidebar = () => {
           </ul>
         </div>
       </div>
+      <ul
+        className={styles.socials_container}
+        style={{ flexDirection: isExpanded ? "row-reverse" : "column-reverse" }}
+      >
+        {socialItems.map((item, index) => (
+          <Link
+            href={item.path}
+            key={index}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconButton icon={item.icon} />
+          </Link>
+        ))}
+      </ul>
     </div>
   );
 };
