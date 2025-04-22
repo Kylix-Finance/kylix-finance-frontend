@@ -1,0 +1,52 @@
+.overlay {
+  background-color: rgba(#121212, 0.1);
+  z-index: 2147483620;
+  inset: 0px;
+  backdrop-filter: blur($backdrop_blur);
+  position: fixed;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  z-index: 2147483621;
+  position: fixed;
+  right: 0;
+  bottom: 0px !important;
+  height: max-content;
+  min-height: 25%;
+  max-height: 90%;
+  border-radius: 20px 20px 0 0;
+  background-color: $color-modal-bg;
+  width: 100%;
+  padding: 0 $spacing-6 $spacing-1;
+  &:focus {
+    outline: none;
+  }
+}
+.handle {
+  flex-shrink: 0;
+  width: 56px;
+  height: 3px;
+  margin: 24px auto 0;
+  border-radius: 20px;
+  background-color: $color-neutral-200;
+}
+.title {
+  color: $color-modal-title;
+  @include font($font-heading-4);
+}
+.children {
+  height: 100%;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block: $spacing-4;
+}
+.close_button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}

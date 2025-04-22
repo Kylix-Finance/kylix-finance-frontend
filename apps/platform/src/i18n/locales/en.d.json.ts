@@ -7,6 +7,11 @@ declare const messages: {
   },
   "Auth": {
     "inValidPassword": "Invalid password"
+  },
+  "WalletModal": {
+    "title": "Connect a wallet",
+    "connectButton": "Connect",
+    "disconnectButton": "Disconnect"
   }
 };
 export default messages;

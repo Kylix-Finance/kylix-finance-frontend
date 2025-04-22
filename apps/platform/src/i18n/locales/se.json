@@ -1,8 +1,0 @@
-{
-  "Dashboard": {
-    "test": "Hej"
-  },
-  "Auth": {
-    "inValidPassword": "Felaktigt lösenord"
-  }
-}
