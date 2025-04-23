@@ -1,11 +1,12 @@
 import Sun from "~/assets/icons/sun";
 import { ButtonGroup } from "../ui/button-group";
 import Moon from "~/assets/icons/moon";
+import { useTheme } from "~/hooks/useTheme";
 
 const tabs = [
   {
     content: "Auto",
-    value: "auto" as const,
+    value: "system" as const,
   },
   {
     content: <Sun />,
@@ -18,5 +19,9 @@ const tabs = [
 ];
 
 export const ThemeSwitcher = () => {
-  return <ButtonGroup tabs={tabs} activeTab="auto" setActiveTab={(e) => e} />;
+  const { theme, switchTheme } = useTheme();
+
+  return (
+    <ButtonGroup tabs={tabs} activeTab={theme} setActiveTab={switchTheme} />
+  );
 };

@@ -8,7 +8,7 @@ interface Props<T extends ButtonGroupTab> {
   tabs: T[];
   fullWidth?: boolean;
   activeTab: T["value"];
-  setActiveTab: React.Dispatch<React.SetStateAction<T["value"]>>;
+  setActiveTab: (value: T["value"]) => void;
 }
 
 function ButtonGroup<T extends ButtonGroupTab>({
