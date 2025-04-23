@@ -19,6 +19,7 @@ import Telegram from "~/assets/icons/telegram";
 import X from "~/assets/icons/x";
 import { motion } from "framer-motion";
 import { LogoDot } from "./LogoDot";
+import Mail from "~/assets/icons/mail";
 
 type MenuItem = {
   path: string;
@@ -41,7 +42,7 @@ const socialItems = [
   { path: "https://discord.gg/kylix", label: "Discord", icon: Discord },
   { path: "https://twitter.com/kylix", label: "Twitter", icon: X },
   { path: "https://t.me/kylix", label: "Telegram", icon: Telegram },
-  { path: "mailto:info@kylix.com", label: "Email", icon: X },
+  { path: "mailto:info@kylix.com", label: "Email", icon: Mail },
 ];
 
 export const Sidebar = () => {

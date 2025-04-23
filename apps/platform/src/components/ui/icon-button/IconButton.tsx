@@ -7,8 +7,13 @@ interface Props extends Omit<ComponentPropsWithRef<"button">, "children"> {
   icon: ElementType;
 }
 
-const IconButton = ({ mode = "fill", icon: Icon, ...rest }: Props) => {
-  const className = clsx(styles.container, {
+const IconButton = ({
+  mode = "fill",
+  icon: Icon,
+  className: containerClassName,
+  ...rest
+}: Props) => {
+  const className = clsx(styles.container, containerClassName, {
     [styles.fill]: mode === "fill",
     [styles.none]: mode === "none",
   });
