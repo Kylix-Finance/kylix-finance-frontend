@@ -1,0 +1,71 @@
+.avatar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  cursor: pointer;
+
+  [data-theme="light"] & {
+    border: 1px solid $color-neutral-200;
+  }
+
+  [data-theme="dark"] & {
+    border: 1px solid $color-neutral-900;
+  }
+
+  &[data-size="small"] {
+    width: 44px;
+    height: 44px;
+
+    [data-theme="light"] & {
+      background-color: $color-white;
+    }
+
+    [data-theme="dark"] & {
+      background-color: $color-neutral-900;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  &[data-size="large"] {
+    width: 120px;
+    height: 120px;
+
+    [data-theme="light"] & {
+      background-color: $color-neutral-50;
+    }
+
+    [data-theme="dark"] & {
+      background-color: $color-neutral-700;
+    }
+
+    .icon {
+      width: 72px;
+      height: 72px;
+    }
+  }
+}
+
+.icon {
+  [data-theme="light"] & {
+    color: $color-neutral-400;
+  }
+
+  [data-theme="dark"] & {
+    color: $color-neutral-200;
+  }
+}
+
+.badge {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: #dbdbdb;
+  border-radius: 100px;
+}
