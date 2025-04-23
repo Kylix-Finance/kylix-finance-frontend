@@ -14,7 +14,6 @@ interface Props {
   children: ReactNode;
   defaultTab: string;
 }
-
 const ChartContainer = ({
   title,
   value,
@@ -32,11 +31,13 @@ const ChartContainer = ({
             {formatBigNumbers(value.bigNumStr, value.decimal)}
           </p>
         </div>
-        <ButtonGroup
-          tabs={tabs}
-          onItemClick={onItemClick}
-          defaultTab={defaultTab}
-        />
+        <div className={styles.tabs_container}>
+          <ButtonGroup
+            tabs={tabs}
+            onItemClick={onItemClick}
+            defaultTab={defaultTab}
+          />
+        </div>
       </div>
       <div className={styles.children}>{children}</div>
     </div>

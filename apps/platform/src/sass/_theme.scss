@@ -356,10 +356,15 @@
   //dummy colors
   --color-chart-container-title: var(--color-neutral-200);
   --color-chart-container-value: var(--color-white);
+  --color-chat-container-bg: var(--color-accent-primary-component);
+  --color-chat-container-border: var(--color-neutral-700);
 }
 @mixin chart-container-dark {
   --color-chart-container-title: var(--color-neutral-200);
   --color-chart-container-value: var(--color-white);
+  --color-chart-container-value: var(--color-white);
+  --color-chat-container-bg: var(--color-accent-primary-component);
+  --color-chat-container-border: var(--color-neutral-700);
 }
 @mixin theme-light {
   @include buttons-light;
