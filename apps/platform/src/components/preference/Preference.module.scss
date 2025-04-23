@@ -1,0 +1,16 @@
+.preference {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 400px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.copy {
+  cursor: pointer;
+}

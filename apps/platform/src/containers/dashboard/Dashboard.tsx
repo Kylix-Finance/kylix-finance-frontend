@@ -5,11 +5,13 @@ import styles from "./Dashboard.module.scss";
 import TotalLocked from "./total-locked/TotalLocked";
 import TotalSupplyBorrow from "./total-supply-borrow/TotalSupplyBorrow";
 import Table from "./table/Table";
+import Preference from "~/components/preference";
 
 const Dashboard = () => {
   return (
     <PageLayout title="Dashboard">
       <div className={styles.container}>
+        <Preference />
         <div className={styles.total_locked}>
           <TotalLocked />
         </div>

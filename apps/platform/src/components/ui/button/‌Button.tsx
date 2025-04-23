@@ -9,6 +9,7 @@ interface Props extends ComponentPropsWithRef<"button"> {
   isLoading?: boolean;
   icon?: ElementType;
   containerClassName?: string;
+  fullWidth?: boolean;
 }
 
 const Button = ({
@@ -16,6 +17,7 @@ const Button = ({
   size = "default",
   isLoading,
   icon: Icon,
+  fullWidth,
   containerClassName,
   ...rest
 }: Props) => {
@@ -26,6 +28,7 @@ const Button = ({
     [styles.small]: size === "small",
     [styles.default]: size === "default",
     [styles.large]: size === "large",
+    [styles.full_width]: fullWidth,
     [styles.loading]: isLoading,
   });
   const iconClassName = clsx({
