@@ -67,7 +67,7 @@
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0%;
-  color: #697586;
+  color: var(--color-neutral-400);
   cursor: pointer;
   &:hover {
     background-color: $color-sidebar-menu-bg-hover;
