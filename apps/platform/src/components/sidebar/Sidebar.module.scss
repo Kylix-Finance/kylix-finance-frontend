@@ -1,13 +1,12 @@
 .container {
-  border-right: 1px solid var(--color-neutral-700);
+  border-right: 1px solid $color-sidebar-border;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 244px;
   height: 100vh;
-  background-color: rgba(30, 30, 30, 0.5);
+  background-color: $color-sidebar-bg;
   backdrop-filter: blur(15px);
-  border-right: 1px solid var(--sidebar-border);
   padding: 24px 16px;
   position: relative;
   overflow: hidden;
@@ -41,7 +40,7 @@
   z-index: 10;
   width: 24px;
   height: 24px;
-  color: var(--color-chart-primary);
+  color: $color-sidebar-primary;
   cursor: pointer;
 }
 
@@ -71,21 +70,21 @@
   color: var(--color-neutral-400);
   cursor: pointer;
   &:hover {
-    background-color: #2a2a2a;
+    background-color: $color-sidebar-menu-bg-hover;
   }
 }
 .active_menu_item {
-  background-color: rgba(86, 221, 180, 0.2);
-  color: $color-chart-primary;
-  border: 1px solid $color-chart-primary;
+  background-color: $color-sidebar-menu-bg;
+  color: $color-sidebar-primary;
+  border: 1px solid $color-sidebar-primary;
   font-weight: 600;
   &:hover {
-    background-color: rgba(86, 221, 180, 0.2);
+    background-color: $color-sidebar-menu-bg;
   }
 }
 
 .disabled_menu_item {
-  color: var(--color-neutral-700);
+  color: $color-sidebar-menu-disabled;
   cursor: not-allowed;
   pointer-events: none;
   &:hover {
