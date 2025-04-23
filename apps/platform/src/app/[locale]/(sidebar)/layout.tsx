@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import SidebarLayout from "~/layouts/SidebarLayout";
+import SidebarLayout from "~/layouts/sidebar-layout";
 
 export const metadata = {
   title: "Next.js",

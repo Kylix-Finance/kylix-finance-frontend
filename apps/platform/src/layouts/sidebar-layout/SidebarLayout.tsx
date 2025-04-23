@@ -1,17 +1,19 @@
 import { ReactNode } from "react";
+import Sidebar from "~/components/sidebar";
+import styles from "./SidebarLayout.module.scss";
 
 interface Props {
   children: ReactNode;
 }
 
-const SidebarLayout = ({ children }: Props) => {
+export const SidebarLayout = ({ children }: Props) => {
   return (
-    <div style={{ position: "relative" }}>
+    <div className={styles.container}>
+      <Sidebar />
+
       {/* <Background /> */}
 
       <div style={{ position: "relative", zIndex: 10 }}>{children}</div>
     </div>
   );
 };
-
-export default SidebarLayout;
