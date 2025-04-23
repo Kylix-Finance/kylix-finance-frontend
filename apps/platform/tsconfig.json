@@ -17,7 +17,8 @@
     "./sass.d.ts",
     "./react-app-env.d.ts",
     ".next/types/**/*.ts",
-    "../../global.d.ts"
-, "src/containers/dashboard/.tsx"  ],
+    "../../global.d.ts",
+    "src/containers/dashboard/.tsx"
+  ],
   "exclude": ["node_modules"]
 }

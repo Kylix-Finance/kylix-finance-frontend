@@ -1,1 +1,1 @@
-export { default as TooltipContent } from "./Content"
+export { default as TooltipContent } from "./Content";

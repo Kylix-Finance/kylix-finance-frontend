@@ -1,1 +1,1 @@
-export { default as TooltipTrigger } from "./Trigger"
+export { default as TooltipTrigger } from "./Trigger";
