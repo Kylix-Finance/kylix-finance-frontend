@@ -13,7 +13,7 @@ export const SidebarLayout = ({ children }: Props) => {
 
       {/* <Background /> */}
 
-      <div style={{ position: "relative", zIndex: 10 }}>{children}</div>
+      <div className={styles.content}>{children}</div>
     </div>
   );
 };

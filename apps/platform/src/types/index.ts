@@ -24,9 +24,9 @@ export type NotificationParams = {
     title: string;
 };
 
-export interface ButtonGroupTab<T> {
+export interface ButtonGroupTab<T = string | number> {
     content: ReactNode;
-    value: T;
+    value: T extends string | number ? T : string | number;
 }
 
 export interface ModalProps {

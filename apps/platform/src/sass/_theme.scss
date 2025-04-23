@@ -345,7 +345,12 @@
   --color-sidebar-menu-disabled: var(--color-neutral-700);
   --color-sidebar-dot-logo-stroke: var(--color-neutral-900);
 }
-
+@mixin page-layout-light {
+  --color-page-layout-title: var(--color-neutral-700);
+}
+@mixin page-layout-dark {
+  --color-page-layout-title: var(--color-white);
+}
 @mixin theme-light {
   @include buttons-light;
   @include link-button-light;
@@ -357,6 +362,7 @@
   @include button-group-light;
   @include modal-light;
   @include sidebar-light;
+  @include page-layout-light;
   --color-black: #121212;
   --color-white: #ffffff;
 
@@ -450,6 +456,8 @@
   @include button-group-dark;
   @include modal-dark;
   @include sidebar-dark;
+  @include page-layout-dark;
+
   --color-black: #121212;
   --color-white: #ffffff;
 

@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-6;
+    display: flex;
+    flex-direction: column;
+    padding-inline: $spacing-8;
+}
+.title {
+    color: $color-page-layout-title;
+  @include font($font-heading-1);
+}
