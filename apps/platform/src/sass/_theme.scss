@@ -351,6 +351,16 @@
 @mixin page-layout-dark {
   --color-page-layout-title: var(--color-white);
 }
+
+@mixin chart-container-light {
+  //dummy colors
+  --color-chart-container-title: var(--color-neutral-200);
+  --color-chart-container-value: var(--color-white);
+}
+@mixin chart-container-dark {
+  --color-chart-container-title: var(--color-neutral-200);
+  --color-chart-container-value: var(--color-white);
+}
 @mixin theme-light {
   @include buttons-light;
   @include link-button-light;
@@ -363,6 +373,7 @@
   @include modal-light;
   @include sidebar-light;
   @include page-layout-light;
+  @include chart-container-light;
   --color-black: #121212;
   --color-white: #ffffff;
 
@@ -457,6 +468,7 @@
   @include modal-dark;
   @include sidebar-dark;
   @include page-layout-dark;
+  @include chart-container-dark;
 
   --color-black: #121212;
   --color-white: #ffffff;

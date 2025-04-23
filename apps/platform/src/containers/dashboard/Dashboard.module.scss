@@ -3,30 +3,23 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 30% 70%;
   grid-template-areas:
     "total_locked total_supply_borrow"
     "table_container table_container";
-  gap: 1rem;
+  gap: $spacing-6;
 }
 
 .total_locked {
   grid-area: total_locked;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  padding: 1rem;
+  height: max-content;
 }
 
 .total_supply_borrow {
   grid-area: total_supply_borrow;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  padding: 1rem;
+  height: max-content;
 }
 
 .table_container {
   grid-area: table_container;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  padding: 1rem;
+  height: max-content;
 }

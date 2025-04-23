@@ -2,14 +2,23 @@
 
 import PageLayout from "~/layouts/page/PageLayout";
 import styles from "./Dashboard.module.scss";
+import TotalLocked from "./total-locked/TotalLocked";
+import TotalSupplyBorrow from "./total-supply-borrow/TotalSupplyBorrow";
+import Table from "./table/Table";
 
 const Dashboard = () => {
   return (
     <PageLayout title="Dashboard">
       <div className={styles.container}>
-        <div className={styles.total_locked}>Chart 1</div>
-        <div className={styles.total_supply_borrow}>Chart 2</div>
-        <div className={styles.table_container}>table</div>
+        <div className={styles.total_locked}>
+          <TotalLocked />
+        </div>
+        <div className={styles.total_supply_borrow}>
+          <TotalSupplyBorrow />
+        </div>
+        <div className={styles.table_container}>
+          <Table />
+        </div>
       </div>
     </PageLayout>
   );

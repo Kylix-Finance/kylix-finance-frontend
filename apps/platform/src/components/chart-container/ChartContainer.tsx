@@ -12,6 +12,7 @@ interface Props {
   onItemClick: (value: ButtonGroupTab) => void;
   tabs: ButtonGroupTab[];
   children: ReactNode;
+  defaultTab: string;
 }
 
 const ChartContainer = ({
@@ -20,15 +21,22 @@ const ChartContainer = ({
   onItemClick,
   tabs,
   children,
+  defaultTab,
 }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div>
-          <p>{title}</p>
-          <p>{formatBigNumbers(value.bigNumStr, value.decimal)}</p>
+        <div className={styles.heading}>
+          <p className={styles.heading_title}>{title}</p>
+          <p className={styles.heading_value}>
+            {formatBigNumbers(value.bigNumStr, value.decimal)}
+          </p>
         </div>
-        <ButtonGroup tabs={tabs} onItemClick={onItemClick} />
+        <ButtonGroup
+          tabs={tabs}
+          onItemClick={onItemClick}
+          defaultTab={defaultTab}
+        />
       </div>
       <div className={styles.children}>{children}</div>
     </div>
