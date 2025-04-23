@@ -32,11 +32,7 @@ const ChartContainer = ({
           </p>
         </div>
         <div className={styles.tabs_container}>
-          <ButtonGroup
-            tabs={tabs}
-            onItemClick={onItemClick}
-            defaultTab={defaultTab}
-          />
+          <ButtonGroup tabs={tabs} activeTab="sad" setActiveTab={(e) => e} />
         </div>
       </div>
       <div className={styles.children}>{children}</div>
