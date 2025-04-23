@@ -25,12 +25,7 @@
   height: 23.37px;
   width: 97.45px;
   flex-shrink: 0;
-}
-.logo_dot {
-  width: 32px;
-  height: 32px;
-  flex-shrink: 0;
-  transition: opacity 0.3s ease-in-out;
+  color: $color-sidebar-primary;
 }
 
 .expand_square {

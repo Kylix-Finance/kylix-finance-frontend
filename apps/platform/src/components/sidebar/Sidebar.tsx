@@ -1,5 +1,5 @@
 "use client";
-import { Logo, LogoDot } from "~/assets/svgs";
+import { Logo } from "~/assets/svgs";
 import styles from "./Sidebar.module.scss";
 import Home from "~/assets/icons/home";
 import clsx from "clsx";
@@ -18,6 +18,7 @@ import Discord from "~/assets/icons/discord";
 import Telegram from "~/assets/icons/telegram";
 import X from "~/assets/icons/x";
 import { motion } from "framer-motion";
+import { LogoDot } from "./LogoDot";
 
 type MenuItem = {
   path: string;
@@ -46,7 +47,7 @@ const socialItems = [
 export const Sidebar = () => {
   const pathname = usePathname();
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   return (
     <div
@@ -62,10 +63,7 @@ export const Sidebar = () => {
 
       <div className={styles.sidebar}>
         <div className={styles.logo_wrapper}>
-          <LogoDot
-            className={styles.logo_dot}
-            style={{ opacity: isExpanded ? 1 : 0 }}
-          />
+          <LogoDot isOpacityZero={!isExpanded} />
           <Logo className={styles.logo} />
         </div>
 

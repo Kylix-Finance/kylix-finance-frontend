@@ -333,6 +333,7 @@
   --color-sidebar-menu-bg-hover: var(--color-neutral-100);
   --color-sidebar-primary: var(--color-sidebar-primary-light);
   --color-sidebar-menu-disabled: var(--color-neutral-200);
+  --color-sidebar-dot-logo-stroke: var(--color-white);
 }
 
 @mixin sidebar-dark {
@@ -342,6 +343,7 @@
   --color-sidebar-menu-bg-hover: var(--color-sidebar-menu-bg-hover-dark);
   --color-sidebar-primary: var(--color-sidebar-primary-dark);
   --color-sidebar-menu-disabled: var(--color-neutral-700);
+  --color-sidebar-dot-logo-stroke: var(--color-neutral-900);
 }
 
 @mixin theme-light {
