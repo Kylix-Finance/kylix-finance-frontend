@@ -321,18 +321,15 @@ importers:
       '@repo/onchain':
         specifier: workspace:*
         version: link:../../packages/onchain
-      '@repo/onchain-utils':
-        specifier: workspace:*
-        version: link:../../packages/onchain-utils
       '@repo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
       '@repo/utils':
         specifier: workspace:*
         version: link:../../packages/utils
-      '@repo/wallet-modal':
-        specifier: workspace:*
-        version: link:../../packages/wallet-modal
+      '@tanstack/react-table':
+        specifier: ^8.21.3
+        version: 8.21.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@visx/axis':
         specifier: ^3.12.0
         version: 3.12.0(react@19.1.0)
@@ -424,8 +421,6 @@ importers:
         specifier: workspace:*
         version: link:../types
 
-  packages/icons: {}
-
   packages/onchain:
     dependencies:
       '@polkadot/api':
@@ -435,18 +430,6 @@ importers:
       '@polkadot/typegen':
         specifier: ^15.9.1
         version: 15.9.1
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@repo/shared':
-        specifier: workspace:*
-        version: link:../shared
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-
-  packages/onchain-utils:
-    devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
@@ -471,18 +454,6 @@ importers:
   packages/typescript-config: {}
 
   packages/utils: {}
-
-  packages/wallet-modal:
-    devDependencies:
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@repo/onchain-utils':
-        specifier: workspace:*
-        version: link:../onchain-utils
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
 
 packages:
 
@@ -2536,6 +2507,17 @@ packages:
     resolution: {integrity: sha512-4UEMyRx54xj144D2nDvDIMiXSG5BrqyCJrmyNoGbymNS+VWODcBDFrmRk9p2fe12UGZ4JtKPTNuW2Jg0aisUgQ==}
     peerDependencies:
       react: ^18 || ^19
+
+  '@tanstack/react-table@8.21.3':
+    resolution: {integrity: sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+
+  '@tanstack/table-core@8.21.3':
+    resolution: {integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==}
+    engines: {node: '>=12'}
 
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
@@ -5608,6 +5590,7 @@ packages:
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
+    deprecated: Use your platform's native DOMException instead
 
   node-fetch@3.3.2:
     resolution: {integrity: sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==}
@@ -10262,6 +10245,14 @@ snapshots:
     dependencies:
       '@tanstack/query-core': 5.72.1
       react: 19.1.0
+
+  '@tanstack/react-table@8.21.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@tanstack/table-core': 8.21.3
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
+  '@tanstack/table-core@8.21.3': {}
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 

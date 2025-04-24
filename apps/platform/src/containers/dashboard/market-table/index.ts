@@ -1,0 +1,1 @@
+export { MarketTable as default } from "./MarketTable";
