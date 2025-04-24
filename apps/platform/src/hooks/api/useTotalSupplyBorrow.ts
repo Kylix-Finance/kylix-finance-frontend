@@ -1,7 +1,7 @@
 import { queryKeys } from "@repo/shared";
 import { useQuery } from "@tanstack/react-query";
 import { ChartScale } from "~/types";
-import axios from "~/lib/axios"
+import axios from "~/lib/axios";
 export type TotalSupplySchema = [number, number, number];
 
 export const useTotalSupplyBorrow = (scale: ChartScale) => {

@@ -2,12 +2,11 @@ import { InjectedAccount } from "@polkadot/extension-inject/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-
 type UseAccountsStoreSchema = {
   account: InjectedAccount | null;
   connectorId: string | null;
-  accounts?: InjectedAccount[]
-}
+  accounts?: InjectedAccount[];
+};
 
 type UseAccountsStore = {
   setAccount: (account: InjectedAccount) => void;
@@ -30,14 +29,16 @@ export const useAccountsStore = create<UseAccountsStore>()(
         set({
           connectorId,
         }),
-      connect: (connectorId: string, accounts: InjectedAccount[]) => set({
-        connectorId,
-        accounts,
-      }),
-      disconnect: () => set({
-        account: null,
-        connectorId: null
-      })
+      connect: (connectorId: string, accounts: InjectedAccount[]) =>
+        set({
+          connectorId,
+          accounts,
+        }),
+      disconnect: () =>
+        set({
+          account: null,
+          connectorId: null,
+        }),
     }),
     {
       name: "accounts",

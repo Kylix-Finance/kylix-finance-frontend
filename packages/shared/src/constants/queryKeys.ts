@@ -75,7 +75,7 @@ const keys = {
   RECENT_LIQUIDATION: "RECENT_LIQUIDATION",
   USER_BIDS: "USER_BIDS",
   SIGNER: "SIGNER",
-  WALLETS: "WALLETS"
+  WALLETS: "WALLETS",
 };
 //FIXME: 1d is temporary
 type ChartScale = "all" | "month" | "year" | "1d";
@@ -151,12 +151,12 @@ export const queryKeys = {
     borrowAssetAmount,
     collateralAsset,
   }: EstimateCollateral) => [
-      baseKey,
-      keys.ESTIMATE_COLLATERAL,
-      borrowAsset,
-      borrowAssetAmount,
-      collateralAsset,
-    ],
+    baseKey,
+    keys.ESTIMATE_COLLATERAL,
+    borrowAsset,
+    borrowAssetAmount,
+    collateralAsset,
+  ],
   getAssetPrice: (asset: number, base_asset?: number) => [
     baseKey,
     keys.GET_ASSET_PRICE,
@@ -175,5 +175,5 @@ export const queryKeys = {
     keys.USER_BIDS,
     activeAccount,
   ],
-  wallets: [baseKey, keys.WALLETS]
+  wallets: [baseKey, keys.WALLETS],
 };

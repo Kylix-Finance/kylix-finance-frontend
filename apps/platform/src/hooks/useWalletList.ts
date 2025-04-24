@@ -9,17 +9,17 @@ export const useWalletList = () => {
     queryFn: async () => {
       const injectedWeb3 = window.injectedWeb3 || {};
       return Object.entries(WALLETS).map(([key, wallet]) => {
-        const extension = injectedWeb3[key]
+        const extension = injectedWeb3[key];
         return {
           ...wallet,
           id: key,
           isInstalled: !!extension,
           extension: extension || undefined,
-        }
-      })
+        };
+      });
     },
     meta: {
       excludeFromGlobalInvalidation: true,
     },
-  })
+  });
 };

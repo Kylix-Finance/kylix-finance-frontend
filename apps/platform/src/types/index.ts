@@ -41,6 +41,6 @@ export interface ModalProps {
   desktopClassName?: string;
   mobileClassName?: string;
   onBackButtonClick?: VoidFunction;
-  footer?: ReactNode
+  footer?: ReactNode;
 }
 export type ChartScale = (typeof CHART_SCALES)[number];

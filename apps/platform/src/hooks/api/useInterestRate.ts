@@ -1,6 +1,6 @@
 import { queryKeys } from "@repo/shared";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import axios from "~/lib/axios"
+import axios from "~/lib/axios";
 export type InterestRateSchema = {
   borrow_apy: number;
   supply_apy: number;

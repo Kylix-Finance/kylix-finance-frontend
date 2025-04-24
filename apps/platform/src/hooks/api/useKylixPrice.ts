@@ -2,7 +2,7 @@ import { queryKeys } from "@repo/shared";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getUnixTime } from "date-fns";
 import { ChartScale } from "~/types";
-import axios from "~/lib/axios"
+import axios from "~/lib/axios";
 export type KylixPriceSchema = [number, number];
 
 export const useKylixPrice = (scale: ChartScale) => {
