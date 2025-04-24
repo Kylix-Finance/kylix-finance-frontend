@@ -6,6 +6,7 @@ import TotalLocked from "./total-locked/TotalLocked";
 import TotalSupplyBorrow from "./total-supply-borrow/TotalSupplyBorrow";
 import Table from "./table/Table";
 import { useGetLendingPools, useGetLiquidationMarkets } from "@repo/onchain";
+import MarketTable from "./market-table";
 
 const Dashboard = () => {
   const { data } = useGetLiquidationMarkets();
@@ -21,7 +22,7 @@ const Dashboard = () => {
           <TotalSupplyBorrow />
         </div>
         <div className={styles.table_container}>
-          <Table />
+          <MarketTable />
         </div>
       </div>
     </PageLayout>
