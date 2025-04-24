@@ -5,68 +5,76 @@ import {
   SortingState,
   getSortedRowModel,
 } from "@tanstack/react-table";
-import styles from "./MarketTable.module.scss";
-import { LandingPool, useGetLendingPools } from "@repo/onchain";
+import styles from "./LiquidationTable.module.scss";
+import {
+  LiquidationMarket,
+  useGetLiquidationMarkets,
+} from "@repo/onchain";
 import Table from "~/components/table";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
 import { useState, useMemo } from "react";
 
-const columnHelper = createColumnHelper<LandingPool>();
+const columnHelper = createColumnHelper<LiquidationMarket>();
 
-export const MarketTable = () => {
-  const { data } = useGetLendingPools();
+export const LiquidationTable = () => {
+  const { data } = useGetLiquidationMarkets();
+
+  console.log("23data", data);
 
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const columns = [
+    columnHelper.accessor("health", {
+      header: "Health",
+      cell: (info) => info.getValue(),
+    }),
     columnHelper.accessor("asset_symbol", {
-      header: "Asset",
-      enableSorting: false,
+      header: "Collateral",
       cell: (info) => (
-        <div>
+        <div className={styles.token}>
           <TokenIcon symbol={info.getValue()} />
+          {info.getValue()}
         </div>
       ),
     }),
-    columnHelper.accessor("total_pool_supply", {
-      header: "Total Supplied",
-      cell: (info) => {
-        const { total_pool_supply, asset_decimals } = info.row.original;
-        return total_pool_supply;
-      },
-    }),
-    columnHelper.accessor("supply_apy", {
-      header: "Supply APY",
+    columnHelper.accessor("bid_asset", {
+      header: "Bid Denom",
       cell: (info) => info.getValue(),
     }),
-    columnHelper.accessor("total_pool_borrow", {
-      header: "Total Borrowed",
+    columnHelper.accessor("tvl", {
+      header: "TVL",
       cell: (info) => {
-        const { borrow_apy, asset_decimals } = info.row.original;
-        return borrow_apy;
+        const { tvl, asset_decimals } = info.row.original;
+        return tvl;
       },
     }),
-    columnHelper.accessor("borrow_apy", {
-      header: "Borrow APY",
+    columnHelper.accessor("pool_size", {
+      header: "Pool size",
+      cell: (info) => {
+        const { pool_size, asset_decimals } = info.row.original;
+        return pool_size;
+      },
+    }),
+    columnHelper.accessor("max_discount", {
+      header: "Max discount",
       cell: (info) => info.getValue(),
     }),
-    columnHelper.accessor("utilization", {
-      header: "Utilization",
+    columnHelper.accessor("user_bid", {
+      header: "Bid placed",
       cell: (info) => info.getValue(),
     }),
     columnHelper.display({
       id: "actions",
       cell: () => (
         <div className={styles.actions}>
-          <Button>Supply</Button>
-          <Button variant="secondary">Borrow</Button>
+          <Button>View Market</Button>
         </div>
       ),
     }),
   ];
 
-  const tableData = useMemo(() => data?.assets || [], [data]);
+  const tableData = useMemo(() => data || [], [data]);
 
   const table = useReactTable({
     data: tableData,

@@ -4,14 +4,10 @@ import PageLayout from "~/layouts/page/PageLayout";
 import styles from "./Dashboard.module.scss";
 import TotalLocked from "./total-locked/TotalLocked";
 import TotalSupplyBorrow from "./total-supply-borrow/TotalSupplyBorrow";
-import Table from "./table/Table";
-import { useGetLendingPools, useGetLiquidationMarkets } from "@repo/onchain";
 import MarketTable from "./market-table";
+import LiquidationTable from "./liquidation-table";
 
 const Dashboard = () => {
-  const { data } = useGetLiquidationMarkets();
-  console.log("_______data", data);
-
   return (
     <PageLayout title="Dashboard">
       <div className={styles.container}>
@@ -23,6 +19,7 @@ const Dashboard = () => {
         </div>
         <div className={styles.table_container}>
           <MarketTable />
+          <LiquidationTable />
         </div>
       </div>
     </PageLayout>
