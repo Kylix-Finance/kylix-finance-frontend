@@ -1,0 +1,9 @@
+.container {
+  padding: $spacing-4;
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+  color: $color-wallet-modal-wallet-list-item-text;
+  background-color: $color-wallet-modal-wallet-list-item-bg;
+  @include font($font-heading-3);
+}

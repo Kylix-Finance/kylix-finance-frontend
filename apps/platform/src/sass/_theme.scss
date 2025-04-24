@@ -366,6 +366,18 @@
   --color-chat-container-bg: var(--color-accent-primary-component);
   --color-chat-container-border: var(--color-neutral-700);
 }
+
+@mixin wallet-modal-light {
+  --color-wallet-modal-wallet-list-policy-text: var(--color-neutral-400);
+  --color-wallet-modal-wallet-list-item-bg: var(--color-neutral-50);
+  --color-wallet-modal-wallet-list-item-text: var(--color-neutral-800);
+}
+@mixin wallet-modal-dark {
+  --color-wallet-modal-wallet-list-policy-text: var(--color-neutral-400);
+  --color-wallet-modal-wallet-list-item-bg: var(--color-neutral-800);
+  --color-wallet-modal-wallet-list-item-text: var(--color-neutral-200);
+}
+
 @mixin theme-light {
   @include buttons-light;
   @include link-button-light;
@@ -379,6 +391,7 @@
   @include sidebar-light;
   @include page-layout-light;
   @include chart-container-light;
+  @include wallet-modal-light;
   --color-black: #121212;
   --color-white: #ffffff;
 
@@ -474,7 +487,7 @@
   @include sidebar-dark;
   @include page-layout-dark;
   @include chart-container-dark;
-
+  @include wallet-modal-dark;
   --color-black: #121212;
   --color-white: #ffffff;
 
@@ -498,7 +511,7 @@
   --color-neutral-500: #999999;
   --color-neutral-600: #333333;
   --color-neutral-700: #444444;
-  --color-neutral-800: #121212;
+  --color-neutral-800: #2A2A2A;
   --color-neutral-900: #1e1e1e;
 
   --color-semantic-success: #4ade80;
@@ -518,7 +531,7 @@
   --color-crypto-mint: #37db8c80;
   --color-crypto-sui: #4ecbfc80;
 
-  --color-sidebar-bg-dark: rgba(30, 30, 30, 0.5);
+  --color-sidebar-bg-dark: #1e1e1e80;
   --color-sidebar-primary-dark: #56ddb4;
   --color-sidebar-menu-bg-dark: #56ddb433;
   --color-sidebar-menu-bg-hover-dark: #2a2a2a;

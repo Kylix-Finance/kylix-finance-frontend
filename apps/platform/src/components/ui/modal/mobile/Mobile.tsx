@@ -4,6 +4,7 @@ import { ModalProps } from "~/types";
 import styles from "./Mobile.module.scss";
 import { Drawer } from "vaul";
 import Close from "~/assets/icons/close";
+import clsx from "clsx";
 const Mobile = ({
   children,
   isOpen,
@@ -21,7 +22,7 @@ const Mobile = ({
     >
       <Drawer.Portal>
         <Drawer.Overlay className={styles.overlay} onClick={onClose}>
-          <Drawer.Content className={styles.content}>
+          <Drawer.Content className={clsx(styles.content, mobileClassName)}>
             <div className={styles.handle} />
             {title && (
               <div className={styles.header}>

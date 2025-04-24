@@ -1,25 +1,25 @@
 "use client";
 import { Logo } from "~/assets/svgs";
 import styles from "./Sidebar.module.scss";
-import Home from "~/assets/icons/home";
+import Home from "~/assets/icons/home.svg";
 import clsx from "clsx";
-import User from "~/assets/icons/user";
-import Swap from "~/assets/icons/swap";
-import SwimmingPool from "~/assets/icons/swimming-pool";
-import Coins from "~/assets/icons/coins";
-import Stack from "~/assets/icons/stack";
+import User from "~/assets/icons/user.svg";
+import Swap from "~/assets/icons/swap.svg";
+import SwimmingPool from "~/assets/icons/swimming-pool.svg";
+import Coins from "~/assets/icons/coins.svg";
+import Stack from "~/assets/icons/stack.svg";
 import { usePathname } from "next/navigation";
-import Bank from "~/assets/icons/bank";
+import Bank from "~/assets/icons/bank.svg";
 import Link from "next/link";
-import SquareHalf from "~/assets/icons/square-half";
+import SquareHalf from "~/assets/icons/square-half.svg";
 import { useState } from "react";
 import { IconButton } from "../ui/icon-button";
-import Discord from "~/assets/icons/discord";
-import Telegram from "~/assets/icons/telegram";
-import X from "~/assets/icons/x";
+import Discord from "~/assets/icons/discord.svg";
+import Telegram from "~/assets/icons/telegram.svg";
+import X from "~/assets/icons/x.svg";
 import { motion } from "framer-motion";
 import { LogoDot } from "./LogoDot";
-import Mail from "~/assets/icons/mail";
+import Mail from "~/assets/icons/mail.svg";
 
 type MenuItem = {
   path: string;

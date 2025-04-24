@@ -1,4 +1,4 @@
-import Copy from "~/assets/icons/copy";
+import Copy from "~/assets/icons/copy.svg";
 import Avatar from "../avatar";
 import styles from "./Preference.module.scss";
 import ThemeSwitcher from "../theme-switcher";

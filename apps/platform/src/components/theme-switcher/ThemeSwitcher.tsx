@@ -1,6 +1,6 @@
-import Sun from "~/assets/icons/sun";
+import Sun from "~/assets/icons/sun.svg";
 import { ButtonGroup } from "../ui/button-group";
-import Moon from "~/assets/icons/moon";
+import Moon from "~/assets/icons/moon.svg";
 import { useTheme } from "~/hooks/useTheme";
 
 const tabs = [

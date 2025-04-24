@@ -7,7 +7,7 @@ import { useRef } from "react";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { fadeAnimation, framerProps } from "~/animations/variants";
-import Close from "~/assets/icons/close";
+import Close from "~/assets/icons/close.svg";
 
 const Desktop = ({
   children,

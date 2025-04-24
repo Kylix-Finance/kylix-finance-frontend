@@ -1,7 +1,6 @@
-import Avatar from "~/components/avatar";
 import styles from "./Header.module.scss";
 import { IconButton } from "../ui/icon-button";
-import Bell from "~/assets/icons/bell";
+import Bell from "~/assets/icons/bell.svg";
 import { Button } from "../ui/button";
 import WalletProfile from "../wallet-profile";
 import { PopoverPanel } from "../popover-panel/PopoverPanel";

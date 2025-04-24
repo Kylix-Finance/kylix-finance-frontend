@@ -1,4 +1,4 @@
-import User from "~/assets/icons/user";
+import User from "~/assets/icons/user.svg";
 import styles from "./Avatar.module.scss";
 
 type AvatarProps = {

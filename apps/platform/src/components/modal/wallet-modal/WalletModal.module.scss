@@ -1,0 +1,7 @@
+.container {
+  width: 400px;
+  height: 100%;
+  @include media("<=mobile") {
+    width: 100%;
+  }
+}

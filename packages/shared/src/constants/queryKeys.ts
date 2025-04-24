@@ -75,6 +75,7 @@ const keys = {
   RECENT_LIQUIDATION: "RECENT_LIQUIDATION",
   USER_BIDS: "USER_BIDS",
   SIGNER: "SIGNER",
+  WALLETS: "WALLETS"
 };
 //FIXME: 1d is temporary
 type ChartScale = "all" | "month" | "year" | "1d";
@@ -174,4 +175,5 @@ export const queryKeys = {
     keys.USER_BIDS,
     activeAccount,
   ],
+  wallets: [baseKey, keys.WALLETS]
 };
