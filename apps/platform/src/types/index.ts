@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ReactNode } from "react";
+import { CHART_SCALES } from "~/constants";
 
 export type Middleware = (req: NextRequest) => Promise<NextResponse | void>;
 export type Locale = "en" | "se" | "ar";
@@ -40,3 +41,4 @@ export interface ModalProps {
   desktopClassName?: string;
   mobileClassName?: string;
 }
+export type ChartScale = (typeof CHART_SCALES)[number];

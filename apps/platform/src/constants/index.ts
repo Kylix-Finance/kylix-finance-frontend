@@ -4,3 +4,5 @@ export const BREAKPOINTS = {
   TABLET: 1024,
   DESKTOP: 1024,
 } as const;
+//FIXME: 1d is temporary
+export const CHART_SCALES = ["all", "month", "year", "1d"] as const;

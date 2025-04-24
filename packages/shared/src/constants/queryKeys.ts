@@ -76,8 +76,8 @@ const keys = {
   USER_BIDS: "USER_BIDS",
   SIGNER: "SIGNER",
 };
-
-type ChartScale = "1m" | "5m" | "15m" | "1h" | "12h" | "1d";
+//FIXME: 1d is temporary
+type ChartScale = "all" | "month" | "year" | "1d";
 
 export const queryKeys = {
   accounts: [baseKey, keys.ACCOUNTS],
@@ -150,12 +150,12 @@ export const queryKeys = {
     borrowAssetAmount,
     collateralAsset,
   }: EstimateCollateral) => [
-    baseKey,
-    keys.ESTIMATE_COLLATERAL,
-    borrowAsset,
-    borrowAssetAmount,
-    collateralAsset,
-  ],
+      baseKey,
+      keys.ESTIMATE_COLLATERAL,
+      borrowAsset,
+      borrowAssetAmount,
+      collateralAsset,
+    ],
   getAssetPrice: (asset: number, base_asset?: number) => [
     baseKey,
     keys.GET_ASSET_PRICE,
