@@ -2,8 +2,5 @@
 module.exports = {
   root: true,
   extends: ["@repo/eslint-config/react-internal.cjs"],
-  ignorePatterns: ["**/*"],
-  parserOptions: {
-    project: null,
-  },
+  ignorePatterns: ["src/types/chain/**/*.ts"],
 };

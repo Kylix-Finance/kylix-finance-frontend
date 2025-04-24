@@ -1,7 +1,7 @@
 import { ComponentPropsWithRef, ReactNode } from "react";
 import clsx from "clsx";
 import styles from "./Switch.module.scss";
-import Warning from "~/assets/icons/warning";
+import Warning from "~/assets/icons/warning.svg";
 
 interface Props extends ComponentPropsWithRef<"input"> {
   label?: ReactNode;
