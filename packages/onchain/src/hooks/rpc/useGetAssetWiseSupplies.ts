@@ -15,23 +15,23 @@ export const useGetAssetWiseSupplies = ({ poolId, account }: Params = {}) => {
     queryKey: queryKeys.assetWiseBorrowsCollaterals(finalAccount, poolId),
     queryFn: enabled
       ? async () => {
-          const response = await execute(account);
-          if (!response) return null;
-          return {
-            suppliedAssets: response[0].map((item) => ({
-              isCollateral: item.is_collateral,
-              supplied: BigInt(item.supplied),
-              apy: item.apy,
-              assetId: item.asset_id,
-              assetSymbol: decodeArrayToString(item.asset_symbol),
-              assetName: decodeArrayToString(item.asset_name),
-              decimals: item.decimals,
-              assetIcon: decodeArrayToString(item.asset_icon),
-              balance: BigInt(item.balance),
-            })),
-            totalSupplied: BigInt(response[1] || 0),
-          };
-        }
+        const response = await execute(account);
+        if (!response) return null;
+        return {
+          suppliedAssets: response[0].map((item) => ({
+            isCollateral: item.is_collateral,
+            apy: item.apy,
+            assetId: item.asset_id,
+            decimals: item.decimals,
+            supplied: BigInt(item.supplied),
+            assetSymbol: decodeArrayToString(item.asset_symbol),
+            assetName: decodeArrayToString(item.asset_name),
+            assetIcon: decodeArrayToString(item.asset_icon),
+            balance: BigInt(item.balance),
+          })),
+          totalSupplied: BigInt(response[1] || 0),
+        };
+      }
       : skipToken,
   });
 };
