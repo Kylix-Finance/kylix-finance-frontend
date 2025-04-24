@@ -24,6 +24,8 @@
     "@repo/onchain": "workspace:*",
     "@repo/shared": "workspace:*",
     "@repo/utils": "workspace:*",
+    "@repo/wallet-modal": "workspace:*",
+    "@tanstack/react-table": "^8.21.3",
     "@visx/axis": "^3.12.0",
     "@visx/curve": "^3.12.0",
     "@visx/event": "^3.12.0",
