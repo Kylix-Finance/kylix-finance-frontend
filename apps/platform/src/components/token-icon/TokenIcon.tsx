@@ -8,7 +8,8 @@ interface Props {
 
 export const TokenIcon = ({ symbol, height = 32, width = 32 }: Props) => {
   const lowerCaseSymbol = symbol.toLowerCase();
-  const IconComponent = cryptoCurrencies[lowerCaseSymbol || "generic"];
+  const IconComponent =
+    cryptoCurrencies[lowerCaseSymbol] || cryptoCurrencies["generic"];
 
   return (
     <IconComponent

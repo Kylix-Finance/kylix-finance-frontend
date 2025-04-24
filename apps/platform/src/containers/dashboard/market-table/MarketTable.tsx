@@ -2,24 +2,27 @@ import {
   createColumnHelper,
   getCoreRowModel,
   useReactTable,
+  SortingState,
+  getSortedRowModel,
 } from "@tanstack/react-table";
 import styles from "./MarketTable.module.scss";
 import { LandingPool, useGetLendingPools } from "@repo/onchain";
 import Table from "~/components/table";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 
 const columnHelper = createColumnHelper<LandingPool>();
 
 export const MarketTable = () => {
   const { data } = useGetLendingPools();
 
-  console.log("data", data);
+  const [sorting, setSorting] = useState<SortingState>([]);
 
   const columns = [
     columnHelper.accessor("asset", {
       header: "Asset",
+      enableSorting: false,
       cell: (info) => (
         <div>
           <TokenIcon symbol={info.getValue()} />
@@ -48,7 +51,6 @@ export const MarketTable = () => {
     }),
     columnHelper.display({
       id: "actions",
-      header: "Utilization",
       cell: (info) => (
         <div className={styles.actions}>
           <Button>Supply</Button>
@@ -64,6 +66,11 @@ export const MarketTable = () => {
     data: tableData,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    onSortingChange: setSorting,
+    state: {
+      sorting,
+    },
   });
 
   return (

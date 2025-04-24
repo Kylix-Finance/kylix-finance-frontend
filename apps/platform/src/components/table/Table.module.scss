@@ -1,46 +1,86 @@
 .container {
   box-sizing: border-box;
   width: 100%;
-  padding: 1rem;
   overflow-x: auto;
-  background-color: #121212;
+
+  [data-theme="light"] & {
+    border-right: 1px solid $color-neutral-200;
+    border-left: 1px solid $color-neutral-200;
+    .thead {
+      color: $color-neutral-600;
+      background-color: $color-neutral-50;
+      border-top: 1px solid $color-neutral-200;
+      border-bottom: 1px solid $color-neutral-200;
+    }
+
+    .tr {
+      border-bottom: 1px solid $color-neutral-100;
+    }
+  }
+
+  [data-theme="dark"] & {
+    border-right: 1px solid $color-neutral-700;
+    border-left: 1px solid $color-neutral-700;
+    .thead {
+      color: $color-neutral-200;
+      background-color: $color-neutral-900;
+      border-top: 1px solid $color-neutral-700;
+      border-bottom: 1px solid $color-neutral-700;
+    }
+    .tr {
+      border-bottom: 1px solid $color-neutral-800;
+    }
+  }
 }
 
 .table {
   width: 100%;
   min-width: 600px;
-  border-radius: 8px;
   border-collapse: collapse;
-  background-color: #1e1e1e;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .thead {
-}
-
-.th {
-  padding: 12px 15px;
-  border-bottom: 2px solid #333;
-  color: #e0e0e0;
-  font-weight: 600;
-  text-align: left;
+  @include font($font-body-compact);
 }
 
 .tbody {
 }
 
 .tr {
-  &:nth-child(even) {
-    background-color: #2a2a2a;
+  height: 72px;
+
+  & > :first-child {
+    padding-left: 16px;
   }
 
-  &:hover {
-    background-color: #333;
+  & > :last-child {
+    padding-right: 16px;
   }
 }
 
+.th {
+  text-align: left;
+
+  &[data-is-sortable="true"] {
+    cursor: pointer;
+  }
+}
 .td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #333;
-  color: #b0b0b0;
+}
+
+.th_content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.arrows {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow {
+  &[data-active="true"] {
+    stroke: $color-primary;
+  }
 }
