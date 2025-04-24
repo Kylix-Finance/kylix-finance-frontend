@@ -3,7 +3,7 @@ import { flexRender, type Table as ReactTable } from "@tanstack/react-table";
 import styles from "./Table.module.css";
 
 interface TableProps {
-  table: ReactTable<unknown>;
+  table: ReactTable<any>;
 }
 
 export function Table({ table }: TableProps) {

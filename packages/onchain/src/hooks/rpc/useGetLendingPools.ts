@@ -7,6 +7,10 @@ interface Params {
   account?: string;
 }
 
+export type LandingPool = NonNullable<
+  ReturnType<typeof useGetLendingPools>["data"]
+>["assets"][number];
+
 export const useGetLendingPools = ({ assetId, account }: Params = {}) => {
   const { execute, isApiAvailable } = useRpc("lending", "getLendingPools");
   const { account: activeAccount } = useAccountsStore();
