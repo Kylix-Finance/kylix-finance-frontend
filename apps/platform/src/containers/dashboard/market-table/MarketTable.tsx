@@ -6,7 +6,7 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 import styles from "./MarketTable.module.scss";
-import { LandingPool, useGetLendingPools } from "@repo/onchain";
+import { formatUnit, LandingPool, useGetLendingPools } from "@repo/onchain";
 import Table from "~/components/table";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
@@ -18,6 +18,8 @@ export const MarketTable = () => {
   const { data } = useGetLendingPools();
 
   const [sorting, setSorting] = useState<SortingState>([]);
+
+  console.log("data", data);
 
   const columns = [
     columnHelper.accessor("asset", {
@@ -31,7 +33,10 @@ export const MarketTable = () => {
     }),
     columnHelper.accessor("total_pool_supply", {
       header: "Total Supplied",
-      cell: (info) => info.getValue(),
+      cell: (info) => {
+        const { total_pool_supply, asset_decimals } = info.row.original;
+        return formatUnit(total_pool_supply, asset_decimals);
+      },
     }),
     columnHelper.accessor("supply_apy", {
       header: "Supply APY",
@@ -39,7 +44,10 @@ export const MarketTable = () => {
     }),
     columnHelper.accessor("total_pool_borrow", {
       header: "Total Borrowed",
-      cell: (info) => info.getValue(),
+      cell: (info) => {
+        const { borrow_apy, asset_decimals } = info.row.original;
+        return formatUnit(borrow_apy, asset_decimals);
+      },
     }),
     columnHelper.accessor("borrow_apy", {
       header: "Borrow APY",
