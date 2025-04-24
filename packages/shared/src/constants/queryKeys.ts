@@ -23,7 +23,7 @@ interface EstimateCollateral {
   collateralAsset: string | undefined;
 }
 interface LiquidationMarkets {
-  account?: string;
+  account: string | null;
 }
 
 interface MarketBidDistribution {

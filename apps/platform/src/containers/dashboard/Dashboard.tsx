@@ -5,10 +5,10 @@ import styles from "./Dashboard.module.scss";
 import TotalLocked from "./total-locked/TotalLocked";
 import TotalSupplyBorrow from "./total-supply-borrow/TotalSupplyBorrow";
 import Table from "./table/Table";
-import { useGetLendingPools } from "@repo/onchain";
+import { useGetLendingPools, useGetLiquidationMarkets } from "@repo/onchain";
 
 const Dashboard = () => {
-  const { data } = useGetLendingPools();
+  const { data } = useGetLiquidationMarkets();
   console.log("_______data", data);
 
   return (

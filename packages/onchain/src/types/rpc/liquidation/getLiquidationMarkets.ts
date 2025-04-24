@@ -1,6 +1,6 @@
 import { Definition } from "../definitions";
 
-type Params = [account?: string];
+type Params = [account: string | null];
 
 type LiquidationMarket = {
   asset_id: number;
