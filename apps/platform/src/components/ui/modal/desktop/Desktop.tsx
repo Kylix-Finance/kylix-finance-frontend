@@ -19,6 +19,7 @@ const Desktop = ({
   hasCloseButton,
   title,
   onBackButtonClick,
+  footer,
 }: ModalProps) => {
   const ref = useRef<any>(null);
 
@@ -62,6 +63,7 @@ const Desktop = ({
               </div>
             )}
             {children}
+            {footer}
           </div>
         </motion.div>
       )}

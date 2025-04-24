@@ -1,6 +1,10 @@
 .container {
   width: 400px;
   height: 100%;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   @include media("<=mobile") {
     width: 100%;
   }

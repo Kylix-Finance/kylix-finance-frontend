@@ -32,7 +32,7 @@ export const useAccountsStore = create<UseAccountsStore>()(
         }),
       connect: (connectorId: string, accounts: InjectedAccount[]) => set({
         connectorId,
-        accounts
+        accounts,
       }),
       disconnect: () => set({
         account: null,

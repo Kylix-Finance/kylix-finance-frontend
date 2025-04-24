@@ -12,7 +12,7 @@ const DisconnectButton = () => {
     setStage("walletsList");
   };
   return (
-    <Button variant="tertiary" onClick={handleClick} fullWidth>
+    <Button variant="primary" onClick={handleClick} fullWidth>
       {t("disconnectButton")}
     </Button>
   );

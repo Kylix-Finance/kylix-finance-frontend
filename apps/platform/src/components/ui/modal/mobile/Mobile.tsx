@@ -3,7 +3,6 @@
 import { ModalProps } from "~/types";
 import styles from "./Mobile.module.scss";
 import { Drawer } from "vaul";
-import Close from "~/assets/icons/close";
 import clsx from "clsx";
 const Mobile = ({
   children,
@@ -11,6 +10,7 @@ const Mobile = ({
   onClose,
   title,
   mobileClassName,
+  footer,
 }: ModalProps) => {
   return (
     <Drawer.Root
@@ -30,6 +30,7 @@ const Mobile = ({
               </div>
             )}
             <div className={styles.children}>{children}</div>
+            {footer}
           </Drawer.Content>
         </Drawer.Overlay>
       </Drawer.Portal>

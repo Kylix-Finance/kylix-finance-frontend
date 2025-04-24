@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useModalStore } from "~/stores/modal";
 import AccountList from "./stages/account-list/AccountList";
 import { useAccountsStore } from "@repo/shared";
+import DisconnectButton from "./disconnect-button/DisconnectButton";
 const WalletModal = () => {
   const t = useTranslations("WalletModal");
   const { stage, setStage, isOpen, setIsOpen } = useModalStore();
@@ -22,6 +23,7 @@ const WalletModal = () => {
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       title={t("title")}
+      footer={stage === "accountsList" && <DisconnectButton />}
     >
       <div className={styles.container}>
         {stage === "walletsList" && <WalletList />}
