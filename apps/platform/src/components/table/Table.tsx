@@ -1,6 +1,6 @@
 import React from "react";
 import { flexRender, type Table as ReactTable } from "@tanstack/react-table";
-import styles from "./Table.module.css";
+import styles from "./Table.module.scss";
 
 interface TableProps {
   table: ReactTable<any>;
