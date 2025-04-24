@@ -1,29 +1,46 @@
+import { InjectedAccount } from "@polkadot/extension-inject/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type UseAccountStore = {
-  account: string | null;
-  setAccount: (account: string | null) => void;
-  connectorId: string | null;
-  setConnectorId: (connectorId: string | null) => void;
-};
 
-export const useAccountStore = create<UseAccountStore>()(
+type UseAccountsStoreSchema = {
+  account: InjectedAccount | null;
+  connectorId: string | null;
+  accounts?: InjectedAccount[]
+}
+
+type UseAccountsStore = {
+  setAccount: (account: InjectedAccount) => void;
+  setConnectorId: (connectorId: string) => void;
+  connect: (connectorId: string, accounts: InjectedAccount[]) => void;
+  disconnect: () => void;
+} & UseAccountsStoreSchema;
+
+export const useAccountsStore = create<UseAccountsStore>()(
   persist(
     (set) => ({
       account: null,
-      setAccount: (account: string | null) =>
+      connectorId: null,
+      accounts: undefined,
+      setAccount: (account: InjectedAccount) =>
         set({
           account,
         }),
-      connectorId: null,
-      setConnectorId: (connectorId: string | null) =>
+      setConnectorId: (connectorId: string) =>
         set({
           connectorId,
         }),
+      connect: (connectorId: string, accounts: InjectedAccount[]) => set({
+        connectorId,
+        accounts
+      }),
+      disconnect: () => set({
+        account: null,
+        connectorId: null
+      })
     }),
     {
-      name: "account",
+      name: "accounts",
     }
   )
 );

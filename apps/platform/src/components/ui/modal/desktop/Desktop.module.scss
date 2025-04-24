@@ -54,3 +54,8 @@
   align-items: center;
   justify-content: center;
 }
+.left {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2_5;
+}

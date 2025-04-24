@@ -1,4 +1,4 @@
-import { useWalletList } from "~/hooks/wallet-modal/useWalletList";
+import { useWalletList } from "~/hooks/useWalletList";
 import styles from "./WalletList.module.scss";
 import Item from "./item/Item";
 const WalletList = () => {

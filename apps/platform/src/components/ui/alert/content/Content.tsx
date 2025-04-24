@@ -1,12 +1,12 @@
 import { toast, ToastContentProps } from "react-toastify";
 import { NotificationParams } from "~/types";
 import styles from "./Content.module.scss";
-import Sparkle from "~/assets/icons/sparkle";
-import CheckCircle from "~/assets/icons/check-circle";
-import Info from "~/assets/icons/info";
-import Attention from "~/assets/icons/attention";
-import Warning from "~/assets/icons/warning";
-import Close from "~/assets/icons/close";
+import Sparkle from "~/assets/icons/sparkle.svg";
+import CheckCircle from "~/assets/icons/check-circle.svg";
+import Info from "~/assets/icons/info.svg";
+import Attention from "~/assets/icons/attention.svg";
+import Warning from "~/assets/icons/warning.svg";
+import Close from "~/assets/icons/close.svg";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 

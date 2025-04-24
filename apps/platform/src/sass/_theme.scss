@@ -371,11 +371,20 @@
   --color-wallet-modal-wallet-list-policy-text: var(--color-neutral-400);
   --color-wallet-modal-wallet-list-item-bg: var(--color-neutral-50);
   --color-wallet-modal-wallet-list-item-text: var(--color-neutral-800);
+  --color-wallet-modal-account-bg: var(--color-neutral-50);
+  --color-wallet-modal-account-border: var(--color-neutral-400);
+  --color-wallet-modal-account-text-name: var(--color-neutral-800);
+  --color-wallet-modal-account-text-address: var(--color-neutral-400);
 }
 @mixin wallet-modal-dark {
   --color-wallet-modal-wallet-list-policy-text: var(--color-neutral-400);
   --color-wallet-modal-wallet-list-item-bg: var(--color-neutral-800);
   --color-wallet-modal-wallet-list-item-text: var(--color-neutral-200);
+
+  --color-wallet-modal-account-bg: var(--color-neutral-800);
+  --color-wallet-modal-account-border: var(--color-neutral-500);
+  --color-wallet-modal-account-text-name: var(--color-neutral-200);
+  --color-wallet-modal-account-text-address: var(--color-neutral-200);
 }
 
 @mixin theme-light {
@@ -511,7 +520,7 @@
   --color-neutral-500: #999999;
   --color-neutral-600: #333333;
   --color-neutral-700: #444444;
-  --color-neutral-800: #2A2A2A;
+  --color-neutral-800: #2a2a2a;
   --color-neutral-900: #1e1e1e;
 
   --color-semantic-success: #4ade80;

@@ -1,0 +1,34 @@
+.container {
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: $color-wallet-modal-account-bg;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  padding: $spacing-4;
+  cursor: pointer;
+}
+.active {
+  border-color: $color-wallet-modal-account-border;
+}
+.left {
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+}
+.information {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.account_name {
+  @include font($font-button);
+  color: $color-wallet-modal-account-text-name;
+}
+.account_address {
+  @include font($font-body-small);
+  color: $color-wallet-modal-account-text-address;
+}

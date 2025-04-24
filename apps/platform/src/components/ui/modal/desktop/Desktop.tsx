@@ -8,7 +8,8 @@ import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { fadeAnimation, framerProps } from "~/animations/variants";
 import Close from "~/assets/icons/close.svg";
-
+import { IconButton } from "../../icon-button";
+import ArrowLeft from "~/assets/icons/arrow-left.svg";
 const Desktop = ({
   children,
   isOpen,
@@ -17,6 +18,7 @@ const Desktop = ({
   desktopClassName,
   hasCloseButton,
   title,
+  onBackButtonClick,
 }: ModalProps) => {
   const ref = useRef<any>(null);
 
@@ -41,7 +43,17 @@ const Desktop = ({
           <div ref={ref} className={clsx(styles.container, desktopClassName)}>
             {(title || hasCloseButton) && (
               <div className={styles.header}>
-                {title && <p className={styles.title}>{title}</p>}
+                <div className={styles.left}>
+                  {onBackButtonClick && (
+                    <IconButton
+                      icon={ArrowLeft}
+                      mode="none"
+                      noPadding
+                      onClick={onBackButtonClick}
+                    />
+                  )}
+                  {title && <p className={styles.title}>{title}</p>}
+                </div>
                 {hasCloseButton && (
                   <button className={styles.close_button} onClick={onClose}>
                     <Close width={20} height={20} />

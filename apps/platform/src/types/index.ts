@@ -40,5 +40,6 @@ export interface ModalProps {
   closeOnClickOutside?: boolean;
   desktopClassName?: string;
   mobileClassName?: string;
+  onBackButtonClick?: VoidFunction
 }
 export type ChartScale = (typeof CHART_SCALES)[number];

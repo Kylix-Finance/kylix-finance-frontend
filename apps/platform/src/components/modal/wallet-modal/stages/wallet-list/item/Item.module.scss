@@ -5,5 +5,29 @@
   gap: $spacing-4;
   color: $color-wallet-modal-wallet-list-item-text;
   background-color: $color-wallet-modal-wallet-list-item-bg;
+  justify-content: space-between;
+  cursor: pointer;
+  border: none;
+  outline: none;
   @include font($font-heading-3);
+  transition: background-color 0.2s ease-in-out;
+  &:hover {
+    //FIXME: we need to handle it
+  }
+  &:disabled {
+    cursor: not-allowed;
+    * {
+      opacity: 0.5;
+    }
+  }
+}
+
+.information {
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+}
+.download_icon {
+  width: 24px;
+  height: 24px;
 }

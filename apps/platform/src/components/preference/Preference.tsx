@@ -5,6 +5,7 @@ import ThemeSwitcher from "../theme-switcher";
 import { Button } from "../ui/button";
 import WalletProfile from "../wallet-profile";
 import Card from "../card";
+import { DisconnectButton } from "../modal/wallet-modal";
 
 export const Preference = () => {
   return (
@@ -17,7 +18,7 @@ export const Preference = () => {
         <span>Theme</span>
         <ThemeSwitcher />
       </div>
-      <Button fullWidth>Disconnect</Button>
+      <DisconnectButton />
     </Card>
   );
 };

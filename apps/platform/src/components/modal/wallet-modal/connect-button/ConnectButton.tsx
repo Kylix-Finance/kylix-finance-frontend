@@ -1,25 +1,13 @@
 import { Button } from "~/components/ui/button";
 import { useTranslations } from "next-intl";
+import { useModalStore } from "~/stores/modal";
 const ConnectButton = () => {
+  const { setIsOpen } = useModalStore();
   const t = useTranslations("WalletModal");
   const handleClick = () => {
-    // if (!account.selected && !account.list) {
-    //   setStage("walletsList");
-    // }
-    // if (!account.selected && account.list) {
-    //   setStage("accountsList");
-    // }
-    // if (account.selected && account.list) {
-    //   setStage("switchAccount");
-    // }
-    // setIsOpen(true);
+    setIsOpen(true);
   };
-  return (
-    <Button onClick={handleClick}>
-      {/* {account.selected ? account.trimmedSelected : t("connectButton")} */}
-      Connect
-    </Button>
-  );
+  return <Button onClick={handleClick}>{t("connectButton")}</Button>;
 };
 
 export default ConnectButton;

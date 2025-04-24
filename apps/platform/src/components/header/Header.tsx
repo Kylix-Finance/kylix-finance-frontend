@@ -5,13 +5,20 @@ import { Button } from "../ui/button";
 import WalletProfile from "../wallet-profile";
 import { PopoverPanel } from "../popover-panel/PopoverPanel";
 import Preference from "../preference";
+import { useAccountsStore } from "@repo/shared";
+import { ConnectButton } from "../modal/wallet-modal";
 
 export const Header = () => {
+  const { account } = useAccountsStore();
   return (
     <header className={styles.header}>
       <Button>Claim &lt; 0.12</Button>
       <IconButton icon={Bell} />
-      <PopoverPanel target={<WalletProfile />} panel={<Preference />} />
+      {account?.address ? (
+        <PopoverPanel target={<WalletProfile />} panel={<Preference />} />
+      ) : (
+        <ConnectButton />
+      )}
     </header>
   );
 };

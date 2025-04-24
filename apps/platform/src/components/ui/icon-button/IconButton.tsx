@@ -1,25 +1,31 @@
 import { ComponentPropsWithRef, ElementType } from "react";
-import DiscordIcon from "~/assets/icons/discord";
 import styles from "./IconButton.module.scss";
 import clsx from "clsx";
 interface Props extends Omit<ComponentPropsWithRef<"button">, "children"> {
   mode?: "fill" | "none";
   icon: ElementType;
+  width?: number;
+  height?: number;
+  noPadding?: boolean;
 }
 
 const IconButton = ({
   mode = "fill",
   icon: Icon,
   className: containerClassName,
+  width = 24,
+  height = 24,
+  noPadding,
   ...rest
 }: Props) => {
   const className = clsx(styles.container, containerClassName, {
     [styles.fill]: mode === "fill",
     [styles.none]: mode === "none",
+    [styles.no_padding]: noPadding,
   });
   return (
     <button className={className} data-mode={mode} {...rest}>
-      <Icon width={24} height={24} />
+      <Icon width={width} height={height} />
     </button>
   );
 };
