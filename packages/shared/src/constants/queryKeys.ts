@@ -10,8 +10,8 @@ interface AssetPrice {
   assetId: ID;
 }
 interface LendingPools {
-  asset?: ID;
-  account?: string;
+  asset: ID | null;
+  account: string | null;
 }
 interface Pools {
   activeAccount: string | undefined;
@@ -96,7 +96,7 @@ export const queryKeys = {
     account,
     connectorId,
   ],
-  lendingPools: ({ asset, account }: LendingPools = {}) => [
+  lendingPools: ({ asset, account }: LendingPools = { account: null, asset: null }) => [
     baseKey,
     keys.LENDING_POOLS,
     asset,
@@ -151,12 +151,12 @@ export const queryKeys = {
     borrowAssetAmount,
     collateralAsset,
   }: EstimateCollateral) => [
-    baseKey,
-    keys.ESTIMATE_COLLATERAL,
-    borrowAsset,
-    borrowAssetAmount,
-    collateralAsset,
-  ],
+      baseKey,
+      keys.ESTIMATE_COLLATERAL,
+      borrowAsset,
+      borrowAssetAmount,
+      collateralAsset,
+    ],
   getAssetPrice: (asset: number, base_asset?: number) => [
     baseKey,
     keys.GET_ASSET_PRICE,

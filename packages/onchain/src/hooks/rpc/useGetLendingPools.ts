@@ -3,24 +3,28 @@ import { useQuery, skipToken } from "@tanstack/react-query";
 import { decodeArrayToString, queryKeys, useAccountsStore } from "@repo/shared";
 import { formatUnit } from "../../utils";
 interface Params {
-  assetId?: string;
-  account?: string;
+  assetId: string | null;
+  account: string | null;
 }
 
 export type LandingPool = NonNullable<
   ReturnType<typeof useGetLendingPools>["data"]
 >["assets"][number];
 
-export const useGetLendingPools = ({ assetId, account }: Params = {}) => {
+export const useGetLendingPools = ({ assetId, account }: Params = { account: null, assetId: null }) => {
   const { execute, isApiAvailable } = useRpc("lending", "getLendingPools");
   const { account: activeAccount } = useAccountsStore();
-  const finalAccount = account || activeAccount?.address;
-  const enabled = isApiAvailable && account;
+  const finalAccount = account || activeAccount?.address || null;
+  const enabled = isApiAvailable;
+  console.log("_____enabled", enabled);
+
   return useQuery({
     queryKey: queryKeys.lendingPools({ account, asset: assetId }),
     queryFn: enabled
       ? async () => {
         const response = await execute(assetId, finalAccount);
+        console.log("_________response", response);
+
         if (!response) return undefined;
 
         const assets = response[0].map((asset) => ({

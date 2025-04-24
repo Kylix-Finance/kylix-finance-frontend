@@ -8,7 +8,9 @@ import Table from "./table/Table";
 import { useGetLendingPools } from "@repo/onchain";
 
 const Dashboard = () => {
-  const { data } = useGetLendingPools({ account: "", assetId: "" });
+  const { data } = useGetLendingPools();
+  console.log("_______data", data);
+
   return (
     <PageLayout title="Dashboard">
       <div className={styles.container}>

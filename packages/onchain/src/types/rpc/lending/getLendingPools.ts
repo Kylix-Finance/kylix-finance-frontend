@@ -1,6 +1,6 @@
 import { Definition } from "../definitions";
 
-type Params = [asset?: string, account?: string];
+type Params = [asset: string | null, account: string | null];
 
 interface PoolTotals {
   total_supply: bigint;

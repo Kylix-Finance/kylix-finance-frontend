@@ -18,6 +18,7 @@ export const useRpc = <T extends Modules, U extends MethodsKeys<T>>(
   type Response = Def extends Definition<any, infer R> ? R : never;
 
   const execute = async (...args: Params): Promise<Response | undefined> => {
+
     if (!isApiExists(provider?.api)) return;
     return provider.api.rpc(
       `${module}_${String(method)}`,
