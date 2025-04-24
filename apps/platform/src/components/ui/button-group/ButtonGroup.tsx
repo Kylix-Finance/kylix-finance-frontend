@@ -1,20 +1,22 @@
-import { useId, useState } from "react";
+import { useId } from "react";
 import styles from "./ButtonGroup.module.scss";
 import { motion } from "motion/react";
 import clsx from "clsx";
 import { ButtonGroupTab } from "~/types";
 
-interface Props {
-  tabs: ButtonGroupTab[];
+interface Props<T extends ButtonGroupTab> {
+  tabs: T[];
   fullWidth?: boolean;
-  defaultTab?: string | number;
-  onItemClick?: (value: ButtonGroupTab) => void;
+  activeTab: T["value"];
+  setActiveTab: (value: T["value"]) => void;
 }
 
-function ButtonGroup({ tabs, defaultTab, fullWidth, onItemClick }: Props) {
-  const [activeTab, setActiveTab] = useState<string | number | undefined>(
-    defaultTab
-  );
+function ButtonGroup<T extends ButtonGroupTab>({
+  tabs,
+  activeTab,
+  setActiveTab,
+  fullWidth,
+}: Props<T>) {
   const id = useId();
   return (
     <div
@@ -31,7 +33,6 @@ function ButtonGroup({ tabs, defaultTab, fullWidth, onItemClick }: Props) {
           key={index}
           onClick={() => {
             setActiveTab(item.value);
-            onItemClick?.(item);
           }}
         >
           {item.content}
