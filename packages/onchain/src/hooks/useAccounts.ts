@@ -1,9 +1,9 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { queryKeys, getWalletExtension, useAccountStore } from "@repo/shared";
+import { queryKeys, getWalletExtension, useAccountsStore } from "@repo/shared";
 import { useConfig } from "./useConfig";
 
 export const useAccounts = () => {
-  const { connectorId } = useAccountStore();
+  const { connectorId } = useAccountsStore();
   const { data: config } = useConfig();
 
   const enabled = !!connectorId && !!config;

@@ -2,13 +2,17 @@
 
 import { useMetadata } from "./useMetadata";
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { DEFAULT_TOKEN_DECIMALS, queryKeys } from "@repo/shared";
+import {
+  DEFAULT_TOKEN_DECIMALS,
+  queryKeys,
+  useAccountsStore,
+} from "@repo/shared";
 import { useProvider } from "../useProvider";
-import { useActiveAccount } from "../useActiveAccount";
 import { formatUnit } from "../../utils/formatUnit";
+
 interface Props {
   accountAddress?: string;
-  assetId?: number;
+  assetId?: string;
   customDecimals?: number;
   enabled?: boolean;
 }
@@ -20,9 +24,9 @@ const useBalance = ({
   enabled = true,
 }: Props = {}) => {
   const { data } = useProvider();
-  const { activeAccount } = useActiveAccount();
-  const address = accountAddress ?? activeAccount?.address;
-  const { data: assetMetaData } = useMetadata(assetId);
+  const { account } = useAccountsStore();
+  const address = accountAddress ?? account?.address;
+  const { data: assetMetaData } = useMetadata(assetId!);
   const finalEnabled = !!data?.api && !!address && enabled;
 
   return useQuery({

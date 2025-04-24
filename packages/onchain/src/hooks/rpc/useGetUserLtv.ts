@@ -1,7 +1,6 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@repo/shared";
+import { queryKeys, useAccountsStore } from "@repo/shared";
 import { useRpc } from "../useRpc";
-import { useActiveAccount } from "../useActiveAccount";
 
 interface Params {
   account?: string;
@@ -9,7 +8,7 @@ interface Params {
 
 export const useGetUserLtv = ({ account }: Params) => {
   const { execute, isApiAvailable } = useRpc("lending", "getUserLtv");
-  const { activeAccount } = useActiveAccount();
+  const { account: activeAccount } = useAccountsStore();
   const finalAccount = (account || activeAccount?.address) as string;
   const enabled = isApiAvailable || !!finalAccount;
   return useQuery({

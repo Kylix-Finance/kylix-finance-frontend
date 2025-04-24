@@ -1,7 +1,6 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@repo/shared";
+import { queryKeys, useAccountsStore } from "@repo/shared";
 import { useRpc } from "../useRpc";
-import { useActiveAccount } from "../useActiveAccount";
 import { formatUnit } from "../../utils";
 interface Params {
   account?: string;
@@ -10,7 +9,7 @@ interface Params {
 
 export const useGetUserBids = ({ account, assetId }: Params) => {
   const { execute, isApiAvailable } = useRpc("liquidation", "getUserBids");
-  const { activeAccount } = useActiveAccount();
+  const { account: activeAccount } = useAccountsStore();
   const finalAccount = (account || activeAccount?.address) as string;
   const enabled = isApiAvailable || !!finalAccount;
   return useQuery({

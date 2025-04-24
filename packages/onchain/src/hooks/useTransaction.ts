@@ -1,6 +1,5 @@
 import { AugmentedSubmittables, ApiTypes } from "@polkadot/api/types";
 import { useProvider } from "./useProvider";
-import { useActiveAccount } from "./useActiveAccount";
 import { useSigner } from "./useSigner";
 import { isAccountExists } from "../utils/validators/isAccountExists";
 import { isApiExists } from "../utils/validators/isApiExists";
@@ -8,6 +7,8 @@ import { isSignerExists } from "../utils/validators/isSignerExists";
 import { validateEstimatedGas } from "../utils/validateTransactionFees";
 import { transactionStatus } from "../utils/transactionStatus";
 import { useBalance } from "./query/useBalance";
+import { useAccountsStore } from "@repo/shared";
+
 type ApiOperations = keyof AugmentedSubmittables<ApiTypes>;
 type OperationMethods<T extends ApiOperations> =
   AugmentedSubmittables<ApiTypes>[T];
@@ -20,7 +21,7 @@ export const useTransaction = <
   method: K
 ) => {
   const { data: provider } = useProvider();
-  const { activeAccount } = useActiveAccount();
+  const { account } = useAccountsStore();
   const { data: signer } = useSigner();
   const { data: balance } = useBalance();
 
@@ -29,7 +30,7 @@ export const useTransaction = <
     ...args: Parameters<OperationMethods<T>[K]>
   ) => {
     if (
-      !isAccountExists(activeAccount?.address) ||
+      !isAccountExists(account?.address) ||
       !isApiExists(provider?.api) ||
       !isSignerExists(signer)
     )
@@ -39,16 +40,12 @@ export const useTransaction = <
     }
     provider.api.setSigner(signer);
     const extrinsic = provider.api.tx[module][method](args);
-    await validateEstimatedGas(
-      extrinsic,
-      activeAccount.address,
-      balance.realBalance
-    );
+    await validateEstimatedGas(extrinsic, account.address, balance.realBalance);
 
     return new Promise((resolve, reject) => {
       extrinsic
         .signAndSend(
-          activeAccount.address,
+          account.address,
           transactionStatus({
             api: provider.api,
             onConfirm,

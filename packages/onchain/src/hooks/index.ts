@@ -1,6 +1,4 @@
 export * from "./useAccounts";
-export * from "./useActiveAccount";
-export * from "./useActiveConnector";
 export * from "./useConfig";
 export * from "./useProvider";
 export * from "./useSigner";

@@ -11,7 +11,7 @@ export type MetadataResult = {
 };
 export const useMetadata = (assetId: string) => {
   const { data } = useProvider();
-  const enabled = !!data?.api;
+  const enabled = !!data?.api && assetId;
   return useQuery({
     queryKey: queryKeys.metadata(assetId || -1),
     queryFn: enabled

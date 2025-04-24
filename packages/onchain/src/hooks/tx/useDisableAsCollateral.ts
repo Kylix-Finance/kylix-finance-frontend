@@ -1,12 +1,12 @@
-import { useActiveAccount } from "../useActiveAccount";
 import { useTransaction } from "../useTransaction";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useAccountsStore } from "@repo/shared";
 interface MutationFnParams {
   assetId: string;
   onConfirm?: () => void;
 }
 export const useDisableAsCollateral = () => {
-  const { activeAccount } = useActiveAccount();
+  const { account: activeAccount } = useAccountsStore();
   const { execute } = useTransaction("lending", "disableAsCollateral");
   const queryClient = useQueryClient();
   return useMutation({

@@ -1,7 +1,6 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@repo/shared";
+import { queryKeys, useAccountsStore } from "@repo/shared";
 import { useRpc } from "../useRpc";
-import { useActiveAccount } from "../useActiveAccount";
 import { formatUnit } from "../../utils";
 
 interface Params {
@@ -13,7 +12,7 @@ export const useGetLiquidationMarkets = ({ account }: Params) => {
     "liquidation",
     "getLiquidationMarkets"
   );
-  const { activeAccount } = useActiveAccount();
+  const { account: activeAccount } = useAccountsStore();
   const finalAccount = account || activeAccount?.address;
   const enabled = isApiAvailable;
   return useQuery({

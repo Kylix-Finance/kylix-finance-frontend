@@ -1,7 +1,6 @@
 import { useRpc } from "../useRpc";
-import { useActiveAccount } from "../useActiveAccount";
 import { useQuery, skipToken } from "@tanstack/react-query";
-import { decodeArrayToString, queryKeys } from "@repo/shared";
+import { decodeArrayToString, queryKeys, useAccountsStore } from "@repo/shared";
 interface Params {
   poolId?: string;
   account?: string;
@@ -15,7 +14,7 @@ export const useGetAssetWiseBorrowsCollaterals = ({
     "lending",
     "getAssetWiseBorrowsCollaterals"
   );
-  const { activeAccount } = useActiveAccount();
+  const { account: activeAccount } = useAccountsStore();
   const finalAccount = account || activeAccount?.address;
   const enabled = isApiAvailable && account;
   return useQuery({

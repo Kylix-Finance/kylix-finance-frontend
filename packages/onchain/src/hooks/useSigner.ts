@@ -1,14 +1,17 @@
-import { useAccountStore, getWalletExtension } from "@repo/shared";
+import { useAccountsStore, getWalletExtension } from "@repo/shared";
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@repo/shared";
 import { useConfig } from "./useConfig";
 
 export const useSigner = () => {
-  const { connectorId, account } = useAccountStore();
+  const { connectorId, account } = useAccountsStore();
   const { data: config } = useConfig();
-  const enabled = connectorId && account && config;
+  const enabled = connectorId && account?.address && config;
   return useQuery({
-    queryKey: queryKeys.signer({ account, connectorId }),
+    queryKey: queryKeys.signer({
+      account: account?.address || null,
+      connectorId,
+    }),
     queryFn: enabled
       ? async () => {
           const walletExtension = getWalletExtension(connectorId);

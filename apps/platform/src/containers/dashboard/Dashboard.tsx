@@ -5,8 +5,10 @@ import styles from "./Dashboard.module.scss";
 import TotalLocked from "./total-locked/TotalLocked";
 import TotalSupplyBorrow from "./total-supply-borrow/TotalSupplyBorrow";
 import Table from "./table/Table";
+import { useGetLendingPools } from "@repo/onchain";
 
 const Dashboard = () => {
+  const { data } = useGetLendingPools({ account: "", assetId: "" });
   return (
     <PageLayout title="Dashboard">
       <div className={styles.container}>

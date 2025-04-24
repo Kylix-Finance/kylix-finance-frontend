@@ -1,7 +1,6 @@
 import { useRpc } from "../useRpc";
-import { useActiveAccount } from "../useActiveAccount";
 import { useQuery, skipToken } from "@tanstack/react-query";
-import { decodeArrayToString, queryKeys } from "@repo/shared";
+import { decodeArrayToString, queryKeys, useAccountsStore } from "@repo/shared";
 import { formatUnit } from "../../utils";
 interface Params {
   assetId?: string;
@@ -10,7 +9,7 @@ interface Params {
 
 export const useGetLendingPools = ({ assetId, account }: Params = {}) => {
   const { execute, isApiAvailable } = useRpc("lending", "getLendingPools");
-  const { activeAccount } = useActiveAccount();
+  const { account: activeAccount } = useAccountsStore();
   const finalAccount = account || activeAccount?.address;
   const enabled = isApiAvailable && account;
   return useQuery({
@@ -18,7 +17,7 @@ export const useGetLendingPools = ({ assetId, account }: Params = {}) => {
     queryFn: enabled
       ? async () => {
           const response = await execute(assetId, finalAccount);
-          if (!response) return null;
+          if (!response) return undefined;
 
           const assets = response[0].map((asset) => ({
             asset: decodeArrayToString(asset.asset),
