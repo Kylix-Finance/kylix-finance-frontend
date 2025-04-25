@@ -62,6 +62,12 @@
   width: fit-content;
   transition: opacity 0.2s ease-in-out;
   outline: none;
+  &[data-icon-position="true"] {
+    flex-direction: row-reverse;
+  }
+  &[data-icon-position="false"] {
+    flex-direction: row;
+  }
 }
 
 .content_loading {
@@ -168,7 +174,26 @@
     $color-button-tertiary-disabled-border
   );
 }
-
+.ghost {
+  @include variant-base($color-button-ghost-text, transparent, transparent);
+  @include variant-hover(
+    $color-button-ghost-text-hover,
+    transparent,
+    transparent
+  );
+  @include variant-active(
+    $color-button-ghost-text-active,
+    transparent,
+    transparent
+  );
+  @include variant-focus(
+    $color-button-ghost-text-focus,
+    transparent,
+    transparent
+  );
+  @include disabled($color-button-ghost-text, transparent, transparent);
+  @include loading($color-button-ghost-text-disabled, transparent, transparent);
+}
 // size
 .default {
   padding: $spacing-2_5 $spacing-5;

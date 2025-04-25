@@ -1,11 +1,11 @@
 import { Button } from "~/components/ui/button";
 import { useTranslations } from "next-intl";
-import { useModalStore } from "~/stores/modal";
+import { useAccountsStore } from "@repo/shared";
 const ConnectButton = () => {
-  const { setIsOpen } = useModalStore();
+  const { setStage } = useAccountsStore();
   const t = useTranslations("WalletModal");
   const handleClick = () => {
-    setIsOpen(true);
+    setStage("walletsList");
   };
   return <Button onClick={handleClick}>{t("connectButton")}</Button>;
 };

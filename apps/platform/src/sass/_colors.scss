@@ -118,6 +118,12 @@ $color-button-tertiary-disabled-bg: var(--color-button-tertiary-disabled-bg);
 $color-button-tertiary-disabled-border: var(
   --color-button-tertiary-disabled-border
 );
+
+$color-button-ghost-text: var(--color-button-ghost-text);
+$color-button-ghost-text-hover: var(--color-button-ghost-text-hover);
+$color-button-ghost-text-focus: var(--color-button-ghost-text-focus);
+$color-button-ghost-text-active: var(--color-button-ghost-text-active);
+$color-button-ghost-text-disabled: var(--color-button-ghost-text-disabled);
 // link button
 $color-link-button-primary-text: var(--color-link-button-primary-text);
 $color-link-button-primary-text-hover: var(

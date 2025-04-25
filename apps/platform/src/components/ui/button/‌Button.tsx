@@ -1,15 +1,16 @@
-import { ComponentPropsWithRef, ReactNode, ElementType } from "react";
+import { ComponentPropsWithRef, ElementType } from "react";
 import styles from "./‌Button.module.scss";
 
 import clsx from "clsx";
 import Spinner from "~/components/loaders/spinner";
 interface Props extends ComponentPropsWithRef<"button"> {
-  variant?: "primary" | "secondary" | "tertiary";
+  variant?: "primary" | "secondary" | "tertiary" | "ghost";
   size?: "small" | "default" | "large";
   isLoading?: boolean;
   icon?: ElementType;
   containerClassName?: string;
   fullWidth?: boolean;
+  iconPosition?: "start" | "end";
 }
 
 const Button = ({
@@ -17,6 +18,7 @@ const Button = ({
   size = "default",
   isLoading,
   icon: Icon,
+  iconPosition = "end",
   fullWidth,
   containerClassName,
   ...rest
@@ -25,6 +27,7 @@ const Button = ({
     [styles.primary]: variant === "primary",
     [styles.secondary]: variant === "secondary",
     [styles.tertiary]: variant === "tertiary",
+    [styles.ghost]: variant === "ghost",
     [styles.small]: size === "small",
     [styles.default]: size === "default",
     [styles.large]: size === "large",
@@ -38,7 +41,12 @@ const Button = ({
   });
 
   return (
-    <button className={className} {...rest} data-loading={isLoading}>
+    <button
+      className={className}
+      {...rest}
+      data-loading={isLoading}
+      data-icon-position={iconPosition === "start"}
+    >
       {Icon && (
         <span className={styles.icon}>
           {isLoading ? (

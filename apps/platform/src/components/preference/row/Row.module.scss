@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.title {
+  @include font($font-heading-5);
+  [data-theme="light"] & {
+    color: $color-neutral-600;
+  }
+  [data-theme="dark"] & {
+    color: $color-neutral-50;
+  }
+}

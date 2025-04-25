@@ -52,6 +52,12 @@
   --color-button-tertiary-border-active: var(--color-neutral-800);
   --color-button-tertiary-border-focus: var(--color-neutral-600);
   --color-button-tertiary-disabled-border: var(--color-neutral-100);
+
+  --color-button-ghost-text: var(--color-neutral-600);
+  --color-button-ghost-text-hover: var(--color-neutral-700);
+  --color-button-ghost-text-focus: var(--color-neutral-700);
+  --color-button-ghost-text-active: var(--color-neutral-700);
+  --color-button-ghost-text-disabled: var(--color-neutral-800);
 }
 @mixin buttons-dark {
   --color-button-primary-text: var(--color-white);
@@ -107,6 +113,12 @@
   --color-button-tertiary-border-active: var(--color-white);
   --color-button-tertiary-border-focus: var(--color-accent-primary-component);
   --color-button-tertiary-disabled-border: var(--color-neutral-800);
+
+  --color-button-ghost-text: var(--color-neutral-200);
+  --color-button-ghost-text-hover: var(--color-neutral-100);
+  --color-button-ghost-text-focus: var(--color-neutral-400);
+  --color-button-ghost-text-active: var(--color-neutral-400);
+  --color-button-ghost-text-disabled: var(--color-neutral-100);
 }
 
 @mixin link-button-light {

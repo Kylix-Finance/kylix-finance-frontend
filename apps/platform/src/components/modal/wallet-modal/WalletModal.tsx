@@ -3,25 +3,22 @@ import Modal from "~/components/ui/modal/Modal";
 import styles from "./WalletModal.module.scss";
 import WalletList from "./stages/wallet-list/WalletList";
 import { useTranslations } from "next-intl";
-import { useModalStore } from "~/stores/modal";
 import AccountList from "./stages/account-list/AccountList";
 import { useAccountsStore } from "@repo/shared";
 import DisconnectButton from "./disconnect-button/DisconnectButton";
 const WalletModal = () => {
   const t = useTranslations("WalletModal");
-  const { stage, setStage, isOpen, setIsOpen } = useModalStore();
-  const { disconnect } = useAccountsStore();
+  const { disconnect, stage, setStage } = useAccountsStore();
   const handleBackButtonClick = () => {
-    disconnect();
-    setStage("walletsList");
+    disconnect("walletsList");
   };
   return (
     <Modal
       onBackButtonClick={
         stage === "accountsList" ? handleBackButtonClick : undefined
       }
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
+      isOpen={!!stage}
+      onClose={() => setStage(null)}
       title={t("title")}
       footer={stage === "accountsList" && <DisconnectButton />}
     >
