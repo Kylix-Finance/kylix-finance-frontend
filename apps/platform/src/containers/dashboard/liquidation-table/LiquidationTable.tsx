@@ -6,10 +6,7 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 import styles from "./LiquidationTable.module.scss";
-import {
-  LiquidationMarket,
-  useGetLiquidationMarkets,
-} from "@repo/onchain";
+import { LiquidationMarket, useGetLiquidationMarkets } from "@repo/onchain";
 import Table from "~/components/table";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
@@ -20,8 +17,6 @@ const columnHelper = createColumnHelper<LiquidationMarket>();
 export const LiquidationTable = () => {
   const { data } = useGetLiquidationMarkets();
 
-  console.log("23data", data);
-
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const columns = [
@@ -31,6 +26,7 @@ export const LiquidationTable = () => {
     }),
     columnHelper.accessor("asset_symbol", {
       header: "Collateral",
+      enableSorting: false,
       cell: (info) => (
         <div className={styles.token}>
           <TokenIcon symbol={info.getValue()} />

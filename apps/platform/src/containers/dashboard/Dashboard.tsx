@@ -4,8 +4,7 @@ import PageLayout from "~/layouts/page/PageLayout";
 import styles from "./Dashboard.module.scss";
 import TotalLocked from "./total-locked/TotalLocked";
 import TotalSupplyBorrow from "./total-supply-borrow/TotalSupplyBorrow";
-import MarketTable from "./market-table";
-import LiquidationTable from "./liquidation-table";
+import Tables from "./tables";
 
 const Dashboard = () => {
   return (
@@ -18,8 +17,7 @@ const Dashboard = () => {
           <TotalSupplyBorrow />
         </div>
         <div className={styles.table_container}>
-          <MarketTable />
-          <LiquidationTable />
+          <Tables />
         </div>
       </div>
     </PageLayout>
