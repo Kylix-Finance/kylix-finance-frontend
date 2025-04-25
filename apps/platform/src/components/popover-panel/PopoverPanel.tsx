@@ -31,7 +31,11 @@ export function PopoverPanel({ target, panel }: PopoverPanelProps) {
   });
 
   const click = useClick(context);
-  const { getReferenceProps, getFloatingProps } = useInteractions([click]);
+  const dismiss = useDismiss(context);
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    click,
+    dismiss,
+  ]);
 
   return (
     <>
