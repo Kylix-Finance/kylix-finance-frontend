@@ -24,8 +24,9 @@ export const MarketTable = () => {
       header: "Asset",
       enableSorting: false,
       cell: (info) => (
-        <div>
+        <div className={styles.token}>
           <TokenIcon symbol={info.getValue()} />
+          {info.getValue()}
         </div>
       ),
     }),
