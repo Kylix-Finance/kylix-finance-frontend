@@ -4,9 +4,9 @@ import { Button } from "~/components/ui/button";
 
 const DisconnectButton = () => {
   const t = useTranslations("WalletModal");
-  const { disconnect } = useAccountsStore();
+  const { disconnectByAccount, account } = useAccountsStore();
   const handleClick = () => {
-    disconnect();
+    disconnectByAccount(account);
   };
   return (
     <Button variant="primary" onClick={handleClick} fullWidth>

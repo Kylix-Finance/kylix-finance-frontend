@@ -8,7 +8,7 @@ import { useAccountsStore } from "@repo/shared";
 import { trimWalletAddress } from "~/utils/trimWalletAddress";
 import ChevronRight from "~/assets/icons/chevron-right.svg";
 export const Preference = () => {
-  const { account } = useAccountsStore();
+  const { account, setStage } = useAccountsStore();
   return (
     <Card className={styles.preference}>
       <WalletProfile hasCopy />
@@ -16,7 +16,12 @@ export const Preference = () => {
         <ThemeSwitcher />
       </Row>
       <Row title="Wallet options">
-        <Button variant="ghost" icon={ChevronRight} iconPosition="start">
+        <Button
+          variant="ghost"
+          icon={ChevronRight}
+          iconPosition="start"
+          onClick={() => setStage("accountsList")}
+        >
           {account?.name ||
             (account?.address && trimWalletAddress(account.address)) ||
             "Unnamed Account"}

@@ -1,7 +1,7 @@
 import { InjectedAccount } from "@polkadot/extension-inject/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-type Stage = "walletsList" | "accountsList" | "switchAccount" | null;
+type Stage = "walletsList" | "accountsList" | null;
 
 type UseAccountsStoreSchema = {
   account: InjectedAccount | null;
@@ -18,13 +18,14 @@ type UseAccountsStore = {
     accounts: InjectedAccount[],
     stage?: Stage
   ) => void;
-  disconnect: (stage?: Stage) => void;
+  disconnect: (stage: Stage | null) => void;
+  disconnectByAccount: (account: InjectedAccount | null) => void;
   setStage: (stage: Stage) => void;
 } & UseAccountsStoreSchema;
 
 export const useAccountsStore = create<UseAccountsStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       account: null,
       connectorId: null,
       accounts: undefined,
@@ -40,7 +41,7 @@ export const useAccountsStore = create<UseAccountsStore>()(
       connect: (
         connectorId: string,
         accounts: InjectedAccount[],
-        stage: Stage = null
+        stage: Stage | null = null
       ) =>
         set({
           connectorId,
@@ -49,10 +50,28 @@ export const useAccountsStore = create<UseAccountsStore>()(
           stage,
         }),
       disconnect: (stage: Stage = null) =>
-        set({
+        set(() => ({
           account: null,
           connectorId: null,
+          accounts: undefined,
           stage,
+        })),
+      disconnectByAccount: (account: InjectedAccount | null) =>
+        set((state) => {
+          if (!state.accounts || !account) return state;
+          const remainingAccounts = state.accounts.filter(
+            (acc) => acc.address !== account.address
+          );
+          if (remainingAccounts.length > 0) {
+            return {
+              accounts: remainingAccounts,
+              account: remainingAccounts[0],
+              stage: state.stage,
+            };
+          } else {
+            get().disconnect(null);
+            return {};
+          }
         }),
       setStage: (stage: Stage) =>
         set({
