@@ -23,7 +23,7 @@ const Item = ({ account, isActiveAccount }: Props) => {
       className={clsx(styles.container, { [styles.active]: isActiveAccount })}
     >
       <div className={styles.left}>
-        <IconButton icon={User} />
+        <IconButton icon={User} noInteractionStyles />
         <div className={styles.information}>
           <p className={styles.account_name}>
             {" "}

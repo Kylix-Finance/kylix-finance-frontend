@@ -1,3 +1,8 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 .avatar {
   position: relative;
   display: flex;
@@ -68,4 +73,14 @@
   bottom: 0;
   background-color: #dbdbdb;
   border-radius: 100px;
+}
+.account {
+  @include font($font-heading-5);
+  user-select: none;
+  [data-theme="dark"] & {
+    color: $color-neutral-200;
+  }
+  [data-theme="light"] & {
+    color: $color-neutral-600;
+  }
 }

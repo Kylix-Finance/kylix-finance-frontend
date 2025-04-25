@@ -10,40 +10,44 @@
 
   transition: all 0.2s ease-out;
 
-  &:hover {
-    color: $color-icon-button-primary-text-hover;
-  }
-  &:active {
-    color: $color-icon-button-primary-text-active;
-  }
-  &:focus {
-    color: $color-icon-button-primary-text-focus;
-  }
-  &:disabled {
-    color: $color-icon-button-primary-text-disabled;
-    cursor: not-allowed;
-    pointer-events: none;
+  [data-no-interaction-styles="false"] {
+    &:hover {
+      color: $color-icon-button-primary-text-hover;
+    }
+    &:active {
+      color: $color-icon-button-primary-text-active;
+    }
+    &:focus {
+      color: $color-icon-button-primary-text-focus;
+    }
+    &:disabled {
+      color: $color-icon-button-primary-text-disabled;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   }
 }
 .fill {
   background-color: $color-icon-button-primary-bg;
   border: 1px solid $color-icon-button-primary-border;
 
-  &:hover {
-    background-color: $color-icon-button-primary-bg-hover;
-    border: 1px solid $color-icon-button-primary-border-hover;
-  }
-  &:active {
-    background-color: $color-icon-button-primary-bg-active;
-    border: 1px solid $color-icon-button-primary-border-active;
-  }
-  &:focus {
-    background-color: $color-icon-button-primary-bg-focus;
-    border: 1px solid $color-icon-button-primary-border-focus;
-  }
-  &:disabled {
-    background-color: $color-icon-button-primary-bg;
-    border: 1px solid $color-icon-button-primary-border-disabled;
+  [data-no-interaction-styles="false"] {
+    &:hover {
+      background-color: $color-icon-button-primary-bg-hover;
+      border: 1px solid $color-icon-button-primary-border-hover;
+    }
+    &:active {
+      background-color: $color-icon-button-primary-bg-active;
+      border: 1px solid $color-icon-button-primary-border-active;
+    }
+    &:focus {
+      background-color: $color-icon-button-primary-bg-focus;
+      border: 1px solid $color-icon-button-primary-border-focus;
+    }
+    &:disabled {
+      background-color: $color-icon-button-primary-bg;
+      border: 1px solid $color-icon-button-primary-border-disabled;
+    }
   }
 }
 .none {

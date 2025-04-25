@@ -7,6 +7,7 @@ interface Props extends Omit<ComponentPropsWithRef<"button">, "children"> {
   width?: number;
   height?: number;
   noPadding?: boolean;
+  noInteractionStyles?: boolean;
 }
 
 const IconButton = ({
@@ -15,6 +16,7 @@ const IconButton = ({
   className: containerClassName,
   width = 24,
   height = 24,
+  noInteractionStyles,
   noPadding,
   ...rest
 }: Props) => {
@@ -24,7 +26,12 @@ const IconButton = ({
     [styles.no_padding]: noPadding,
   });
   return (
-    <button className={className} data-mode={mode} {...rest}>
+    <button
+      className={className}
+      data-mode={mode}
+      {...rest}
+      data-no-interaction-styles={noInteractionStyles}
+    >
       <Icon width={width} height={height} />
     </button>
   );
