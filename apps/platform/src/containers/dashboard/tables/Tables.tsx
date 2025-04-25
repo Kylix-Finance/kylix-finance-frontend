@@ -5,6 +5,7 @@ import { ButtonGroup } from "~/components/ui/button-group";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
+import TableLayout from "~/components/table-layout";
 
 type Tab = "markets" | "liquidations";
 
@@ -12,8 +13,8 @@ export const Tables = () => {
   const [activeTab, setActiveTab] = useState<Tab>("markets");
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
+    <TableLayout
+      header={
         <div className={styles.switcher}>
           <ButtonGroup
             tabs={[
@@ -30,8 +31,8 @@ export const Tables = () => {
             setActiveTab={setActiveTab}
           />
         </div>
-      </div>
-
+      }
+    >
       <AnimatePresence mode="wait">
         {activeTab === "markets" && (
           <motion.div
@@ -53,6 +54,6 @@ export const Tables = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </TableLayout>
   );
 };

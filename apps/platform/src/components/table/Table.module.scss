@@ -4,8 +4,8 @@
   overflow-x: auto;
 
   [data-theme="light"] & {
-    border-right: 1px solid $color-neutral-200;
-    border-left: 1px solid $color-neutral-200;
+    // border-right: 1px solid $color-neutral-200;
+    // border-left: 1px solid $color-neutral-200;
     .thead {
       color: $color-neutral-600;
       background-color: $color-neutral-50;
@@ -19,8 +19,8 @@
   }
 
   [data-theme="dark"] & {
-    border-right: 1px solid $color-neutral-700;
-    border-left: 1px solid $color-neutral-700;
+    // border-right: 1px solid $color-neutral-700;
+    // border-left: 1px solid $color-neutral-700;
     .thead {
       color: $color-neutral-200;
       background-color: $color-neutral-900;
