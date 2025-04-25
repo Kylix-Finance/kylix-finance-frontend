@@ -7,7 +7,7 @@ type UseAccountsStoreSchema = {
   account: InjectedAccount | null;
   connectorId: string | null;
   accounts?: InjectedAccount[];
-  stage: Stage;
+  stage: Stage | null;
 };
 
 type UseAccountsStore = {
