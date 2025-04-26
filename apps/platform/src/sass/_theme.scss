@@ -278,6 +278,11 @@
   --color-alert-border-message: var(--color-semantic-info);
   --color-alert-border-warning: var(--color-semantic-warning);
   --color-alert-border-error: var(--color-semantic-error);
+
+  --toastify-color-progress-info: var(--color-semantic-info);
+  --toastify-color-progress-success: var(--color-semantic-success);
+  --toastify-color-progress-warning: var(--color-semantic-warning);
+  --toastify-color-progress-error: var(--color-semantic-error);
 }
 @mixin alert-dark {
   --color-alert-bg: var(--color-black);
@@ -287,6 +292,11 @@
   --color-alert-border-message: var(--color-semantic-info);
   --color-alert-border-warning: var(--color-semantic-warning);
   --color-alert-border-error: var(--color-semantic-error);
+
+  --toastify-color-progress-info: var(--color-semantic-info);
+  --toastify-color-progress-success: var(--color-semantic-success);
+  --toastify-color-progress-warning: var(--color-semantic-warning);
+  --toastify-color-progress-error: var(--color-semantic-error);
 }
 
 @mixin button-group-light {
@@ -398,7 +408,6 @@
   --color-wallet-modal-account-text-name: var(--color-neutral-200);
   --color-wallet-modal-account-text-address: var(--color-neutral-200);
 }
-
 @mixin theme-light {
   @include buttons-light;
   @include link-button-light;
@@ -413,6 +422,7 @@
   @include page-layout-light;
   @include chart-container-light;
   @include wallet-modal-light;
+
   --color-black: #121212;
   --color-white: #ffffff;
 
