@@ -1,6 +1,6 @@
 import { ChartContainer } from "~/components/chart-container";
 import { ButtonGroupTab } from "~/types";
-import { Skeleton } from "~/components/skeleton";
+import { ChartSkeleton } from "~/components/chart-skeleton";
 const tabs: ButtonGroupTab[] = [
   {
     content: "ALL",
@@ -24,9 +24,9 @@ const TotalLocked = () => {
       onItemClick={() => {}}
       defaultTab="all"
     >
-      <Skeleton isLoading width={400} height={400}>
+      <ChartSkeleton isLoading>
         <div></div>
-      </Skeleton>
+      </ChartSkeleton>
     </ChartContainer>
   );
 };
