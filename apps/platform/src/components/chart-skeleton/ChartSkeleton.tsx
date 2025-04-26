@@ -5,10 +5,11 @@ import { Skeleton } from "../skeleton";
 interface Props {
   isLoading?: boolean;
   children?: ReactNode;
+  width?: number;
 }
 const heights = [105, 130, 191, 163, 250, 283];
 
-const ChartSkeleton = ({ children, isLoading }: Props) => {
+const ChartSkeleton = ({ children, isLoading, width = 45 }: Props) => {
   if (isLoading)
     return (
       <div className={styles.wrapper}>
@@ -16,7 +17,7 @@ const ChartSkeleton = ({ children, isLoading }: Props) => {
           <Skeleton
             key={index}
             containerClassName={styles.container}
-            width={45}
+            width={width}
             height={height}
             isLoading
           />
