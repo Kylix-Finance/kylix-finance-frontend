@@ -5,6 +5,7 @@ import "~/sass/globals.scss";
 import ThemeProvider from "~/providers/ThemeProvider";
 import { fonts } from "~/assets/fonts";
 import "react-toastify/dist/ReactToastify.css";
+import "react-loading-skeleton/dist/skeleton.css";
 import { ToastContainer } from "react-toastify";
 import ModalProvider from "~/providers/ModalProvider";
 export const metadata = {
