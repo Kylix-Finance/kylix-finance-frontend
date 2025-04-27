@@ -1,5 +1,1 @@
-import { Dashboard } from "~/containers/dashboard";
-
-export default function Home() {
-  return <Dashboard />;
-}
+export { default } from "~/containers/dashboard/Dashboard";
