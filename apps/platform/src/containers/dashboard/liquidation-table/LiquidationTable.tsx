@@ -6,7 +6,12 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 import styles from "./LiquidationTable.module.scss";
-import { LiquidationMarket, useGetLiquidationMarkets } from "@repo/onchain";
+import {
+  formatBigNumbers,
+  formatUnit,
+  LiquidationMarket,
+  useGetLiquidationMarkets,
+} from "@repo/onchain";
 import Table from "~/components/table";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
@@ -42,14 +47,14 @@ export const LiquidationTable = () => {
       header: "TVL",
       cell: (info) => {
         const { tvl, asset_decimals } = info.row.original;
-        return tvl;
+        return formatBigNumbers(formatUnit(tvl, asset_decimals), 4);
       },
     }),
     columnHelper.accessor("pool_size", {
       header: "Pool size",
       cell: (info) => {
         const { pool_size, asset_decimals } = info.row.original;
-        return pool_size;
+        return formatBigNumbers(formatUnit(pool_size, asset_decimals), 4);
       },
     }),
     columnHelper.accessor("max_discount", {
@@ -58,7 +63,12 @@ export const LiquidationTable = () => {
     }),
     columnHelper.accessor("user_bid", {
       header: "Bid placed",
-      cell: (info) => info.getValue(),
+      cell: (info) => {
+        const { user_bid, bid_asset_decimals } = info.row.original;
+        return user_bid
+          ? formatBigNumbers(formatUnit(user_bid, bid_asset_decimals), 4)
+          : "-";
+      },
     }),
     columnHelper.display({
       id: "actions",

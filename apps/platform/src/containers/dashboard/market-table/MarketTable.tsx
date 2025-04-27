@@ -6,7 +6,11 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 import styles from "./MarketTable.module.scss";
-import { LandingPool, useGetLendingPools } from "@repo/onchain";
+import {
+  formatBigNumbers,
+  LandingPool,
+  useGetLendingPools,
+} from "@repo/onchain";
 import Table from "~/components/table";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
@@ -33,8 +37,8 @@ export const MarketTable = () => {
     columnHelper.accessor("total_pool_supply", {
       header: "Total Supplied",
       cell: (info) => {
-        const { total_pool_supply, asset_decimals } = info.row.original;
-        return total_pool_supply;
+        const { total_pool_supply } = info.row.original;
+        return formatBigNumbers(total_pool_supply.toString(), 4);
       },
     }),
     columnHelper.accessor("supply_apy", {
@@ -44,7 +48,7 @@ export const MarketTable = () => {
     columnHelper.accessor("total_pool_borrow", {
       header: "Total Borrowed",
       cell: (info) => {
-        const { borrow_apy, asset_decimals } = info.row.original;
+        const { borrow_apy } = info.row.original;
         return borrow_apy;
       },
     }),
