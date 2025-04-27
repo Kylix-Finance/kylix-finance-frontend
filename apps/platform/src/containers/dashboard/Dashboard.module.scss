@@ -7,7 +7,7 @@
     "total_locked total_supply_borrow"
     "table_container table_container";
   gap: $spacing-6;
-
+  padding-bottom: 24px;
   @include media("<=tablet") {
     grid-template-columns: 1fr;
     grid-template-areas:

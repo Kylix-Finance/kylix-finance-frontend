@@ -2,7 +2,6 @@
   box-sizing: border-box;
   width: 100%;
   overflow-x: auto;
-
   [data-theme="light"] & {
     // border-right: 1px solid $color-neutral-200;
     // border-left: 1px solid $color-neutral-200;
@@ -40,10 +39,13 @@
   border-spacing: 20px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  overflow-x: auto;
 }
 
 .thead {
-  @include font($font-body-compact);
+  * {
+    @include font($font-body-compact);
+  }
 }
 
 .tbody {
@@ -51,7 +53,10 @@
 
 .tr {
   height: 72px;
-
+  cursor: pointer;
+  &:hover {
+    background-color: $color-accent-primary-component;
+  }
   & > :first-child {
     padding-left: 16px;
   }

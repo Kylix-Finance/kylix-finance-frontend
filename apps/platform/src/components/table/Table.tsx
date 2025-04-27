@@ -3,7 +3,6 @@ import { flexRender, type Table as ReactTable } from "@tanstack/react-table";
 import styles from "./Table.module.scss";
 import ChevronUp from "~/assets/icons/chevron-up.svg";
 import ChevronDown from "~/assets/icons/chevron-down.svg";
-
 interface TableProps {
   table: ReactTable<any>;
 }
@@ -53,7 +52,7 @@ export function Table({ table }: TableProps) {
         </thead>
         <tbody className={styles.tbody}>
           {table.getRowModel().rows.map((row) => (
-            <tr className={styles.tr} key={row.id}>
+            <tr key={row.id} className={styles.tr}>
               {row.getVisibleCells().map((cell) => (
                 <td className={styles.td} key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

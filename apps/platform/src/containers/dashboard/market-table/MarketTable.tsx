@@ -15,11 +15,12 @@ import Table from "~/components/table";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
 import { useState, useMemo } from "react";
+import clsx from "clsx";
 
 const columnHelper = createColumnHelper<LandingPool>();
 
 export const MarketTable = () => {
-  const { data } = useGetLendingPools();
+  const { data, isLoading, isFetched } = useGetLendingPools();
 
   const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -28,7 +29,7 @@ export const MarketTable = () => {
       header: "Asset",
       enableSorting: false,
       cell: (info) => (
-        <div className={styles.token}>
+        <div className={clsx(styles.token, styles.cell)}>
           <TokenIcon symbol={info.getValue()} />
           {info.getValue()}
         </div>
@@ -38,27 +39,31 @@ export const MarketTable = () => {
       header: "Total Supplied",
       cell: (info) => {
         const { total_pool_supply } = info.row.original;
-        return formatBigNumbers(total_pool_supply.toString(), 4);
+        return (
+          <p className={styles.cell}>
+            {formatBigNumbers(total_pool_supply.toString(), 2)}
+          </p>
+        );
       },
     }),
     columnHelper.accessor("supply_apy", {
       header: "Supply APY",
-      cell: (info) => info.getValue(),
+      cell: (info) => <p className={styles.cell}>{info.getValue()}</p>,
     }),
     columnHelper.accessor("total_pool_borrow", {
       header: "Total Borrowed",
       cell: (info) => {
         const { borrow_apy } = info.row.original;
-        return borrow_apy;
+        return <p className={styles.cell}>{borrow_apy}</p>;
       },
     }),
     columnHelper.accessor("borrow_apy", {
       header: "Borrow APY",
-      cell: (info) => info.getValue(),
+      cell: (info) => <p className={styles.cell}>{info.getValue()}</p>,
     }),
     columnHelper.accessor("utilization", {
       header: "Utilization",
-      cell: (info) => info.getValue(),
+      cell: (info) => <p className={styles.cell}>{info.getValue()}</p>,
     }),
     columnHelper.display({
       id: "actions",
