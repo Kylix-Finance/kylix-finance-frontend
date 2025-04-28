@@ -102,15 +102,13 @@ export const MarketTable = ({ query }: Props) => {
   return (
     <div className={styles.container}>
       <Table table={table} isLoading={!data && (isLoading || !isFetched)} />
-      {(!data?.assets || data?.assets.length === 0) &&
-        !isLoading &&
-        isFetched && (
-          <EmptyState
-            description="No markets are currently available. Please check back later for available lending and borrowing markets."
-            title="No Markets Available"
-            icon={Ghost}
-          />
-        )}
+      {(!tableData || tableData.length === 0) && !isLoading && isFetched && (
+        <EmptyState
+          description="No markets were found. This could be due to no available markets or your search criteria didn't match any results."
+          title="No Markets Found"
+          icon={Ghost}
+        />
+      )}
     </div>
   );
 };

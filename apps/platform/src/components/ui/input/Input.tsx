@@ -10,7 +10,11 @@ const Input = ({ icon: Icon, ...rest }: Props) => {
     inputRef.current?.focus();
   };
   return (
-    <div className={styles.container} onClick={handleContainerClick}>
+    <div
+      className={styles.container}
+      onClick={handleContainerClick}
+      data-disabled={rest.disabled}
+    >
       {Icon && (
         <span className={styles.icon}>
           <Icon />

@@ -25,6 +25,7 @@
 .description {
   @include font($font-body);
   color: $color-neutral-200;
+  max-width: 500px;
 }
 .content {
   display: flex;

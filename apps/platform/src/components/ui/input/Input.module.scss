@@ -7,6 +7,26 @@
   color: $color-neutral-400;
   gap: 12px;
   width: 100%;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    background-color: $color-neutral-800;
+    color: $color-neutral-400;
+  }
+  &:active {
+    background-color: $color-black;
+    color: $color-white;
+  }
+  &:focus {
+    background-color: $color-black;
+    color: $color-white;
+    border-color: $color-neutral-500;
+  }
+  [data-disabled="true"] {
+    background-color: $color-neutral-800;
+    color: $color-neutral-700;
+    border-color: $color-neutral-800;
+  }
 }
 
 .input {

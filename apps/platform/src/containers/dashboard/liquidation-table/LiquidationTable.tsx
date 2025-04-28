@@ -118,10 +118,10 @@ export const LiquidationTable = ({ query }: Props) => {
   return (
     <div className={styles.container}>
       <Table table={table} isLoading={!data && (isLoading || isFetched)} />
-      {(!data || data.length === 0) && !isLoading && isFetched && (
+      {(!tableData || tableData.length === 0) && !isLoading && isFetched && (
         <EmptyState
-          description="No liquidation markets are currently available. Please check back later."
-          title="No Liquidation Markets Available"
+          description="No liquidation markets available. This could be due to unavailable data or no matching search results."
+          title="No Liquidation Markets Found"
           icon={Ghost}
         />
       )}
