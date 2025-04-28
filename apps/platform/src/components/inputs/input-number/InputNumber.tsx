@@ -1,5 +1,5 @@
 import { ComponentPropsWithRef, useState } from "react";
-import styles from "./Input.module.scss";
+import styles from "./InputNumber.module.scss";
 import { Button } from "~/components/ui/button";
 import TokenIcon from "~/components/token-icon";
 import { SelectBox } from "../select-box";
@@ -17,7 +17,7 @@ interface Props
   value?: string;
 }
 
-export const Input = ({
+export const InputNumber = ({
   label,
   showMaxButton = false,
   onMaxClick,
