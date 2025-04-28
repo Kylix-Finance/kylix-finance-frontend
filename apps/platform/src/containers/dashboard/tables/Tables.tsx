@@ -87,7 +87,7 @@ export const Tables = () => {
     defaultValue: networkKeys[0],
   });
   const [selectedSort, setSelectedSort] = useQueryState("sort", {
-    defaultValue: networkKeys[0],
+    defaultValue: sortOptionKeys[0],
   });
 
   const renderNetwork = (key: string) => {
