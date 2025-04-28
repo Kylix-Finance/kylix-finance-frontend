@@ -17,7 +17,7 @@ import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
 import { useState, useMemo } from "react";
 import clsx from "clsx";
-
+import Health from "./health/Health";
 const columnHelper = createColumnHelper<LiquidationMarket>();
 
 export const LiquidationTable = () => {
@@ -28,7 +28,7 @@ export const LiquidationTable = () => {
   const columns = [
     columnHelper.accessor("health", {
       header: "Health",
-      cell: (info) => info.getValue(),
+      cell: (info) => <Health value={info.getValue()} />,
     }),
     columnHelper.accessor("asset_symbol", {
       header: "Collateral",
