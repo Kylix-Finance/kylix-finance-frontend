@@ -19,8 +19,10 @@ import { useState, useMemo } from "react";
 import clsx from "clsx";
 import Health from "./health/Health";
 const columnHelper = createColumnHelper<LiquidationMarket>();
-
-export const LiquidationTable = () => {
+interface Props {
+  query: string | null;
+}
+export const LiquidationTable = ({ query }: Props) => {
   const { data, isLoading, isFetching } = useGetLiquidationMarkets();
 
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -93,8 +95,13 @@ export const LiquidationTable = () => {
     }),
   ];
 
-  const tableData = useMemo(() => data || [], [data]);
-
+  const tableData = useMemo(() => {
+    if (!data) return [];
+    if (!query) return data;
+    return data.filter((item) =>
+      item.asset_name.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [data, query]);
   const table = useReactTable({
     data: tableData,
     columns,

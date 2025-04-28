@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  align-items: center;
+  border: 1px solid $color-neutral-700;
+  padding: 10px 16px;
+  border-radius: 9999px;
+  color: $color-neutral-400;
+  gap: 12px;
+  width: 100%;
+}
+
+.input {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  width: 100%;
+  @include font($font-body);
+  &::placeholder {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  color: inherit;
+  flex-shrink: 0;
+  svg {
+    width: inherit;
+    height: inherit;
+    color: inherit;
+  }
+}

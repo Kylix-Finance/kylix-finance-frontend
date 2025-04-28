@@ -19,7 +19,11 @@ import clsx from "clsx";
 
 const columnHelper = createColumnHelper<LandingPool>();
 
-export const MarketTable = () => {
+interface Props {
+  query: string | null;
+}
+
+export const MarketTable = ({ query }: Props) => {
   const { data, isLoading, isFetched } = useGetLendingPools();
 
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -76,7 +80,13 @@ export const MarketTable = () => {
     }),
   ];
 
-  const tableData = useMemo(() => data?.assets || [], [data]);
+  const tableData = useMemo(() => {
+    if (!data?.assets) return [];
+    if (!query) return data.assets;
+    return data.assets.filter((item) =>
+      item.asset.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [data, query]);
 
   const table = useReactTable({
     data: tableData,
