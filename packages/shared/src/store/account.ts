@@ -13,6 +13,7 @@ type UseAccountsStoreSchema = {
 type UseAccountsStore = {
   setAccount: (account: InjectedAccount) => void;
   setConnectorId: (connectorId: string) => void;
+  switchAccount: (account: InjectedAccount, stage: Stage) => void;
   connect: (
     connectorId: string,
     accounts: InjectedAccount[],
@@ -77,6 +78,11 @@ export const useAccountsStore = create<UseAccountsStore>()(
         set({
           stage,
         }),
+      switchAccount: (account: InjectedAccount, stage: Stage) =>
+        set(() => ({
+          account,
+          stage,
+        })),
     }),
     {
       name: "accounts",

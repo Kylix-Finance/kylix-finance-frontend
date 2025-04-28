@@ -4,7 +4,6 @@ import styles from "./WalletModal.module.scss";
 import WalletList from "./stages/wallet-list/WalletList";
 import AccountList from "./stages/account-list/AccountList";
 import { useAccountsStore } from "@repo/shared";
-import DisconnectButton from "./disconnect-button/DisconnectButton";
 const WalletModal = () => {
   const { disconnect, stage, setStage } = useAccountsStore();
   const handleBackButtonClick = () => {
@@ -18,7 +17,6 @@ const WalletModal = () => {
       isOpen={!!stage}
       onClose={() => setStage(null)}
       title={stage === "walletsList" ? "Connect a wallet" : "Wallet selection"}
-      footer={stage === "accountsList" && <DisconnectButton />}
     >
       <div className={styles.container}>
         {stage === "walletsList" && <WalletList />}

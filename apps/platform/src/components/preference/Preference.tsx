@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { useAccountsStore } from "@repo/shared";
 import { trimWalletAddress } from "~/utils/trimWalletAddress";
 import ChevronRight from "~/assets/icons/chevron-right.svg";
+import { DisconnectButton } from "../modal/wallet-modal";
 export const Preference = () => {
   const { account, setStage } = useAccountsStore();
   return (
@@ -26,6 +27,9 @@ export const Preference = () => {
             (account?.address && trimWalletAddress(account.address)) ||
             "Unnamed Account"}
         </Button>
+      </Row>
+      <Row>
+        <DisconnectButton />
       </Row>
     </Card>
   );

@@ -4,12 +4,10 @@ import { Button } from "~/components/ui/button";
 
 const DisconnectButton = () => {
   const t = useTranslations("WalletModal");
-  const { disconnectByAccount, account } = useAccountsStore();
-  const handleClick = () => {
-    disconnectByAccount(account);
-  };
+  const { disconnect } = useAccountsStore();
+
   return (
-    <Button variant="primary" onClick={handleClick} fullWidth>
+    <Button variant="primary" onClick={() => disconnect(null)} fullWidth>
       {t("disconnectButton")}
     </Button>
   );

@@ -13,9 +13,9 @@ interface Props {
 }
 
 const Item = ({ account, isActiveAccount }: Props) => {
-  const { setAccount } = useAccountsStore();
+  const { switchAccount } = useAccountsStore();
   const handleClick = () => {
-    setAccount(account);
+    switchAccount(account, null);
   };
   return (
     <div
