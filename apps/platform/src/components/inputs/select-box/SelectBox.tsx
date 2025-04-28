@@ -1,7 +1,8 @@
-import { ReactNode } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import styles from "./SelectBox.module.scss";
 import { PopoverPanel } from "~/components/popover-panel/PopoverPanel";
 import clsx from "clsx";
+import { ChevronDown } from "~/assets/icons";
 
 interface Props<T> {
   options: T[];
@@ -22,29 +23,47 @@ const SelectBox = <T extends string | number>({
   className,
   optionsClassName,
 }: Props<T>) => {
-  const Selector = () => (
-    <div className={clsx(styles.selector, className)}>
-      {value ? renderValue(value) : null}
-    </div>
-  );
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState<T | undefined>(value);
 
-  const OptionsList = () => (
-    <div className={clsx(styles.optionsList, optionsClassName)}>
-      {options.map((option) => (
-        <button
-          key={option}
-          className={clsx(styles.option, {
-            [styles.selectedOption]: option === value,
-          })}
-          onClick={() => onChange?.(option)}
-        >
-          {renderOption(option)}
-        </button>
-      ))}
-    </div>
-  );
+  useEffect(() => {
+    setSelectedValue(value);
+  }, [value]);
 
-  return <PopoverPanel target={<Selector />} panel={<OptionsList />} />;
+  const handleOptionClick = (option: T) => {
+    setSelectedValue(option);
+    onChange?.(option);
+  };
+
+  return (
+    <PopoverPanel
+      target={
+        <div className={clsx(styles.selector, className)}>
+          {selectedValue ? renderValue(selectedValue) : null}
+          <ChevronDown
+            className={clsx(styles.chevron, { [styles.chevronOpen]: isOpen })}
+          />
+        </div>
+      }
+      panel={
+        <div className={clsx(styles.optionsList, optionsClassName)}>
+          {options.map((option) => (
+            <button
+              key={option}
+              className={clsx(styles.option, {
+                [styles.selectedOption]: option === selectedValue,
+              })}
+              onClick={() => handleOptionClick(option)}
+            >
+              {renderOption(option)}
+            </button>
+          ))}
+        </div>
+      }
+      onOpenChange={setIsOpen}
+      open={isOpen}
+    />
+  );
 };
 
 export default SelectBox;

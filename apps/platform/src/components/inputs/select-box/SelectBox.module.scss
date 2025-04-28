@@ -53,3 +53,11 @@
     background-color: $color-accent-secondary-element;
   }
 }
+
+.chevron {
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(-180deg);
+}
