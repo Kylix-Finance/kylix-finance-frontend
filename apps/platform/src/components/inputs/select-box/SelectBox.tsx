@@ -2,7 +2,7 @@ import { ReactNode, useState, useEffect } from "react";
 import styles from "./SelectBox.module.scss";
 import { PopoverPanel } from "~/components/popover-panel/PopoverPanel";
 import clsx from "clsx";
-import { ChevronDown } from "~/assets/icons";
+import { Check, ChevronDown } from "~/assets/icons";
 
 interface Props<T> {
   options: T[];
@@ -56,7 +56,12 @@ const SelectBox = <T extends string | number>({
               })}
               onClick={() => handleOptionClick(option)}
             >
-              {renderOption(option)}
+              <div className={styles.option_wrapper}>
+                {renderOption(option)}
+              </div>
+              {option === selectedValue && (
+                <Check className={styles.check_icon} />
+              )}
             </button>
           ))}
         </div>

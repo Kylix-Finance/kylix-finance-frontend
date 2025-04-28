@@ -64,17 +64,6 @@
   color: $color-white;
 }
 
-.tokenList {
-  background-color: $color-neutral-900;
-  border: 1px solid $color-neutral-700;
-  border-radius: 16px;
-  padding: $spacing-2;
-  min-width: 160px;
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-1;
-}
-
 .tokenOption {
   display: flex;
   align-items: center;

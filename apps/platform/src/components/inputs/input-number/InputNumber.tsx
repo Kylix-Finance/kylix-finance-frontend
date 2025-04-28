@@ -48,7 +48,7 @@ export const InputNumber = ({
 
   const renderTokenOption = (token: string) => (
     <>
-      <TokenIcon symbol={token} width={24} height={24} />
+      <TokenIcon symbol={token} width={28} height={28} />
       <span>{token}</span>
     </>
   );
@@ -78,7 +78,6 @@ export const InputNumber = ({
               renderOption={renderTokenOption}
               renderValue={renderTokenOption}
               className={styles.tokenSelector}
-              optionsClassName={styles.tokenList}
             />
           )}
         </div>
