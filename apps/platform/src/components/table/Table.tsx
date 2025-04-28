@@ -3,11 +3,14 @@ import { flexRender, type Table as ReactTable } from "@tanstack/react-table";
 import styles from "./Table.module.scss";
 import ChevronUp from "~/assets/icons/chevron-up.svg";
 import ChevronDown from "~/assets/icons/chevron-down.svg";
+import { Skeleton } from "../skeleton";
+
 interface TableProps {
   table: ReactTable<any>;
+  isLoading: boolean;
 }
 
-export function Table({ table }: TableProps) {
+export function Table({ table, isLoading }: TableProps) {
   return (
     <div className={styles.container}>
       <table className={styles.table}>
@@ -51,15 +54,33 @@ export function Table({ table }: TableProps) {
           ))}
         </thead>
         <tbody className={styles.tbody}>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className={styles.tr}>
-              {row.getVisibleCells().map((cell) => (
-                <td className={styles.td} key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+          {isLoading
+            ? Array.from({ length: 6 }).map((_, index) => (
+                <tr key={index} className={styles.tr}>
+                  {table.getVisibleFlatColumns().map((_, colIndex) => (
+                    <td className={styles.td} key={colIndex}>
+                      <Skeleton
+                        height={30}
+                        width="80%"
+                        className={styles.skel}
+                        isLoading
+                      />
+                    </td>
+                  ))}
+                </tr>
+              ))
+            : table.getRowModel().rows.map((row) => (
+                <tr key={row.id} className={styles.tr}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td className={styles.td} key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
         </tbody>
       </table>
     </div>

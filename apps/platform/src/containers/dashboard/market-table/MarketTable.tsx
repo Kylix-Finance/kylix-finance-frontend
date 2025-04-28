@@ -91,7 +91,7 @@ export const MarketTable = () => {
 
   return (
     <div className={styles.container}>
-      <Table table={table} />
+      <Table table={table} isLoading={!data && (isLoading || !isFetched)} />
     </div>
   );
 };

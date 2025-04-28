@@ -68,12 +68,15 @@
 
 .th {
   text-align: left;
-
+  min-width: max-content;
+  white-space: nowrap;
   &[data-is-sortable="true"] {
     cursor: pointer;
   }
 }
 .td {
+  min-width: max-content;
+  text-align: center;
 }
 
 .th_content {
@@ -91,4 +94,8 @@
   &[data-active="true"] {
     stroke: $color-primary;
   }
+}
+.skel {
+  border-radius: 9999px;
+  min-width: 100px;
 }
