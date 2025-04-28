@@ -12,7 +12,11 @@ const Dashboard = () => {
     <PageLayout title="Dashboard">
       <div className={styles.container}>
         <div className={styles.input}>
-          <Input />
+          <Input
+            availableTokens={["btc", "eth", "dot"]}
+            selectedToken="btc"
+            onTokenSelect={(e) => console.log(e)}
+          />
         </div>
 
         <div className={styles.total_locked}>

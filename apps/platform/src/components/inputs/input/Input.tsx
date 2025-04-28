@@ -2,6 +2,7 @@ import { ComponentPropsWithRef, useState } from "react";
 import styles from "./Input.module.scss";
 import { Button } from "~/components/ui/button";
 import TokenIcon from "~/components/token-icon";
+import { SelectBox } from "../select-box";
 
 interface Props
   extends Omit<ComponentPropsWithRef<"input">, "onChange" | "value"> {
@@ -45,6 +46,13 @@ export const Input = ({
     }
   };
 
+  const renderTokenOption = (token: string) => (
+    <>
+      <TokenIcon symbol={token} width={24} height={24} />
+      <span>{token}</span>
+    </>
+  );
+
   return (
     <div className={styles.container}>
       {label && <label className={styles.label}>{label}</label>}
@@ -58,34 +66,20 @@ export const Input = ({
         />
         <div className={styles.rightElements}>
           {showMaxButton && (
-            <Button
-              variant="secondary"
-              size="small"
-              onClick={() => {
-                onMaxClick?.();
-              }}
-            >
+            <Button variant="secondary" size="small" onClick={onMaxClick}>
               Max
             </Button>
           )}
-          {selectedToken && (
-            <div className={styles.tokenSelector}>
-              <TokenIcon symbol={selectedToken} width={24} height={24} />
-              <span className={styles.tokenSymbol}>{selectedToken}</span>
-              {availableTokens.length > 0 && onTokenSelect && (
-                <select
-                  className={styles.tokenSelect}
-                  value={selectedToken}
-                  onChange={(e) => onTokenSelect(e.target.value)}
-                >
-                  {availableTokens.map((token) => (
-                    <option key={token} value={token}>
-                      {token}
-                    </option>
-                  ))}
-                </select>
-              )}
-            </div>
+          {selectedToken && availableTokens.length > 0 && (
+            <SelectBox
+              options={availableTokens}
+              value={selectedToken}
+              onChange={onTokenSelect}
+              renderOption={renderTokenOption}
+              renderValue={renderTokenOption}
+              className={styles.tokenSelector}
+              optionsClassName={styles.tokenList}
+            />
           )}
         </div>
       </div>
