@@ -19,3 +19,17 @@
 .value {
   color: $color-white;
 }
+
+@keyframes fadeIn {
+  from {
+    fill-opacity: 0;
+  }
+  to {
+    fill-opacity: 1;
+  }
+}
+
+.rect {
+  fill-opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}

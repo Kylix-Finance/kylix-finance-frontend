@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { totalValueLocked } from "~/data/charts";
 import styles from "./AreaChart.module.scss";
+import { CursorProps } from "~/types";
 
 const formatMonth = (unix: number) => {
   return format(fromUnixTime(unix), "MMM");
@@ -44,6 +45,34 @@ const CustomDot = (props: DotProps) => {
   );
 };
 
+const CustomCursor = ({ points, width, height }: CursorProps) => {
+  const x = points?.[0]?.x ?? 0;
+
+  return (
+    <>
+      <line
+        x1={x}
+        x2={x}
+        y1={0}
+        y2={height}
+        stroke="var(--color-neutral-400)"
+        strokeWidth={0.5}
+        strokeDasharray="3 3"
+      />
+
+      <rect
+        x={x}
+        y={0}
+        width="100%"
+        height="calc(100% - 30px)"
+        fill="rgba(0,0,0,0.4)"
+        pointerEvents="none"
+        // className={styles.rect}
+      />
+    </>
+  );
+};
+
 const CustomTooltip = ({
   active,
   payload,
@@ -71,7 +100,7 @@ export const CustomAreaChart = () => {
     <ResponsiveContainer width="100%" height={300}>
       <AreaChart
         data={totalValueLocked}
-        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+        // margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
       >
         <defs>
           <linearGradient id="colorVolume" x1="0" y1="0" x2="0" y2="1">
@@ -97,11 +126,8 @@ export const CustomAreaChart = () => {
         <Tooltip
           labelFormatter={formatMonth}
           content={CustomTooltip}
-          cursor={{
-            fill: "none",
-            strokeWidth: 0.5,
-            strokeDasharray: "3 3",
-          }}
+          //@ts-expect-error props will be added by rechart
+          cursor={<CustomCursor />}
         />
       </AreaChart>
     </ResponsiveContainer>
