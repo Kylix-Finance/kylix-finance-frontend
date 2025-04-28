@@ -16,7 +16,8 @@ import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
 import { useState, useMemo } from "react";
 import clsx from "clsx";
-
+import { EmptyState } from "~/components/empty-state";
+import Ghost from "~/assets/icons/ghost.svg";
 const columnHelper = createColumnHelper<LandingPool>();
 
 interface Props {
@@ -98,10 +99,18 @@ export const MarketTable = ({ query }: Props) => {
       sorting,
     },
   });
-
   return (
     <div className={styles.container}>
       <Table table={table} isLoading={!data && (isLoading || !isFetched)} />
+      {(!data?.assets || data?.assets.length === 0) &&
+        !isLoading &&
+        isFetched && (
+          <EmptyState
+            description="No markets are currently available. Please check back later for available lending and borrowing markets."
+            title="No Markets Available"
+            icon={Ghost}
+          />
+        )}
     </div>
   );
 };

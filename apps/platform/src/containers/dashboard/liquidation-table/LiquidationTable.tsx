@@ -18,12 +18,14 @@ import { Button } from "~/components/ui/button";
 import { useState, useMemo } from "react";
 import clsx from "clsx";
 import Health from "./health/Health";
+import { EmptyState } from "~/components/empty-state";
+import Ghost from "~/assets/icons/ghost.svg";
 const columnHelper = createColumnHelper<LiquidationMarket>();
 interface Props {
   query: string | null;
 }
 export const LiquidationTable = ({ query }: Props) => {
-  const { data, isLoading, isFetching } = useGetLiquidationMarkets();
+  const { data, isLoading, isFetched } = useGetLiquidationMarkets();
 
   const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -115,7 +117,14 @@ export const LiquidationTable = ({ query }: Props) => {
 
   return (
     <div className={styles.container}>
-      <Table table={table} isLoading={!data && (isLoading || isFetching)} />
+      <Table table={table} isLoading={!data && (isLoading || isFetched)} />
+      {(!data || data.length === 0) && !isLoading && isFetched && (
+        <EmptyState
+          description="No liquidation markets are currently available. Please check back later."
+          title="No Liquidation Markets Available"
+          icon={Ghost}
+        />
+      )}
     </div>
   );
 };

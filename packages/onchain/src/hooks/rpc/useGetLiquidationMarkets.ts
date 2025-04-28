@@ -26,7 +26,7 @@ export const useGetLiquidationMarkets = (
     queryFn: enabled
       ? async () => {
           const response = await execute(finalAccount);
-          if (!response) return null;
+          if (!response) return undefined;
           return response.map((item) => ({
             ...item,
             formatted_tvl: formatUnit(item.tvl, item.asset_decimals),
