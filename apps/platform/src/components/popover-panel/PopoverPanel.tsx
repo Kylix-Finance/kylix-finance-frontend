@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   useFloating,
   offset,
@@ -9,6 +9,7 @@ import {
   useInteractions,
   FloatingPortal,
   autoUpdate,
+  OpenChangeReason,
 } from "@floating-ui/react";
 import { AnimatePresence } from "framer-motion";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
@@ -17,17 +18,26 @@ import { motion } from "motion/react";
 interface PopoverPanelProps {
   target: React.ReactNode;
   panel: React.ReactNode;
+  onOpenChange: (
+    open: boolean,
+    event?: Event,
+    reason?: OpenChangeReason
+  ) => void;
+  open: boolean;
 }
 
-export function PopoverPanel({ target, panel }: PopoverPanelProps) {
-  const [open, setOpen] = useState(false);
-
+export function PopoverPanel({
+  target,
+  panel,
+  onOpenChange,
+  open,
+}: PopoverPanelProps) {
   const { refs, floatingStyles, context } = useFloating({
     open,
-    onOpenChange: setOpen,
     middleware: [offset(10), flip(), shift()],
     placement: "bottom-start",
     whileElementsMounted: autoUpdate,
+    onOpenChange,
   });
 
   const click = useClick(context);
