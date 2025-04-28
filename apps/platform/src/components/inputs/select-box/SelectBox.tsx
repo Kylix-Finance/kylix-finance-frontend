@@ -33,6 +33,7 @@ const SelectBox = <T extends string | number>({
   const handleOptionClick = (option: T) => {
     setSelectedValue(option);
     onChange?.(option);
+    setIsOpen(false);
   };
 
   return (
