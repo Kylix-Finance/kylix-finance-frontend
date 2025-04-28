@@ -1,7 +1,8 @@
 import axios from "axios";
+import { ENV } from "~/config/env";
 
 const instance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_REST_ENDPOINT,
+  baseURL: ENV.REST_ENDPOINT,
   adapter: "fetch",
 });
 

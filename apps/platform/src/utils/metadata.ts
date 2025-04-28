@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import merge from "lodash/merge";
+import { ENV } from "~/config/env";
 const baseMetadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_PLATFORM_URL!),
+  metadataBase: new URL(ENV.PLATFORM_URL),
   openGraph: {
     type: "website",
     url: "./",
