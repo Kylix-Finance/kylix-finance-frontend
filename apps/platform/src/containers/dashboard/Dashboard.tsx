@@ -5,12 +5,14 @@ import styles from "./Dashboard.module.scss";
 import TotalLocked from "./total-locked/TotalLocked";
 import TotalSupplyBorrow from "./total-supply-borrow/TotalSupplyBorrow";
 import Tables from "./tables";
+import CustomAreaChart from "~/components/recharts/AreaChart";
 
 const Dashboard = () => {
   return (
     <PageLayout title="Dashboard">
       <div className={styles.container}>
         <div className={styles.total_locked}>
+          <CustomAreaChart />
           <TotalLocked />
         </div>
         <div className={styles.total_supply_borrow}>

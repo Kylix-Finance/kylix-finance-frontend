@@ -44,3 +44,14 @@ export interface ModalProps {
   footer?: ReactNode;
 }
 export type ChartScale = (typeof CHART_SCALES)[number];
+
+export type ChartPoint = {
+  x: number;
+  y: number;
+};
+
+export type CursorProps = {
+  width: number;
+  height: number;
+  points: ChartPoint[];
+};
