@@ -32,7 +32,7 @@ $thumb-offset: 2px;
   width: $switch-width;
   height: $switch-height;
   border-radius: 100px;
-  background-color: $color-switch-primary-bg;
+  background-color: $color-neutral-700;
   cursor: pointer;
   transition: background-color 0.35s ease;
   overflow: hidden;
@@ -56,14 +56,14 @@ $thumb-offset: 2px;
     width: $thumb-size;
     height: $thumb-size;
     border-radius: 50%;
-    background-color: $color-switch-primary-thumb;
+    background-color: $color-white;
     box-shadow: $shadow-modal;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 }
 
 .switch_input:checked + .switch_label {
-  background-color: $color-switch-primary-bg-checked;
+  background-color: $color-primary;
 
   &::after {
     opacity: 1;
@@ -93,7 +93,7 @@ $thumb-offset: 2px;
 .switch_input:disabled + .switch_label {
   opacity: 0.6;
   cursor: not-allowed;
-  background-color: $color-switch-primary-bg-disabled;
+  background-color: $color-neutral-800;
 }
 .disabled_icon {
   color: $color-semantic-warning;

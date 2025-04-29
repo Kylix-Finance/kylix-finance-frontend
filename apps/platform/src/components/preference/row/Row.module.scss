@@ -6,10 +6,5 @@
 }
 .title {
   @include font($font-heading-5);
-  [data-theme="light"] & {
-    color: $color-neutral-600;
-  }
-  [data-theme="dark"] & {
-    color: $color-neutral-50;
-  }
+  color: $color-neutral-50;
 }

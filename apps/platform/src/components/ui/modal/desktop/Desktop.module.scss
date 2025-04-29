@@ -23,9 +23,9 @@
   height: max-content;
   max-height: 80vh;
   overflow: hidden;
-  border: solid 1px $color-modal-border;
+  border: solid 1px $color-neutral-700;
   border-radius: 20px;
-  background-color: $color-modal-bg;
+  background-color: $color-neutral-900;
   padding: $spacing-6;
 
   @include media("<=tablet") {
@@ -39,7 +39,7 @@
 }
 .title {
   @include font($font-heading-4);
-  color: $color-modal-title;
+  color: $color-white;
   user-select: none;
 }
 .close_button {
@@ -49,7 +49,7 @@
   border: none;
   outline: none;
   cursor: pointer;
-  color: $color-modal-button-close;
+  color: $color-neutral-400;
   display: flex;
   align-items: center;
   justify-content: center;

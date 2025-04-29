@@ -2,13 +2,6 @@
   padding: 24px 16px;
   border-radius: 16px;
 
-  [data-theme="light"] & {
-    background-color: $color-white;
-    border: 1px solid $color-neutral-200;
-  }
-
-  [data-theme="dark"] & {
-    background-color: $color-neutral-900;
-    border: 1px solid $color-neutral-700;
-  }
+  background-color: $color-neutral-900;
+  border: 1px solid $color-neutral-700;
 }

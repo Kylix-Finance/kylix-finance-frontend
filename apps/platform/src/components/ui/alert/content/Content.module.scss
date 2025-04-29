@@ -36,47 +36,47 @@
 }
 
 .type_information {
-  color: $color-alert-border-information;
+  color: $color-semantic-info;
 }
 
 .type_error {
-  color: $color-alert-border-error;
+  color: $color-semantic-error;
 }
 
 .type_message {
-  color: $color-alert-border-message;
+  color: $color-semantic-info;
 }
 
 .type_success {
-  color: $color-alert-border-success;
+  color: $color-semantic-success;
 }
 
 .type_warning {
-  color: $color-alert-border-warning;
+  color: $color-semantic-warning;
 }
 
 .message {
   @include font($font-body);
   padding-left: 24px;
-  color: $color-alert-text;
+  color: $color-neutral-200;
 }
 
 .container_information {
-  border-color: $color-alert-border-information;
+  border-color: $color-semantic-info;
 }
 
 .container_success {
-  border-color: $color-alert-border-success;
+  border-color: $color-semantic-success;
 }
 
 .container_message {
-  border-color: $color-alert-border-message;
+  border-color: $color-semantic-info;
 }
 
 .container_error {
-  border-color: $color-alert-border-error;
+  border-color: $color-semantic-error;
 }
 
 .container_warning {
-  border-color: $color-alert-border-warning;
+  border-color: $color-semantic-warning;
 }

@@ -19,11 +19,11 @@
   align-items: center;
   justify-content: center;
   padding: $spacing-2_5 $spacing-4_5;
-  color: $color-button-group-text-item;
+  color: $color-neutral-400;
   @include font($font-button);
 }
 .button_active {
-  color: $color-button-group-text-item-active;
+  color: $color-primary;
   position: relative;
   &:hover {
     opacity: 0.9;
@@ -34,7 +34,7 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  border: 1px solid $color-button-group-border-item-active;
+  border: 1px solid $color-primary;
   background-color: $color-button-primary-bg-active;
   border-radius: inherit;
 }

@@ -11,25 +11,13 @@
   border-radius: 100px;
   cursor: pointer;
 
-  [data-theme="light"] & {
-    border: 1px solid $color-neutral-200;
-  }
-
-  [data-theme="dark"] & {
-    border: 1px solid $color-neutral-900;
-  }
+  border: 1px solid $color-neutral-900;
 
   &[data-size="small"] {
     width: 44px;
     height: 44px;
 
-    [data-theme="light"] & {
-      background-color: $color-white;
-    }
-
-    [data-theme="dark"] & {
-      background-color: $color-neutral-900;
-    }
+    background-color: $color-neutral-900;
 
     .icon {
       width: 24px;
@@ -40,13 +28,7 @@
     width: 120px;
     height: 120px;
 
-    [data-theme="light"] & {
-      background-color: $color-neutral-50;
-    }
-
-    [data-theme="dark"] & {
-      background-color: $color-neutral-700;
-    }
+    background-color: $color-neutral-700;
 
     .icon {
       width: 72px;
@@ -56,13 +38,7 @@
 }
 
 .icon {
-  [data-theme="light"] & {
-    color: $color-neutral-400;
-  }
-
-  [data-theme="dark"] & {
-    color: $color-neutral-200;
-  }
+  color: $color-neutral-200;
 }
 
 .badge {
@@ -77,10 +53,5 @@
 .account {
   @include font($font-heading-5);
   user-select: none;
-  [data-theme="dark"] & {
-    color: $color-neutral-200;
-  }
-  [data-theme="light"] & {
-    color: $color-neutral-600;
-  }
+  color: $color-neutral-200;
 }

@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-right: 1px solid $color-sidebar-border;
+  border-right: 1px solid $color-neutral-700;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -81,7 +81,7 @@
 }
 
 .disabled_menu_item {
-  color: $color-sidebar-menu-disabled;
+  color: $color-neutral-700;
   cursor: not-allowed;
   pointer-events: none;
   &:hover {

@@ -222,24 +222,6 @@ $color-checkbox-primary-outline-disabled: var(
 );
 
 $color-checkbox-mark: var(--color-checkbox-mark);
-//switch
-$color-switch-primary-thumb: var(--color-switch-primary-thumb);
-$color-switch-primary-bg: var(--color-switch-primary-bg);
-$color-switch-primary-bg-disabled: var(--color-switch-primary-bg-disabled);
-$color-switch-primary-bg-checked: var(--color-switch-primary-bg-checked);
-
-//toot-tip
-$color-tooltip-primary-bg: var(--color-tooltip-primary-bg);
-$color-tooltip-primary-bg-tail: var(--color-tooltip-primary-bg-tail);
-$color-tooltip-primary-text: var(--color-tooltip-primary-text);
-//alert
-$color-alert-bg: var(--color-alert-bg);
-$color-alert-text: var(--color-alert-text);
-$color-alert-border-success: var(--color-alert-border-success);
-$color-alert-border-information: var(--color-alert-border-information);
-$color-alert-border-message: var(--color-alert-border-message);
-$color-alert-border-warning: var(--color-alert-border-warning);
-$color-alert-border-error: var(--color-alert-border-error);
 
 //button group
 $color-button-group-border: var(--color-button-group-border);
@@ -248,20 +230,6 @@ $color-button-group-bg-item-active: var(--color-button-group-bg-item-active);
 $color-button-group-border-item-active: var(
   --color-button-group-border-item-active
 );
-$color-button-group-text-item: var(--color-button-group-text-item);
-$color-button-group-bg-item-active-hover: var(
-  --color-button-group-bg-item-active-hover
-);
-$color-button-group-bg-item-hover: var(--color-button-group-bg-item-hover);
-$color-button-group-text-item-active: var(
-  --color-button-group-text-item-active
-);
-
-//modal
-$color-modal-bg: var(--color-modal-bg);
-$color-modal-border: var(--color-modal-border);
-$color-modal-title: var(--color-modal-title);
-$color-modal-button-close: var(--color-modal-button-close);
 
 //sidebar
 $color-sidebar-border: var(--color-sidebar-border);
@@ -269,33 +237,3 @@ $color-sidebar-bg: var(--color-sidebar-bg);
 $color-sidebar-primary: var(--color-sidebar-primary);
 $color-sidebar-menu-bg: var(--color-sidebar-menu-bg);
 $color-sidebar-menu-bg-hover: var(--color-sidebar-menu-bg-hover);
-$color-sidebar-menu-disabled: var(--color-sidebar-menu-disabled);
-$color-sidebar-dot-logo-stroke: var(--color-sidebar-dot-logo-stroke);
-
-//page-layout
-$color-page-layout-title: var(--color-page-layout-title);
-//chart-container
-$color-chart-container-title: var(--color-chart-container-title);
-$color-chart-container-value: var(--color-chart-container-value);
-$color-chat-container-bg: var(--color-chat-container-bg);
-$color-chat-container-border: var(--color-chat-container-border);
-
-//wallet modal
-$color-wallet-modal-wallet-list-policy-text: var(
-  --color-wallet-modal-wallet-list-policy-text
-);
-$color-wallet-modal-wallet-list-item-bg: var(
-  --color-wallet-modal-wallet-list-item-bg
-);
-$color-wallet-modal-wallet-list-item-text: var(
-  --color-wallet-modal-wallet-list-item-text
-);
-
-$color-wallet-modal-account-bg: var(--color-wallet-modal-account-bg);
-$color-wallet-modal-account-border: var(--color-wallet-modal-account-border);
-$color-wallet-modal-account-text-name: var(
-  --color-wallet-modal-account-text-name
-);
-$color-wallet-modal-account-text-address: var(
-  --color-wallet-modal-account-text-address
-);

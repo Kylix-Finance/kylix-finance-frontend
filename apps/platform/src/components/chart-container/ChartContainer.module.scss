@@ -9,8 +9,8 @@
   background-color: transparent;
   @include media("<=tablet") {
     padding: $spacing-4;
-    background-color: $color-chat-container-bg;
-    border-color: $color-chat-container-border;
+    background-color: $color-accent-primary-component;
+    border-color: $color-neutral-700;
   }
 }
 .header {
@@ -27,14 +27,14 @@
 }
 .heading_title {
   @include font($font-body);
-  color: $color-chart-container-title;
+  color: $color-neutral-200;
   @include media("<=tablet") {
     @include font($font-heading-5);
   }
 }
 .heading_value {
   @include font($font-heading-1);
-  color: $color-chart-container-value;
+  color: $color-white;
 }
 .tabs_container {
   @include media("<=tablet") {
