@@ -3,6 +3,7 @@ import styles from "./InputNumber.module.scss";
 import { Button } from "~/components/ui/button";
 import TokenIcon from "~/components/token-icon";
 import { SelectBox } from "../select-box";
+import { Wallet } from "~/assets/icons";
 
 interface Props
   extends Omit<ComponentPropsWithRef<"input">, "onChange" | "value"> {
@@ -61,9 +62,10 @@ export const InputNumber = ({
   );
 
   return (
-    <div className={styles.container}>
+    <div className={styles.inputWrapper}>
       {label && <label className={styles.label}>{label}</label>}
-      <div className={styles.inputWrapper}>
+
+      <div className={styles.topRow}>
         <input
           type="text"
           className={styles.input}
@@ -71,25 +73,30 @@ export const InputNumber = ({
           value={localValue}
           {...rest}
         />
-        <div className={styles.rightElements}>
+        {selectedToken && availableTokens.length > 0 && (
+          <SelectBox
+            options={availableTokens}
+            value={selectedToken}
+            onChange={onTokenSelect}
+            renderOption={renderTokenOption}
+            renderValue={renderTokenOption}
+            className={styles.tokenSelector}
+          />
+        )}
+      </div>
+      <div className={styles.bottomRow}>
+        ${localValue || 0}
+        <div className={styles.wallet_balance}>
+          <Wallet className={styles.wallet_icon} />
+          <div className={styles.available_amount}>0.53 {selectedToken}</div>
+
           {showMaxButton && (
             <Button variant="secondary" size="small" onClick={onMaxClick}>
               Max
             </Button>
           )}
-          {selectedToken && availableTokens.length > 0 && (
-            <SelectBox
-              options={availableTokens}
-              value={selectedToken}
-              onChange={onTokenSelect}
-              renderOption={renderTokenOption}
-              renderValue={renderTokenOption}
-              className={styles.tokenSelector}
-            />
-          )}
         </div>
       </div>
-      {error && <span className={styles.error}>{error}</span>}
     </div>
   );
 };
