@@ -31,8 +31,14 @@ export const InputNumber = ({
 }: Props) => {
   const [localValue, setLocalValue] = useState(externalValue || "");
 
+  const formatNumberWithCommas = (value: string) => {
+    const parts = value.split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
+    const newValue = e.target.value.replace(/,/g, ""); // Remove existing commas
 
     // Allow empty string or valid number with optional decimal
     const isValidNumber = newValue === "" || /^\d*\.?\d*$/.test(newValue);
@@ -41,8 +47,9 @@ export const InputNumber = ({
     const hasOneOrNoDot = (newValue.match(/\./g) || []).length <= 1;
 
     if (isValidNumber && hasOneOrNoDot) {
-      setLocalValue(newValue);
-      onChange?.(newValue);
+      const formattedValue = formatNumberWithCommas(newValue);
+      setLocalValue(formattedValue);
+      onChange?.(newValue); // Pass the unformatted value to onChange
     }
   };
 
