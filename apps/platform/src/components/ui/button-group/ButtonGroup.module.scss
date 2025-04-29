@@ -1,6 +1,6 @@
 .container {
   padding: 4px;
-  border: 1px solid $color-button-group-border;
+  border: 1px solid $color-neutral-700;
   border-radius: 9999px;
   display: flex;
   align-items: center;
@@ -35,6 +35,6 @@
   height: 100%;
   position: absolute;
   border: 1px solid $color-primary;
-  background-color: $color-button-primary-bg-active;
+  background-color: $color-accent-primary-element;
   border-radius: inherit;
 }

@@ -1,6 +1,6 @@
 .container {
   border-radius: 9999px;
-  color: $color-icon-button-primary-text;
+  color: $color-neutral-400;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -11,42 +11,37 @@
   transition: all 0.2s ease-out;
 
   [data-no-interaction-styles="false"] {
-    &:hover {
-      color: $color-icon-button-primary-text-hover;
-    }
-    &:active {
-      color: $color-icon-button-primary-text-active;
-    }
+    &:active,
     &:focus {
-      color: $color-icon-button-primary-text-focus;
+      color: $color-primary;
     }
     &:disabled {
-      color: $color-icon-button-primary-text-disabled;
+      color: $color-neutral-700;
       cursor: not-allowed;
       pointer-events: none;
     }
   }
 }
 .fill {
-  background-color: $color-icon-button-primary-bg;
-  border: 1px solid $color-icon-button-primary-border;
+  background-color: $color-neutral-800;
+  border: 1px solid $color-neutral-700;
 
   [data-no-interaction-styles="false"] {
     &:hover {
-      background-color: $color-icon-button-primary-bg-hover;
-      border: 1px solid $color-icon-button-primary-border-hover;
+      background-color: $color-neutral-700;
+      border: 1px solid $color-neutral-400;
     }
     &:active {
-      background-color: $color-icon-button-primary-bg-active;
-      border: 1px solid $color-icon-button-primary-border-active;
+      background-color: $color-accent-primary-element;
+      border: 1px solid $color-primary;
     }
     &:focus {
-      background-color: $color-icon-button-primary-bg-focus;
-      border: 1px solid $color-icon-button-primary-border-focus;
+      background-color: $color-accent-primary-element;
+      border: 1px solid $color-primary;
     }
     &:disabled {
-      background-color: $color-icon-button-primary-bg;
-      border: 1px solid $color-icon-button-primary-border-disabled;
+      background-color: transparent;
+      border: 1px solid $color-primary;
     }
   }
 }

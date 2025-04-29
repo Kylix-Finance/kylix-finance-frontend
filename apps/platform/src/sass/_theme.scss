@@ -1,58 +1,4 @@
 @mixin buttons-dark {
-  --color-button-primary-text: var(--color-white);
-  --color-button-primary-text-hover: var(--color-white);
-  --color-button-primary-disabled-text: var(--color-neutral-400);
-  --color-button-primary-text-active: var(--color-white);
-  --color-button-primary-text-focus: var(--color-white);
-
-  --color-button-primary-bg: var(--color-accent-primary-element);
-  --color-button-primary-bg-hover: var(--color-accent-secondary-element);
-  --color-button-primary-bg-active: var(--color-accent-primary-element);
-  --color-button-primary-bg-focus: var(--color-accent-primary-element);
-  --color-button-primary-disabled-bg: var(--color-neutral-800);
-
-  --color-button-primary-border: var(--color-primary);
-  --color-button-primary-border-hover: var(--color-primary-light);
-  --color-button-primary-border-active: var(--color-primary);
-  --color-button-primary-border-focus: var(--color-primary);
-  --color-button-primary-disabled-border: var(--color-neutral-800);
-
-  --color-button-secondary-text: var(--color-neutral-200);
-  --color-button-secondary-text-hover: var(--color-neutral-400);
-  --color-button-secondary-text-active: var(--color-neutral-200);
-  --color-button-secondary-text-focus: var(--color-neutral-200);
-  --color-button-secondary-disabled-text: var(--color-neutral-700);
-
-  --color-button-secondary-bg: var(--color-neutral-800);
-  --color-button-secondary-bg-hover: var(--color-neutral-700);
-  --color-button-secondary-bg-active: var(--color-neutral-800);
-  --color-button-secondary-bg-focus: var(--color-neutral-700);
-  --color-button-secondary-disabled-bg: var(--color-neutral-800);
-
-  --color-button-secondary-border: var(--color-neutral-700);
-  --color-button-secondary-border-hover: var(--color-neutral-700);
-  --color-button-secondary-border-active: var(--color-neutral-700);
-  --color-button-secondary-border-focus: var(--color-neutral-700);
-  --color-button-secondary-disabled-border: var(--color-neutral-700);
-
-  --color-button-tertiary-text: var(--color-accent-primary-component);
-  --color-button-tertiary-text-hover: var(--color-accent-primary-component);
-  --color-button-tertiary-text-active: var(--color-accent-primary-component);
-  --color-button-tertiary-text-focus: var(--color-accent-primary-component);
-  --color-button-tertiary-disabled-text: var(--color-neutral-700);
-
-  --color-button-tertiary-bg: var(--color-white);
-  --color-button-tertiary-bg-hover: var(--color-neutral-200);
-  --color-button-tertiary-bg-active: var(--color-white);
-  --color-button-tertiary-bg-focus: var(--color-white);
-  --color-button-tertiary-disabled-bg: var(--color-neutral-800);
-
-  --color-button-tertiary-border: var(--color-white);
-  --color-button-tertiary-border-hover: var(--color-neutral-200);
-  --color-button-tertiary-border-active: var(--color-white);
-  --color-button-tertiary-border-focus: var(--color-accent-primary-component);
-  --color-button-tertiary-disabled-border: var(--color-neutral-800);
-
   --color-button-ghost-text: var(--color-neutral-200);
   --color-button-ghost-text-hover: var(--color-neutral-100);
   --color-button-ghost-text-focus: var(--color-neutral-400);
@@ -60,81 +6,11 @@
   --color-button-ghost-text-disabled: var(--color-neutral-100);
 }
 
-@mixin link-button-dark {
-  --color-link-button-primary-text: var(--color-primary);
-  --color-link-button-primary-text-hover: var(--color-primary-light);
-  --color-link-button-primary-text-active: var(--color-primary);
-  --color-link-button-primary-text-focus: var(--color-primary);
-  --color-link-button-primary-text-disabled: var(--color-neutral-700);
-
-  --color-link-button-primary-border: transparent;
-  --color-link-button-primary-border-hover: transparent;
-  --color-link-button-primary-border-active: transparent;
-  --color-link-button-primary-border-focus: var(--color-primary);
-}
-
-@mixin icon-button-dark {
-  --color-icon-button-primary-text: var(--color-neutral-400);
-  --color-icon-button-primary-text-hover: var(--color-neutral-400);
-  --color-icon-button-primary-text-active: var(--color-primary);
-  --color-icon-button-primary-text-focus: var(--color-primary);
-  --color-icon-button-primary-text-disabled: var(--color-neutral-700);
-
-  --color-icon-button-primary-border: var(--color-neutral-700);
-  --color-icon-button-primary-border-hover: var(--color-neutral-400);
-  --color-icon-button-primary-border-active: var(--color-primary);
-  --color-icon-button-primary-border-disabled: var(--color-neutral-700);
-  --color-icon-button-primary-border-focus: var(--color-primary);
-
-  --color-icon-button-primary-bg: var(--color-neutral-800);
-  --color-icon-button-primary-bg-hover: var(--color-neutral-700);
-  --color-icon-button-primary-bg-active: var(--color-accent-primary-element);
-  --color-icon-button-primary-bg-focus: var(--color-accent-primary-element);
-  --color-icon-button-primary-bg-disabled: transparent;
-}
-
-@mixin checkbox-dark {
-  --color-checkbox-primary-bg: var(--color-neutral-200);
-  --color-checkbox-primary-bg-hover: var(--color-neutral-500);
-  --color-checkbox-primary-bg-active: var(--color-primary);
-  --color-checkbox-primary-bg-focus: var(--color-neutral-200);
-  --color-checkbox-primary-bg-disabled: var(--color-neutral-700);
-
-  --color-checkbox-primary-border: var(--color-neutral-700);
-  --color-checkbox-primary-border-hover: var(--color-neutral-700);
-  --color-checkbox-primary-border-disabled: var(--color-neutral-800);
-  --color-checkbox-primary-border-active: var(--color-primary);
-  --color-checkbox-primary-border-focus: var(--color-neutral-700);
-
-  --color-checkbox-primary-outline: transparent;
-  --color-checkbox-primary-outline-hover: transparent;
-  --color-checkbox-primary-outline-active: var(--color-primary);
-  --color-checkbox-primary-outline-focus: var(--color-primary);
-  --color-checkbox-primary-outline-disabled: transparent;
-
-  --color-checkbox-mark: var(--color-black);
-}
-
 @mixin alert-dark {
   --toastify-color-progress-info: var(--color-semantic-info);
   --toastify-color-progress-success: var(--color-semantic-success);
   --toastify-color-progress-warning: var(--color-semantic-warning);
   --toastify-color-progress-error: var(--color-semantic-error);
-}
-
-@mixin button-group-dark {
-  --color-button-group-border: var(--color-neutral-700);
-  --color-button-group-bg: var(--color-accent-primary-component);
-
-  --color-button-group-bg-item-active: var(--color-accent-primary-element);
-  --color-button-group-border-item-active: var(--color-primary);
-}
-
-@mixin sidebar-dark {
-  --color-sidebar-bg: var(--color-sidebar-bg-dark);
-  --color-sidebar-menu-bg: var(--color-sidebar-menu-bg-dark);
-  --color-sidebar-menu-bg-hover: var(--color-sidebar-menu-bg-hover-dark);
-  --color-sidebar-primary: var(--color-sidebar-primary-dark);
 }
 
 @mixin theme-dark {
@@ -181,10 +57,10 @@
   --color-crypto-mint: #37db8c80;
   --color-crypto-sui: #4ecbfc80;
 
-  --color-sidebar-bg-dark: #1e1e1e80;
-  --color-sidebar-primary-dark: #56ddb4;
-  --color-sidebar-menu-bg-dark: #56ddb433;
-  --color-sidebar-menu-bg-hover-dark: #2a2a2a;
+  --color-sidebar-bg: #1e1e1e80;
+  --color-sidebar-primary: #56ddb4;
+  --color-sidebar-menu-bg: #56ddb433;
+  --color-sidebar-menu-bg-hover: #2a2a2a;
 
   --color-accent-primary-component: #1e1e1e80;
 
