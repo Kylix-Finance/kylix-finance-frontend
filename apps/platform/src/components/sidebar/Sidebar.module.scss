@@ -8,7 +8,7 @@
   justify-content: space-between;
   width: 244px;
   height: 100vh;
-  background-color: $color-sidebar-bg;
+  background-color: $color-accent-primary-component;
   backdrop-filter: blur(15px);
   padding: 24px 16px;
   transition: width 0.3s ease-in-out;
@@ -27,7 +27,7 @@
   height: 23.37px;
   width: 97.45px;
   flex-shrink: 0;
-  color: $color-sidebar-primary;
+  color: $color-primary;
 }
 
 .expand_square {
@@ -37,7 +37,7 @@
   z-index: 10;
   width: 24px;
   height: 24px;
-  color: $color-sidebar-primary;
+  color: $color-primary;
   cursor: pointer;
 }
 
@@ -67,17 +67,14 @@
   color: var(--color-neutral-400);
   cursor: pointer;
   &:hover {
-    background-color: $color-sidebar-menu-bg-hover;
+    background-color: $color-neutral-800;
   }
 }
 .active_menu_item {
-  background-color: $color-sidebar-menu-bg;
-  color: $color-sidebar-primary;
-  border: 1px solid $color-sidebar-primary;
+  background-color: $color-accent-primary-element;
+  color: $color-primary;
+  border: 1px solid $color-primary;
   font-weight: 600;
-  &:hover {
-    background-color: $color-sidebar-menu-bg;
-  }
 }
 
 .disabled_menu_item {
