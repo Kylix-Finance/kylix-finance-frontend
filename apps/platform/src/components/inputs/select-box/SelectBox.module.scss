@@ -18,7 +18,7 @@
 .optionsList {
   background-color: $color-neutral-900;
   border: 1px solid $color-neutral-700;
-  border-radius: 16px;
+  border-radius: $spacing-5;
   padding: $spacing-2;
   min-width: 160px;
   display: flex;
@@ -31,7 +31,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: $spacing-4 $spacing-3;
+  padding: $spacing-3 $spacing-4;
   border-radius: $spacing-3;
   background: transparent;
   border: none;
