@@ -1,4 +1,3 @@
-import { format, fromUnixTime } from "date-fns";
 import {
   AreaChart,
   Area,
@@ -12,10 +11,7 @@ import {
 import { totalValueLocked } from "~/data/charts";
 import styles from "./AreaChart.module.scss";
 import { CursorProps } from "~/types";
-
-const formatMonth = (unix: number) => {
-  return format(fromUnixTime(unix), "MMM");
-};
+import { getShortMonth } from "~/utils/date";
 
 const CustomDot = (props: DotProps) => {
   const { cx, cy } = props;
@@ -110,7 +106,7 @@ export const CustomAreaChart = () => {
         </defs>
         <XAxis
           dataKey="timestamp"
-          tickFormatter={formatMonth}
+          tickFormatter={getShortMonth}
           axisLine={false}
           tickLine={false}
         />
@@ -124,7 +120,7 @@ export const CustomAreaChart = () => {
           activeDot={<CustomDot />}
         />
         <Tooltip
-          labelFormatter={formatMonth}
+          labelFormatter={getShortMonth}
           content={CustomTooltip}
           //@ts-expect-error props will be added by rechart
           cursor={<CustomCursor />}

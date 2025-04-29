@@ -81,3 +81,256 @@ export const totalValueLocked = [
   { timestamp: 1743897600, volume: 4483 },
   { timestamp: 1744070400, volume: 4352 },
 ];
+
+export const totalBorrowSupply = [
+  {
+    timestamp: 1745884800,
+    bottom: 64,
+    top: 138,
+  },
+  {
+    timestamp: 1745884860,
+    bottom: 66,
+    top: 117,
+  },
+  {
+    timestamp: 1745884920,
+    bottom: 56,
+    top: 136,
+  },
+  {
+    timestamp: 1745884980,
+    bottom: 72,
+    top: 137,
+  },
+  {
+    timestamp: 1745885040,
+    bottom: 65,
+    top: 144,
+  },
+  {
+    timestamp: 1745885100,
+    bottom: 90,
+    top: 166,
+  },
+  {
+    timestamp: 1745885160,
+    bottom: 59,
+    top: 139,
+  },
+  {
+    timestamp: 1745885220,
+    bottom: 70,
+    top: 131,
+  },
+  {
+    timestamp: 1745885280,
+    bottom: 77,
+    top: 155,
+  },
+  {
+    timestamp: 1745885340,
+    bottom: 53,
+    top: 119,
+  },
+  {
+    timestamp: 1745885400,
+    bottom: 48,
+    top: 107,
+  },
+  {
+    timestamp: 1745885460,
+    bottom: 48,
+    top: 122,
+  },
+  {
+    timestamp: 1745885520,
+    bottom: 46,
+    top: 115,
+  },
+  {
+    timestamp: 1745885580,
+    bottom: 56,
+    top: 135,
+  },
+  {
+    timestamp: 1745885640,
+    bottom: 74,
+    top: 146,
+  },
+  {
+    timestamp: 1745885700,
+    bottom: 78,
+    top: 156,
+  },
+  {
+    timestamp: 1745885760,
+    bottom: 49,
+    top: 108,
+  },
+  {
+    timestamp: 1745885820,
+    bottom: 46,
+    top: 119,
+  },
+  {
+    timestamp: 1745885880,
+    bottom: 44,
+    top: 122,
+  },
+  {
+    timestamp: 1745885940,
+    bottom: 83,
+    top: 143,
+  },
+  {
+    timestamp: 1745886000,
+    bottom: 70,
+    top: 137,
+  },
+  {
+    timestamp: 1745886060,
+    bottom: 46,
+    top: 107,
+  },
+  {
+    timestamp: 1745886120,
+    bottom: 67,
+    top: 127,
+  },
+  {
+    timestamp: 1745886180,
+    bottom: 79,
+    top: 149,
+  },
+  {
+    timestamp: 1745886240,
+    bottom: 53,
+    top: 133,
+  },
+  {
+    timestamp: 1745886300,
+    bottom: 75,
+    top: 140,
+  },
+  {
+    timestamp: 1745886360,
+    bottom: 68,
+    top: 145,
+  },
+  {
+    timestamp: 1745886420,
+    bottom: 73,
+    top: 131,
+  },
+  {
+    timestamp: 1745886480,
+    bottom: 43,
+    top: 118,
+  },
+  {
+    timestamp: 1745886540,
+    bottom: 75,
+    top: 154,
+  },
+  {
+    timestamp: 1745886600,
+    bottom: 40,
+    top: 92,
+  },
+  {
+    timestamp: 1745886660,
+    bottom: 86,
+    top: 162,
+  },
+  {
+    timestamp: 1745886720,
+    bottom: 65,
+    top: 137,
+  },
+  {
+    timestamp: 1745886780,
+    bottom: 90,
+    top: 161,
+  },
+  {
+    timestamp: 1745886840,
+    bottom: 80,
+    top: 130,
+  },
+  {
+    timestamp: 1745886900,
+    bottom: 79,
+    top: 144,
+  },
+  {
+    timestamp: 1745886960,
+    bottom: 61,
+    top: 118,
+  },
+  {
+    timestamp: 1745887020,
+    bottom: 86,
+    top: 146,
+  },
+  {
+    timestamp: 1745887080,
+    bottom: 85,
+    top: 162,
+  },
+  {
+    timestamp: 1745887140,
+    bottom: 44,
+    top: 100,
+  },
+  {
+    timestamp: 1745887200,
+    bottom: 76,
+    top: 133,
+  },
+  {
+    timestamp: 1745887260,
+    bottom: 55,
+    top: 130,
+  },
+  {
+    timestamp: 1745887320,
+    bottom: 49,
+    top: 124,
+  },
+  {
+    timestamp: 1745887380,
+    bottom: 74,
+    top: 138,
+  },
+  {
+    timestamp: 1745887440,
+    bottom: 45,
+    top: 97,
+  },
+  {
+    timestamp: 1745887500,
+    bottom: 60,
+    top: 138,
+  },
+  {
+    timestamp: 1745887560,
+    bottom: 72,
+    top: 151,
+  },
+  {
+    timestamp: 1745887620,
+    bottom: 71,
+    top: 124,
+  },
+  {
+    timestamp: 1745887680,
+    bottom: 59,
+    top: 126,
+  },
+  {
+    timestamp: 1745887740,
+    bottom: 58,
+    top: 130,
+  },
+];
