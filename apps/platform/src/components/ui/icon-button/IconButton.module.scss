@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  padding: $spacing-2_5;
+  padding: 10px;
   outline: none;
 
   transition: all 0.2s ease-out;
@@ -55,5 +55,5 @@
   border: 1px solid transparent;
 }
 .no_padding {
-  padding: $spacing-0;
+  padding: 0px;
 }

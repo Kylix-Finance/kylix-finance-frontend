@@ -3,7 +3,7 @@
   pointer-events: none;
   border-radius: 8px;
   background-color: $color-white;
-  padding: $spacing-4 $spacing-3;
+  padding: 16px 12px;
   color: $color-black;
   @include font($font-body-compact);
 }

@@ -1,11 +1,11 @@
 .container {
-  padding: $spacing-1;
+  padding: 4px;
   border: 1px solid $color-button-group-border;
   border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: $spacing-0_5;
+  gap: 2px;
 }
 .button {
   background-color: transparent;
@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: $spacing-2_5 $spacing-4_5;
+  padding: 10px 18px;
   color: $color-neutral-400;
   @include font($font-button);
 }

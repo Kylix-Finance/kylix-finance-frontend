@@ -196,19 +196,19 @@
 }
 // size
 .default {
-  padding: $spacing-2_5 $spacing-5;
+  padding: 10px 20px;
   @include font($font-button);
-  gap: $spacing-2;
+  gap: 8px;
 }
 .small {
-  padding: $spacing-1 $spacing-2_5;
+  padding: 4px 10px;
   @include font($font-body-compact);
-  gap: $spacing-1;
+  gap: 4px;
 }
 .large {
-  padding: $spacing-4 $spacing-11;
+  padding: 16px 44px;
   @include font($font-heading-4);
-  gap: $spacing-2;
+  gap: 8px;
 }
 // state
 .loading_icon {

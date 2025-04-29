@@ -18,7 +18,7 @@
   border-radius: 20px 20px 0 0;
   background-color: $color-neutral-900;
   width: 100%;
-  padding: 0 $spacing-6 $spacing-1;
+  padding: 0 24px 4px;
   &:focus {
     outline: none;
   }
@@ -42,7 +42,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-block: $spacing-4;
+  margin-block: 16px;
 }
 .close_button {
   outline: none;

@@ -8,7 +8,7 @@
   background-color: $color-neutral-800;
   border: 1px solid transparent;
   border-radius: 16px;
-  padding: $spacing-4;
+  padding: 16px;
   cursor: pointer;
 }
 .active {
@@ -17,7 +17,7 @@
 .left {
   display: flex;
   align-items: center;
-  gap: $spacing-4;
+  gap: 16px;
 }
 .information {
   display: flex;
