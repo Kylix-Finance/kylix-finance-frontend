@@ -1,10 +1,9 @@
-import { RefObject, useRef } from "react";
-import styles from "./TotalSupplyBorrow.module.scss";
 import { ChartContainer } from "~/components/chart-container";
 // import StackedBarChart from "~/components/charts/StackedBarChart";
 import { useTotalSupplyBorrow } from "~/hooks/api/useTotalSupplyBorrow";
 import { ButtonGroupTab } from "~/types";
 import { useResizeObserver } from "@mantine/hooks";
+import StackedBarChart from "~/components/recharts/StackedBarChart";
 const tabs: ButtonGroupTab[] = [
   {
     content: "ALL",
@@ -33,6 +32,7 @@ const TotalSupplyBorrow = () => {
       onItemClick={() => {}}
       defaultTab="all"
     >
+      <StackedBarChart />
       <div ref={ref}>
         {/* <StackedBarChart data={data} width={rect.width} height={800} /> */}
       </div>

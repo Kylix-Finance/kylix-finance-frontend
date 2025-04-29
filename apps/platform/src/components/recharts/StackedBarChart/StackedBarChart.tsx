@@ -1,3 +1,5 @@
+"use client";
+
 import { CSSProperties, useState } from "react";
 import {
   ResponsiveContainer,
@@ -12,6 +14,7 @@ import {
 import styles from "./StackedBarChart.module.scss";
 import { getShortMonth } from "~/utils/date";
 import { totalBorrowSupply } from "~/data/charts";
+import { useDownsample } from "~/hooks/useDownsample";
 
 type HoveredIndex = number | string | bigint | null | undefined;
 
@@ -71,15 +74,10 @@ const CustomTooltip = ({
 }: TooltipProps<number, string>) => {
   if (!active || !payload?.length) return null;
 
-  // const { value: ts } = label as unknown as { value: number };
-  // const volume = payload[0].value;
-
-  console.log("payload", payload);
-
   return (
     <div className={styles.tooltip}>
       <div className={styles.unit}>
-        DOT:{" "}
+        Borrow:{" "}
         <div
           className={styles.badge}
           style={{ background: payload[0].stroke }}
@@ -87,7 +85,7 @@ const CustomTooltip = ({
         <span className={styles.value}>$1.94$</span>
       </div>
       <div className={styles.unit}>
-        USDT:{" "}
+        Supply:{" "}
         <div
           className={styles.badge}
           style={{ background: payload[1].stroke }}
@@ -101,10 +99,12 @@ const CustomTooltip = ({
 export const StackedBarChart = () => {
   const [hoveredIndex, setHoveredIndex] = useState<HoveredIndex>(null);
 
+  const datasets = useDownsample(totalBorrowSupply, 25);
+
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer width="100%" height={300}>
       <BarChart
-        data={totalBorrowSupply}
+        data={datasets}
         margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
         barSize={14}
       >
