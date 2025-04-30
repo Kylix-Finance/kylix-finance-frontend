@@ -15,7 +15,7 @@
   }
 }
 
-.optionsList {
+.options_list {
   background-color: $color-neutral-900;
   border: 1px solid $color-neutral-700;
   border-radius: $spacing-5;
@@ -55,7 +55,7 @@
   gap: $spacing-2;
 }
 
-.selectedOption {
+.selected_option {
   color: $color-neutral-200;
 }
 
@@ -65,7 +65,7 @@
   transition: transform 0.2s ease;
 }
 
-.chevronOpen {
+.chevron_open {
   transform: rotate(-180deg);
 }
 

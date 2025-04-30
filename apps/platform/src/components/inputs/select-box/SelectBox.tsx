@@ -42,17 +42,17 @@ const SelectBox = <T extends string | number>({
         <div className={clsx(styles.selector, className)}>
           {selectedValue ? renderValue(selectedValue) : null}
           <ChevronDown
-            className={clsx(styles.chevron, { [styles.chevronOpen]: isOpen })}
+            className={clsx(styles.chevron, { [styles.chevron_open]: isOpen })}
           />
         </div>
       }
       panel={
-        <div className={clsx(styles.optionsList, optionsClassName)}>
+        <div className={clsx(styles.options_list, optionsClassName)}>
           {options.map((option) => (
             <button
               key={option}
               className={clsx(styles.option, {
-                [styles.selectedOption]: option === selectedValue,
+                [styles.selected_option]: option === selectedValue,
               })}
               onClick={() => handleOptionClick(option)}
             >

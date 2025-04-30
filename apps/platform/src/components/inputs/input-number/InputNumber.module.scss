@@ -9,7 +9,7 @@
   color: $color-neutral-200;
 }
 
-.inputWrapper {
+.input_wrapper {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -25,18 +25,19 @@
   }
 }
 
-.topRow {
+.top_row {
   display: flex;
   align-items: center;
   gap: $spacing-2;
   width: 100%;
 }
 
-.bottomRow {
+.bottom_row {
   display: flex;
   justify-content: space-between;
   color: $color-neutral-200;
 }
+
 .wallet_balance {
   display: flex;
   align-items: center;
@@ -61,7 +62,7 @@
   border: none;
   outline: none;
   color: $color-white;
-  @include font($font-body);
+  @include font($font-heading-1);
   height: 40px;
   display: flex;
   align-items: center;
@@ -71,13 +72,13 @@
   }
 }
 
-.rightElements {
+.right_elements {
   display: flex;
   align-items: flex-start;
   margin-left: $spacing-2;
 }
 
-.rightColumn {
+.right_column {
   display: flex;
   flex-direction: column;
   gap: $spacing-2;
@@ -87,7 +88,7 @@
   }
 }
 
-.tokenSelector {
+.token_selector {
   display: flex;
   align-items: center;
   gap: $spacing-2;
@@ -103,12 +104,12 @@
   }
 }
 
-.tokenSymbol {
+.token_symbol {
   @include font($font-body-compact);
   color: $color-white;
 }
 
-.tokenOption {
+.token_option {
   display: flex;
   align-items: center;
   gap: $spacing-2;
@@ -126,7 +127,7 @@
   }
 }
 
-.selectedToken {
+.selected_token {
   background-color: $color-accent-primary-element;
 
   &:hover {

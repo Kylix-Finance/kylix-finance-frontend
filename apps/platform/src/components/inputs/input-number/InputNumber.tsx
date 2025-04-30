@@ -89,10 +89,10 @@ export const InputNumber = ({
   );
 
   return (
-    <div className={styles.inputWrapper}>
+    <div className={styles.input_wrapper}>
       {label && <label className={styles.label}>{label}</label>}
 
-      <div className={styles.topRow}>
+      <div className={styles.top_row}>
         <input
           ref={inputRef}
           type="text"
@@ -108,11 +108,11 @@ export const InputNumber = ({
             onChange={onTokenSelect}
             renderOption={renderTokenOption}
             renderValue={renderTokenOption}
-            className={styles.tokenSelector}
+            className={styles.token_selector}
           />
         )}
       </div>
-      <div className={styles.bottomRow}>
+      <div className={styles.bottom_row}>
         ${localValue || 0}
         <div className={styles.wallet_balance}>
           <Wallet className={styles.wallet_icon} />
