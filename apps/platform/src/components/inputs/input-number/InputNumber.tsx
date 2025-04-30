@@ -17,6 +17,7 @@ interface Props
   error?: string;
   value?: string;
   decimals?: number;
+  price?: string;
 }
 
 export const InputNumber = ({
@@ -30,6 +31,7 @@ export const InputNumber = ({
   error,
   value: externalValue,
   decimals = 18,
+  price,
   ...rest
 }: Props) => {
   const [localValue, setLocalValue] = useState(externalValue || "");
@@ -113,7 +115,7 @@ export const InputNumber = ({
         )}
       </div>
       <div className={styles.bottom_row}>
-        ${localValue || 0}
+        ${Number(price || 0) * Number(localValue || 0) || 0}
         <div className={styles.wallet_balance}>
           <Wallet className={styles.wallet_icon} />
           <div className={styles.available_amount}>0.53 {selectedToken}</div>
@@ -124,6 +126,13 @@ export const InputNumber = ({
             </Button>
           )}
         </div>
+      </div>
+      <div className={styles.percentage}>
+        {[1, 5, 10, 25].map((percent) => (
+          <Button variant="secondary" size="small" key={percent}>
+            +{percent}%
+          </Button>
+        ))}
       </div>
     </div>
   );
