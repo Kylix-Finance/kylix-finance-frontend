@@ -15,7 +15,6 @@ import Table from "~/components/table";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
 import { useState, useMemo } from "react";
-import clsx from "clsx";
 import { EmptyState } from "~/components/empty-state";
 import Ghost from "~/assets/icons/ghost.svg";
 const columnHelper = createColumnHelper<LandingPool>();
@@ -34,7 +33,7 @@ export const MarketTable = ({ query }: Props) => {
       header: "Asset",
       enableSorting: false,
       cell: (info) => (
-        <div className={clsx(styles.token, styles.cell)}>
+        <div className={styles.token}>
           <TokenIcon symbol={info.getValue()} />
           {info.getValue()}
         </div>
@@ -43,10 +42,13 @@ export const MarketTable = ({ query }: Props) => {
     columnHelper.accessor("total_pool_supply", {
       header: "Total Supplied",
       cell: (info) => {
-        const { total_pool_supply } = info.row.original;
+        const { total_pool_supply, asset_symbol } = info.row.original;
         return (
           <p className={styles.cell}>
-            {formatBigNumbers(total_pool_supply.toString(), 2)}
+            <span className={styles.value}>
+              {formatBigNumbers(total_pool_supply.toString(), 2)}
+            </span>
+            <span>{asset_symbol}</span>
           </p>
         );
       },
@@ -58,8 +60,15 @@ export const MarketTable = ({ query }: Props) => {
     columnHelper.accessor("total_pool_borrow", {
       header: "Total Borrowed",
       cell: (info) => {
-        const { borrow_apy } = info.row.original;
-        return <p className={styles.cell}>{borrow_apy}</p>;
+        const { total_pool_borrow, asset_symbol } = info.row.original;
+        return (
+          <p className={styles.cell}>
+            <span className={styles.value}>
+              {formatBigNumbers(total_pool_borrow.toString(), 2)}
+            </span>
+            <span>{asset_symbol}</span>
+          </p>
+        );
       },
     }),
     columnHelper.accessor("borrow_apy", {
