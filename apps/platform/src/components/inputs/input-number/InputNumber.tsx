@@ -90,6 +90,19 @@ export const InputNumber = ({
     processValue(input.value, input.selectionStart || 0);
   };
 
+  const handlePercentageClick = (percent: number) => {
+    if (!availableAmount) return;
+
+    const currentValue = Number(localValue.replace(/,/g, "") || "0");
+    const availableNum = Number(availableAmount);
+    const percentAmount = (availableNum * percent) / 100;
+    const newValue = currentValue + percentAmount;
+
+    if (newValue <= availableNum) {
+      processValue(newValue.toFixed(decimals));
+    }
+  };
+
   const renderTokenOption = (token: string) => (
     <>
       <TokenIcon symbol={token} width={28} height={28} />
@@ -147,7 +160,12 @@ export const InputNumber = ({
       </div>
       <div className={styles.percentage}>
         {[1, 5, 10, 25].map((percent) => (
-          <Button variant="secondary" size="small" key={percent}>
+          <Button
+            variant="secondary"
+            size="small"
+            key={percent}
+            onClick={() => handlePercentageClick(percent)}
+          >
             +{percent}%
           </Button>
         ))}
