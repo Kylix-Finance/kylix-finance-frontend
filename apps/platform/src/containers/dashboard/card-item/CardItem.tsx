@@ -1,9 +1,10 @@
 import { Skeleton } from "~/components/skeleton";
-import styles from "./Item.module.scss";
+import styles from "./CardItem.module.scss";
+import { isValidElement, ReactNode } from "react";
 
 interface Props {
   title: string;
-  value: string;
+  value: ReactNode;
   subValue?: string;
   hasValue?: boolean;
   hasSubValue?: boolean;
@@ -18,21 +19,21 @@ const Item = ({
   hasValue = true,
   isPending,
 }: Props) => {
+  const isReactElement = isValidElement(value);
   return (
     <div className={styles.container}>
       <p className={styles.title}>{title}</p>
       <div className={styles.value_container}>
-        {hasValue && (
-          <Skeleton
-            rounded
-            isLoading={isPending}
-            width={80}
-            height={16}
-            className={styles.value}
-          >
-            <span className={styles.value}>{value}</span>
-          </Skeleton>
-        )}
+        <span className={styles.value}>
+          {hasValue &&
+            (isReactElement ? (
+              value
+            ) : (
+              <Skeleton rounded isLoading={isPending} width={80} height={16}>
+                <span>{value}</span>
+              </Skeleton>
+            ))}
+        </span>
         {hasSubValue && (
           <Skeleton
             isLoading={isPending}

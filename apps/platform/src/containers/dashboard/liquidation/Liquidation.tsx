@@ -3,6 +3,7 @@ import { BREAKPOINTS } from "~/constants";
 import LiquidationTable from "./table";
 import { useGetLiquidationMarkets } from "@repo/onchain";
 import { useMemo } from "react";
+import Cards from "./cards/Cards";
 interface Props {
   query: string | null;
 }
@@ -18,16 +19,18 @@ const Liquidation = ({ query }: Props) => {
       item.asset_name.toLowerCase().includes(query.toLowerCase())
     );
   }, [data, query]);
+  const isPending = !data && (isLoading || !isFetched);
+  const isEmpty = (!data || data.length === 0) && !isLoading && isFetched;
   return (
     <>
       {isDesktop ? (
         <LiquidationTable
           data={finalData}
-          isFetched={isFetched}
-          isLoading={isLoading}
+          isPending={isPending}
+          isEmpty={isEmpty}
         />
       ) : (
-        <div></div>
+        <Cards data={finalData} isPending={isPending} isEmpty={isEmpty} />
       )}
     </>
   );

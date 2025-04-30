@@ -2,7 +2,7 @@ import { formatBigNumbers, LandingPool } from "@repo/onchain";
 import styles from "./Card.module.scss";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
-import Item from "./item/Item";
+import CardItem from "../../../card-item/CardItem";
 import { Skeleton } from "~/components/skeleton";
 
 interface Props {
@@ -29,31 +29,31 @@ const Card = ({ data, isPending }: Props) => {
       </div>
       <div className={styles.content}>
         <div className={styles.detail}>
-          <Item
+          <CardItem
             title="Total Supplied"
             value={` ${data && formatBigNumbers(data.total_pool_supply.toString(), 2)} ${data && data.asset_symbol} : `}
             hasSubValue
             subValue="$3.91B"
             isPending={isPending}
           />
-          <Item
+          <CardItem
             title="Supply APY"
             isPending={isPending}
             value={`${data && formatBigNumbers(data.supply_apy.toString(), 2)}`}
           />
-          <Item
+          <CardItem
             title="Total Borrowed"
             value={` ${data && formatBigNumbers(data.total_pool_borrow.toString(), 2)} ${data && data.asset_symbol}`}
             subValue="$3.91B"
             hasSubValue
             isPending={isPending}
           />
-          <Item
+          <CardItem
             title="Borrow APY"
             value={`${data && formatBigNumbers(data.borrow_apy.toString(), 2)}`}
             isPending={isPending}
           />
-          <Item
+          <CardItem
             title="Utilization"
             value={`${data && formatBigNumbers(data.utilization.toString(), 2)}`}
             isPending={isPending}

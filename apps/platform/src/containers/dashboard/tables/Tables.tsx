@@ -1,6 +1,6 @@
 import styles from "./Tables.module.scss";
 import { ButtonGroup } from "~/components/ui/button-group";
-import { ElementType, useState } from "react";
+import { ElementType } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
 import TableLayout from "~/components/table-layout";
@@ -80,7 +80,11 @@ const sortOptions = new Map<string, Sort>([
 const networkKeys = Array.from(networks.keys());
 const sortOptionKeys = Array.from(sortOptions.keys());
 export const Tables = () => {
-  const [activeTab, setActiveTab] = useState<Tab>("markets");
+  const [activeTab, setActiveTab] = useQueryState<Tab>("tab", {
+    defaultValue: "markets",
+    parse: (value: string): Tab =>
+      value === "liquidations" ? "liquidations" : "markets",
+  });
 
   const [q, setQ] = useQueryState("q");
   const [selectedNetwork, setSelectedNetwork] = useQueryState("network", {
