@@ -14,6 +14,7 @@ const page = () => {
         onChange={(value) => console.log("Value changed:", value)}
         value="1000.00"
         placeholder="Enter amount"
+        decimals={4}
       />
     </div>
   );

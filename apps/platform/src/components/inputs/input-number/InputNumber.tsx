@@ -16,6 +16,7 @@ interface Props
   onChange?: (value: string) => void;
   error?: string;
   value?: string;
+  decimals?: number;
 }
 
 export const InputNumber = ({
@@ -28,6 +29,7 @@ export const InputNumber = ({
   onChange,
   error,
   value: externalValue,
+  decimals = 18,
   ...rest
 }: Props) => {
   const [localValue, setLocalValue] = useState(externalValue || "");
@@ -47,7 +49,11 @@ export const InputNumber = ({
     // Additional validation to prevent multiple decimal points
     const hasOneOrNoDot = (newValue.match(/\./g) || []).length <= 1;
 
-    if (isValidNumber && hasOneOrNoDot) {
+    // Check decimal places
+    const parts = newValue.split(".");
+    const hasValidDecimals = parts.length === 1 || parts[1].length <= decimals;
+
+    if (isValidNumber && hasOneOrNoDot && hasValidDecimals) {
       const formattedValue = formatNumberWithCommas(newValue);
       setLocalValue(formattedValue);
       onChange?.(newValue); // Pass the unformatted value to onChange
