@@ -41,3 +41,8 @@
     display: none;
   }
 }
+.children {
+  @include media("<desktop") {
+    display: none;
+  }
+}

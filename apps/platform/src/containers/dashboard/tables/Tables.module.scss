@@ -1,5 +1,8 @@
 .switcher {
   width: 330px;
+  @include media("<desktop") {
+    width: 100%;
+  }
 }
 .header {
   display: flex;
@@ -10,11 +13,18 @@
 }
 .search {
   width: 300px;
+  @include media("<desktop") {
+    width: 100%;
+  }
 }
 .options {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  @include media("<desktop") {
+    flex-direction: column-reverse;
+    gap: 24px;
+  }
 }
 .option {
   display: flex;

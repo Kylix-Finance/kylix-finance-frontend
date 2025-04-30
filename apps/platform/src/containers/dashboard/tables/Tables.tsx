@@ -1,5 +1,3 @@
-import MarketTable from "../market-table";
-import LiquidationTable from "../liquidation-table";
 import styles from "./Tables.module.scss";
 import { ButtonGroup } from "~/components/ui/button-group";
 import { ElementType, useState } from "react";
@@ -14,6 +12,8 @@ import Glob from "~/assets/icons/glob.svg";
 import Bitcoin from "~/assets/svgs/crypto-currencies/bitcoin.svg";
 import Dot from "~/assets/svgs/crypto-currencies/dot.svg";
 import capitalize from "lodash/capitalize";
+import Markets from "../markets/Markets";
+import Liquidation from "../liquidation/Liquidation";
 type Tab = "markets" | "liquidations";
 interface Network {
   name: string;
@@ -129,6 +129,7 @@ export const Tables = () => {
                 setActiveTab(value);
                 setQ(null);
               }}
+              fullWidth
             />
           </div>
           <div className={styles.options}>
@@ -179,7 +180,7 @@ export const Tables = () => {
             {...framerProps}
             variants={fadeInOutAnimation}
           >
-            <MarketTable query={q} />
+            <Markets query={q} />
           </motion.div>
         )}
 
@@ -189,7 +190,7 @@ export const Tables = () => {
             {...framerProps}
             variants={fadeInOutAnimation}
           >
-            <LiquidationTable query={q} />
+            <Liquidation query={q} />
           </motion.div>
         )}
       </AnimatePresence>

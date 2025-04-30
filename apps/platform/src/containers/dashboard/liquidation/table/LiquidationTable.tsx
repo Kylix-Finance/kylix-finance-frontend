@@ -6,27 +6,22 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 import styles from "./LiquidationTable.module.scss";
-import {
-  formatBigNumbers,
-  formatUnit,
-  LiquidationMarket,
-  useGetLiquidationMarkets,
-} from "@repo/onchain";
+import { formatBigNumbers, formatUnit, LiquidationMarket } from "@repo/onchain";
 import Table from "~/components/table";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 import Health from "./health/Health";
 import { EmptyState } from "~/components/empty-state";
 import Ghost from "~/assets/icons/ghost.svg";
 const columnHelper = createColumnHelper<LiquidationMarket>();
 interface Props {
-  query: string | null;
+  isLoading: boolean;
+  isFetched: boolean;
+  data: LiquidationMarket[];
 }
-export const LiquidationTable = ({ query }: Props) => {
-  const { data, isLoading, isFetched } = useGetLiquidationMarkets();
-
+export const LiquidationTable = ({ data, isFetched, isLoading }: Props) => {
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const columns = [
@@ -97,15 +92,8 @@ export const LiquidationTable = ({ query }: Props) => {
     }),
   ];
 
-  const tableData = useMemo(() => {
-    if (!data) return [];
-    if (!query) return data;
-    return data.filter((item) =>
-      item.asset_name.toLowerCase().includes(query.toLowerCase())
-    );
-  }, [data, query]);
   const table = useReactTable({
-    data: tableData,
+    data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -118,7 +106,7 @@ export const LiquidationTable = ({ query }: Props) => {
   return (
     <div className={styles.container}>
       <Table table={table} isLoading={!data && (isLoading || isFetched)} />
-      {(!tableData || tableData.length === 0) && !isLoading && isFetched && (
+      {(!data || data.length === 0) && !isLoading && isFetched && (
         <EmptyState
           description="No liquidation markets available. This could be due to unavailable data or no matching search results."
           title="No Liquidation Markets Found"

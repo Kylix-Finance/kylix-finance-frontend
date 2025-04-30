@@ -9,10 +9,10 @@ interface Props {
     bigNumStr: string;
     decimal: number;
   };
-  onItemClick: (value: ButtonGroupTab) => void;
+  onItemClick: (value: string | number) => void;
   tabs: ButtonGroupTab[];
   children: ReactNode;
-  defaultTab: string;
+  activeTab: string;
 }
 const ChartContainer = ({
   title,
@@ -20,7 +20,7 @@ const ChartContainer = ({
   onItemClick,
   tabs,
   children,
-  defaultTab,
+  activeTab,
 }: Props) => {
   return (
     <div className={styles.container}>
@@ -32,7 +32,11 @@ const ChartContainer = ({
           </p>
         </div>
         <div className={styles.tabs_container}>
-          <ButtonGroup tabs={tabs} activeTab="sad" setActiveTab={(e) => e} />
+          <ButtonGroup
+            tabs={tabs}
+            activeTab={activeTab}
+            setActiveTab={onItemClick}
+          />
         </div>
       </div>
       <div className={styles.children}>{children}</div>
