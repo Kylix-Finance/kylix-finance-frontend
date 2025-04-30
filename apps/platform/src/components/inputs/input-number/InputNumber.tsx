@@ -119,7 +119,7 @@ export const InputNumber = ({
           <div className={styles.available_amount}>0.53 {selectedToken}</div>
 
           {showMaxButton && (
-            <Button variant="secondary" size="small" onClick={onMaxClick}>
+            <Button variant="primary" size="small" onClick={onMaxClick}>
               Max
             </Button>
           )}
