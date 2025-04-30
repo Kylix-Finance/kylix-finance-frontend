@@ -3,6 +3,7 @@ import { BREAKPOINTS } from "~/constants";
 import MarketsTable from "./table";
 import { useGetLendingPools } from "@repo/onchain";
 import { useMemo } from "react";
+import Cards from "./cards/Cards";
 interface Props {
   query: string | null;
 }
@@ -18,16 +19,19 @@ const Markets = ({ query }: Props) => {
       item.asset.toLowerCase().includes(query.toLowerCase())
     );
   }, [data, query]);
+  const isPending = !data && (isLoading || !isFetched);
+  const isEmpty =
+    (!data || data.assets.length === 0) && !isLoading && isFetched;
   return (
     <>
       {isDesktop ? (
         <MarketsTable
           data={finalData}
-          isFetched={isFetched}
-          isLoading={isLoading}
+          isPending={isPending}
+          isEmpty={isEmpty}
         />
       ) : (
-        <div></div>
+        <Cards isPending={isPending} data={finalData} isEmpty={isEmpty} />
       )}
     </>
   );

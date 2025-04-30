@@ -11,17 +11,16 @@ import Table from "~/components/table";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
-import { EmptyState } from "~/components/empty-state";
-import Ghost from "~/assets/icons/ghost.svg";
+import Empty from "../Empty";
 const columnHelper = createColumnHelper<LandingPool>();
 
 interface Props {
-  isLoading: boolean;
-  isFetched: boolean;
+  isPending: boolean;
   data: LandingPool[];
+  isEmpty: boolean;
 }
 
-export const MarketTable = ({ data, isFetched, isLoading }: Props) => {
+export const MarketTable = ({ data, isPending, isEmpty }: Props) => {
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const columns = [
@@ -98,14 +97,8 @@ export const MarketTable = ({ data, isFetched, isLoading }: Props) => {
   });
   return (
     <div className={styles.container}>
-      <Table table={table} isLoading={!data && (isLoading || !isFetched)} />
-      {(!data || data.length === 0) && !isLoading && isFetched && (
-        <EmptyState
-          description="No markets were found. This could be due to no available markets or your search criteria didn't match any results."
-          title="No Markets Found"
-          icon={Ghost}
-        />
-      )}
+      <Table table={table} isLoading={isPending} />
+      <Empty isEmpty={isEmpty} />
     </div>
   );
 };

@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  user-select: none;
+}
+.title {
+  @include font($font-body);
+  color: $color-neutral-400;
+}
+.value_container {
+  display: flex;
+  flex-direction: column;
+}
+.value {
+  @include font($font-heading-5);
+  color: $color-neutral-200;
+}
+.sub_value {
+  @include font($font-body-compact);
+  color: $color-neutral-400;
+}
