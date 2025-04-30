@@ -10,7 +10,7 @@ interface Props {
 
 const Liquidation = ({ query }: Props) => {
   const { width } = useViewportSize();
-  const isDesktop = width > BREAKPOINTS.DESKTOP;
+  const isDesktop = width >= BREAKPOINTS.DESKTOP;
   const { data, isLoading, isFetched } = useGetLiquidationMarkets();
   const finalData = useMemo(() => {
     if (!data) return [];

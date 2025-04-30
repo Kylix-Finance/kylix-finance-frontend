@@ -10,7 +10,7 @@ interface Props {
 
 const Markets = ({ query }: Props) => {
   const { width } = useViewportSize();
-  const isDesktop = width > BREAKPOINTS.DESKTOP;
+  const isDesktop = width >= BREAKPOINTS.DESKTOP;
   const { data, isLoading, isFetched } = useGetLendingPools();
   const finalData = useMemo(() => {
     if (!data?.assets) return [];

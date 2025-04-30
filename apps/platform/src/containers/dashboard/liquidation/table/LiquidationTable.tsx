@@ -14,6 +14,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import Health from "../health/Health";
 import Empty from "../Empty";
+import Check from "~/assets/icons/check.svg";
 const columnHelper = createColumnHelper<LiquidationMarket>();
 interface Props {
   isPending: boolean;
@@ -73,11 +74,13 @@ export const LiquidationTable = ({ data, isEmpty, isPending }: Props) => {
       cell: (info) => {
         const { user_bid, bid_asset_decimals } = info.row.original;
         return (
-          <p className={styles.cell}>
-            {user_bid
-              ? formatBigNumbers(formatUnit(user_bid, bid_asset_decimals), 4)
-              : "-"}
-          </p>
+          <span className={styles.cell}>
+            {user_bid ? (
+              <Check width={32} heigh={32} className={styles.check} />
+            ) : (
+              "-"
+            )}
+          </span>
         );
       },
     }),
