@@ -146,6 +146,8 @@
 }
 
 .estimated_value {
+  display: flex;
+  align-items: center;
   max-width: 41%;
   overflow: hidden;
 }

@@ -138,7 +138,13 @@ export const InputNumber = ({
         <span className={styles.estimated_value}>
           {price && (
             <>
-              $<span>{Number(price || 0) * Number(externalValue || 0)}</span>
+              $
+              <span>
+                {formatBigNumbers(
+                  (Number(price || 0) * Number(externalValue || 0)).toString(),
+                  4
+                )}
+              </span>
             </>
           )}
         </span>
