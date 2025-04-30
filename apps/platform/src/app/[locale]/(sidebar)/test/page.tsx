@@ -1,7 +1,9 @@
 "use client";
+import { useState } from "react";
 import InputNumber from "~/components/inputs/input-number";
+const Page = () => {
+  const [value, setValue] = useState("");
 
-const page = () => {
   return (
     <div style={{ width: 329 }}>
       <InputNumber
@@ -11,13 +13,15 @@ const page = () => {
         selectedToken="ETH"
         onTokenSelect={(token) => console.log("Selected token:", token)}
         availableTokens={["ETH", "BTC", "USDT"]}
-        onChange={(value) => console.log("Value changed:", value)}
-        value="1000.00"
-        placeholder="Enter amount"
+        onChange={setValue}
+        value={value}
+        placeholder="0"
         decimals={4}
+        price="94000"
+        availableAmount="0.056"
       />
     </div>
   );
 };
 
-export default page;
+export default Page;

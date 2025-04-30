@@ -4,6 +4,7 @@ import { Button } from "~/components/ui/button";
 import TokenIcon from "~/components/token-icon";
 import { SelectBox } from "../select-box";
 import { Wallet } from "~/assets/icons";
+import { formatBigNumbers } from "@repo/onchain";
 
 interface Props
   extends Omit<ComponentPropsWithRef<"input">, "onChange" | "value"> {
@@ -18,6 +19,7 @@ interface Props
   value?: string;
   decimals?: number;
   price?: string;
+  availableAmount?: string;
 }
 
 export const InputNumber = ({
@@ -32,6 +34,7 @@ export const InputNumber = ({
   value: externalValue,
   decimals = 18,
   price,
+  availableAmount,
   ...rest
 }: Props) => {
   const [localValue, setLocalValue] = useState(externalValue || "");
@@ -43,15 +46,8 @@ export const InputNumber = ({
     return parts.join(".");
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target;
-    const newValue = input.value.replace(/,/g, ""); // Remove existing commas
-    const cursorPosition = input.selectionStart || 0;
-
-    // Count commas before cursor in the old value
-    const beforeCommasCount = (
-      localValue.slice(0, cursorPosition).match(/,/g) || []
-    ).length;
+  const processValue = (newValue: string, cursorPosition?: number) => {
+    newValue = newValue.replace(/,/g, ""); // Remove existing commas
 
     // Allow empty string or valid number with optional decimal
     const isValidNumber = newValue === "" || /^\d*\.?\d*$/.test(newValue);
@@ -64,23 +60,34 @@ export const InputNumber = ({
       setLocalValue(formattedValue);
       onChange?.(newValue);
 
-      // Count commas before cursor in the new value
-      const afterCommasCount = (
-        formattedValue.slice(0, cursorPosition).match(/,/g) || []
-      ).length;
+      if (cursorPosition !== undefined) {
+        // Count commas before cursor in the old value
+        const beforeCommasCount = (
+          localValue.slice(0, cursorPosition).match(/,/g) || []
+        ).length;
+        // Count commas before cursor in the new value
+        const afterCommasCount = (
+          formattedValue.slice(0, cursorPosition).match(/,/g) || []
+        ).length;
 
-      // Calculate new cursor position
-      requestAnimationFrame(() => {
-        if (inputRef.current) {
-          const newCursorPosition =
-            cursorPosition + (afterCommasCount - beforeCommasCount);
-          inputRef.current.setSelectionRange(
-            newCursorPosition,
-            newCursorPosition
-          );
-        }
-      });
+        // Calculate new cursor position
+        requestAnimationFrame(() => {
+          if (inputRef.current) {
+            const newCursorPosition =
+              cursorPosition + (afterCommasCount - beforeCommasCount);
+            inputRef.current.setSelectionRange(
+              newCursorPosition,
+              newCursorPosition
+            );
+          }
+        });
+      }
     }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target;
+    processValue(input.value, input.selectionStart || 0);
   };
 
   const renderTokenOption = (token: string) => (
@@ -115,13 +122,24 @@ export const InputNumber = ({
         )}
       </div>
       <div className={styles.bottom_row}>
-        ${Number(price || 0) * Number(localValue || 0) || 0}
+        <span>
+          {price && "$" + Number(price || 0) * Number(externalValue || 0)}
+        </span>
         <div className={styles.wallet_balance}>
           <Wallet className={styles.wallet_icon} />
-          <div className={styles.available_amount}>0.53 {selectedToken}</div>
+          <div className={styles.available_amount}>
+            {formatBigNumbers(availableAmount || "0", 4)} {selectedToken}
+          </div>
 
           {showMaxButton && (
-            <Button variant="primary" size="small" onClick={onMaxClick}>
+            <Button
+              variant="primary"
+              size="small"
+              onClick={() => {
+                onMaxClick?.();
+                processValue(availableAmount || "0");
+              }}
+            >
               Max
             </Button>
           )}
