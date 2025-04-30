@@ -144,3 +144,8 @@
   display: flex;
   gap: 8px;
 }
+
+.estimated_value {
+  max-width: 41%;
+  overflow: hidden;
+}

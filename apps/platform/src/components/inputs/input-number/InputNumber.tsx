@@ -135,8 +135,12 @@ export const InputNumber = ({
         )}
       </div>
       <div className={styles.bottom_row}>
-        <span>
-          {price && "$" + Number(price || 0) * Number(externalValue || 0)}
+        <span className={styles.estimated_value}>
+          {price && (
+            <>
+              $<span>{Number(price || 0) * Number(externalValue || 0)}</span>
+            </>
+          )}
         </span>
         <div className={styles.wallet_balance}>
           <Wallet className={styles.wallet_icon} />
