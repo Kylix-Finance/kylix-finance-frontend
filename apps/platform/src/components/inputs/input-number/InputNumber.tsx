@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, useState } from "react";
+import { ComponentPropsWithRef, useRef, useState } from "react";
 import styles from "./InputNumber.module.scss";
 import { Button } from "~/components/ui/button";
 import TokenIcon from "~/components/token-icon";
@@ -33,6 +33,7 @@ export const InputNumber = ({
   ...rest
 }: Props) => {
   const [localValue, setLocalValue] = useState(externalValue || "");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const formatNumberWithCommas = (value: string) => {
     const parts = value.split(".");
@@ -41,22 +42,42 @@ export const InputNumber = ({
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value.replace(/,/g, ""); // Remove existing commas
+    const input = e.target;
+    const newValue = input.value.replace(/,/g, ""); // Remove existing commas
+    const cursorPosition = input.selectionStart || 0;
+
+    // Count commas before cursor in the old value
+    const beforeCommasCount = (
+      localValue.slice(0, cursorPosition).match(/,/g) || []
+    ).length;
 
     // Allow empty string or valid number with optional decimal
     const isValidNumber = newValue === "" || /^\d*\.?\d*$/.test(newValue);
-
-    // Additional validation to prevent multiple decimal points
     const hasOneOrNoDot = (newValue.match(/\./g) || []).length <= 1;
-
-    // Check decimal places
     const parts = newValue.split(".");
     const hasValidDecimals = parts.length === 1 || parts[1].length <= decimals;
 
     if (isValidNumber && hasOneOrNoDot && hasValidDecimals) {
       const formattedValue = formatNumberWithCommas(newValue);
       setLocalValue(formattedValue);
-      onChange?.(newValue); // Pass the unformatted value to onChange
+      onChange?.(newValue);
+
+      // Count commas before cursor in the new value
+      const afterCommasCount = (
+        formattedValue.slice(0, cursorPosition).match(/,/g) || []
+      ).length;
+
+      // Calculate new cursor position
+      requestAnimationFrame(() => {
+        if (inputRef.current) {
+          const newCursorPosition =
+            cursorPosition + (afterCommasCount - beforeCommasCount);
+          inputRef.current.setSelectionRange(
+            newCursorPosition,
+            newCursorPosition
+          );
+        }
+      });
     }
   };
 
@@ -73,6 +94,7 @@ export const InputNumber = ({
 
       <div className={styles.topRow}>
         <input
+          ref={inputRef}
           type="text"
           className={styles.input}
           onChange={handleInputChange}
