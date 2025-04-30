@@ -16,7 +16,7 @@ const IconButton = ({
   className: containerClassName,
   width = 24,
   height = 24,
-  noInteractionStyles,
+  noInteractionStyles = false,
   noPadding,
   ...rest
 }: Props) => {
