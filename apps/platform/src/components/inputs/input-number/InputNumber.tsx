@@ -49,8 +49,13 @@ export const InputNumber = ({
   const processValue = (newValue: string, cursorPosition?: number) => {
     newValue = newValue.replace(/,/g, ""); // Remove existing commas
 
-    // Allow empty string or valid number with optional decimal
-    const isValidNumber = newValue === "" || /^\d*\.?\d*$/.test(newValue);
+    // Check if the value is empty, a valid decimal number, and doesn't start with unnecessary zeros
+    const isValidNumber =
+      newValue === "" ||
+      (/^\d*\.?\d*$/.test(newValue) &&
+        !/^0\d+/.test(newValue) &&
+        newValue !== ".");
+
     const hasOneOrNoDot = (newValue.match(/\./g) || []).length <= 1;
     const parts = newValue.split(".");
     const hasValidDecimals = parts.length === 1 || parts[1].length <= decimals;
@@ -109,10 +114,16 @@ export const InputNumber = ({
       <span>{token}</span>
     </>
   );
-
   return (
     <div className={styles.input_wrapper}>
-      {label && <label className={styles.label}>{label}</label>}
+      {label && (
+        <label
+          className={styles.label}
+          onClick={() => inputRef.current?.focus()}
+        >
+          {label}
+        </label>
+      )}
 
       <div className={styles.top_row}>
         <input
@@ -135,8 +146,8 @@ export const InputNumber = ({
         )}
       </div>
       <div className={styles.bottom_row}>
-        <span className={styles.estimated_value}>
-          {price && (
+        {price && (
+          <span className={styles.estimated_value}>
             <>
               $
               <span>
@@ -146,8 +157,8 @@ export const InputNumber = ({
                 )}
               </span>
             </>
-          )}
-        </span>
+          </span>
+        )}
         <div className={styles.wallet_balance}>
           <Wallet className={styles.wallet_icon} />
           <div className={styles.available_amount}>
