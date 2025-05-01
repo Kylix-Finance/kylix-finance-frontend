@@ -10,6 +10,8 @@ interface Props
   extends Omit<ComponentPropsWithRef<"input">, "onChange" | "value"> {
   label?: string;
   showMaxButton?: boolean;
+  showEstimate?: boolean;
+  showPercentButtons?: boolean;
   onMaxClick?: () => void;
   selectedToken?: string;
   onTokenSelect?: (token: string) => void;
@@ -20,11 +22,14 @@ interface Props
   decimals?: number;
   price?: string;
   availableAmount?: string;
+  isPercentMode?: boolean;
 }
 
 export const InputNumber = ({
   label,
-  showMaxButton = false,
+  showMaxButton,
+  showEstimate,
+  showPercentButtons,
   onMaxClick,
   selectedToken,
   onTokenSelect,
@@ -35,6 +40,7 @@ export const InputNumber = ({
   decimals = 18,
   price,
   availableAmount,
+  isPercentMode = false,
   ...rest
 }: Props) => {
   const [localValue, setLocalValue] = useState(externalValue || "");
@@ -49,8 +55,13 @@ export const InputNumber = ({
   const processValue = (newValue: string, cursorPosition?: number) => {
     newValue = newValue.replace(/,/g, ""); // Remove existing commas
 
-    // Allow empty string or valid number with optional decimal
-    const isValidNumber = newValue === "" || /^\d*\.?\d*$/.test(newValue);
+    // Check if the value is empty, a valid decimal number, and doesn't start with unnecessary zeros
+    const isValidNumber =
+      newValue === "" ||
+      (/^\d*\.?\d*$/.test(newValue) &&
+        !/^0\d+/.test(newValue) &&
+        newValue !== ".");
+
     const hasOneOrNoDot = (newValue.match(/\./g) || []).length <= 1;
     const parts = newValue.split(".");
     const hasValidDecimals = parts.length === 1 || parts[1].length <= decimals;
@@ -103,26 +114,39 @@ export const InputNumber = ({
     }
   };
 
+  const focusInput = () => inputRef.current?.focus();
+
   const renderTokenOption = (token: string) => (
     <>
       <TokenIcon symbol={token} width={28} height={28} />
       <span>{token}</span>
     </>
   );
-
   return (
     <div className={styles.input_wrapper}>
-      {label && <label className={styles.label}>{label}</label>}
+      {label && (
+        <label className={styles.label} onClick={focusInput}>
+          {label}
+        </label>
+      )}
 
       <div className={styles.top_row}>
-        <input
-          ref={inputRef}
-          type="text"
-          className={styles.input}
-          onChange={handleInputChange}
-          value={localValue}
-          {...rest}
-        />
+        <div className={styles.input_container}>
+          {isPercentMode && (
+            <span onClick={focusInput} className={styles.percent_symbol}>
+              %
+            </span>
+          )}
+          <input
+            ref={inputRef}
+            type="text"
+            className={styles.input}
+            onChange={handleInputChange}
+            value={localValue}
+            data-percent-mode={isPercentMode}
+            {...rest}
+          />
+        </div>
         {selectedToken && availableTokens.length > 0 && (
           <SelectBox
             options={availableTokens}
@@ -135,8 +159,8 @@ export const InputNumber = ({
         )}
       </div>
       <div className={styles.bottom_row}>
-        <span className={styles.estimated_value}>
-          {price && (
+        {showEstimate && price && (
+          <span className={styles.estimated_value}>
             <>
               $
               <span>
@@ -146,8 +170,8 @@ export const InputNumber = ({
                 )}
               </span>
             </>
-          )}
-        </span>
+          </span>
+        )}
         <div className={styles.wallet_balance}>
           <Wallet className={styles.wallet_icon} />
           <div className={styles.available_amount}>
@@ -156,6 +180,7 @@ export const InputNumber = ({
 
           {showMaxButton && (
             <Button
+              disabled={!availableAmount}
               variant="primary"
               size="small"
               onClick={() => {
@@ -168,18 +193,21 @@ export const InputNumber = ({
           )}
         </div>
       </div>
-      <div className={styles.percentage}>
-        {[1, 5, 10, 25].map((percent) => (
-          <Button
-            variant="secondary"
-            size="small"
-            key={percent}
-            onClick={() => handlePercentageClick(percent)}
-          >
-            +{percent}%
-          </Button>
-        ))}
-      </div>
+      {showPercentButtons && (
+        <div className={styles.percentage}>
+          {[1, 5, 10, 25].map((percent) => (
+            <Button
+              variant="secondary"
+              size="small"
+              key={percent}
+              onClick={() => handlePercentageClick(percent)}
+              disabled={!availableAmount}
+            >
+              +{percent}%
+            </Button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

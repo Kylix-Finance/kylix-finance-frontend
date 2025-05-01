@@ -8,7 +8,10 @@ const Page = () => {
     <div style={{ width: 329 }}>
       <InputNumber
         label="Amount"
-        showMaxButton={true}
+        showMaxButton
+        showEstimate
+        showPercentButtons
+        isPercentMode={true}
         onMaxClick={() => console.log("Max clicked")}
         selectedToken="ETH"
         onTokenSelect={(token) => console.log("Selected token:", token)}
