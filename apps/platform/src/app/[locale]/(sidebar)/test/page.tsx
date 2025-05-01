@@ -18,7 +18,7 @@ const Page = () => {
         placeholder="0"
         decimals={4}
         price="94000"
-        availableAmount="0.056"
+        // availableAmount="0.056"
       />
     </div>
   );

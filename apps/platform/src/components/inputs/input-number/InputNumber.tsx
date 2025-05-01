@@ -10,6 +10,8 @@ interface Props
   extends Omit<ComponentPropsWithRef<"input">, "onChange" | "value"> {
   label?: string;
   showMaxButton?: boolean;
+  showEstimate?: boolean;
+  showPercentButtons?: boolean;
   onMaxClick?: () => void;
   selectedToken?: string;
   onTokenSelect?: (token: string) => void;
@@ -24,7 +26,9 @@ interface Props
 
 export const InputNumber = ({
   label,
-  showMaxButton = false,
+  showMaxButton,
+  showEstimate,
+  showPercentButtons,
   onMaxClick,
   selectedToken,
   onTokenSelect,
@@ -146,7 +150,7 @@ export const InputNumber = ({
         )}
       </div>
       <div className={styles.bottom_row}>
-        {price && (
+        {showEstimate && price && (
           <span className={styles.estimated_value}>
             <>
               $
@@ -167,6 +171,7 @@ export const InputNumber = ({
 
           {showMaxButton && (
             <Button
+              disabled={!availableAmount}
               variant="primary"
               size="small"
               onClick={() => {
@@ -179,18 +184,21 @@ export const InputNumber = ({
           )}
         </div>
       </div>
-      <div className={styles.percentage}>
-        {[1, 5, 10, 25].map((percent) => (
-          <Button
-            variant="secondary"
-            size="small"
-            key={percent}
-            onClick={() => handlePercentageClick(percent)}
-          >
-            +{percent}%
-          </Button>
-        ))}
-      </div>
+      {showPercentButtons && (
+        <div className={styles.percentage}>
+          {[1, 5, 10, 25].map((percent) => (
+            <Button
+              variant="secondary"
+              size="small"
+              key={percent}
+              onClick={() => handlePercentageClick(percent)}
+              disabled={!availableAmount}
+            >
+              +{percent}%
+            </Button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
