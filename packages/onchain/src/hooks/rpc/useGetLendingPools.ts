@@ -3,8 +3,8 @@ import { useQuery, skipToken } from "@tanstack/react-query";
 import { decodeArrayToString, queryKeys, useAccountsStore } from "@repo/shared";
 import { formatUnit } from "../../utils";
 interface Params {
-  assetId: string | null;
-  account: string | null;
+  assetId: number | null;
+  account: string | null | undefined;
 }
 
 export type LandingPool = NonNullable<

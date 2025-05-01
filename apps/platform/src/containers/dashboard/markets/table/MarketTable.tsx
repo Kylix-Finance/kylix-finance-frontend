@@ -12,17 +12,24 @@ import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
 import Empty from "../Empty";
+import { useAccountsStore } from "@repo/shared";
 const columnHelper = createColumnHelper<LandingPool>();
 
 interface Props {
   isPending: boolean;
   data: LandingPool[];
   isEmpty: boolean;
+  onSupplyClick: (assetId: number) => void;
 }
 
-export const MarketTable = ({ data, isPending, isEmpty }: Props) => {
+export const MarketTable = ({
+  data,
+  isPending,
+  isEmpty,
+  onSupplyClick,
+}: Props) => {
   const [sorting, setSorting] = useState<SortingState>([]);
-
+  const { account } = useAccountsStore();
   const columns = [
     columnHelper.accessor("asset_symbol", {
       header: "Asset",
@@ -76,12 +83,20 @@ export const MarketTable = ({ data, isPending, isEmpty }: Props) => {
     }),
     columnHelper.display({
       id: "actions",
-      cell: () => (
-        <div className={styles.actions}>
-          <Button>Supply</Button>
-          <Button variant="secondary">Borrow</Button>
-        </div>
-      ),
+      cell: (info) => {
+        const { asset_id } = info.row.original;
+        return (
+          <div className={styles.actions}>
+            <Button
+              disabled={!account?.address}
+              onClick={() => onSupplyClick(asset_id)}
+            >
+              Supply
+            </Button>
+            <Button variant="secondary">Borrow</Button>
+          </div>
+        );
+      },
     }),
   ];
 

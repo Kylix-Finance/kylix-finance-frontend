@@ -2,8 +2,9 @@ import { useViewportSize } from "@mantine/hooks";
 import { BREAKPOINTS } from "~/constants";
 import MarketsTable from "./table";
 import { useGetLendingPools } from "@repo/onchain";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Cards from "./cards/Cards";
+import SupplyModal from "~/components/modal/supply-modal/SupplyModal";
 interface Props {
   query: string | null;
 }
@@ -11,6 +12,7 @@ interface Props {
 const Markets = ({ query }: Props) => {
   const { width } = useViewportSize();
   const isDesktop = width >= BREAKPOINTS.DESKTOP;
+  const [selectedAssetId, setSelectedAssetId] = useState<null | number>(null);
   const { data, isLoading, isFetched } = useGetLendingPools();
   const finalData = useMemo(() => {
     if (!data?.assets) return [];
@@ -29,9 +31,16 @@ const Markets = ({ query }: Props) => {
           data={finalData}
           isPending={isPending}
           isEmpty={isEmpty}
+          onSupplyClick={(id) => setSelectedAssetId(id)}
         />
       ) : (
         <Cards isPending={isPending} data={finalData} isEmpty={isEmpty} />
+      )}
+      {selectedAssetId && (
+        <SupplyModal
+          assetId={selectedAssetId}
+          onClose={() => setSelectedAssetId(null)}
+        />
       )}
     </>
   );

@@ -1,14 +1,5 @@
 import { Definition } from "../definitions";
 
-type Params = [asset: number, base_asset?: number];
-type Response = {
-  currentBorrow: number;
-  currentLtv: number;
-  borrowLimit: number;
-  saleLtv: string;
-  liquidationValue: number;
-  liquidationLtv: string;
-  allowance: number;
-  collateral: number;
-};
+type Params = [asset: number, base_asset: number | null];
+type Response = [price: bigint, decimal: number];
 export type GetAssetPrice = Definition<Params, Response>;
