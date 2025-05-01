@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ReactNode } from "react";
+import { ElementType, ReactNode } from "react";
 import { CHART_SCALES } from "~/constants";
 
 export type Middleware = (req: NextRequest) => Promise<NextResponse | void>;
@@ -55,3 +55,12 @@ export type CursorProps = {
   height: number;
   points: ChartPoint[];
 };
+
+export interface ExpandableCardItem {
+  title: {
+    value: string;
+    icon?: ElementType;
+    tooltipContent?: string;
+  };
+  content: ReactNode;
+}

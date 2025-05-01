@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.left {
+  display: flex;
+  align-items: center;
+}
+.icon {
+  cursor: default;
+}
+.title_container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

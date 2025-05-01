@@ -2,6 +2,7 @@ import Modal from "~/components/ui/modal/Modal";
 import { VoidFunction } from "~/types";
 import styles from "./SupplyModal.module.scss";
 import InputNumber from "~/components/inputs/input-number";
+import GasPump from "~/assets/icons/gas-pump.svg";
 import {
   formatUnit,
   useAssetPrice,
@@ -12,6 +13,7 @@ import {
 import { useAccountsStore } from "@repo/shared";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
+import { ExpandableCard } from "~/components/expandable-card";
 interface Props {
   assetId: number;
   onClose: VoidFunction;
@@ -88,6 +90,53 @@ const SupplyModal = ({ assetId, onClose }: Props) => {
             {value ? "Supply" : "Enter an amount"}
           </Button>
         </div>
+        <ExpandableCard
+          data={[
+            [
+              {
+                title: {
+                  value: "$0.45",
+                  icon: GasPump,
+                },
+                content: <p>0.045KYL</p>,
+              },
+              {
+                title: {
+                  value: "Supply APY",
+                },
+                content: <p>12.5%</p>,
+              },
+            ],
+            [
+              {
+                title: {
+                  value: "Borrow APY",
+                },
+                content: <p>99%</p>,
+              },
+              {
+                title: {
+                  value: "Collateral Factor",
+                },
+                content: <p>75%</p>,
+              },
+            ],
+            [
+              {
+                title: {
+                  value: "Borrow APY",
+                },
+                content: <p>99%</p>,
+              },
+              {
+                title: {
+                  value: "Collateral Factor",
+                },
+                content: <p>75%</p>,
+              },
+            ],
+          ]}
+        />
       </div>
     </Modal>
   );
