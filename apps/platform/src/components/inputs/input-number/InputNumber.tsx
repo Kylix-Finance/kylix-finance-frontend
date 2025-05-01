@@ -22,6 +22,7 @@ interface Props
   decimals?: number;
   price?: string;
   availableAmount?: string;
+  isPercentMode?: boolean;
 }
 
 export const InputNumber = ({
@@ -39,6 +40,7 @@ export const InputNumber = ({
   decimals = 18,
   price,
   availableAmount,
+  isPercentMode = false,
   ...rest
 }: Props) => {
   const [localValue, setLocalValue] = useState(externalValue || "");
@@ -112,6 +114,8 @@ export const InputNumber = ({
     }
   };
 
+  const focusInput = () => inputRef.current?.focus();
+
   const renderTokenOption = (token: string) => (
     <>
       <TokenIcon symbol={token} width={28} height={28} />
@@ -121,23 +125,28 @@ export const InputNumber = ({
   return (
     <div className={styles.input_wrapper}>
       {label && (
-        <label
-          className={styles.label}
-          onClick={() => inputRef.current?.focus()}
-        >
+        <label className={styles.label} onClick={focusInput}>
           {label}
         </label>
       )}
 
       <div className={styles.top_row}>
-        <input
-          ref={inputRef}
-          type="text"
-          className={styles.input}
-          onChange={handleInputChange}
-          value={localValue}
-          {...rest}
-        />
+        <div className={styles.input_container}>
+          {isPercentMode && (
+            <span onClick={focusInput} className={styles.percent_symbol}>
+              %
+            </span>
+          )}
+          <input
+            ref={inputRef}
+            type="text"
+            className={styles.input}
+            onChange={handleInputChange}
+            value={localValue}
+            data-percent-mode={isPercentMode}
+            {...rest}
+          />
+        </div>
         {selectedToken && availableTokens.length > 0 && (
           <SelectBox
             options={availableTokens}
