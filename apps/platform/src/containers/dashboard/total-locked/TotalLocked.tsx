@@ -1,6 +1,7 @@
 import { ChartContainer } from "~/components/chart-container";
 import { ButtonGroupTab } from "~/types";
-import { ChartSkeleton } from "~/components/chart-skeleton";
+import CustomAreaChart from "~/components/recharts/AreaChart";
+
 const tabs: ButtonGroupTab[] = [
   {
     content: "ALL",
@@ -22,11 +23,13 @@ const TotalLocked = () => {
       tabs={tabs}
       value={{ bigNumStr: "100", decimal: 2 }}
       onItemClick={() => {}}
-      defaultTab="all"
+      activeTab="all"
     >
-      <ChartSkeleton isLoading>
+      <CustomAreaChart />
+
+      {/* <ChartSkeleton isLoading>
         <div></div>
-      </ChartSkeleton>
+      </ChartSkeleton> */}
     </ChartContainer>
   );
 };

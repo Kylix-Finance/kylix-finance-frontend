@@ -19,7 +19,7 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <Button>Claim &lt; 0.12</Button>
-      <IconButton icon={Bell} />
+      <IconButton icon={Bell} disabled />
       {isMounted ? (
         <>
           {account?.address ? (

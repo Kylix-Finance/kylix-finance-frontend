@@ -1,11 +1,12 @@
 .container {
-  padding: $spacing-1;
-  border: 1px solid $color-button-group-border;
+  padding: 4px;
+  border: 1px solid $color-neutral-700;
   border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: $spacing-0_5;
+  gap: 2px;
+  background-color: $color-accent-primary-component;
 }
 .button {
   background-color: transparent;
@@ -18,12 +19,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: $spacing-2_5 $spacing-4_5;
-  color: $color-button-group-text-item;
+  padding: 10px 18px;
+  color: $color-neutral-400;
   @include font($font-button);
 }
 .button_active {
-  color: $color-button-group-text-item-active;
+  color: $color-primary;
   position: relative;
   &:hover {
     opacity: 0.9;
@@ -34,7 +35,7 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  border: 1px solid $color-button-group-border-item-active;
-  background-color: $color-button-primary-bg-active;
+  border: 1px solid $color-primary;
+  background-color: $color-accent-primary-element;
   border-radius: inherit;
 }

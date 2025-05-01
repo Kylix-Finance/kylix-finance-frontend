@@ -6,12 +6,31 @@ import clsx from "clsx";
 interface Props extends SkeletonProps {
   isLoading?: boolean;
   children?: ReactNode;
+  rounded?: boolean;
+  borderRadius?: number;
 }
 
-const Skeleton = ({ children, isLoading, className, ...rest }: Props) => {
+const Skeleton = ({
+  children,
+  isLoading,
+  className,
+  rounded,
+  style,
+  borderRadius,
+  ...rest
+}: Props) => {
   if (isLoading)
     return (
-      <BaseSkeleton {...rest} className={clsx(className, styles.container)} />
+      <BaseSkeleton
+        {...rest}
+        style={{
+          borderRadius,
+          ...style,
+        }}
+        className={clsx(className, styles.container, {
+          [styles.rounded]: rounded,
+        })}
+      />
     );
 
   return children;

@@ -1,7 +1,7 @@
 "use client";
 import { useLockScroll } from "~/hooks/useLockScroll";
 import { ModalProps } from "~/types";
-import { useWindowSize } from "usehooks-ts";
+import { useViewportSize } from "@mantine/hooks";
 import { BREAKPOINTS } from "~/constants";
 import { Portal } from "~/components/portal";
 import Mobile from "./mobile/Mobile";
@@ -13,7 +13,7 @@ const Modal = ({
   hasCloseButton = true,
   ...rest
 }: ModalProps) => {
-  const { width } = useWindowSize();
+  const { width } = useViewportSize();
   const isMobile = width <= BREAKPOINTS.MOBILE;
   useLockScroll({ isLocked: isOpen, onClose });
   const modal = (

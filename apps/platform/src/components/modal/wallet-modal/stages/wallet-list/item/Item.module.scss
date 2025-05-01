@@ -1,10 +1,10 @@
 .container {
-  padding: $spacing-4;
+  padding: 16px;
   display: flex;
   align-items: center;
-  gap: $spacing-4;
-  color: $color-wallet-modal-wallet-list-item-text;
-  background-color: $color-wallet-modal-wallet-list-item-bg;
+  gap: 16px;
+  color: $color-neutral-200;
+  background-color: $color-neutral-800;
   justify-content: space-between;
   cursor: pointer;
   border: none;
@@ -25,7 +25,7 @@
 .information {
   display: flex;
   align-items: center;
-  gap: $spacing-4;
+  gap: 16px;
 }
 .download_icon {
   width: 24px;

@@ -1,8 +1,6 @@
-import MarketTable from "../market-table";
-import LiquidationTable from "../liquidation-table";
 import styles from "./Tables.module.scss";
 import { ButtonGroup } from "~/components/ui/button-group";
-import { ElementType, useState } from "react";
+import { ElementType } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
 import TableLayout from "~/components/table-layout";
@@ -14,6 +12,8 @@ import Glob from "~/assets/icons/glob.svg";
 import Bitcoin from "~/assets/svgs/crypto-currencies/bitcoin.svg";
 import Dot from "~/assets/svgs/crypto-currencies/dot.svg";
 import capitalize from "lodash/capitalize";
+import Markets from "../markets/Markets";
+import Liquidation from "../liquidation/Liquidation";
 type Tab = "markets" | "liquidations";
 interface Network {
   name: string;
@@ -80,7 +80,11 @@ const sortOptions = new Map<string, Sort>([
 const networkKeys = Array.from(networks.keys());
 const sortOptionKeys = Array.from(sortOptions.keys());
 export const Tables = () => {
-  const [activeTab, setActiveTab] = useState<Tab>("markets");
+  const [activeTab, setActiveTab] = useQueryState<Tab>("tab", {
+    defaultValue: "markets",
+    parse: (value: string): Tab =>
+      value === "liquidations" ? "liquidations" : "markets",
+  });
 
   const [q, setQ] = useQueryState("q");
   const [selectedNetwork, setSelectedNetwork] = useQueryState("network", {
@@ -129,6 +133,7 @@ export const Tables = () => {
                 setActiveTab(value);
                 setQ(null);
               }}
+              fullWidth
             />
           </div>
           <div className={styles.options}>
@@ -179,7 +184,7 @@ export const Tables = () => {
             {...framerProps}
             variants={fadeInOutAnimation}
           >
-            <MarketTable query={q} />
+            <Markets query={q} />
           </motion.div>
         )}
 
@@ -189,7 +194,7 @@ export const Tables = () => {
             {...framerProps}
             variants={fadeInOutAnimation}
           >
-            <LiquidationTable query={q} />
+            <Liquidation query={q} />
           </motion.div>
         )}
       </AnimatePresence>

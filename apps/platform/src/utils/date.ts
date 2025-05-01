@@ -1,5 +1,5 @@
-import { format } from "date-fns";
+import { format, fromUnixTime } from "date-fns";
 
-export const getShortMonth = (date: Date): string => {
-  return format(date, "MMM");
+export const getShortMonth = (unix: number) => {
+  return format(fromUnixTime(unix), "MMM");
 };

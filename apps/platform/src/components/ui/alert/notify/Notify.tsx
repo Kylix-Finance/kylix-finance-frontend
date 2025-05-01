@@ -18,6 +18,7 @@ const notify = (
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      progressClassName: styles[mode],
       closeButton: false,
       className: styles.container,
       ...options,

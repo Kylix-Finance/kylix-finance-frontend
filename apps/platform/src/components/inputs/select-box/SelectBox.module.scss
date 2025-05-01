@@ -4,14 +4,15 @@
   gap: 8px;
   padding: 4px;
   border-radius: 22px;
-  background-color: $color-neutral-800;
+  background-color: $color-neutral-900;
   color: $color-neutral-200;
   border: 1px solid $color-neutral-700;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
-
+  user-select: none;
+  @include font($font-heading-5);
   &:hover {
-    background-color: $color-neutral-700;
+    background-color: $color-neutral-800;
   }
 }
 

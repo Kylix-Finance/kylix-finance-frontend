@@ -2,9 +2,9 @@
   position: absolute;
   pointer-events: none;
   border-radius: 8px;
-  background-color: $color-tooltip-primary-bg;
-  padding: $spacing-4 $spacing-3;
-  color: $color-tooltip-primary-text;
+  background-color: $color-white;
+  padding: 16px 12px;
+  color: $color-black;
   @include font($font-body-compact);
 }
 .tail {

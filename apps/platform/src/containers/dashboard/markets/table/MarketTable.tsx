@@ -6,27 +6,21 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 import styles from "./MarketTable.module.scss";
-import {
-  formatBigNumbers,
-  LandingPool,
-  useGetLendingPools,
-} from "@repo/onchain";
+import { formatBigNumbers, LandingPool } from "@repo/onchain";
 import Table from "~/components/table";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
-import { useState, useMemo } from "react";
-import clsx from "clsx";
-import { EmptyState } from "~/components/empty-state";
-import Ghost from "~/assets/icons/ghost.svg";
+import { useState } from "react";
+import Empty from "../Empty";
 const columnHelper = createColumnHelper<LandingPool>();
 
 interface Props {
-  query: string | null;
+  isPending: boolean;
+  data: LandingPool[];
+  isEmpty: boolean;
 }
 
-export const MarketTable = ({ query }: Props) => {
-  const { data, isLoading, isFetched } = useGetLendingPools();
-
+export const MarketTable = ({ data, isPending, isEmpty }: Props) => {
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const columns = [
@@ -34,7 +28,7 @@ export const MarketTable = ({ query }: Props) => {
       header: "Asset",
       enableSorting: false,
       cell: (info) => (
-        <div className={clsx(styles.token, styles.cell)}>
+        <div className={styles.token}>
           <TokenIcon symbol={info.getValue()} />
           {info.getValue()}
         </div>
@@ -43,10 +37,13 @@ export const MarketTable = ({ query }: Props) => {
     columnHelper.accessor("total_pool_supply", {
       header: "Total Supplied",
       cell: (info) => {
-        const { total_pool_supply } = info.row.original;
+        const { total_pool_supply, asset_symbol } = info.row.original;
         return (
           <p className={styles.cell}>
-            {formatBigNumbers(total_pool_supply.toString(), 2)}
+            <span className={styles.value}>
+              {formatBigNumbers(total_pool_supply.toString(), 2)}
+            </span>
+            <span>{asset_symbol}</span>
           </p>
         );
       },
@@ -58,8 +55,15 @@ export const MarketTable = ({ query }: Props) => {
     columnHelper.accessor("total_pool_borrow", {
       header: "Total Borrowed",
       cell: (info) => {
-        const { borrow_apy } = info.row.original;
-        return <p className={styles.cell}>{borrow_apy}</p>;
+        const { total_pool_borrow, asset_symbol } = info.row.original;
+        return (
+          <p className={styles.cell}>
+            <span className={styles.value}>
+              {formatBigNumbers(total_pool_borrow.toString(), 2)}
+            </span>
+            <span>{asset_symbol}</span>
+          </p>
+        );
       },
     }),
     columnHelper.accessor("borrow_apy", {
@@ -81,16 +85,8 @@ export const MarketTable = ({ query }: Props) => {
     }),
   ];
 
-  const tableData = useMemo(() => {
-    if (!data?.assets) return [];
-    if (!query) return data.assets;
-    return data.assets.filter((item) =>
-      item.asset.toLowerCase().includes(query.toLowerCase())
-    );
-  }, [data, query]);
-
   const table = useReactTable({
-    data: tableData,
+    data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -101,14 +97,8 @@ export const MarketTable = ({ query }: Props) => {
   });
   return (
     <div className={styles.container}>
-      <Table table={table} isLoading={!data && (isLoading || !isFetched)} />
-      {(!tableData || tableData.length === 0) && !isLoading && isFetched && (
-        <EmptyState
-          description="No markets were found. This could be due to no available markets or your search criteria didn't match any results."
-          title="No Markets Found"
-          icon={Ghost}
-        />
-      )}
+      <Table table={table} isLoading={isPending} />
+      <Empty isEmpty={isEmpty} />
     </div>
   );
 };

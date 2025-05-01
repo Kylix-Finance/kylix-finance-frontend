@@ -1,5 +1,4 @@
 import styles from "./Preference.module.scss";
-import ThemeSwitcher from "../theme-switcher";
 import Card from "../card";
 import { WalletProfile } from "../wallet-profile/WalletProfile";
 import Row from "./row/Row";
@@ -13,9 +12,6 @@ export const Preference = () => {
   return (
     <Card className={styles.preference}>
       <WalletProfile hasCopy />
-      <Row title="Theme">
-        <ThemeSwitcher />
-      </Row>
       <Row title="Wallet options">
         <Button
           variant="ghost"

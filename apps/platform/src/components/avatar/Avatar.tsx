@@ -13,7 +13,7 @@ export const Avatar = ({ size = "small", hasBadge, account }: AvatarProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.avatar} data-size={size}>
-        <IconButton icon={User} />
+        <IconButton icon={User} noInteractionStyles />
         {hasBadge && <div className={styles.badge} />}
       </div>
       {account && (

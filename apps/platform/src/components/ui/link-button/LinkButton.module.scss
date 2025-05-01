@@ -1,33 +1,21 @@
 .container {
-  color: $color-link-button-primary-text;
+  color: $color-primary;
   background-color: transparent;
-  border: 1px solid $color-link-button-primary-border;
+  border: 1px solid transparent;
   border-radius: 4px;
   user-select: none;
   outline: none;
-
   @include font($font-button);
-
   transition: all 0.2s ease-in-out;
-
   &:hover {
-    color: $color-link-button-primary-text-hover;
-    border-color: $color-link-button-primary-border-hover;
+    color: $color-primary-light;
   }
-
-  &:active {
-    color: $color-link-button-primary-text-active;
-    border-color: $color-link-button-primary-border-active;
-  }
-
   &:focus {
-    color: $color-link-button-primary-text-focus;
-    border-color: $color-link-button-primary-border-focus;
+    border-color: $color-primary;
   }
 }
-
 .disabled {
-  color: $color-link-button-primary-text-disabled;
+  color: $color-neutral-700;
   cursor: not-allowed;
   pointer-events: none;
 }
