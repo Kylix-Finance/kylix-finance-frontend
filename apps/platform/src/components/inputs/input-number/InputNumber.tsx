@@ -142,7 +142,7 @@ export const InputNumber = ({
               <span>
                 {formatBigNumbers(
                   (Number(price || 0) * Number(externalValue || 0)).toString(),
-                  4
+                  2
                 )}
               </span>
             </>
