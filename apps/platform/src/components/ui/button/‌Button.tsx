@@ -2,7 +2,7 @@ import { ComponentPropsWithRef, ElementType } from "react";
 import styles from "./‌Button.module.scss";
 
 import clsx from "clsx";
-import Spinner from "~/components/loaders/spinner";
+import Spinner from "~/components/loaders/spinner/Spinner";
 interface Props extends ComponentPropsWithRef<"button"> {
   variant?: "primary" | "secondary" | "tertiary" | "ghost";
   size?: "small" | "default" | "large";

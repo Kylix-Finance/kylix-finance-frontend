@@ -1,5 +1,5 @@
 import Modal from "~/components/ui/modal/Modal";
-import { VoidFunction } from "~/types";
+import { TransactionStage, VoidFunction } from "~/types";
 import Form from "./form/Form";
 import {
   parseUnit,
@@ -10,6 +10,7 @@ import {
 } from "@repo/onchain";
 import { useAccountsStore } from "@repo/shared";
 import { useEffect, useState } from "react";
+import Loading from "./loading/Loading";
 
 interface Props {
   assetId: number;
@@ -18,10 +19,15 @@ interface Props {
 
 const SupplyModal = ({ assetId, onClose }: Props) => {
   const [value, setValue] = useState<string | undefined>(undefined);
-
+  const [stage, setStage] = useState<TransactionStage>("form");
   const { account } = useAccountsStore();
 
-  const { mutate: supplyMutate, isPending: isSupplyPending } = useSupply({
+  const {
+    mutate: supplyMutate,
+    isPending: isSupplyPending,
+    isError,
+    error,
+  } = useSupply({
     assetId: assetId?.toString(),
   });
 
@@ -59,10 +65,22 @@ const SupplyModal = ({ assetId, onClose }: Props) => {
   const asset = pool?.assets[0];
   const handleClick = () => {
     if (!value || !asset) return;
-    supplyMutate({
-      balance: parseUnit(value, asset.asset_decimals),
-      options: {},
-    });
+    supplyMutate(
+      {
+        balance: parseUnit(value, asset.asset_decimals),
+        options: {
+          onBroadcast: () => setStage("broadcast"),
+          onFinalized: () => setStage("finalized"),
+          onInBlock: () => setStage("in_block"),
+          onReady: () => setStage("ready"),
+        },
+      },
+      {
+        onError: () => {
+          setStage("error");
+        },
+      }
+    );
   };
 
   const onInputValueChange = async (newValue: string) => {
@@ -70,18 +88,31 @@ const SupplyModal = ({ assetId, onClose }: Props) => {
   };
 
   return (
-    <Modal isOpen={!!assetId} onClose={onClose} title="You’re supplying">
-      <Form
-        isLoading={isLoading}
-        value={value}
-        onInputChange={onInputValueChange}
-        asset={asset}
-        formattedBalance={balance?.formattedBalance}
-        onButtonClick={handleClick}
-        isButtonLoading={isSupplyPending}
-        assetPrice={assetPrice?.[0].toString()}
-        assetDecimal={assetPrice?.[1]}
-      />
+    <Modal
+      isOpen={!!assetId}
+      onClose={onClose}
+      title={stage === "form" ? "You’re supplying" : undefined}
+    >
+      {stage === "form" ? (
+        <Form
+          isLoading={isLoading}
+          value={value}
+          onInputChange={onInputValueChange}
+          asset={asset}
+          formattedBalance={balance?.formattedBalance}
+          onButtonClick={handleClick}
+          isButtonLoading={isSupplyPending}
+          assetPrice={assetPrice?.[0].toString()}
+          assetDecimal={assetPrice?.[1]}
+        />
+      ) : (
+        <Loading
+          stage={stage}
+          value={value}
+          symbol={asset?.asset_symbol}
+          error={error}
+        />
+      )}
     </Modal>
   );
 };

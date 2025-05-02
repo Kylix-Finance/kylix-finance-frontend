@@ -64,3 +64,12 @@ export interface ExpandableCardItem {
   };
   content: ReactNode;
 }
+
+export type TransactionStage =
+  | "form"
+  | "ready"
+  | "broadcast"
+  | "in_block"
+  | "finalized"
+  | "wallet"
+  | "error";
