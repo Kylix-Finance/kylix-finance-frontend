@@ -51,63 +51,69 @@ export const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
-    <div
-      className={styles.container}
-      style={{ width: isExpanded ? "244px" : "84px" }}
-    >
-      <SquareHalf
-        className={styles.expand_square}
-        onClick={() => {
-          setIsExpanded((o) => !o);
-        }}
-      />
+    <div className={styles.wrapper}>
+      <div
+        className={styles.container}
+        style={{ width: isExpanded ? "244px" : "84px" }}
+      >
+        <SquareHalf
+          className={styles.expand_square}
+          onClick={() => {
+            setIsExpanded((o) => !o);
+          }}
+        />
 
-      <div className={styles.sidebar}>
-        <div className={styles.logo_wrapper}>
-          <LogoDot isOpacityZero={!isExpanded} />
-          <Logo className={styles.logo} />
+        <div className={styles.sidebar}>
+          <div className={styles.logo_wrapper}>
+            <LogoDot isOpacityZero={!isExpanded} />
+            <Logo className={styles.logo} />
+          </div>
+
+          <div className={styles.menu}>
+            <ul className={styles.menu_list}>
+              {menuItems.map((item, index) => (
+                <Link href={item.disabled ? "#" : item.path} key={index}>
+                  <li
+                    className={clsx(styles.menu_item, {
+                      [styles.active_menu_item]: pathname === item.path,
+                      [styles.disabled_menu_item]: item.disabled,
+                    })}
+                  >
+                    {item.icon && <item.icon className={styles.icon} />}
+                    {item.label}
+                  </li>
+                </Link>
+              ))}
+            </ul>
+          </div>
         </div>
-
-        <div className={styles.menu}>
-          <ul className={styles.menu_list}>
-            {menuItems.map((item, index) => (
-              <Link href={item.disabled ? "#" : item.path} key={index}>
-                <li
-                  className={clsx(styles.menu_item, {
-                    [styles.active_menu_item]: pathname === item.path,
-                    [styles.disabled_menu_item]: item.disabled,
-                  })}
+        <motion.ul className={styles.socials_container}>
+          {socialItems.map((item, index) => {
+            const position = index * 52; // 44px (icon size) + 8px (gap)
+            return (
+              <motion.div
+                key={index}
+                initial={false}
+                animate={{
+                  x: isExpanded ? position + -1 : 0,
+                  y: isExpanded ? 0 : position * -1,
+                }}
+                transition={{
+                  duration: 0.3,
+                }}
+              >
+                <Link
+                  href={item.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  {item.icon && <item.icon className={styles.icon} />}
-                  {item.label}
-                </li>
-              </Link>
-            ))}
-          </ul>
-        </div>
+                  <IconButton icon={item.icon} />
+                </Link>
+              </motion.div>
+            );
+          })}
+        </motion.ul>
       </div>
-      <motion.ul className={styles.socials_container}>
-        {socialItems.map((item, index) => {
-          const position = index * 52; // 44px (icon size) + 8px (gap)
-          return (
-            <motion.div
-              key={index}
-              initial={false}
-              animate={{
-                x: isExpanded ? position + -1 : 0,
-                y: isExpanded ? 0 : position * -1,
-              }}
-              transition={{
-                duration: 0.3,
-              }}
-            >
-              <Link href={item.path} target="_blank" rel="noopener noreferrer">
-                <IconButton icon={item.icon} />
-              </Link>
-            </motion.div>
-          );
-        })}
-      </motion.ul>
     </div>
   );
 };
