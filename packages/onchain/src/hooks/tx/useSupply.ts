@@ -1,18 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { useTransaction } from "../useTransaction";
-interface SupplyParams {
-  assetId: string;
-}
-
-interface MutationFnParams {
-  balance: string | bigint;
-  onConfirm?: () => void;
-}
+import { SupplyMutationFnParams, SupplyParams } from "../../types";
 
 export const useSupply = ({ assetId }: SupplyParams) => {
-  const { execute, simulate } = useTransaction("lending", "supply");
+  const { execute } = useTransaction("lending", "supply");
   return useMutation({
-    mutationFn: async (params: MutationFnParams) => {
+    mutationFn: async (params: SupplyMutationFnParams) => {
       const { balance: amount, onConfirm } = params;
       return execute(onConfirm, assetId, amount);
     },

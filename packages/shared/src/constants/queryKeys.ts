@@ -174,9 +174,10 @@ export const queryKeys = {
     activeAccount,
   ],
   wallets: [baseKey, keys.WALLETS],
-  estimatedGas: (account: string | undefined) => [
+  estimatedGas: (method: string, account: string | undefined) => [
     baseKey,
     keys.ESTIMATED_GAS,
+    method,
     account,
   ],
 };
