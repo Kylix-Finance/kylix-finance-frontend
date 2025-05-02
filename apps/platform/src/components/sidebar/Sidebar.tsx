@@ -48,7 +48,7 @@ const socialItems = [
 export const Sidebar = () => {
   const pathname = usePathname();
 
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <div className={styles.wrapper}>
