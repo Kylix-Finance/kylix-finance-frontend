@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.gas_container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo {
+  color: $color-primary;
+  width: 16px;
+  height: 16px;
+  svg {
+    width: inherit;
+    height: inherit;
+  }
+}
+.price {
+  @include font($font-body);
+}
+.collateralization {
+  color: $color-semantic-success;
+}
+.interest {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.interest_usdt {
+  color: $color-neutral-400;
+}
+.ltv {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.arrow {
+  color: $color-primary;
+}

@@ -1,9 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTransaction } from "../useTransaction";
 import { useAccountsStore } from "@repo/shared";
+import { TransactionStatus } from "../../types";
+
 interface MutationFnParams {
   assetId: string;
-  onConfirm?: () => void;
+  options?: TransactionStatus;
 }
 
 export const useEnableAsCollateral = () => {
@@ -12,8 +14,8 @@ export const useEnableAsCollateral = () => {
   const { execute } = useTransaction("lending", "enableAsCollateral");
   return useMutation({
     mutationFn: async (params: MutationFnParams) => {
-      const { assetId, onConfirm } = params;
-      return execute(onConfirm, assetId);
+      const { assetId, options } = params;
+      return execute(options, assetId);
     },
     onSuccess: (_, { assetId }) => {
       //FIXME: should be fix after lending pools rpc

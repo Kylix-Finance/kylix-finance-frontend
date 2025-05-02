@@ -6,7 +6,6 @@ interface Params {
   assetId: number;
   base_asset: number | null;
 }
-
 export const useAssetPrice = ({
   assetId,
   base_asset = PRICE_BASE_ASSET_ID,

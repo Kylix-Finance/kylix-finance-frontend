@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useTransaction } from "../useTransaction";
+import { TransactionStatus } from "../../types";
 
 interface PlaceBidParams {
   assetId: string;
@@ -7,14 +8,14 @@ interface PlaceBidParams {
 interface MutationFnParams {
   balance: string | bigint;
   discount: number;
-  onConfirm?: () => void;
+  options?: TransactionStatus;
 }
 export const usePlaceBid = ({ assetId }: PlaceBidParams) => {
   const { execute } = useTransaction("lending", "placeBid");
   return useMutation({
     mutationFn: async (params: MutationFnParams) => {
-      const { balance: amount, onConfirm, discount } = params;
-      return execute(onConfirm, assetId, discount, amount);
+      const { balance: amount, options, discount } = params;
+      return execute(options, assetId, discount, amount);
     },
   });
 };

@@ -1,20 +1,23 @@
 import { ApiPromise } from "@polkadot/api";
 import { SubmittableResultValue } from "@polkadot/api-base/types";
+import { TransactionStatus } from "../types";
 interface Result {
   blockNumber: string | undefined;
   txHash: string;
 }
 export const transactionStatus = ({
   api,
-  onConfirm,
   resolve,
   reject,
+  onBroadcast,
+  onFinalized,
+  onInBlock,
+  onReady,
 }: {
   api: ApiPromise;
-  onConfirm?: () => void;
   resolve: (value: Result) => void;
   reject: (reason: Error) => void;
-}) => {
+} & TransactionStatus) => {
   return ({
     status,
     dispatchError,
@@ -30,15 +33,19 @@ export const transactionStatus = ({
       }
       return;
     }
-
     if (status.isReady) {
-      onConfirm?.();
+      onReady?.();
     } else if (status.isInBlock) {
       console.info("Transaction inBlock:", { blockNumber, txHash });
+      onInBlock?.();
       resolve({
         txHash: txHash.toString(),
         blockNumber: blockNumber?.toString(),
       });
+    } else if (status.isBroadcast) {
+      onBroadcast?.();
+    } else if (status.isFinalized) {
+      onFinalized?.();
     } else {
       console.info(`Transaction status: ${status.type}`);
     }
