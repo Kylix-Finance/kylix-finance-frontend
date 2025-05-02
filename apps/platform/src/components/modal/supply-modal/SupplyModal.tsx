@@ -95,10 +95,10 @@ const SupplyModal = ({ assetId, onClose }: Props) => {
             [
               {
                 title: {
-                  value: "$0.45",
+                  value: "",
                   icon: GasPump,
                 },
-                content: <p>0.045KYL</p>,
+                content: <p>111</p>,
               },
               {
                 title: {

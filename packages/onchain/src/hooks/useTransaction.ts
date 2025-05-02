@@ -25,6 +25,24 @@ export const useTransaction = <
   const { data: signer } = useSigner();
   const { data: balance } = useBalance();
 
+  const simulate = async (...args: Parameters<OperationMethods<T>[K]>) => {
+    if (
+      !isAccountExists(account?.address) ||
+      !isApiExists(provider?.api) ||
+      !isSignerExists(signer)
+    ) {
+      return false;
+    }
+
+    if (!balance) {
+      throw new Error("Balance information is not available");
+    }
+    provider.api.setSigner(signer);
+    const extrinsic = provider.api.tx[module][method](args);
+    const paymentInfo = await extrinsic.paymentInfo(account.address);
+    return paymentInfo.partialFee;
+  };
+
   const execute = async (
     onConfirm?: () => void,
     ...args: Parameters<OperationMethods<T>[K]>
@@ -58,5 +76,6 @@ export const useTransaction = <
   };
   return {
     execute,
+    simulate,
   };
 };

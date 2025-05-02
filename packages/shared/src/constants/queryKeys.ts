@@ -76,6 +76,7 @@ const keys = {
   USER_BIDS: "USER_BIDS",
   SIGNER: "SIGNER",
   WALLETS: "WALLETS",
+  ESTIMATED_GAS: "ESTIMATED_GAS",
 };
 //FIXME: 1d is temporary
 type ChartScale = "all" | "month" | "year" | "1d";
@@ -173,4 +174,9 @@ export const queryKeys = {
     activeAccount,
   ],
   wallets: [baseKey, keys.WALLETS],
+  estimatedGas: (account: string | undefined) => [
+    baseKey,
+    keys.ESTIMATED_GAS,
+    account,
+  ],
 };
