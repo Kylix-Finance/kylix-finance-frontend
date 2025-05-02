@@ -11,7 +11,7 @@ interface AssetPrice {
 }
 interface LendingPools {
   asset: ID | null;
-  account: string | null;
+  account: string | null | undefined;
 }
 interface Pools {
   activeAccount: string | undefined;
@@ -76,6 +76,7 @@ const keys = {
   USER_BIDS: "USER_BIDS",
   SIGNER: "SIGNER",
   WALLETS: "WALLETS",
+  ESTIMATED_GAS: "ESTIMATED_GAS",
 };
 //FIXME: 1d is temporary
 type ChartScale = "all" | "month" | "year" | "1d";
@@ -96,12 +97,9 @@ export const queryKeys = {
     account,
     connectorId,
   ],
-  lendingPools: ({ asset, account }: LendingPools = { account: null, asset: null }) => [
-    baseKey,
-    keys.LENDING_POOLS,
-    asset,
-    account,
-  ],
+  lendingPools: (
+    { asset, account }: LendingPools = { account: null, asset: null }
+  ) => [baseKey, keys.LENDING_POOLS, asset, account],
   liquidationMarkets: ({ account }: LiquidationMarkets) => [
     baseKey,
     keys.LIQUIDATION_MARKETS,
@@ -151,12 +149,12 @@ export const queryKeys = {
     borrowAssetAmount,
     collateralAsset,
   }: EstimateCollateral) => [
-      baseKey,
-      keys.ESTIMATE_COLLATERAL,
-      borrowAsset,
-      borrowAssetAmount,
-      collateralAsset,
-    ],
+    baseKey,
+    keys.ESTIMATE_COLLATERAL,
+    borrowAsset,
+    borrowAssetAmount,
+    collateralAsset,
+  ],
   getAssetPrice: (asset: number, base_asset?: number) => [
     baseKey,
     keys.GET_ASSET_PRICE,
@@ -176,4 +174,10 @@ export const queryKeys = {
     activeAccount,
   ],
   wallets: [baseKey, keys.WALLETS],
+  estimatedGas: (method: string, account: string | undefined) => [
+    baseKey,
+    keys.ESTIMATED_GAS,
+    method,
+    account,
+  ],
 };
