@@ -36,3 +36,11 @@
 .interest_usdt {
   color: $color-neutral-400;
 }
+.ltv {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.arrow {
+  color: $color-primary;
+}
