@@ -1,6 +1,6 @@
 import styles from "./Tables.module.scss";
 import { ButtonGroup } from "~/components/ui/button-group";
-import { ElementType } from "react";
+import { useMemo } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
 import TableLayout from "~/components/table-layout";
@@ -9,51 +9,21 @@ import Search from "~/assets/icons/search.svg";
 import { useQueryState } from "nuqs";
 import { SelectBox } from "~/components/inputs/select-box";
 import Glob from "~/assets/icons/glob.svg";
-import Bitcoin from "~/assets/svgs/crypto-currencies/bitcoin.svg";
-import Dot from "~/assets/svgs/crypto-currencies/dot.svg";
 import capitalize from "lodash/capitalize";
 import Markets from "../markets/Markets";
 import Liquidation from "../liquidation/Liquidation";
+import { useGetLendingPools } from "@repo/onchain";
+import { useAccountsStore } from "@repo/shared";
+import TokenIcon from "~/components/token-icon";
 type Tab = "markets" | "liquidations";
 interface Network {
   name: string;
   symbol: string;
-  value: string;
-  icon: ElementType;
 }
 interface Sort {
   name: string;
   value: string;
 }
-const networks = new Map<string, Network>([
-  [
-    "none",
-    {
-      name: "All Networks",
-      value: "none",
-      symbol: "none",
-      icon: Glob,
-    },
-  ],
-  [
-    "bit",
-    {
-      name: "Bitcoin",
-      value: "bit",
-      symbol: "bitcoin",
-      icon: Bitcoin,
-    },
-  ],
-  [
-    "dot",
-    {
-      name: "Polkadot",
-      value: "dot",
-      symbol: "bitcoin",
-      icon: Dot,
-    },
-  ],
-]);
 const sortOptions = new Map<string, Sort>([
   [
     "total_value_locked",
@@ -77,7 +47,6 @@ const sortOptions = new Map<string, Sort>([
     },
   ],
 ]);
-const networkKeys = Array.from(networks.keys());
 const sortOptionKeys = Array.from(sortOptions.keys());
 export const Tables = () => {
   const [activeTab, setActiveTab] = useQueryState<Tab>("tab", {
@@ -85,6 +54,36 @@ export const Tables = () => {
     parse: (value: string): Tab =>
       value === "liquidations" ? "liquidations" : "markets",
   });
+  const { account } = useAccountsStore();
+  const {
+    data: pool,
+    isLoading,
+    isFetched,
+  } = useGetLendingPools({
+    enabled: activeTab === "markets",
+    account: account?.address,
+  });
+  const isMarketsPending = !pool && (isLoading || !isFetched);
+
+  const networks = useMemo(() => {
+    const map = new Map<string, Network>([
+      [
+        "none",
+        {
+          name: "All Networks",
+          symbol: "none",
+        },
+      ],
+    ]);
+    pool?.assets?.forEach((item) => {
+      map.set(item.asset_symbol, {
+        name: item.asset,
+        symbol: item.asset_symbol,
+      });
+    });
+    return map;
+  }, [pool?.assets]);
+  const networkKeys = Array.from(networks.keys());
 
   const [q, setQ] = useQueryState("q");
   const [selectedNetwork, setSelectedNetwork] = useQueryState("network", {
@@ -96,11 +95,14 @@ export const Tables = () => {
 
   const renderNetwork = (key: string) => {
     const network = networks.get(key);
-    if (!network) return null;
     return (
       <div className={styles.selected_network}>
-        <network.icon className={styles.glob} />
-        {capitalize(network.name)}
+        {key === "none" || isMarketsPending ? (
+          <Glob className={styles.glob} />
+        ) : (
+          <TokenIcon height={20} width={20} symbol={key} />
+        )}
+        {capitalize(network?.name || "All networks")}
       </div>
     );
   };
@@ -111,6 +113,25 @@ export const Tables = () => {
       <div className={styles.selected_network}>{capitalize(option.name)}</div>
     );
   };
+  const finalPoolData = useMemo(() => {
+    if (!pool?.assets || activeTab !== "markets") return [];
+    const query = q?.trim().toLowerCase() || "";
+    let filtered = pool.assets.filter((item) => {
+      const name = item.asset.toLowerCase();
+      const symbol = item.asset_symbol.toLowerCase();
+      return !query || name.includes(query) || symbol.includes(query);
+    });
+    if (selectedNetwork !== "none") {
+      filtered = filtered.filter(
+        (item) => item.asset_symbol === selectedNetwork
+      );
+    }
+
+    return filtered;
+  }, [activeTab, pool?.assets, q, selectedNetwork]);
+
+  const isMarketsEmpty =
+    (!finalPoolData || finalPoolData.length === 0) && !isLoading && isFetched;
 
   return (
     <TableLayout
@@ -184,7 +205,11 @@ export const Tables = () => {
             {...framerProps}
             variants={fadeInOutAnimation}
           >
-            <Markets query={q} />
+            <Markets
+              data={finalPoolData}
+              isEmpty={isMarketsEmpty}
+              isPending={isMarketsPending}
+            />
           </motion.div>
         )}
 
