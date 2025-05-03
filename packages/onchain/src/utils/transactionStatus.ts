@@ -1,10 +1,7 @@
 import { ApiPromise } from "@polkadot/api";
 import { SubmittableResultValue } from "@polkadot/api-base/types";
-import { TransactionStatus } from "../types";
-interface Result {
-  blockNumber: string | undefined;
-  txHash: string;
-}
+import { TransactionStatus, UseTransactionResult } from "../types";
+
 export const transactionStatus = ({
   api,
   resolve,
@@ -15,7 +12,7 @@ export const transactionStatus = ({
   onReady,
 }: {
   api: ApiPromise;
-  resolve: (value: Result) => void;
+  resolve: (value: UseTransactionResult) => void;
   reject: (reason: Error) => void;
 } & TransactionStatus) => {
   return ({

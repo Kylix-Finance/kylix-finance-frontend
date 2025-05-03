@@ -11,3 +11,7 @@ export type TransactionStatus = {
 export interface SupplyParams {
   assetId: string;
 }
+export interface UseTransactionResult {
+  blockNumber: string | undefined;
+  txHash: string;
+}

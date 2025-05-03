@@ -10,7 +10,8 @@
     "JWT_SECRET",
     "NEXT_PUBLIC_PLATFORM_URL",
     "NEXT_PUBLIC_REST_ENDPOINT",
-    "NEXT_PUBLIC_BASE_ASSET"
+    "NEXT_PUBLIC_BASE_ASSET",
+    "NEXT_PUBLIC_RPC_END_POINT"
   ],
   "tasks": {
     "build": {

@@ -13,15 +13,20 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .title {
   @include font($font-heading-4);
   color: $color-white;
+  text-align: center;
 }
 .description {
   @include font($font-body);
   color: $color-neutral-200;
+  text-align: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .footer {
   display: flex;

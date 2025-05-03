@@ -11,7 +11,7 @@ import {
 import { useAccountsStore } from "@repo/shared";
 import { useEffect, useState } from "react";
 import Loading from "./loading/Loading";
-
+import styles from "./SupplyModal.module.scss";
 interface Props {
   assetId: number;
   onClose: VoidFunction;
@@ -25,8 +25,8 @@ const SupplyModal = ({ assetId, onClose }: Props) => {
   const {
     mutate: supplyMutate,
     isPending: isSupplyPending,
-    isError,
     error,
+    data: supplyData,
   } = useSupply({
     assetId: assetId?.toString(),
   });
@@ -94,28 +94,31 @@ const SupplyModal = ({ assetId, onClose }: Props) => {
       onClose={onClose}
       title={stage === "form" ? "You’re supplying" : undefined}
     >
-      {stage === "form" ? (
-        <Form
-          isLoading={isLoading}
-          value={value}
-          onInputChange={onInputValueChange}
-          asset={asset}
-          formattedBalance={balance?.formattedBalance}
-          onButtonClick={handleClick}
-          isButtonLoading={isSupplyPending}
-          assetPrice={assetPrice?.[0].toString()}
-          assetDecimal={assetPrice?.[1]}
-          disabled={disabled}
-          realBalance={balance?.realBalance}
-        />
-      ) : (
-        <Loading
-          stage={stage}
-          value={value}
-          symbol={asset?.asset_symbol}
-          error={error}
-        />
-      )}
+      <div className={styles.container}>
+        {stage === "form" ? (
+          <Form
+            isLoading={isLoading}
+            value={value}
+            onInputChange={onInputValueChange}
+            asset={asset}
+            formattedBalance={balance?.formattedBalance}
+            onButtonClick={handleClick}
+            isButtonLoading={isSupplyPending}
+            assetPrice={assetPrice?.[0].toString()}
+            assetDecimal={assetPrice?.[1]}
+            disabled={disabled}
+            realBalance={balance?.realBalance}
+          />
+        ) : (
+          <Loading
+            stage={stage}
+            value={value}
+            symbol={asset?.asset_symbol}
+            error={error}
+            data={supplyData}
+          />
+        )}
+      </div>
     </Modal>
   );
 };

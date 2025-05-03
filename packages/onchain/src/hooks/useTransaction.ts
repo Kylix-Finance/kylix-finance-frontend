@@ -8,7 +8,7 @@ import { validateEstimatedGas } from "../utils/validateTransactionFees";
 import { transactionStatus } from "../utils/transactionStatus";
 import { useBalance } from "./query/useBalance";
 import { useAccountsStore } from "@repo/shared";
-import { TransactionStatus } from "../types";
+import { TransactionStatus, UseTransactionResult } from "../types";
 
 type ApiOperations = keyof AugmentedSubmittables<ApiTypes>;
 type OperationMethods<T extends ApiOperations> =
@@ -43,7 +43,7 @@ export const useTransaction = <
     const extrinsic = provider.api.tx[module][method](...args);
     await validateEstimatedGas(extrinsic, account.address, balance.realBalance);
 
-    return new Promise((resolve, reject) => {
+    return new Promise<UseTransactionResult>((resolve, reject) => {
       extrinsic
         .signAndSend(
           account.address,

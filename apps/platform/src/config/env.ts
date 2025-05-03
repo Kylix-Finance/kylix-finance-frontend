@@ -9,6 +9,7 @@ const JWT_SECRET = process.env.JWT_SECRET!;
 const PLATFORM_URL = process.env.NEXT_PUBLIC_PLATFORM_URL!;
 const REST_ENDPOINT = process.env.NEXT_PUBLIC_REST_ENDPOINT!;
 const BASE_ASSET = process.env.NEXT_PUBLIC_BASE_ASSET! as unknown as number;
+const RPC_END_POINT = process.env.NEXT_PUBLIC_RPC_END_POINT;
 export const ENV = {
   IS_PRODUCTION,
   APP_ACCESS_PASSWORD,
@@ -18,4 +19,5 @@ export const ENV = {
   PLATFORM_URL,
   REST_ENDPOINT,
   BASE_ASSET,
+  RPC_END_POINT,
 };

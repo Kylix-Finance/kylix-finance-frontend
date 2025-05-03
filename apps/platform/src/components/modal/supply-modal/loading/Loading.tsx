@@ -7,11 +7,14 @@ import CheckCircle from "~/assets/icons/check-circle.svg";
 import CircleClose from "~/assets/icons/circle-close.svg";
 import { AnimatePresence, motion } from "motion/react";
 import { fadeAnimation, framerProps } from "~/animations/variants";
+import { UseTransactionResult } from "@repo/onchain";
+import { LinkButton } from "~/components/ui/link-button";
 interface Props {
   stage: TransactionStage;
   value: string | undefined;
   symbol: string | undefined;
   error: Error | null;
+  data?: UseTransactionResult;
 }
 
 type StageMessage = {
@@ -20,7 +23,7 @@ type StageMessage = {
   footer?: ReactNode;
 };
 
-const Loading = ({ stage, value, symbol, error }: Props) => {
+const Loading = ({ stage, value, symbol, error, data }: Props) => {
   const stageMessages: Record<TransactionStage, StageMessage> = {
     form: {
       title: "Provide Supply Details",
@@ -34,13 +37,12 @@ const Loading = ({ stage, value, symbol, error }: Props) => {
       title: "Assets Prepared for Supply",
       description: (
         <div className={styles.description}>
-          Your supply request has been configured. You are poised to
-          deposit&nbsp;
+          Your supply request has been configured
           <span className={styles.token}>
             {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
             {value} {symbol}
           </span>
-          &nbsp;into your lending position.
+          .
         </div>
       ),
     },
@@ -48,8 +50,8 @@ const Loading = ({ stage, value, symbol, error }: Props) => {
       title: "Awaiting Wallet Approval",
       description: (
         <div className={styles.description}>
-          Kindly authorize this transaction in your wallet to proceed with the
-          supply of&nbsp;
+          Authorize this transaction in your wallet to proceed with the supply
+          of&nbsp;
           <span className={styles.token}>
             {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
             {value} {symbol}
@@ -67,8 +69,7 @@ const Loading = ({ stage, value, symbol, error }: Props) => {
       title: "Transaction Broadcasted",
       description: (
         <div className={styles.description}>
-          Your transaction has been successfully broadcast to the network. It
-          will be included in a block shortly.
+          Your transaction has been successfully broadcast to the network.
         </div>
       ),
     },
@@ -76,26 +77,29 @@ const Loading = ({ stage, value, symbol, error }: Props) => {
       title: "Transaction Confirmed in Block",
       description: (
         <div className={styles.description}>
-          Your transaction has been recorded on the blockchain. Finalizing
-          verification of the transaction status...
+          Your transaction has been recorded on the blockchain.
         </div>
       ),
     },
     finalized: {
-      title: "Supply Successfully Confirmed",
+      title: "Supply Successfully Confirmed.",
       description: (
         <div className={styles.description}>
-          Your supply of&nbsp;
+          Your successfully supplied&nbsp;
           <span className={styles.token}>
             {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
             {value} {symbol}
           </span>
-          &nbsp;has been completed successfully.
         </div>
       ),
       footer: (
         <div className={styles.footerNote}>
-          You may now review your updated balance.
+          <LinkButton
+            target="_blank"
+            href={`https://polkadot.js.org/apps/?rpc=wss://test-dashboard.kylix.finance#/explorer/query/${data?.blockNumber}`}
+          >
+            View details
+          </LinkButton>
         </div>
       ),
     },
