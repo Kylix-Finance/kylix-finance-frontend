@@ -92,7 +92,10 @@ export const MarketTable = ({
           <div className={styles.actions}>
             <Button
               disabled={!account?.address}
-              onClick={() => onSupplyClick(asset_id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                onSupplyClick(asset_id);
+              }}
             >
               Supply
             </Button>

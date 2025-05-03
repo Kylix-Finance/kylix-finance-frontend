@@ -72,7 +72,7 @@ export const LiquidationTable = ({ data, isEmpty, isPending }: Props) => {
     columnHelper.accessor("user_bid", {
       header: "Bid placed",
       cell: (info) => {
-        const { user_bid, bid_asset_decimals } = info.row.original;
+        const { user_bid } = info.row.original;
         return (
           <span className={styles.cell}>
             {user_bid ? (
