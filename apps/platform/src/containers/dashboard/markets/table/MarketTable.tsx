@@ -4,6 +4,7 @@ import {
   useReactTable,
   SortingState,
   getSortedRowModel,
+  Row,
 } from "@tanstack/react-table";
 import styles from "./MarketTable.module.scss";
 import { formatBigNumbers, LandingPool } from "@repo/onchain";
@@ -13,6 +14,7 @@ import { Button } from "~/components/ui/button";
 import { useState } from "react";
 import Empty from "../Empty";
 import { useAccountsStore } from "@repo/shared";
+import { useRouter } from "next/navigation";
 const columnHelper = createColumnHelper<LandingPool>();
 
 interface Props {
@@ -30,6 +32,7 @@ export const MarketTable = ({
 }: Props) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const { account } = useAccountsStore();
+  const router = useRouter();
   const columns = [
     columnHelper.accessor("asset_symbol", {
       header: "Asset",
@@ -112,7 +115,13 @@ export const MarketTable = ({
   });
   return (
     <div className={styles.container}>
-      <Table table={table} isLoading={isPending} />
+      <Table
+        table={table}
+        isLoading={isPending}
+        onRowClick={(row: Row<LandingPool>) =>
+          router.push(`/markets/${row.original.asset_id}`)
+        }
+      />
       <Empty isEmpty={isEmpty} />
     </div>
   );

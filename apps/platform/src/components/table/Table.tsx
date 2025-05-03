@@ -1,5 +1,9 @@
 import React from "react";
-import { flexRender, type Table as ReactTable } from "@tanstack/react-table";
+import {
+  flexRender,
+  Row,
+  type Table as ReactTable,
+} from "@tanstack/react-table";
 import styles from "./Table.module.scss";
 import ChevronUp from "~/assets/icons/chevron-up.svg";
 import ChevronDown from "~/assets/icons/chevron-down.svg";
@@ -8,9 +12,10 @@ import { Skeleton } from "../skeleton";
 interface TableProps {
   table: ReactTable<any>;
   isLoading: boolean;
+  onRowClick?: (row: Row<any>) => void;
 }
 
-export function Table({ table, isLoading }: TableProps) {
+export function Table({ table, isLoading, onRowClick }: TableProps) {
   return (
     <div className={styles.container}>
       <table className={styles.table}>
@@ -70,7 +75,11 @@ export function Table({ table, isLoading }: TableProps) {
                 </tr>
               ))
             : table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className={styles.tr}>
+                <tr
+                  key={row.id}
+                  className={styles.tr}
+                  onClick={() => onRowClick?.(row)}
+                >
                   {row.getVisibleCells().map((cell) => (
                     <td className={styles.td} key={cell.id}>
                       {flexRender(
