@@ -4,26 +4,28 @@ import { useRpc } from "../useRpc";
 import { formatUnit } from "../../utils";
 
 interface Params {
-  account: string | null;
+  account?: string | null;
+  enabled?: boolean;
 }
 
 export type LiquidationMarket = NonNullable<
   ReturnType<typeof useGetLiquidationMarkets>["data"]
 >[number];
 
-export const useGetLiquidationMarkets = (
-  { account }: Params = { account: null }
-) => {
+export const useGetLiquidationMarkets = ({
+  account = null,
+  enabled = true,
+}: Params) => {
   const { execute, isApiAvailable } = useRpc(
     "liquidation",
     "getLiquidationMarkets"
   );
   const { account: activeAccount } = useAccountsStore();
   const finalAccount = account || activeAccount?.address || null;
-  const enabled = isApiAvailable;
+  const finalEnabled = isApiAvailable || enabled;
   return useQuery({
     queryKey: queryKeys.liquidationMarkets({ account }),
-    queryFn: enabled
+    queryFn: finalEnabled
       ? async () => {
           const response = await execute(finalAccount);
           if (!response) return undefined;

@@ -12,7 +12,7 @@ import Glob from "~/assets/icons/glob.svg";
 import capitalize from "lodash/capitalize";
 import Markets from "../markets/Markets";
 import Liquidation from "../liquidation/Liquidation";
-import { useGetLendingPools } from "@repo/onchain";
+import { useGetLendingPools, useGetLiquidationMarkets } from "@repo/onchain";
 import { useAccountsStore } from "@repo/shared";
 import TokenIcon from "~/components/token-icon";
 type Tab = "markets" | "liquidations";
@@ -64,6 +64,13 @@ export const Tables = () => {
     account: account?.address,
   });
   const isMarketsPending = !pool && (isLoading || !isFetched);
+  const {
+    data: liquidation,
+    isLoading: isLiquidationLoading,
+    isFetched: isLiquidationFetched,
+  } = useGetLiquidationMarkets({});
+  const isLiquidationPending =
+    !liquidation && (isLiquidationLoading || !isLiquidationFetched);
 
   const networks = useMemo(() => {
     const map = new Map<string, Network>([
@@ -75,14 +82,23 @@ export const Tables = () => {
         },
       ],
     ]);
-    pool?.assets?.forEach((item) => {
-      map.set(item.asset_symbol, {
-        name: item.asset,
-        symbol: item.asset_symbol,
+    if (activeTab === "markets") {
+      pool?.assets?.forEach((item) => {
+        map.set(item.asset_symbol, {
+          name: item.asset,
+          symbol: item.asset_symbol,
+        });
       });
-    });
+    } else if (activeTab === "liquidations") {
+      liquidation?.forEach((item) => {
+        map.set(item.asset_symbol, {
+          name: item.asset_name,
+          symbol: item.asset_symbol,
+        });
+      });
+    }
     return map;
-  }, [pool?.assets]);
+  }, [activeTab, liquidation, pool?.assets]);
   const networkKeys = Array.from(networks.keys());
 
   const [q, setQ] = useQueryState("q");
@@ -129,10 +145,28 @@ export const Tables = () => {
 
     return filtered;
   }, [activeTab, pool?.assets, q, selectedNetwork]);
+  const finalLiquidationData = useMemo(() => {
+    if (!liquidation || activeTab !== "liquidations") return [];
+    const query = q?.trim().toLowerCase() || "";
+    let filtered = liquidation.filter((item) => {
+      const name = item.asset_name.toLowerCase();
+      const symbol = item.asset_symbol.toLowerCase();
+      return !query || name.includes(query) || symbol.includes(query);
+    });
+    if (selectedNetwork !== "none") {
+      filtered = filtered.filter(
+        (item) => item.asset_symbol === selectedNetwork
+      );
+    }
 
+    return filtered;
+  }, [activeTab, liquidation, q, selectedNetwork]);
   const isMarketsEmpty =
     (!finalPoolData || finalPoolData.length === 0) && !isLoading && isFetched;
-
+  const isLiquidationEmpty =
+    (!liquidation || liquidation.length === 0) &&
+    !isLiquidationLoading &&
+    isLiquidationFetched;
   return (
     <TableLayout
       header={
@@ -219,7 +253,11 @@ export const Tables = () => {
             {...framerProps}
             variants={fadeInOutAnimation}
           >
-            <Liquidation query={q} />
+            <Liquidation
+              data={finalLiquidationData}
+              isEmpty={isLiquidationEmpty}
+              isPending={isLiquidationPending}
+            />
           </motion.div>
         )}
       </AnimatePresence>
