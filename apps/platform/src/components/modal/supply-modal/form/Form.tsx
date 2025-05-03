@@ -16,10 +16,12 @@ interface Props {
   onInputChange: (value: string) => void;
   asset: LandingPool | undefined;
   formattedBalance: string | undefined;
+  realBalance: bigint | undefined;
   onButtonClick: () => void;
   isButtonLoading: boolean;
   assetPrice: string | undefined;
   assetDecimal: number | undefined;
+  disabled: boolean;
 }
 
 const Form = ({
@@ -32,6 +34,8 @@ const Form = ({
   isButtonLoading,
   assetPrice,
   assetDecimal,
+  disabled,
+  realBalance,
 }: Props) => {
   return (
     <div className={styles.container}>
@@ -41,6 +45,8 @@ const Form = ({
           placeholder="0"
           onMaxClick={() => {}}
           showMaxButton
+          showEstimate
+          showPercentButtons
           selectedToken={asset?.asset_symbol}
           value={value}
           availableAmount={formattedBalance}
@@ -49,13 +55,17 @@ const Form = ({
           price={assetPrice && formatUnit(assetPrice, assetDecimal)}
         />
         <Button
-          disabled={!value || isLoading}
+          disabled={disabled}
           size="large"
           fullWidth
           onClick={onButtonClick}
           isLoading={isButtonLoading}
         >
-          {value ? "Supply" : "Enter an amount"}
+          {realBalance
+            ? value
+              ? "Supply"
+              : "Enter an amount"
+            : "Insufficient balance"}
         </Button>
       </div>
       <AnimatePresence mode="wait">

@@ -5,125 +5,135 @@ import { ReactNode } from "react";
 import TokenIcon from "~/components/token-icon";
 import CheckCircle from "~/assets/icons/check-circle.svg";
 import CircleClose from "~/assets/icons/circle-close.svg";
+import { AnimatePresence, motion } from "motion/react";
+import { fadeAnimation, framerProps } from "~/animations/variants";
 interface Props {
   stage: TransactionStage;
   value: string | undefined;
   symbol: string | undefined;
   error: Error | null;
 }
+
 type StageMessage = {
   title: string;
   description: ReactNode;
-  footer: ReactNode;
+  footer?: ReactNode;
 };
 
 const Loading = ({ stage, value, symbol, error }: Props) => {
   const stageMessages: Record<TransactionStage, StageMessage> = {
+    form: {
+      title: "Provide Supply Details",
+      description: (
+        <div className={styles.description}>
+          Please enter the quantity of tokens you wish to supply to the pool.
+        </div>
+      ),
+    },
     ready: {
-      title: "Your transaction is ready",
+      title: "Assets Prepared for Supply",
       description: (
         <div className={styles.description}>
-          You successfully supplied{" "}
+          Your supply request has been configured. You are poised to
+          deposit&nbsp;
           <span className={styles.token}>
             {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
-            <span className={styles.value}>
-              {value} {symbol}
-            </span>
+            {value} {symbol}
           </span>
+          &nbsp;into your lending position.
         </div>
       ),
-      footer: undefined,
-    },
-    broadcast: {
-      title: "Your transaction is broadcasted",
-      description: (
-        <div className={styles.description}>
-          You successfully supplied{" "}
-          <span className={styles.token}>
-            {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
-            <span className={styles.value}>
-              {value} {symbol}
-            </span>
-          </span>
-        </div>
-      ),
-      footer: undefined,
-    },
-    in_block: {
-      title: "Your transaction is in block",
-      description: (
-        <div className={styles.description}>
-          You successfully supplied{" "}
-          <span className={styles.token}>
-            {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
-            <span className={styles.value}>
-              {value} {symbol}
-            </span>
-          </span>
-        </div>
-      ),
-      footer: undefined,
-    },
-    finalized: {
-      title: "Your supply was successful",
-      description: (
-        <div className={styles.description}>
-          You successfully supplied{" "}
-          <span className={styles.token}>
-            {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
-            <span className={styles.value}>
-              {value} {symbol}
-            </span>
-          </span>
-        </div>
-      ),
-      footer: <div></div>,
     },
     wallet: {
-      title: "Confirm on your wallet",
-      footer: "Proceed in your wallet",
+      title: "Awaiting Wallet Approval",
       description: (
         <div className={styles.description}>
-          Confirm you supply of{" "}
+          Kindly authorize this transaction in your wallet to proceed with the
+          supply of&nbsp;
           <span className={styles.token}>
             {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
-            <span className={styles.value}>
-              {value} {symbol}
-            </span>
+            {value} {symbol}
           </span>
+          .
+        </div>
+      ),
+      footer: (
+        <div className={styles.footerNote}>
+          Select "Approve" when the wallet prompt appears.
         </div>
       ),
     },
-    form: {
-      title: "",
-      description: undefined,
-      footer: undefined,
+    broadcast: {
+      title: "Transaction Broadcasted",
+      description: (
+        <div className={styles.description}>
+          Your transaction has been successfully broadcast to the network. It
+          will be included in a block shortly.
+        </div>
+      ),
+    },
+    in_block: {
+      title: "Transaction Confirmed in Block",
+      description: (
+        <div className={styles.description}>
+          Your transaction has been recorded on the blockchain. Finalizing
+          verification of the transaction status...
+        </div>
+      ),
+    },
+    finalized: {
+      title: "Supply Successfully Confirmed",
+      description: (
+        <div className={styles.description}>
+          Your supply of&nbsp;
+          <span className={styles.token}>
+            {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
+            {value} {symbol}
+          </span>
+          &nbsp;has been completed successfully.
+        </div>
+      ),
+      footer: (
+        <div className={styles.footerNote}>
+          You may now review your updated balance.
+        </div>
+      ),
     },
     error: {
-      title: error?.name || "Transaction Failed",
-      description: error?.message || "",
-      footer: undefined,
+      title: error?.name || "Transaction Unsuccessful",
+      description: (
+        <div className={styles.description}>
+          {error?.message ||
+            "An unexpected error occurred. Please try again later."}
+        </div>
+      ),
     },
   };
+
   return (
-    <div className={styles.container}>
-      {stage === "error" ? (
-        <CircleClose width={50} height={50} className={styles.error_icon} />
-      ) : stage === "finalized" ? (
-        <CheckCircle className={styles.success_icon} width={50} height={50} />
-      ) : (
-        <Spinner width={50} height={50} borderWidth={4} />
-      )}
-      <div className={styles.content}>
-        <p className={styles.title}>{stageMessages[stage].title}</p>
-        <div className={styles.description}>
+    <AnimatePresence>
+      <motion.div
+        {...framerProps}
+        variants={fadeAnimation}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className={styles.container}
+      >
+        {stage === "error" ? (
+          <CircleClose width={50} height={50} className={styles.error_icon} />
+        ) : stage === "finalized" ? (
+          <CheckCircle width={50} height={50} className={styles.success_icon} />
+        ) : (
+          <Spinner width={50} height={50} borderWidth={4} />
+        )}
+        <div className={styles.content}>
+          <p className={styles.title}>{stageMessages[stage].title}</p>
           {stageMessages[stage].description}
         </div>
-      </div>
-      <div className={styles.footer}>
-        <div>{stageMessages[stage].footer}</div>
-      </div>
-    </div>
+        {stageMessages[stage].footer && (
+          <div className={styles.footer}>{stageMessages[stage].footer}</div>
+        )}
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

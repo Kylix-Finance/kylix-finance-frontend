@@ -61,6 +61,7 @@ const SupplyModal = ({ assetId, onClose }: Props) => {
     (!pool && isPoolFetched && isPoolLoading) ||
     (!balance && isBalanceFetched && isBalanceLoading) ||
     (!assetPrice && isAssetPriceLoading && !isAssetPriceFetched);
+  const disabled = !balance?.realBalance || !value || isLoading;
 
   const asset = pool?.assets[0];
   const handleClick = () => {
@@ -104,6 +105,8 @@ const SupplyModal = ({ assetId, onClose }: Props) => {
           isButtonLoading={isSupplyPending}
           assetPrice={assetPrice?.[0].toString()}
           assetDecimal={assetPrice?.[1]}
+          disabled={disabled}
+          realBalance={balance?.realBalance}
         />
       ) : (
         <Loading
