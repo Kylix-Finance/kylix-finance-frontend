@@ -22,6 +22,7 @@ interface Props {
   data: LandingPool[];
   isEmpty: boolean;
   onSupplyClick: (assetId: number) => void;
+  onBorrowClick: (assetId: number) => void;
 }
 
 export const MarketTable = ({
@@ -29,6 +30,7 @@ export const MarketTable = ({
   isPending,
   isEmpty,
   onSupplyClick,
+  onBorrowClick,
 }: Props) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const { account } = useAccountsStore();
@@ -99,7 +101,15 @@ export const MarketTable = ({
             >
               Supply
             </Button>
-            <Button variant="secondary">Borrow</Button>
+            <Button
+              variant="secondary"
+              onClick={(e) => {
+                e.stopPropagation();
+                onBorrowClick(asset_id);
+              }}
+            >
+              Borrow
+            </Button>
           </div>
         );
       },

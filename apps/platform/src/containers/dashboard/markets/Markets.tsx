@@ -5,6 +5,7 @@ import { LandingPool } from "@repo/onchain";
 import { useState } from "react";
 import Cards from "./cards/Cards";
 import SupplyModal from "~/components/modal/supply-modal/SupplyModal";
+import BorrowModal from "~/components/modal/borrow-modal/BorrowModal";
 interface Props {
   data: LandingPool[];
   isPending: boolean;
@@ -14,8 +15,12 @@ interface Props {
 const Markets = ({ isEmpty, isPending, data }: Props) => {
   const { width } = useViewportSize();
   const isDesktop = width >= BREAKPOINTS.DESKTOP;
-  const [selectedAssetId, setSelectedAssetId] = useState<null | number>(null);
-
+  const [selectedSupplyAssetId, setSelectedSupplyAssetId] = useState<
+    null | number
+  >(null);
+  const [selectedSupplyBorrowId, setSelectedBorrowAssetId] = useState<
+    null | number
+  >(null);
   return (
     <>
       {isDesktop ? (
@@ -23,15 +28,22 @@ const Markets = ({ isEmpty, isPending, data }: Props) => {
           data={data}
           isPending={isPending}
           isEmpty={isEmpty}
-          onSupplyClick={(id) => setSelectedAssetId(id)}
+          onSupplyClick={(id) => setSelectedSupplyAssetId(id)}
+          onBorrowClick={(id) => setSelectedBorrowAssetId(id)}
         />
       ) : (
         <Cards isPending={isPending} data={data} isEmpty={isEmpty} />
       )}
-      {selectedAssetId && (
+      {selectedSupplyAssetId && (
         <SupplyModal
-          assetId={selectedAssetId}
-          onClose={() => setSelectedAssetId(null)}
+          assetId={selectedSupplyAssetId}
+          onClose={() => setSelectedSupplyAssetId(null)}
+        />
+      )}
+      {selectedSupplyBorrowId && (
+        <BorrowModal
+          assetId={selectedSupplyBorrowId}
+          onClose={() => setSelectedBorrowAssetId(null)}
         />
       )}
     </>
