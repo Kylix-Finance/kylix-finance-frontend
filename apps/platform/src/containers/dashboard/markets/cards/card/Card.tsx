@@ -4,15 +4,19 @@ import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
 import CardItem from "../../../card-item/CardItem";
 import { Skeleton } from "~/components/skeleton";
+import { Link } from "~/i18n/navigation";
+import { VoidFunction } from "~/types";
 
 interface Props {
   data: LandingPool | null;
   isPending: boolean;
+  onSupplyClick: VoidFunction;
+  onBorrowClick: VoidFunction;
 }
 
-const Card = ({ data, isPending }: Props) => {
+const Card = ({ data, isPending, onBorrowClick, onSupplyClick }: Props) => {
   return (
-    <div className={styles.container}>
+    <Link href={`/markets/${data?.asset_id}`} className={styles.container}>
       <div className={styles.header}>
         <div className={styles.left}>
           <Skeleton rounded isLoading={isPending} circle width={40} height={40}>
@@ -61,18 +65,38 @@ const Card = ({ data, isPending }: Props) => {
         </div>
         <div className={styles.buttons}>
           <Skeleton borderRadius={10} isLoading={isPending} height={44}>
-            <Button size="large" fullWidth>
+            <Button
+              size="large"
+              fullWidth
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                onSupplyClick();
+              }}
+              disabled={!data}
+            >
               Supply
             </Button>
           </Skeleton>
           <Skeleton borderRadius={10} isLoading={isPending} height={44}>
-            <Button size="large" variant="secondary" fullWidth>
+            <Button
+              size="large"
+              variant="secondary"
+              fullWidth
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+
+                onBorrowClick();
+              }}
+              disabled={!data}
+            >
               Borrow
             </Button>
           </Skeleton>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

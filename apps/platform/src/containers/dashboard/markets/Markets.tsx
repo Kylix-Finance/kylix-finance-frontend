@@ -32,7 +32,13 @@ const Markets = ({ isEmpty, isPending, data }: Props) => {
           onBorrowClick={(id) => setSelectedBorrowAssetId(id)}
         />
       ) : (
-        <Cards isPending={isPending} data={data} isEmpty={isEmpty} />
+        <Cards
+          isPending={isPending}
+          data={data}
+          isEmpty={isEmpty}
+          onBorrowClick={(id) => setSelectedBorrowAssetId(id)}
+          onSupplyClick={(id) => setSelectedSupplyAssetId(id)}
+        />
       )}
       {selectedSupplyAssetId && (
         <SupplyModal
