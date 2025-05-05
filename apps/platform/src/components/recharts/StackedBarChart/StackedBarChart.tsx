@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties, useState } from "react";
+import { useState } from "react";
 import {
   ResponsiveContainer,
   BarChart,
@@ -8,96 +8,16 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  BarProps,
-  TooltipProps,
 } from "recharts";
-import styles from "./StackedBarChart.module.scss";
 import { getShortMonth } from "~/utils/date";
 import { totalBorrowSupply } from "~/data/charts";
 import { useDownsample } from "~/hooks/useDownsample";
-
-type HoveredIndex = number | string | bigint | null | undefined;
-
-interface CustomBarProps extends BarProps {
-  borderRadius?: CSSProperties["borderRadius"];
-  gradient: string;
-  borderColor: string;
-  hoveredIndex: HoveredIndex;
-  setHoveredIndex: React.Dispatch<React.SetStateAction<HoveredIndex>>;
-}
-
-const CustomBar = ({
-  x,
-  y,
-  width,
-  height,
-  index,
-  hoveredIndex,
-  setHoveredIndex,
-  gradient,
-  borderColor,
-  borderRadius,
-}: CustomBarProps) => {
-  const isActive = hoveredIndex === null || hoveredIndex === index;
-
-  return (
-    <foreignObject
-      x={x}
-      y={y}
-      width={width}
-      height={height}
-      style={{
-        pointerEvents: "all",
-        opacity: isActive ? 1 : 0.4,
-        transition: "opacity 0.2s ease",
-      }}
-      onMouseEnter={() => setHoveredIndex(index)}
-      onMouseLeave={() => setHoveredIndex(null)}
-    >
-      <div
-        className={styles.bar}
-        style={{
-          background: gradient,
-          borderColor,
-          borderRadius,
-        }}
-      />
-    </foreignObject>
-  );
-};
-
-const CustomTooltip = ({
-  active,
-  payload,
-  label,
-  ...props
-}: TooltipProps<number, string>) => {
-  if (!active || !payload?.length) return null;
-
-  return (
-    <div className={styles.tooltip}>
-      <div className={styles.unit}>
-        Borrow:{" "}
-        <div
-          className={styles.badge}
-          style={{ background: payload[0].stroke }}
-        ></div>
-        <span className={styles.value}>$1.94$</span>
-      </div>
-      <div className={styles.unit}>
-        Supply:{" "}
-        <div
-          className={styles.badge}
-          style={{ background: payload[1].stroke }}
-        ></div>
-        <span className={styles.value}>$46.89M</span>
-      </div>
-    </div>
-  );
-};
+import { ChartItemIndex } from "~/types";
+import TooltipContent from "./Tooltip";
+import CustomBar from "./Bar";
 
 export const StackedBarChart = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<HoveredIndex>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<ChartItemIndex>(null);
 
   const datasets = useDownsample(totalBorrowSupply, 25);
 
@@ -117,7 +37,7 @@ export const StackedBarChart = () => {
         />
         <YAxis tick={false} axisLine={false} />
 
-        <Tooltip content={CustomTooltip} cursor={false} />
+        <Tooltip content={TooltipContent} cursor={false} />
 
         <Bar
           dataKey="bottom"
