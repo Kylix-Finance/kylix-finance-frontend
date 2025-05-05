@@ -1,0 +1,60 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(9, auto);
+  grid-gap: 24px;
+  padding: 32px;
+  max-height: 100vh;
+
+  @include media("<desktop") {
+    display: flex;
+    flex-direction: column;
+    max-height: initial;
+    grid-gap: 0;
+    gap: 24px;
+  }
+}
+
+.action_header {
+  grid-column: 1 / span 8;
+  grid-row: 1;
+
+  @include media("<desktop") {
+    grid-column: 1;
+    grid-row: auto;
+    height: auto;
+  }
+}
+
+.transaction_form {
+  grid-column: 9 / span 4;
+  grid-row: 2 / span 3;
+
+  @include media("<desktop") {
+    grid-column: 1;
+    grid-row: auto;
+    height: auto;
+  }
+}
+
+.utilization {
+  grid-column: 1 / span 8;
+  grid-row: 2 / span 4;
+
+  @include media("<desktop") {
+    grid-column: 1;
+    grid-row: auto;
+    height: auto;
+  }
+}
+
+.total_supplied_borrowed {
+  grid-column: 1 / span 8;
+  grid-row: 6 / span 4;
+
+  @include media("<desktop") {
+    grid-column: 1;
+    grid-row: auto;
+    height: auto;
+  }
+}
