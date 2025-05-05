@@ -12,6 +12,11 @@
     background-color: $color-accent-primary-component;
     border-color: $color-neutral-700;
   }
+  &[data-hide-container-style="false"] {
+    padding: 16px;
+    background-color: $color-accent-primary-component;
+    border-color: $color-neutral-700;
+  }
 }
 .header {
   display: flex;
@@ -31,6 +36,9 @@
   @include media("<=tablet") {
     @include font($font-heading-5);
   }
+  &[data-hide-container-style="false"] {
+    color: $color-neutral-500;
+  }
 }
 .heading_value {
   @include font($font-heading-1);
@@ -42,7 +50,9 @@
   }
 }
 .children {
-  @include media("<desktop") {
-    display: none;
+  &[data-hide-on-mobile="true"] {
+    @include media("<desktop") {
+      display: none;
+    }
   }
 }
