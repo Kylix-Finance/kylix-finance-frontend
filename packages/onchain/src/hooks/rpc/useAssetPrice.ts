@@ -4,7 +4,7 @@ import { useRpc } from "../useRpc";
 
 interface Params {
   assetId: number;
-  base_asset: number | null;
+  base_asset?: number | null;
 }
 export const useAssetPrice = ({
   assetId,
