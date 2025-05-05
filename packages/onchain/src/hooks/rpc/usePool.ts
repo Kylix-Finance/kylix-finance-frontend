@@ -1,7 +1,7 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@repo/shared";
 import { useProvider } from "../useProvider";
-
+import { LendingLendingPool } from "@polkadot/types/lookup";
 interface Params {
   assetId: number;
 }
@@ -14,7 +14,7 @@ export const usePool = ({ assetId }: Params) => {
     queryFn: enabled
       ? async () => {
           const pool = await data.api.query.lending.lendingPoolStorage(assetId);
-          return pool.toJSON() as unknown;
+          return pool.toJSON() as unknown as LendingLendingPool;
         }
       : skipToken,
   });
