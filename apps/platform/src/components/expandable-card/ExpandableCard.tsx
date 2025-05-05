@@ -4,6 +4,7 @@ import { ExpandableCardItem } from "~/types";
 import styles from "./ExpandableCard.module.scss";
 import ChevronDown from "~/assets/icons/chevron-down.svg";
 import Row from "./row/Row";
+import { Divider } from "../divider";
 import {
   collapsableFadeInOutVariants,
   framerProps,
@@ -58,9 +59,7 @@ const ExpandableCard = ({ data }: Props) => {
           >
             {collapsibleSections.map((section, index) => (
               <Fragment key={index}>
-                {index <= collapsibleSections.length - 1 && (
-                  <div className={styles.divider} />
-                )}{" "}
+                {index <= collapsibleSections.length - 1 && <Divider />}{" "}
                 <div className={styles.section}>
                   {section.map((row, rowIndex) => (
                     <Row {...row} key={rowIndex} />

@@ -3,6 +3,7 @@ import { IconButton } from "~/components/ui/icon-button";
 import { Tooltip } from "~/components/ui/tooltip";
 import { ExpandableCardItem } from "~/types";
 import Info from "~/assets/icons/info.svg";
+import clsx from "clsx";
 const Row = ({ title, content }: ExpandableCardItem) => {
   return (
     <div className={styles.container}>
@@ -16,7 +17,7 @@ const Row = ({ title, content }: ExpandableCardItem) => {
             className={styles.icon}
           />
         )}
-        <div className={styles.title_container}>
+        <div className={clsx(styles.title_container, title.className)}>
           <p>{title.value}</p>
           {title.tooltipContent && (
             <Tooltip content={title.tooltipContent}>

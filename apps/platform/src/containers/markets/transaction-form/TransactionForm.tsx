@@ -8,6 +8,7 @@ import Withdraw from "./withdraw/Withdraw";
 import Repay from "./repay/Repay";
 import { AnimatePresence, motion } from "motion/react";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
+import { TransactionFormProps } from "~/types";
 const tabs = [
   { value: "supply" as const, content: "Supply" },
   { value: "borrow" as const, content: "Borrow" },
@@ -16,8 +17,7 @@ const tabs = [
 ];
 
 type TabValue = (typeof tabs)[number]["value"];
-
-const TransactionForm = () => {
+const TransactionForm = (props: TransactionFormProps) => {
   const [activeTab, setActiveTab] = useQueryState<TabValue>("tab", {
     clearOnDefault: true,
     defaultValue: tabs[0].value,
@@ -39,7 +39,7 @@ const TransactionForm = () => {
             {...framerProps}
             variants={fadeInOutAnimation}
           >
-            <Supply />
+            <Supply {...props} />
           </motion.div>
         )}
         {activeTab === "borrow" && (

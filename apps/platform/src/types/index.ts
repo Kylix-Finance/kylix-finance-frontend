@@ -1,3 +1,5 @@
+import { LandingPool, LendingLendingPool } from "@repo/onchain";
+import { GetAssetPrice } from "@repo/onchain/src/types/rpc/lending/getAssetPrice";
 import { NextRequest, NextResponse } from "next/server";
 import { ElementType, ReactNode } from "react";
 import { CHART_SCALES } from "~/constants";
@@ -61,6 +63,7 @@ export interface ExpandableCardItem {
     value: string;
     icon?: ElementType;
     tooltipContent?: string;
+    className?: string;
   };
   content: ReactNode;
 }
@@ -73,3 +76,13 @@ export type TransactionStage =
   | "finalized"
   | "wallet"
   | "error";
+
+export interface TransactionFormProps {
+  data?: LandingPool;
+  detail?: LendingLendingPool;
+  price?: GetAssetPrice["response"];
+  balance?: {
+    formattedBalance: string;
+    realBalance: bigint;
+  };
+}

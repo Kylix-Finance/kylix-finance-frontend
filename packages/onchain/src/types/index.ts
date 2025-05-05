@@ -1,3 +1,6 @@
+export * from "./rpc";
+export * from "./query";
+
 export type Config = {
   dappName: string;
   rpc: string;

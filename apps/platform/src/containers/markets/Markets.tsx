@@ -9,6 +9,7 @@ import {
   formatBigNumbers,
   formatUnit,
   useAssetPrice,
+  useBalance,
   useGetLendingPools,
   usePool,
 } from "@repo/onchain";
@@ -19,6 +20,7 @@ const Markets = () => {
   const { data: poolData } = usePool({ assetId: +assetId });
   const { data: assetPrice } = useAssetPrice({ assetId: +assetId });
   const { account } = useAccountsStore();
+  const { data: balance } = useBalance({ assetId });
   const { data: lendingPool } = useGetLendingPools({
     account: account?.address,
   });
@@ -72,7 +74,12 @@ const Markets = () => {
         <TotalSuppliedBorrowed />
       </div>
       <div className={styles.transaction_form}>
-        <TransactionForm />
+        <TransactionForm
+          data={lendingPool?.assets[0]}
+          detail={poolData}
+          price={assetPrice}
+          balance={balance}
+        />
       </div>
     </div>
   );

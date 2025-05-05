@@ -6,4 +6,7 @@
   backdrop-filter: blur(15px);
   border-radius: 20px;
   padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
