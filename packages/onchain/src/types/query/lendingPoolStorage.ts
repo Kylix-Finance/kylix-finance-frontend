@@ -1,14 +1,14 @@
 export interface LendingLendingPool {
   id: number;
   lendTokenId: number;
-  reserveBalance: string;
-  borrowedBalance: string;
+  reserveBalance: bigint;
+  borrowedBalance: bigint;
   activated: boolean;
   interestModel: {
-    y0: string;
-    y1: string;
-    xm: string;
-    ym: string;
+    y0: bigint;
+    y1: bigint;
+    xm: bigint;
+    ym: bigint;
   };
   reserveFactor: number;
   exchangeRate: number;
@@ -16,11 +16,11 @@ export interface LendingLendingPool {
   liquidationThreshold: number;
   borrowRate: number;
   supplyRate: number;
-  lastAccruedInterestAt: string;
-  borrowIndex: string;
-  supplyIndex: string;
+  lastAccruedInterestAt: bigint;
+  borrowIndex: bigint;
+  supplyIndex: bigint;
   liquidation: {
-    totalCollateral: string;
-    totalDebt: string;
+    totalCollateral: bigint;
+    totalDebt: bigint;
   };
 }
