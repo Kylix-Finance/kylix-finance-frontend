@@ -1,1 +1,1 @@
-export { default } from "~/containers/market";
+export { default } from "~/containers/markets";

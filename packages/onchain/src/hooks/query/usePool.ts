@@ -1,7 +1,7 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@repo/shared";
 import { useProvider } from "../useProvider";
-import { LendingLendingPool } from "@polkadot/types/lookup";
+import { LendingLendingPool } from "../../types/query";
 interface Params {
   assetId: number;
 }

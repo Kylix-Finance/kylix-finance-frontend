@@ -6,10 +6,12 @@
     "paths": {
       "@polkadot/api/augment": ["src/types/chain/augment-api.ts"],
       "@polkadot/types/augment": ["src/types/chain/augment-types.ts"],
-      "@polkadot/types/lookup": ["src/types/chain/types-lookup.ts"]
+      "@polkadot/types/lookup": [
+        "../packages/onchain/src/types/chain/types-lookup.ts"
+      ]
     },
     "allowJs": true
   },
   "include": ["src", "../../global.d.ts", "./augment-rpc.d.ts"],
-  "exclude": ["node_modules", "dist", "src/types/chain/**/*.ts"]
+  "exclude": ["node_modules", "dist"]
 }

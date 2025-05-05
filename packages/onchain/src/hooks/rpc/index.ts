@@ -5,4 +5,3 @@ export * from "./useGetLendingPools";
 export * from "./useGetLiquidationMarkets";
 export * from "./useGetUserBids";
 export * from "./useGetUserLtv";
-export * from "./usePool";
