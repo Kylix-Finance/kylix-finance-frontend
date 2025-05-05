@@ -3,26 +3,37 @@ import styles from "./ActionHeader.module.scss";
 import { ArrowLeft } from "~/assets/icons";
 import ScrollableContainer from "~/components/ScrollableContainer/ScrollableContainer";
 import TokenIcon from "~/components/token-icon";
+import Link from "next/link";
 
-interface Props {
-  data: any;
+interface Data {
+  title: string;
+  value?: string;
 }
 
-const ActionHeader = ({ data }: Props) => {
+interface Props {
+  data: Data[];
+  title: string;
+  symbol: string;
+  backLinkHref?: string;
+}
+
+const ActionHeader = ({ data, symbol, title, backLinkHref = "/" }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.navigation}>
-        <IconButton icon={ArrowLeft} />
+        <Link href={backLinkHref}>
+          <IconButton icon={ArrowLeft} />
+        </Link>
         <div className={styles.title_wrapper}>
-          <TokenIcon symbol="BTC" width={40} height={40} />
-          <p>Bid for liquidated BTC using USDC</p>
+          <TokenIcon symbol={symbol} width={40} height={40} />
+          <p>{title}</p>
         </div>
       </div>
       <ScrollableContainer>
-        {[0, 1, 2, 3, 4, 5, 6, 7].map((_, index) => (
+        {data.map((item, index) => (
           <div key={index} className={styles.action_wrapper}>
-            <div className={styles.label}>hello world</div>
-            <div className={styles.content}>$ 24.67M</div>
+            <div className={styles.label}>{item.title}</div>
+            <div className={styles.content}>{item.value}</div>
           </div>
         ))}
       </ScrollableContainer>
