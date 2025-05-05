@@ -5,7 +5,7 @@
 }
 
 .container {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
   border-right: 1px solid $color-neutral-700;
