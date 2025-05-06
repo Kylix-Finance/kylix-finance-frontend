@@ -7,8 +7,10 @@ import { Row } from "~/components/expandable-card/row";
 import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
 import { formatUnit } from "@repo/onchain";
+import { Switch } from "~/components/ui/switch";
 const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -30,16 +32,23 @@ const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
       <div className={styles.info}>
         <Row
           title={{ value: "Borrowable Amount", className: styles.row_title }}
-          content="0 BTC"
+          content={`0 ${data?.asset_symbol}`}
+        />
+        <Row
+          title={{ value: "Collateral", className: styles.row_title }}
+          content={<Switch name="collateral" checked={true} />}
         />
         <Divider />
         <Row
-          title={{ value: "Borrow balance (BTC)", className: styles.row_title }}
+          title={{
+            value: `Borrow balance (${data?.asset_symbol})`,
+            className: styles.row_title,
+          }}
           content="0"
         />
         <Row
           title={{ value: "Borrow limit used", className: styles.row_title }}
-          content="0%"
+          content="$0"
         />
         <Row
           title={{ value: "Daily earnings", className: styles.row_title }}
