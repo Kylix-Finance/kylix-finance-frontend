@@ -3,6 +3,7 @@ import styles from "./ActionHeader.module.scss";
 import { ArrowLeft } from "~/assets/icons";
 import ScrollableContainer from "~/components/ScrollableContainer/ScrollableContainer";
 import TokenIcon from "~/components/token-icon";
+import Skeleton from "~/components/skeleton";
 import { useRouter } from "next/navigation";
 
 interface Data {
@@ -15,9 +16,16 @@ interface Props {
   title: string;
   symbol: string;
   backLinkHref?: string;
+  isLoading?: boolean;
 }
 
-const ActionHeader = ({ data, symbol, title, backLinkHref }: Props) => {
+const ActionHeader = ({
+  data,
+  symbol,
+  title,
+  backLinkHref,
+  isLoading,
+}: Props) => {
   const router = useRouter();
 
   const backClickHandler = () => {
@@ -41,7 +49,15 @@ const ActionHeader = ({ data, symbol, title, backLinkHref }: Props) => {
         {data.map((item, index) => (
           <div key={index} className={styles.action_wrapper}>
             <div className={styles.label}>{item.title}</div>
-            <div className={styles.content}>{item.value}</div>
+            {isLoading ? (
+              <Skeleton
+                isLoading={isLoading}
+                className={styles.skeleton}
+                rounded
+              />
+            ) : (
+              <div className={styles.content}>{item.value}</div>
+            )}
           </div>
         ))}
       </ScrollableContainer>
