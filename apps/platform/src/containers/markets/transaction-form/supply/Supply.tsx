@@ -36,7 +36,7 @@ const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
         />
         <Row
           title={{ value: "Collateral", className: styles.row_title }}
-          content={<Switch name="collateral" checked={true} />}
+          content={<Switch name="collateral" checked={true} readOnly />}
         />
         <Divider />
         <Row
