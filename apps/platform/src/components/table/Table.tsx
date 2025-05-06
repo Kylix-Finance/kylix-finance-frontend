@@ -7,7 +7,7 @@ import {
 import styles from "./Table.module.scss";
 import ChevronUp from "~/assets/icons/chevron-up.svg";
 import ChevronDown from "~/assets/icons/chevron-down.svg";
-import { Skeleton } from "../skeleton";
+import Skeleton from "../skeleton";
 
 interface TableProps {
   table: ReactTable<any>;

@@ -21,9 +21,10 @@ const Markets = () => {
   const { data: assetPrice } = useAssetPrice({ assetId: +assetId });
   const { account } = useAccountsStore();
   const { data: balance } = useBalance({ assetId });
-  const { data: lendingPool } = useGetLendingPools({
-    account: account?.address,
-  });
+  const { data: lendingPool, isLoading: isLendingPoolLoading } =
+    useGetLendingPools({
+      account: account?.address,
+    });
   const asset = lendingPool?.assets[0];
   return (
     <div className={styles.container}>
@@ -65,6 +66,7 @@ const Markets = () => {
           ]}
           symbol={asset?.asset_symbol || ""}
           title={asset?.asset || ""}
+          isLoading={isLendingPoolLoading}
         />
       </div>
       <div className={styles.utilization}>

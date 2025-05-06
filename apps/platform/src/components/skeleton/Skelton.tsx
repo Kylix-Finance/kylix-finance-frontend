@@ -10,7 +10,7 @@ interface Props extends SkeletonProps {
   borderRadius?: number;
 }
 
-const Skeleton = ({
+export const Skeleton = ({
   children,
   isLoading,
   className,
@@ -35,5 +35,3 @@ const Skeleton = ({
 
   return children;
 };
-
-export default Skeleton;

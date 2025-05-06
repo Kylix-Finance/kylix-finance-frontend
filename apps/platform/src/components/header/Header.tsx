@@ -8,7 +8,7 @@ import Preference from "../preference";
 import { useAccountsStore } from "@repo/shared";
 import { ConnectButton } from "../modal/wallet-modal";
 import { useMounted } from "@mantine/hooks";
-import { Skeleton } from "../skeleton";
+import Skeleton from "../skeleton";
 import { useState } from "react";
 
 export const Header = () => {

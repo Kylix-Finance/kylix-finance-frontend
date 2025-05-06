@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import styles from "./ChartSkeleton.module.scss";
-import { Skeleton } from "../skeleton";
+import Skeleton from "../skeleton";
 
 interface Props {
   isLoading?: boolean;

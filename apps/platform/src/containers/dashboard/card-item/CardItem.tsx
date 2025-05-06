@@ -1,4 +1,4 @@
-import { Skeleton } from "~/components/skeleton";
+import Skeleton from "~/components/skeleton";
 import styles from "./CardItem.module.scss";
 import { isValidElement, ReactNode } from "react";
 

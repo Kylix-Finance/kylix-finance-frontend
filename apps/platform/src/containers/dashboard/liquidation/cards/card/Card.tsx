@@ -5,7 +5,7 @@ import Health from "../../health/Health";
 import CardItem from "../../../card-item/CardItem";
 import TokenIcon from "~/components/token-icon";
 import Check from "~/assets/icons/check.svg";
-import { Skeleton } from "~/components/skeleton";
+import Skeleton from "~/components/skeleton";
 interface Props {
   data: LiquidationMarket | null;
   isPending: boolean;
