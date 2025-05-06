@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { ButtonGroupTab } from "~/types";
 
 interface Props<T extends ButtonGroupTab> {
-  tabs: T[];
+  tabs: T[] | readonly T[];
   fullWidth?: boolean;
   activeTab: T["value"];
   setActiveTab: (value: T["value"]) => void;

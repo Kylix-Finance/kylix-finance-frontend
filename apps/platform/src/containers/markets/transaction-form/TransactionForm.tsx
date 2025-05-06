@@ -9,20 +9,24 @@ import Repay from "./repay/Repay";
 import { AnimatePresence, motion } from "motion/react";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
 import { TransactionFormProps } from "~/types";
+
 const tabs = [
-  { value: "supply" as const, content: "Supply" },
-  { value: "borrow" as const, content: "Borrow" },
-  { value: "withdraw" as const, content: "Withdraw" },
-  { value: "repay" as const, content: "Repay" },
-];
+  { value: "supply" as const, content: "Supply", Component: Supply },
+  { value: "borrow" as const, content: "Borrow", Component: Borrow },
+  { value: "withdraw" as const, content: "Withdraw", Component: Withdraw },
+  { value: "repay" as const, content: "Repay", Component: Repay },
+] as const;
 
 type TabValue = (typeof tabs)[number]["value"];
+
 const TransactionForm = (props: TransactionFormProps) => {
   const [activeTab, setActiveTab] = useQueryState<TabValue>("tab", {
     clearOnDefault: true,
     defaultValue: tabs[0].value,
     parse: (value) => value as TabValue,
   });
+
+  const activeTabData = tabs.find((tab) => tab.value === activeTab);
 
   return (
     <div className={styles.container}>
@@ -33,40 +37,13 @@ const TransactionForm = (props: TransactionFormProps) => {
         setActiveTab={setActiveTab}
       />
       <AnimatePresence mode="wait">
-        {activeTab === "supply" && (
+        {activeTabData && (
           <motion.div
-            key="supply"
+            key={activeTabData.value}
             {...framerProps}
             variants={fadeInOutAnimation}
           >
-            <Supply {...props} />
-          </motion.div>
-        )}
-        {activeTab === "borrow" && (
-          <motion.div
-            key="borrow"
-            {...framerProps}
-            variants={fadeInOutAnimation}
-          >
-            <Borrow />
-          </motion.div>
-        )}
-        {activeTab === "withdraw" && (
-          <motion.div
-            key="withdraw"
-            {...framerProps}
-            variants={fadeInOutAnimation}
-          >
-            <Withdraw />
-          </motion.div>
-        )}
-        {activeTab === "repay" && (
-          <motion.div
-            key="repay"
-            {...framerProps}
-            variants={fadeInOutAnimation}
-          >
-            <Repay />
+            <activeTabData.Component {...props} />
           </motion.div>
         )}
       </AnimatePresence>
