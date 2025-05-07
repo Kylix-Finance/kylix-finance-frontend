@@ -8,7 +8,13 @@ import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
 import { formatUnit } from "@repo/onchain";
 
-const Withdraw = ({ pool, detail, price, balance }: TransactionFormProps) => {
+const Withdraw = ({
+  pool,
+  detail,
+  price,
+  balance,
+  isLoading,
+}: TransactionFormProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
 
   return (
@@ -20,17 +26,13 @@ const Withdraw = ({ pool, detail, price, balance }: TransactionFormProps) => {
           onChange={(value) => setValue(value)}
           placeholder="0"
           price={{
-            value: price.data && formatUnit(price.data?.[0], price.data?.[1]),
-            isLoading: price.isLoading,
+            value: price && formatUnit(price?.[0], price?.[1]),
           }}
-          decimals={pool.data?.asset_decimals}
+          decimals={pool?.asset_decimals}
           showEstimate
           availableAmount={{
-            value: formatUnit(
-              balance?.realBalance || 0,
-              pool.data?.asset_decimals
-            ),
-            isLoading: balance.isLoading || pool.isLoading,
+            value: formatUnit(balance?.realBalance || 0, pool?.asset_decimals),
+            isLoading,
           }}
         />
         <PrivateButton fullWidth>Withdraw</PrivateButton>
@@ -38,12 +40,12 @@ const Withdraw = ({ pool, detail, price, balance }: TransactionFormProps) => {
       <div className={styles.info}>
         <Row
           title={{ value: "Withdrawable Amount", className: styles.row_title }}
-          content={`0 ${pool.data?.asset_symbol}`}
+          content={`0 ${pool?.asset_symbol}`}
         />
         <Divider />
         <Row
           title={{
-            value: `Borrow balance (${pool.data?.asset_symbol})`,
+            value: `Borrow balance (${pool?.asset_symbol})`,
             className: styles.row_title,
           }}
           content="0"

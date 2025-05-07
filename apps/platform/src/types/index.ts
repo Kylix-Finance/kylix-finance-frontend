@@ -80,23 +80,14 @@ export type TransactionStage =
   | "error";
 
 export interface TransactionFormProps {
-  pool: {
-    isLoading: boolean;
-    data?: LandingPool;
-  };
-  detail: {
-    data?: LendingLendingPool;
-    isLoading: boolean;
-  };
-  price: {
-    data?: GetAssetPrice["response"];
-    isLoading: boolean;
-  };
-  balance: {
+  pool?: LandingPool;
+  detail?: LendingLendingPool;
+  price?: GetAssetPrice["response"];
+  balance?: {
     formattedBalance?: string;
     realBalance?: bigint;
-    isLoading: boolean;
   };
+  isLoading: boolean;
 }
 
 export type ChartItemIndex = number | string | bigint | null | undefined;

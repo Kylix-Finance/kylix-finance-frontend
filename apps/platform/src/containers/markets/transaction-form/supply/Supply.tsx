@@ -9,7 +9,13 @@ import { TransactionFormProps } from "~/types";
 import { formatUnit } from "@repo/onchain";
 import { Switch } from "~/components/ui/switch";
 import SupplyModal from "~/components/modal/supply-modal/SupplyModal";
-const Supply = ({ pool, detail, price, balance }: TransactionFormProps) => {
+const Supply = ({
+  pool,
+  detail,
+  price,
+  balance,
+  isLoading,
+}: TransactionFormProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
   const [isReviewed, setIsReviewed] = useState(false);
   return (
@@ -21,17 +27,14 @@ const Supply = ({ pool, detail, price, balance }: TransactionFormProps) => {
           onChange={setValue}
           placeholder="0"
           price={{
-            value: price.data && formatUnit(price.data?.[0], price.data?.[1]),
-            isLoading: price.isLoading,
+            value: price && formatUnit(price?.[0], price?.[1]),
+            isLoading,
           }}
-          decimals={pool.data?.asset_decimals}
+          decimals={pool?.asset_decimals}
           showEstimate
           availableAmount={{
-            value: formatUnit(
-              balance?.realBalance || 0,
-              pool.data?.asset_decimals
-            ),
-            isLoading: balance.isLoading || pool.isLoading,
+            value: formatUnit(balance?.realBalance || 0, pool?.asset_decimals),
+            isLoading,
           }}
         />
         <PrivateButton
@@ -45,8 +48,8 @@ const Supply = ({ pool, detail, price, balance }: TransactionFormProps) => {
       <div className={styles.info}>
         <Row
           title={{ value: "Borrowable Amount", className: styles.row_title }}
-          content={`0 ${pool.data?.asset_symbol}`}
-          isContentLoading={pool.isLoading}
+          content={`0 ${pool?.asset_symbol}`}
+          isContentLoading={isLoading}
         />
         <Row
           title={{ value: "Collateral", className: styles.row_title }}
@@ -55,9 +58,9 @@ const Supply = ({ pool, detail, price, balance }: TransactionFormProps) => {
         <Divider />
         <Row
           title={{
-            value: `Borrow balance (${pool.data?.asset_symbol})`,
+            value: `Borrow balance (${pool?.asset_symbol})`,
             className: styles.row_title,
-            isLoading: pool.isLoading,
+            isLoading,
           }}
           content="0"
         />
@@ -70,9 +73,9 @@ const Supply = ({ pool, detail, price, balance }: TransactionFormProps) => {
           content="$0"
         />
       </div>
-      {pool.data?.asset_id && isReviewed && (
+      {pool?.asset_id && isReviewed && (
         <SupplyModal
-          assetId={pool.data.asset_id}
+          assetId={pool.asset_id}
           onClose={() => setIsReviewed(false)}
           isViewOnly
           value={value}

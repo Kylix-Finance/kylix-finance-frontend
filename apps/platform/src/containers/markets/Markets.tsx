@@ -17,7 +17,11 @@ import { useAccountsStore } from "@repo/shared";
 
 const Markets = () => {
   const { id: assetId } = useParams<{ id: string }>();
-  const { data: poolData, isLoading: isPoolLoading } = usePool({
+  const {
+    data: poolData,
+    isLoading: isPoolLoading,
+    isFetched: isPoolFetched,
+  } = usePool({
     assetId: +assetId,
   });
   const { data: assetPrice, isLoading: isAssetPriceLoading } = useAssetPrice({
@@ -42,6 +46,7 @@ const Markets = () => {
   const isLendingPoolPending =
     !lendingPool && (isLendingPoolFetched || isLendingPoolLoading);
   const isBalancePending = !balance && (isBalanceFetched || isBalanceLoading);
+  const isPoolPending = !poolData && (isPoolFetched || isPoolLoading);
   const asset = lendingPool?.assets[0];
 
   return (
@@ -112,22 +117,11 @@ const Markets = () => {
       </div>
       <div className={styles.transaction_form}>
         <TransactionForm
-          pool={{
-            data: lendingPool?.assets[0],
-            isLoading: isLendingPoolPending,
-          }}
-          detail={{
-            data: poolData,
-            isLoading: isPoolLoading,
-          }}
-          price={{
-            data: assetPrice,
-            isLoading: isAssetPriceLoading,
-          }}
-          balance={{
-            ...balance,
-            isLoading: isBalancePending,
-          }}
+          pool={lendingPool?.assets[0]}
+          detail={poolData}
+          price={assetPrice}
+          balance={balance}
+          isLoading={isBalancePending || isLendingPoolPending || isPoolPending}
         />
       </div>
     </div>
