@@ -1,31 +1,99 @@
 import Modal from "~/components/ui/modal/Modal";
 import { TransactionStage, VoidFunction } from "~/types";
 import Form from "./form/Form";
-
+import {
+  parseUnit,
+  useAssetPrice,
+  useBalance,
+  useBorrow,
+  useGetLendingPools,
+} from "@repo/onchain";
 import { useAccountsStore } from "@repo/shared";
 import { useEffect, useState } from "react";
 import Loading from "./loading/Loading";
 import styles from "./BorrowModal.module.scss";
+// import Detail from "./detail/Detail";
+// import ViewOnly from "./view-only/ViewOnly";
+
 interface Props {
   assetId: number;
   onClose: VoidFunction;
+  isViewOnly?: boolean;
+  value?: string;
 }
 
-const BorrowModal = ({ assetId, onClose }: Props) => {
+const BorrowModal = ({
+  assetId,
+  onClose,
+  isViewOnly,
+  value: viewOnlyValue,
+}: Props) => {
   const [value, setValue] = useState<string | undefined>(undefined);
   const [stage, setStage] = useState<TransactionStage>("form");
   const { account } = useAccountsStore();
 
+  const {
+    mutate: borrowMutate,
+    isPending: isBorrowPending,
+    error,
+    data: borrowData,
+  } = useBorrow({
+    assetId: assetId?.toString(),
+  });
+
+  const {
+    data: pool,
+    isFetched: isPoolFetched,
+    isLoading: isPoolLoading,
+  } = useGetLendingPools({ assetId, account: account?.address });
+  const {
+    data: balance,
+    isFetched: isBalanceFetched,
+    isLoading: isBalanceLoading,
+  } = useBalance({
+    assetId: assetId.toString(),
+    accountAddress: account?.address,
+  });
+  const {
+    data: assetPrice,
+    isLoading: isAssetPriceLoading,
+    isFetched: isAssetPriceFetched,
+  } = useAssetPrice({
+    assetId,
+  });
   useEffect(() => {
     if (!assetId || !account) {
       onClose();
     }
   }, [account, assetId, onClose]);
+  const isLoading =
+    (!pool && isPoolFetched && isPoolLoading) ||
+    (!balance && isBalanceFetched && isBalanceLoading) ||
+    (!assetPrice && isAssetPriceLoading && !isAssetPriceFetched);
+  const finalValue = isViewOnly ? viewOnlyValue : value;
 
-  const handleClick = () => {};
+  const disabled = !balance?.realBalance || !finalValue || isLoading;
 
-  const onInputValueChange = async (newValue: string) => {
-    setValue(newValue);
+  const asset = pool?.assets[0];
+  const handleClick = () => {
+    if (!finalValue || !asset) return;
+    borrowMutate(
+      {
+        balance: parseUnit(finalValue, asset.asset_decimals),
+        options: {
+          onBroadcast: () => setStage("broadcast"),
+          onFinalized: () => setStage("finalized"),
+          onInBlock: () => setStage("in_block"),
+          onReady: () => setStage("ready"),
+          onSignerRequestSend: () => setStage("wallet"),
+        },
+      },
+      {
+        onError: () => {
+          setStage("error");
+        },
+      }
+    );
   };
 
   return (
@@ -36,26 +104,42 @@ const BorrowModal = ({ assetId, onClose }: Props) => {
     >
       <div className={styles.container}>
         {stage === "form" ? (
-          <Form
-            isLoading={false}
-            value={value}
-            onInputChange={onInputValueChange}
-            asset={undefined}
-            formattedBalance={undefined}
-            onButtonClick={handleClick}
-            isButtonLoading={false}
-            assetPrice={undefined}
-            assetDecimal={undefined}
-            disabled={false}
-            realBalance={undefined}
-          />
+          <div className={styles.content}>
+            {isViewOnly ? (
+              // <ViewOnly
+              //   assetDecimal={asset?.asset_decimals}
+              //   assetPrice={assetPrice?.[0]}
+              //   assetSymbol={asset?.asset_symbol}
+              //   disabled={disabled}
+              //   isLoading={isLoading}
+              //   onClick={handleClick}
+              //   value={finalValue}
+              // />
+              <></>
+            ) : (
+              <Form
+                isLoading={isLoading}
+                value={value}
+                onInputChange={setValue}
+                asset={asset}
+                formattedBalance={balance?.formattedBalance}
+                onButtonClick={handleClick}
+                isButtonLoading={isBorrowPending}
+                assetPrice={assetPrice?.[0].toString()}
+                assetDecimal={assetPrice?.[1]}
+                disabled={disabled}
+                realBalance={balance?.realBalance}
+              />
+            )}
+            {/* <Detail asset={asset} enable={!!finalValue} /> */}
+          </div>
         ) : (
           <Loading
             stage={stage}
             value={value}
-            symbol={undefined}
-            error={null}
-            data={undefined}
+            symbol={asset?.asset_symbol}
+            error={error}
+            data={borrowData}
           />
         )}
       </div>
