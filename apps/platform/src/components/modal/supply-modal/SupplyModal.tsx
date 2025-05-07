@@ -2,6 +2,7 @@ import Modal from "~/components/ui/modal/Modal";
 import { TransactionStage, VoidFunction } from "~/types";
 import Form from "./form/Form";
 import {
+  formatUnit,
   parseUnit,
   useAssetPrice,
   useBalance,
@@ -12,24 +13,24 @@ import { useAccountsStore } from "@repo/shared";
 import { useEffect, useState } from "react";
 import Loading from "./loading/Loading";
 import styles from "./SupplyModal.module.scss";
+import Detail from "./detail/Detail";
+import TokenIcon from "~/components/token-icon";
+import { Button } from "~/components/ui/button";
+import ViewOnly from "./view-only/ViewOnly";
 
-interface BaseProps {
+interface Props {
   assetId: number;
   onClose: VoidFunction;
   isViewOnly?: boolean;
+  value?: string;
 }
 
-interface ViewOnlyProps extends BaseProps {
-  isViewOnly: true;
-  value: string;
-}
-
-interface EditableProps extends BaseProps {
-  isViewOnly?: false;
-}
-
-type Props = ViewOnlyProps | EditableProps;
-const SupplyModal = ({ assetId, onClose }: Props) => {
+const SupplyModal = ({
+  assetId,
+  onClose,
+  isViewOnly,
+  value: viewOnlyValue,
+}: Props) => {
   const [value, setValue] = useState<string | undefined>(undefined);
   const [stage, setStage] = useState<TransactionStage>("form");
   const { account } = useAccountsStore();
@@ -62,7 +63,6 @@ const SupplyModal = ({ assetId, onClose }: Props) => {
     isFetched: isAssetPriceFetched,
   } = useAssetPrice({
     assetId,
-    base_asset: null,
   });
   useEffect(() => {
     if (!assetId || !account) {
@@ -73,14 +73,16 @@ const SupplyModal = ({ assetId, onClose }: Props) => {
     (!pool && isPoolFetched && isPoolLoading) ||
     (!balance && isBalanceFetched && isBalanceLoading) ||
     (!assetPrice && isAssetPriceLoading && !isAssetPriceFetched);
-  const disabled = !balance?.realBalance || !value || isLoading;
+  const finalValue = isViewOnly ? viewOnlyValue : value;
+
+  const disabled = !balance?.realBalance || !finalValue || isLoading;
 
   const asset = pool?.assets[0];
   const handleClick = () => {
-    if (!value || !asset) return;
+    if (!finalValue || !asset) return;
     supplyMutate(
       {
-        balance: parseUnit(value, asset.asset_decimals),
+        balance: parseUnit(finalValue, asset.asset_decimals),
         options: {
           onBroadcast: () => setStage("broadcast"),
           onFinalized: () => setStage("finalized"),
@@ -96,10 +98,6 @@ const SupplyModal = ({ assetId, onClose }: Props) => {
     );
   };
 
-  const onInputValueChange = async (newValue: string) => {
-    setValue(newValue);
-  };
-
   return (
     <Modal
       isOpen={!!assetId}
@@ -108,19 +106,34 @@ const SupplyModal = ({ assetId, onClose }: Props) => {
     >
       <div className={styles.container}>
         {stage === "form" ? (
-          <Form
-            isLoading={isLoading}
-            value={value}
-            onInputChange={onInputValueChange}
-            asset={asset}
-            formattedBalance={balance?.formattedBalance}
-            onButtonClick={handleClick}
-            isButtonLoading={isSupplyPending}
-            assetPrice={assetPrice?.[0].toString()}
-            assetDecimal={assetPrice?.[1]}
-            disabled={disabled}
-            realBalance={balance?.realBalance}
-          />
+          <div className={styles.content}>
+            {isViewOnly ? (
+              <ViewOnly
+                assetDecimal={asset?.asset_decimals}
+                assetPrice={assetPrice?.[0]}
+                assetSymbol={asset?.asset_symbol}
+                disabled={disabled}
+                isLoading={isLoading}
+                onClick={handleClick}
+                value={finalValue}
+              />
+            ) : (
+              <Form
+                isLoading={isLoading}
+                value={value}
+                onInputChange={setValue}
+                asset={asset}
+                formattedBalance={balance?.formattedBalance}
+                onButtonClick={handleClick}
+                isButtonLoading={isSupplyPending}
+                assetPrice={assetPrice?.[0].toString()}
+                assetDecimal={assetPrice?.[1]}
+                disabled={disabled}
+                realBalance={balance?.realBalance}
+              />
+            )}
+            <Detail asset={asset} enable={!!finalValue} />
+          </div>
         ) : (
           <Loading
             stage={stage}

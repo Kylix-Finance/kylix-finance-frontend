@@ -28,8 +28,12 @@ const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
             data?.asset_decimals
           )}
         />
-        <PrivateButton fullWidth onClick={() => setIsReviewed(true)}>
-          Supply
+        <PrivateButton
+          fullWidth
+          onClick={() => setIsReviewed(true)}
+          disabled={!value}
+        >
+          Review
         </PrivateButton>
       </div>
       <div className={styles.info}>
@@ -58,10 +62,10 @@ const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
           content="$0"
         />
       </div>
-      {data?.asset_id && value && (
+      {data?.asset_id && isReviewed && (
         <SupplyModal
           assetId={data.asset_id}
-          onClose={() => {}}
+          onClose={() => setIsReviewed(false)}
           isViewOnly
           value={value}
         />

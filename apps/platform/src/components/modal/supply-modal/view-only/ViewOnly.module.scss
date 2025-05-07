@@ -1,0 +1,17 @@
+.view_only {
+  display: flex;
+  flex-direction: column;
+  color: $color-white;
+  gap: 16px;
+}
+.first_row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.value {
+  @include font($font-heading-1);
+}
+.usdt_value {
+  @include font($font-body-compact);
+}
