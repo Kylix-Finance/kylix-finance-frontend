@@ -41,7 +41,7 @@ const ViewOnly = ({
       <div>
         <Skeleton isLoading={!assetPrice} width={80} height={20} rounded>
           {assetPrice && value && !isNaN(price) && (
-            <p>${formatBigNumbers(BigInt(price * +value).toString(), 4)}</p>
+            <p>${formatBigNumbers(String(price * +value).toString(), 4)}</p>
           )}
         </Skeleton>
       </div>
