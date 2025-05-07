@@ -24,8 +24,10 @@ const Markets = () => {
   const { data: lendingPool, isLoading: isLendingPoolLoading } =
     useGetLendingPools({
       account: account?.address,
+      assetId: +assetId,
     });
   const asset = lendingPool?.assets[0];
+
   return (
     <div className={styles.container}>
       <div className={styles.action_header}>

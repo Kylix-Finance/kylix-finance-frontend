@@ -1,13 +1,14 @@
-import { formatUnit } from "@repo/onchain";
+import { formatBigNumbers, formatUnit } from "@repo/onchain";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
 import { VoidFunction } from "~/types";
 import styles from "./ViewOnly.module.scss";
+import Skeleton from "~/components/skeleton";
 interface Props {
-  assetSymbol: string;
-  value: string;
-  assetDecimal: number;
-  assetPrice: number;
+  assetSymbol?: string;
+  value?: string;
+  assetDecimal?: number;
+  assetPrice?: bigint;
   onClick: VoidFunction;
   isLoading: boolean;
   disabled: boolean;
@@ -22,23 +23,27 @@ const ViewOnly = ({
   isLoading,
   onClick,
 }: Props) => {
-  const price = Number(formatUnit(assetPrice, assetDecimal));
+  const price = Number(formatUnit(assetPrice || 0, assetDecimal));
   return (
     <div className={styles.view_only}>
       <div className={styles.first_row}>
-        <p className={styles.value}>
-          {value} {assetSymbol}
-        </p>
-        {assetSymbol && (
-          <TokenIcon width={40} height={40} symbol={assetSymbol} />
-        )}
+        <Skeleton isLoading={!assetSymbol} width={90} height={30} rounded>
+          <p className={styles.value}>
+            {value} {assetSymbol}
+          </p>
+        </Skeleton>
+        <Skeleton isLoading={!assetSymbol} width={40} height={40} circle>
+          {assetSymbol && (
+            <TokenIcon width={40} height={40} symbol={assetSymbol} />
+          )}
+        </Skeleton>
       </div>
       <div>
-        {assetPrice && !isNaN(price) && value && (
-          <p>
-            ${price} * {+value}
-          </p>
-        )}
+        <Skeleton isLoading={!assetPrice} width={80} height={20} rounded>
+          {assetPrice && value && !isNaN(price) && (
+            <p>${formatBigNumbers(BigInt(price * +value).toString(), 4)}</p>
+          )}
+        </Skeleton>
       </div>
       <Button
         size="large"
