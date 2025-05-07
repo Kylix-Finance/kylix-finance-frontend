@@ -14,7 +14,7 @@ export const Skeleton = ({
   children,
   isLoading,
   className,
-  rounded,
+  rounded = true,
   style,
   borderRadius,
   ...rest

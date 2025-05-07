@@ -18,15 +18,21 @@ const Supply = ({ pool, detail, price, balance }: TransactionFormProps) => {
         <InputNumber
           title="You’re supplying"
           value={value}
-          onChange={(value) => setValue(value)}
+          onChange={setValue}
           placeholder="0"
-          price={price.data && formatUnit(price.data?.[0], price.data?.[1])}
+          price={{
+            value: price.data && formatUnit(price.data?.[0], price.data?.[1]),
+            isLoading: price.isLoading,
+          }}
           decimals={pool.data?.asset_decimals}
           showEstimate
-          availableAmount={formatUnit(
-            balance?.realBalance || 0,
-            pool.data?.asset_decimals
-          )}
+          availableAmount={{
+            value: formatUnit(
+              balance?.realBalance || 0,
+              pool.data?.asset_decimals
+            ),
+            isLoading: balance.isLoading || pool.isLoading,
+          }}
         />
         <PrivateButton
           fullWidth

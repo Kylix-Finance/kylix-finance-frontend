@@ -19,13 +19,19 @@ const Borrow = ({ pool, detail, price, balance }: TransactionFormProps) => {
           value={value}
           onChange={(value) => setValue(value)}
           placeholder="0"
-          price={price.data && formatUnit(price.data?.[0], price.data?.[1])}
+          price={{
+            value: price.data && formatUnit(price.data?.[0], price.data?.[1]),
+            isLoading: price.isLoading,
+          }}
           decimals={pool.data?.asset_decimals}
           showEstimate
-          availableAmount={formatUnit(
-            balance?.realBalance || 0,
-            pool.data?.asset_decimals
-          )}
+          availableAmount={{
+            value: formatUnit(
+              balance?.realBalance || 0,
+              pool.data?.asset_decimals
+            ),
+            isLoading: pool.isLoading || balance.isLoading,
+          }}
         />
         <PrivateButton fullWidth>Borrow</PrivateButton>
       </div>

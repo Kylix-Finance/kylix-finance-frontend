@@ -20,8 +20,12 @@ const Page = () => {
         value={value}
         placeholder="0"
         decimals={4}
-        price="94000"
-        availableAmount="0.056"
+        price={{
+          value: "94000",
+        }}
+        availableAmount={{
+          value: "0.056",
+        }}
       />
     </div>
   );

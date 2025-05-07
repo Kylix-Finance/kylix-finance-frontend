@@ -19,13 +19,19 @@ const Repay = ({ pool, price, balance }: TransactionFormProps) => {
           value={value}
           onChange={(value) => setValue(value)}
           placeholder="0"
-          price={price && formatUnit(price.data?.[0] || 0, price.data?.[1])}
+          price={{
+            value: price && formatUnit(price.data?.[0] || 0, price.data?.[1]),
+            isLoading: price.isLoading,
+          }}
           decimals={pool.data?.asset_decimals}
           showEstimate
-          availableAmount={formatUnit(
-            balance?.realBalance || 0,
-            pool.data?.asset_decimals
-          )}
+          availableAmount={{
+            value: formatUnit(
+              balance?.realBalance || 0,
+              pool.data?.asset_decimals
+            ),
+            isLoading: balance.isLoading || pool.isLoading,
+          }}
         />
         <PrivateButton fullWidth>Repay</PrivateButton>
       </div>

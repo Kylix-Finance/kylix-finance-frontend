@@ -5,7 +5,12 @@ import TokenIcon from "~/components/token-icon";
 import { SelectBox } from "../select-box";
 import { Wallet } from "~/assets/icons";
 import { formatBigNumbers } from "@repo/onchain";
+import Skeleton from "~/components/skeleton";
 
+type Data = {
+  value?: string;
+  isLoading?: boolean;
+};
 interface Props
   extends Omit<ComponentPropsWithRef<"input">, "onChange" | "value"> {
   label?: string;
@@ -20,8 +25,8 @@ interface Props
   error?: string;
   value?: string;
   decimals?: number;
-  price?: string;
-  availableAmount?: string;
+  price?: Data;
+  availableAmount?: Data;
   isPercentMode?: boolean;
 }
 
@@ -159,24 +164,36 @@ export const InputNumber = ({
         )}
       </div>
       <div className={styles.bottom_row}>
-        {showEstimate && price && (
-          <span className={styles.estimated_value}>
-            <>
-              $
-              <span>
-                {formatBigNumbers(
-                  (Number(price || 0) * Number(externalValue || 0)).toString(),
-                  2
-                )}
-              </span>
-            </>
-          </span>
+        {showEstimate && price?.value && (
+          <Skeleton isLoading={price.isLoading} width={60} height={20}>
+            <span className={styles.estimated_value}>
+              <>
+                $
+                <span>
+                  {formatBigNumbers(
+                    (
+                      Number(price.value || 0) * Number(externalValue || 0)
+                    ).toString(),
+                    2
+                  )}
+                </span>
+              </>
+            </span>
+          </Skeleton>
         )}
         <div className={styles.wallet_balance}>
           <Wallet className={styles.wallet_icon} />
-          <div className={styles.available_amount}>
-            {formatBigNumbers(availableAmount || "0", 4)} {selectedToken}
-          </div>
+          <Skeleton
+            isLoading={availableAmount?.isLoading}
+            width={80}
+            height={20}
+            rounded
+          >
+            <div className={styles.available_amount}>
+              {formatBigNumbers(availableAmount?.value || "0", 4)}{" "}
+              {selectedToken}
+            </div>
+          </Skeleton>
 
           {showMaxButton && (
             <Button
@@ -185,7 +202,7 @@ export const InputNumber = ({
               size="small"
               onClick={() => {
                 onMaxClick?.();
-                processValue(availableAmount || "0");
+                processValue(availableAmount?.value || "0");
               }}
             >
               Max

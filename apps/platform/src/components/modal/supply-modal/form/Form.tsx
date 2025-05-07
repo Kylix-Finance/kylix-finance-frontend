@@ -2,7 +2,6 @@ import InputNumber from "~/components/inputs/input-number";
 import { Button } from "~/components/ui/button";
 import styles from "./Form.module.scss";
 import { formatUnit, LandingPool } from "@repo/onchain";
-import Detail from "../detail/Detail";
 interface Props {
   value: string | undefined;
   isLoading: boolean;
@@ -41,10 +40,14 @@ const Form = ({
         showPercentButtons
         selectedToken={asset?.asset_symbol}
         value={value}
-        availableAmount={formattedBalance}
+        availableAmount={{
+          value: formattedBalance,
+        }}
         onChange={onInputChange}
         decimals={asset?.asset_decimals}
-        price={assetPrice && formatUnit(assetPrice, assetDecimal)}
+        price={{
+          value: assetPrice && formatUnit(assetPrice, assetDecimal),
+        }}
       />
       <Button
         disabled={disabled}
