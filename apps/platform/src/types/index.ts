@@ -64,9 +64,10 @@ export interface ExpandableCardItem {
     icon?: ElementType;
     tooltipContent?: string;
     className?: string;
+    isLoading?: boolean;
   };
   content: ReactNode;
-  isLoading?: boolean;
+  isContentLoading?: boolean;
 }
 
 export type TransactionStage =

@@ -7,7 +7,7 @@ import Skeleton from "~/components/skeleton";
 import { useRouter } from "next/navigation";
 interface Content {
   content?: string;
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 interface Data extends Content {
   value?: string;
@@ -21,7 +21,13 @@ interface Props {
   isLoading?: boolean;
 }
 
-const ActionHeader = ({ data, symbol, title, backLinkHref }: Props) => {
+const ActionHeader = ({
+  data,
+  symbol,
+  title,
+  backLinkHref,
+  isLoading,
+}: Props) => {
   const router = useRouter();
 
   const backClickHandler = () => {

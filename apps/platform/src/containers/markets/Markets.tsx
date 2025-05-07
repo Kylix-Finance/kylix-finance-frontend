@@ -24,14 +24,24 @@ const Markets = () => {
     assetId: +assetId,
   });
   const { account } = useAccountsStore();
-  const { data: balance, isLoading: isBalanceLoading } = useBalance({
+  const {
+    data: balance,
+    isLoading: isBalanceLoading,
+    isFetched: isBalanceFetched,
+  } = useBalance({
     assetId,
   });
-  const { data: lendingPool, isLoading: isLendingPoolLoading } =
-    useGetLendingPools({
-      account: account?.address,
-      assetId: +assetId,
-    });
+  const {
+    data: lendingPool,
+    isLoading: isLendingPoolLoading,
+    isFetched: isLendingPoolFetched,
+  } = useGetLendingPools({
+    account: account?.address,
+    assetId: +assetId,
+  });
+  const isLendingPoolPending =
+    !lendingPool && (isLendingPoolFetched || isLendingPoolLoading);
+  const isBalancePending = !balance && (isBalanceFetched || isBalanceLoading);
   const asset = lendingPool?.assets[0];
 
   return (
@@ -50,12 +60,12 @@ const Markets = () => {
                   ),
                   4
                 ),
-              isLoading: isLendingPoolLoading,
+              isLoading: isLendingPoolPending,
             },
             {
               content: "Borrow APY",
               value: asset?.borrow_apy,
-              isLoading: isLendingPoolLoading,
+              isLoading: isLendingPoolPending,
             },
             {
               content: "Total Supplied",
@@ -65,12 +75,12 @@ const Markets = () => {
                   formatUnit(asset.total_pool_supply, asset.asset_decimals),
                   4
                 ),
-              isLoading: isLendingPoolLoading,
+              isLoading: isLendingPoolPending,
             },
             {
               content: "Supply APY",
               value: asset?.supply_apy,
-              isLoading: isLendingPoolLoading,
+              isLoading: isLendingPoolPending,
             },
             {
               content: "Oracle price",
@@ -85,13 +95,13 @@ const Markets = () => {
           ]}
           symbol={{
             content: asset?.asset_symbol,
-            isLoading: isLendingPoolLoading,
+            isLoading: isLendingPoolPending,
           }}
           title={{
-            isLoading: isLendingPoolLoading,
+            isLoading: isLendingPoolPending,
             content: asset?.asset,
           }}
-          isLoading={isLendingPoolLoading}
+          isLoading={isLendingPoolPending}
         />
       </div>
       <div className={styles.utilization}>
@@ -104,7 +114,7 @@ const Markets = () => {
         <TransactionForm
           pool={{
             data: lendingPool?.assets[0],
-            isLoading: isLendingPoolLoading,
+            isLoading: isLendingPoolPending,
           }}
           detail={{
             data: poolData,
@@ -116,7 +126,7 @@ const Markets = () => {
           }}
           balance={{
             ...balance,
-            isLoading: isBalanceLoading,
+            isLoading: isBalancePending,
           }}
         />
       </div>

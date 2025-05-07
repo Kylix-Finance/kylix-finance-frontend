@@ -46,7 +46,7 @@ const Supply = ({ pool, detail, price, balance }: TransactionFormProps) => {
         <Row
           title={{ value: "Borrowable Amount", className: styles.row_title }}
           content={`0 ${pool.data?.asset_symbol}`}
-          isLoading={pool.isLoading}
+          isContentLoading={pool.isLoading}
         />
         <Row
           title={{ value: "Collateral", className: styles.row_title }}
@@ -57,6 +57,7 @@ const Supply = ({ pool, detail, price, balance }: TransactionFormProps) => {
           title={{
             value: `Borrow balance (${pool.data?.asset_symbol})`,
             className: styles.row_title,
+            isLoading: pool.isLoading,
           }}
           content="0"
         />
