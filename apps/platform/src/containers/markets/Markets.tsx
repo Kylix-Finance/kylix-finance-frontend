@@ -36,7 +36,7 @@ const Markets = () => {
         <ActionHeader
           data={[
             {
-              title: "Total Borrowed",
+              content: "Total Borrowed",
               value:
                 asset &&
                 formatUnit(
@@ -46,24 +46,24 @@ const Markets = () => {
               isLoading: isLendingPoolLoading,
             },
             {
-              title: "Borrow APY",
+              content: "Borrow APY",
               value: asset?.borrow_apy,
               isLoading: isLendingPoolLoading,
             },
             {
-              title: "Total Supplied",
+              content: "Total Supplied",
               value:
                 asset &&
                 formatUnit(asset.total_pool_supply, asset.asset_decimals),
               isLoading: isLendingPoolLoading,
             },
             {
-              title: "Supply APY",
+              content: "Supply APY",
               value: asset?.supply_apy,
               isLoading: isLendingPoolLoading,
             },
             {
-              title: "Oracle price",
+              content: "Oracle price",
               value:
                 assetPrice &&
                 formatBigNumbers(
@@ -73,8 +73,14 @@ const Markets = () => {
               isLoading: isAssetPriceLoading,
             },
           ]}
-          symbol={asset?.asset_symbol || ""}
-          title={asset?.asset || ""}
+          symbol={{
+            content: asset?.asset_symbol,
+            isLoading: isLendingPoolLoading,
+          }}
+          title={{
+            isLoading: isLendingPoolLoading,
+            content: asset?.asset,
+          }}
           isLoading={isLendingPoolLoading}
         />
       </div>
