@@ -12,11 +12,23 @@ import { useAccountsStore } from "@repo/shared";
 import { useEffect, useState } from "react";
 import Loading from "./loading/Loading";
 import styles from "./SupplyModal.module.scss";
-interface Props {
+
+interface BaseProps {
   assetId: number;
   onClose: VoidFunction;
+  isViewOnly?: boolean;
 }
 
+interface ViewOnlyProps extends BaseProps {
+  isViewOnly: true;
+  value: string;
+}
+
+interface EditableProps extends BaseProps {
+  isViewOnly?: false;
+}
+
+type Props = ViewOnlyProps | EditableProps;
 const SupplyModal = ({ assetId, onClose }: Props) => {
   const [value, setValue] = useState<string | undefined>(undefined);
   const [stage, setStage] = useState<TransactionStage>("form");

@@ -8,9 +8,10 @@ import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
 import { formatUnit } from "@repo/onchain";
 import { Switch } from "~/components/ui/switch";
+import SupplyModal from "~/components/modal/supply-modal/SupplyModal";
 const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
-
+  const [isReviewed, setIsReviewed] = useState(false);
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -27,7 +28,9 @@ const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
             data?.asset_decimals
           )}
         />
-        <PrivateButton fullWidth>Supply</PrivateButton>
+        <PrivateButton fullWidth onClick={() => setIsReviewed(true)}>
+          Supply
+        </PrivateButton>
       </div>
       <div className={styles.info}>
         <Row
@@ -55,6 +58,14 @@ const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
           content="$0"
         />
       </div>
+      {data?.asset_id && value && (
+        <SupplyModal
+          assetId={data.asset_id}
+          onClose={() => {}}
+          isViewOnly
+          value={value}
+        />
+      )}
     </div>
   );
 };
