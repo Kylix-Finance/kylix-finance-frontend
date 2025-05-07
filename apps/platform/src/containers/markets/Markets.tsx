@@ -49,50 +49,46 @@ const Markets = () => {
   const isPoolPending = !poolData && (isPoolFetched || isPoolLoading);
   const asset = lendingPool?.assets[0];
 
+  const headerData = [
+    {
+      content: "Total Borrowed",
+      value:
+        asset &&
+        formatBigNumbers(
+          formatUnit(asset?.total_pool_borrow || 0, asset?.asset_decimals),
+          4
+        ),
+    },
+    {
+      content: "Borrow APY",
+      value: asset?.borrow_apy,
+    },
+    {
+      content: "Total Supplied",
+      value:
+        asset &&
+        formatBigNumbers(
+          formatUnit(asset.total_pool_supply, asset.asset_decimals),
+          4
+        ),
+    },
+    {
+      content: "Supply APY",
+      value: asset?.supply_apy,
+    },
+    {
+      content: "Oracle price",
+      value:
+        assetPrice &&
+        formatBigNumbers(formatUnit(assetPrice?.[0], assetPrice?.[1]), 4),
+    },
+  ];
+
   return (
     <div className={styles.container}>
       <div className={styles.action_header}>
         <ActionHeader
-          data={[
-            {
-              content: "Total Borrowed",
-              value:
-                asset &&
-                formatBigNumbers(
-                  formatUnit(
-                    asset?.total_pool_borrow || 0,
-                    asset?.asset_decimals
-                  ),
-                  4
-                ),
-            },
-            {
-              content: "Borrow APY",
-              value: asset?.borrow_apy,
-            },
-            {
-              content: "Total Supplied",
-              value:
-                asset &&
-                formatBigNumbers(
-                  formatUnit(asset.total_pool_supply, asset.asset_decimals),
-                  4
-                ),
-            },
-            {
-              content: "Supply APY",
-              value: asset?.supply_apy,
-            },
-            {
-              content: "Oracle price",
-              value:
-                assetPrice &&
-                formatBigNumbers(
-                  formatUnit(assetPrice?.[0], assetPrice?.[1]),
-                  4
-                ),
-            },
-          ]}
+          data={headerData}
           symbol={asset?.asset_symbol}
           title={asset?.asset}
           isLoading={isLendingPoolPending || isAssetPriceLoading}
