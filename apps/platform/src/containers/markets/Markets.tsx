@@ -17,12 +17,16 @@ import { useAccountsStore } from "@repo/shared";
 
 const Markets = () => {
   const { id: assetId } = useParams<{ id: string }>();
-  const { data: poolData } = usePool({ assetId: +assetId });
+  const { data: poolData, isLoading: isPoolLoading } = usePool({
+    assetId: +assetId,
+  });
   const { data: assetPrice, isLoading: isAssetPriceLoading } = useAssetPrice({
     assetId: +assetId,
   });
   const { account } = useAccountsStore();
-  const { data: balance } = useBalance({ assetId });
+  const { data: balance, isLoading: isBalanceLoading } = useBalance({
+    assetId,
+  });
   const { data: lendingPool, isLoading: isLendingPoolLoading } =
     useGetLendingPools({
       account: account?.address,
@@ -98,10 +102,22 @@ const Markets = () => {
       </div>
       <div className={styles.transaction_form}>
         <TransactionForm
-          data={lendingPool?.assets[0]}
-          detail={poolData}
-          price={assetPrice}
-          balance={balance}
+          pool={{
+            data: lendingPool?.assets[0],
+            isLoading: isLendingPoolLoading,
+          }}
+          detail={{
+            data: poolData,
+            isLoading: isPoolLoading,
+          }}
+          price={{
+            data: assetPrice,
+            isLoading: isAssetPriceLoading,
+          }}
+          balance={{
+            ...balance,
+            isLoading: isBalanceLoading,
+          }}
         />
       </div>
     </div>

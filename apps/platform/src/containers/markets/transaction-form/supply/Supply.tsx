@@ -9,7 +9,7 @@ import { TransactionFormProps } from "~/types";
 import { formatUnit } from "@repo/onchain";
 import { Switch } from "~/components/ui/switch";
 import SupplyModal from "~/components/modal/supply-modal/SupplyModal";
-const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
+const Supply = ({ pool, detail, price, balance }: TransactionFormProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
   const [isReviewed, setIsReviewed] = useState(false);
   return (
@@ -20,12 +20,12 @@ const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
           value={value}
           onChange={(value) => setValue(value)}
           placeholder="0"
-          price={price && formatUnit(price?.[0], price?.[1])}
-          decimals={data?.asset_decimals}
+          price={price.data && formatUnit(price.data?.[0], price.data?.[1])}
+          decimals={pool.data?.asset_decimals}
           showEstimate
           availableAmount={formatUnit(
             balance?.realBalance || 0,
-            data?.asset_decimals
+            pool.data?.asset_decimals
           )}
         />
         <PrivateButton
@@ -39,7 +39,8 @@ const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
       <div className={styles.info}>
         <Row
           title={{ value: "Borrowable Amount", className: styles.row_title }}
-          content={`0 ${data?.asset_symbol}`}
+          content={`0 ${pool.data?.asset_symbol}`}
+          isLoading={pool.isLoading}
         />
         <Row
           title={{ value: "Collateral", className: styles.row_title }}
@@ -48,7 +49,7 @@ const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
         <Divider />
         <Row
           title={{
-            value: `Borrow balance (${data?.asset_symbol})`,
+            value: `Borrow balance (${pool.data?.asset_symbol})`,
             className: styles.row_title,
           }}
           content="0"
@@ -62,9 +63,9 @@ const Supply = ({ data, detail, price, balance }: TransactionFormProps) => {
           content="$0"
         />
       </div>
-      {data?.asset_id && isReviewed && (
+      {pool.data?.asset_id && isReviewed && (
         <SupplyModal
-          assetId={data.asset_id}
+          assetId={pool.data.asset_id}
           onClose={() => setIsReviewed(false)}
           isViewOnly
           value={value}

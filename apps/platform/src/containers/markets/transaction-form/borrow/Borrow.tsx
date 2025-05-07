@@ -8,7 +8,7 @@ import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
 import { formatUnit } from "@repo/onchain";
 
-const Borrow = ({ data, detail, price, balance }: TransactionFormProps) => {
+const Borrow = ({ pool, detail, price, balance }: TransactionFormProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
 
   return (
@@ -19,12 +19,12 @@ const Borrow = ({ data, detail, price, balance }: TransactionFormProps) => {
           value={value}
           onChange={(value) => setValue(value)}
           placeholder="0"
-          price={price && formatUnit(price?.[0], price?.[1])}
-          decimals={data?.asset_decimals}
+          price={price.data && formatUnit(price.data?.[0], price.data?.[1])}
+          decimals={pool.data?.asset_decimals}
           showEstimate
           availableAmount={formatUnit(
             balance?.realBalance || 0,
-            data?.asset_decimals
+            pool.data?.asset_decimals
           )}
         />
         <PrivateButton fullWidth>Borrow</PrivateButton>
@@ -32,12 +32,12 @@ const Borrow = ({ data, detail, price, balance }: TransactionFormProps) => {
       <div className={styles.info}>
         <Row
           title={{ value: "Borrowable Amount", className: styles.row_title }}
-          content={`0 ${data?.asset_symbol}`}
+          content={`0 ${pool.data?.asset_symbol}`}
         />
         <Divider />
         <Row
           title={{
-            value: `Borrow balance (${data?.asset_symbol})`,
+            value: `Borrow balance (${pool.data?.asset_symbol})`,
             className: styles.row_title,
           }}
           content="0"

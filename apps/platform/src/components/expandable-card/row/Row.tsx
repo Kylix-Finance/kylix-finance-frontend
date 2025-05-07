@@ -4,7 +4,8 @@ import { Tooltip } from "~/components/ui/tooltip";
 import { ExpandableCardItem } from "~/types";
 import Info from "~/assets/icons/info.svg";
 import clsx from "clsx";
-const Row = ({ title, content }: ExpandableCardItem) => {
+import Skeleton from "~/components/skeleton";
+const Row = ({ title, content, isLoading }: ExpandableCardItem) => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -31,7 +32,9 @@ const Row = ({ title, content }: ExpandableCardItem) => {
           )}
         </div>
       </div>
-      {content}
+      <Skeleton isLoading={isLoading} width={80} height={20} rounded>
+        {content}
+      </Skeleton>
     </div>
   );
 };

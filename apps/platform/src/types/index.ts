@@ -66,6 +66,7 @@ export interface ExpandableCardItem {
     className?: string;
   };
   content: ReactNode;
+  isLoading?: boolean;
 }
 
 export type TransactionStage =
@@ -78,12 +79,22 @@ export type TransactionStage =
   | "error";
 
 export interface TransactionFormProps {
-  data?: LandingPool;
-  detail?: LendingLendingPool;
-  price?: GetAssetPrice["response"];
-  balance?: {
-    formattedBalance: string;
-    realBalance: bigint;
+  pool: {
+    isLoading: boolean;
+    data?: LandingPool;
+  };
+  detail: {
+    data?: LendingLendingPool;
+    isLoading: boolean;
+  };
+  price: {
+    data?: GetAssetPrice["response"];
+    isLoading: boolean;
+  };
+  balance: {
+    formattedBalance?: string;
+    realBalance?: bigint;
+    isLoading: boolean;
   };
 }
 
