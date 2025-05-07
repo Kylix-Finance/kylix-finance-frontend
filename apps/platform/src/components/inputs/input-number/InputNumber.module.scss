@@ -72,8 +72,9 @@
 }
 
 .bottom_row {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   color: $color-neutral-400;
 }
 
@@ -81,6 +82,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-left: auto;
 }
 
 .wallet_icon {
