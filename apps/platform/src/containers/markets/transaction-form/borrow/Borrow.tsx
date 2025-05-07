@@ -6,11 +6,7 @@ import { PrivateButton } from "~/components/private-button";
 import { Row } from "~/components/expandable-card/row";
 import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
-import {
-  formatUnit,
-  useGetUserLtv,
-  usePool,
-} from "@repo/onchain";
+import { formatUnit, useGetUserLtv, usePool } from "@repo/onchain";
 
 const Borrow = ({
   pool,
@@ -28,7 +24,7 @@ const Borrow = ({
   const { data: ltv } = useGetUserLtv();
   const allowance = formatUnit(ltv?.allowance || "0", 6);
 
-  const allowanceAmount = Number(allowance || 0) / Number(formattedPrice || 1);
+  const allowanceAmount = Number(allowance) / Number(formattedPrice || 1);
 
   const poolBalance = Number(
     formatUnit(BigInt(otherPoolData?.reserveBalance || 0), price?.[1]) || 0
