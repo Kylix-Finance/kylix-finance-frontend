@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 interface Data {
   title: string;
   value?: string;
+  isLoading: boolean;
 }
 
 interface Props {
@@ -19,13 +20,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-const ActionHeader = ({
-  data,
-  symbol,
-  title,
-  backLinkHref,
-  isLoading,
-}: Props) => {
+const ActionHeader = ({ data, symbol, title, backLinkHref }: Props) => {
   const router = useRouter();
 
   const backClickHandler = () => {
@@ -49,15 +44,13 @@ const ActionHeader = ({
         {data.map((item, index) => (
           <div key={index} className={styles.action_wrapper}>
             <div className={styles.label}>{item.title}</div>
-            {isLoading ? (
-              <Skeleton
-                isLoading={isLoading}
-                className={styles.skeleton}
-                rounded
-              />
-            ) : (
+            <Skeleton
+              isLoading={item.isLoading}
+              className={styles.skeleton}
+              rounded
+            >
               <div className={styles.content}>{item.value}</div>
-            )}
+            </Skeleton>
           </div>
         ))}
       </ScrollableContainer>

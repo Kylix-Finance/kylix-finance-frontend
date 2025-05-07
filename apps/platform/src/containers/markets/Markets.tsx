@@ -18,7 +18,9 @@ import { useAccountsStore } from "@repo/shared";
 const Markets = () => {
   const { id: assetId } = useParams<{ id: string }>();
   const { data: poolData } = usePool({ assetId: +assetId });
-  const { data: assetPrice } = useAssetPrice({ assetId: +assetId });
+  const { data: assetPrice, isLoading: isAssetPriceLoading } = useAssetPrice({
+    assetId: +assetId,
+  });
   const { account } = useAccountsStore();
   const { data: balance } = useBalance({ assetId });
   const { data: lendingPool, isLoading: isLendingPoolLoading } =
@@ -41,20 +43,24 @@ const Markets = () => {
                   asset?.total_pool_borrow || 0,
                   asset?.asset_decimals
                 ),
+              isLoading: isLendingPoolLoading,
             },
             {
               title: "Borrow APY",
               value: asset?.borrow_apy,
+              isLoading: isLendingPoolLoading,
             },
             {
               title: "Total Supplied",
               value:
                 asset &&
                 formatUnit(asset.total_pool_supply, asset.asset_decimals),
+              isLoading: isLendingPoolLoading,
             },
             {
               title: "Supply APY",
               value: asset?.supply_apy,
+              isLoading: isLendingPoolLoading,
             },
             {
               title: "Oracle price",
@@ -64,6 +70,7 @@ const Markets = () => {
                   formatUnit(assetPrice?.[0], assetPrice?.[1]),
                   4
                 ),
+              isLoading: isAssetPriceLoading,
             },
           ]}
           symbol={asset?.asset_symbol || ""}
