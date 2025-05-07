@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { useTransaction } from "../useTransaction";
-import { SupplyParams, TransactionStatus } from "../../types";
+import { SupplyParams, TransactionCallbacks } from "../../types";
 
 export interface SupplyMutationFnParams {
   balance: string | bigint;
-  options?: TransactionStatus;
+  options?: TransactionCallbacks;
 }
 export const useSupply = ({ assetId }: SupplyParams) => {
   const { execute } = useTransaction("lending", "supply");

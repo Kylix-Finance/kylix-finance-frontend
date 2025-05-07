@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useTransaction } from "../useTransaction";
-import { TransactionStatus } from "../../types";
+import { TransactionCallbacks } from "../../types";
 
 interface PlaceBidParams {
   assetId: string;
@@ -8,7 +8,7 @@ interface PlaceBidParams {
 interface MutationFnParams {
   balance: string | bigint;
   discount: number;
-  options?: TransactionStatus;
+  options?: TransactionCallbacks;
 }
 export const usePlaceBid = ({ assetId }: PlaceBidParams) => {
   const { execute } = useTransaction("lending", "placeBid");

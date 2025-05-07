@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useTransaction } from "../useTransaction";
-import { TransactionStatus } from "../../types";
+import { TransactionCallbacks } from "../../types";
 
 interface CancelBidParams {
   assetId: string;
@@ -10,7 +10,7 @@ interface MutationFnParams {
   discount: number;
   txIndex: number;
   txBlockNumber: number;
-  options?: TransactionStatus;
+  options?: TransactionCallbacks;
 }
 export const useCancelBid = ({ assetId }: CancelBidParams) => {
   const { execute } = useTransaction("lending", "cancelBid");

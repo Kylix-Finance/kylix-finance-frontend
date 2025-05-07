@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTransaction } from "../useTransaction";
 import { useAccountsStore } from "@repo/shared";
-import { TransactionStatus } from "../../types";
+import { TransactionCallbacks } from "../../types";
 
 interface MutationFnParams {
   assetId: string;
-  options?: TransactionStatus;
+  options?: TransactionCallbacks;
 }
 
 export const useEnableAsCollateral = () => {

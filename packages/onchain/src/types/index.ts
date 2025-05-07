@@ -1,15 +1,17 @@
 export * from "./rpc";
 export * from "./query";
-
+type VoidFunction = () => void;
 export type Config = {
   dappName: string;
   rpc: string;
 };
-export type TransactionStatus = {
-  onReady?: () => void;
-  onBroadcast?: () => void;
-  onInBlock?: () => void;
-  onFinalized?: () => void;
+export type TransactionCallbacks = {
+  onReady?: VoidFunction;
+  onBroadcast?: VoidFunction;
+  onInBlock?: VoidFunction;
+  onFinalized?: VoidFunction;
+  onSignerRequestSend?: VoidFunction;
+  onSignerRequestApproved?: VoidFunction;
 };
 export interface SupplyParams {
   assetId: string;

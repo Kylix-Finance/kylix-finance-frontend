@@ -2,7 +2,6 @@ import Modal from "~/components/ui/modal/Modal";
 import { TransactionStage, VoidFunction } from "~/types";
 import Form from "./form/Form";
 import {
-  formatUnit,
   parseUnit,
   useAssetPrice,
   useBalance,
@@ -14,8 +13,6 @@ import { useEffect, useState } from "react";
 import Loading from "./loading/Loading";
 import styles from "./SupplyModal.module.scss";
 import Detail from "./detail/Detail";
-import TokenIcon from "~/components/token-icon";
-import { Button } from "~/components/ui/button";
 import ViewOnly from "./view-only/ViewOnly";
 
 interface Props {
@@ -88,6 +85,7 @@ const SupplyModal = ({
           onFinalized: () => setStage("finalized"),
           onInBlock: () => setStage("in_block"),
           onReady: () => setStage("ready"),
+          onSignerRequestSend: () => setStage("wallet"),
         },
       },
       {

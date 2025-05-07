@@ -1,6 +1,6 @@
 import { ApiPromise } from "@polkadot/api";
 import { SubmittableResultValue } from "@polkadot/api-base/types";
-import { TransactionStatus, UseTransactionResult } from "../types";
+import { TransactionCallbacks, UseTransactionResult } from "../types";
 
 export const transactionStatus = ({
   api,
@@ -14,7 +14,7 @@ export const transactionStatus = ({
   api: ApiPromise;
   resolve: (value: UseTransactionResult) => void;
   reject: (reason: Error) => void;
-} & TransactionStatus) => {
+} & TransactionCallbacks) => {
   return ({
     status,
     dispatchError,

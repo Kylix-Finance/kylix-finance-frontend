@@ -8,7 +8,7 @@ import { validateEstimatedGas } from "../utils/validateTransactionFees";
 import { transactionStatus } from "../utils/transactionStatus";
 import { useBalance } from "./query/useBalance";
 import { useAccountsStore } from "@repo/shared";
-import { TransactionStatus, UseTransactionResult } from "../types";
+import { TransactionCallbacks, UseTransactionResult } from "../types";
 
 type ApiOperations = keyof AugmentedSubmittables<ApiTypes>;
 type OperationMethods<T extends ApiOperations> =
@@ -27,7 +27,7 @@ export const useTransaction = <
   const { data: balance } = useBalance();
 
   const execute = async (
-    options?: TransactionStatus,
+    options?: TransactionCallbacks,
     ...args: Parameters<OperationMethods<T>[K]>
   ) => {
     if (
@@ -39,7 +39,9 @@ export const useTransaction = <
     if (!balance) {
       throw new Error("Balance information is not available");
     }
+    options?.onSignerRequestSend?.();
     provider.api.setSigner(signer);
+    options?.onSignerRequestApproved?.();
     const extrinsic = provider.api.tx[module][method](...args);
     await validateEstimatedGas(extrinsic, account.address, balance.realBalance);
 

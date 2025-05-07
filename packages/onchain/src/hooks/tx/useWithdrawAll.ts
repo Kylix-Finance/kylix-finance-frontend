@@ -1,13 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
 import { useTransaction } from "../useTransaction";
-import { TransactionStatus } from "../../types";
+import { TransactionCallbacks } from "../../types";
 
 interface WithdrawAllParams {
   assetId: string;
 }
 
 interface MutationFnParams {
-  options?: TransactionStatus;
+  options?: TransactionCallbacks;
 }
 
 export const useWithdrawAll = ({ assetId }: WithdrawAllParams) => {
