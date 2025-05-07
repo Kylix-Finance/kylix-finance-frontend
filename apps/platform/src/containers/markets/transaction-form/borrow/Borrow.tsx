@@ -6,7 +6,11 @@ import { PrivateButton } from "~/components/private-button";
 import { Row } from "~/components/expandable-card/row";
 import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
-import { formatUnit } from "@repo/onchain";
+import {
+  formatUnit,
+  useGetUserLtv,
+  usePool,
+} from "@repo/onchain";
 
 const Borrow = ({
   pool,
@@ -14,8 +18,23 @@ const Borrow = ({
   price,
   balance,
   isLoading,
+  assetId,
 }: TransactionFormProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
+
+  const { data: otherPoolData } = usePool({ assetId: +assetId });
+
+  const formattedPrice = formatUnit(price?.[0] || "0", price?.[1]);
+  const { data: ltv } = useGetUserLtv();
+  const allowance = formatUnit(ltv?.allowance || "0", 6);
+
+  const allowanceAmount = Number(allowance || 0) / Number(formattedPrice || 1);
+
+  const poolBalance = Number(
+    formatUnit(BigInt(otherPoolData?.reserveBalance || 0), price?.[1]) || 0
+  );
+
+  const max = Math.min(poolBalance, allowanceAmount).toFixed(4);
 
   return (
     <div className={styles.container}>
@@ -33,6 +52,7 @@ const Borrow = ({
             pool?.asset_decimals
           )}
           isLoading={isLoading}
+          max={max}
         />
         <PrivateButton fullWidth>Borrow</PrivateButton>
       </div>

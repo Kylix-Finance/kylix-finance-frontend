@@ -88,6 +88,7 @@ export interface TransactionFormProps {
     realBalance?: bigint;
   };
   isLoading: boolean;
+  assetId: string;
 }
 
 export type ChartItemIndex = number | string | bigint | null | undefined;

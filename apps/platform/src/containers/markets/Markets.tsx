@@ -107,6 +107,7 @@ const Markets = () => {
           price={assetPrice}
           balance={balance}
           isLoading={isBalancePending || isLendingPoolPending || isPoolPending}
+          assetId={assetId}
         />
       </div>
     </div>
