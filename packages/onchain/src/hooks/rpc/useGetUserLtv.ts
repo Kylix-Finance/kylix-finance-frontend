@@ -6,7 +6,7 @@ interface Params {
   account?: string;
 }
 
-export const useGetUserLtv = ({ account }: Params) => {
+export const useGetUserLtv = ({ account }: Params = {}) => {
   const { execute, isApiAvailable } = useRpc("lending", "getUserLtv");
   const { account: activeAccount } = useAccountsStore();
   const finalAccount = (account || activeAccount?.address) as string;

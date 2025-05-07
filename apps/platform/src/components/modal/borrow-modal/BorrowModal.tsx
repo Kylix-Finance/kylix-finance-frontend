@@ -2,11 +2,14 @@ import Modal from "~/components/ui/modal/Modal";
 import { TransactionStage, VoidFunction } from "~/types";
 import Form from "./form/Form";
 import {
+  formatUnit,
   parseUnit,
   useAssetPrice,
   useBalance,
   useBorrow,
   useGetLendingPools,
+  useGetUserLtv,
+  usePool,
 } from "@repo/onchain";
 import { useAccountsStore } from "@repo/shared";
 import { useEffect, useState } from "react";
@@ -46,6 +49,11 @@ const BorrowModal = ({
     isFetched: isPoolFetched,
     isLoading: isPoolLoading,
   } = useGetLendingPools({ assetId, account: account?.address });
+
+  const { data: otherPoolData } = usePool({ assetId });
+
+  const decimals = pool?.assets[0].asset_decimals;
+
   const {
     data: balance,
     isFetched: isBalanceFetched,
@@ -61,11 +69,32 @@ const BorrowModal = ({
   } = useAssetPrice({
     assetId,
   });
+
+  const formattedPrice = formatUnit(assetPrice?.[0] || "0", assetPrice?.[1]);
+
+  const { data: ltv } = useGetUserLtv();
+  const allowance = formatUnit(ltv?.allowance || "0", 6);
+
+  const allowanceAmount = Number(allowance || 0) / Number(formattedPrice || 1);
+
+  const poolBalance = Number(
+    formatUnit(BigInt(otherPoolData?.reserveBalance || 0), decimals) || 0
+  );
+
+  const max = Math.min(poolBalance, allowanceAmount).toFixed(4);
+
+  // const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
+  //   { poolId: assetId }
+  // );
+
+  // const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
+
   useEffect(() => {
     if (!assetId || !account) {
       onClose();
     }
   }, [account, assetId, onClose]);
+
   const isLoading =
     (!pool && isPoolFetched && isPoolLoading) ||
     (!balance && isBalanceFetched && isBalanceLoading) ||
@@ -75,6 +104,7 @@ const BorrowModal = ({
   const disabled = !balance?.realBalance || !finalValue || isLoading;
 
   const asset = pool?.assets[0];
+
   const handleClick = () => {
     if (!finalValue || !asset) return;
     borrowMutate(
@@ -129,6 +159,7 @@ const BorrowModal = ({
                 assetDecimal={assetPrice?.[1]}
                 disabled={disabled}
                 realBalance={balance?.realBalance}
+                maxValue={max}
               />
             )}
             {/* <Detail asset={asset} enable={!!finalValue} /> */}

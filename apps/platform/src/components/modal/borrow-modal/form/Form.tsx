@@ -16,6 +16,7 @@ interface Props {
   assetPrice: string | undefined;
   assetDecimal: number | undefined;
   disabled: boolean;
+  maxValue: string | undefined;
 }
 
 const Form = ({
@@ -30,6 +31,7 @@ const Form = ({
   assetDecimal,
   disabled,
   realBalance,
+  maxValue,
 }: Props) => {
   return (
     <div className={styles.container}>
@@ -44,6 +46,7 @@ const Form = ({
           onChange={onInputChange}
           decimals={asset?.asset_decimals}
           price={assetPrice && formatUnit(assetPrice, assetDecimal)}
+          max={maxValue}
         />
         <Button
           disabled={disabled}

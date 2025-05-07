@@ -2,7 +2,7 @@ import { useRpc } from "../useRpc";
 import { useQuery, skipToken } from "@tanstack/react-query";
 import { decodeArrayToString, queryKeys, useAccountsStore } from "@repo/shared";
 interface Params {
-  poolId?: string;
+  poolId?: string | number;
   account?: string;
 }
 
