@@ -5,18 +5,15 @@ import ScrollableContainer from "~/components/ScrollableContainer/ScrollableCont
 import TokenIcon from "~/components/token-icon";
 import Skeleton from "~/components/skeleton";
 import { useRouter } from "next/navigation";
-interface Content {
+interface Data {
   content?: string;
-  isLoading?: boolean;
-}
-interface Data extends Content {
   value?: string;
 }
 
 interface Props {
   data: Data[];
-  title: Content;
-  symbol?: Content;
+  title?: string;
+  symbol?: string;
   backLinkHref?: string;
   isLoading?: boolean;
 }
@@ -43,13 +40,11 @@ const ActionHeader = ({
       <div className={styles.navigation}>
         <IconButton icon={ArrowLeft} onClick={backClickHandler} />
         <div className={styles.title_wrapper}>
-          <Skeleton isLoading={symbol?.isLoading} circle width={40} height={40}>
-            {symbol?.content && (
-              <TokenIcon symbol={symbol?.content} width={40} height={40} />
-            )}
+          <Skeleton isLoading={isLoading} circle width={40} height={40}>
+            {symbol && <TokenIcon symbol={symbol} width={40} height={40} />}
           </Skeleton>
-          <Skeleton isLoading={title.isLoading} rounded width={100}>
-            <p>{title.content}</p>
+          <Skeleton isLoading={isLoading} rounded width={100}>
+            <p>{title}</p>
           </Skeleton>
         </div>
       </div>
@@ -57,11 +52,7 @@ const ActionHeader = ({
         {data.map((item, index) => (
           <div key={index} className={styles.action_wrapper}>
             <div className={styles.label}>{item.content}</div>
-            <Skeleton
-              isLoading={item.isLoading}
-              className={styles.skeleton}
-              rounded
-            >
+            <Skeleton isLoading={isLoading} className={styles.skeleton} rounded>
               <div className={styles.content}>{item.value}</div>
             </Skeleton>
           </div>

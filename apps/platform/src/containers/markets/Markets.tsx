@@ -65,12 +65,10 @@ const Markets = () => {
                   ),
                   4
                 ),
-              isLoading: isLendingPoolPending,
             },
             {
               content: "Borrow APY",
               value: asset?.borrow_apy,
-              isLoading: isLendingPoolPending,
             },
             {
               content: "Total Supplied",
@@ -80,12 +78,10 @@ const Markets = () => {
                   formatUnit(asset.total_pool_supply, asset.asset_decimals),
                   4
                 ),
-              isLoading: isLendingPoolPending,
             },
             {
               content: "Supply APY",
               value: asset?.supply_apy,
-              isLoading: isLendingPoolPending,
             },
             {
               content: "Oracle price",
@@ -95,18 +91,11 @@ const Markets = () => {
                   formatUnit(assetPrice?.[0], assetPrice?.[1]),
                   4
                 ),
-              isLoading: isAssetPriceLoading,
             },
           ]}
-          symbol={{
-            content: asset?.asset_symbol,
-            isLoading: isLendingPoolPending,
-          }}
-          title={{
-            isLoading: isLendingPoolPending,
-            content: asset?.asset,
-          }}
-          isLoading={isLendingPoolPending}
+          symbol={asset?.asset_symbol}
+          title={asset?.asset}
+          isLoading={isLendingPoolPending || isAssetPriceLoading}
         />
       </div>
       <div className={styles.utilization}>
