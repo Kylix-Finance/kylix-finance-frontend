@@ -40,14 +40,10 @@ const Form = ({
           showEstimate
           selectedToken={asset?.asset_symbol}
           value={value}
-          availableAmount={{
-            value: formattedBalance,
-          }}
+          availableAmount={formattedBalance}
           onChange={onInputChange}
           decimals={asset?.asset_decimals}
-          price={{
-            value: assetPrice && formatUnit(assetPrice, assetDecimal),
-          }}
+          price={assetPrice && formatUnit(assetPrice, assetDecimal)}
         />
         <Button
           disabled={disabled}

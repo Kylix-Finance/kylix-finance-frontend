@@ -26,16 +26,14 @@ const Supply = ({
           value={value}
           onChange={setValue}
           placeholder="0"
-          price={{
-            value: price && formatUnit(price?.[0], price?.[1]),
-            isLoading,
-          }}
+          price={price && formatUnit(price?.[0], price?.[1])}
           decimals={pool?.asset_decimals}
           showEstimate
-          availableAmount={{
-            value: formatUnit(balance?.realBalance || 0, pool?.asset_decimals),
-            isLoading,
-          }}
+          availableAmount={formatUnit(
+            balance?.realBalance || 0,
+            pool?.asset_decimals
+          )}
+          isLoading={isLoading}
         />
         <PrivateButton
           fullWidth

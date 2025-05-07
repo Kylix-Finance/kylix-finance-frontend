@@ -25,9 +25,10 @@ interface Props
   error?: string;
   value?: string;
   decimals?: number;
-  price?: Data;
-  availableAmount?: Data;
+  price?: string;
+  availableAmount?: string;
   isPercentMode?: boolean;
+  isLoading?: boolean;
 }
 
 export const InputNumber = ({
@@ -46,6 +47,7 @@ export const InputNumber = ({
   price,
   availableAmount,
   isPercentMode = false,
+  isLoading,
   ...rest
 }: Props) => {
   const [localValue, setLocalValue] = useState(externalValue || "");
@@ -164,15 +166,15 @@ export const InputNumber = ({
         )}
       </div>
       <div className={styles.bottom_row}>
-        {showEstimate && price?.value && (
-          <Skeleton isLoading={price.isLoading} width={60} height={20}>
+        {showEstimate && price && (
+          <Skeleton isLoading={isLoading} width={60} height={20}>
             <span className={styles.estimated_value}>
               <>
                 $
                 <span>
                   {formatBigNumbers(
                     (
-                      Number(price.value || 0) * Number(externalValue || 0)
+                      Number(price || 0) * Number(externalValue || 0)
                     ).toString(),
                     2
                   )}
@@ -183,15 +185,9 @@ export const InputNumber = ({
         )}
         <div className={styles.wallet_balance}>
           <Wallet className={styles.wallet_icon} />
-          <Skeleton
-            isLoading={availableAmount?.isLoading}
-            width={80}
-            height={20}
-            rounded
-          >
+          <Skeleton isLoading={isLoading} width={80} height={20} rounded>
             <div className={styles.available_amount}>
-              {formatBigNumbers(availableAmount?.value || "0", 4)}{" "}
-              {selectedToken}
+              {formatBigNumbers(availableAmount || "0", 4)} {selectedToken}
             </div>
           </Skeleton>
 
@@ -202,7 +198,7 @@ export const InputNumber = ({
               size="small"
               onClick={() => {
                 onMaxClick?.();
-                processValue(availableAmount?.value || "0");
+                processValue(availableAmount || "0");
               }}
             >
               Max
