@@ -39,9 +39,12 @@ const Markets = () => {
               content: "Total Borrowed",
               value:
                 asset &&
-                formatUnit(
-                  asset?.total_pool_borrow || 0,
-                  asset?.asset_decimals
+                formatBigNumbers(
+                  formatUnit(
+                    asset?.total_pool_borrow || 0,
+                    asset?.asset_decimals
+                  ),
+                  4
                 ),
               isLoading: isLendingPoolLoading,
             },
@@ -54,7 +57,10 @@ const Markets = () => {
               content: "Total Supplied",
               value:
                 asset &&
-                formatUnit(asset.total_pool_supply, asset.asset_decimals),
+                formatBigNumbers(
+                  formatUnit(asset.total_pool_supply, asset.asset_decimals),
+                  4
+                ),
               isLoading: isLendingPoolLoading,
             },
             {
