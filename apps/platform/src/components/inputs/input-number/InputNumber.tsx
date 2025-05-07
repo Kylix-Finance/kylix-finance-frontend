@@ -166,7 +166,7 @@ export const InputNumber = ({
         )}
       </div>
       <div className={styles.bottom_row}>
-        {showEstimate && price && (
+        {showEstimate && (
           <Skeleton isLoading={isLoading} width={60} height={20}>
             <span className={styles.estimated_value}>
               <>
