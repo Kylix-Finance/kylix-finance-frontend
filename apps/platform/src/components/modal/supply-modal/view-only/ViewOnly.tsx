@@ -1,4 +1,4 @@
-import { formatBigNumbers, formatUnit } from "@repo/onchain";
+import { formatBigNumbers } from "@repo/onchain";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
 import { VoidFunction } from "~/types";
@@ -7,15 +7,13 @@ import Skeleton from "~/components/skeleton";
 interface Props {
   assetSymbol?: string;
   value?: string;
-  assetDecimal?: number;
-  assetPrice?: bigint;
+  assetPrice?: string;
   onClick: VoidFunction;
   isLoading: boolean;
   disabled: boolean;
 }
 
 const ViewOnly = ({
-  assetDecimal,
   assetPrice,
   assetSymbol,
   value,
@@ -23,7 +21,6 @@ const ViewOnly = ({
   isLoading,
   onClick,
 }: Props) => {
-  const price = Number(formatUnit(assetPrice || 0, assetDecimal));
   return (
     <div className={styles.view_only}>
       <div className={styles.first_row}>
@@ -40,8 +37,10 @@ const ViewOnly = ({
       </div>
       <div>
         <Skeleton isLoading={!assetPrice} width={80} height={20} rounded>
-          {assetPrice && value && !isNaN(price) && (
-            <p>${formatBigNumbers(String(price * +value).toString(), 4)}</p>
+          {assetPrice && value && !isNaN(+assetPrice) && (
+            <p>
+              ${formatBigNumbers(String(+assetPrice * +value).toString(), 4)}
+            </p>
           )}
         </Skeleton>
       </div>

@@ -12,9 +12,11 @@ export type LiquidationMethod =
 export type Definition<
   P extends any[] = any[],
   R extends Record<string, any> = object,
+  F extends Record<string, any> = object,
 > = {
   params: P;
   response: R;
+  formattedResponse: F;
 };
 
 export type RPCMethod<T extends Definition> = (

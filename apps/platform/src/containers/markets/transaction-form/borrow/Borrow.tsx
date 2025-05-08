@@ -20,14 +20,14 @@ const Borrow = ({
 
   const { data: otherPoolData } = usePool({ assetId: +assetId });
 
-  const formattedPrice = formatUnit(price?.[0] || "0", price?.[1]);
   const { data: ltv } = useGetUserLtv();
   const allowance = formatUnit(ltv?.allowance || "0", 6);
 
-  const allowanceAmount = Number(allowance) / Number(formattedPrice || 1);
+  const allowanceAmount =
+    Number(allowance) / Number(price?.formattedPrice || 1);
 
   const poolBalance = Number(
-    formatUnit(BigInt(otherPoolData?.reserveBalance || 0), price?.[1]) || 0
+    formatUnit(BigInt(otherPoolData?.reserveBalance || 0), price?.decimal) || 0
   );
 
   const max = Math.min(poolBalance, allowanceAmount).toFixed(4);
@@ -40,7 +40,7 @@ const Borrow = ({
           value={value}
           onChange={(value) => setValue(value)}
           placeholder="0"
-          price={price && formatUnit(price?.[0], price?.[1])}
+          price={price?.formattedPrice}
           decimals={pool?.asset_decimals}
           showEstimate
           availableAmount={formatUnit(

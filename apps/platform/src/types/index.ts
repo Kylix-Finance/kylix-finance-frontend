@@ -82,7 +82,7 @@ export type TransactionStage =
 export interface TransactionFormProps {
   pool?: LandingPool;
   detail?: LendingLendingPool;
-  price?: GetAssetPrice["response"];
+  price?: GetAssetPrice["formattedResponse"];
   balance?: {
     formattedBalance?: string;
     realBalance?: bigint;

@@ -25,7 +25,7 @@ const Markets = () => {
     assetId: +assetId,
   });
   const { data: assetPrice, isLoading: isAssetPriceLoading } = useAssetPrice({
-    assetId: +assetId,
+    assetId,
   });
   const { account } = useAccountsStore();
   const {
@@ -78,9 +78,7 @@ const Markets = () => {
     },
     {
       content: "Oracle price",
-      value:
-        assetPrice &&
-        formatBigNumbers(formatUnit(assetPrice?.[0], assetPrice?.[1]), 4),
+      value: assetPrice && formatBigNumbers(assetPrice.formattedPrice, 4),
     },
   ];
 

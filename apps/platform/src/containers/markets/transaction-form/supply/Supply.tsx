@@ -26,7 +26,7 @@ const Supply = ({
           value={value}
           onChange={setValue}
           placeholder="0"
-          price={price && formatUnit(price?.[0], price?.[1])}
+          price={price?.formattedPrice}
           decimals={pool?.asset_decimals}
           showEstimate
           availableAmount={formatUnit(

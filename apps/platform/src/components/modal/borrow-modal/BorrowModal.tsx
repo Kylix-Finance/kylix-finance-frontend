@@ -70,12 +70,11 @@ const BorrowModal = ({
     assetId,
   });
 
-  const formattedPrice = formatUnit(assetPrice?.[0] || "0", assetPrice?.[1]);
-
   const { data: ltv } = useGetUserLtv();
   const allowance = formatUnit(ltv?.allowance || "0", 6);
 
-  const allowanceAmount = Number(allowance || 0) / Number(formattedPrice || 1);
+  const allowanceAmount =
+    Number(allowance || 0) / Number(assetPrice?.formattedPrice || 1);
 
   const poolBalance = Number(
     formatUnit(BigInt(otherPoolData?.reserveBalance || 0), decimals) || 0
@@ -155,8 +154,7 @@ const BorrowModal = ({
                 formattedBalance={balance?.formattedBalance}
                 onButtonClick={handleClick}
                 isButtonLoading={isBorrowPending}
-                assetPrice={assetPrice?.[0].toString()}
-                assetDecimal={assetPrice?.[1]}
+                assetPrice={assetPrice?.formattedPrice}
                 disabled={disabled}
                 realBalance={balance?.realBalance}
                 maxValue={max}

@@ -1,7 +1,7 @@
 import InputNumber from "~/components/inputs/input-number";
 import { Button } from "~/components/ui/button";
 import styles from "./Form.module.scss";
-import { formatUnit, LandingPool } from "@repo/onchain";
+import { LandingPool } from "@repo/onchain";
 import Detail from "./detail/Detail";
 import { LinkButton } from "~/components/ui/link-button";
 interface Props {
@@ -14,7 +14,6 @@ interface Props {
   onButtonClick: () => void;
   isButtonLoading: boolean;
   assetPrice: string | undefined;
-  assetDecimal: number | undefined;
   disabled: boolean;
   maxValue: string | undefined;
 }
@@ -28,7 +27,6 @@ const Form = ({
   onButtonClick,
   isButtonLoading,
   assetPrice,
-  assetDecimal,
   disabled,
   realBalance,
   maxValue,
@@ -45,7 +43,7 @@ const Form = ({
           availableAmount={formattedBalance}
           onChange={onInputChange}
           decimals={asset?.asset_decimals}
-          price={assetPrice && formatUnit(assetPrice, assetDecimal)}
+          price={assetPrice}
           max={maxValue}
         />
         <Button

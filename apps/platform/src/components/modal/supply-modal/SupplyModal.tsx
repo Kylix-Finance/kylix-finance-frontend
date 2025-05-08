@@ -107,8 +107,7 @@ const SupplyModal = ({
           <div className={styles.content}>
             {isViewOnly ? (
               <ViewOnly
-                assetDecimal={asset?.asset_decimals}
-                assetPrice={assetPrice?.[0]}
+                assetPrice={assetPrice?.formattedPrice}
                 assetSymbol={asset?.asset_symbol}
                 disabled={disabled}
                 isLoading={isLoading}
@@ -124,8 +123,7 @@ const SupplyModal = ({
                 formattedBalance={balance?.formattedBalance}
                 onButtonClick={handleClick}
                 isButtonLoading={isSupplyPending}
-                assetPrice={assetPrice?.[0].toString()}
-                assetDecimal={assetPrice?.[1]}
+                assetPrice={assetPrice?.formattedPrice}
                 disabled={disabled}
                 realBalance={balance?.realBalance}
               />
