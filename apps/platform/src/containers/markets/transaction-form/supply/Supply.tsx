@@ -8,7 +8,7 @@ import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
 import { formatUnit } from "@repo/onchain";
 import { Switch } from "~/components/ui/switch";
-import SupplyModal from "~/components/modal/supply-modal/SupplyModal";
+import SupplyModal from "~/components/modal/transactions/supply-modal/SupplyModal";
 const Supply = ({
   pool,
   detail,

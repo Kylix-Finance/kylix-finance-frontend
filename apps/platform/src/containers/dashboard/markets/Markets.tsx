@@ -4,8 +4,8 @@ import MarketsTable from "./table";
 import { LandingPool } from "@repo/onchain";
 import { useState } from "react";
 import Cards from "./cards/Cards";
-import SupplyModal from "~/components/modal/supply-modal/SupplyModal";
-import BorrowModal from "~/components/modal/borrow-modal/BorrowModal";
+import SupplyModal from "~/components/modal/transactions/supply-modal/SupplyModal";
+import BorrowModal from "~/components/modal/transactions/borrow-modal/BorrowModal";
 interface Props {
   data: LandingPool[];
   isPending: boolean;

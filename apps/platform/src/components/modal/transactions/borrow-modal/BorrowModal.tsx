@@ -2,18 +2,22 @@ import Modal from "~/components/ui/modal/Modal";
 import { TransactionStage, VoidFunction } from "~/types";
 import Form from "./form/Form";
 import {
+  formatUnit,
   parseUnit,
   useAssetPrice,
   useBalance,
+  useBorrow,
   useGetLendingPools,
-  useSupply,
+  useGetUserLtv,
+  usePool,
 } from "@repo/onchain";
 import { useAccountsStore } from "@repo/shared";
 import { useState } from "react";
 import Loading from "./loading/Loading";
-import styles from "./SupplyModal.module.scss";
-import Detail from "./detail/Detail";
-import ViewOnly from "./view-only/ViewOnly";
+import styles from "./BorrowModal.module.scss";
+import ViewOnly from "../components/view-only/ViewOnly";
+// import Detail from "./detail/Detail";
+// import ViewOnly from "./view-only/ViewOnly";
 
 interface Props {
   assetId: number;
@@ -22,7 +26,7 @@ interface Props {
   value?: string;
 }
 
-const SupplyModal = ({
+const BorrowModal = ({
   assetId,
   onClose,
   isViewOnly,
@@ -33,11 +37,11 @@ const SupplyModal = ({
   const { account } = useAccountsStore();
 
   const {
-    mutate: supplyMutate,
-    isPending: isSupplyPending,
+    mutate: borrowMutate,
+    isPending: isBorrowPending,
     error,
-    data: supplyData,
-  } = useSupply({
+    data: borrowData,
+  } = useBorrow({
     assetId: assetId?.toString(),
   });
 
@@ -46,6 +50,11 @@ const SupplyModal = ({
     isFetched: isPoolFetched,
     isLoading: isPoolLoading,
   } = useGetLendingPools({ assetId, account: account?.address });
+
+  const { data: otherPoolData } = usePool({ assetId });
+
+  const decimals = pool?.assets[0].asset_decimals;
+
   const {
     data: balance,
     isFetched: isBalanceFetched,
@@ -61,6 +70,25 @@ const SupplyModal = ({
   } = useAssetPrice({
     assetId,
   });
+
+  const { data: ltv } = useGetUserLtv();
+  const allowance = formatUnit(ltv?.allowance || "0", 6);
+
+  const allowanceAmount =
+    Number(allowance || 0) / Number(assetPrice?.formattedPrice || 1);
+
+  const poolBalance = Number(
+    formatUnit(BigInt(otherPoolData?.reserveBalance || 0), decimals) || 0
+  );
+
+  const max = Math.min(poolBalance, allowanceAmount).toFixed(4);
+
+  // const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
+  //   { poolId: assetId }
+  // );
+
+  // const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
+
   const isLoading =
     (!pool && isPoolFetched && isPoolLoading) ||
     (!balance && isBalanceFetched && isBalanceLoading) ||
@@ -70,9 +98,10 @@ const SupplyModal = ({
   const disabled = !balance?.realBalance || !finalValue || isLoading;
 
   const asset = pool?.assets[0];
+
   const handleClick = () => {
     if (!finalValue || !asset) return;
-    supplyMutate(
+    borrowMutate(
       {
         balance: parseUnit(finalValue, asset.asset_decimals),
         options: {
@@ -95,7 +124,7 @@ const SupplyModal = ({
     <Modal
       isOpen={!!assetId}
       onClose={onClose}
-      title={stage === "form" ? "You’re supplying" : undefined}
+      title={stage === "form" ? "You’re borrowing" : undefined}
     >
       <div className={styles.container}>
         {stage === "form" ? (
@@ -117,13 +146,14 @@ const SupplyModal = ({
                 asset={asset}
                 formattedBalance={balance?.formattedBalance}
                 onButtonClick={handleClick}
-                isButtonLoading={isSupplyPending}
+                isButtonLoading={isBorrowPending}
                 assetPrice={assetPrice?.formattedPrice}
                 disabled={disabled}
                 realBalance={balance?.realBalance}
+                maxValue={max}
               />
             )}
-            <Detail asset={asset} enable={!!finalValue} />
+            {/* <Detail asset={asset} enable={!!finalValue} /> */}
           </div>
         ) : (
           <Loading
@@ -131,7 +161,7 @@ const SupplyModal = ({
             value={value}
             symbol={asset?.asset_symbol}
             error={error}
-            data={supplyData}
+            data={borrowData}
           />
         )}
       </div>
@@ -139,4 +169,4 @@ const SupplyModal = ({
   );
 };
 
-export default SupplyModal;
+export default BorrowModal;
