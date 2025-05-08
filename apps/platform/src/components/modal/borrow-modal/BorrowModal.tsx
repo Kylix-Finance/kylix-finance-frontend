@@ -12,7 +12,7 @@ import {
   usePool,
 } from "@repo/onchain";
 import { useAccountsStore } from "@repo/shared";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Loading from "./loading/Loading";
 import styles from "./BorrowModal.module.scss";
 // import Detail from "./detail/Detail";
@@ -87,12 +87,6 @@ const BorrowModal = ({
   // );
 
   // const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
-
-  useEffect(() => {
-    if (!assetId || !account) {
-      onClose();
-    }
-  }, [account, assetId, onClose]);
 
   const isLoading =
     (!pool && isPoolFetched && isPoolLoading) ||

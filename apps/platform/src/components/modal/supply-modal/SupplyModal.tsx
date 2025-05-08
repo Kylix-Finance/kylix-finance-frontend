@@ -9,7 +9,7 @@ import {
   useSupply,
 } from "@repo/onchain";
 import { useAccountsStore } from "@repo/shared";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Loading from "./loading/Loading";
 import styles from "./SupplyModal.module.scss";
 import Detail from "./detail/Detail";
@@ -61,11 +61,6 @@ const SupplyModal = ({
   } = useAssetPrice({
     assetId,
   });
-  useEffect(() => {
-    if (!assetId || !account) {
-      onClose();
-    }
-  }, [account, assetId, onClose]);
   const isLoading =
     (!pool && isPoolFetched && isPoolLoading) ||
     (!balance && isBalanceFetched && isBalanceLoading) ||

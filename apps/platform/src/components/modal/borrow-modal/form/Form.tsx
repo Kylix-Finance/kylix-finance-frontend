@@ -1,9 +1,9 @@
 import InputNumber from "~/components/inputs/input-number";
-import { Button } from "~/components/ui/button";
 import styles from "./Form.module.scss";
 import { LandingPool } from "@repo/onchain";
 import Detail from "./detail/Detail";
 import { LinkButton } from "~/components/ui/link-button";
+import { PrivateButton } from "~/components/private-button";
 interface Props {
   value: string | undefined;
   isLoading: boolean;
@@ -46,7 +46,7 @@ const Form = ({
           price={assetPrice}
           max={maxValue}
         />
-        <Button
+        <PrivateButton
           disabled={disabled}
           size="large"
           fullWidth
@@ -58,7 +58,7 @@ const Form = ({
               ? "Borrow"
               : "Enter an amount"
             : "Insufficient balance"}
-        </Button>
+        </PrivateButton>
       </div>
       <Detail asset={asset} enable={!!value} />
       <div className={styles.alert}>

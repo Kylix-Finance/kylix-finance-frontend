@@ -1,7 +1,7 @@
 import InputNumber from "~/components/inputs/input-number";
-import { Button } from "~/components/ui/button";
 import styles from "./Form.module.scss";
 import { LandingPool } from "@repo/onchain";
+import { PrivateButton } from "~/components/private-button";
 interface Props {
   value: string | undefined;
   isLoading: boolean;
@@ -44,7 +44,7 @@ const Form = ({
         price={assetPrice}
         isLoading={isLoading}
       />
-      <Button
+      <PrivateButton
         disabled={disabled}
         size="large"
         fullWidth
@@ -56,7 +56,7 @@ const Form = ({
             ? "Supply"
             : "Enter an amount"
           : "Insufficient balance"}
-      </Button>
+      </PrivateButton>
     </div>
   );
 };
