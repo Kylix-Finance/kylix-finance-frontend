@@ -9,7 +9,7 @@ interface ScrollableContainerProps {
   padding?: number;
 }
 
-const ScrollableContainer = ({
+export const ScrollableContainer = ({
   children,
   className,
   gap,
@@ -26,5 +26,3 @@ const ScrollableContainer = ({
     </div>
   );
 };
-
-export default ScrollableContainer;

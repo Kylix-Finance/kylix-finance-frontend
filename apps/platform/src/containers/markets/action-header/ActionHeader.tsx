@@ -1,7 +1,7 @@
 import { IconButton } from "~/components/ui/icon-button";
 import styles from "./ActionHeader.module.scss";
 import { ArrowLeft } from "~/assets/icons";
-import ScrollableContainer from "~/components/ScrollableContainer/ScrollableContainer";
+import ScrollableContainer from "~/components/scrollable-container";
 import TokenIcon from "~/components/token-icon";
 import Skeleton from "~/components/skeleton";
 import { useRouter } from "next/navigation";
