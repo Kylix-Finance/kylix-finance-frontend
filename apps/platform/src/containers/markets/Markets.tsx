@@ -22,7 +22,7 @@ const Markets = () => {
     isLoading: isPoolLoading,
     isFetched: isPoolFetched,
   } = usePool({
-    assetId: +assetId,
+    assetId,
   });
   const { data: assetPrice, isLoading: isAssetPriceLoading } = useAssetPrice({
     assetId,
@@ -41,7 +41,7 @@ const Markets = () => {
     isFetched: isLendingPoolFetched,
   } = useGetLendingPools({
     account: account?.address,
-    assetId: +assetId,
+    assetId,
   });
   const isLendingPoolPending =
     !lendingPool && (isLendingPoolFetched || isLendingPoolLoading);

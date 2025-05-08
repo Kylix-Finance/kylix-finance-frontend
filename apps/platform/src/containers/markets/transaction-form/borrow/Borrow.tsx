@@ -18,7 +18,7 @@ const Borrow = ({
 }: TransactionFormProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
 
-  const { data: otherPoolData } = usePool({ assetId: +assetId });
+  const { data: otherPoolData } = usePool({ assetId });
 
   const { data: ltv } = useGetUserLtv();
   const allowance = formatUnit(ltv?.allowance || "0", 6);

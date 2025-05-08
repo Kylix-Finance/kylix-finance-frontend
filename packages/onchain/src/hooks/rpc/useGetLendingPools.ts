@@ -3,7 +3,7 @@ import { useQuery, skipToken } from "@tanstack/react-query";
 import { decodeArrayToString, queryKeys, useAccountsStore } from "@repo/shared";
 import { formatUnit } from "../../utils";
 interface Params {
-  assetId?: number | null;
+  assetId?: number | null | string;
   account?: string | null | undefined;
   enabled?: boolean;
 }
@@ -25,8 +25,10 @@ export const useGetLendingPools = ({
     queryKey: queryKeys.lendingPools({ account, asset: assetId }),
     queryFn: finalEnabled
       ? async () => {
-          const response = await execute(assetId, finalAccount);
-
+          const response = await execute(
+            assetId ? +assetId : null,
+            finalAccount
+          );
           if (!response) return undefined;
 
           const assets = response[0].map((asset) => ({
