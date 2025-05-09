@@ -35,7 +35,7 @@ const Card = ({ data, isPending, onBorrowClick, onSupplyClick }: Props) => {
         <div className={styles.detail}>
           <CardItem
             title="Total Supplied"
-            value={` ${data && formatBigNumbers(data.total_pool_supply.toString(), 2)} ${data && data.asset_symbol} : `}
+            value={` ${data && formatBigNumbers(data.total_pool_supply.toString(), 2)} ${data && data.asset_symbol}`}
             hasSubValue
             subValue="$3.91B"
             isPending={isPending}

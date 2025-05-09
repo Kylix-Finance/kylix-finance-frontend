@@ -9,4 +9,8 @@
   z-index: 10;
   width: calc(100% - 84px);
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-inline: 32px;
 }

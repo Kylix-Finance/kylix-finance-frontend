@@ -1,3 +1,4 @@
+"use client";
 import styles from "./Header.module.scss";
 import { IconButton } from "../ui/icon-button";
 import Bell from "~/assets/icons/bell.svg";
