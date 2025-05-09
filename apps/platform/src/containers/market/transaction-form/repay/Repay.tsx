@@ -1,15 +1,12 @@
 "use client";
 import InputNumber from "~/components/inputs/input-number";
-import styles from "./Withdraw.module.scss";
+import styles from "./Repay.module.scss";
 import { useState } from "react";
 import { PrivateButton } from "~/components/private-button";
 import { Row } from "~/components/expandable-card/row";
 import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
-import {
-  formatUnit,
-  useGetAssetWiseBorrowsCollaterals,
-} from "@repo/onchain";
+import { formatUnit, useGetAssetWiseBorrowsCollaterals } from "@repo/onchain";
 import RepayModal from "~/components/modal/transactions/repay-modal/RepayModal";
 const Repay = ({
   pool,
