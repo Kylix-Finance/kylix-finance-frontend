@@ -7,16 +7,17 @@ import { Row } from "~/components/expandable-card/row";
 import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
 import { formatUnit, useGetUserLtv, usePool } from "@repo/onchain";
+import BorrowModal from "~/components/modal/transactions/borrow-modal/BorrowModal";
 
 const Borrow = ({
   pool,
-  detail,
   price,
   balance,
   isLoading,
   assetId,
 }: TransactionFormProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
+  const [isReviewed, setIsReviewed] = useState(false);
 
   const { data: otherPoolData } = usePool({ assetId });
 
@@ -50,11 +51,25 @@ const Borrow = ({
           isLoading={isLoading}
           max={max}
         />
-        <PrivateButton fullWidth>Borrow</PrivateButton>
+        <PrivateButton
+          fullWidth
+          onClick={() => setIsReviewed(true)}
+          disabled={!value}
+        >
+          Borrow
+        </PrivateButton>
       </div>
+      {pool?.asset_id && isReviewed && (
+        <BorrowModal
+          assetId={pool.asset_id}
+          onClose={() => setIsReviewed(false)}
+          isViewOnly
+          value={value}
+        />
+      )}
       <div className={styles.info}>
         <Row
-          title={{ value: "Borrowable Amount", className: styles.row_title }}
+          title={{ value: "Available to Borrow", className: styles.row_title }}
           content={`0 ${pool?.asset_symbol}`}
         />
         <Divider />

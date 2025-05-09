@@ -8,7 +8,7 @@ import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
 import { formatUnit } from "@repo/onchain";
 import { Switch } from "~/components/ui/switch";
-import SupplyModal from "~/components/modal/transactions/supply-modal/SupplyModal";
+import WithdrawModal from "~/components/modal/transactions/withdraw-modal/WithdrawModal";
 const Withdraw = ({
   pool,
   detail,
@@ -45,7 +45,7 @@ const Withdraw = ({
       </div>
       <div className={styles.info}>
         <Row
-          title={{ value: "Borrowable Amount", className: styles.row_title }}
+          title={{ value: "Withdrawable Amount", className: styles.row_title }}
           content={`0 ${pool?.asset_symbol}`}
           isContentLoading={isLoading}
         />
@@ -56,15 +56,11 @@ const Withdraw = ({
         <Divider />
         <Row
           title={{
-            value: `Borrow balance (${pool?.asset_symbol})`,
+            value: `Supply balance (${pool?.asset_symbol})`,
             className: styles.row_title,
             isLoading,
           }}
           content="0"
-        />
-        <Row
-          title={{ value: "Borrow limit used", className: styles.row_title }}
-          content="$0"
         />
         <Row
           title={{ value: "Daily earnings", className: styles.row_title }}
@@ -72,7 +68,7 @@ const Withdraw = ({
         />
       </div>
       {pool?.asset_id && isReviewed && (
-        <SupplyModal
+        <WithdrawModal
           assetId={pool.asset_id}
           onClose={() => setIsReviewed(false)}
           isViewOnly

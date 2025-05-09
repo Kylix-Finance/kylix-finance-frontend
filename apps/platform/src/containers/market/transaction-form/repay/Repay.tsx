@@ -1,23 +1,29 @@
 "use client";
 import InputNumber from "~/components/inputs/input-number";
-import styles from "./Repay.module.scss";
+import styles from "./Withdraw.module.scss";
 import { useState } from "react";
 import { PrivateButton } from "~/components/private-button";
 import { Row } from "~/components/expandable-card/row";
 import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
 import { formatUnit } from "@repo/onchain";
-
-const Repay = ({ pool, price, balance, isLoading }: TransactionFormProps) => {
+import RepayModal from "~/components/modal/transactions/repay-modal/RepayModal";
+const Repay = ({
+  pool,
+  detail,
+  price,
+  balance,
+  isLoading,
+}: TransactionFormProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
-
+  const [isReviewed, setIsReviewed] = useState(false);
   return (
     <div className={styles.container}>
       <div className={styles.content}>
         <InputNumber
-          title="You're repaying"
+          title="You’re Repaying"
           value={value}
-          onChange={(value) => setValue(value)}
+          onChange={setValue}
           placeholder="0"
           price={price?.formattedPrice}
           decimals={pool?.asset_decimals}
@@ -28,30 +34,42 @@ const Repay = ({ pool, price, balance, isLoading }: TransactionFormProps) => {
           )}
           isLoading={isLoading}
         />
-        <PrivateButton fullWidth>Repay</PrivateButton>
+        <PrivateButton
+          fullWidth
+          onClick={() => setIsReviewed(true)}
+          disabled={!value}
+        >
+          Review
+        </PrivateButton>
       </div>
       <div className={styles.info}>
         <Row
-          title={{ value: "Available Amount", className: styles.row_title }}
+          title={{ value: "Repayable Amount", className: styles.row_title }}
           content={`0 ${pool?.asset_symbol}`}
+          isContentLoading={isLoading}
         />
         <Divider />
         <Row
           title={{
             value: `Borrow balance (${pool?.asset_symbol})`,
             className: styles.row_title,
+            isLoading,
           }}
           content="0"
         />
         <Row
-          title={{ value: "Borrow limit used", className: styles.row_title }}
-          content="0%"
-        />
-        <Row
-          title={{ value: "Daily cost", className: styles.row_title }}
+          title={{ value: "Daily earnings", className: styles.row_title }}
           content="$0"
         />
       </div>
+      {pool?.asset_id && isReviewed && (
+        <RepayModal
+          assetId={pool.asset_id}
+          onClose={() => setIsReviewed(false)}
+          isViewOnly
+          value={value}
+        />
+      )}
     </div>
   );
 };
