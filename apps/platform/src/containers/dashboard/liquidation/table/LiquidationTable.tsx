@@ -20,8 +20,14 @@ interface Props {
   isPending: boolean;
   isEmpty: boolean;
   data: LiquidationMarket[];
+  onViewMarketClick: (id: number) => void;
 }
-export const LiquidationTable = ({ data, isEmpty, isPending }: Props) => {
+export const LiquidationTable = ({
+  data,
+  isEmpty,
+  isPending,
+  onViewMarketClick,
+}: Props) => {
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const columns = [
@@ -86,11 +92,22 @@ export const LiquidationTable = ({ data, isEmpty, isPending }: Props) => {
     }),
     columnHelper.display({
       id: "actions",
-      cell: () => (
-        <div className={styles.actions}>
-          <Button>View Market</Button>
-        </div>
-      ),
+      cell: (info) => {
+        const { asset_id } = info.row.original;
+        return (
+          <div className={styles.actions}>
+            <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                onViewMarketClick(asset_id);
+              }}
+            >
+              View Market
+            </Button>
+          </div>
+        );
+      },
     }),
   ];
 

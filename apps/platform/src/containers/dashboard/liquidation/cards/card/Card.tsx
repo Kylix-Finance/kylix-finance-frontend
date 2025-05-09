@@ -6,12 +6,14 @@ import CardItem from "../../../card-item/CardItem";
 import TokenIcon from "~/components/token-icon";
 import Check from "~/assets/icons/check.svg";
 import Skeleton from "~/components/skeleton";
+import { VoidFunction } from "~/types";
 interface Props {
   data: LiquidationMarket | null;
   isPending: boolean;
+  onViewMarketClick?: VoidFunction;
 }
 
-const Card = ({ data, isPending }: Props) => {
+const Card = ({ data, isPending, onViewMarketClick }: Props) => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -171,7 +173,9 @@ const Card = ({ data, isPending }: Props) => {
         </div>
       </div>
       <div>
-        <Button fullWidth>View Market</Button>
+        <Button fullWidth onClick={onViewMarketClick}>
+          View Market
+        </Button>
       </div>
     </div>
   );
