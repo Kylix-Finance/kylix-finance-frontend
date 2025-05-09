@@ -32,7 +32,7 @@ const Form = ({
   return (
     <div className={styles.content}>
       <InputNumber
-        label="Supply"
+        label="Repay"
         placeholder="0"
         onMaxClick={() => {}}
         showMaxButton
@@ -56,7 +56,7 @@ const Form = ({
       >
         {realBalance
           ? value
-            ? "Supply"
+            ? "Repay"
             : "Enter an amount"
           : "Insufficient balance"}
       </PrivateButton>

@@ -6,3 +6,5 @@ export const BREAKPOINTS = {
 } as const;
 //FIXME: 1d is temporary
 export const CHART_SCALES = ["all", "month", "year", "1d"] as const;
+
+export const TOTAL_BLOCKS_IN_YEAR = (365 * 24 * 60 * 60) / 6;

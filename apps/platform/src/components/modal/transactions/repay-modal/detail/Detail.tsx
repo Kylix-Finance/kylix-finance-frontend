@@ -36,15 +36,9 @@ const Detail = ({ enable, asset }: Props) => {
                 },
                 {
                   title: {
-                    value: "Supply APY",
+                    value: "Borrow APY",
                   },
-                  content: <p>{asset?.supply_apy}</p>,
-                },
-                {
-                  title: {
-                    value: "Collateralization",
-                  },
-                  content: <p className={styles.collateralization}>Enabled</p>,
+                  content: <p>{asset?.borrow_apy}</p>,
                 },
                 {
                   title: {
@@ -122,7 +116,7 @@ const Detail = ({ enable, asset }: Props) => {
                 },
                 {
                   title: {
-                    value: `Supply balance (${asset?.asset_symbol})`,
+                    value: `Borrow balance (${asset?.asset_symbol})`,
                   },
                   content: (
                     <div className={styles.ltv}>

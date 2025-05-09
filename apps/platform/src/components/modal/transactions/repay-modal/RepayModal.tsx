@@ -2,9 +2,11 @@ import Modal from "~/components/ui/modal/Modal";
 import { TransactionStage, VoidFunction } from "~/types";
 import Form from "./form/Form";
 import {
+  formatUnit,
   parseUnit,
   useAssetPrice,
   useBalance,
+  useGetAssetWiseBorrowsCollaterals,
   useGetLendingPools,
   usePool,
   useRepay,
@@ -16,6 +18,7 @@ import Loading from "./loading/Loading";
 import styles from "./RepayModal.module.scss";
 import Detail from "./detail/Detail";
 import ViewOnly from "../components/view-only/ViewOnly";
+import { TOTAL_BLOCKS_IN_YEAR } from "~/constants";
 
 interface Props {
   assetId: number;
@@ -57,8 +60,28 @@ const RepayModal = ({
     isLoading: isPoolLoading,
   } = useGetLendingPools({ assetId, account: account?.address });
 
-  const { data: otherPoolData } = usePool({ assetId });
+  const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
+    { poolId: assetId }
+  );
 
+  const {
+    data: assetPrice,
+    isLoading: isAssetPriceLoading,
+    isFetched: isAssetPriceFetched,
+  } = useAssetPrice({
+    assetId,
+  });
+
+  const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
+  const borrowed = formatUnit(
+    borrowAssetData?.borrowed || "0",
+    assetPrice?.decimal
+  );
+
+  pool?.assets[0]?.borrow_apy;
+  pool?.assets[0]?.formatted_user_balance;
+  const { data: otherPoolData } = usePool({ assetId });
+  otherPoolData?.borrowRate;
   const {
     data: balance,
     isFetched: isBalanceFetched,
@@ -68,13 +91,6 @@ const RepayModal = ({
     accountAddress: account?.address,
   });
 
-  const {
-    data: assetPrice,
-    isLoading: isAssetPriceLoading,
-    isFetched: isAssetPriceFetched,
-  } = useAssetPrice({
-    assetId,
-  });
   const isLoading =
     (!pool && isPoolFetched && isPoolLoading) ||
     (!balance && isBalanceFetched && isBalanceLoading) ||
@@ -85,29 +101,34 @@ const RepayModal = ({
 
   const asset = pool?.assets[0];
   const handleClick = () => {
-    if (!finalValue || !asset) return;
+    if (!finalValue || !asset || !otherPoolData?.borrowRate) return;
+
+    if (
+      // if the amount of interest within 10 blocks is greater than the (borrowed - amount) then repay all
+      (otherPoolData?.borrowRate * 10) / TOTAL_BLOCKS_IN_YEAR >
+      Number(borrowed) - Number(finalValue)
+    ) {
+      return repayAllMutate(
+        {
+          options: {
+            onBroadcast: () => setStage("broadcast"),
+            onFinalized: () => setStage("finalized"),
+            onInBlock: () => setStage("in_block"),
+            onReady: () => setStage("ready"),
+            onSignerRequestSend: () => setStage("wallet"),
+          },
+        },
+        {
+          onError: () => {
+            setStage("error");
+          },
+        }
+      );
+    }
+
     repayMutate(
       {
         balance: parseUnit(finalValue, asset.asset_decimals),
-        options: {
-          onBroadcast: () => setStage("broadcast"),
-          onFinalized: () => setStage("finalized"),
-          onInBlock: () => setStage("in_block"),
-          onReady: () => setStage("ready"),
-          onSignerRequestSend: () => setStage("wallet"),
-        },
-      },
-      {
-        onError: () => {
-          setStage("error");
-        },
-      }
-    );
-  };
-  const handleMaxClick = () => {
-    if (!finalValue || !asset) return;
-    repayAllMutate(
-      {
         options: {
           onBroadcast: () => setStage("broadcast"),
           onFinalized: () => setStage("finalized"),
