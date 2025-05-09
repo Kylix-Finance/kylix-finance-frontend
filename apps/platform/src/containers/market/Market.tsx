@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 import ActionHeader from "./action-header/ActionHeader";
-import styles from "./Markets.module.scss";
+import styles from "./Market.module.scss";
 import TotalSuppliedBorrowed from "./total-supplied-borrowed/TotalSuppliedBorrowed";
 import TransactionForm from "./transaction-form/TransactionForm";
 import Utilization from "./utilization/Utilization";
