@@ -1,3 +1,4 @@
+"use client";
 import { IconButton } from "~/components/ui/icon-button";
 import styles from "./ActionHeader.module.scss";
 import { ArrowLeft } from "~/assets/icons";
