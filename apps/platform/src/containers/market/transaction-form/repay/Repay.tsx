@@ -6,7 +6,11 @@ import { PrivateButton } from "~/components/private-button";
 import { Row } from "~/components/expandable-card/row";
 import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
-import { formatUnit } from "@repo/onchain";
+import {
+  formatUnit,
+  useAssetPrice,
+  useGetAssetWiseBorrowsCollaterals,
+} from "@repo/onchain";
 import RepayModal from "~/components/modal/transactions/repay-modal/RepayModal";
 const Repay = ({
   pool,
@@ -14,9 +18,25 @@ const Repay = ({
   price,
   balance,
   isLoading,
+  assetId,
 }: TransactionFormProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
   const [isReviewed, setIsReviewed] = useState(false);
+
+  const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
+    { poolId: assetId }
+  );
+
+  const { data: assetPrice } = useAssetPrice({
+    assetId,
+  });
+
+  const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
+  const borrowed = formatUnit(
+    borrowAssetData?.borrowed || "0",
+    assetPrice?.decimal
+  );
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -33,6 +53,7 @@ const Repay = ({
             pool?.asset_decimals
           )}
           isLoading={isLoading}
+          max={borrowed}
         />
         <PrivateButton
           fullWidth

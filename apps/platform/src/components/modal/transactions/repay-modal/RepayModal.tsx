@@ -78,8 +78,6 @@ const RepayModal = ({
     assetPrice?.decimal
   );
 
-  pool?.assets[0]?.borrow_apy;
-  pool?.assets[0]?.formatted_user_balance;
   const { data: otherPoolData } = usePool({ assetId });
   otherPoolData?.borrowRate;
   const {
@@ -101,11 +99,11 @@ const RepayModal = ({
 
   const asset = pool?.assets[0];
   const handleClick = () => {
-    if (!finalValue || !asset || !otherPoolData?.borrowRate) return;
+    if (!finalValue || !asset || !pool?.assets[0].borrow_apy) return;
 
     if (
       // if the amount of interest within 10 blocks is greater than the (borrowed - amount) then repay all
-      (otherPoolData?.borrowRate * 10) / TOTAL_BLOCKS_IN_YEAR >
+      (Number(pool?.assets[0].borrow_apy) * 10) / TOTAL_BLOCKS_IN_YEAR >
       Number(borrowed) - Number(finalValue)
     ) {
       return repayAllMutate(
