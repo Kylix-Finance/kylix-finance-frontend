@@ -171,7 +171,7 @@ const RepayModal = ({
                 asset={asset}
                 formattedBalance={balance?.formattedBalance}
                 onButtonClick={handleClick}
-                isButtonLoading={isRepayPending}
+                isButtonLoading={isRepayPending || isRepayAllPending}
                 assetPrice={assetPrice?.formattedPrice}
                 disabled={disabled}
                 realBalance={balance?.realBalance}
@@ -185,8 +185,8 @@ const RepayModal = ({
             stage={stage}
             value={value}
             symbol={asset?.asset_symbol}
-            error={error}
-            data={repayData}
+            error={error || repayAllError}
+            data={repayData || repayAllData}
           />
         )}
       </div>
