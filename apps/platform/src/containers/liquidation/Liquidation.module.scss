@@ -1,0 +1,59 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(9, minmax(80px, auto));
+  gap: 24px;
+}
+
+.header {
+  grid-column: 1 / span 8;
+  grid-row: 1;
+  background-color: blue;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-radius: 8px;
+
+  @include media("<desktop") {
+    grid-column: 1 / -1;
+  }
+}
+
+.chart {
+  grid-column: 1 / span 8;
+  grid-row: 2 / span 4;
+  background-color: red;
+  padding: 20px;
+  border-radius: 8px;
+
+  @include media("<desktop") {
+    grid-column: 1 / -1;
+    grid-row: 3 / span 4;
+  }
+}
+
+.form {
+  grid-column: 9 / span 4;
+  grid-row: 2;
+  background-color: orange;
+  padding: 20px;
+  border-radius: 8px;
+
+  @include media("<desktop") {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+.table {
+  grid-column: 1 / -1;
+  grid-row: 6 / span 4;
+  background-color: purple;
+  padding: 20px;
+  border-radius: 8px;
+
+  @include media("<desktop") {
+    grid-row: 7 / span 3;
+  }
+}
