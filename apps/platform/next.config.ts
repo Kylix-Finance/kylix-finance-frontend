@@ -1,15 +1,5 @@
-import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const withNextIntl = createNextIntlPlugin({
-  experimental: {
-    createMessagesDeclaration: "./src/i18n/locales/en.json",
-  },
-});
+import { join } from "path";
 
 const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
@@ -58,16 +48,25 @@ const nextConfig: NextConfig = {
     );
     return config;
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: "/",
+          destination: "/dashboard",
+        },
+      ],
+    };
+  },
   async redirects() {
     return [
-      // {
-      //   source: "/",
-      //   destination: "/dashboard",
-      //   permanent: false,
-      // },
+      {
+        source: "/dashboard",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 };
 
-const config = withNextIntl(nextConfig);
-export default config;
+export default nextConfig;

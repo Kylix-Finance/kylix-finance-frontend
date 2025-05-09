@@ -1,18 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { PASSWORD_PROTECTION_COOKIE_NAME } from "~/constants";
-import { Locale } from "~/types";
 import { SignJWT } from "jose";
-import { getTranslations } from "next-intl/server";
 import { ENV } from "~/config/env";
 
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { locale: Locale } }
-) {
-  const { locale } = params;
-  const t = await getTranslations({ locale, namespace: "Auth" });
-
+export async function POST(request: NextRequest) {
   const { password } = await request.json();
   if (password === ENV.APP_ACCESS_PASSWORD) {
     const maxCookieLifetime = 365 * 24 * 60 * 60 * 100;
@@ -31,9 +23,6 @@ export async function POST(
     });
     return NextResponse.redirect(new URL("/", request.url));
   } else {
-    return NextResponse.json(
-      { message: t("inValidPassword") },
-      { status: 401 }
-    );
+    return NextResponse.json({ message: "Invalid password" }, { status: 401 });
   }
 }

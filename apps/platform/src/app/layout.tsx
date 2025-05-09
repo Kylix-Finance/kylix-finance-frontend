@@ -1,5 +1,4 @@
 import { PropsWithChildren } from "react";
-import { NextIntlClientProvider } from "next-intl";
 import ReactQueryProvider from "~/providers/ReactQueryProvider";
 import "~/sass/globals.scss";
 import ThemeProvider from "~/providers/ThemeProvider";
@@ -20,12 +19,10 @@ export default function Layout({ children }: PropsWithChildren) {
         <NuqsAdapter>
           <ThemeProvider>
             <ReactQueryProvider>
-              <NextIntlClientProvider>
-                {children}
-                <ToastContainer />
-                <div id="modal"></div>
-                <ModalProvider />
-              </NextIntlClientProvider>
+              {children}
+              <ToastContainer />
+              <div id="modal"></div>
+              <ModalProvider />
             </ReactQueryProvider>
           </ThemeProvider>
         </NuqsAdapter>

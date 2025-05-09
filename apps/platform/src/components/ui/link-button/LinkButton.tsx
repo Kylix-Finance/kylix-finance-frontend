@@ -1,9 +1,7 @@
-// LinkButton.tsx
 import { ReactNode, AnchorHTMLAttributes } from "react";
 import styles from "./LinkButton.module.scss";
-import { Link } from "~/i18n/navigation";
 import clsx from "clsx";
-
+import Link from "next/link";
 interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   disabled?: boolean;
