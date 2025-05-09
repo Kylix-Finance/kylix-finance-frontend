@@ -75,7 +75,7 @@ const RepayModal = ({
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
   const borrowed = formatUnit(
     borrowAssetData?.borrowed || "0",
-    assetPrice?.decimal
+    pool?.assets[0].asset_decimals
   );
 
   const { data: otherPoolData } = usePool({ assetId });

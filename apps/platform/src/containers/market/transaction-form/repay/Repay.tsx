@@ -8,7 +8,6 @@ import { Divider } from "~/components/divider";
 import { TransactionFormProps } from "~/types";
 import {
   formatUnit,
-  useAssetPrice,
   useGetAssetWiseBorrowsCollaterals,
 } from "@repo/onchain";
 import RepayModal from "~/components/modal/transactions/repay-modal/RepayModal";
@@ -27,14 +26,10 @@ const Repay = ({
     { poolId: assetId }
   );
 
-  const { data: assetPrice } = useAssetPrice({
-    assetId,
-  });
-
   const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
   const borrowed = formatUnit(
     borrowAssetData?.borrowed || "0",
-    assetPrice?.decimal
+    pool?.asset_decimals
   );
 
   return (
