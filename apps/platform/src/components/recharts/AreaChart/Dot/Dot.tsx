@@ -9,7 +9,13 @@ export const Dot = (props: DotProps) => {
     <svg x={0} y={0} width="100%" height="100%">
       <line x1="0" y1={cy} x2="100%" y2={cy} className={styles.line} />
 
-      <line x1={cx} y1="0" x2={cx} y2="100%" className={styles.line} />
+      <line
+        x1={cx}
+        y1="0"
+        x2={cx}
+        y2="calc(100% - 30px)"
+        className={styles.line}
+      />
 
       <g transform={`translate(${cx - 8}, ${cy - 8})`}>
         <path
