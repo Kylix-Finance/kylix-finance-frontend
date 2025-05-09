@@ -26,18 +26,18 @@ type StageMessage = {
 const Loading = ({ stage, value, symbol, error, data }: Props) => {
   const stageMessages: Record<TransactionStage, StageMessage> = {
     form: {
-      title: "Provide Supply Details",
+      title: "Provide Borrow Details",
       description: (
         <div className={styles.description}>
-          Please enter the quantity of tokens you wish to supply to the pool.
+          Please enter the quantity of tokens you wish to borrow to the pool.
         </div>
       ),
     },
     ready: {
-      title: "Assets Prepared for Supply",
+      title: "Assets Prepared for Borrow",
       description: (
         <div className={styles.description}>
-          Your supply request has been configured
+          Your borrow request has been configured
           <span className={styles.token}>
             {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
             {value} {symbol}
@@ -50,7 +50,7 @@ const Loading = ({ stage, value, symbol, error, data }: Props) => {
       title: "Awaiting Wallet Approval",
       description: (
         <div className={styles.description}>
-          Authorize this transaction in your wallet to proceed with the supply
+          Authorize this transaction in your wallet to proceed with the borrow
           of&nbsp;
           <span className={styles.token}>
             {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
@@ -82,7 +82,7 @@ const Loading = ({ stage, value, symbol, error, data }: Props) => {
       ),
     },
     finalized: {
-      title: "Supply Successfully Confirmed.",
+      title: "Borrow Successfully Confirmed.",
       description: (
         <div className={styles.description}>
           Your successfully supplied&nbsp;
