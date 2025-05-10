@@ -8,6 +8,8 @@ import { AnimatePresence, motion } from "motion/react";
 import Recent from "./recent/Recent";
 import YourBids from "./your-bids/YourBids";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
+import { useParams } from "next/navigation";
+import { useRecentLiquidation } from "~/hooks/api/useRecentLiquidation";
 
 type LiquidationTabType = "recent" | "bids";
 const tabs: ButtonGroupTab[] = [
@@ -22,6 +24,7 @@ const tabs: ButtonGroupTab[] = [
 ];
 
 const Table = () => {
+  const { id: assetId } = useParams<{ id: string }>();
   const [activeTab, setActiveTab] = useQueryState<LiquidationTabType>("tab", {
     clearOnDefault: true,
     defaultValue: "recent" as LiquidationTabType,
@@ -31,7 +34,18 @@ const Table = () => {
         : ("recent" as LiquidationTabType);
     },
   });
-
+  const {
+    data: recentLiquidationData,
+    isFetched: isRecentLiquidationFetched,
+    isLoading: isRecentLiquidationLoading,
+  } = useRecentLiquidation(assetId);
+  const isRecentLiquidationPending =
+    !recentLiquidationData &&
+    (isRecentLiquidationFetched || isRecentLiquidationLoading);
+  const isRecentLiquidationEmpty =
+    (!recentLiquidationData || recentLiquidationData.length === 0) &&
+    !isRecentLiquidationLoading &&
+    isRecentLiquidationFetched;
   return (
     <TableLayout
       header={
@@ -59,7 +73,12 @@ const Table = () => {
             {...framerProps}
             variants={fadeInOutAnimation}
           >
-            <Recent />
+            <Recent
+              isPending={isRecentLiquidationPending}
+              //FIXME: will be fix
+              data={recentLiquidationData || []}
+              isEmpty={isRecentLiquidationEmpty}
+            />
           </motion.div>
         )}
         {activeTab === "bids" && (

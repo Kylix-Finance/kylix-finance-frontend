@@ -4,7 +4,7 @@ import { useRpc } from "../useRpc";
 import { formatUnit } from "../../utils";
 interface Params {
   account?: string;
-  assetId: number;
+  assetId: number | string;
 }
 
 export const useGetUserBids = ({ account, assetId }: Params) => {
@@ -16,7 +16,7 @@ export const useGetUserBids = ({ account, assetId }: Params) => {
     queryKey: queryKeys.userBids(finalAccount),
     queryFn: enabled
       ? async () => {
-          const response = await execute(finalAccount, assetId);
+          const response = await execute(finalAccount, +assetId);
           if (!response) return null;
           return response.map((item) => ({
             ...item,

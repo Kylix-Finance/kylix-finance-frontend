@@ -1,7 +1,7 @@
 import { queryKeys } from "@repo/shared";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import axios from "~/lib/axios";
-export type RecentLiquidation = [
+export type RecentLiquidationResponse = [
   number,
   number,
   number,
@@ -9,17 +9,20 @@ export type RecentLiquidation = [
   number,
   number,
 ];
-export const useRecentLiquidation = (assetId: string) => {
+export type RecentLiquidation = NonNullable<
+  ReturnType<typeof useRecentLiquidation>["data"]
+>[number];
+export const useRecentLiquidation = (assetId: string | number) => {
   return useQuery({
-    queryKey: queryKeys.recentLiquidation({ assetId }),
-    queryFn: () => getRecentLiquidation(assetId),
+    queryKey: queryKeys.recentLiquidation({ assetId: assetId.toString() }),
+    queryFn: () => getRecentLiquidation(assetId.toString()),
     placeholderData: keepPreviousData,
   });
 };
 const getRecentLiquidation = async (assetId: string) => {
   const endTime = Date.now();
 
-  const { data } = await axios.get<RecentLiquidation[]>(
+  const { data } = await axios.get<RecentLiquidationResponse[]>(
     "/recent_liquidations",
     {
       params: {
