@@ -1,14 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-} from "recharts";
+import { ResponsiveContainer, BarChart, Bar, XAxis, Tooltip } from "recharts";
 import { getShortMonth } from "~/utils/date";
 import { totalBorrowSupply } from "~/data/charts";
 import { useDownsample } from "~/hooks/useDownsample";
@@ -19,13 +12,13 @@ import CustomBar from "./Bar";
 export const StackedBarChart = () => {
   const [hoveredIndex, setHoveredIndex] = useState<ChartItemIndex>(null);
 
-  const datasets = useDownsample(totalBorrowSupply, 25);
+  const datasets = useDownsample(totalBorrowSupply, 35);
 
   return (
     <ResponsiveContainer width="100%" height={300}>
       <BarChart
         data={datasets}
-        margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
+        margin={{ top: 0, right: 0, left: 0, bottom: 20 }}
         barSize={14}
       >
         <XAxis
@@ -35,8 +28,6 @@ export const StackedBarChart = () => {
           tickMargin={20}
           tickFormatter={getShortMonth}
         />
-        <YAxis tick={false} axisLine={false} />
-
         <Tooltip content={TooltipContent} cursor={false} />
 
         <Bar
