@@ -92,3 +92,10 @@ export interface TransactionFormProps {
 }
 
 export type ChartItemIndex = number | string | bigint | null | undefined;
+
+export interface TokenIconProps {
+  symbol: string;
+  width?: number;
+  height?: number;
+  className?: string;
+}
