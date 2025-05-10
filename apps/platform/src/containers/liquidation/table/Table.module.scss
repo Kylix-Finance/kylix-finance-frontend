@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.tabs {
+  width: 330px;
+}
+.description {
+  @include font($font-body);
+  color: $color-neutral-200;
+}
