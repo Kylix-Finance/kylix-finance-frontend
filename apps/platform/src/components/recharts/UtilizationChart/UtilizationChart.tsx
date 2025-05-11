@@ -26,10 +26,17 @@ export const UtilizationChart = () => {
         onMouseMove={() => setShowReferenceLine(false)}
         onMouseLeave={() => setShowReferenceLine(true)}
       >
+        <CartesianGrid
+          horizontal={true}
+          vertical={false}
+          stroke="var(--color-chart-grid)"
+          strokeDasharray="3 3"
+        />
         <XAxis
           dataKey="timestamp"
-          axisLine={false}
+          axisLine={true}
           tickLine={false}
+          stroke="var(--color-chart-bottom)"
           tick={{ fill: "var(--color-white)" }}
           tickFormatter={getShortMonth}
           padding={{ left: 50, right: 50 }}
@@ -57,13 +64,6 @@ export const UtilizationChart = () => {
           strokeWidth={2}
           dot={<Dot length={utilization.length} />}
           activeDot={<Dot length={utilization.length} isActiveDot />}
-        />
-
-        <CartesianGrid
-          horizontal={true}
-          vertical={false}
-          stroke="var(--color-chart-grid)"
-          strokeDasharray="3 3"
         />
 
         <ReferenceLine
