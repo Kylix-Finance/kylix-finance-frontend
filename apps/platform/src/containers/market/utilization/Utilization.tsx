@@ -1,7 +1,7 @@
-import styles from "./Utilization.module.scss";
+import UtilizationChart from "~/components/recharts/UtilizationChart";
 
 const Utilization = () => {
-  return <div className={styles.container}>Utilization</div>;
+  return <UtilizationChart />;
 };
 
 export default Utilization;

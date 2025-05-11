@@ -334,3 +334,76 @@ export const totalBorrowSupply = [
     top: 130,
   },
 ];
+
+export const utilization = [
+  {
+    timestamp: 1622505600,
+    supply: 131.27,
+    borrow: 55.43,
+  },
+  {
+    timestamp: 1622592000,
+    supply: 89.34,
+    borrow: 63.18,
+  },
+  {
+    timestamp: 1622678400,
+    supply: 142.11,
+    borrow: 76.52,
+  },
+  {
+    timestamp: 1622764800,
+    supply: 110.67,
+    borrow: 41.29,
+  },
+  {
+    timestamp: 1622851200,
+    supply: 125.92,
+    borrow: 92.05,
+  },
+  {
+    timestamp: 1622937600,
+    supply: 101.44,
+    borrow: 68.77,
+  },
+  {
+    timestamp: 1623024000,
+    supply: 94.2,
+    borrow: 48.31,
+  },
+  {
+    timestamp: 1623110400,
+    supply: 137.83,
+    borrow: 81.66,
+  },
+  {
+    timestamp: 1623196800,
+    supply: 120.55,
+    borrow: 54.02,
+  },
+  {
+    timestamp: 1623283200,
+    supply: 115.09,
+    borrow: 94.74,
+  },
+  {
+    timestamp: 1623369600,
+    supply: 128.02,
+    borrow: 49.88,
+  },
+  {
+    timestamp: 1623456000,
+    supply: 83.45,
+    borrow: 58.14,
+  },
+  {
+    timestamp: 1623542400,
+    supply: 138.77,
+    borrow: 98.32,
+  },
+  {
+    timestamp: 1623628800,
+    supply: 104.31,
+    borrow: 65.47,
+  },
+];

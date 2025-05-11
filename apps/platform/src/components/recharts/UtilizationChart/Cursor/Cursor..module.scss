@@ -1,0 +1,5 @@
+.line {
+  stroke: $color-chart-utilization;
+  stroke-dasharray: 2 4;
+  pointer-events: none;
+}
