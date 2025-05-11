@@ -51,9 +51,46 @@ export const UtilizationChart = () => {
           cursor={<Cursor />}
         />
 
+        <defs>
+          {/* Supply shadow */}
+          <filter
+            id="supplyShadow"
+            x="-20%"
+            y="-20%"
+            width="140%"
+            height="140%"
+          >
+            <feDropShadow
+              dx="2"
+              dy="2"
+              stdDeviation="4"
+              floodColor="var(--color-chart-supply)"
+              floodOpacity="0.6"
+            />
+          </filter>
+
+          {/* Borrow shadow */}
+          <filter
+            id="borrowShadow"
+            x="-20%"
+            y="-20%"
+            width="140%"
+            height="140%"
+          >
+            <feDropShadow
+              dx="2"
+              dy="2"
+              stdDeviation="4"
+              floodColor="var(--color-chart-borrow)"
+              floodOpacity="0.6"
+            />
+          </filter>
+        </defs>
+
         <Line
           dataKey="supply"
           stroke="var(--color-chart-supply)"
+          filter="url(#supplyShadow)"
           strokeWidth={2}
           dot={<Dot length={utilization.length} />}
           activeDot={<Dot length={utilization.length} isActiveDot />}
@@ -61,6 +98,7 @@ export const UtilizationChart = () => {
         <Line
           dataKey="borrow"
           stroke="var(--color-chart-borrow)"
+          filter="url(#borrowShadow)"
           strokeWidth={2}
           dot={<Dot length={utilization.length} />}
           activeDot={<Dot length={utilization.length} isActiveDot />}
