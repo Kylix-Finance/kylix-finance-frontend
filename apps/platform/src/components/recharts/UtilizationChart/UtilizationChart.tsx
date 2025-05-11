@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   CartesianGrid,
+  Legend,
   Line,
   LineChart,
   ReferenceLine,
@@ -71,6 +72,32 @@ export const UtilizationChart = () => {
           strokeDasharray="2 4"
           ifOverflow="extendDomain"
           strokeOpacity={showReferenceLine ? 1 : 0}
+        />
+
+        <Legend
+          verticalAlign="bottom"
+          align="center"
+          payload={[
+            {
+              value: "Supply APY",
+              type: "line",
+              id: "supply",
+              color: "var(--color-chart-supply)",
+            },
+            {
+              value: "Borrow APY",
+              type: "line",
+              id: "borrow",
+              color: "var(--color-chart-borrow)",
+            },
+            {
+              value: "Utilization Rate",
+              type: "line",
+              id: "utilization",
+              color: "var(--color-chart-utilization)",
+            },
+          ]}
+          wrapperStyle={{ paddingTop: 12 }}
         />
       </LineChart>
     </ResponsiveContainer>
