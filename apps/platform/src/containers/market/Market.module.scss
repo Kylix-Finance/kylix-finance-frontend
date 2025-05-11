@@ -28,8 +28,6 @@
   grid-column: 1 / span 8;
   grid-row: 2 / span 4;
   width: 100%;
-  flex: 1;
-
   @include media("<desktop") {
     grid-column: 1 / span 12;
     grid-row: 3 / span 4;
