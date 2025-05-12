@@ -8,3 +8,17 @@
   margin-right: 8px;
   @include font($font-body-compact);
 }
+
+.toggle {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  display: flex;
+  margin-left: auto;
+  margin: 12px 0;
+}
+
+.toggle_text {
+  margin-right: 8px;
+  color: $color-neutral-400;
+}
