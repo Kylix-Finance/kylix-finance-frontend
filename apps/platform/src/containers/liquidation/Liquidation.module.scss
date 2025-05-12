@@ -3,6 +3,7 @@
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(9, minmax(80px, auto));
   gap: 24px;
+  padding-bottom: 32px;
 }
 
 .header {
