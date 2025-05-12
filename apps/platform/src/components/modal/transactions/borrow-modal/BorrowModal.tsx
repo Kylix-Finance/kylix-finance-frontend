@@ -95,7 +95,7 @@ const BorrowModal = ({
     (!assetPrice && isAssetPriceLoading && !isAssetPriceFetched);
   const finalValue = isViewOnly ? viewOnlyValue : value;
 
-  const disabled = !balance?.realBalance || !finalValue || isLoading;
+  const disabled = !finalValue || isLoading;
 
   const asset = pool?.assets[0];
 

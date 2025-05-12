@@ -53,11 +53,7 @@ const Form = ({
           onClick={onButtonClick}
           isLoading={isButtonLoading}
         >
-          {realBalance
-            ? value
-              ? "Borrow"
-              : "Enter an amount"
-            : "Insufficient balance"}
+          {value ? "Borrow" : "Enter an amount"}
         </PrivateButton>
       </div>
       <Detail asset={asset} enable={!!value} />
