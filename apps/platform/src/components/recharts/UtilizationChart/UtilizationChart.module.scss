@@ -2,3 +2,9 @@
   stroke: $color-chart-utilization;
   stroke-dasharray: 3 3;
 }
+
+.legend {
+  color: $color-white;
+  margin-right: 8px;
+  @include font($font-body-compact);
+}

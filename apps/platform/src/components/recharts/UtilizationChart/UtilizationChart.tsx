@@ -14,6 +14,7 @@ import { utilization } from "~/data/charts";
 import Cursor from "./Cursor";
 import Dot from "./Dot";
 import { getShortMonth } from "~/utils/date";
+import styles from "./UtilizationChart.module.scss";
 
 export const UtilizationChart = () => {
   const [showReferenceLine, setShowReferenceLine] = useState(true);
@@ -136,6 +137,7 @@ export const UtilizationChart = () => {
             },
           ]}
           wrapperStyle={{ paddingTop: 12 }}
+          formatter={(value) => <span className={styles.legend}>{value}</span>}
         />
       </LineChart>
     </ResponsiveContainer>

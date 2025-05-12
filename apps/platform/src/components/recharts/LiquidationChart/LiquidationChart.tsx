@@ -4,6 +4,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -14,6 +15,8 @@ import CustomBar from "./Bar";
 import TooltipContent from "./Tooltip";
 import { useState } from "react";
 import { ChartItemIndex } from "~/types";
+import Card from "~/components/card";
+import styles from "./LiquidationChart.module.scss";
 
 export const LiquidationChart = () => {
   const [hoveredIndex, setHoveredIndex] = useState<ChartItemIndex>(null);
@@ -22,7 +25,7 @@ export const LiquidationChart = () => {
   const timeGradientId = "time-gradient-id";
 
   return (
-    <div>
+    <Card>
       <ResponsiveContainer width="100%" height={350}>
         <BarChart
           data={liquidations}
@@ -144,8 +147,29 @@ export const LiquidationChart = () => {
               />
             }
           />
+
+          <Legend
+            verticalAlign="bottom"
+            align="center"
+            payload={[
+              {
+                value: "Pool Value",
+                type: "line",
+                color: "var(--color-primary",
+              },
+              {
+                value: "Time Emptied",
+                type: "line",
+                color: "var(--color-neutral-200)",
+              },
+            ]}
+            wrapperStyle={{ paddingTop: 12 }}
+            formatter={(value) => (
+              <span className={styles.legend}>{value}</span>
+            )}
+          />
         </BarChart>
       </ResponsiveContainer>
-    </div>
+    </Card>
   );
 };
