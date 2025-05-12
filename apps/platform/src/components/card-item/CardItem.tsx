@@ -1,6 +1,7 @@
 import Skeleton from "~/components/skeleton";
 import styles from "./CardItem.module.scss";
 import { isValidElement, ReactNode } from "react";
+import clsx from "clsx";
 
 interface Props {
   title: string;
@@ -9,6 +10,7 @@ interface Props {
   hasValue?: boolean;
   hasSubValue?: boolean;
   isPending: boolean;
+  subValueClassName?: string;
 }
 
 const Item = ({
@@ -18,6 +20,7 @@ const Item = ({
   hasSubValue,
   hasValue = true,
   isPending,
+  subValueClassName,
 }: Props) => {
   const isReactElement = isValidElement(value);
   return (
@@ -42,7 +45,9 @@ const Item = ({
             rounded
             className={styles.sub_value}
           >
-            <span className={styles.sub_value}>{subValue}</span>
+            <span className={clsx(styles.sub_value, subValueClassName)}>
+              {subValue}
+            </span>
           </Skeleton>
         )}
       </div>

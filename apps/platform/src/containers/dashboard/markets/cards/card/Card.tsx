@@ -2,7 +2,7 @@ import { formatBigNumbers, LandingPool } from "@repo/onchain";
 import styles from "./Card.module.scss";
 import TokenIcon from "~/components/token-icon";
 import { Button } from "~/components/ui/button";
-import CardItem from "../../../card-item/CardItem";
+import CardItem from "../../../../../components/card-item/CardItem";
 import Skeleton from "~/components/skeleton";
 import { VoidFunction } from "~/types";
 import Link from "next/link";

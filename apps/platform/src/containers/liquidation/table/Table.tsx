@@ -88,6 +88,7 @@ const Table = () => {
             <ButtonGroup
               tabs={tabs}
               activeTab={activeTab}
+              fullWidth
               setActiveTab={(value) => {
                 setActiveTab(value as LiquidationTabType);
               }}

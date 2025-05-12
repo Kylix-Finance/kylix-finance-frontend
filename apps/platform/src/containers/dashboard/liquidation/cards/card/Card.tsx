@@ -2,7 +2,7 @@ import { formatBigNumbers, LiquidationMarket } from "@repo/onchain";
 import styles from "./Card.module.scss";
 import { Button } from "~/components/ui/button";
 import Health from "../../health/Health";
-import CardItem from "../../../card-item/CardItem";
+import CardItem from "~/components/card-item";
 import TokenIcon from "~/components/token-icon";
 import Check from "~/assets/icons/check.svg";
 import Skeleton from "~/components/skeleton";
