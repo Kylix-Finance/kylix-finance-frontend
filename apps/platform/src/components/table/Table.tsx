@@ -8,6 +8,7 @@ import styles from "./Table.module.scss";
 import ChevronUp from "~/assets/icons/chevron-up.svg";
 import ChevronDown from "~/assets/icons/chevron-down.svg";
 import Skeleton from "../skeleton";
+import clsx from "clsx";
 
 interface TableProps {
   table: ReactTable<any>;
@@ -77,7 +78,9 @@ export function Table({ table, isLoading, onRowClick }: TableProps) {
             : table.getRowModel().rows.map((row) => (
                 <tr
                   key={row.id}
-                  className={styles.tr}
+                  className={clsx(styles.tr, {
+                    [styles.tr_hover]: typeof onRowClick === "function",
+                  })}
                   onClick={() => onRowClick?.(row)}
                 >
                   {row.getVisibleCells().map((cell) => (

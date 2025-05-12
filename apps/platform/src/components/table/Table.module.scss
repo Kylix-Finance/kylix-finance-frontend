@@ -29,11 +29,8 @@
 
 .tr {
   height: 72px;
-  cursor: pointer;
   border-bottom: 1px solid $color-neutral-800;
-  &:hover {
-    background-color: $color-accent-primary-component;
-  }
+
   & > :first-child {
     padding-left: 16px;
   }
@@ -42,7 +39,12 @@
     padding-right: 16px;
   }
 }
-
+.tr_hover {
+  cursor: pointer;
+  &:hover {
+    background-color: $color-accent-primary-component;
+  }
+}
 .th {
   text-align: left;
   min-width: max-content;
