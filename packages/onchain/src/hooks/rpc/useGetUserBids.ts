@@ -6,7 +6,9 @@ interface Params {
   account?: string;
   assetId: number | string;
 }
-
+export type UserBid = NonNullable<
+  ReturnType<typeof useGetUserBids>["data"]
+>[number];
 export const useGetUserBids = ({ account, assetId }: Params) => {
   const { execute, isApiAvailable } = useRpc("liquidation", "getUserBids");
   const { account: activeAccount } = useAccountsStore();

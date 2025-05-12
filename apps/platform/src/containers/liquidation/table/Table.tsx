@@ -11,6 +11,8 @@ import { fadeInOutAnimation, framerProps } from "~/animations/variants";
 import { useParams } from "next/navigation";
 import { useRecentLiquidation } from "~/hooks/api/useRecentLiquidation";
 import { useMemo } from "react";
+import { useGetUserBids } from "@repo/onchain";
+import { useAccountsStore } from "@repo/shared";
 
 type LiquidationTabType = "recent" | "bids";
 const tabs: ButtonGroupTab[] = [
@@ -26,6 +28,7 @@ const tabs: ButtonGroupTab[] = [
 
 const Table = () => {
   const { id: assetId } = useParams<{ id: string }>();
+  const { account } = useAccountsStore();
   const [activeTab, setActiveTab] = useQueryState<LiquidationTabType>("tab", {
     clearOnDefault: true,
     defaultValue: "recent" as LiquidationTabType,
@@ -45,13 +48,28 @@ const Table = () => {
     isFetched: isRecentLiquidationFetched,
     isLoading: isRecentLiquidationLoading,
   } = useRecentLiquidation(assetId);
+  const {
+    data: userBidsData,
+    isFetched: isUserBidsFetched,
+    isLoading: isUserBidsLoading,
+  } = useGetUserBids({
+    account: account?.address,
+    assetId,
+  });
   const isRecentLiquidationPending =
     !recentLiquidationData &&
     (isRecentLiquidationFetched || isRecentLiquidationLoading);
+  const isUserBidsPending =
+    !userBidsData && (isUserBidsFetched || isUserBidsLoading);
+
   const isRecentLiquidationEmpty =
     (!recentLiquidationData || recentLiquidationData.length === 0) &&
     !isRecentLiquidationLoading &&
     isRecentLiquidationFetched;
+  const isUserBidsEmpty =
+    (!userBidsData || userBidsData.length === 0) &&
+    !isUserBidsLoading &&
+    isUserBidsFetched;
 
   const finalRecentData = useMemo(() => {
     if (!recentLiquidationData) return [];
@@ -100,7 +118,12 @@ const Table = () => {
         )}
         {activeTab === "bids" && (
           <motion.div key="bids" {...framerProps} variants={fadeInOutAnimation}>
-            <YourBids />
+            <YourBids
+              data={userBidsData || []}
+              isPending={isUserBidsPending}
+              isEmpty={isUserBidsEmpty}
+              assetId={assetId}
+            />
           </motion.div>
         )}
       </AnimatePresence>
