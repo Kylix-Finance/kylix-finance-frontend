@@ -10,6 +10,7 @@ import YourBids from "./your-bids/YourBids";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
 import { useParams } from "next/navigation";
 import { useRecentLiquidation } from "~/hooks/api/useRecentLiquidation";
+import { useMemo } from "react";
 
 type LiquidationTabType = "recent" | "bids";
 const tabs: ButtonGroupTab[] = [
@@ -34,6 +35,11 @@ const Table = () => {
         : ("recent" as LiquidationTabType);
     },
   });
+  const [limit, setLimit] = useQueryState("limit", {
+    clearOnDefault: true,
+    defaultValue: "10",
+  });
+
   const {
     data: recentLiquidationData,
     isFetched: isRecentLiquidationFetched,
@@ -46,6 +52,16 @@ const Table = () => {
     (!recentLiquidationData || recentLiquidationData.length === 0) &&
     !isRecentLiquidationLoading &&
     isRecentLiquidationFetched;
+
+  const finalRecentData = useMemo(() => {
+    if (!recentLiquidationData) return [];
+    return recentLiquidationData.slice(0, parseInt(limit) || 10);
+  }, [recentLiquidationData, limit]);
+  const hasMore = finalRecentData.length < (recentLiquidationData?.length ?? 0);
+  const handleLoadMoreClick = () => {
+    if (!hasMore) return;
+    setLimit((value) => ((parseInt(value) || 10) + 10).toString());
+  };
   return (
     <TableLayout
       header={
@@ -75,9 +91,10 @@ const Table = () => {
           >
             <Recent
               isPending={isRecentLiquidationPending}
-              //FIXME: will be fix
-              data={recentLiquidationData || []}
+              data={finalRecentData}
               isEmpty={isRecentLiquidationEmpty}
+              hasMore={hasMore}
+              onLoadMoreClick={handleLoadMoreClick}
             />
           </motion.div>
         )}

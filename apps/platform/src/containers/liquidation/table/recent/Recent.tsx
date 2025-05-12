@@ -13,13 +13,23 @@ import Empty from "./Empty";
 import { formatTimestamp } from "~/utils/date";
 import styles from "./Recent.module.scss";
 import clsx from "clsx";
+import { Button } from "~/components/ui/button";
+import { VoidFunction } from "~/types";
 const columnHelper = createColumnHelper<RecentLiquidation>();
 interface Props {
   isPending: boolean;
   isEmpty: boolean;
   data: RecentLiquidation[];
+  onLoadMoreClick: VoidFunction;
+  hasMore: boolean;
 }
-const Recent = ({ isPending, data, isEmpty }: Props) => {
+const Recent = ({
+  isPending,
+  data,
+  isEmpty,
+  hasMore,
+  onLoadMoreClick,
+}: Props) => {
   const [sorting, setSorting] = useState<SortingState>([]);
 
   const columns = [
@@ -93,6 +103,15 @@ const Recent = ({ isPending, data, isEmpty }: Props) => {
   return (
     <div>
       <Table table={table} isLoading={isPending} />
+      <div className={styles.footer}>
+        <Button
+          onClick={onLoadMoreClick}
+          variant="secondary"
+          disabled={isPending || !hasMore}
+        >
+          Load More Assets
+        </Button>
+      </div>
       <Empty isEmpty={isEmpty} />
     </div>
   );
