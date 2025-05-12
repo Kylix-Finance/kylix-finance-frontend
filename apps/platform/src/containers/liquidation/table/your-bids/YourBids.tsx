@@ -1,7 +1,4 @@
-import {
-  formatUnit,
-  UserBid,
-} from "@repo/onchain";
+import { formatUnit, UserBid } from "@repo/onchain";
 import Empty from "./Empty";
 import {
   createColumnHelper,
@@ -15,6 +12,7 @@ import Table from "~/components/table";
 import TokenIcon from "~/components/token-icon";
 import styles from "./YourBids.module.scss";
 import { CancelBidButton } from "./CancelBidButton";
+import clsx from "clsx";
 interface Props {
   data: UserBid[];
   isPending: boolean;
@@ -31,9 +29,11 @@ const YourBids = ({ data, isEmpty, isPending, assetId }: Props) => {
       header: "Asset",
       enableSorting: false,
       cell: (info) => {
+        const symbol = info.row.original.bid_asset_info.asset_symbol;
         return (
-          <div className={styles.cell}>
-            <TokenIcon symbol={info.row.original.bid_asset_info.asset_symbol} />
+          <div className={clsx(styles.cell, styles.asset)}>
+            <TokenIcon symbol={symbol} />
+            <p className={styles.value}>{symbol}</p>
           </div>
         );
       },
