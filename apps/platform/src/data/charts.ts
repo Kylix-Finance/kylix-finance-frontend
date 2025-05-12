@@ -407,3 +407,15 @@ export const utilization = [
     borrow: 65.47,
   },
 ];
+
+export const liquidations = [
+  { percentage: 0, value: 35, time: 3 },
+  { percentage: 2, value: 88, time: 6 },
+  { percentage: 4, value: 59, time: 5 },
+  { percentage: 6, value: 21, time: 2 },
+  { percentage: 8, value: 70, time: 4 },
+  { percentage: 10, value: 44, time: 3 },
+  { percentage: 12, value: 96, time: 6 },
+  { percentage: 14, value: 25, time: 5 },
+  { percentage: 16, value: 63, time: 2 },
+];

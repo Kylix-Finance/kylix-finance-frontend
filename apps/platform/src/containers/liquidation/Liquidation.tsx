@@ -1,3 +1,4 @@
+import LiquidationChart from "~/components/recharts/LiquidationChart";
 import ActionHeader from "./action-header/ActionHeader";
 import styles from "./Liquidation.module.scss";
 import Table from "./table/Table";
@@ -24,7 +25,9 @@ const Liquidation = () => {
           symbol={["ETH", "BTC"]}
         />
       </div>
-      <div className={styles.chart}>chart</div>
+      <div className={styles.chart}>
+        <LiquidationChart />
+      </div>
       <div className={styles.table}>
         <Table />
       </div>
