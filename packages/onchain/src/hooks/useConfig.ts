@@ -6,7 +6,7 @@ export const useConfig = () => {
     queryKey: queryKeys.config,
     queryFn: () => ({
       dappName: "Kylix",
-      rpc: process.env.NEXT_PUBLIC_RPC_END_POINT,
+      rpc: process.env.NEXT_PUBLIC_RPC_ENDPOINT,
     }),
   });
 };
