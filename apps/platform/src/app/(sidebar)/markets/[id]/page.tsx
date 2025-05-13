@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Market from "~/containers/market/Market";
-import { getLendingPools } from "~/lib/getLendingPools";
+import { getLendingPools } from "@repo/onchain";
 
 interface PageProps {
   params: Promise<{ id: string }>;
