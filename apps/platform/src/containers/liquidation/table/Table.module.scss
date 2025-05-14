@@ -30,3 +30,12 @@
   @include font($font-heading-5);
   color: $color-neutral-200;
 }
+.tab_info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.tab_info_title {
+  @include font($font-heading-4);
+  color: $color-white;
+}

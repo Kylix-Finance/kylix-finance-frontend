@@ -14,7 +14,6 @@ import { useMemo } from "react";
 import { useGetUserBids } from "@repo/onchain";
 import { useAccountsStore } from "@repo/shared";
 import Sort from "~/components/sort";
-
 type LiquidationTabType = "recent" | "bids";
 const tabs: ButtonGroupTab[] = [
   {
@@ -164,10 +163,33 @@ const Table = () => {
               }}
             />
           </div>
-          <p className={styles.description}>
-            Recent liquidations of BTC tokens with USDC payments and price
-            fluctuations.
-          </p>
+          <AnimatePresence mode="wait">
+            {activeTab === "recent" ? (
+              <motion.div
+                className={styles.tab_info}
+                {...framerProps}
+                variants={fadeInOutAnimation}
+              >
+                <p className={styles.tab_info_title}>Recent Liquidations</p>
+                <p className={styles.description}>
+                  Recent liquidations of BTC tokens with USDC payments and price
+                  fluctuations."
+                </p>
+              </motion.div>
+            ) : (
+              <motion.div
+                className={styles.tab_info}
+                {...framerProps}
+                variants={fadeInOutAnimation}
+              >
+                <p className={styles.tab_info_title}>Your Bids</p>
+                <p className={styles.description}>
+                  User liquidation bids for BTC tokens with USDC payments at
+                  discounted rates.
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
           <div className={styles.filter}>
             <div className={styles.option}>
               <p className={styles.label}>Sort by:</p>
