@@ -2,17 +2,13 @@
 import { IconButton } from "~/components/ui/icon-button";
 import styles from "./ActionHeader.module.scss";
 import { ArrowLeft } from "~/assets/icons";
-import ScrollableContainer from "~/components/scrollable-container";
 import Skeleton from "~/components/skeleton";
 import { useRouter } from "next/navigation";
 import MultiTokenIcon from "~/components/multi-token-icon";
-interface Data {
-  content?: string;
-  value?: string;
-}
+import StatsBar, { Item } from "~/components/stats-bar";
 
 interface Props {
-  data: Data[];
+  data: Item[];
   symbol?: [string, string];
   backLinkHref?: string;
   isLoading?: boolean;
@@ -51,16 +47,7 @@ const ActionHeader = ({ data, symbol, backLinkHref, isLoading }: Props) => {
           </div>
         </div>
       </div>
-      <ScrollableContainer>
-        {data.map((item, index) => (
-          <div key={index} className={styles.action_wrapper}>
-            <div className={styles.label}>{item.content}</div>
-            <Skeleton isLoading={isLoading} className={styles.skeleton} rounded>
-              <div className={styles.content}>{item.value}</div>
-            </Skeleton>
-          </div>
-        ))}
-      </ScrollableContainer>
+      <StatsBar data={data} isLoading={isLoading} />
     </div>
   );
 };

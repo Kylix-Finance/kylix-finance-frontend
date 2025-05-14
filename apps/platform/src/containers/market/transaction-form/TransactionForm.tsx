@@ -1,6 +1,5 @@
 "use client";
 import { ButtonGroup } from "~/components/ui/button-group";
-import styles from "./TransactionForm.module.scss";
 import { useQueryState } from "nuqs";
 import Supply from "./supply/Supply";
 import Borrow from "./borrow/Borrow";
@@ -9,6 +8,7 @@ import Repay from "./repay/Repay";
 import { AnimatePresence, motion } from "motion/react";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
 import { TransactionFormProps } from "~/types";
+import CardWrapper from "~/components/card-wrapper";
 
 const tabs = [
   { value: "supply" as const, content: "Supply", Component: Supply },
@@ -29,7 +29,7 @@ const TransactionForm = (props: TransactionFormProps) => {
   const activeTabData = tabs.find((tab) => tab.value === activeTab);
 
   return (
-    <div className={styles.container}>
+    <CardWrapper>
       <ButtonGroup
         tabs={tabs}
         activeTab={activeTab}
@@ -47,7 +47,7 @@ const TransactionForm = (props: TransactionFormProps) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </CardWrapper>
   );
 };
 
