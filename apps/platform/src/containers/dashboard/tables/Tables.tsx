@@ -15,34 +15,33 @@ import Liquidation from "../liquidation/Liquidation";
 import { useGetLendingPools, useGetLiquidationMarkets } from "@repo/onchain";
 import { useAccountsStore } from "@repo/shared";
 import TokenIcon from "~/components/token-icon";
+import Sort from "~/components/sort";
+import { Sort as SortItem } from "~/types";
 type Tab = "markets" | "liquidations";
 interface Network {
   name: string;
   symbol: string;
 }
-interface Sort {
-  name: string;
-  value: string;
-}
-const sortOptions = new Map<string, Sort>([
+
+const sortOptions = new Map<string, SortItem>([
   [
     "total_value_locked",
     {
-      name: "Total Value Locked",
+      title: "Total Value Locked",
       value: "total_value_locked",
     },
   ],
   [
     "none",
     {
-      name: "None",
+      title: "None",
       value: "none",
     },
   ],
   [
     "most_used_assets",
     {
-      name: "Most Used Assets",
+      title: "Most Used Assets",
       value: "most_used_assets",
     },
   ],
@@ -122,13 +121,7 @@ export const Tables = () => {
       </div>
     );
   };
-  const renderSort = (key: string) => {
-    const option = sortOptions.get(key);
-    if (!option) return null;
-    return (
-      <div className={styles.selected_network}>{capitalize(option.name)}</div>
-    );
-  };
+
   const finalPoolData = useMemo(() => {
     if (!pool?.assets || activeTab !== "markets") return [];
     const query = q?.trim().toLowerCase() || "";
@@ -208,15 +201,13 @@ export const Tables = () => {
               </div>
               <div className={styles.option}>
                 <p className={styles.label}>Sort by:</p>
-                <SelectBox
-                  options={sortOptionKeys}
+                <Sort
+                  keys={sortOptionKeys}
+                  items={sortOptions}
                   onChange={(value: string) => {
                     setSelectedSort(value);
                   }}
-                  renderOption={renderSort}
                   value={selectedSort}
-                  renderValue={renderSort}
-                  className={styles.select}
                 />
               </div>
             </div>
