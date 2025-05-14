@@ -36,7 +36,11 @@ const Status = ({
       }}
     >
       <span>{content}</span>
-      <span className={styles.icon}>{Icon && <Icon />}</span>
+      {Icon && (
+        <span className={styles.icon}>
+          <Icon />
+        </span>
+      )}
     </div>
   );
 };

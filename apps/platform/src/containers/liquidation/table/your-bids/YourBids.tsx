@@ -1,115 +1,28 @@
-import { formatUnit, UserBid } from "@repo/onchain";
+import { UserBid } from "@repo/onchain";
 import Empty from "./Empty";
-import {
-  createColumnHelper,
-  getCoreRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
-} from "@tanstack/react-table";
-import { useState } from "react";
-import Table from "~/components/table";
-import TokenIcon from "~/components/token-icon";
-import styles from "./YourBids.module.scss";
-import { CancelBidButton } from "./CancelBidButton";
-import clsx from "clsx";
+import { useViewportSize } from "@mantine/hooks";
+import { BREAKPOINTS } from "~/constants";
+import YourBidsTable from "./table/YourBidsTable";
+import Cards from "./cards/Cards";
+
 interface Props {
   data: UserBid[];
   isPending: boolean;
-  isEmpty: boolean;
   assetId: string;
+  isEmpty: boolean;
 }
-const columnHelper = createColumnHelper<UserBid>();
 
-const YourBids = ({ data, isEmpty, isPending, assetId }: Props) => {
-  const [sorting, setSorting] = useState<SortingState>([]);
-
-  const columns = [
-    columnHelper.accessor("market_assetInfo.asset_name", {
-      header: "Asset",
-      enableSorting: false,
-      cell: (info) => {
-        const symbol = info.row.original.bid_asset_info.asset_symbol;
-        return (
-          <div className={clsx(styles.cell, styles.asset)}>
-            <TokenIcon symbol={symbol} />
-            <p className={styles.value}>{symbol}</p>
-          </div>
-        );
-      },
-    }),
-    columnHelper.accessor("bid_amount", {
-      header: "Bid Amount",
-      enableSorting: true,
-      cell: (info) => {
-        const value = formatUnit(
-          info.getValue(),
-          info.row.original.bid_asset_info.decimals
-        );
-        return (
-          <div className={styles.cell}>
-            <span className={styles.value}>
-              {value} {info.row.original.bid_asset_info.asset_symbol}
-            </span>
-            <span className={styles.sub_value}>$3.91B</span>
-          </div>
-        );
-      },
-    }),
-    columnHelper.accessor("discount", {
-      header: "Discount",
-      enableSorting: true,
-      cell: (info) => {
-        return (
-          <div className={styles.cell}>
-            <span className={styles.value}>{info.getValue()}%</span>
-          </div>
-        );
-      },
-    }),
-    columnHelper.accessor("filled_amount", {
-      header: "Filled",
-      enableSorting: true,
-      cell: (info) => {
-        return (
-          <div className={styles.cell}>
-            <span className={styles.value}>{info.getValue()}</span>
-          </div>
-        );
-      },
-    }),
-    columnHelper.accessor("blocknumber", {
-      header: "",
-      enableSorting: false,
-      cell: (info) => {
-        const data = info.row.original;
-        return (
-          <div className={styles.cell}>
-            <CancelBidButton
-              assetId={assetId}
-              discount={data.discount}
-              txBlockNumber={data.blocknumber}
-              txIndex={data.index}
-            />
-          </div>
-        );
-      },
-    }),
-  ];
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    onSortingChange: setSorting,
-    state: {
-      sorting,
-    },
-  });
+const YourBids = ({ data, isPending, assetId, isEmpty }: Props) => {
+  const { width } = useViewportSize();
+  const isDesktop = width >= BREAKPOINTS.DESKTOP;
   return (
     <div>
-      <Table table={table} isLoading={isPending} />
-      <Empty isEmpty={isEmpty} />
+      {isDesktop ? (
+        <YourBidsTable assetId={assetId} data={data} isPending={isPending} />
+      ) : (
+        <Cards assetId={assetId} data={data} isPending={true} />
+      )}
+      <Empty isEmpty={isEmpty} hasBorder />
     </div>
   );
 };
