@@ -20,7 +20,13 @@ export default function Layout({ children }: PropsWithChildren) {
         <NuqsAdapter>
           <ThemeProvider>
             <ReactQueryProvider>
-              {children}
+              <div
+                style={{
+                  paddingRight: "calc(100vw - 100%)",
+                }}
+              >
+                {children}
+              </div>
               <ToastContainer />
               <BlockProvider />
               <div id="modal"></div>
