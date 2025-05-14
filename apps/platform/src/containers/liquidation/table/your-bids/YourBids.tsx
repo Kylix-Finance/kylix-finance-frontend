@@ -20,7 +20,7 @@ const YourBids = ({ data, isPending, assetId, isEmpty }: Props) => {
       {isDesktop ? (
         <YourBidsTable assetId={assetId} data={data} isPending={isPending} />
       ) : (
-        <Cards assetId={assetId} data={data} isPending={true} />
+        <Cards assetId={assetId} data={data} isPending={isPending} />
       )}
       <Empty isEmpty={isEmpty} hasBorder />
     </div>
