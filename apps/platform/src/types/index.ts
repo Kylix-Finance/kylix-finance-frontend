@@ -99,3 +99,7 @@ export interface TokenIconProps {
   height?: number;
   className?: string;
 }
+export type Sort = {
+  title: string;
+  value: string;
+};

@@ -13,3 +13,20 @@
   @include font($font-body);
   color: $color-neutral-200;
 }
+.filter {
+  display: none;
+
+  @include media("<desktop") {
+    display: flex;
+    align-items: center;
+  }
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.label {
+  @include font($font-heading-5);
+  color: $color-neutral-200;
+}
