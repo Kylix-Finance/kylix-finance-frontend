@@ -10,6 +10,7 @@ import ModalProvider from "~/providers/ModalProvider";
 import { mergeMetadata } from "~/utils/metadata";
 import { metaTags } from "~/constants/metadata";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import BlockProvider from "~/providers/BlockProvider";
 
 export const metadata = mergeMetadata(metaTags.root);
 export default function Layout({ children }: PropsWithChildren) {
@@ -21,6 +22,7 @@ export default function Layout({ children }: PropsWithChildren) {
             <ReactQueryProvider>
               {children}
               <ToastContainer />
+              <BlockProvider />
               <div id="modal"></div>
               <ModalProvider />
             </ReactQueryProvider>
