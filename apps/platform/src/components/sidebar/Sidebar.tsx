@@ -26,10 +26,16 @@ type MenuItem = {
   label: string;
   icon: React.FC<{ className?: string }>;
   disabled?: boolean;
+  relatedPaths?: string[];
 };
 
 const menuItems: MenuItem[] = [
-  { path: "/dashboard", label: "Dashboard", icon: Home },
+  {
+    path: "/dashboard",
+    label: "Dashboard",
+    icon: Home,
+    relatedPaths: ["/markets", "/liquidations", "/"],
+  },
   { path: "/portfolio", label: "Portfolio", icon: User },
   { path: "/swap", label: "Swap", icon: Swap },
   { path: "/pools", label: "Pools", icon: SwimmingPool },
@@ -49,7 +55,6 @@ export const Sidebar = () => {
   const pathname = usePathname();
 
   const [isExpanded, setIsExpanded] = useState(false);
-
   return (
     <div className={styles.wrapper}>
       <div
@@ -75,7 +80,11 @@ export const Sidebar = () => {
                 <Link href={item.disabled ? "#" : item.path} key={index}>
                   <li
                     className={clsx(styles.menu_item, {
-                      [styles.active_menu_item]: pathname === item.path,
+                      [styles.active_menu_item]:
+                        pathname === item.path ||
+                        item.relatedPaths?.some((item) =>
+                          pathname.startsWith(item)
+                        ),
                       [styles.disabled_menu_item]: item.disabled,
                     })}
                   >
