@@ -4,6 +4,7 @@ import ActionHeader from "./action-header/ActionHeader";
 import styles from "./Liquidation.module.scss";
 import Table from "./table/Table";
 import Form from "./form/Form";
+import CardWrapper from "~/components/card-wrapper";
 
 export const Liquidation = () => {
   return (
@@ -35,7 +36,9 @@ export const Liquidation = () => {
         <Table />
       </div>
       <div className={styles.form}>
-        <Form />
+        <CardWrapper>
+          <Form />
+        </CardWrapper>
       </div>
     </div>
   );
