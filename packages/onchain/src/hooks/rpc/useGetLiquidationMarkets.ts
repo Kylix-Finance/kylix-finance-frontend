@@ -15,7 +15,7 @@ export type LiquidationMarket = NonNullable<
 export const useGetLiquidationMarkets = ({
   account = null,
   enabled = true,
-}: Params) => {
+}: Params = {}) => {
   const { execute, isApiAvailable } = useRpc(
     "liquidation",
     "getLiquidationMarkets"

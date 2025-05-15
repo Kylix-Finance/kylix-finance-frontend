@@ -1,8 +1,11 @@
+"use client";
 import LiquidationChart from "~/components/recharts/LiquidationChart";
 import ActionHeader from "./action-header/ActionHeader";
 import styles from "./Liquidation.module.scss";
 import Table from "./table/Table";
-const Liquidation = () => {
+import Form from "./form/Form";
+
+export const Liquidation = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -31,9 +34,9 @@ const Liquidation = () => {
       <div className={styles.table}>
         <Table />
       </div>
-      <div className={styles.form}>form</div>
+      <div className={styles.form}>
+        <Form />
+      </div>
     </div>
   );
 };
-
-export default Liquidation;

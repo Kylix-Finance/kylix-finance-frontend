@@ -1,1 +1,1 @@
-export { default } from "./Liquidation";
+export { Liquidation as default } from "./Liquidation";
