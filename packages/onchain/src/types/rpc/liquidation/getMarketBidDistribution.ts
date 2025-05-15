@@ -1,10 +1,10 @@
 import { Definition } from "../definitions";
 
-type Params = [market_asset_id: string];
+type Params = [market_asset_id: string | number];
 
-type DiscountDistribution = {
+export type DiscountDistribution = {
   discount: number;
-  amount: string;
+  amount: bigint;
 };
 
 type MetaData = {

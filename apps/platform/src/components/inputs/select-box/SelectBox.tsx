@@ -16,7 +16,7 @@ interface Props<T> {
 }
 
 const SelectBox = <
-  T extends string | number | { [key: string]: string | number },
+  T extends string | number | { [key: string]: string | number | bigint },
 >({
   options,
   value,

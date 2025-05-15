@@ -27,7 +27,7 @@ interface LiquidationMarkets {
 }
 
 interface MarketBidDistribution {
-  assetId: string;
+  assetId: string | number;
 }
 
 interface RecentLiquidation {

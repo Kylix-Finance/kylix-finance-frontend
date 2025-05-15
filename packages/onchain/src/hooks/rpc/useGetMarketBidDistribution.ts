@@ -3,7 +3,7 @@ import { queryKeys } from "@repo/shared";
 import { useRpc } from "../useRpc";
 
 interface Params {
-  assetId: string;
+  assetId: string | number;
 }
 
 export const useGetMarketBidDistribution = ({ assetId }: Params) => {
@@ -16,7 +16,7 @@ export const useGetMarketBidDistribution = ({ assetId }: Params) => {
     queryKey: queryKeys.marketBidDistribution({ assetId }),
     queryFn: enabled
       ? async () => {
-          const response = await execute(assetId);
+          const response = await execute(Number(assetId));
           if (!response) return null;
           const [metaData, discountDistributions] = response;
           const transformedDiscounts = discountDistributions.map(

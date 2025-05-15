@@ -3,23 +3,39 @@ import { SelectBox } from "~/components/inputs/select-box";
 import styles from "./Form.module.scss";
 import InputNumber from "~/components/inputs/input-number";
 import { PrivateButton } from "~/components/private-button";
+import {
+  formatBigNumbers,
+  formatUnit,
+  useGetMarketBidDistribution,
+} from "@repo/onchain";
+import { useParams } from "next/navigation";
+import { DiscountDistribution } from "@repo/onchain/src/types/rpc/liquidation/getMarketBidDistribution";
+import { useEffect, useRef, useState } from "react";
 
 const Form = () => {
-  // const { id: assetId } = useParams<{ id: string }>();
+  const [discountValue, setDiscountValue] = useState<DiscountDistribution>();
 
-  // const { data: bidDistribution } = useGetMarketBidDistribution({
-  //   assetId,
-  // });
+  const { id: assetId } = useParams<{ id: string }>();
 
-  // console.log("______XXXXXX", bidDistribution);
-  const renderDiscountOption = (option: {
-    percent: string;
-    volume: number;
-  }) => {
+  const { data: bidDistribution } = useGetMarketBidDistribution({
+    assetId: +assetId,
+  });
+  const onceRef = useRef(false);
+  useEffect(() => {
+    if (onceRef.current || !bidDistribution) return;
+    onceRef.current = true;
+    setDiscountValue(
+      bidDistribution[1][Math.floor(bidDistribution[1].length / 2)]
+    );
+  }, [bidDistribution]);
+
+  const renderDiscountOption = (option: DiscountDistribution) => {
     return (
       <div className={styles.discount_option}>
-        <span className={styles.percent}>%{option.percent}</span>
-        <span className={styles.volume}>${option.volume}</span>
+        <span className={styles.percent}>%{option.discount}</span>
+        <span className={styles.volume}>
+          ${formatBigNumbers(formatUnit(option.amount, 6), 2)}
+        </span>
       </div>
     );
   };
@@ -30,14 +46,11 @@ const Form = () => {
       <div className={styles.bid_info}>Premium (Discount)</div>
       <SelectBox
         className={styles.discount_select_target}
-        value={{ percent: "20", volume: 200 }}
-        options={[
-          { percent: "10", volume: 100 },
-          { percent: "20", volume: 200 },
-          { percent: "30", volume: 300 },
-        ]}
+        value={discountValue}
+        options={bidDistribution?.[1] || []}
         renderOption={renderDiscountOption}
         renderValue={renderDiscountOption}
+        onChange={setDiscountValue}
         portalClassName={styles.discount_select_portal}
       />
       <InputNumber
