@@ -6,6 +6,7 @@ import CardItem from "../../../../../components/card-item/CardItem";
 import Skeleton from "~/components/skeleton";
 import { VoidFunction } from "~/types";
 import Link from "next/link";
+import { useAccountsStore } from "@repo/shared";
 
 interface Props {
   data: LandingPool | null;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const Card = ({ data, isPending, onBorrowClick, onSupplyClick }: Props) => {
+  const { account } = useAccountsStore();
   return (
     <Link href={`/markets/${data?.asset_id}`} className={styles.container}>
       <div className={styles.header}>
@@ -73,7 +75,7 @@ const Card = ({ data, isPending, onBorrowClick, onSupplyClick }: Props) => {
                 e.preventDefault();
                 onSupplyClick();
               }}
-              disabled={!data}
+              disabled={!data || !account?.address}
             >
               Supply
             </Button>
@@ -89,7 +91,7 @@ const Card = ({ data, isPending, onBorrowClick, onSupplyClick }: Props) => {
 
                 onBorrowClick();
               }}
-              disabled={!data}
+              disabled={!data || !account?.address}
             >
               Borrow
             </Button>

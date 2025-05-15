@@ -102,6 +102,7 @@ export const MarketTable = ({
               Supply
             </Button>
             <Button
+              disabled={!account?.address}
               variant="secondary"
               onClick={(e) => {
                 e.stopPropagation();
