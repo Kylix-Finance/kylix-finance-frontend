@@ -25,7 +25,7 @@ const Form = () => {
   const { id: assetId } = useParams<{ id: string }>();
 
   const { mutate: placeBid, isPending: isPlaceBidLoading } = usePlaceBid({
-    assetId,
+    assetId: +assetId,
   });
 
   const { data: bidDistribution } = useGetMarketBidDistribution({
@@ -51,7 +51,7 @@ const Form = () => {
     if (!balance || !assetMetaData || !amount) return;
 
     placeBid({
-      balance: parseUnit(amount, 18),
+      balance: parseUnit(amount, assetMetaData.decimals),
       discount: discountValue?.discount || 0,
     });
   };
@@ -88,13 +88,13 @@ const Form = () => {
         showEstimate
         showPercentButtons
         onMaxClick={() => console.log("Max clicked")}
-        selectedToken="USDC"
+        selectedToken="USDT"
         onTokenSelect={(token) => console.log("Selected token:", token)}
         availableTokens={["USDT"]}
         placeholder="0"
         decimals={4}
-        price="94000"
-        availableAmount="0.056"
+        price="1"
+        availableAmount={balance?.formattedBalance}
       />
       <PrivateButton
         size="large"

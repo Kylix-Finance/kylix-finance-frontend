@@ -3,7 +3,7 @@ import { useTransaction } from "../useTransaction";
 import { TransactionCallbacks } from "../../types";
 
 interface PlaceBidParams {
-  assetId: string;
+  assetId: string | number;
 }
 interface MutationFnParams {
   balance: string | bigint;
