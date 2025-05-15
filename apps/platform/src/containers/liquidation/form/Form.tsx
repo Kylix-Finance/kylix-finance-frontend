@@ -2,6 +2,7 @@
 import { SelectBox } from "~/components/inputs/select-box";
 import styles from "./Form.module.scss";
 import InputNumber from "~/components/inputs/input-number";
+import { PrivateButton } from "~/components/private-button";
 
 const Form = () => {
   // const { id: assetId } = useParams<{ id: string }>();
@@ -53,6 +54,9 @@ const Form = () => {
         price="94000"
         availableAmount="0.056"
       />
+      <PrivateButton size="large" fullWidth containerClassName={styles.submit}>
+        Enter an amount
+      </PrivateButton>
     </>
   );
 };
