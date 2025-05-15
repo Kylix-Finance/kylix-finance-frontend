@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   useFloating,
   offset,
@@ -18,6 +18,7 @@ import { motion } from "motion/react";
 interface PopoverPanelProps {
   target: React.ReactNode;
   panel: React.ReactNode;
+  portalClassName?: string;
   onOpenChange: (
     open: boolean,
     event?: Event,
@@ -31,7 +32,10 @@ export function PopoverPanel({
   panel,
   onOpenChange,
   open,
+  portalClassName,
 }: PopoverPanelProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const { refs, floatingStyles, context } = useFloating({
     open,
     middleware: [offset(10), flip(), shift()],
@@ -48,25 +52,26 @@ export function PopoverPanel({
   ]);
 
   return (
-    <>
+    <div ref={containerRef} style={{ position: "relative" }}>
       <div ref={refs.setReference} {...getReferenceProps()}>
         {target}
       </div>
       <AnimatePresence>
         {open && (
-          <FloatingPortal>
+          <FloatingPortal root={containerRef}>
             <motion.div
               {...framerProps}
               variants={fadeInOutAnimation}
               ref={refs.setFloating}
               style={{ ...floatingStyles, zIndex: 10 }}
               {...getFloatingProps()}
+              className={portalClassName}
             >
               {panel}
             </motion.div>
           </FloatingPortal>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

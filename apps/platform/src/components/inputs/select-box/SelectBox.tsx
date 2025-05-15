@@ -12,9 +12,12 @@ interface Props<T> {
   renderValue: (value: T) => ReactNode;
   className?: string;
   optionsClassName?: string;
+  portalClassName?: string;
 }
 
-const SelectBox = <T extends string | number>({
+const SelectBox = <
+  T extends string | number | { [key: string]: string | number },
+>({
   options,
   value,
   onChange,
@@ -22,6 +25,7 @@ const SelectBox = <T extends string | number>({
   renderValue,
   className,
   optionsClassName,
+  portalClassName,
 }: Props<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState<T | undefined>(value);
@@ -38,6 +42,7 @@ const SelectBox = <T extends string | number>({
 
   return (
     <PopoverPanel
+      portalClassName={portalClassName}
       target={
         <div className={clsx(styles.selector, className)}>
           {selectedValue ? renderValue(selectedValue) : null}
@@ -48,9 +53,9 @@ const SelectBox = <T extends string | number>({
       }
       panel={
         <div className={clsx(styles.options_list, optionsClassName)}>
-          {options.map((option) => (
+          {options.map((option, index) => (
             <button
-              key={option}
+              key={typeof option === "object" ? index : String(option)}
               className={clsx(styles.option, {
                 [styles.selected_option]: option === selectedValue,
               })}
