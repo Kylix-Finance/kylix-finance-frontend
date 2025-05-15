@@ -6,18 +6,27 @@ import { PrivateButton } from "~/components/private-button";
 import {
   formatBigNumbers,
   formatUnit,
+  parseUnit,
+  useBalance,
   useGetMarketBidDistribution,
+  useMetadata,
+  usePlaceBid,
 } from "@repo/onchain";
 import { useParams } from "next/navigation";
 import { DiscountDistribution } from "@repo/onchain/src/types/rpc/liquidation/getMarketBidDistribution";
 import { useEffect, useRef, useState } from "react";
+import { BASE_ASSET_ID } from "@repo/shared";
 
 const Form = () => {
-  const [value, setValue] = useState<string | undefined>(undefined);
+  const [amount, setAmount] = useState<string | undefined>(undefined);
 
   const [discountValue, setDiscountValue] = useState<DiscountDistribution>();
 
   const { id: assetId } = useParams<{ id: string }>();
+
+  const { mutate: placeBid, isPending: isPlaceBidLoading } = usePlaceBid({
+    assetId,
+  });
 
   const { data: bidDistribution } = useGetMarketBidDistribution({
     assetId: +assetId,
@@ -30,6 +39,22 @@ const Form = () => {
       bidDistribution[1][Math.floor(bidDistribution[1].length / 2)]
     );
   }, [bidDistribution]);
+
+  const { data: assetMetaData, isPending: isMetadataLoading } =
+    useMetadata(BASE_ASSET_ID);
+
+  const { data: balance } = useBalance({
+    assetId: BASE_ASSET_ID.toString(),
+  });
+
+  const handlePlaceBid = () => {
+    if (!balance || !assetMetaData || !amount) return;
+
+    placeBid({
+      balance: parseUnit(amount, 18),
+      discount: discountValue?.discount || 0,
+    });
+  };
 
   const renderDiscountOption = (option: DiscountDistribution) => {
     return (
@@ -56,8 +81,8 @@ const Form = () => {
         portalClassName={styles.discount_select_portal}
       />
       <InputNumber
-        value={value}
-        onChange={setValue}
+        value={amount}
+        onChange={setAmount}
         label="Amount"
         showMaxButton
         showEstimate
@@ -71,8 +96,19 @@ const Form = () => {
         price="94000"
         availableAmount="0.056"
       />
-      <PrivateButton size="large" fullWidth containerClassName={styles.submit}>
-        Enter an amount
+      <PrivateButton
+        size="large"
+        fullWidth
+        containerClassName={styles.submit}
+        onClick={handlePlaceBid}
+        isLoading={isPlaceBidLoading || isMetadataLoading}
+        disabled={!amount || !discountValue}
+      >
+        {balance?.realBalance
+          ? amount
+            ? "Place"
+            : "Enter an amount"
+          : "Insufficient balance"}
       </PrivateButton>
     </>
   );
