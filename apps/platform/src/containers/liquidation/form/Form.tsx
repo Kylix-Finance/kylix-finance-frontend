@@ -1,6 +1,7 @@
 "use client";
 import { SelectBox } from "~/components/inputs/select-box";
 import styles from "./Form.module.scss";
+import InputNumber from "~/components/inputs/input-number";
 
 const Form = () => {
   // const { id: assetId } = useParams<{ id: string }>();
@@ -24,6 +25,8 @@ const Form = () => {
 
   return (
     <>
+      <div className={styles.bid_header}>Place Bid</div>
+      <div className={styles.bid_info}>Premium (Discount)</div>
       <SelectBox
         className={styles.discount_select_target}
         value={{ percent: "20", volume: 200 }}
@@ -35,6 +38,20 @@ const Form = () => {
         renderOption={renderDiscountOption}
         renderValue={renderDiscountOption}
         portalClassName={styles.discount_select_portal}
+      />
+      <InputNumber
+        label="Amount"
+        showMaxButton
+        showEstimate
+        showPercentButtons
+        onMaxClick={() => console.log("Max clicked")}
+        selectedToken="USDC"
+        onTokenSelect={(token) => console.log("Selected token:", token)}
+        availableTokens={["USDT"]}
+        placeholder="0"
+        decimals={4}
+        price="94000"
+        availableAmount="0.056"
       />
     </>
   );

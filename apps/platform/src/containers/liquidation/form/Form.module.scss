@@ -1,5 +1,13 @@
+.bid_header {
+  @include font($font-heading-3);
+}
+.bid_info {
+  margin-top: 8px;
+  @include font($font-heading-5);
+}
 .discount_select_target {
   padding: 10px 16px;
+  margin-block: 8px;
 }
 .discount_select_portal {
   width: 100%;

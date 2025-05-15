@@ -26,7 +26,11 @@
 .form {
   grid-column: 9 / span 4;
   grid-row: 2;
-  background-color: orange;
+  background-color: $color-accent-primary-component;
+  gap: 8px;
+  padding: 24px 16px;
+  color: $color-white;
+  border-radius: 20px;
 
   @include media("<desktop") {
     grid-column: 1 / -1;
