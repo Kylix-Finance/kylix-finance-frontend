@@ -31,15 +31,17 @@ const Recent = ({
       ) : (
         <Cards data={data} isPending={isPending} />
       )}
-      <div className={styles.footer}>
-        <Button
-          onClick={onLoadMoreClick}
-          variant="secondary"
-          disabled={isPending || !hasMore}
-        >
-          Load More Assets
-        </Button>
-      </div>
+      {!isEmpty && (
+        <div className={styles.footer}>
+          <Button
+            onClick={onLoadMoreClick}
+            variant="secondary"
+            disabled={isPending || !hasMore}
+          >
+            Load More Assets
+          </Button>
+        </div>
+      )}
       <Empty isEmpty={isEmpty} />
     </div>
   );

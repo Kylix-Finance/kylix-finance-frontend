@@ -22,7 +22,7 @@ const YourBids = ({ data, isPending, assetId, isEmpty }: Props) => {
       ) : (
         <Cards assetId={assetId} data={data} isPending={isPending} />
       )}
-      <Empty isEmpty={isEmpty} hasBorder />
+      <Empty isEmpty={isEmpty} />
     </div>
   );
 };
