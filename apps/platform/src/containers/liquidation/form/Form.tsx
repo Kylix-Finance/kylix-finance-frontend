@@ -13,6 +13,8 @@ import { DiscountDistribution } from "@repo/onchain/src/types/rpc/liquidation/ge
 import { useEffect, useRef, useState } from "react";
 
 const Form = () => {
+  const [value, setValue] = useState<string | undefined>(undefined);
+
   const [discountValue, setDiscountValue] = useState<DiscountDistribution>();
 
   const { id: assetId } = useParams<{ id: string }>();
@@ -54,6 +56,8 @@ const Form = () => {
         portalClassName={styles.discount_select_portal}
       />
       <InputNumber
+        value={value}
+        onChange={setValue}
         label="Amount"
         showMaxButton
         showEstimate
