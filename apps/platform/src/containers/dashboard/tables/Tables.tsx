@@ -17,6 +17,7 @@ import { useAccountsStore } from "@repo/shared";
 import TokenIcon from "~/components/token-icon";
 import Sort from "~/components/sort";
 import { Sort as SortItem } from "~/types";
+import { useViewportSize } from "@mantine/hooks";
 type Tab = "markets" | "liquidations";
 interface Network {
   name: string;
@@ -160,6 +161,8 @@ export const Tables = () => {
     (!liquidation || liquidation.length === 0) &&
     !isLiquidationLoading &&
     isLiquidationFetched;
+  const { width } = useViewportSize();
+
   return (
     <TableLayout
       header={
@@ -229,6 +232,10 @@ export const Tables = () => {
             key="markets"
             {...framerProps}
             variants={fadeInOutAnimation}
+            style={{
+              maxHeight: width !== 0 ? "max-content" : "400px",
+              minHeight: 432,
+            }}
           >
             <Markets
               data={finalPoolData}
