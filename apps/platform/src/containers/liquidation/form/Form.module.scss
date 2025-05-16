@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 }
 
 .bid_header {
@@ -13,7 +13,6 @@
 }
 .discount_select_target {
   padding: 10px 16px;
-  margin-block: 8px;
 }
 .discount_select_portal {
   width: 100%;
@@ -36,5 +35,4 @@
 }
 
 .submit {
-  margin-top: 8px;
 }

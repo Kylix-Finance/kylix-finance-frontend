@@ -250,6 +250,10 @@ export const Tables = () => {
             key="liquidations"
             {...framerProps}
             variants={fadeInOutAnimation}
+            style={{
+              maxHeight: width !== 0 ? "max-content" : "400px",
+              minHeight: 432,
+            }}
           >
             <Liquidation
               data={finalLiquidationData}
