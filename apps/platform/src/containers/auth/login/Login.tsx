@@ -40,6 +40,7 @@ const Login = () => {
         <div className={styles.form}>
           <p className={styles.title}>Login</p>
           <Input
+            type="password"
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
