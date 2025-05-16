@@ -3,12 +3,11 @@ import { TransactionStage, VoidFunction } from "~/types";
 import Form from "./form/Form";
 import {
   parseUnit,
-  useAssetPrice,
   useBalance,
   useGetLendingPools,
   usePlaceBid,
 } from "@repo/onchain";
-import { useAccountsStore } from "@repo/shared";
+import { BASE_ASSET_ID, useAccountsStore } from "@repo/shared";
 import { useState } from "react";
 import Loading from "./loading/Loading";
 import styles from "./PlaceBidModal.module.scss";
@@ -16,7 +15,7 @@ import Detail from "./detail/Detail";
 import ViewOnly from "../components/view-only/ViewOnly";
 
 interface Props {
-  assetId: number;
+  assetId: string;
   onClose: VoidFunction;
   isViewOnly?: boolean;
   value: string | undefined;
@@ -40,33 +39,26 @@ const PlaceBidModal = ({
     error,
     data: bidData,
   } = usePlaceBid({
-    assetId: assetId?.toString(),
+    assetId,
   });
 
   const {
     data: pool,
     isFetched: isPoolFetched,
     isLoading: isPoolLoading,
-  } = useGetLendingPools({ assetId, account: account?.address });
+  } = useGetLendingPools({ assetId: BASE_ASSET_ID, account: account?.address });
   const {
     data: balance,
     isFetched: isBalanceFetched,
     isLoading: isBalanceLoading,
   } = useBalance({
-    assetId: assetId.toString(),
+    assetId: BASE_ASSET_ID.toString(),
     accountAddress: account?.address,
   });
-  const {
-    data: assetPrice,
-    isLoading: isAssetPriceLoading,
-    isFetched: isAssetPriceFetched,
-  } = useAssetPrice({
-    assetId,
-  });
+
   const isLoading =
     (!pool && isPoolFetched && isPoolLoading) ||
-    (!balance && isBalanceFetched && isBalanceLoading) ||
-    (!assetPrice && isAssetPriceLoading && !isAssetPriceFetched);
+    (!balance && isBalanceFetched && isBalanceLoading);
   const finalValue = isViewOnly ? viewOnlyValue : value;
 
   const disabled = !balance?.realBalance || !finalValue || isLoading;
@@ -106,7 +98,7 @@ const PlaceBidModal = ({
           <div className={styles.content}>
             {isViewOnly ? (
               <ViewOnly
-                assetPrice={assetPrice?.formattedPrice}
+                assetPrice="1"
                 assetSymbol={asset?.asset_symbol}
                 disabled={disabled}
                 isLoading={isLoading}
@@ -123,7 +115,7 @@ const PlaceBidModal = ({
                 formattedBalance={balance?.formattedBalance}
                 onButtonClick={handleClick}
                 isButtonLoading={isBidPending}
-                assetPrice={assetPrice?.formattedPrice}
+                assetPrice="1"
                 disabled={disabled}
                 realBalance={balance?.realBalance}
               />

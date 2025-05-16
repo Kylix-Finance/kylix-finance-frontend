@@ -106,7 +106,7 @@ const Form = () => {
       </PrivateButton> */}
       {isReviewed && (
         <PlaceBidModal
-          assetId={BASE_ASSET_ID}
+          assetId={assetId}
           onClose={() => setIsReviewed(false)}
           isViewOnly
           value={amount}
