@@ -13,6 +13,7 @@ interface Props<T> {
   className?: string;
   optionsClassName?: string;
   portalClassName?: string;
+  activeType?: "border" | "icon";
 }
 
 const SelectBox = <
@@ -26,6 +27,7 @@ const SelectBox = <
   className,
   optionsClassName,
   portalClassName,
+  activeType = "icon",
 }: Props<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState<T | undefined>(value);
@@ -57,14 +59,15 @@ const SelectBox = <
             <button
               key={typeof option === "object" ? index : String(option)}
               className={clsx(styles.option, {
-                [styles.selected_option]: option === selectedValue,
+                [styles.selected_option]:
+                  option === selectedValue && activeType === "border",
               })}
               onClick={() => handleOptionClick(option)}
             >
               <div className={styles.option_wrapper}>
                 {renderOption(option)}
               </div>
-              {option === selectedValue && (
+              {option === selectedValue && activeType === "icon" && (
                 <Check className={styles.check_icon} />
               )}
             </button>
