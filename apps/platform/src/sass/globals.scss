@@ -20,8 +20,9 @@ html {
 }
 body {
   font-family: $font-family-primary;
-  color: #000;
   width: 100%;
+  color: $color-white;
+  @include font($font-body);
 }
 
 ::-webkit-scrollbar {

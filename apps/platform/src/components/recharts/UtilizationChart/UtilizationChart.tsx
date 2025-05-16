@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   CartesianGrid,
-  Legend,
   Line,
   LineChart,
   ReferenceLine,
@@ -16,6 +15,7 @@ import Dot from "./Dot";
 import { getShortMonth } from "~/utils/date";
 import styles from "./UtilizationChart.module.scss";
 import { Switch } from "~/components/ui/switch";
+import Legend from "~/components/legend";
 
 export const UtilizationChart = () => {
   const [showReferenceLine, setShowReferenceLine] = useState(true);
@@ -133,37 +133,26 @@ export const UtilizationChart = () => {
             ifOverflow="extendDomain"
             strokeOpacity={showReferenceLine ? 1 : 0}
           />
-
-          <Legend
-            verticalAlign="bottom"
-            align="center"
-            payload={[
-              {
-                value: "Supply APY",
-                type: "line",
-                id: "supply",
-                color: "var(--color-chart-supply)",
-              },
-              {
-                value: "Borrow APY",
-                type: "line",
-                id: "borrow",
-                color: "var(--color-chart-borrow)",
-              },
-              {
-                value: "Utilization Rate",
-                type: "line",
-                id: "utilization",
-                color: "var(--color-chart-utilization)",
-              },
-            ]}
-            wrapperStyle={{ paddingTop: 12 }}
-            formatter={(value) => (
-              <span className={styles.legend}>{value}</span>
-            )}
-          />
         </LineChart>
       </ResponsiveContainer>
+      <div className={styles.legend}>
+        <Legend
+          items={[
+            {
+              label: "Supply APY",
+              color: "var(--color-chart-supply)",
+            },
+            {
+              label: "Borrow APY",
+              color: "var(--color-chart-borrow)",
+            },
+            {
+              label: "Utilization Rate",
+              color: "var(--color-chart-utilization)",
+            },
+          ]}
+        />
+      </div>
     </div>
   );
 };
