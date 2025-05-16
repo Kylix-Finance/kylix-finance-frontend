@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
 import { TransactionFormProps } from "~/types";
 import CardWrapper from "~/components/card-wrapper";
+import styles from "./TransactionForm.module.scss";
 
 const tabs = [
   { value: "supply" as const, content: "Supply", Component: Supply },
@@ -29,7 +30,7 @@ const TransactionForm = (props: TransactionFormProps) => {
   const activeTabData = tabs.find((tab) => tab.value === activeTab);
 
   return (
-    <CardWrapper>
+    <CardWrapper className={styles.container}>
       <ButtonGroup
         tabs={tabs}
         activeTab={activeTab}

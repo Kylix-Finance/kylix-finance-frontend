@@ -1,13 +1,10 @@
 import { ComponentProps } from "react";
 import styles from "./CardWrapper.module.scss";
-interface Props extends Omit<ComponentProps<"div">, "className"> {}
+import clsx from "clsx";
+interface Props extends ComponentProps<"div"> {}
 
-const CardWrapper = ({ children, ...rest }: Props) => {
-  return (
-    <div className={styles.container} {...rest}>
-      {children}
-    </div>
-  );
+const CardWrapper = ({ className, ...rest }: Props) => {
+  return <div className={clsx(styles.container, className)} {...rest} />;
 };
 
 export default CardWrapper;

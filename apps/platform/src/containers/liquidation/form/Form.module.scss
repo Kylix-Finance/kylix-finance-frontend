@@ -1,3 +1,9 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .bid_header {
   @include font($font-heading-3);
 }

@@ -23,6 +23,7 @@ import {
 import { useParams } from "next/navigation";
 import { random } from "lodash-es";
 import Loading from "~/components/loaders/loading";
+import CardWrapper from "~/components/card-wrapper";
 
 export const LiquidationChart = () => {
   const [hoveredIndex, setHoveredIndex] = useState<ChartItemIndex>(null);
@@ -45,13 +46,13 @@ export const LiquidationChart = () => {
 
   if (!isFetched)
     return (
-      <div className={styles.container}>
+      <CardWrapper>
         <Loading />
-      </div>
+      </CardWrapper>
     );
 
   return (
-    <div className={styles.container}>
+    <CardWrapper>
       <ResponsiveContainer width="100%" height={350}>
         <BarChart
           data={discounts}
@@ -192,6 +193,6 @@ export const LiquidationChart = () => {
           ]}
         />
       </div>
-    </div>
+    </CardWrapper>
   );
 };

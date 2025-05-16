@@ -9,13 +9,18 @@ export interface Data {
 interface Props {
   data: Data[];
   isLoading?: boolean;
+  hasDivider?: boolean;
 }
 
-const StatsBar = ({ data, isLoading }: Props) => {
+const StatsBar = ({ data, isLoading, hasDivider = true }: Props) => {
   return (
     <ScrollableContainer>
       {data.map((item, index) => (
-        <div key={index} className={styles.container}>
+        <div
+          key={index}
+          className={styles.container}
+          data-has-divider={hasDivider}
+        >
           <div className={styles.label}>{item.content}</div>
           <Skeleton isLoading={isLoading} height="24px" rounded>
             <div className={styles.content}>{item.value}</div>

@@ -1,10 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  @include font($font-heading-2);
+}
+
 .reference {
   stroke: $color-chart-utilization;
   stroke-dasharray: 3 3;
 }
 
-.legend {
-  margin-top: 20px;
+.header {
+  display: flex;
+  align-items: center;
 }
 
 .toggle {
@@ -19,4 +30,9 @@
 .toggle_text {
   margin-right: 8px;
   color: $color-neutral-400;
+}
+
+.scale {
+  display: flex;
+  justify-content: flex-end;
 }

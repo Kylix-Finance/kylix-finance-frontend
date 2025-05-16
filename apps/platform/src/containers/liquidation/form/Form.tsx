@@ -69,7 +69,7 @@ const Form = () => {
   };
 
   return (
-    <CardWrapper>
+    <CardWrapper className={styles.container}>
       <div className={styles.bid_header}>Place Bid</div>
       <div className={styles.bid_info}>Premium (Discount)</div>
       <SelectBox
