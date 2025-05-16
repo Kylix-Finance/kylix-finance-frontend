@@ -1,44 +1,25 @@
 .container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(9, minmax(80px, auto));
+  display: flex;
+  flex-direction: column;
   gap: 24px;
-  padding-bottom: 32px;
-}
-
-.header {
-  grid-column: 1 / span 8;
-  grid-row: 1;
   @include media("<desktop") {
-    grid-column: 1 / -1;
+    padding-bottom: 32px;
   }
 }
 
-.chart {
-  grid-column: 1 / span 8;
-  grid-row: 2 / span 4;
+.middle {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+
   @include media("<desktop") {
-    grid-column: 1 / -1;
-    grid-row: 3 / span 4;
+    flex-direction: column-reverse;
   }
 }
-
 .form {
-  grid-column: 9 / span 4;
-  grid-row: 2;
-  color: $color-white;
-
-  @include media("<desktop") {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
+  flex: 0.2;
+  min-width: 400px;
 }
-
-.table {
-  grid-column: 1 / -1;
-  grid-row: 6 / span 4;
-  overflow: hidden;
-  @include media("<desktop") {
-    grid-row: 7 / span 3;
-  }
+.chart {
+  flex: 0.8;
 }

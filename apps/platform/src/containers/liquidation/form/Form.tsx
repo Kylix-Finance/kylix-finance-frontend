@@ -16,6 +16,7 @@ import { useParams } from "next/navigation";
 import { DiscountDistribution } from "@repo/onchain/src/types/rpc/liquidation/getMarketBidDistribution";
 import { useEffect, useRef, useState } from "react";
 import { BASE_ASSET_ID } from "@repo/shared";
+import CardWrapper from "~/components/card-wrapper";
 
 const Form = () => {
   const [amount, setAmount] = useState<string | undefined>(undefined);
@@ -68,7 +69,7 @@ const Form = () => {
   };
 
   return (
-    <>
+    <CardWrapper>
       <div className={styles.bid_header}>Place Bid</div>
       <div className={styles.bid_info}>Premium (Discount)</div>
       <SelectBox
@@ -110,7 +111,7 @@ const Form = () => {
             : "Enter an amount"
           : "Insufficient balance"}
       </PrivateButton>
-    </>
+    </CardWrapper>
   );
 };
 

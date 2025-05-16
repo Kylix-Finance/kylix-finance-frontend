@@ -84,29 +84,33 @@ const Markets = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.action_header}>
-        <ActionHeader
-          data={headerData}
-          symbol={asset?.asset_symbol}
-          title={asset?.asset}
-          isLoading={isLendingPoolPending || isAssetPriceLoading}
-        />
-      </div>
-      <div className={styles.utilization}>
-        <Utilization />
-      </div>
-      <div className={styles.total_supplied_borrowed}>
-        <TotalSuppliedBorrowed />
-      </div>
-      <div className={styles.transaction_form}>
-        <TransactionForm
-          pool={lendingPool?.assets[0]}
-          detail={poolData}
-          price={assetPrice}
-          balance={balance}
-          isLoading={isBalancePending || isLendingPoolPending || isPoolPending}
-          assetId={assetId}
-        />
+      <ActionHeader
+        data={headerData}
+        symbol={asset?.asset_symbol}
+        title={asset?.asset}
+        isLoading={isLendingPoolPending || isAssetPriceLoading}
+      />
+      <div className={styles.content}>
+        <div className={styles.chart_container}>
+          <div className={styles.utilization}>
+            <Utilization />
+          </div>
+          <div className={styles.total_supplied_borrowed}>
+            <TotalSuppliedBorrowed />
+          </div>
+        </div>
+        <div className={styles.transaction_form}>
+          <TransactionForm
+            pool={lendingPool?.assets[0]}
+            detail={poolData}
+            price={assetPrice}
+            balance={balance}
+            isLoading={
+              isBalancePending || isLendingPoolPending || isPoolPending
+            }
+            assetId={assetId}
+          />
+        </div>
       </div>
     </div>
   );

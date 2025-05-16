@@ -1,19 +1,20 @@
 .container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(5, minmax(80px, auto));
+  display: flex;
+  flex-direction: column;
   gap: 24px;
-  padding: 32px;
-  padding-top: 0;
   @include media("<desktop") {
-    grid-template-rows: auto repeat(8, minmax(80px, auto));
+    padding-bottom: 32px;
   }
-
-  & > * {
+}
+.content {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  @include media("<desktop") {
+    flex-direction: column;
     width: 100%;
   }
 }
-
 .action_header {
   grid-column: 1 / span 12;
   grid-row: 1;
@@ -23,41 +24,22 @@
     grid-row: 1;
   }
 }
-
-.utilization {
-  grid-column: 1 / span 8;
-  grid-row: 2 / span 1;
+.chart_container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
   width: 100%;
-  @include media("<desktop") {
-    grid-column: 1 / span 12;
-    grid-row: 3 / span 4;
-  }
+}
+.utilization {
+  width: 100%;
 }
 
 .transaction_form {
-  grid-column: 9 / span 4;
-  grid-row: 2;
   min-width: 450px;
   height: auto;
-  justify-self: end;
 
   @include media("<desktop") {
-    grid-column: 1 / span 12;
-    grid-row: 2;
-    width: 100%;
     min-width: 100%;
-    justify-self: stretch;
-  }
-}
-
-.total_supplied_borrowed {
-  grid-column: 1 / span 8;
-  grid-row: 3 / span 4;
-  width: 100%;
-  flex: 1;
-
-  @include media("<desktop") {
-    grid-column: 1 / span 12;
-    grid-row: 7 / span 3;
   }
 }
