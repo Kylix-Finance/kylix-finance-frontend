@@ -85,7 +85,7 @@ const Loading = ({ stage, value, symbol, error, data }: Props) => {
       title: "Borrow Successfully Confirmed.",
       description: (
         <div className={styles.description}>
-          Your successfully supplied&nbsp;
+          You successfully supplied&nbsp;
           <span className={styles.token}>
             {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
             {value} {symbol}
