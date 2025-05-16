@@ -64,6 +64,7 @@ const Form = () => {
         renderValue={renderDiscountOption}
         onChange={setDiscountValue}
         portalClassName={styles.discount_select_portal}
+        activeType="border"
       />
       <InputNumber
         value={amount}

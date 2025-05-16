@@ -41,13 +41,19 @@
   cursor: pointer;
   color: $color-neutral-400;
   @include font($font-body);
-  transition: background-color 0.2s ease-in-out;
+  transition:
+    background-color,
+    border 0.2s ease-in-out;
   width: 100%;
   text-align: left;
+  border: transparent 1px solid;
 
   &:hover {
     background-color: $color-neutral-800;
   }
+}
+.selected_option {
+  border: $color-primary-light 1px solid;
 }
 
 .option_wrapper {
