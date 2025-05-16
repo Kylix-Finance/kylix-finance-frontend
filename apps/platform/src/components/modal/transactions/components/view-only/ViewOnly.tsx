@@ -11,6 +11,7 @@ interface Props {
   onClick: VoidFunction;
   isLoading: boolean;
   disabled: boolean;
+  buttonText: string;
 }
 
 const ViewOnly = ({
@@ -20,6 +21,7 @@ const ViewOnly = ({
   disabled,
   isLoading,
   onClick,
+  buttonText,
 }: Props) => {
   return (
     <div className={styles.view_only}>
@@ -51,7 +53,7 @@ const ViewOnly = ({
         isLoading={isLoading}
         disabled={disabled}
       >
-        Supply
+        {buttonText}
       </Button>
     </div>
   );

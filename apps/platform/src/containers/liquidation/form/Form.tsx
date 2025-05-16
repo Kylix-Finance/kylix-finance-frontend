@@ -6,11 +6,8 @@ import { PrivateButton } from "~/components/private-button";
 import {
   formatBigNumbers,
   formatUnit,
-  parseUnit,
   useBalance,
   useGetMarketBidDistribution,
-  useMetadata,
-  usePlaceBid,
 } from "@repo/onchain";
 import { useParams } from "next/navigation";
 import { DiscountDistribution } from "@repo/onchain/src/types/rpc/liquidation/getMarketBidDistribution";
@@ -28,10 +25,6 @@ const Form = () => {
 
   const { id: assetId } = useParams<{ id: string }>();
 
-  const { mutate: placeBid, isPending: isPlaceBidLoading } = usePlaceBid({
-    assetId: +assetId,
-  });
-
   const { data: bidDistribution } = useGetMarketBidDistribution({
     assetId: +assetId,
   });
@@ -44,21 +37,9 @@ const Form = () => {
     );
   }, [bidDistribution]);
 
-  const { data: assetMetaData, isPending: isMetadataLoading } =
-    useMetadata(BASE_ASSET_ID);
-
   const { data: balance } = useBalance({
     assetId: BASE_ASSET_ID.toString(),
   });
-
-  const handlePlaceBid = () => {
-    if (!balance || !assetMetaData || !amount) return;
-
-    placeBid({
-      balance: parseUnit(amount, assetMetaData.decimals),
-      discount: discountValue?.discount || 0,
-    });
-  };
 
   const renderDiscountOption = (option: DiscountDistribution) => {
     return (

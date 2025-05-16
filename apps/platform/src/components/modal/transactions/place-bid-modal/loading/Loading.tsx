@@ -50,8 +50,7 @@ const Loading = ({ stage, value, symbol, error, data }: Props) => {
       title: "Awaiting Wallet Approval",
       description: (
         <div className={styles.description}>
-          Authorize this transaction in your wallet to proceed with the bid
-          of&nbsp;
+          Confirm your bid of&nbsp;
           <span className={styles.token}>
             {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
             {value} {symbol}
@@ -82,10 +81,10 @@ const Loading = ({ stage, value, symbol, error, data }: Props) => {
       ),
     },
     finalized: {
-      title: "Bid Successfully Confirmed",
+      title: "Your placing was successful",
       description: (
         <div className={styles.description}>
-          Your successfully placed a bid of&nbsp;
+          You successfully placed a bid of&nbsp;
           <span className={styles.token}>
             {symbol && <TokenIcon width={16} height={16} symbol={symbol} />}{" "}
             {value} {symbol}

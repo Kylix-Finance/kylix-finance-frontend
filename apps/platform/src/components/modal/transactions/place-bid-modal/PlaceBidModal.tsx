@@ -72,6 +72,7 @@ const PlaceBidModal = ({
   const disabled = !balance?.realBalance || !finalValue || isLoading;
 
   const asset = pool?.assets[0];
+
   const handleClick = () => {
     if (!finalValue || !asset || !discount) return;
     bidMutate(
@@ -111,6 +112,7 @@ const PlaceBidModal = ({
                 isLoading={isLoading}
                 onClick={handleClick}
                 value={finalValue}
+                buttonText="Place Bid"
               />
             ) : (
               <Form
@@ -131,7 +133,7 @@ const PlaceBidModal = ({
         ) : (
           <Loading
             stage={stage}
-            value={value}
+            value={finalValue}
             symbol={asset?.asset_symbol}
             error={error}
             data={bidData}
