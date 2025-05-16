@@ -2,16 +2,14 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  @include media("<desktop") {
-    padding-bottom: 32px;
-  }
+  padding-bottom: 32px;
 }
 
 .middle {
   display: flex;
   gap: 24px;
   flex: 1;
-
+  align-items: flex-start;
   @include media("<desktop") {
     flex-direction: column-reverse;
   }
