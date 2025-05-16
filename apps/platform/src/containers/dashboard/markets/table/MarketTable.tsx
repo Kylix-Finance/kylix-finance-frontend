@@ -132,9 +132,7 @@ export const MarketTable = ({
       <Table
         table={table}
         isLoading={isPending}
-        onRowClick={(row: Row<LandingPool>) =>
-          router.push(`/markets/${row.original.asset_id}`)
-        }
+        getHref={(row: Row<LandingPool>) => `/markets/${row.original.asset_id}`}
       />
       <Empty isEmpty={isEmpty} />
     </div>

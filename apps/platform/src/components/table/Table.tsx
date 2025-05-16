@@ -9,14 +9,15 @@ import ChevronUp from "~/assets/icons/chevron-up.svg";
 import ChevronDown from "~/assets/icons/chevron-down.svg";
 import Skeleton from "../skeleton";
 import clsx from "clsx";
+import Link from "next/link";
 
 interface TableProps {
   table: ReactTable<any>;
   isLoading: boolean;
-  onRowClick?: (row: Row<any>) => void;
+  getHref?: (row: Row<any>) => string;
 }
 
-export function Table({ table, isLoading, onRowClick }: TableProps) {
+export function Table({ table, isLoading, getHref }: TableProps) {
   return (
     <div className={styles.container}>
       <table className={styles.table}>
@@ -79,18 +80,25 @@ export function Table({ table, isLoading, onRowClick }: TableProps) {
                 <tr
                   key={row.id}
                   className={clsx(styles.tr, {
-                    [styles.tr_hover]: typeof onRowClick === "function",
+                    [styles.tr_hover]: getHref,
                   })}
-                  onClick={() => onRowClick?.(row)}
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <td className={styles.td} key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
+                  {row.getVisibleCells().map((cell) => {
+                    const content = flexRender(
+                      cell.column.columnDef.cell,
+                      cell.getContext()
+                    );
+
+                    return (
+                      <td className={styles.td} key={cell.id}>
+                        {getHref ? (
+                          <Link href={getHref(row)}>{content}</Link>
+                        ) : (
+                          content
+                        )}
+                      </td>
+                    );
+                  })}
                 </tr>
               ))}
         </tbody>
