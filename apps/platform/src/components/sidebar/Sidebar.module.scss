@@ -81,6 +81,9 @@
   color: $color-primary;
   border: 1px solid $color-primary;
   font-weight: 600;
+  &:hover {
+    background-color: $color-accent-primary-light;
+  }
 }
 
 .disabled_menu_item {
