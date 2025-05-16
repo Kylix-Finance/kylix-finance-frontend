@@ -95,7 +95,7 @@ export const MarketTable = ({
             <Button
               disabled={!account?.address}
               onClick={(e) => {
-                e.stopPropagation();
+                e.preventDefault();
                 onSupplyClick(asset_id);
               }}
             >
@@ -105,7 +105,7 @@ export const MarketTable = ({
               disabled={!account?.address}
               variant="secondary"
               onClick={(e) => {
-                e.stopPropagation();
+                e.preventDefault();
                 onBorrowClick(asset_id);
               }}
             >
