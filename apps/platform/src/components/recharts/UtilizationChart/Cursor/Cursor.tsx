@@ -10,7 +10,7 @@ export const Cursor = ({ points }: CursorProps) => {
         x1={x}
         y1={10}
         x2={x}
-        y2="calc(100% - 62px)"
+        y2="calc(100% - 30px)"
         className={styles.line}
       />
 
@@ -18,7 +18,7 @@ export const Cursor = ({ points }: CursorProps) => {
         x={x}
         y={10}
         width="100%"
-        height="calc(100% - 72px)"
+        height="calc(100% - 40px)"
         fill="rgba(0,0,0,0.2)"
         pointerEvents="none"
       />
