@@ -9,12 +9,12 @@
   display: flex;
   gap: 24px;
   flex: 1;
-  align-items: flex-start;
   @include media("<desktop") {
     flex-direction: column-reverse;
   }
 }
 .form {
+  align-self: flex-start;
   flex: 0.2;
   min-width: 400px;
 }

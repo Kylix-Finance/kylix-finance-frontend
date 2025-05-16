@@ -46,13 +46,13 @@ export const LiquidationChart = () => {
 
   if (!isFetched)
     return (
-      <CardWrapper>
+      <CardWrapper className={styles.container}>
         <Loading />
       </CardWrapper>
     );
 
   return (
-    <CardWrapper>
+    <CardWrapper className={styles.container}>
       <ResponsiveContainer width="100%" height={350}>
         <BarChart
           data={discounts}
