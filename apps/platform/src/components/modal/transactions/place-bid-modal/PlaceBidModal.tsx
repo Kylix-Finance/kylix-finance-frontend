@@ -2,47 +2,44 @@ import Modal from "~/components/ui/modal/Modal";
 import { TransactionStage, VoidFunction } from "~/types";
 import Form from "./form/Form";
 import {
-  formatUnit,
   parseUnit,
   useAssetPrice,
   useBalance,
-  useBorrow,
   useGetLendingPools,
-  useGetUserLtv,
-  usePool,
+  usePlaceBid,
 } from "@repo/onchain";
 import { useAccountsStore } from "@repo/shared";
 import { useState } from "react";
 import Loading from "./loading/Loading";
-import styles from "./BorrowModal.module.scss";
+import styles from "./PlaceBidModal.module.scss";
+import Detail from "./detail/Detail";
 import ViewOnly from "../components/view-only/ViewOnly";
-import Detail from "./form/detail/Detail";
-// import Detail from "./detail/Detail";
-// import ViewOnly from "./view-only/ViewOnly";
 
 interface Props {
   assetId: number;
   onClose: VoidFunction;
   isViewOnly?: boolean;
-  value?: string;
+  value: string | undefined;
+  discount: number | undefined;
 }
 
-const BorrowModal = ({
+const PlaceBidModal = ({
   assetId,
   onClose,
   isViewOnly,
   value: viewOnlyValue,
+  discount,
 }: Props) => {
   const [value, setValue] = useState<string | undefined>(undefined);
   const [stage, setStage] = useState<TransactionStage>("form");
   const { account } = useAccountsStore();
 
   const {
-    mutate: borrowMutate,
-    isPending: isBorrowPending,
+    mutate: bidMutate,
+    isPending: isBidPending,
     error,
-    data: borrowData,
-  } = useBorrow({
+    data: bidData,
+  } = usePlaceBid({
     assetId: assetId?.toString(),
   });
 
@@ -51,11 +48,6 @@ const BorrowModal = ({
     isFetched: isPoolFetched,
     isLoading: isPoolLoading,
   } = useGetLendingPools({ assetId, account: account?.address });
-
-  const { data: otherPoolData } = usePool({ assetId });
-
-  const decimals = pool?.assets[0].asset_decimals;
-
   const {
     data: balance,
     isFetched: isBalanceFetched,
@@ -71,40 +63,21 @@ const BorrowModal = ({
   } = useAssetPrice({
     assetId,
   });
-
-  const { data: ltv } = useGetUserLtv();
-  const allowance = formatUnit(ltv?.allowance || "0", 6);
-
-  const allowanceAmount =
-    Number(allowance || 0) / Number(assetPrice?.formattedPrice || 1);
-
-  const poolBalance = Number(
-    formatUnit(BigInt(otherPoolData?.reserveBalance || 0), decimals) || 0
-  );
-
-  const max = Math.min(poolBalance, allowanceAmount).toFixed(4);
-
-  // const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
-  //   { poolId: assetId }
-  // );
-
-  // const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
-
   const isLoading =
     (!pool && isPoolFetched && isPoolLoading) ||
     (!balance && isBalanceFetched && isBalanceLoading) ||
     (!assetPrice && isAssetPriceLoading && !isAssetPriceFetched);
   const finalValue = isViewOnly ? viewOnlyValue : value;
 
-  const disabled = !finalValue || isLoading;
+  const disabled = !balance?.realBalance || !finalValue || isLoading;
 
   const asset = pool?.assets[0];
-
   const handleClick = () => {
-    if (!finalValue || !asset) return;
-    borrowMutate(
+    if (!finalValue || !asset || !discount) return;
+    bidMutate(
       {
         balance: parseUnit(finalValue, asset.asset_decimals),
+        discount,
         options: {
           onBroadcast: () => setStage("broadcast"),
           onFinalized: () => setStage("finalized"),
@@ -125,7 +98,7 @@ const BorrowModal = ({
     <Modal
       isOpen={!!assetId}
       onClose={onClose}
-      title={stage === "form" ? "You’re borrowing" : undefined}
+      title={stage === "form" ? "You're placing a bid" : undefined}
     >
       <div className={styles.container}>
         {stage === "form" ? (
@@ -147,14 +120,13 @@ const BorrowModal = ({
                 asset={asset}
                 formattedBalance={balance?.formattedBalance}
                 onButtonClick={handleClick}
-                isButtonLoading={isBorrowPending}
+                isButtonLoading={isBidPending}
                 assetPrice={assetPrice?.formattedPrice}
                 disabled={disabled}
                 realBalance={balance?.realBalance}
-                maxValue={max}
               />
             )}
-            <Detail asset={asset} enable={!!finalValue} />
+            <Detail asset={asset} enable={!!finalValue} discount={discount} />
           </div>
         ) : (
           <Loading
@@ -162,7 +134,7 @@ const BorrowModal = ({
             value={value}
             symbol={asset?.asset_symbol}
             error={error}
-            data={borrowData}
+            data={bidData}
           />
         )}
       </div>
@@ -170,4 +142,4 @@ const BorrowModal = ({
   );
 };
 
-export default BorrowModal;
+export default PlaceBidModal;

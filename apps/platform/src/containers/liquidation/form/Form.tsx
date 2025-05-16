@@ -17,8 +17,11 @@ import { DiscountDistribution } from "@repo/onchain/src/types/rpc/liquidation/ge
 import { useEffect, useRef, useState } from "react";
 import { BASE_ASSET_ID } from "@repo/shared";
 import CardWrapper from "~/components/card-wrapper";
+import PlaceBidModal from "~/components/modal/transactions/place-bid-modal/PlaceBidModal";
 
 const Form = () => {
+  const [isReviewed, setIsReviewed] = useState(false);
+
   const [amount, setAmount] = useState<string | undefined>(undefined);
 
   const [discountValue, setDiscountValue] = useState<DiscountDistribution>();
@@ -98,6 +101,14 @@ const Form = () => {
         availableAmount={balance?.formattedBalance}
       />
       <PrivateButton
+        fullWidth
+        onClick={() => setIsReviewed(true)}
+        disabled={!amount || !discountValue}
+        containerClassName={styles.submit}
+      >
+        Review
+      </PrivateButton>
+      {/* <PrivateButton
         size="large"
         fullWidth
         containerClassName={styles.submit}
@@ -110,7 +121,16 @@ const Form = () => {
             ? "Place"
             : "Enter an amount"
           : "Insufficient balance"}
-      </PrivateButton>
+      </PrivateButton> */}
+      {isReviewed && (
+        <PlaceBidModal
+          assetId={BASE_ASSET_ID}
+          onClose={() => setIsReviewed(false)}
+          isViewOnly
+          value={amount}
+          discount={discountValue?.discount}
+        />
+      )}
     </CardWrapper>
   );
 };
