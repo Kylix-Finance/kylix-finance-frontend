@@ -11,23 +11,8 @@ export const useGetMarketBidDistribution = ({ assetId }: Params) => {
     "liquidation",
     "getMarketBidDistribution"
   );
-  const enabled = isApiAvailable;
   return useQuery({
     queryKey: queryKeys.marketBidDistribution({ assetId }),
-    queryFn: enabled
-      ? async () => {
-          const response = await execute(Number(assetId));
-          if (!response) return null;
-          const [metaData, discountDistributions] = response;
-          const transformedDiscounts = discountDistributions.map(
-            (discount) => ({
-              ...discount,
-              amount: BigInt(discount.amount),
-            })
-          );
-
-          return [metaData, transformedDiscounts] as const;
-        }
-      : skipToken,
+    queryFn: isApiAvailable ? async () => execute(Number(assetId)) : skipToken,
   });
 };

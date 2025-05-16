@@ -9,14 +9,20 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { liquidations } from "~/data/charts";
 import CustomBar from "./Bar";
 import TooltipContent from "./Tooltip";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ChartItemIndex } from "~/types";
 import Card from "~/components/card";
 import styles from "./LiquidationChart.module.scss";
 import Legend from "~/components/legend";
+import {
+  formatBigNumbers,
+  formatUnit,
+  useGetMarketBidDistribution,
+} from "@repo/onchain";
+import { useParams } from "next/navigation";
+import { random } from "lodash-es";
 
 export const LiquidationChart = () => {
   const [hoveredIndex, setHoveredIndex] = useState<ChartItemIndex>(null);
@@ -24,11 +30,26 @@ export const LiquidationChart = () => {
   const poolGradientId = "pool-gradient-id";
   const timeGradientId = "time-gradient-id";
 
+  const { id } = useParams<{ id: string }>();
+
+  const { data, isFetched } = useGetMarketBidDistribution({ assetId: id });
+
+  //mock and temporary until second chart API is ready
+  const discounts = useMemo(() => {
+    if (!data) return [];
+    return data[1].map((discount) => ({
+      ...discount,
+      time: random(2, 8),
+    }));
+  }, [data]);
+
+  if (!isFetched) return "loading...";
+
   return (
     <Card>
       <ResponsiveContainer width="100%" height={350}>
         <BarChart
-          data={liquidations}
+          data={discounts}
           margin={{ top: 20, right: 0, left: 0, bottom: 20 }}
           barSize={48}
         >
@@ -60,7 +81,7 @@ export const LiquidationChart = () => {
           </defs>
 
           <XAxis
-            dataKey="percentage"
+            dataKey="discount"
             tickLine={false}
             tickMargin={20}
             tickFormatter={(tick) => `${tick}%`}
@@ -68,16 +89,18 @@ export const LiquidationChart = () => {
           />
 
           <YAxis
-            dataKey="value"
+            width={80}
+            dataKey="amount"
             axisLine={false}
             tickLine={false}
             tick={{ fill: "var(--color-neutral-400)" }}
+            tickFormatter={(tick) => formatBigNumbers(formatUnit(tick, 6), 2)}
           />
 
           <Tooltip content={TooltipContent} cursor={false} />
 
           <Bar
-            dataKey="value"
+            dataKey="amount"
             stroke="var(--color-primary)"
             shape={
               //@ts-expect-error props will be added by rechart
@@ -93,7 +116,7 @@ export const LiquidationChart = () => {
       </ResponsiveContainer>
       <ResponsiveContainer width="100%" height={100} style={{ marginTop: 10 }}>
         <BarChart
-          data={liquidations}
+          data={discounts}
           margin={{ top: 0, right: 0, left: 0, bottom: 10 }}
           barSize={48}
         >
@@ -127,6 +150,7 @@ export const LiquidationChart = () => {
           <Tooltip content={TooltipContent} cursor={false} />
 
           <YAxis
+            width={80}
             dataKey="time"
             axisLine={false}
             tickLine={false}
