@@ -52,7 +52,7 @@ export const LiquidationChart = () => {
     );
 
   return (
-    <CardWrapper className={styles.container}>
+    <CardWrapper>
       <ResponsiveContainer width="100%" height={350}>
         <BarChart
           data={discounts}
