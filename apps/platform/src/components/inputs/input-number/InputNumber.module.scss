@@ -140,7 +140,7 @@
   border: none;
   cursor: pointer;
   color: $color-white;
-  @include font($font-body-compact);
+  @include font($font-heading-5);
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
