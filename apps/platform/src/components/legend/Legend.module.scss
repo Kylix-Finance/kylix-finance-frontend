@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  @include font($font-body);
+}

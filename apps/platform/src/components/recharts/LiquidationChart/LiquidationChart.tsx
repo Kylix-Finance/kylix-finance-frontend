@@ -4,7 +4,6 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -17,6 +16,7 @@ import { useState } from "react";
 import { ChartItemIndex } from "~/types";
 import Card from "~/components/card";
 import styles from "./LiquidationChart.module.scss";
+import Legend from "~/components/legend";
 
 export const LiquidationChart = () => {
   const [hoveredIndex, setHoveredIndex] = useState<ChartItemIndex>(null);
@@ -147,29 +147,22 @@ export const LiquidationChart = () => {
               />
             }
           />
-
-          <Legend
-            verticalAlign="bottom"
-            align="center"
-            payload={[
-              {
-                value: "Pool Value",
-                type: "line",
-                color: "var(--color-primary",
-              },
-              {
-                value: "Time Emptied",
-                type: "line",
-                color: "var(--color-neutral-200)",
-              },
-            ]}
-            wrapperStyle={{ paddingTop: 12 }}
-            formatter={(value) => (
-              <span className={styles.legend}>{value}</span>
-            )}
-          />
         </BarChart>
       </ResponsiveContainer>
+      <div className={styles.legend}>
+        <Legend
+          items={[
+            {
+              label: "Pool Value",
+              color: "var(--color-primary",
+            },
+            {
+              label: "Time Emptied",
+              color: "var(--color-neutral-200)",
+            },
+          ]}
+        />
+      </div>
     </Card>
   );
 };
