@@ -78,7 +78,7 @@ const Form = () => {
         onTokenSelect={(token) => console.log("Selected token:", token)}
         availableTokens={["USDT"]}
         placeholder="0"
-        decimals={4}
+        decimals={2}
         price="1"
         availableAmount={balance?.formattedBalance}
       />

@@ -187,7 +187,8 @@ export const InputNumber = ({
           <Wallet className={styles.wallet_icon} />
           <Skeleton isLoading={isLoading} width={80} height={20} rounded>
             <div className={styles.available_amount}>
-              {formatBigNumbers(availableAmount || "0", 4)} {selectedToken}
+              {formatBigNumbers(availableAmount || "0", decimals)}{" "}
+              {selectedToken}
             </div>
           </Skeleton>
 
