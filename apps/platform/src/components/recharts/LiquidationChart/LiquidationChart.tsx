@@ -13,7 +13,6 @@ import CustomBar from "./Bar";
 import TooltipContent from "./Tooltip";
 import { useMemo, useState } from "react";
 import { ChartItemIndex } from "~/types";
-import Card from "~/components/card";
 import styles from "./LiquidationChart.module.scss";
 import Legend from "~/components/legend";
 import {
@@ -23,6 +22,7 @@ import {
 } from "@repo/onchain";
 import { useParams } from "next/navigation";
 import { random } from "lodash-es";
+import Loading from "~/components/loaders/loading";
 
 export const LiquidationChart = () => {
   const [hoveredIndex, setHoveredIndex] = useState<ChartItemIndex>(null);
@@ -43,10 +43,15 @@ export const LiquidationChart = () => {
     }));
   }, [data]);
 
-  if (!isFetched) return "loading...";
+  if (!isFetched)
+    return (
+      <div className={styles.container}>
+        <Loading />
+      </div>
+    );
 
   return (
-    <Card>
+    <div className={styles.container}>
       <ResponsiveContainer width="100%" height={350}>
         <BarChart
           data={discounts}
@@ -187,6 +192,6 @@ export const LiquidationChart = () => {
           ]}
         />
       </div>
-    </Card>
+    </div>
   );
 };
