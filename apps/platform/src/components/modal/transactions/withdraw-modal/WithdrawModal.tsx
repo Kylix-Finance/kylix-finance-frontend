@@ -113,6 +113,7 @@ const WithdrawModal = ({
                 isLoading={isLoading}
                 onClick={handleClick}
                 value={finalValue}
+                buttonText="Withdraw"
               />
             ) : (
               <Form

@@ -108,6 +108,7 @@ const SupplyModal = ({
                 isLoading={isLoading}
                 onClick={handleClick}
                 value={finalValue}
+                buttonText="Supply"
               />
             ) : (
               <Form

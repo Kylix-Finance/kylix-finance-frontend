@@ -160,6 +160,7 @@ const RepayModal = ({
                 isLoading={isLoading}
                 onClick={handleClick}
                 value={finalValue}
+                buttonText="Repay"
               />
             ) : (
               <Form

@@ -138,6 +138,7 @@ const BorrowModal = ({
                 isLoading={isLoading}
                 onClick={handleClick}
                 value={finalValue}
+                buttonText="Borrow"
               />
             ) : (
               <Form
