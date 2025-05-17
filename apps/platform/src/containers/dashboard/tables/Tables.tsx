@@ -158,7 +158,7 @@ export const Tables = () => {
   const isMarketsEmpty =
     (!finalPoolData || finalPoolData.length === 0) && !isLoading && isFetched;
   const isLiquidationEmpty =
-    (!liquidation || liquidation.length === 0) &&
+    (!finalLiquidationData || finalLiquidationData.length === 0) &&
     !isLiquidationLoading &&
     isLiquidationFetched;
   const { width } = useViewportSize();

@@ -1,8 +1,6 @@
 import InputNumber from "~/components/inputs/input-number";
 import styles from "./Form.module.scss";
 import { LandingPool } from "@repo/onchain";
-import Detail from "./detail/Detail";
-import { LinkButton } from "~/components/ui/link-button";
 import { PrivateButton } from "~/components/private-button";
 interface Props {
   value: string | undefined;
@@ -55,14 +53,6 @@ const Form = ({
         >
           {value ? "Borrow" : "Enter an amount"}
         </PrivateButton>
-      </div>
-      <Detail asset={asset} enable={!!value} />
-      <div className={styles.alert}>
-        <p>
-          Maximum LTV: 75%. Borrow up to 75% of your collateral value. Monitor
-          health factor to avoid liquidation.
-        </p>
-        <LinkButton href="/">Learn more</LinkButton>
       </div>
     </div>
   );

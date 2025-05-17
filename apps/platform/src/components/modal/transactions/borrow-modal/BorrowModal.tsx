@@ -17,6 +17,7 @@ import Loading from "./loading/Loading";
 import styles from "./BorrowModal.module.scss";
 import ViewOnly from "../components/view-only/ViewOnly";
 import Detail from "./form/detail/Detail";
+import { LinkButton } from "~/components/ui/link-button";
 // import Detail from "./detail/Detail";
 // import ViewOnly from "./view-only/ViewOnly";
 
@@ -84,12 +85,6 @@ const BorrowModal = ({
 
   const max = Math.min(poolBalance, allowanceAmount).toFixed(4);
 
-  // const { data: assetWiseBorrowCollateral } = useGetAssetWiseBorrowsCollaterals(
-  //   { poolId: assetId }
-  // );
-
-  // const borrowAssetData = assetWiseBorrowCollateral?.borrowedAssets[0];
-
   const isLoading =
     (!pool && isPoolFetched && isPoolLoading) ||
     (!balance && isBalanceFetched && isBalanceLoading) ||
@@ -155,7 +150,15 @@ const BorrowModal = ({
                 maxValue={max}
               />
             )}
+
             <Detail asset={asset} enable={!!finalValue} />
+            <div className={styles.alert}>
+              <p>
+                Maximum LTV: 75%. Borrow up to 75% of your collateral value.
+                Monitor health factor to avoid liquidation.
+              </p>
+              <LinkButton href="/">Learn more</LinkButton>
+            </div>
           </div>
         ) : (
           <Loading

@@ -53,5 +53,6 @@
   align-items: center;
   gap: 8px;
   padding-left: 4px;
+  text-wrap: nowrap;
   @include font($font-heading-5);
 }
