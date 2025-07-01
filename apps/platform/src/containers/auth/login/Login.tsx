@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [password, setPassword] = useState<string | undefined>(undefined);
-  const { mutate, isPending } = useLogin();
+  const { mutate, isPending, isSuccess } = useLogin();
   const disabled = !password || password.trim().length < 4;
   const router = useRouter();
   const handleClick = () => {
@@ -48,7 +48,7 @@ const Login = () => {
           <Button
             onClick={handleClick}
             fullWidth
-            isLoading={isPending}
+            isLoading={isPending || isSuccess}
             disabled={disabled}
           >
             Login
