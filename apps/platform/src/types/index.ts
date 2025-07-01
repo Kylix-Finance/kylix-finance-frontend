@@ -103,3 +103,7 @@ export type Sort = {
   title: string;
   value: string;
 };
+export interface Network {
+  name: string;
+  symbol: string;
+}

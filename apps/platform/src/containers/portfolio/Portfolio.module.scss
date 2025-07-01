@@ -1,0 +1,30 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "total_portfolio_value total_collateral_borrowed"
+    "tvl_container tvl_container"
+    "table_container table_container";
+}
+
+.total_collateral_borrowed {
+  grid-area: total_collateral_borrowed;
+  height: max-content;
+}
+
+.total_portfolio_value {
+  grid-area: total_portfolio_value;
+  height: max-content;
+}
+
+.tvl_container {
+  grid-area: tvl_container;
+  height: max-content;
+}
+
+.table_container {
+  grid-area: table_container;
+  height: max-content;
+}

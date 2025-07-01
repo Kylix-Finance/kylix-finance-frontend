@@ -9,22 +9,15 @@ import TableLayout from "~/components/table-layout";
 import { Input } from "~/components/ui/input";
 import Search from "~/assets/icons/search.svg";
 import { useQueryState } from "nuqs";
-import { SelectBox } from "~/components/inputs/select-box";
-import Glob from "~/assets/icons/glob.svg";
-import capitalize from "lodash/capitalize";
 import Markets from "../markets/Markets";
 import Liquidation from "../liquidation/Liquidation";
 import { useGetLendingPools, useGetLiquidationMarkets } from "@repo/onchain";
 import { useAccountsStore } from "@repo/shared";
-import TokenIcon from "~/components/token-icon";
 import Sort from "~/components/sort";
-import { Sort as SortItem } from "~/types";
+import { Network as NetworkItemType, Sort as SortItem } from "~/types";
 import { useViewportSize } from "@mantine/hooks";
+import Network from "~/components/filters/network/Network";
 type Tab = "markets" | "liquidations";
-interface Network {
-  name: string;
-  symbol: string;
-}
 
 const sortOptions = new Map<string, SortItem>([
   [
@@ -75,7 +68,7 @@ export const Tables = () => {
     !liquidation && (isLiquidationLoading || !isLiquidationFetched);
 
   const networks = useMemo(() => {
-    const map = new Map<string, Network>([
+    const map = new Map<string, NetworkItemType>([
       [
         "none",
         {
@@ -110,20 +103,6 @@ export const Tables = () => {
   const [selectedSort, setSelectedSort] = useQueryState("sort", {
     defaultValue: sortOptionKeys[0],
   });
-
-  const renderNetwork = (key: string) => {
-    const network = networks.get(key);
-    return (
-      <div className={styles.selected_network}>
-        {key === "none" || isMarketsPending ? (
-          <Glob className={styles.glob} />
-        ) : (
-          <TokenIcon height={20} width={20} symbol={key} />
-        )}
-        {capitalize(network?.name || "All networks")}
-      </div>
-    );
-  };
 
   const finalPoolData = useMemo(() => {
     if (!pool?.assets || activeTab !== "markets") return [];
@@ -193,15 +172,12 @@ export const Tables = () => {
             <div className={styles.left}>
               <div className={styles.option}>
                 <p className={styles.label}>Filter by:</p>
-                <SelectBox
-                  options={networkKeys}
-                  onChange={(value: string) => {
-                    setSelectedNetwork(value);
-                  }}
-                  renderOption={renderNetwork}
-                  value={selectedNetwork}
-                  renderValue={renderNetwork}
-                  className={styles.select}
+                <Network
+                  networkKeys={networkKeys}
+                  networks={networks}
+                  selectedNetwork={selectedNetwork}
+                  setSelectedNetwork={setSelectedNetwork}
+                  isPending={isMarketsPending || isLiquidationPending}
                 />
               </div>
               <div className={styles.option}>

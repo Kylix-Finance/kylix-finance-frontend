@@ -1,0 +1,17 @@
+.select {
+  padding: 9px 16px !important;
+}
+.selected_network {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 4px;
+  text-wrap: nowrap;
+  @include font($font-heading-5);
+}
+
+.glob {
+  color: $color-primary;
+  width: 20px;
+  height: 20px;
+}

@@ -5,8 +5,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
     "total_locked total_supply_borrow"
-    "table_container table_container"
-    "test test";
+    "table_container table_container";
   gap: 24px;
   padding-bottom: 24px;
   @include media("<=tablet") {
