@@ -82,8 +82,10 @@ export const Sidebar = () => {
                     className={clsx(styles.menu_item, {
                       [styles.active_menu_item]:
                         pathname === item.path ||
-                        item.relatedPaths?.some((item) =>
-                          pathname.startsWith(item)
+                        (item.path === "/dashboard" && pathname === "/") ||
+                        item.relatedPaths?.some(
+                          (related) =>
+                            pathname.startsWith(related) && related !== "/"
                         ),
                       [styles.disabled_menu_item]: item.disabled,
                     })}

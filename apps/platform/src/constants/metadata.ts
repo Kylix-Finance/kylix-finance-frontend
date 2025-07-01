@@ -10,4 +10,7 @@ export const metaTags = {
   dashboard: {
     title: "Dashboard",
   },
+  portfolio: {
+    title: "Portfolio",
+  },
 } as const satisfies Record<string, Metadata>;
