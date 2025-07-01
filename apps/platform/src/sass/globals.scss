@@ -54,3 +54,32 @@ html {
     scrollbar-color: $color-neutral-700 $color-black;
   }
 }
+
+//toastify styles
+
+.toastify_container {
+  padding: 0;
+  border-radius: 20px;
+  background-color: $color-black;
+  overflow: hidden;
+}
+
+.toastify_success {
+  background: $color-semantic-success !important;
+}
+
+.toastify_information {
+  background: $color-semantic-info !important;
+}
+
+.toastify_message {
+  background: $color-semantic-info !important;
+}
+
+.toastify_warning {
+  background: $color-semantic-warning !important;
+}
+
+.toastify_error {
+  background: $color-semantic-error !important;
+}
