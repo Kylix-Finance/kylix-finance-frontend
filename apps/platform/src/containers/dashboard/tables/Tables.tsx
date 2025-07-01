@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./Tables.module.scss";
 import { ButtonGroup } from "~/components/ui/button-group";
 import { useMemo } from "react";

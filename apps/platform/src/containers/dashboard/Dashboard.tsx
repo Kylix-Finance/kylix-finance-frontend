@@ -5,6 +5,7 @@ import styles from "./Dashboard.module.scss";
 import TotalLocked from "./total-locked/TotalLocked";
 import TotalSupplyBorrow from "./total-supply-borrow/TotalSupplyBorrow";
 import Tables from "./tables";
+import { Suspense } from "react";
 
 const Dashboard = () => {
   return (
@@ -17,7 +18,9 @@ const Dashboard = () => {
           <TotalSupplyBorrow />
         </div>
         <div className={styles.table_container}>
-          <Tables />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Tables />
+          </Suspense>
         </div>
       </div>
     </PageLayout>
