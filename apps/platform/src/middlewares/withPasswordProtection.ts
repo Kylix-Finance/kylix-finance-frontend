@@ -4,7 +4,7 @@ import { Middleware } from "~/types";
 import { ENV } from "~/config/env";
 export const withPasswordProtection = (middleware: Middleware): Middleware => {
   return async (request: NextRequest) => {
-    if (ENV.IS_PRODUCTION) {
+    if (!ENV.IS_PRODUCTION) {
       return middleware(request);
     }
 
