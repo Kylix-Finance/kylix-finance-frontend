@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       maxAge: maxCookieLifetime,
       sameSite: "lax",
     });
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.json(null, { status: 200 });
   } else {
     return NextResponse.json({ message: "Invalid password" }, { status: 401 });
   }
