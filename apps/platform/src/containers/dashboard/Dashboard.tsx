@@ -6,7 +6,7 @@ import TotalLocked from "./total-locked/TotalLocked";
 import TotalSupplyBorrow from "./total-supply-borrow/TotalSupplyBorrow";
 import Tables from "./tables";
 import { Suspense } from "react";
-
+//deploy comment
 const Dashboard = () => {
   return (
     <PageLayout title="Dashboard">
