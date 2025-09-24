@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { fadeAnimation, framerProps } from "~/animations/variants";
 import { UseTransactionResult } from "@repo/onchain";
 import { LinkButton } from "~/components/ui/link-button";
+import { ENV } from "~/config/env";
 interface Props {
   stage: TransactionStage;
   value: string | undefined;
@@ -95,7 +96,7 @@ const Loading = ({ stage, value, symbol, error, data }: Props) => {
         <div className={styles.footerNote}>
           <LinkButton
             target="_blank"
-            href={`https://polkadot.js.org/apps/?rpc=wss://test-dashboard.kylix.finance#/explorer/query/${data?.blockNumber}`}
+            href={`https://polkadot.js.org/apps/?rpc=${ENV.RPC_ENDPOINT}#/explorer/query/${data?.blockNumber}`}
           >
             View details
           </LinkButton>

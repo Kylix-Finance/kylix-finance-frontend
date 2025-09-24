@@ -9,6 +9,10 @@ import { useMemo } from "react";
 import { Sort as SortItemType } from "~/types";
 import { Input } from "~/components/ui/input";
 import Search from "~/assets/icons/search.svg";
+import { useGetAssetWiseBorrowsCollaterals } from "@repo/onchain";
+import { AnimatePresence, motion } from "motion/react";
+import { fadeInOutAnimation, framerProps } from "~/animations/variants";
+import { useViewportSize } from "@mantine/hooks";
 
 type Tab = "supplied" | "borrowed";
 
@@ -39,6 +43,7 @@ const sortOptionKeys = Array.from(sortOptions.keys());
 
 const Tables = () => {
   const [q, setQ] = useQueryState("q");
+  const { width } = useViewportSize();
 
   const [activeTab, setActiveTab] = useQueryState<Tab>("tab", {
     defaultValue: "supplied",
@@ -47,6 +52,13 @@ const Tables = () => {
   });
   const [selectedSort, setSelectedSort] = useQueryState("sort", {
     defaultValue: sortOptionKeys[0],
+  });
+  const {
+    data: assetWiseBorrowsCollaterals,
+    isPending: isGetAssetWiseBorrowsCollateralsPending,
+    isFetched: isGetAssetWiseBorrowsCollateralFetched,
+  } = useGetAssetWiseBorrowsCollaterals({
+    enabled: activeTab === "borrowed",
   });
 
   const networks = useMemo(() => {
@@ -66,6 +78,23 @@ const Tables = () => {
   const [selectedNetwork, setSelectedNetwork] = useQueryState("network", {
     defaultValue: networkKeys[0],
   });
+
+  const finalBorrowedData = useMemo(() => {
+    if (!assetWiseBorrowsCollaterals || activeTab !== "borrowed") return [];
+    const query = q?.trim().toLowerCase() || "";
+    let filtered = assetWiseBorrowsCollaterals.borrowedAssets.filter((item) => {
+      const name = item.assetName.toLowerCase();
+      const symbol = item.assetSymbol.toLowerCase();
+      return !query || name.includes(query) || symbol.includes(query);
+    });
+    if (selectedNetwork !== "none") {
+      filtered = filtered.filter(
+        (item) => item.assetSymbol === selectedNetwork
+      );
+    }
+
+    return filtered;
+  }, [activeTab, assetWiseBorrowsCollaterals, q, selectedNetwork]);
   return (
     <TableLayout
       header={
@@ -125,7 +154,27 @@ const Tables = () => {
           </div>
         </div>
       }
-    ></TableLayout>
+    >
+      <AnimatePresence mode="wait">
+        {activeTab === "borrowed" && (
+          <motion.div
+            key="borrowed"
+            {...framerProps}
+            variants={fadeInOutAnimation}
+            style={{
+              maxHeight: width !== 0 ? "max-content" : "400px",
+              minHeight: 432,
+            }}
+          >
+            {/* <Borrowed
+              data={finalPoolData}
+              isEmpty={isMarketsEmpty}
+              isPending={isMarketsPending}
+            /> */}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </TableLayout>
   );
 };
 

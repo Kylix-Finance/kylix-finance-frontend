@@ -4,11 +4,17 @@ import { decodeArrayToString, queryKeys, useAccountsStore } from "@repo/shared";
 interface Params {
   poolId?: string | number;
   account?: string;
+  enabled?: boolean;
 }
+
+export type UseGetAssetWiseBorrowsCollaterals = ReturnType<
+  typeof useGetAssetWiseBorrowsCollaterals
+>;
 
 export const useGetAssetWiseBorrowsCollaterals = ({
   poolId,
   account,
+  enabled: _enabled,
 }: Params = {}) => {
   const { execute, isApiAvailable } = useRpc(
     "lending",
@@ -16,7 +22,7 @@ export const useGetAssetWiseBorrowsCollaterals = ({
   );
   const { account: activeAccount } = useAccountsStore();
   const finalAccount = account || activeAccount?.address;
-  const enabled = isApiAvailable && account;
+  const enabled = isApiAvailable && account && _enabled;
   return useQuery({
     queryKey: queryKeys.assetWiseBorrowsCollaterals(finalAccount, poolId),
     queryFn: enabled
