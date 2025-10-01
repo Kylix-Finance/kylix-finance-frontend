@@ -8,6 +8,7 @@ interface Props extends ComponentPropsWithRef<"input"> {
   name: string;
   className?: string;
   fullWidth?: boolean;
+  hasWarning?: boolean;
 }
 const Switch = ({
   label,
@@ -15,6 +16,7 @@ const Switch = ({
   className,
   fullWidth,
   disabled,
+  hasWarning,
   ...props
 }: Props) => {
   return (
@@ -35,7 +37,7 @@ const Switch = ({
         type="checkbox"
       />
       <label className={styles.switch_label} htmlFor={name} />
-      {disabled && (
+      {disabled && hasWarning && (
         <Warning width={24} height={24} className={styles.disabled_icon} />
       )}
     </div>

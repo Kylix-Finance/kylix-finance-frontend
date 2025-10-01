@@ -5,3 +5,4 @@ export * from "./useCancelBid";
 export * from "./usePlaceBid";
 export * from "./useRepay";
 export * from "./useRepayAll";
+export * from "./useEnableAsCollateral";

@@ -4,15 +4,22 @@ import { BorrowedResponse } from "../Borrowed";
 import BorrowMore from "../borrow-more/BorrowMore";
 interface Props {
   isPending: boolean;
+  isEmpty: boolean;
   data: BorrowedResponse;
   onRepayClick: (assetId: number) => void;
   onBorrowClick: (assetId: number) => void;
 }
 
-const Cards = ({ data, isPending, onBorrowClick, onRepayClick }: Props) => {
+const Cards = ({
+  data,
+  isPending,
+  isEmpty,
+  onBorrowClick,
+  onRepayClick,
+}: Props) => {
   return (
     <div className={styles.container}>
-      <BorrowMore hasBorrowed={data.length > 0} />
+      <BorrowMore hasBorrowed={data.length > 0 || isEmpty} />
       {(isPending ? Array.from({ length: 6 }, () => null) : data).map(
         (item, index) => (
           <Card

@@ -1,10 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTransaction } from "../useTransaction";
-import { useAccountsStore } from "@repo/shared";
+import { queryKeys, useAccountsStore } from "@repo/shared";
 import { TransactionCallbacks } from "../../types";
+import { UseGetAssetWiseSupplies } from "../rpc";
 
 interface MutationFnParams {
-  assetId: string;
+  assetId: string | number;
   options?: TransactionCallbacks;
 }
 
@@ -18,18 +19,17 @@ export const useEnableAsCollateral = () => {
       return execute(options, assetId);
     },
     onSuccess: (_, { assetId }) => {
-      //FIXME: should be fix after lending pools rpc
-      // queryClient.setQueryData<any>(
-      //   queryKeys.lendingPools({ account: activeAccount?.address }),
-      //   (prev) => {
-      //     if (!prev) return;
-      //     const newAssets = prev.assets.map((item) => ({
-      //       ...item,
-      //       is_collateral: item.id === assetId ? true : item.is_collateral,
-      //     }));
-      //     return { ...prev, assets: newAssets };
-      //   }
-      // );
+      queryClient.setQueryData<UseGetAssetWiseSupplies["data"]>(
+        queryKeys.assetWiseBorrowsCollaterals(account?.address),
+        (prev) => {
+          if (!prev) return;
+          const newAssets = prev.suppliedAssets.map((item) => ({
+            ...item,
+            is_collateral: item.assetId === assetId ? true : item.isCollateral,
+          }));
+          return { ...prev, assets: newAssets };
+        }
+      );
     },
   });
 };

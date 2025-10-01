@@ -9,11 +9,15 @@ import { useMemo } from "react";
 import { Sort as SortItemType } from "~/types";
 import { Input } from "~/components/ui/input";
 import Search from "~/assets/icons/search.svg";
-import { useGetAssetWiseBorrowsCollaterals } from "@repo/onchain";
+import {
+  useGetAssetWiseBorrowsCollaterals,
+  useGetAssetWiseSupplies,
+} from "@repo/onchain";
 import { AnimatePresence, motion } from "motion/react";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
 import { useViewportSize } from "@mantine/hooks";
 import Borrowed from "./borrowed/Borrowed";
+import Supplies from "./supplies/Supplies";
 
 type Tab = "supplied" | "borrowed";
 
@@ -62,7 +66,15 @@ const Tables = () => {
   } = useGetAssetWiseBorrowsCollaterals({
     enabled: activeTab === "borrowed",
   });
-
+  const {
+    data: assetWiseSupplies,
+    isLoading: isGetAssetWiseSuppliesLoading,
+    isPending: isGetAssetWiseSuppliesPending,
+    isFetched: isGetAssetWiseSuppliesFetched,
+  } = useGetAssetWiseSupplies({
+    enabled: activeTab == "supplied",
+  });
+  //networks should be fetched from backend
   const networks = useMemo(() => {
     const map = new Map<string, Network>([
       [
@@ -97,6 +109,22 @@ const Tables = () => {
 
     return filtered;
   }, [activeTab, assetWiseBorrowsCollaterals, q, selectedNetwork]);
+  const finalSuppliesData = useMemo(() => {
+    if (!assetWiseSupplies || activeTab !== "supplied") return [];
+    const query = q?.trim().toLowerCase() || "";
+    let filtered = assetWiseSupplies.suppliedAssets.filter((item) => {
+      const name = item.assetName.toLowerCase();
+      const symbol = item.assetSymbol.toLowerCase();
+      return !query || name.includes(query) || symbol.includes(query);
+    });
+    if (selectedNetwork !== "none") {
+      filtered = filtered.filter(
+        (item) => item.assetSymbol === selectedNetwork
+      );
+    }
+
+    return filtered;
+  }, [activeTab, assetWiseSupplies, q, selectedNetwork]);
   const isBorrowedEmpty =
     (!finalBorrowedData || finalBorrowedData.length === 0) &&
     !isGetAssetWiseBorrowsCollateralLoading &&
@@ -174,6 +202,25 @@ const Tables = () => {
           >
             <Borrowed
               data={finalBorrowedData}
+              isEmpty={isBorrowedEmpty}
+              isPending={isGetAssetWiseBorrowsCollateralsPending}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence mode="wait">
+        {activeTab === "supplied" && (
+          <motion.div
+            key="supplied"
+            {...framerProps}
+            variants={fadeInOutAnimation}
+            style={{
+              maxHeight: width !== 0 ? "max-content" : "400px",
+              minHeight: 432,
+            }}
+          >
+            <Supplies
+              data={finalSuppliesData}
               isEmpty={isBorrowedEmpty}
               isPending={isGetAssetWiseBorrowsCollateralsPending}
             />
