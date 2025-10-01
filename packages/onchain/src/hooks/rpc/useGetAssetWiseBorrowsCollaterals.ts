@@ -22,12 +22,12 @@ export const useGetAssetWiseBorrowsCollaterals = ({
   );
   const { account: activeAccount } = useAccountsStore();
   const finalAccount = account || activeAccount?.address;
-  const enabled = isApiAvailable && account && _enabled;
+  const enabled = isApiAvailable && finalAccount && _enabled;
   return useQuery({
     queryKey: queryKeys.assetWiseBorrowsCollaterals(finalAccount, poolId),
     queryFn: enabled
       ? async () => {
-          const response = await execute(account);
+          const response = await execute(finalAccount);
           if (!response) return null;
           return {
             borrowedAssets: response[0].map((item) => ({

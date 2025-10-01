@@ -13,6 +13,7 @@ import { useGetAssetWiseBorrowsCollaterals } from "@repo/onchain";
 import { AnimatePresence, motion } from "motion/react";
 import { fadeInOutAnimation, framerProps } from "~/animations/variants";
 import { useViewportSize } from "@mantine/hooks";
+import Borrowed from "./borrowed/Borrowed";
 
 type Tab = "supplied" | "borrowed";
 
@@ -55,6 +56,7 @@ const Tables = () => {
   });
   const {
     data: assetWiseBorrowsCollaterals,
+    isLoading: isGetAssetWiseBorrowsCollateralLoading,
     isPending: isGetAssetWiseBorrowsCollateralsPending,
     isFetched: isGetAssetWiseBorrowsCollateralFetched,
   } = useGetAssetWiseBorrowsCollaterals({
@@ -72,7 +74,7 @@ const Tables = () => {
       ],
     ]);
     return map;
-  }, [activeTab]);
+  }, []);
 
   const networkKeys = Array.from(networks.keys());
   const [selectedNetwork, setSelectedNetwork] = useQueryState("network", {
@@ -95,6 +97,10 @@ const Tables = () => {
 
     return filtered;
   }, [activeTab, assetWiseBorrowsCollaterals, q, selectedNetwork]);
+  const isBorrowedEmpty =
+    (!finalBorrowedData || finalBorrowedData.length === 0) &&
+    !isGetAssetWiseBorrowsCollateralLoading &&
+    isGetAssetWiseBorrowsCollateralFetched;
   return (
     <TableLayout
       header={
@@ -166,11 +172,11 @@ const Tables = () => {
               minHeight: 432,
             }}
           >
-            {/* <Borrowed
-              data={finalPoolData}
-              isEmpty={isMarketsEmpty}
-              isPending={isMarketsPending}
-            /> */}
+            <Borrowed
+              data={finalBorrowedData}
+              isEmpty={isBorrowedEmpty}
+              isPending={isGetAssetWiseBorrowsCollateralsPending}
+            />
           </motion.div>
         )}
       </AnimatePresence>
