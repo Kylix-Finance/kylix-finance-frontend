@@ -222,8 +222,8 @@ const Tables = () => {
             }}
           >
             <Supplies
-              data={[]}
-              isEmpty={true}
+              data={finalSuppliesData}
+              isEmpty={isSuppliesEmpty}
               isPending={isGetAssetWiseSuppliesPending}
             />
           </motion.div>
