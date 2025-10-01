@@ -35,7 +35,7 @@ const Borrowed = ({ data, isEmpty, isPending }: Props) => {
             onBorrowClick={(assetId) => setSelectedBorrowAssetId(assetId)}
             onRepayClick={(assetId) => setSelectedRepayAssetId(assetId)}
           />
-          <BorrowMore hasBorrowed={data.length > 0 || isEmpty} hasPadding />
+          {!isPending && <BorrowMore hasBorrowed={!isEmpty} hasPadding />}
         </div>
       ) : (
         <Cards

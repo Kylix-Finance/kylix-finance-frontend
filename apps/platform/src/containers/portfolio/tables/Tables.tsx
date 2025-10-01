@@ -63,17 +63,14 @@ const Tables = () => {
     isLoading: isGetAssetWiseBorrowsCollateralLoading,
     isPending: isGetAssetWiseBorrowsCollateralsPending,
     isFetched: isGetAssetWiseBorrowsCollateralFetched,
-  } = useGetAssetWiseBorrowsCollaterals({
-    enabled: activeTab === "borrowed",
-  });
+  } = useGetAssetWiseBorrowsCollaterals();
+
   const {
     data: assetWiseSupplies,
     isLoading: isGetAssetWiseSuppliesLoading,
     isPending: isGetAssetWiseSuppliesPending,
     isFetched: isGetAssetWiseSuppliesFetched,
-  } = useGetAssetWiseSupplies({
-    enabled: activeTab == "supplied",
-  });
+  } = useGetAssetWiseSupplies();
   //networks should be fetched from backend
   const networks = useMemo(() => {
     const map = new Map<string, Network>([
@@ -95,7 +92,9 @@ const Tables = () => {
 
   const finalBorrowedData = useMemo(() => {
     if (!assetWiseBorrowsCollaterals || activeTab !== "borrowed") return [];
+
     const query = q?.trim().toLowerCase() || "";
+
     let filtered = assetWiseBorrowsCollaterals.borrowedAssets.filter((item) => {
       const name = item.assetName.toLowerCase();
       const symbol = item.assetSymbol.toLowerCase();
@@ -112,6 +111,7 @@ const Tables = () => {
   const finalSuppliesData = useMemo(() => {
     if (!assetWiseSupplies || activeTab !== "supplied") return [];
     const query = q?.trim().toLowerCase() || "";
+
     let filtered = assetWiseSupplies.suppliedAssets.filter((item) => {
       const name = item.assetName.toLowerCase();
       const symbol = item.assetSymbol.toLowerCase();
@@ -129,6 +129,10 @@ const Tables = () => {
     (!finalBorrowedData || finalBorrowedData.length === 0) &&
     !isGetAssetWiseBorrowsCollateralLoading &&
     isGetAssetWiseBorrowsCollateralFetched;
+  const isSuppliesEmpty =
+    (!finalSuppliesData || finalSuppliesData.length === 0) &&
+    !isGetAssetWiseSuppliesLoading &&
+    isGetAssetWiseSuppliesFetched;
   return (
     <TableLayout
       header={
@@ -207,8 +211,6 @@ const Tables = () => {
             />
           </motion.div>
         )}
-      </AnimatePresence>
-      <AnimatePresence mode="wait">
         {activeTab === "supplied" && (
           <motion.div
             key="supplied"
@@ -220,9 +222,9 @@ const Tables = () => {
             }}
           >
             <Supplies
-              data={finalSuppliesData}
-              isEmpty={isBorrowedEmpty}
-              isPending={isGetAssetWiseBorrowsCollateralsPending}
+              data={[]}
+              isEmpty={true}
+              isPending={isGetAssetWiseSuppliesPending}
             />
           </motion.div>
         )}

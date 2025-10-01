@@ -19,7 +19,7 @@ const Cards = ({
 }: Props) => {
   return (
     <div className={styles.container}>
-      <BorrowMore hasBorrowed={data.length > 0 || isEmpty} />
+      <BorrowMore hasBorrowed={!isEmpty} />
       {(isPending ? Array.from({ length: 6 }, () => null) : data).map(
         (item, index) => (
           <Card

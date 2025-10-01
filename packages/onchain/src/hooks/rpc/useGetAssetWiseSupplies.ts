@@ -15,14 +15,14 @@ interface Params {
 export const useGetAssetWiseSupplies = ({
   poolId,
   account,
-  enabled: _enabled,
+  enabled: _enabled = true,
 }: Params = {}) => {
   const { execute, isApiAvailable } = useRpc("lending", "getAssetWiseSupplies");
   const { account: activeAccount } = useAccountsStore();
   const finalAccount = account || activeAccount?.address;
   const enabled = isApiAvailable && finalAccount && _enabled;
   return useQuery({
-    queryKey: queryKeys.assetWiseBorrowsCollaterals(finalAccount, poolId),
+    queryKey: queryKeys.assetWiseSupplies(finalAccount),
     queryFn: enabled
       ? async () => {
           const response = await execute(finalAccount);

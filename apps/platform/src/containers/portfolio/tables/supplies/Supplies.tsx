@@ -3,6 +3,9 @@ import { UseGetAssetWiseSupplies } from "@repo/onchain";
 import { useState } from "react";
 import { BREAKPOINTS } from "~/constants";
 import SuppliesTable from "./table";
+import SupplyModal from "~/components/modal/transactions/supply-modal/SupplyModal";
+import Empty from "./Empty";
+import Cards from "./cards/Cards";
 export type SuppliesResponse = NonNullable<
   UseGetAssetWiseSupplies["data"]
 >["suppliedAssets"];
@@ -14,10 +17,8 @@ interface Props {
 const Supplies = ({ data, isEmpty, isPending }: Props) => {
   const { width } = useViewportSize();
   const isDesktop = width >= BREAKPOINTS.DESKTOP;
-  const [selectedRepayAssetId, setSelectedRepayAssetId] = useState<
-    null | number
-  >(null);
-  const [selectedBorrowAssetId, setSelectedBorrowAssetId] = useState<
+
+  const [selectedSupplyAssetId, setSelectedSupplyAssetId] = useState<
     null | number
   >(null);
   return (
@@ -26,10 +27,21 @@ const Supplies = ({ data, isEmpty, isPending }: Props) => {
         <SuppliesTable
           data={data}
           isPending={isPending}
-          onSupplyClick={() => {}}
+          onSupplyClick={(assetId) => setSelectedSupplyAssetId(assetId)}
         />
       ) : (
-        <div></div>
+        <Cards
+          data={data}
+          isPending={isPending}
+          onSupplyClick={(assetId) => setSelectedSupplyAssetId(assetId)}
+        />
+      )}
+      <Empty isEmpty={isEmpty} hasBorder={!isDesktop} />
+      {selectedSupplyAssetId && (
+        <SupplyModal
+          assetId={selectedSupplyAssetId}
+          onClose={() => setSelectedSupplyAssetId(null)}
+        />
       )}
     </div>
   );
