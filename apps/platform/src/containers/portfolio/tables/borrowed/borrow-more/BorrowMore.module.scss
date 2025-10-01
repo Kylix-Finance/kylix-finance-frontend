@@ -1,6 +1,11 @@
 .padding {
   padding: 24px 16px;
 }
+.action_button {
+  @include media("<=desktop") {
+    width: 100%;
+  }
+}
 .description {
   flex-wrap: wrap;
 }

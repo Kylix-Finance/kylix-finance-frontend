@@ -34,7 +34,7 @@ const BorrowMore = ({ hasBorrowed, hasPadding }: Props) => {
           )
         }
         action={
-          <LinkButton href="/dashboard">
+          <LinkButton href="/dashboard" className={styles.action_button}>
             <Button fullWidth>Explore Assets</Button>
           </LinkButton>
         }
