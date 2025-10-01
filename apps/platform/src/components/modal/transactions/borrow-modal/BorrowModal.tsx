@@ -2,14 +2,12 @@ import Modal from "~/components/ui/modal/Modal";
 import { TransactionStage, VoidFunction } from "~/types";
 import Form from "./form/Form";
 import {
-  formatUnit,
   parseUnit,
   useAssetPrice,
   useBalance,
   useBorrow,
   useGetLendingPools,
-  useGetUserLtv,
-  usePool,
+  useMaxBorrowAmount,
 } from "@repo/onchain";
 import { useAccountsStore } from "@repo/shared";
 import { useState } from "react";
@@ -53,10 +51,6 @@ const BorrowModal = ({
     isLoading: isPoolLoading,
   } = useGetLendingPools({ assetId, account: account?.address });
 
-  const { data: otherPoolData } = usePool({ assetId });
-
-  const decimals = pool?.assets[0].asset_decimals;
-
   const {
     data: balance,
     isFetched: isBalanceFetched,
@@ -73,17 +67,7 @@ const BorrowModal = ({
     assetId,
   });
 
-  const { data: ltv } = useGetUserLtv();
-  const allowance = formatUnit(ltv?.allowance || "0", 6);
-
-  const allowanceAmount =
-    Number(allowance || 0) / Number(assetPrice?.formattedPrice || 1);
-
-  const poolBalance = Number(
-    formatUnit(BigInt(otherPoolData?.reserveBalance || 0), decimals) || 0
-  );
-
-  const max = Math.min(poolBalance, allowanceAmount).toFixed(4);
+  const max = useMaxBorrowAmount({ assetId });
 
   const isLoading =
     (!pool && isPoolFetched && isPoolLoading) ||
