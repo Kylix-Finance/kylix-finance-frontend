@@ -1,0 +1,10 @@
+.container {
+  padding: 24px 16px;
+}
+.description {
+  flex-wrap: wrap;
+}
+.description_balance {
+  @include font($font-heading-4);
+  color: $color-white;
+}

@@ -5,6 +5,7 @@ import { useViewportSize } from "@mantine/hooks";
 import { useState } from "react";
 import RepayModal from "~/components/modal/transactions/repay-modal/RepayModal";
 import BorrowModal from "~/components/modal/transactions/borrow-modal/BorrowModal";
+import BorrowMore from "./borrow-more/BorrowMore";
 export type BorrowedResponse = NonNullable<
   UseGetAssetWiseBorrowsCollaterals["data"]
 >["borrowedAssets"];
@@ -26,12 +27,15 @@ const Borrowed = ({ data, isEmpty, isPending }: Props) => {
   return (
     <div>
       {isDesktop ? (
-        <BorrowedTable
-          data={data}
-          isPending={isPending}
-          onBorrowClick={(assetId) => setSelectedBorrowAssetId(assetId)}
-          onRepayClick={(assetId) => setSelectedRepayAssetId(assetId)}
-        />
+        <div>
+          <BorrowedTable
+            data={data}
+            isPending={isPending}
+            onBorrowClick={(assetId) => setSelectedBorrowAssetId(assetId)}
+            onRepayClick={(assetId) => setSelectedRepayAssetId(assetId)}
+          />
+          <BorrowMore hasBorrowed={true} usdtBalance={1000} />
+        </div>
       ) : (
         <div></div>
       )}
