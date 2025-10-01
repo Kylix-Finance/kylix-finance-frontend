@@ -6,6 +6,7 @@ import { useState } from "react";
 import RepayModal from "~/components/modal/transactions/repay-modal/RepayModal";
 import BorrowModal from "~/components/modal/transactions/borrow-modal/BorrowModal";
 import BorrowMore from "./borrow-more/BorrowMore";
+import Cards from "./cards/Cards";
 export type BorrowedResponse = NonNullable<
   UseGetAssetWiseBorrowsCollaterals["data"]
 >["borrowedAssets"];
@@ -34,10 +35,15 @@ const Borrowed = ({ data, isEmpty, isPending }: Props) => {
             onBorrowClick={(assetId) => setSelectedBorrowAssetId(assetId)}
             onRepayClick={(assetId) => setSelectedRepayAssetId(assetId)}
           />
-          <BorrowMore hasBorrowed={true} usdtBalance={1000} />
+          <BorrowMore hasBorrowed={data.length > 0} hasPadding />
         </div>
       ) : (
-        <div></div>
+        <Cards
+          data={data}
+          isPending={isPending}
+          onBorrowClick={(assetId) => setSelectedBorrowAssetId(assetId)}
+          onRepayClick={(assetId) => setSelectedRepayAssetId(assetId)}
+        />
       )}
       {selectedRepayAssetId && (
         <RepayModal

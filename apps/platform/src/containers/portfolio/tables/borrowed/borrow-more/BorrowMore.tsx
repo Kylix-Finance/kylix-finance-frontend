@@ -3,14 +3,22 @@ import PlusCircle from "~/assets/icons/plus-circle.svg";
 import { Button } from "~/components/ui/button";
 import styles from "./BorrowMore.module.scss";
 import { LinkButton } from "~/components/ui/link-button";
+import { useMaxBorrowAmount } from "@repo/onchain";
+import { BASE_ASSET_ID } from "@repo/shared";
+import clsx from "clsx";
 interface Props {
   hasBorrowed: boolean;
-  usdtBalance: number;
+  hasPadding?: boolean;
 }
 
-const BorrowMore = ({ hasBorrowed, usdtBalance }: Props) => {
+const BorrowMore = ({ hasBorrowed, hasPadding }: Props) => {
+  const usdtAmount = useMaxBorrowAmount({ assetId: BASE_ASSET_ID });
   return (
-    <div className={styles.container}>
+    <div
+      className={clsx({
+        [styles.padding]: hasPadding,
+      })}
+    >
       <EmptyState
         hasBorder
         icon={PlusCircle}
@@ -19,7 +27,7 @@ const BorrowMore = ({ hasBorrowed, usdtBalance }: Props) => {
           hasBorrowed ? (
             <p className={styles.description}>
               Based on your collateral, you can borrow up to{" "}
-              <span className={styles.description_balance}>${usdtBalance}</span>
+              <span className={styles.description_balance}>${usdtAmount}</span>
             </p>
           ) : (
             "Use your collateral to unlock borrowing power and access a wide range of assets instantly."
@@ -27,7 +35,7 @@ const BorrowMore = ({ hasBorrowed, usdtBalance }: Props) => {
         }
         action={
           <LinkButton href="/dashboard">
-            <Button>Explore Assets</Button>
+            <Button fullWidth>Explore Assets</Button>
           </LinkButton>
         }
       />
