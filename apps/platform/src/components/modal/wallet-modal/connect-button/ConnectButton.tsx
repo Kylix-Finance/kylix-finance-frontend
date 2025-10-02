@@ -1,11 +1,14 @@
 import { Button } from "~/components/ui/button";
 import { useAccountsStore } from "@repo/shared";
-const ConnectButton = () => {
+interface Props {
+  content?: string;
+}
+const ConnectButton = ({ content = "Connect" }: Props) => {
   const { setStage } = useAccountsStore();
   const handleClick = () => {
     setStage("walletsList");
   };
-  return <Button onClick={handleClick}>Connect</Button>;
+  return <Button onClick={handleClick}>{content}</Button>;
 };
 
 export default ConnectButton;
