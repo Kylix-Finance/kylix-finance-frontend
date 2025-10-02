@@ -17,17 +17,26 @@ const Tvl = () => {
           <Status variant="error" content="72% (Liquidation)" />
         </div>
       </div>
-      <Skeleton height={10} isLoading={isPending || !data}>
-        {data && (
-          <ProgressBar
-            height={10}
-            safe={40}
-            value={42}
-            warning={60}
-            liquidation={80}
-          />
-        )}
-      </Skeleton>
+      <div className={styles.content}>
+        <div className={styles.current_container}>
+          <span className={styles.current_value}>44%</span>
+          <Status variant="success" content="Safe" />
+        </div>
+        <Skeleton height={10} isLoading={isPending || !data}>
+          {data && (
+            <ProgressBar
+              height={10}
+              safe={40}
+              value={42}
+              warning={60}
+              liquidation={80}
+            />
+          )}
+        </Skeleton>
+        <p className={styles.description}>
+          Current liquidation threshold: 72.01%
+        </p>
+      </div>
     </div>
   );
 };

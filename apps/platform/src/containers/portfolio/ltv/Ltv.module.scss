@@ -23,3 +23,21 @@
   display: flex;
   gap: 8px;
 }
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.current_container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.current_value {
+  @include font($font-heading-1);
+  color: $color-white;
+}
+.description {
+  @include font($font-body);
+  color: $color-neutral-200;
+}
