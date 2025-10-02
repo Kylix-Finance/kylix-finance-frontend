@@ -12,29 +12,34 @@ const Tvl = () => {
       <div className={styles.heading}>
         <p className={styles.title}>Loan-to-Value</p>
         <div className={styles.borders}>
-          <Status variant="success" content="42% (Safe)" />
-          <Status variant="warning" content="62% (Warning)" />
-          <Status variant="error" content="72% (Liquidation)" />
+          <Status variant="success" content="25% (Safe)" />
+          <Status variant="warning" content="75% (Warning)" />
+          <Status
+            variant="error"
+            content={`${Number(data?.liquidation_ltv || 0)}% (Liquidation)`}
+          />
         </div>
       </div>
       <div className={styles.content}>
         <div className={styles.current_container}>
-          <span className={styles.current_value}>44%</span>
+          <span className={styles.current_value}>
+            {Number(data?.current_ltv || 0)}%
+          </span>
           <Status variant="success" content="Safe" />
         </div>
         <Skeleton height={10} isLoading={isPending || !data}>
           {data && (
             <ProgressBar
               height={10}
-              safe={40}
-              value={42}
-              warning={60}
-              liquidation={80}
+              safe={25}
+              value={Number(data.current_ltv)}
+              warning={75}
+              liquidation={Number(data.liquidation_ltv)}
             />
           )}
         </Skeleton>
         <p className={styles.description}>
-          Current liquidation threshold: 72.01%
+          Current liquidation threshold: {Number(data?.liquidation_ltv || 0)}%
         </p>
       </div>
     </div>
