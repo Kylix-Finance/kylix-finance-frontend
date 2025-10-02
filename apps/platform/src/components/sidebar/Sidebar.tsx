@@ -37,10 +37,10 @@ const menuItems: MenuItem[] = [
     relatedPaths: ["/markets", "/liquidations", "/"],
   },
   { path: "/portfolio", label: "Portfolio", icon: User },
-  { path: "/swap", label: "Swap", icon: Swap },
-  { path: "/pools", label: "Pools", icon: SwimmingPool },
-  { path: "/loans", label: "Loans", icon: Coins },
-  { path: "/stake", label: "Stake", icon: Stack },
+  { path: "/swap", label: "Swap", icon: Swap, disabled: true },
+  { path: "/pools", label: "Pools", icon: SwimmingPool, disabled: true },
+  { path: "/loans", label: "Loans", icon: Coins, disabled: true },
+  { path: "/stake", label: "Stake", icon: Stack, disabled: true },
   { path: "/governance", label: "Governance", icon: Bank, disabled: true },
 ];
 

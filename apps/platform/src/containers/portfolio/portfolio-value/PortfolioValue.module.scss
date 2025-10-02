@@ -1,0 +1,32 @@
+.container {
+  border-radius: 20px;
+  border: 1px solid $color-neutral-700;
+  overflow: hidden;
+  background-color: $color-accent-primary-component;
+  backdrop-filter: blur(15px);
+  padding: 16px;
+}
+.heading_container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.heading {
+  @include font($font-body);
+  color: $color-neutral-500;
+}
+.value {
+  @include font($font-heading-1);
+  color: $color-white;
+}
+.heading_description {
+  @include font($font-body);
+  color: $color-neutral-200;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.apr_value {
+  color: $color-primary;
+}
