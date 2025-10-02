@@ -14,7 +14,7 @@ const Tvl = () => {
         <p className={styles.title}>Loan-to-Value</p>
         <div className={styles.borders}>
           <Status variant="success" content="25% (Safe)" />
-          <Status variant="warning" content="75% (Warning)" />
+          <Status variant="warning" content="50% (Warning)" />
           <Status
             variant="error"
             content={`${formatUnit(data?.liquidation_ltv || 0, 4)}% (Liquidation)`}
@@ -26,7 +26,10 @@ const Tvl = () => {
           <span className={styles.current_value}>
             {Number(data?.current_ltv || 0)}%
           </span>
-          <Status variant="success" content="Safe" />
+          <Status
+            variant={Number(formatUnit(data?.current_ltv || 0, 4)) >= 50 ? "error" : Number(formatUnit(data?.current_ltv || 0, 4)) >= 25 ? "warning" : "success"}
+            content={Number(formatUnit(data?.current_ltv || 0, 4)) >= 50 ? "Liquidation Risk" : Number(formatUnit(data?.current_ltv || 0, 4)) >= 25 ? "Warning" : "Safe"}
+          />
         </div>
         <Skeleton height={10} isLoading={isPending || !data}>
           {data && (
@@ -34,7 +37,7 @@ const Tvl = () => {
               height={10}
               safe={25}
               value={Number(formatUnit(data.current_ltv, 4))}
-              warning={75}
+              warning={50}
               liquidation={Number(formatUnit(data.liquidation_ltv, 4))}
             />
           )}
