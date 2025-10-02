@@ -2,13 +2,14 @@ import { Definition } from "../definitions";
 
 type Params = [account: string];
 type Response = {
+  current_borrow: bigint;
+  current_ltv: bigint;
+  borrow_limit: bigint;
+  sale_ltv: bigint;
+  liquidation_value: bigint;
+  liquidation_ltv: bigint;
   allowance: bigint;
-  borrowLimit: bigint;
   collateral: bigint;
-  currentBorrow: bigint;
-  currentLtv: bigint;
-  liquidationLtv: bigint;
-  liquidationValue: bigint;
-  saleLtv: bigint;
+  decimals: number;
 };
 export type GetUserLtv = Definition<Params, Response>;

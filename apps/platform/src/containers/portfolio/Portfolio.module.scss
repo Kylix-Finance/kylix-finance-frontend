@@ -3,6 +3,7 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 24px;
   grid-template-areas:
     "total_portfolio_value total_collateral_borrowed"
     "tvl_container tvl_container"

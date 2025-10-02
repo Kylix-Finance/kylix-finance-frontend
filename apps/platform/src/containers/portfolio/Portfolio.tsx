@@ -2,7 +2,7 @@ import PageLayout from "~/layouts/page/PageLayout";
 import styles from "./Portfolio.module.scss";
 import { Suspense } from "react";
 import Tables from "./tables/Tables";
-import Tvl from "./tvl/Tvl";
+import Ltv from "./ltv/Ltv";
 const Portfolio = () => {
   return (
     <PageLayout title="Portfolio">
@@ -14,7 +14,7 @@ const Portfolio = () => {
           <p>Bye</p>
         </div>
         <div className={styles.tvl_container}>
-          <Tvl />
+          <Ltv />
         </div>
         <div className={styles.table_container}>
           <Suspense fallback={<div>Loading...</div>}>
