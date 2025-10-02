@@ -13,7 +13,7 @@ const Portfolio = () => {
         <div className={styles.total_collateral_borrowed}>
           <p>Bye</p>
         </div>
-        <div className={styles.tvl_container}>
+        <div className={styles.ltv_container}>
           <Ltv />
         </div>
         <div className={styles.table_container}>

@@ -5,4 +5,21 @@
   background-color: $color-accent-primary-component;
   backdrop-filter: blur(15px);
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  @include font($font-heading-5);
+  color: $color-neutral-200;
+}
+.borders {
+  display: flex;
+  gap: 8px;
 }
