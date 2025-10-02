@@ -1,9 +1,10 @@
 "use client";
 import ProgressBar from "~/components/progress-bar";
 import styles from "./Ltv.module.scss";
-import { useGetUserLtv } from "@repo/onchain";
+import { useGetUserLtv, formatUnit } from "@repo/onchain";
 import Skeleton from "~/components/skeleton";
 import { Status } from "~/components/ui/status";
+
 const Tvl = () => {
   const { data, isPending } = useGetUserLtv();
 
@@ -16,7 +17,7 @@ const Tvl = () => {
           <Status variant="warning" content="75% (Warning)" />
           <Status
             variant="error"
-            content={`${Number(data?.liquidation_ltv || 0)}% (Liquidation)`}
+            content={`${formatUnit(data?.liquidation_ltv || 0, 4)}% (Liquidation)`}
           />
         </div>
       </div>
@@ -32,14 +33,15 @@ const Tvl = () => {
             <ProgressBar
               height={10}
               safe={25}
-              value={Number(data.current_ltv)}
+              value={Number(formatUnit(data.current_ltv, 4))}
               warning={75}
-              liquidation={Number(data.liquidation_ltv)}
+              liquidation={Number(formatUnit(data.liquidation_ltv, 4))}
             />
           )}
         </Skeleton>
         <p className={styles.description}>
-          Current liquidation threshold: {Number(data?.liquidation_ltv || 0)}%
+          Current liquidation threshold:{" "}
+          {formatUnit(data?.liquidation_ltv || 0, 4)}%
         </p>
       </div>
     </div>
