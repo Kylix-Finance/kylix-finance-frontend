@@ -1,7 +1,7 @@
 "use client";
 import ProgressBar from "~/components/progress-bar";
 import styles from "./Ltv.module.scss";
-import { useGetUserLtv, formatUnit } from "@repo/onchain";
+import { useGetUserLtv, formatUnit, formatBigNumbers } from "@repo/onchain";
 import Skeleton from "~/components/skeleton";
 import { Status } from "~/components/ui/status";
 
@@ -17,7 +17,7 @@ const Tvl = () => {
           <Status variant="warning" content="50% (Warning)" />
           <Status
             variant="error"
-            content={`${formatUnit(data?.liquidation_ltv || 0, 4)}% (Liquidation)`}
+            content={`${formatBigNumbers(formatUnit(data?.liquidation_ltv || 0, 4), 2)}% (Liquidation)`}
           />
         </div>
       </div>
@@ -27,8 +27,20 @@ const Tvl = () => {
             {Number(data?.current_ltv || 0)}%
           </span>
           <Status
-            variant={Number(formatUnit(data?.current_ltv || 0, 4)) >= 50 ? "error" : Number(formatUnit(data?.current_ltv || 0, 4)) >= 25 ? "warning" : "success"}
-            content={Number(formatUnit(data?.current_ltv || 0, 4)) >= 50 ? "Liquidation Risk" : Number(formatUnit(data?.current_ltv || 0, 4)) >= 25 ? "Warning" : "Safe"}
+            variant={
+              Number(formatUnit(data?.current_ltv || 0, 4)) >= 50
+                ? "error"
+                : Number(formatUnit(data?.current_ltv || 0, 4)) >= 25
+                  ? "warning"
+                  : "success"
+            }
+            content={
+              Number(formatUnit(data?.current_ltv || 0, 4)) >= 50
+                ? "Liquidation Risk"
+                : Number(formatUnit(data?.current_ltv || 0, 4)) >= 25
+                  ? "Warning"
+                  : "Safe"
+            }
           />
         </div>
         <Skeleton height={10} isLoading={isPending || !data}>
@@ -44,7 +56,7 @@ const Tvl = () => {
         </Skeleton>
         <p className={styles.description}>
           Current liquidation threshold:{" "}
-          {formatUnit(data?.liquidation_ltv || 0, 4)}%
+          {formatBigNumbers(formatUnit(data?.liquidation_ltv || 0, 4), 2)}%
         </p>
       </div>
     </div>
