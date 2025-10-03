@@ -1,9 +1,8 @@
 import { UserBid } from "@repo/onchain";
 import Empty from "./Empty";
-import { useViewportSize } from "@mantine/hooks";
-import { BREAKPOINTS } from "~/constants";
 import YourBidsTable from "./table/YourBidsTable";
 import Cards from "./cards/Cards";
+import { useIsDesktop } from "~/hooks/useIsDesktop";
 
 interface Props {
   data: UserBid[];
@@ -13,8 +12,7 @@ interface Props {
 }
 
 const YourBids = ({ data, isPending, assetId, isEmpty }: Props) => {
-  const { width } = useViewportSize();
-  const isDesktop = width >= BREAKPOINTS.DESKTOP;
+  const isDesktop = useIsDesktop();
   return (
     <div>
       {isDesktop ? (

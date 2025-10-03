@@ -1,0 +1,6 @@
+.chart :global(.recharts-surface:focus),
+.chart :global(.recharts-surface:focus-visible),
+.chart :global(.recharts-sector:focus),
+.chart :global(.recharts-sector:focus-visible) {
+  outline: none;
+}

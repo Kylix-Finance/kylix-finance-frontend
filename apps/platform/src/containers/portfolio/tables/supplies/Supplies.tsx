@@ -1,11 +1,10 @@
-import { useViewportSize } from "@mantine/hooks";
 import { UseGetAssetWiseSupplies } from "@repo/onchain";
 import { useState } from "react";
-import { BREAKPOINTS } from "~/constants";
 import SuppliesTable from "./table";
 import SupplyModal from "~/components/modal/transactions/supply-modal/SupplyModal";
 import Empty from "./Empty";
 import Cards from "./cards/Cards";
+import { useIsDesktop } from "~/hooks/useIsDesktop";
 export type SuppliesResponse = NonNullable<
   UseGetAssetWiseSupplies["data"]
 >["suppliedAssets"];
@@ -15,8 +14,7 @@ interface Props {
   isPending: boolean;
 }
 const Supplies = ({ data, isEmpty, isPending }: Props) => {
-  const { width } = useViewportSize();
-  const isDesktop = width >= BREAKPOINTS.DESKTOP;
+  const isDesktop = useIsDesktop();
 
   const [selectedSupplyAssetId, setSelectedSupplyAssetId] = useState<
     null | number

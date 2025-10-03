@@ -1,12 +1,11 @@
 import { UseGetAssetWiseBorrowsCollaterals } from "@repo/onchain";
 import { BorrowedTable } from "./table/BorrowedTable";
-import { BREAKPOINTS } from "~/constants";
-import { useViewportSize } from "@mantine/hooks";
 import { useState } from "react";
 import RepayModal from "~/components/modal/transactions/repay-modal/RepayModal";
 import BorrowModal from "~/components/modal/transactions/borrow-modal/BorrowModal";
 import BorrowMore from "./borrow-more/BorrowMore";
 import Cards from "./cards/Cards";
+import { useIsDesktop } from "~/hooks/useIsDesktop";
 export type BorrowedResponse = NonNullable<
   UseGetAssetWiseBorrowsCollaterals["data"]
 >["borrowedAssets"];
@@ -17,8 +16,7 @@ interface Props {
 }
 
 const Borrowed = ({ data, isEmpty, isPending }: Props) => {
-  const { width } = useViewportSize();
-  const isDesktop = width >= BREAKPOINTS.DESKTOP;
+  const isDesktop = useIsDesktop();
   const [selectedRepayAssetId, setSelectedRepayAssetId] = useState<
     null | number
   >(null);

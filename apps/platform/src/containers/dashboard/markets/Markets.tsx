@@ -1,11 +1,10 @@
-import { useViewportSize } from "@mantine/hooks";
-import { BREAKPOINTS } from "~/constants";
 import MarketsTable from "./table";
 import { LandingPool } from "@repo/onchain";
 import { useState } from "react";
 import Cards from "./cards/Cards";
 import SupplyModal from "~/components/modal/transactions/supply-modal/SupplyModal";
 import BorrowModal from "~/components/modal/transactions/borrow-modal/BorrowModal";
+import { useIsDesktop } from "~/hooks/useIsDesktop";
 interface Props {
   data: LandingPool[];
   isPending: boolean;
@@ -13,8 +12,7 @@ interface Props {
 }
 
 const Markets = ({ isEmpty, isPending, data }: Props) => {
-  const { width } = useViewportSize();
-  const isDesktop = width >= BREAKPOINTS.DESKTOP;
+  const isDesktop = useIsDesktop();
   const [selectedSupplyAssetId, setSelectedSupplyAssetId] = useState<
     null | number
   >(null);

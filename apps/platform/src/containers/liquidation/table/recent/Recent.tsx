@@ -5,9 +5,8 @@ import { Button } from "~/components/ui/button";
 import { VoidFunction } from "~/types";
 import RecentTable from "./table/RecentTable";
 import styles from "./Recent.module.scss";
-import { BREAKPOINTS } from "~/constants";
-import { useViewportSize } from "@mantine/hooks";
 import Cards from "./cards/Cards";
+import { useIsDesktop } from "~/hooks/useIsDesktop";
 interface Props {
   isPending: boolean;
   isEmpty: boolean;
@@ -22,8 +21,7 @@ const Recent = ({
   hasMore,
   onLoadMoreClick,
 }: Props) => {
-  const { width } = useViewportSize();
-  const isDesktop = width >= BREAKPOINTS.DESKTOP;
+  const isDesktop = useIsDesktop();
   return (
     <div>
       {isDesktop ? (
