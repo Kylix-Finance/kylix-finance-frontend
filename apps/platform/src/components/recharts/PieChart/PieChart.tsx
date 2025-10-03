@@ -15,7 +15,7 @@ export type PieData = {
   fill: string;
 };
 
-type PieChartProps = {
+export type PieChartProps = {
   data: PieData[];
   maxWidth?: number | string;
 } & Pick<ResponsiveContainerProps, "width" | "height" | "aspect" | "maxHeight">;
@@ -28,6 +28,8 @@ export const PieChart = ({
   maxWidth,
   data,
 }: PieChartProps) => {
+  const containerStyle = maxWidth ? { maxWidth, margin: "0 auto" } : undefined;
+
   return (
     <ResponsiveContainer
       width={width}
@@ -35,7 +37,7 @@ export const PieChart = ({
       aspect={height ? undefined : aspect}
       maxHeight={maxHeight}
       className={styles.chart}
-      style={maxWidth ? { maxWidth, margin: "0 auto" } : undefined}
+      style={containerStyle}
     >
       <RechartsPieChart>
         <Pie

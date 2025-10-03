@@ -6,17 +6,15 @@ import {
   useGetAssetWiseBorrowsCollaterals,
   useGetAssetWiseSupplies,
 } from "@repo/onchain";
-import { useIsDesktop } from "~/hooks/useIsDesktop";
-
+import Skeleton from "~/components/skeleton";
 const PortfolioValue = () => {
-  const isDesktop = useIsDesktop();
   const {
     data: assetWiseBorrowCollateral,
     isPending: isAssetWiseBorrowCollateralPending,
   } = useGetAssetWiseBorrowsCollaterals();
   const { data: assetWiseSupplies, isPending: isAssetWiseSuppliesPending } =
     useGetAssetWiseSupplies();
-  const isChartLoading =
+  const isLoading =
     isAssetWiseBorrowCollateralPending || isAssetWiseSuppliesPending;
   const rawTotalSupplied = formatUnit(assetWiseSupplies?.totalSupplied || 0, 4);
   const rawTotalBorrowed = formatUnit(
@@ -34,7 +32,14 @@ const PortfolioValue = () => {
     <div className={styles.container}>
       <div className={styles.heading_container}>
         <p className={styles.heading}>Total Portfolio Value</p>
-        <p className={styles.value}>$1,909.72</p>
+        <Skeleton isLoading={isLoading} width="50%" height={38}>
+          <p className={styles.value}>
+            ${" "}
+            {(
+              Number(rawTotalBorrowed || 0) + Number(rawTotalSupplied || 0)
+            ).toLocaleString()}{" "}
+          </p>
+        </Skeleton>
         <p className={styles.heading_description}>
           Net Earn APR
           <span className={styles.apr_value}>12.3%</span>
