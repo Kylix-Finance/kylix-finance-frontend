@@ -7,7 +7,9 @@ import {
   useGetAssetWiseSupplies,
 } from "@repo/onchain";
 import Skeleton from "~/components/skeleton";
+import { useIsDesktop } from "~/hooks/useIsDesktop";
 const PortfolioValue = () => {
+  const isDesktop = useIsDesktop();
   const {
     data: assetWiseBorrowCollateral,
     isPending: isAssetWiseBorrowCollateralPending,
@@ -45,9 +47,9 @@ const PortfolioValue = () => {
           <span className={styles.apr_value}>12.3%</span>
         </p>
       </div>
-      <div>
+      {isDesktop && (
         <PieChart data={PIE_CHART_DATA} maxWidth={900} maxHeight={900} />
-      </div>
+      )}
     </div>
   );
 };
