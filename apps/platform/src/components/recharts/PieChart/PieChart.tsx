@@ -6,9 +6,11 @@ import {
   Pie,
   PieChart as RechartsPieChart,
   ResponsiveContainer,
+  Tooltip,
 } from "recharts";
 import styles from "./PieChart.module.scss";
 import LegendContent from "./Legend";
+import TooltipContent from "./Tooltip";
 export type PieData = {
   name: string;
   value: number;
@@ -33,8 +35,7 @@ export const PieChart = ({
   return (
     <ResponsiveContainer
       width={width}
-      height={height}
-      aspect={height ? undefined : aspect}
+      height={300}
       maxHeight={maxHeight}
       className={styles.chart}
       style={containerStyle}
@@ -55,6 +56,7 @@ export const PieChart = ({
           isAnimationActive={false}
           legendType="circle"
         />
+        <Tooltip content={TooltipContent} cursor={false} />
         <RechartsLegend
           layout="vertical"
           align="right"
