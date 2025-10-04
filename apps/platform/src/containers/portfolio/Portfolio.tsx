@@ -5,6 +5,7 @@ import Tables from "./tables/Tables";
 import Ltv from "./ltv/Ltv";
 import PortfolioValue from "./portfolio-value/PortfolioValue";
 import ProtectedLayout from "~/layouts/protected";
+import TotalCollateralBorrowed from "./total-collateral-borrowed";
 const Portfolio = () => {
   return (
     <PageLayout title="Portfolio">
@@ -14,7 +15,7 @@ const Portfolio = () => {
             <PortfolioValue />
           </div>
           <div className={styles.total_collateral_borrowed}>
-            <p>Bye</p>
+            <TotalCollateralBorrowed />
           </div>
           <div className={styles.ltv_container}>
             <Ltv />

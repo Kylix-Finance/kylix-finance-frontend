@@ -1,0 +1,29 @@
+.container {
+  border-radius: 20px;
+  border: 1px solid $color-neutral-700;
+  overflow: hidden;
+  background-color: $color-accent-primary-component;
+  backdrop-filter: blur(15px);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  @include font($font-heading-5);
+  color: $color-neutral-200;
+}
+
+.tabs {
+}
+
+.chart {
+  width: 100%;
+}
