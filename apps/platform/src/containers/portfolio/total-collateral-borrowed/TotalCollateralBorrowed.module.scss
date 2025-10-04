@@ -10,6 +10,23 @@
   gap: 12px;
 }
 
+.desktop_only {
+  display: block;
+
+  @include media("<=tablet") {
+    display: none;
+  }
+}
+
+.tablet_only {
+  display: none;
+
+  @include media("<=tablet") {
+    display: grid;
+    gap: 24px;
+  }
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -26,4 +43,15 @@
 
 .chart {
   width: 100%;
+}
+
+// Typography for tablet-only cards
+.label {
+  @include font($font-body);
+  color: $color-neutral-400;
+}
+
+.value {
+  @include font($font-heading-3);
+  color: $color-white;
 }

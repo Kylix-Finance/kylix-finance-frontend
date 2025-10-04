@@ -34,7 +34,7 @@ const PortfolioValue = () => {
     <div className={styles.container}>
       <div className={styles.heading_container}>
         <p className={styles.heading}>Total Portfolio Value</p>
-        <Skeleton isLoading={isLoading} width="50%" height={38}>
+        <Skeleton isLoading={isLoading} width={150} height={38}>
           <p className={styles.value}>
             ${" "}
             {(

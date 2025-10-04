@@ -8,6 +8,11 @@
     "total_portfolio_value total_collateral_borrowed"
     "tvl_container tvl_container"
     "table_container table_container";
+
+  @include media("<=desktop") {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .total_collateral_borrowed {
