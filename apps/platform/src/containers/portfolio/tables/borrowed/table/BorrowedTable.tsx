@@ -11,7 +11,7 @@ import { useAccountsStore } from "@repo/shared";
 import { useState } from "react";
 import TokenIcon from "~/components/token-icon";
 import styles from "./BorrowedTable.module.scss";
-import { formatBigNumbers } from "@repo/onchain";
+import { formatBigNumbers, formatUnit } from "@repo/onchain";
 import { Button } from "~/components/ui/button";
 const columnHelper = createColumnHelper<BorrowedResponse[number]>();
 
@@ -48,7 +48,7 @@ export const BorrowedTable = ({
         return (
           <p className={styles.cell}>
             <span className={styles.value}>
-              {formatBigNumbers(borrowed.toString(), decimals)}
+              {formatBigNumbers(formatUnit(borrowed.toString(), decimals), 4)}
             </span>
             <span>{assetSymbol}</span>
           </p>
@@ -66,7 +66,7 @@ export const BorrowedTable = ({
         return (
           <p className={styles.cell}>
             <span className={styles.value}>
-              {formatBigNumbers(balance.toString(), decimals)}
+              {formatBigNumbers(formatUnit(balance.toString(), decimals), 4)}
             </span>
             <span>{assetSymbol}</span>
           </p>
