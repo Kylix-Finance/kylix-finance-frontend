@@ -7,7 +7,7 @@ import { Status } from "~/components/ui/status";
 
 const Tvl = () => {
   const { data, isPending } = useGetUserLtv();
-
+  const currentLTV = Number(formatUnit(data?.current_ltv || 0, 4));
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
@@ -31,22 +31,22 @@ const Tvl = () => {
         <div className={styles.current_container}>
           <Skeleton isLoading={isPending} height={30} width={100}>
             <span className={styles.current_value}>
-              {Number(data?.current_ltv || 0)}%
+              {formatBigNumbers(currentLTV.toString(), 2)}%
             </span>
           </Skeleton>
           <Skeleton isLoading={isPending} width={80} height={25}>
             <Status
               variant={
-                Number(formatUnit(data?.current_ltv || 0, 4)) >= 50
+                currentLTV >= 50
                   ? "error"
-                  : Number(formatUnit(data?.current_ltv || 0, 4)) >= 25
+                  : currentLTV >= 25
                     ? "warning"
                     : "success"
               }
               content={
-                Number(formatUnit(data?.current_ltv || 0, 4)) >= 50
+                currentLTV >= 50
                   ? "Liquidation Risk"
-                  : Number(formatUnit(data?.current_ltv || 0, 4)) >= 25
+                  : currentLTV >= 25
                     ? "Warning"
                     : "Safe"
               }
@@ -58,7 +58,7 @@ const Tvl = () => {
             <ProgressBar
               height={10}
               safe={25}
-              value={Number(formatUnit(data.current_ltv, 4))}
+              value={currentLTV}
               warning={50}
               liquidation={Number(formatUnit(data.liquidation_ltv, 4))}
             />
