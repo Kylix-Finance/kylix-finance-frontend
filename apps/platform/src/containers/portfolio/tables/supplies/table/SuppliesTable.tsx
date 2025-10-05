@@ -11,7 +11,11 @@ import { useAccountsStore } from "@repo/shared";
 import { useState } from "react";
 import TokenIcon from "~/components/token-icon";
 import styles from "./SuppliesTable.module.scss";
-import { formatBigNumbers, useEnableAsCollateral } from "@repo/onchain";
+import {
+  formatBigNumbers,
+  formatUnit,
+  useEnableAsCollateral,
+} from "@repo/onchain";
 import { Button } from "~/components/ui/button";
 import { Switch } from "~/components/ui/switch";
 import { LinkButton } from "~/components/ui/link-button";
@@ -48,7 +52,7 @@ export const SuppliesTable = ({ data, isPending, onSupplyClick }: Props) => {
         return (
           <p className={styles.cell}>
             <span className={styles.value}>
-              {formatBigNumbers(supplied.toString(), decimals)}
+              {formatBigNumbers(formatUnit(supplied.toString(), decimals), 4)}
             </span>
             <span>{assetSymbol}</span>
           </p>
@@ -66,7 +70,7 @@ export const SuppliesTable = ({ data, isPending, onSupplyClick }: Props) => {
         return (
           <p className={styles.cell}>
             <span className={styles.value}>
-              {formatBigNumbers(balance.toString(), decimals)}
+              {formatBigNumbers(formatUnit(balance.toString(), decimals), 4)}
             </span>
             <span>{assetSymbol}</span>
           </p>
