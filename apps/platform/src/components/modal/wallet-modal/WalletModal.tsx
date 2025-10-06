@@ -5,9 +5,9 @@ import WalletList from "./stages/wallet-list/WalletList";
 import AccountList from "./stages/account-list/AccountList";
 import { useAccountsStore } from "@repo/shared";
 const WalletModal = () => {
-  const { disconnect, stage, setStage } = useAccountsStore();
+  const { stage, setStage } = useAccountsStore();
   const handleBackButtonClick = () => {
-    disconnect("walletsList");
+    setStage("walletsList");
   };
   return (
     <Modal
