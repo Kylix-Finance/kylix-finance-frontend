@@ -4,6 +4,7 @@ import styles from "./WalletModal.module.scss";
 import WalletList from "./stages/wallet-list/WalletList";
 import AccountList from "./stages/account-list/AccountList";
 import { useAccountsStore } from "@repo/shared";
+
 const WalletModal = () => {
   const { stage, setStage } = useAccountsStore();
   const handleBackButtonClick = () => {
