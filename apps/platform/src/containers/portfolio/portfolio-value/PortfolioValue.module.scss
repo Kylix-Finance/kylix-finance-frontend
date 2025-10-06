@@ -5,6 +5,15 @@
   background-color: $color-accent-primary-component;
   backdrop-filter: blur(15px);
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.container_empty {
+  justify-content: center;
+  align-items: center;
 }
 .heading_container {
   display: flex;
@@ -29,4 +38,11 @@
 
 .apr_value {
   color: $color-primary;
+}
+
+.chart_container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

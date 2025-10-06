@@ -33,7 +33,6 @@ export const PieChart = ({
     ? data.filter((d) => Number.isFinite(d.value))
     : [];
   const hasValidData = chartData.length > 0;
-  const allZero = hasValidData && chartData.every((d) => Number(d.value) === 0);
 
   return (
     <ResponsiveContainer
@@ -43,49 +42,34 @@ export const PieChart = ({
       className={styles.chart}
       style={containerStyle}
     >
-      {allZero ? (
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "var(--color-neutral-400)",
-          }}
-        >
-          No data to display
-        </div>
-      ) : (
-        <RechartsPieChart>
-          <Pie
-            data={chartData}
-            dataKey="value"
-            cx="50%"
-            cy="50%"
-            startAngle={90}
-            endAngle={-270}
-            innerRadius="65%"
-            outerRadius="85%"
-            paddingAngle={2}
-            stroke="#FFFFFF"
-            strokeWidth="1"
-            isAnimationActive={false}
-            legendType="circle"
+      <RechartsPieChart>
+        <Pie
+          data={chartData}
+          dataKey="value"
+          cx="50%"
+          cy="50%"
+          startAngle={90}
+          endAngle={-270}
+          innerRadius="65%"
+          outerRadius="85%"
+          paddingAngle={2}
+          stroke="#FFFFFF"
+          strokeWidth="1"
+          isAnimationActive={false}
+          legendType="circle"
+        />
+        {hasValidData && <Tooltip content={TooltipContent} cursor={false} />}
+        {hasValidData && (
+          <RechartsLegend
+            layout="vertical"
+            align="right"
+            verticalAlign="middle"
+            iconType="circle"
+            content={LegendContent}
+            wrapperStyle={{ color: "#E3E5F0" }}
           />
-          {hasValidData && <Tooltip content={TooltipContent} cursor={false} />}
-          {hasValidData && (
-            <RechartsLegend
-              layout="vertical"
-              align="right"
-              verticalAlign="middle"
-              iconType="circle"
-              content={LegendContent}
-              wrapperStyle={{ color: "#E3E5F0" }}
-            />
-          )}
-        </RechartsPieChart>
-      )}
+        )}
+      </RechartsPieChart>
     </ResponsiveContainer>
   );
 };

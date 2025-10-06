@@ -7,6 +7,7 @@ interface Props {
   action?: ReactNode;
   icon: ElementType;
   hasBorder?: boolean;
+  hasBackgroundColor?: boolean;
 }
 
 const EmptyState = ({
@@ -15,11 +16,13 @@ const EmptyState = ({
   title,
   icon: Icon,
   hasBorder,
+  hasBackgroundColor = true,
 }: Props) => {
   return (
     <div
       className={clsx(styles.container, {
         [styles.container_border]: hasBorder,
+        [styles.container_background]: hasBackgroundColor,
       })}
     >
       <Icon className={styles.icon} />

@@ -2,9 +2,9 @@
   min-height: 360px;
   padding: 24px;
   border: 1px dashed transparent;
-  background-color: $color-accent-primary-component;
   display: flex;
   flex-direction: column;
+  background-color: transparent;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -14,6 +14,9 @@
 .container_border {
   border-color: $color-neutral-500;
   border-radius: 16px;
+}
+.container_background {
+  background-color: $color-accent-primary-component;
 }
 .icon {
   color: $color-primary;
