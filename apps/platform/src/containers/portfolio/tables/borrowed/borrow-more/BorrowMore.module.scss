@@ -1,0 +1,15 @@
+.padding {
+  padding: 24px 16px;
+}
+.action_button {
+  @include media("<=desktop") {
+    width: 100%;
+  }
+}
+.description {
+  flex-wrap: wrap;
+}
+.description_balance {
+  @include font($font-heading-4);
+  color: $color-white;
+}

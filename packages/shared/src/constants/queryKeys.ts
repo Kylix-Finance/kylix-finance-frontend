@@ -1,17 +1,17 @@
-import { Signer } from "@polkadot/api/types";
-
 const baseKey = "kylix";
+
+type ID = number | string | undefined;
 
 interface Balance {
   address: string | undefined;
-  assetId: number | string | undefined;
+  assetId: ID;
 }
 interface AssetPrice {
-  assetId: number | string | undefined;
+  assetId: ID;
 }
 interface LendingPools {
-  asset?: number | string | undefined;
-  account?: string | string;
+  asset: ID | null;
+  account: string | null | undefined;
 }
 interface Pools {
   activeAccount: string | undefined;
@@ -23,17 +23,20 @@ interface EstimateCollateral {
   collateralAsset: string | undefined;
 }
 interface LiquidationMarkets {
-  account?: string;
+  account: string | null;
 }
 
 interface MarketBidDistribution {
-  assetId: string;
+  assetId: string | number;
 }
 
 interface RecentLiquidation {
   assetId: string;
 }
-
+interface Signer {
+  connectorId: string | null;
+  account: string | null;
+}
 const keys = {
   BALANCE: "BALANCE",
   ACCOUNTS: "ACCOUNTS",
@@ -71,9 +74,12 @@ const keys = {
   PLACE_BID: "PLACE_BID",
   RECENT_LIQUIDATION: "RECENT_LIQUIDATION",
   USER_BIDS: "USER_BIDS",
+  SIGNER: "SIGNER",
+  WALLETS: "WALLETS",
+  ESTIMATED_GAS: "ESTIMATED_GAS",
 };
-
-type ChartScale = "1m" | "5m" | "15m" | "1h" | "12h" | "1d";
+//FIXME: 1d is temporary
+type ChartScale = "all" | "month" | "year" | "1d";
 
 export const queryKeys = {
   accounts: [baseKey, keys.ACCOUNTS],
@@ -85,13 +91,15 @@ export const queryKeys = {
   disconnectRequest: [baseKey, keys.DISCONNECT_REQUEST],
   options: [baseKey, keys.OPTIONS],
   provider: [baseKey, keys.PROVIDER],
-
-  lendingPools: ({ asset, account }: LendingPools = {}) => [
+  signer: ({ account, connectorId }: Signer) => [
     baseKey,
-    keys.LENDING_POOLS,
-    asset,
+    keys.SIGNER,
     account,
+    connectorId,
   ],
+  lendingPools: (
+    { asset, account }: LendingPools = { account: null, asset: null }
+  ) => [baseKey, keys.LENDING_POOLS, asset, account],
   liquidationMarkets: ({ account }: LiquidationMarkets) => [
     baseKey,
     keys.LIQUIDATION_MARKETS,
@@ -164,5 +172,12 @@ export const queryKeys = {
     baseKey,
     keys.USER_BIDS,
     activeAccount,
+  ],
+  wallets: [baseKey, keys.WALLETS],
+  estimatedGas: (method: string, account: string | undefined) => [
+    baseKey,
+    keys.ESTIMATED_GAS,
+    method,
+    account,
   ],
 };

@@ -1,0 +1,26 @@
+.container {
+  padding: 0;
+  border-radius: 20px;
+  background-color: $color-black;
+  overflow: hidden;
+}
+
+.success {
+  background: $color-semantic-success !important;
+}
+
+.information {
+  background: $color-semantic-info !important;
+}
+
+.message {
+  background: $color-semantic-info !important;
+}
+
+.warning {
+  background: $color-semantic-warning !important;
+}
+
+.error {
+  background: $color-semantic-error !important;
+}

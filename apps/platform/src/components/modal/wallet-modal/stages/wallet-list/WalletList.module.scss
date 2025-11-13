@@ -1,0 +1,22 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 10px;
+  gap: 4px;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  background-color: blue;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+}
+.policy {
+  @include font($font-body-compact);
+  color: $color-neutral-400;
+}

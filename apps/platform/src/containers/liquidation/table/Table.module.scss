@@ -1,0 +1,41 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.tabs {
+  width: 330px;
+  @include media("<desktop") {
+    width: 100%;
+  }
+}
+.description {
+  @include font($font-body);
+  color: $color-neutral-200;
+}
+.filter {
+  display: none;
+
+  @include media("<desktop") {
+    display: flex;
+    align-items: center;
+  }
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.label {
+  @include font($font-heading-5);
+  color: $color-neutral-200;
+}
+.tab_info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.tab_info_title {
+  @include font($font-heading-4);
+  color: $color-white;
+}

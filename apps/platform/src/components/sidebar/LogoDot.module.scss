@@ -1,0 +1,14 @@
+.container {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.outer_circle {
+  fill: $color-primary;
+}
+
+.inner_circle {
+  fill: $color-primary;
+  stroke: $color-neutral-900;
+}

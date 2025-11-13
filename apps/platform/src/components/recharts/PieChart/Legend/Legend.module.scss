@@ -1,0 +1,29 @@
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: 12px;
+  color: $color-white;
+  @include font($font-body-compact);
+}
+
+.item:focus,
+.item:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.dot {
+  display: inline-flex;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid $color-white;
+}

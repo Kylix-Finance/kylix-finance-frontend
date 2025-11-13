@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding-bottom: 24px;
+
+  grid-template-areas:
+    "total_portfolio_value total_collateral_borrowed"
+    "tvl_container tvl_container"
+    "table_container table_container";
+
+  @include media("<=desktop") {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.total_collateral_borrowed {
+  grid-area: total_collateral_borrowed;
+  height: 100%;
+}
+
+.total_portfolio_value {
+  grid-area: total_portfolio_value;
+  height: 100%;
+}
+
+.ltv_container {
+  grid-area: tvl_container;
+  height: max-content;
+}
+
+.table_container {
+  grid-area: table_container;
+  height: max-content;
+}

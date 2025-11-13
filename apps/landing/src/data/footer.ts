@@ -1,5 +1,5 @@
 import { Discord, Telegram, Twitter } from "~/assets/svgs";
-import { Footer, FooterItem, SocialMedia } from "~/types";
+import { Footer } from "~/types";
 import { getFooterContentData } from "~/utils/mdx";
 const data = getFooterContentData();
 

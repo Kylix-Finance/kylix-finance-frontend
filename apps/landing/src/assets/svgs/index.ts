@@ -1,3 +1,4 @@
+/* eslint-disable @cspell/spellchecker */
 import ArrowRight from "./arrow-right.svg";
 import BorrowImage from "./borrow-image.svg";
 import Check from "./check.svg";

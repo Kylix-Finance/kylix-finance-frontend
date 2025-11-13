@@ -1,0 +1,82 @@
+.container {
+  padding: 16px;
+  border-radius: 20px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close_button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: $color-neutral-400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.title_container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  @include font($font-heading-5);
+}
+
+.type_information {
+  color: $color-semantic-info;
+}
+
+.type_error {
+  color: $color-semantic-error;
+}
+
+.type_message {
+  color: $color-semantic-info;
+}
+
+.type_success {
+  color: $color-semantic-success;
+}
+
+.type_warning {
+  color: $color-semantic-warning;
+}
+
+.message {
+  @include font($font-body);
+  padding-left: 24px;
+  color: $color-neutral-200;
+}
+
+.container_information {
+  border-color: $color-semantic-info;
+}
+
+.container_success {
+  border-color: $color-semantic-success;
+}
+
+.container_message {
+  border-color: $color-semantic-info;
+}
+
+.container_error {
+  border-color: $color-semantic-error;
+}
+
+.container_warning {
+  border-color: $color-semantic-warning;
+}

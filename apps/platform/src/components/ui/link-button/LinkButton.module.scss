@@ -1,0 +1,21 @@
+.container {
+  color: $color-primary;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  user-select: none;
+  outline: none;
+  @include font($font-button);
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: $color-primary-light;
+  }
+  &:focus {
+    border-color: $color-primary;
+  }
+}
+.disabled {
+  color: $color-neutral-700;
+  cursor: not-allowed;
+  pointer-events: none;
+}

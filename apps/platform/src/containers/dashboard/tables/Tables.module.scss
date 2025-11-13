@@ -1,0 +1,58 @@
+.switcher {
+  width: 330px;
+  @include media("<desktop") {
+    width: 100%;
+  }
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 24px;
+  justify-content: space-between;
+}
+.search {
+  width: 300px;
+  @include media("<desktop") {
+    width: 100%;
+  }
+}
+.options {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  @include media("<desktop") {
+    flex-direction: column-reverse;
+    gap: 24px;
+  }
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.label {
+  @include font($font-heading-5);
+  color: $color-neutral-200;
+}
+.select {
+  padding: 9px 16px !important;
+}
+.glob {
+  color: $color-primary;
+  width: 20px;
+  height: 20px;
+}
+.left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.selected_network {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 4px;
+  text-wrap: nowrap;
+  @include font($font-heading-5);
+}

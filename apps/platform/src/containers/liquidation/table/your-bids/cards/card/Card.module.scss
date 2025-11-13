@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid $color-neutral-700;
+  padding: 16px;
+  border-radius: 20px;
+  user-select: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bid_info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $color-neutral-200;
+}
+.detail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  grid-auto-flow: row;
+}

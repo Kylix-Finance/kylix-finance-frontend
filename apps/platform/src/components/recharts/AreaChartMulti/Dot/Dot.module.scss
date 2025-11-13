@@ -1,0 +1,17 @@
+.line {
+  stroke: $color-neutral-400;
+  stroke-width: 0.5;
+  stroke-dasharray: 3 3;
+  pointer-events: none;
+}
+
+.circle {
+  fill: $color-primary;
+  opacity: 0.25;
+}
+
+.dot {
+  fill: $color-primary;
+  stroke: $color-neutral-900;
+  stroke-opacity: 0.5;
+}

@@ -1,0 +1,39 @@
+.container {
+  min-height: 360px;
+  padding: 24px;
+  border: 1px dashed transparent;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+  user-select: none;
+}
+.container_border {
+  border-color: $color-neutral-500;
+  border-radius: 16px;
+}
+.container_background {
+  background-color: $color-accent-primary-component;
+}
+.icon {
+  color: $color-primary;
+  width: 90px;
+  height: 90px;
+}
+.title {
+  @include font($font-heading-2);
+  color: $color-white;
+}
+.description {
+  @include font($font-body);
+  color: $color-neutral-200;
+  max-width: 500px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

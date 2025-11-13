@@ -42,11 +42,11 @@ export type MarketTrend = {
   actions?: {
     primary?: {
       label: string;
-      action: VoidFunction;
+      action: globalThis.VoidFunction;
     };
     secondary?: {
       label: string;
-      action: VoidFunction;
+      action: globalThis.VoidFunction;
     };
   };
 };

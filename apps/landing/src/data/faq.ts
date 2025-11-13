@@ -1,3 +1,4 @@
+/* eslint-disable @cspell/spellchecker */
 import { FAQSectionProps } from "~/app/faq/_parts/Section";
 
 export const faqData: FAQSectionProps[] = [

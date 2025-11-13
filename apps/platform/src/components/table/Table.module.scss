@@ -1,0 +1,80 @@
+.container {
+  box-sizing: border-box;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  border-spacing: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow-x: auto;
+}
+
+.thead {
+  color: $color-neutral-200;
+  background-color: $color-neutral-900;
+  border-top: 1px solid $color-neutral-700;
+  border-bottom: 1px solid $color-neutral-700;
+  * {
+    @include font($font-body-compact);
+  }
+}
+
+.tbody {
+}
+
+.tr {
+  height: 72px;
+  border-bottom: 1px solid $color-neutral-800;
+
+  & > :first-child {
+    padding-left: 16px;
+  }
+
+  & > :last-child {
+    padding-right: 16px;
+  }
+}
+.tr_hover {
+  cursor: pointer;
+  &:hover {
+    background-color: $color-accent-primary-component;
+  }
+}
+.th {
+  text-align: left;
+  min-width: max-content;
+  white-space: nowrap;
+  &[data-is-sortable="true"] {
+    cursor: pointer;
+  }
+}
+.td {
+  min-width: max-content;
+  text-align: center;
+}
+
+.th_content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.arrows {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow {
+  &[data-active="true"] {
+    stroke: $color-primary;
+  }
+}
+.skel {
+  border-radius: 9999px;
+  min-width: 100px;
+}

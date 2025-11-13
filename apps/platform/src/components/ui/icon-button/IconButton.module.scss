@@ -1,0 +1,58 @@
+.container {
+  border-radius: 9999px;
+  color: $color-neutral-400;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 10px;
+  outline: none;
+  transition: all 0.2s ease-out;
+
+  &[data-no-interaction-styles="false"] {
+    &:active,
+    &:focus {
+      color: $color-primary;
+    }
+    &:disabled {
+      color: $color-neutral-700;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+}
+.fill {
+  background-color: $color-neutral-800;
+  border: 1px solid $color-neutral-700;
+  color: $color-neutral-400;
+
+  &[data-no-interaction-styles="false"] {
+    &:hover {
+      background-color: $color-neutral-700;
+      border: 1px solid $color-neutral-400;
+    }
+    &:active {
+      background-color: $color-accent-primary-element;
+      border-color: $color-primary;
+      color: $color-primary;
+    }
+    &:focus {
+      background-color: $color-accent-primary-element;
+      border-color: $color-primary;
+      color: $color-primary;
+    }
+    &:disabled {
+      background-color: transparent;
+      border-color: $color-neutral-700;
+      color: $color-neutral-700;
+      cursor: not-allowed;
+    }
+  }
+}
+.none {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+.no_padding {
+  padding: 0px;
+}

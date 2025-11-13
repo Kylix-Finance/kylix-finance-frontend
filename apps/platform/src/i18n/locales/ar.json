@@ -1,0 +1,13 @@
+{
+  "Dashboard": {
+    "test": "مرحبًا"
+  },
+  "Auth": {
+    "inValidPassword": "كلمة المرور غير صحيحة"
+  },
+  "WalletModal": {
+    "title": "Connect a wallet",
+    "connectButton": "Connect",
+    "disconnectButton": "Disconnect"
+  }
+}

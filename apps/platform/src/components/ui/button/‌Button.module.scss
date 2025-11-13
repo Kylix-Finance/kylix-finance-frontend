@@ -1,0 +1,216 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px;
+  cursor: pointer;
+  position: relative;
+  width: fit-content;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  &[data-icon-position="true"] {
+    flex-direction: row-reverse;
+  }
+  &[data-icon-position="false"] {
+    flex-direction: row;
+  }
+}
+
+.content_loading {
+  opacity: 0;
+}
+
+// variants
+.primary {
+  color: $color-white;
+  background-color: $color-accent-primary;
+  border: 1px solid $color-primary;
+  backdrop-filter: blur(15px);
+
+  &:hover {
+    background-color: $color-accent-secondary-element;
+    border-color: $color-primary-light;
+  }
+
+  &:active {
+    background-color: $color-accent-primary-element;
+    border-color: $color-primary;
+  }
+
+  &:focus {
+    background-color: $color-accent-primary-element;
+    border-color: $color-primary;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $color-neutral-400;
+    background-color: $color-neutral-800;
+    border-color: $color-neutral-800;
+  }
+
+  &[data-loading="true"] {
+    cursor: not-allowed;
+    color: $color-neutral-400;
+    background-color: $color-neutral-800;
+    border-color: $color-neutral-800;
+  }
+}
+
+.secondary {
+  color: $color-neutral-200;
+  background-color: $color-neutral-800;
+  border: 1px solid $color-neutral-700;
+  backdrop-filter: blur(15px);
+
+  &:hover {
+    color: $color-neutral-400;
+    background-color: $color-neutral-700;
+    border-color: $color-neutral-700;
+  }
+
+  &:active {
+    color: $color-neutral-200;
+    background-color: $color-neutral-800;
+    border-color: $color-neutral-800;
+  }
+
+  &:focus {
+    color: $color-neutral-200;
+    background-color: $color-neutral-700;
+    border-color: $color-neutral-700;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $color-neutral-700;
+    background-color: $color-neutral-800;
+    border-color: $color-neutral-700;
+  }
+
+  &[data-loading="true"] {
+    cursor: not-allowed;
+    color: $color-neutral-700;
+    background-color: $color-neutral-800;
+    border-color: $color-neutral-700;
+  }
+}
+
+.tertiary {
+  color: $color-accent-primary-component;
+  background-color: $color-white;
+  border: 1px solid $color-white;
+  backdrop-filter: blur(15px);
+
+  &:hover {
+    background-color: $color-neutral-200;
+    border-color: $color-neutral-200;
+  }
+
+  &:focus {
+    border-color: $color-accent-primary-component;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $color-neutral-700;
+    background-color: $color-neutral-800;
+    border-color: $color-neutral-800;
+  }
+
+  &[data-loading="true"] {
+    cursor: not-allowed;
+    color: $color-neutral-700;
+    background-color: $color-neutral-800;
+    border-color: $color-neutral-800;
+  }
+}
+
+.ghost {
+  color: $color-neutral-200;
+  background-color: transparent;
+  border: 1px solid transparent;
+  backdrop-filter: blur(15px);
+
+  &:hover {
+    color: $color-neutral-100;
+  }
+
+  &:active {
+    color: $color-neutral-400;
+  }
+
+  &:focus {
+    color: $color-neutral-400;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $color-neutral-100;
+  }
+
+  &[data-loading="true"] {
+    cursor: not-allowed;
+    color: $color-neutral-100;
+  }
+}
+
+.default {
+  padding: 10px 20px;
+  @include font($font-button);
+  gap: 8px;
+}
+.small {
+  padding: 4px 10px;
+  @include font($font-body-compact);
+  gap: 4px;
+}
+.large {
+  padding: 16px 44px;
+  @include font($font-heading-4);
+  gap: 8px;
+}
+
+.loading_icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+/* icons */
+.icon_small {
+  width: 20px;
+  height: 20px;
+}
+.icon_default {
+  width: 20px;
+  height: 20px;
+}
+.icon_large {
+  width: 24px;
+  height: 24px;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full_width {
+  width: 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

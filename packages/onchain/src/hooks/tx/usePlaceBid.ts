@@ -1,0 +1,21 @@
+import { useMutation } from "@tanstack/react-query";
+import { useTransaction } from "../useTransaction";
+import { TransactionCallbacks } from "../../types";
+
+interface PlaceBidParams {
+  assetId: string | number;
+}
+interface MutationFnParams {
+  balance: string | bigint;
+  discount: number;
+  options?: TransactionCallbacks;
+}
+export const usePlaceBid = ({ assetId }: PlaceBidParams) => {
+  const { execute } = useTransaction("lending", "placeBid");
+  return useMutation({
+    mutationFn: async (params: MutationFnParams) => {
+      const { balance: amount, options, discount } = params;
+      return execute(options, assetId, discount, amount);
+    },
+  });
+};

@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  width: 100%;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  @include media("<=tablet") {
+    padding: 16px;
+    background-color: $color-accent-primary-component;
+    border-color: $color-neutral-700;
+  }
+  &[data-hide-container-style="false"] {
+    padding: 16px;
+    background-color: $color-accent-primary-component;
+    border-color: $color-neutral-700;
+  }
+}
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  user-select: none;
+}
+.heading_title {
+  @include font($font-body);
+  color: $color-neutral-200;
+  @include media("<=tablet") {
+    @include font($font-heading-5);
+  }
+  &[data-hide-container-style="false"] {
+    color: $color-neutral-500;
+  }
+}
+.heading_value {
+  @include font($font-heading-1);
+  color: $color-white;
+}
+.tabs_container {
+  @include media("<=tablet") {
+    display: none;
+  }
+}
+.children {
+  &[data-hide-on-mobile="true"] {
+    @include media("<desktop") {
+      display: none;
+    }
+  }
+}

@@ -34,6 +34,8 @@ export async function POST(request: Request) {
     const data = await response.json();
     return NextResponse.json({ success: true, data }, { status: 201 });
   } catch (error) {
+    console.log("contacts:POST", error);
+
     return NextResponse.json(
       { error: "Failed to create contact" },
       { status: 500 }

@@ -1,0 +1,18 @@
+.layout {
+  border-radius: 20px;
+  border: 1px solid $color-neutral-700;
+  overflow: hidden;
+  background-color: $color-accent-primary-component;
+  backdrop-filter: blur(15px);
+  @include media("<desktop") {
+    border-radius: 0px;
+    border: none;
+    background-color: transparent;
+    backdrop-filter: blur(0px);
+  }
+}
+
+.header {
+  padding: 16px;
+  padding-bottom: 24px;
+}

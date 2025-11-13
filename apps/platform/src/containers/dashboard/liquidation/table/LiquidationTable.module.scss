@@ -1,0 +1,17 @@
+.token {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.cell {
+  color: $color-neutral-200;
+}
+.check {
+  color: $color-primary;
+}

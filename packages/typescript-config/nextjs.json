@@ -1,13 +1,25 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Next.js",
   "extends": "./base.json",
+  "display": "NextJS",
   "compilerOptions": {
-    "plugins": [{ "name": "next" }],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "jsx": "preserve",
-    "noEmit": true
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "plugins": [
+      {
+        "name": "next"
+      },
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES5",
+    "types": ["node"]
   }
 }

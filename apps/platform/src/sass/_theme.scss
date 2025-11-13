@@ -1,0 +1,84 @@
+@mixin theme-dark {
+  --color-black: #121212;
+  --color-white: #ffffff;
+
+  --color-primary: #56ddb4;
+  --color-primary-light: #96ffdf;
+  --color-primary-dark: #208a6a;
+
+  --color-accent-primary-component: #1e1e1e80;
+  --color-accent-primary-element: #56ddb433;
+  --color-accent-secondary-element: #96ffdf26;
+  --color-accent-primary: #1b2e2c;
+  --color-accent-primary-light: #212f2e;
+  --color-accent-success: #1a3022;
+  --color-accent-warning: #352f1b;
+  --color-accent-error: #352023;
+  --color-accent-info: #1d2834;
+
+  --color-neutral-50: #f5f7fa;
+  --color-neutral-100: #e9ebee;
+  --color-neutral-200: #e0e0e0;
+  --color-neutral-400: #aaaaaa;
+  --color-neutral-500: #999999;
+  --color-neutral-600: #333333;
+  --color-neutral-700: #444444;
+  --color-neutral-800: #2a2a2a;
+  --color-neutral-900: #1e1e1e;
+
+  --color-semantic-success: #4ade80;
+  --color-semantic-warning: #fcd34d;
+  --color-semantic-error: #fb7185;
+  --color-semantic-info: #60a5fa;
+
+  --color-chart-primary: #56ddb4;
+  --color-chart-supply: #ff62c8;
+  --color-chart-borrow: #60a5fa;
+  --color-chart-utilization: #96ff66;
+  --color-chart-bottom: #7b7b8e;
+  --color-chart-grid: #4c4c56;
+
+  --color-crypto-eth: #5664d280;
+  --color-crypto-dot: #7b78ff80;
+  --color-crypto-mint: #37db8c80;
+  --color-crypto-sui: #4ecbfc80;
+  --color-gradient-linear-primary: linear-gradient(
+    180deg,
+    rgba(86, 221, 180, 0.3) 0%,
+    rgba(86, 221, 180, 0.05) 100%
+  );
+  --color-gradient-linear-supply: linear-gradient(
+    180deg,
+    rgba(255, 98, 200, 0.3) 0%,
+    rgba(255, 98, 200, 0.15) 100%
+  );
+  --color-gradient-linear-borrow: linear-gradient(
+    180deg,
+    rgba(31, 148, 255, 0.3) 0%,
+    rgba(31, 148, 255, 0.15) 100%
+  );
+  --color-gradient-linear-success: linear-gradient(
+    90deg,
+    #4ade80 0%,
+    #36e977 49.5%,
+    #6dd994 100%
+  );
+  --color-gradient-linear-warning: linear-gradient(
+    90deg,
+    #fcd34d 0%,
+    #ffd359 43.5%,
+    #f5b64f 100%
+  );
+  --color-gradient-linear-error: linear-gradient(
+    90deg,
+    #fa5069 0%,
+    #fb7185 41.5%,
+    #f13853 100%
+  );
+
+  --color-gradient-linear-bar: linear-gradient(
+    180deg,
+    rgba(170, 170, 170, 0.3) 0%,
+    rgba(170, 170, 170, 0.05) 100%
+  );
+}

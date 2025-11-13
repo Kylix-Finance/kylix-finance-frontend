@@ -44,11 +44,11 @@ const Jar = ({ scrollYProgress }: Props) => {
 
   return (
     <motion.group
-      scale={sScale}
       dispose={null}
+      position-y={sPosition}
       rotation-x={sRotation}
       rotation-y={-0.04}
-      position-y={sPosition}
+      scale={sScale}
     >
       <motion.group name="Mesh_0">
         {Object.entries(nodes).map(([name, node]) => {
@@ -56,16 +56,16 @@ const Jar = ({ scrollYProgress }: Props) => {
             const material = node.material as THREE.MeshStandardMaterial;
 
             return (
-              <motion.mesh key={name} name={name} geometry={node.geometry}>
+              <motion.mesh key={name} geometry={node.geometry} name={name}>
                 <meshStandardMaterial
                   color={material.color}
                   emissive={material.emissive}
                   emissiveIntensity={material.emissiveIntensity}
                   emissiveMap={material.emissiveMap}
                   metalness={1.5}
+                  opacity={material.opacity}
                   roughness={0.1}
                   transparent={material.transparent}
-                  opacity={material.opacity}
                 />
               </motion.mesh>
             );
