@@ -1,9 +1,4 @@
-import dynamic from "next/dynamic";
-
-const Hero = dynamic(() => import("./_parts/Hero"), {
-  ssr: false,
-  loading: () => <div className="w-full h-screen" />,
-});
+import HeroWrapper from "./_parts/Hero/HeroWrapper";
 
 import SmartLending from "./_parts/SmartLending";
 import MarketTrends from "./_parts/MarketTrends";
@@ -27,7 +22,7 @@ export const metadata: Metadata = mergeMetadata(
 export default function page() {
   return (
     <div className="flex flex-col items-center">
-      <Hero />
+      <HeroWrapper />
       <FeaturedPartners />
       <SmartLending />
       <MarketTrends />

@@ -1,0 +1,34 @@
+.container {
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: $color-neutral-800;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  padding: 16px;
+  cursor: pointer;
+}
+.active {
+  border-color: $color-neutral-500;
+}
+.left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.information {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.account_name {
+  @include font($font-button);
+  color: $color-neutral-200;
+}
+.account_address {
+  @include font($font-body-small);
+  color: $color-neutral-200;
+}

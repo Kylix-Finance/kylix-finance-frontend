@@ -14,11 +14,11 @@ const Footer = () => {
               {footerData.left.map(({ icon: Icon, link }, index) => {
                 return (
                   <Link
+                    key={index + index}
                     className="w-10 h-10 flex justify-center items-center"
-                    key={index}
                     href={link}
                   >
-                    <Icon width={24} height={24} />
+                    <Icon height={24} width={24} />
                   </Link>
                 );
               })}
@@ -27,7 +27,10 @@ const Footer = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14">
             {footerData.right.map((item, index) => {
               return (
-                <div className="flex flex-col gap-5 lg:gap-8 p-2 " key={index}>
+                <div
+                  key={index + index}
+                  className="flex flex-col gap-5 lg:gap-8 p-2 "
+                >
                   <p className="font-semibold lg:font-bold leading-4 lg:leading-8 text-xl lg:text-2xl">
                     {item.title}
                   </p>
@@ -35,9 +38,9 @@ const Footer = () => {
                     {item.items.map((item, index) => {
                       return (
                         <Link
-                          key={index}
-                          href={item.link}
+                          key={index + index}
                           className="font-normal leading-8 text-sm text-primaryText hover:text-primaryText/70 transition-all duration-150 w-fit"
+                          href={item.link}
                         >
                           {item.label}
                         </Link>

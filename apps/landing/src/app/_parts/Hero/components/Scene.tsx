@@ -1,18 +1,17 @@
 "use client";
 
-import { Environment, OrbitControls, Html } from "@react-three/drei";
+import { Environment, OrbitControls } from "@react-three/drei";
 import Jar from "./Jar";
 import { Suspense } from "react";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { MotionCanvas } from "framer-motion-3d";
-import { MotionConfig, MotionValue } from "framer-motion";
-import Image from "next/image";
+import { MotionValue } from "framer-motion";
 
-import * as THREE from "three";
-import { extend } from "@react-three/fiber";
+// import * as THREE from "three";
+// import { extend } from "@react-three/fiber";
 import Camera from "./Camera";
 
-extend(THREE);
+// extend(THREE);
 
 interface Props {
   scrollYProgress: MotionValue<number>;
@@ -24,15 +23,15 @@ const Scene = ({ scrollYProgress }: Props) => {
       <Camera />
 
       <OrbitControls
-        enablePan={false}
-        enableZoom={false}
-        enableRotate={false}
-        enableDamping={true}
         dampingFactor={0.01}
+        enableDamping={true}
+        enablePan={false}
+        enableRotate={false}
+        enableZoom={false}
       />
       <Suspense fallback={null}>
         <EffectComposer>
-          <Bloom intensity={0.2} width={1000} height={1000} kernelSize={5} />
+          <Bloom height={1000} intensity={0.2} kernelSize={5} width={1000} />
         </EffectComposer>
         <Jar scrollYProgress={scrollYProgress} />
 

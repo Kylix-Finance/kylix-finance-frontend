@@ -1,0 +1,36 @@
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.content {
+  position: relative;
+  z-index: 10;
+  width: calc(100% - 84px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-inline: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form {
+  border: 1px solid $color-neutral-700;
+  background-color: $color-neutral-900;
+  box-shadow: $shadow-modal;
+  padding: 16px;
+  border-radius: 20px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+.title {
+  @include font($font-heading-4);
+  color: $color-white;
+}

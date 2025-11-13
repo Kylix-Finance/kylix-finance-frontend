@@ -18,17 +18,17 @@ const Header = () => {
       </div>
       <div className="flex items-center gap-2.5 relative z-50">
         <Button
-          variant="primary"
-          color="secondary"
           className="text-sm font-semibold"
+          color="secondary"
+          variant="primary"
         >
           Ask a QUestion
         </Button>
         <Link href="https://discord.com/invite/UkRcWaTh5p">
           <Button
-            variant="outline"
-            color="white"
             className="flex items-center text-sm font-semibold gap-2"
+            color="white"
+            variant="outline"
           >
             <Discord /> <span>Join Our Discord </span>
           </Button>

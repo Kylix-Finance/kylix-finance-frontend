@@ -1,0 +1,30 @@
+.tooltip {
+  display: flex;
+  padding: 8px 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border-radius: 16px;
+  border: 1px solid $color-neutral-700;
+  //   background: var(--Dark-Mode-Accent-Primary-Components, rgba(30, 30, 30, 0.5));
+  backdrop-filter: blur(7.5px);
+
+  @include font($font-body-small);
+}
+
+.unit {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: $color-neutral-400;
+}
+
+.value {
+  color: $color-white;
+}
+
+.badge {
+  height: 12px;
+  width: 12px;
+  border-radius: 3px;
+}

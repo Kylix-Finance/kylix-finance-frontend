@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  border: 1px solid $color-neutral-700;
+  padding: 16px;
+  border-radius: 20px;
+  user-select: none;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid $color-neutral-700;
+  padding-block: 12px;
+}
+.heading {
+  @include font($font-heading-5);
+  color: $color-neutral-200;
+}
+.detail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  grid-auto-flow: row;
+}
+.collateral {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tvl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.check {
+  color: $color-primary;
+}

@@ -1,0 +1,10 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 4px;
+  @include font($font-heading-5);
+}
+.select {
+  padding: 9px 16px;
+}

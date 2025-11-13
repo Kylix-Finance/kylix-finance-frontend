@@ -18,18 +18,18 @@ const Card = ({ id }: Props) => {
 
   return (
     <motion.div
-      className="flex flex-col md:flex-row gap-16 items-center justify-between"
       key={currentSlide.id}
-      initial="hidden"
       animate="visible"
+      className="flex flex-col md:flex-row gap-16 items-center justify-between"
       exit="exit"
-      variants={variants}
+      initial="hidden"
       transition={{ duration: 0.3 }}
+      variants={variants}
     >
       <div className="flex flex-col gap-8 order-2 md:order-1">
         <div className="flex flex-col gap-8">
           {currentSlide.items.map((item, index) => (
-            <div className="flex flex-col gap-1" key={index}>
+            <div key={item.title + index} className="flex flex-col gap-1">
               <h3 className="font-bold text-2xl leading-8 text-white">
                 {item.title}
               </h3>
@@ -42,18 +42,18 @@ const Card = ({ id }: Props) => {
         <div className="flex items-center gap-2.5">
           {currentSlide?.actions?.primary && (
             <Button
-              onClick={currentSlide.actions.primary.action}
-              variant="primary"
               color="secondary"
+              variant="primary"
+              onClick={currentSlide.actions.primary.action}
             >
               {currentSlide.actions.primary.label}
             </Button>
           )}
           {currentSlide.actions?.secondary && (
             <Button
-              onClick={currentSlide.actions.secondary.action}
-              variant="outline"
               color="white"
+              variant="outline"
+              onClick={currentSlide.actions.secondary.action}
             >
               {currentSlide.actions.secondary.label}
             </Button>
@@ -62,11 +62,11 @@ const Card = ({ id }: Props) => {
       </div>
       <div className="relative w-full order-1">
         <Image
+          alt={currentSlide.label}
           className="ml-auto"
-          width={644}
           height={384}
           src={currentSlide.image}
-          alt={currentSlide.label}
+          width={644}
         />
       </div>
     </motion.div>

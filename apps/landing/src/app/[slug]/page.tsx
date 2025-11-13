@@ -10,9 +10,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = getContentData(params.slug);
+  const { slug } = await params;
+  const post = getContentData(slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -20,8 +21,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function page({ params }: { params: { slug: string } }) {
-  const post = getContentData(params.slug);
+export default async function page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = getContentData(slug);
 
   if (!post) {
     notFound();

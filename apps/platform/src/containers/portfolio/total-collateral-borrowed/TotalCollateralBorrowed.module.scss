@@ -1,0 +1,58 @@
+.container {
+  border-radius: 20px;
+  border: 1px solid $color-neutral-700;
+  overflow: hidden;
+  background-color: $color-accent-primary-component;
+  backdrop-filter: blur(15px);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+}
+
+.desktop_only {
+  display: block;
+
+  @include media("<=tablet") {
+    display: none;
+  }
+}
+
+.tablet_only {
+  display: none;
+
+  @include media("<=tablet") {
+    display: grid;
+    gap: 24px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  @include font($font-heading-5);
+  color: $color-neutral-200;
+}
+
+.tabs {
+}
+
+.chart {
+  width: 100%;
+}
+
+// Typography for tablet-only cards
+.label {
+  @include font($font-body);
+  color: $color-neutral-400;
+}
+
+.value {
+  @include font($font-heading-3);
+  color: $color-white;
+}

@@ -1,0 +1,13 @@
+{
+  "Dashboard": {
+    "test": "Hi"
+  },
+  "Auth": {
+    "inValidPassword": "Invalid password"
+  },
+  "WalletModal": {
+    "title": "Connect a wallet",
+    "connectButton": "Connect",
+    "disconnectButton": "Disconnect"
+  }
+}

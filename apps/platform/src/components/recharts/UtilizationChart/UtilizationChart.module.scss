@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  @include font($font-heading-2);
+}
+
+.reference {
+  stroke: $color-chart-utilization;
+  stroke-dasharray: 3 3;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.toggle {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  display: flex;
+  margin-left: auto;
+  margin: 12px 0;
+}
+
+.toggle_text {
+  margin-right: 8px;
+  color: $color-neutral-400;
+}
+
+.scale {
+  display: flex;
+  justify-content: flex-end;
+}

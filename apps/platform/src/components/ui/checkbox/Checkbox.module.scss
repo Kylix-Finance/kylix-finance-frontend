@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  border: 2px solid $color-neutral-700;
+  background-color: $color-neutral-200;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  outline: 1px solid transparent;
+
+  &:checked {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    outline-color: $color-primary;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      width: 25%;
+      height: 50%;
+      border: 2px solid $color-black;
+      border-width: 0 2px 2px 0;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+  }
+
+  &:hover:not(:disabled):not(:checked) {
+    background-color: $color-neutral-500;
+    border-color: $color-neutral-700;
+    outline-color: transparent;
+  }
+  &:hover:not(:disabled):checked {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    outline-color: transparent;
+  }
+  &:focus:not(:checked) {
+    background-color: $color-neutral-200;
+    border-color: $color-neutral-700;
+    outline-color: $color-primary;
+  }
+
+  &:disabled {
+    background-color: $color-neutral-700;
+    border-color: $color-neutral-800;
+    outline-color: transparent;
+    cursor: not-allowed;
+  }
+}

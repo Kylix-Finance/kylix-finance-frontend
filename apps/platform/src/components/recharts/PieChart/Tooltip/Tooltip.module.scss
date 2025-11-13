@@ -1,0 +1,20 @@
+.tooltip {
+  display: flex;
+  padding: 8px 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border-radius: 8px;
+  border: 1px solid $color-neutral-700;
+  backdrop-filter: blur(7.5px);
+
+  @include font($font-body-small);
+}
+
+.unit {
+  color: $color-neutral-400;
+}
+
+.value {
+  color: $color-white;
+}

@@ -1,0 +1,8 @@
+.container {
+  --base-color: var(--color-neutral-700);
+  --highlight-color: var(--color-neutral-800);
+  --animation-duration: 3s;
+}
+.rounded {
+  border-radius: 9999px;
+}

@@ -1,0 +1,32 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.container {
+  &[data-health="good"] {
+    .rank_1,
+    .rank_2,
+    .rank_3 {
+      fill: #45a996;
+    }
+  }
+  &[data-health="medium"] {
+    .rank_1,
+    .rank_2 {
+      fill: #a67b9766;
+    }
+    .path-3 {
+      fill: #5c5e641a;
+    }
+  }
+  &[data-health="bad"] {
+    .path_1 {
+      fill: #f07979;
+    }
+    .rank_2,
+    .rank_3 {
+      fill: #5c5e641a;
+    }
+  }
+}

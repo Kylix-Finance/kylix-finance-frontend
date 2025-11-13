@@ -1,5 +1,4 @@
 import { ComponentProps, ReactNode } from "react";
-import Image from "next/image";
 import { cn } from "~/utils";
 
 interface Props extends ComponentProps<"div"> {

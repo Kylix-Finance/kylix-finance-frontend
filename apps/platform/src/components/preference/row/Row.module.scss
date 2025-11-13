@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.title {
+  @include font($font-heading-5);
+  color: $color-neutral-50;
+}

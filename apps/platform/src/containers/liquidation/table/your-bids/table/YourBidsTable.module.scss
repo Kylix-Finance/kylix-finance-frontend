@@ -1,0 +1,28 @@
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.value {
+  @include font($font-heading-5);
+  color: $color-neutral-200;
+}
+.sub_value {
+  @include font($font-body-compact);
+  color: $color-neutral-400;
+}
+.down {
+  color: $color-semantic-error;
+}
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90px;
+}
+.asset {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}

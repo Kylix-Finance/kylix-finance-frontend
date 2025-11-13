@@ -52,13 +52,13 @@ const WaitingList = () => {
   return (
     <div className="w-full flex justify-center  lg:max-w-[1900px]">
       <Section
+        className="mb-44"
+        contentClassName="py-9 md:py-9 lg:py-9  gap-5  backdrop-blur-md border border-primary-900 rounded-2xl"
+        description="Stay tuned with the latest updates."
         heading={{
           left: "Join",
           right: "our waiting list",
         }}
-        contentClassName="py-9 md:py-9 lg:py-9  gap-5  backdrop-blur-md border border-primary-900 rounded-2xl"
-        className="mb-44"
-        description={"Stay tuned with the latest updates."}
         id="#waiting-list"
       >
         <form className="flex flex-col" onSubmit={onSubmit}>
@@ -66,11 +66,11 @@ const WaitingList = () => {
             <div className="relative w-full h-full  rounded-lg ">
               <div className="absolute w-full h-full backdrop-blur-sm rounded-lg pointer-events-none" />
               <input
+                className="relative h-full w-full px-4 py-2 bg-transparent text-gray-300 placeholder-gray-500 border-none rounded-md  outline-none shadow-primary-500 shadow-inner"
+                placeholder="Enter your email address"
                 type="email"
                 value={email}
                 onChange={onChangeHandler}
-                placeholder="Enter your email address"
-                className="relative h-full w-full px-4 py-2 bg-transparent text-gray-300 placeholder-gray-500 border-none rounded-md  outline-none shadow-primary-500 shadow-inner"
               />
             </div>
 
@@ -81,11 +81,11 @@ const WaitingList = () => {
           {error && <span className="text-red-500">{error}</span>}
           {isSuccess && (
             <span className="text-primary-500">
-              you successfully joined kylix waitlist
+              you successfully joined kylix wait list
             </span>
           )}
           <p className="font-normal text-white/40 text-xs leading-5 text-center tracking-wider mt-6">
-            By submitting your email address, you agree to join Kylix waitlist
+            By submitting your email address, you agree to join Kylix wait list
             and newsletter{" "}
           </p>
         </form>

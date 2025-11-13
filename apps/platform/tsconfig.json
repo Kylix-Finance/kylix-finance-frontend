@@ -1,0 +1,24 @@
+{
+  "extends": "@repo/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "allowArbitraryExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["testSrc/*"],
+      "#/*": ["public/*"],
+      "~/*": ["src/*"]
+    },
+    "noEmit": true
+  },
+  "include": [
+    "src",
+    "next-env.d.ts",
+    "./i18n.d.ts",
+    "./sass.d.ts",
+    "./react-app-env.d.ts",
+    ".next/types/**/*.ts",
+    "../../global.d.ts",
+    "src/containers/dashboard/.tsx"
+  ],
+  "exclude": ["node_modules"]
+}

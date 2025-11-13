@@ -1,0 +1,39 @@
+.container {
+  padding: 16px;
+  border: 1px solid $color-neutral-700;
+  background-color: $color-accent-primary-component;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $color-neutral-700;
+  padding-bottom: 12px;
+}
+.left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $color-neutral-200;
+  @include font($font-heading-5);
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.detail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  grid-auto-flow: row;
+}

@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 32px;
+}
+
+.middle {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+  @include media("<desktop") {
+    flex-direction: column-reverse;
+  }
+}
+.form {
+  align-self: flex-start;
+  flex: 0.2;
+  min-width: 400px;
+}
+.chart {
+  flex: 0.8;
+}

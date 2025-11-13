@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid $color-neutral-700;
+  padding: 16px;
+  border-radius: 20px;
+  user-select: none;
+  background-color: $color-accent-primary-component;
+  backdrop-filter: blur(15px);
+}
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  grid-auto-flow: row;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.icon_container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.icon_header {
+  @include font($font-body);
+  color: $color-neutral-400;
+}
+.icon_holder {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  @include font($font-heading-5);
+  color: $color-neutral-200;
+}
+.up {
+  color: $color-semantic-success !important;
+}
